@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking - Choose Location</title>
+    <!-- Example CSS inclusion. Adjust the href as needed based on repo CSS file location/name -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="booking-container">
+        <h1>Start Your Booking</h1>
+        <form id="bookingForm">
+            <label for="country">Select Country:</label>
+            <select id="country" name="country">
+                <option value="">-- Select Country --</option>
+                <option value="denmark">Denmark</option>
+                <option value="estonia">Estonia</option>
+                <option value="latvia">Latvia</option>
+                <option value="lithuania">Lithuania</option>
+            </select>
+
+            <label for="city">Select City/Town:</label>
+            <select id="city" name="city" disabled>
+                <option value="">-- Select City/Town --</option>
+            </select>
+        </form>
+    </div>
+
+    <script>
+        // Example city/town data for each country
+        const cities = {
+            denmark: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
+            estonia: ["Tallinn", "Tartu", "Narva", "Pärnu", "Viljandi"],
+            latvia: ["Riga", "Daugavpils", "Liepaja", "Jelgava", "Jurmala"],
+            lithuania: ["Vilnius", "Kaunas", "Klaipeda", "Šiauliai", "Panevėžys"]
+        };
+
+        const countrySelect = document.getElementById('country');
+        const citySelect = document.getElementById('city');
+
+        countrySelect.addEventListener('change', function() {
+            const selectedCountry = this.value;
+            citySelect.innerHTML = '<option value="">-- Select City/Town --</option>';
+            citySelect.disabled = !selectedCountry;
+            if (cities[selectedCountry]) {
+                cities[selectedCountry].forEach(function(city) {
+                    const opt = document.createElement('option');
+                    opt.value = city.toLowerCase().replace(/ /g, '-');
+                    opt.text = city;
+                    citySelect.appendChild(opt);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
