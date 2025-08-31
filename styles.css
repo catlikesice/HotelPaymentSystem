@@ -66,6 +66,49 @@ section.features {
     background: #1b2d14;
 }
 
+/* --- New Section Styles --- */
+
+.booking-initiate {
+    background: #e9f7df;
+    text-align: center;
+    padding: 2rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgb(46 77 37 / 0.12);
+    margin: 2rem 1rem;
+}
+
+.booking-initiate h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2e4d25;
+    margin-bottom: 1rem;
+}
+
+.booking-initiate p {
+    font-size: 1.1em;
+    color: #2e4d25;
+    margin-bottom: 1.5rem;
+}
+
+.booking-btn {
+    background: #274e13;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    border: none;
+    box-shadow: 0 2px 8px rgb(39 78 19 / 0.10);
+}
+
+.booking-btn:hover {
+    background: #1b2d14;
+    color: #fff;
+}
+
 footer {
     text-align: center;
     padding: 1rem 2rem;
