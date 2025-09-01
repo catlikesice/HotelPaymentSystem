@@ -8,11 +8,27 @@ body {
     line-height: 1.6;
 }
 
-header {
+header, .booking-header {
     background: #4f7942; /* Medium green */
     color: #f0f8ea; /* Light text */
     padding: 1rem 2rem;
     text-align: center;
+}
+
+.booking-header {
+    padding: 2rem 0 1.5rem 0;
+    margin-bottom: 0.5rem;
+}
+
+.booking-header h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    margin-bottom: 0.2em;
+}
+
+.booking-header p {
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
 }
 
 h1, h2, h3 {
@@ -50,7 +66,9 @@ section.features {
     margin-bottom: 0.75rem;
 }
 
-.btn {
+.btn,
+.booking-btn,
+.continue-btn {
     display: inline-block;
     background: #2e4d25;
     color: white;
@@ -60,51 +78,15 @@ section.features {
     font-weight: bold;
     margin-top: 1rem;
     transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background: #1b2d14;
-}
-
-/* --- New Section Styles --- */
-
-.booking-initiate {
-    background: #e9f7df;
-    text-align: center;
-    padding: 2rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgb(46 77 37 / 0.12);
-    margin: 2rem 1rem;
-}
-
-.booking-initiate h2 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #2e4d25;
-    margin-bottom: 1rem;
-}
-
-.booking-initiate p {
-    font-size: 1.1em;
-    color: #2e4d25;
-    margin-bottom: 1.5rem;
-}
-
-.booking-btn {
-    background: #274e13;
-    color: #fff;
-    padding: 0.75rem 2rem;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 1rem;
-    transition: background-color 0.3s ease;
-    display: inline-block;
     border: none;
     box-shadow: 0 2px 8px rgb(39 78 19 / 0.10);
+    cursor: pointer;
+    font-size: 1em;
 }
 
-.booking-btn:hover {
+.btn:hover,
+.booking-btn:hover,
+.continue-btn:hover {
     background: #1b2d14;
     color: #fff;
 }
@@ -117,4 +99,49 @@ footer {
     color: #e6f0e6;
     border-top: 1px solid #2e4d25;
     margin-top: 3rem;
+}
+
+/* Booking page layout tweaks */
+.booking-container {
+    margin: 2rem;
+    position: relative;
+    min-height: 70vh;
+}
+
+@media (max-width: 700px) {
+    .booking-header h1 {
+        font-size: 1.5em;
+    }
+    .booking-container {
+        margin: 1rem;
+    }
+    .continue-btn {
+        right: 1rem !important;
+        bottom: 1rem !important;
+        font-size: 0.95em;
+        padding: 0.6em 1.5em;
+    }
+}
+
+/* Place continue-btn at bottom-right */
+.continue-btn {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+}
+
+/* Form field styling for booking page */
+.booking-container label {
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.booking-container select {
+    font-size: 1em;
+    padding: 0.3em;
+    margin-right: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #a7c8a7;
+    background: #f0f8ea;
+    color: #2e4d25;
 }
