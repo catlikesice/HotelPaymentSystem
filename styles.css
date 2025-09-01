@@ -108,6 +108,29 @@ footer {
     min-height: 70vh;
 }
 
+/* Booking form row: countries/cities aligned horizontally */
+.booking-form-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.booking-form-row label {
+    font-weight: 700;
+    margin-right: 0.25rem;
+    white-space: nowrap;
+}
+.booking-form-row select {
+    font-size: 1em;
+    padding: 0.3em;
+    margin-right: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #a7c8a7;
+    background: #f0f8ea;
+    color: #2e4d25;
+}
+
 @media (max-width: 700px) {
     .booking-header h1 {
         font-size: 1.5em;
@@ -121,6 +144,11 @@ footer {
         font-size: 0.95em;
         padding: 0.6em 1.5em;
     }
+    .booking-form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
 }
 
 /* Place continue-btn at bottom-right */
@@ -128,20 +156,4 @@ footer {
     position: absolute;
     right: 2rem;
     bottom: 2rem;
-}
-
-/* Form field styling for booking page */
-.booking-container label {
-    font-weight: 500;
-    margin-right: 0.5rem;
-}
-
-.booking-container select {
-    font-size: 1em;
-    padding: 0.3em;
-    margin-right: 1.5rem;
-    border-radius: 6px;
-    border: 1px solid #a7c8a7;
-    background: #f0f8ea;
-    color: #2e4d25;
 }
