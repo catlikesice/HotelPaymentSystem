@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Hotels in Copenhagen – HotelPaymentSystem</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+        .hotel-card {
+            background: #cde7cd;
+            border-radius: 12px;
+            box-shadow: 0 1px 6px rgb(46 77 37 / 0.18);
+            max-width: 330px;
+            min-width: 270px;
+            padding: 1.5rem 1rem 1rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hotel-card img {
+            width: 90%;
+            max-width: 270px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            object-fit: cover;
+            height: 160px;
+        }
+        .hotel-card h3 {
+            color: #346534;
+            margin-bottom: 0.4rem;
+        }
+        .hotel-chain {
+            font-size: 1em;
+            color: #2e4d25;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+        }
+        .hotel-price {
+            margin-bottom: 1rem;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #274e13;
+        }
+        .booking-btn {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-header">
+        <h1>Hotels in Copenhagen</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="hotel-list">
+        <!-- Hotel 1: Scandic Palace Hotel -->
+        <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Scandic Palace Hotel">
+            <h3>Scandic Palace Hotel</h3>
+            <div class="hotel-chain">Scandic Hotels</div>
+            <div class="hotel-price">0.042 ETH / night</div>
+            <a href="#" class="booking-btn btn">Book Now</a>
+        </div>
+        <!-- Hotel 2: Comwell Copenhagen Portside -->
+        <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Comwell Copenhagen Portside">
+            <h3>Comwell Copenhagen Portside</h3>
+            <div class="hotel-chain">Comwell Hotels</div>
+            <div class="hotel-price">0.038 ETH / night</div>
+            <a href="#" class="booking-btn btn">Book Now</a>
+        </div>
+        <!-- Hotel 3: Imperial Hotel -->
+        <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Imperial Hotel">
+            <h3>Imperial Hotel</h3>
+            <div class="hotel-chain">Arp-Hansen Hotel Group</div>
+            <div class="hotel-price">0.045 ETH / night</div>
+            <a href="#" class="booking-btn btn">Book Now</a>
+        </div>
+        <!-- Hotel 4: CABINN City -->
+        <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="CABINN City">
+            <h3>CABINN City</h3>
+            <div class="hotel-chain">Cabinn Hotels</div>
+            <div class="hotel-price">0.021 ETH / night</div>
+            <a href="#" class="booking-btn btn">Book Now</a>
+        </div>
+        <!-- Hotel 5: Zleep Hotel Copenhagen City -->
+        <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80" alt="Zleep Hotel Copenhagen City">
+            <h3>Zleep Hotel Copenhagen City</h3>
+            <div class="hotel-chain">Zleep Hotels</div>
+            <div class="hotel-price">0.027 ETH / night</div>
+            <a href="#" class="booking-btn btn">Book Now</a>
+        </div>
+        <!-- Hotel 6: First Hotel Kong Frederik -->
+        <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80" alt="First Hotel Kong Frederik">
+            <h3>First Hotel Kong Frederik</h3>
+            <div class="hotel-chain">First Hotels</div>
+            <div class="hotel-price">0.033 ETH / night</div>
+            <a href="#" class="booking-btn btn">Book Now</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 HotelPaymentSystem – All bookings made with secure blockchain payments.</p>
+    </footer>
+</body>
+</html>
