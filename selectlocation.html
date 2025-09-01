@@ -30,7 +30,7 @@
         </form>
     </div>
     <!-- Continue button at lower right -->
-    <a href="select-hotel.html" class="btn continue-btn">Continue</a>
+    <a href="#" class="btn continue-btn" id="continueBtn" style="opacity: 0.5; cursor: not-allowed;">Continue</a>
 
     <script>
         // Country/city data stays intact
@@ -41,8 +41,47 @@
             lithuania: ["Vilnius", "Kaunas", "Klaipeda", "Šiauliai", "Panevėžys"]
         };
 
+        // Available city pages (only Denmark cities have HTML files)
+        const availableCityPages = {
+            'copenhagen': 'copenhagen.html',
+            'aarhus': 'aarhus.html', 
+            'odense': 'odense.html',
+            'esbjerg': 'esbjerg.html'
+        };
+
         const countrySelect = document.getElementById('country');
         const citySelect = document.getElementById('city');
+        const continueBtn = document.getElementById('continueBtn');
+
+        function updateContinueButton() {
+            const country = countrySelect.value;
+            const city = citySelect.value;
+            
+            if (country && city) {
+                if (availableCityPages[city]) {
+                    continueBtn.style.opacity = '1';
+                    continueBtn.style.cursor = 'pointer';
+                    continueBtn.onclick = function() {
+                        window.location.href = availableCityPages[city];
+                        return false;
+                    };
+                } else {
+                    continueBtn.style.opacity = '0.5';
+                    continueBtn.style.cursor = 'not-allowed';
+                    continueBtn.onclick = function() {
+                        alert('Sorry, hotel listings for this city are not available yet.');
+                        return false;
+                    };
+                }
+            } else {
+                continueBtn.style.opacity = '0.5';
+                continueBtn.style.cursor = 'not-allowed';
+                continueBtn.onclick = function() {
+                    alert('Please select both country and city.');
+                    return false;
+                };
+            }
+        }
 
         countrySelect.addEventListener('change', function() {
             const selectedCountry = this.value;
@@ -56,7 +95,15 @@
                     citySelect.appendChild(opt);
                 });
             }
+            updateContinueButton();
         });
+
+        citySelect.addEventListener('change', function() {
+            updateContinueButton();
+        });
+
+        // Initialize button state
+        updateContinueButton();
     </script>
 </body>
 </html>
