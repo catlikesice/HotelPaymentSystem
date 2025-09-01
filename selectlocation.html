@@ -4,36 +4,59 @@
     <meta charset="UTF-8">
     <title>Hotel Booking - Choose Location</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-form-row {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .form-inline {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        select {
+            min-width: 160px;
+            padding: 0.3rem;
+        }
+        @media (max-width: 700px) {
+            .booking-form-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body style="background:#e6f0e6;min-height:100vh;position:relative;">
-    <!-- Added main header from home page -->
     <div class="booking-header">
         <h1>HotelPaymentSystem</h1>
         <p>Empowering hotel businesses with secure blockchain payments</p>
     </div>
     <div class="booking-container">
         <h2>Start Your Booking</h2>
-        <form id="bookingForm" class="booking-form-row">
-            <label for="country"><b>Select Country:</b></label>
-            <select id="country" name="country">
-                <option value="">-- Select Country --</option>
-                <option value="denmark">Denmark</option>
-                <option value="estonia">Estonia</option>
-                <option value="latvia">Latvia</option>
-                <option value="lithuania">Lithuania</option>
-            </select>
-
-            <label for="city" style="margin-left:2rem;"><b>Select City/Town:</b></label>
-            <select id="city" name="city" disabled>
-                <option value="">-- Select City/Town --</option>
-            </select>
+        <form id="bookingForm" class="booking-form-row" onsubmit="return false;">
+            <div class="form-inline">
+                <label for="country"><b>Select Country:</b></label>
+                <select id="country" name="country">
+                    <option value="">-- Select Country --</option>
+                    <option value="denmark">Denmark</option>
+                    <option value="estonia">Estonia</option>
+                    <option value="latvia">Latvia</option>
+                    <option value="lithuania">Lithuania</option>
+                </select>
+            </div>
+            <div class="form-inline">
+                <label for="city"><b>Select City/Town:</b></label>
+                <select id="city" name="city" disabled>
+                    <option value="">-- Select City/Town --</option>
+                </select>
+            </div>
         </form>
     </div>
-    <!-- Continue button at lower right -->
-    <a href="select-hotel.html" class="btn continue-btn">Continue</a>
+    <button id="continueBtn" class="btn continue-btn" style="position:fixed;right:2rem;bottom:2rem;">Continue</button>
 
     <script>
-        // Country/city data stays intact
         const cities = {
             denmark: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
             estonia: ["Tallinn", "Tartu", "Narva", "Pärnu", "Viljandi"],
@@ -43,6 +66,7 @@
 
         const countrySelect = document.getElementById('country');
         const citySelect = document.getElementById('city');
+        const continueBtn = document.getElementById('continueBtn');
 
         countrySelect.addEventListener('change', function() {
             const selectedCountry = this.value;
@@ -55,6 +79,18 @@
                     opt.text = city;
                     citySelect.appendChild(opt);
                 });
+            }
+        });
+
+        continueBtn.addEventListener('click', function() {
+            const selectedCountry = countrySelect.value;
+            const selectedCity = citySelect.value;
+            if (!selectedCountry) {
+                alert('Please select a country before continuing.');
+            } else if (!selectedCity) {
+                alert('Please select a city/town before continuing.');
+            } else {
+                window.location.href = selectedCity + '.html';
             }
         });
     </script>
