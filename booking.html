@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Hotel Booking - Choose Location</title>
-    <!-- Example CSS inclusion. Adjust the href as needed based on repo CSS file location/name -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body style="background:#e6f0e6;min-height:100vh;position:relative;">
+    <!-- Added main header from home page -->
+    <div class="booking-header">
+        <h1>HotelPaymentSystem</h1>
+        <p>Empowering hotel businesses with secure blockchain payments</p>
+    </div>
     <div class="booking-container">
-        <h1>Start Your Booking</h1>
-        <form id="bookingForm">
-            <label for="country">Select Country:</label>
+        <h2>Start Your Booking</h2>
+        <form id="bookingForm" class="booking-form-row">
+            <label for="country"><b>Select Country:</b></label>
             <select id="country" name="country">
                 <option value="">-- Select Country --</option>
                 <option value="denmark">Denmark</option>
@@ -19,15 +23,17 @@
                 <option value="lithuania">Lithuania</option>
             </select>
 
-            <label for="city">Select City/Town:</label>
+            <label for="city" style="margin-left:2rem;"><b>Select City/Town:</b></label>
             <select id="city" name="city" disabled>
                 <option value="">-- Select City/Town --</option>
             </select>
         </form>
     </div>
+    <!-- Continue button at lower right -->
+    <a href="select-hotel.html" class="btn continue-btn">Continue</a>
 
     <script>
-        // Example city/town data for each country
+        // Country/city data stays intact
         const cities = {
             denmark: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
             estonia: ["Tallinn", "Tartu", "Narva", "Pärnu", "Viljandi"],
