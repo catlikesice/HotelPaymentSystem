@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel d’Angleterre, Copenhagen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-detail {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+            padding: 2rem;
+        }
+        .hotel-detail img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+            margin-bottom: 1rem;
+        }
+        .hotel-detail .price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .hotel-detail form {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .hotel-detail label {
+            margin-right: 0.5rem;
+        }
+        .hotel-detail input[type="date"] {
+            padding: 0.3rem;
+        }
+        .hotel-detail .total-price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-left: 1rem;
+        }
+        .hotel-detail button {
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-detail button:hover {
+            background: #156d17;
+        }
+    </style>
+    <script>
+        function calculateTotalPrice() {
+            const pricePerNight = 0.12;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const totalPriceSpan = document.getElementById('totalPrice');
+            let nights = 0;
+            if (checkin && checkout) {
+                const inDate = new Date(checkin);
+                const outDate = new Date(checkout);
+                nights = (outDate - inDate) / (1000 * 60 * 60 * 24);
+            }
+            if (nights > 0) {
+                totalPriceSpan.textContent = 'Total: ' + (nights * pricePerNight).toFixed(2) + ' ETH';
+            } else {
+                totalPriceSpan.textContent = '';
+            }
+        }
+    </script>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>HotelPaymentSystem</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="hotel-detail">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=600&q=80" alt="Hotel d’Angleterre">
+        <h2>Hotel d’Angleterre, Copenhagen</h2>
+        <div class="price">0.12 ETH / night</div>
+        <p>
+            Historic five-star hotel on Kongens Nytorv, with luxury amenities and fine dining.
+        </p>
+        <form id="bookingForm" onsubmit="event.preventDefault(); alert('Booking request submitted!');">
+            <label for="checkin"><b>Check-in:</b></label>
+            <input type="date" id="checkin" name="checkin" required onchange="calculateTotalPrice()">
+            <label for="checkout"><b>Check-out:</b></label>
+            <input type="date" id="checkout" name="checkout" required onchange="calculateTotalPrice()">
+            <span id="totalPrice" class="total-price"></span>
+            <button type="submit">Book Now</button>
+        </form>
+    </div>
+</body>
+</html>
