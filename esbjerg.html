@@ -4,28 +4,126 @@
     <meta charset="UTF-8">
     <title>Hotel Booking - Esbjerg</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #e6f5ea;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .booking-header {
+            background: #487344;
+            color: #fff;
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+        }
+        .booking-header h1 {
+            margin: 0 0 0.5rem 0;
+        }
+        .booking-header p {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .booking-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .hotel-card {
+            background: #d6f2da;
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(72,115,68,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            transition: box-shadow .2s;
+        }
+        .hotel-card:hover {
+            box-shadow: 0 8px 24px rgba(72,115,68,0.13);
+        }
+        .hotel-card img {
+            width: 240px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+        }
+        .hotel-card h3 {
+            margin: 0 0 0.3rem 0;
+            color: #305b31;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+        .hotel-card .hotel-group {
+            color: #3b5039;
+            font-size: 1.03rem;
+            margin-bottom: 0.7rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #23451d;
+            font-size: 1.1rem;
+            margin-bottom: 1.1rem;
+        }
+        .hotel-card button {
+            background: #305b31;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 0.7rem 2.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .hotel-card button:hover {
+            background: #1e3d1d;
+        }
+        @media (max-width: 600px) {
+            .hotel-card img {
+                width: 100%;
+                height: 110px;
+            }
+        }
+    </style>
 </head>
-<body style="background:#e6f0e6;min-height:100vh;">
+<body>
     <div class="booking-header">
         <h1>HotelPaymentSystem</h1>
         <p>Book your stay with secure crypto payments</p>
     </div>
     <div class="booking-container">
-        <h2>Available Hotels in Esbjerg</h2>
-        <ul class="hotel-list">
-            <li>
+        <h2 style="text-align:center; color:#305b31;">Available Hotels in Esbjerg</h2>
+        <div class="hotel-grid">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Hotel Britannia">
                 <h3>Hotel Britannia</h3>
-                <p>Comfort and style in Esbjerg's center.</p>
-            </li>
-            <li>
+                <div class="hotel-group">Britannia Hotels</div>
+                <div class="price">0.035 ETH / night</div>
+                <button>Book Now</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Scandic Olympic">
                 <h3>Scandic Olympic</h3>
-                <p>Modern hotel near the harbor.</p>
-            </li>
-            <li>
+                <div class="hotel-group">Scandic Hotels</div>
+                <div class="price">0.029 ETH / night</div>
+                <button>Book Now</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Hotel Ansgar">
                 <h3>Hotel Ansgar</h3>
-                <p>Classic Danish hospitality close to train station.</p>
-            </li>
-        </ul>
+                <div class="hotel-group">Ansgar Group</div>
+                <div class="price">0.025 ETH / night</div>
+                <button>Book Now</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
