@@ -31,6 +31,28 @@ header, .booking-header {
     margin-bottom: 0.2em;
 }
 
+/* --- Logo section above navbar --- */
+/* Logo image: Baltic Comfort LTD logo.png */
+.logo-header {
+    width: 100%;
+    /* Remove background color */
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Reduce vertical padding */
+    padding: 1rem 0 1rem 0;
+}
+
+.logo-header img {
+    max-width: 120px; /* Make logo smaller */
+    height: auto;
+    display: block;
+    /* Remove any border or box-shadow if present */
+    border: none;
+    box-shadow: none;
+}
+
 h1, h2, h3 {
     margin-bottom: 0.5rem;
 }
