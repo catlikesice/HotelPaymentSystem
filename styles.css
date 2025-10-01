@@ -8,6 +8,15 @@ body {
     line-height: 1.6;
 }
 
+header {
+    /* Set the same height or padding as other sections */
+    padding: 2rem 2rem;   /* Example: matches .hero section */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;     /* Or your chosen color */
+}
+
 header, .booking-header {
     background: #4f7942; /* Medium green */
     color: #f0f8ea; /* Light text */
@@ -34,21 +43,15 @@ header, .booking-header {
 /* --- Logo section above navbar --- */
 /* Logo image: Baltic Comfort LTD logo.png */
 .logo-header {
-    width: 100%;
-    /* Remove background color */
-    background: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Reduce vertical padding */
-    padding: 1rem 0 1rem 0;
+    padding: 0;           /* Remove any extra padding */
+    margin: 0;
 }
 
 .logo-header img {
-    max-width: 120px; /* Make logo smaller */
+    max-height: 48px;     /* Set max height to fit header, adjust as needed */
+    width: auto;
     height: auto;
     display: block;
-    /* Remove any border or box-shadow if present */
     border: none;
     box-shadow: none;
 }
