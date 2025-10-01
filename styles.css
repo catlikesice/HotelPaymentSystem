@@ -9,12 +9,14 @@ body {
 }
 
 header {
-    /* Set the same height or padding as other sections */
-    padding: 2rem 2rem;   /* Example: matches .hero section */
+    height: 180px; /* Set desired header height */
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
     display: flex;
+    align-items: stretch;
     justify-content: center;
-    align-items: center;
-    background: none;     /* Or your chosen color */
+    background: none;
 }
 
 header, .booking-header {
@@ -48,12 +50,10 @@ header, .booking-header {
 }
 
 .logo-header img {
-    max-height: 48px;     /* Set max height to fit header, adjust as needed */
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills header, may crop edges */
     display: block;
-    border: none;
-    box-shadow: none;
 }
 
 h1, h2, h3 {
