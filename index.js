@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const TronWeb = require('tronweb');
 const QRCode = require('qrcode');
+const NOWPayments = require('NOWPayments');
 const rateLimit = require('express-rate-limit'); // <--- Add this line
 
 const app = express();
