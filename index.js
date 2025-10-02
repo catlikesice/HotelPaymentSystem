@@ -2,9 +2,20 @@ require('dotenv').config();
 const express = require('express');
 const TronWeb = require('tronweb');
 const QRCode = require('qrcode');
+const rateLimit = require('express-rate-limit'); // <--- Add this line
 
 const app = express();
 app.use(express.json());
+
+// Define your rate limiter
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests, please try again later.'
+});
+
+// Place this here, before your route handlers
+app.use(limiter);
 
 const tronWeb = new TronWeb(
   process.env.TRON_FULL_NODE,
