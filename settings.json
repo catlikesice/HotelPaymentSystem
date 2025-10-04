@@ -1,0 +1,10 @@
+{
+  "git.path": "D:\\PortableGit\\bin\\git.exe",
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "E:\\PortableGit\\bin\\bash.exe"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.cwd": "C:\\Users\\sebas\\Documents\\GitHub\\HotelPaymentSystem"
+}
