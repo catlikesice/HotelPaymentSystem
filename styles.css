@@ -20,16 +20,10 @@ header {
 }
 
 header, .booking-header {
-    background: #8bbf73; /* lighter, blends with logo */
-    color: #23441a;
+    background: #4f7942; /* Medium green */
+    color: #f0f8ea; /* Light text */
     padding: 1rem 2rem;
     text-align: center;
-.hero {
-    background: #b4e2a8; /* lighter, minty green */
-    padding: 2rem 2rem;
-    text-align: center;
-    border-radius: 0 0 12px 12px;
-    box-shadow: 0 2px 6px rgb(46 77 37 / 0.15);
 }
 
 .booking-header {
@@ -82,7 +76,7 @@ section.features {
 }
 
 .feature {
-    background: #e2f5da; /* very light green */
+    background: #cde7cd;
     border-radius: 12px;
     box-shadow: 0 1px 4px rgb(46 77 37 / 0.2);
     padding: 1rem 1.5rem;
@@ -126,8 +120,8 @@ footer {
     text-align: center;
     padding: 1rem 2rem;
     font-size: 0.9rem;
-    background: #8bbf73; /* match new header color */
-    color: #23441a;
+    background: #4f7942;
+    color: #e6f0e6;
     border-top: 1px solid #2e4d25;
     margin-top: 3rem;
 }
