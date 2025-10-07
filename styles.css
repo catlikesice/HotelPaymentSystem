@@ -20,8 +20,8 @@ header {
 }
 
 header, .booking-header {
-    background: #4f7942; /* Medium green */
-    color: #f0f8ea; /* Light text */
+    background: #FFF9B0; /* matches the logo background */
+    color: #23441a;
     padding: 1rem 2rem;
     text-align: center;
 }
