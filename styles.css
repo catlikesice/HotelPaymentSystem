@@ -3,7 +3,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background: #e6f0e6; /* Light green background */
+    background: #f4fbf4; /* Lighter green background */
     color: #2e4d25; /* Dark green text */
     line-height: 1.6;
 }
@@ -61,7 +61,7 @@ h1, h2, h3 {
 }
 
 .hero {
-    background: #7fbf7f; /* Softer green shade */
+    background: #b2e3b2; /* Lighter green shade for hero section */
     padding: 2rem 2rem;
     text-align: center;
     border-radius: 0 0 12px 12px;
@@ -76,7 +76,7 @@ section.features {
 }
 
 .feature {
-    background: #cde7cd;
+    background: #e5f8e5; /* Lighter green for feature cards */
     border-radius: 12px;
     box-shadow: 0 1px 4px rgb(46 77 37 / 0.2);
     padding: 1rem 1.5rem;
