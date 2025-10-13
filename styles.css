@@ -19,9 +19,9 @@ header {
     background: none;
 }
 
-/* REVERTED: header background back to yellow (#FFF9B0) */
+/* CHANGED: header, .booking-header background to match feature card green (#e5f8e5) */
 header, .booking-header {
-    background: #FFF9B0; /* matches the logo background */
+    background: #e5f8e5; /* matches feature card background */
     color: #23441a;
     padding: 1rem 2rem;
     text-align: center;
@@ -62,4 +62,125 @@ h1, h2, h3 {
 }
 
 .hero {
-    background: #b2e3b2; /* Lighter green shade for
+    background: #b2e3b2; /* Lighter green shade for hero section */
+    padding: 2rem 2rem;
+    text-align: center;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 6px rgb(46 77 37 / 0.3);
+}
+
+section.features {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 1rem;
+    flex-wrap: wrap;
+}
+
+.feature {
+    background: #e5f8e5; /* Lighter green for feature cards */
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgb(46 77 37 / 0.2);
+    padding: 1rem 1.5rem;
+    margin: 1rem;
+    flex: 1 1 250px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.feature h3 {
+    color: #346534;
+    margin-bottom: 0.75rem;
+}
+
+.btn,
+.booking-btn,
+.continue-btn {
+    display: inline-block;
+    background: #2e4d25;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgb(39 78 19 / 0.10);
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn:hover,
+.booking-btn:hover,
+.continue-btn:hover {
+    background: #1b2d14;
+    color: #fff;
+}
+
+/* CHANGED: footer background to match feature card green (#e5f8e5) and font color for contrast */
+footer {
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    background: #e5f8e5;
+    color: #2e4d25;
+    border-top: 1px solid #2e4d25;
+    margin-top: 3rem;
+}
+
+/* Booking page layout tweaks */
+.booking-container {
+    margin: 2rem;
+    position: relative;
+    min-height: 70vh;
+}
+
+/* Booking form row: countries/cities aligned horizontally */
+.booking-form-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.booking-form-row label {
+    font-weight: 700;
+    margin-right: 0.25rem;
+    white-space: nowrap;
+}
+.booking-form-row select {
+    font-size: 1em;
+    padding: 0.3em;
+    margin-right: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #a7c8a7;
+    background: #f0f8ea;
+    color: #2e4d25;
+}
+
+@media (max-width: 700px) {
+    .booking-header h1 {
+        font-size: 1.5em;
+    }
+    .booking-container {
+        margin: 1rem;
+    }
+    .continue-btn {
+        right: 1rem !important;
+        bottom: 1rem !important;
+        font-size: 0.95em;
+        padding: 0.6em 1.5em;
+    }
+    .booking-form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+}
+
+/* Place continue-btn at bottom-right */
+.continue-btn {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+}
