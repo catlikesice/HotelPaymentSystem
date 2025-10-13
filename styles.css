@@ -19,7 +19,6 @@ header {
     background: none;
 }
 
-/* CHANGED: header, .booking-header background to match feature card green (#e5f8e5) */
 header, .booking-header {
     background: #e5f8e5; /* matches feature card background */
     color: #23441a;
@@ -117,14 +116,21 @@ section.features {
     color: #fff;
 }
 
-/* CHANGED: footer background to match feature card green (#e5f8e5) and font color for contrast */
+/* CHANGED: footer to look like header */
 footer {
+    height: 180px; /* Same as header */
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    background: none;
+    background: #e5f8e5; /* matches feature card background */
+    color: #23441a;
     text-align: center;
-    padding: 1rem 2rem;
-    font-size: 0.9rem;
-    background: #e5f8e5;
-    color: #2e4d25;
     border-top: 1px solid #2e4d25;
+    font-size: 0.9rem;
     margin-top: 3rem;
 }
 
@@ -176,11 +182,4 @@ footer {
         gap: 0.5rem;
         align-items: flex-start;
     }
-}
-
-/* Place continue-btn at bottom-right */
-.continue-btn {
-    position: absolute;
-    right: 2rem;
-    bottom: 2rem;
 }
