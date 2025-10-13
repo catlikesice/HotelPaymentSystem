@@ -19,9 +19,8 @@ header {
     background: none;
 }
 
-/* CHANGED: header, .booking-header background to match feature card green (#e5f8e5) */
 header, .booking-header {
-    background: #e5f8e5; /* matches feature card background */
+    background: #FFF9B0; /* matches the logo background */
     color: #23441a;
     padding: 1rem 2rem;
     text-align: center;
@@ -117,13 +116,12 @@ section.features {
     color: #fff;
 }
 
-/* CHANGED: footer background to match feature card green (#e5f8e5) and font color for contrast */
 footer {
     text-align: center;
     padding: 1rem 2rem;
     font-size: 0.9rem;
-    background: #e5f8e5;
-    color: #2e4d25;
+    background: #4f7942;
+    color: #e6f0e6;
     border-top: 1px solid #2e4d25;
     margin-top: 3rem;
 }
