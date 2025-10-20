@@ -26,17 +26,6 @@ header, .booking-header {
     text-align: center;
 }
 
-/* Add logo as a decorative background image on the header.
-   Only change in this file: this block adds the logo and nothing else.
-   The path is relative to styles.css (image is in the repo root).
-*/
-header {
-    background-image: url("Baltic%20Comfort%20LTD%20logo.png");
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size: auto 100%;
-}
-
 .booking-header {
     padding: 2rem 0 1.5rem 0;
     margin-bottom: 0.5rem;
