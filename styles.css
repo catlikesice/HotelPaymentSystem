@@ -26,6 +26,24 @@ header, .booking-header {
     text-align: center;
 }
 
+/* Add logo as a decorative background image on the header,
+   center it and prevent duplication if an <img> is present in the HTML.
+   NOTE: Path is relative to styles.css. If styles.css is in a subfolder,
+   update the path accordingly (e.g. url("../Baltic%20Comfort%20LTD%20logo.png")).
+*/
+header {
+    background-image: url("Baltic%20Comfort%20LTD%20logo.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+/* Hide any header <img> elements so the background logo is the only one shown */
+header .logo-header img,
+header img {
+    display: none !important;
+}
+
 .booking-header {
     padding: 2rem 0 1.5rem 0;
     margin-bottom: 0.5rem;
@@ -173,6 +191,12 @@ footer {
         flex-direction: column;
         gap: 0.5rem;
         align-items: flex-start;
+    }
+
+    /* scale the header background logo down on narrower screens */
+    header {
+        background-position: center center;
+        background-size: 60%;
     }
 }
 
