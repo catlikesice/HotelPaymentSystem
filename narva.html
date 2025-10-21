@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotels in Narva</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-list { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; padding-bottom: 2rem; }
+        .hotel-card { background: #fff; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); width: 300px; padding: 1rem; text-align: center; }
+        .hotel-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 0.7rem; }
+        .hotel-card h3 { margin: 0.6rem 0 0.3rem 0; font-size: 1.1rem; }
+        .hotel-card .price { font-weight: bold; color: #2e7d32; margin: 0.5rem 0; }
+        .hotel-card p { color: #444; font-size: 0.95rem; }
+        .hotel-card .book-link { display: inline-block; margin: 1rem auto 0 auto; background: #2e7d32; color: #fff; border: none; border-radius: 0.5rem; padding: 0.7rem 1.2rem; text-decoration: none; font-weight: 600; }
+        .hotel-card .book-link:hover { background: #156d17; }
+        .booking-header { text-align: center; padding: 2rem 1rem 0.5rem 1rem; }
+        .booking-header h1 { margin: 0; font-size: 2rem; }
+        .booking-header p { margin: 0.3rem 0 1rem 0; color: #333; }
+        .booking-container { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>HotelPaymentSystem</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="booking-container">
+        <h2>Available Hotels in Narva</h2>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1505691723518-36a1ddb1b3b6?fit=crop&w=400&q=80" alt="Narva-Jõesuu Hotel">
+                <h3>Narva-Jõesuu Seaside Hotel</h3>
+                <div class="price">0.03 ETH / night</div>
+                <p>Seaside hotel near Narva with easy access to sandy beaches and coastal walks.</p>
+                <a href="narva-joesuu-hotel.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc3?fit=crop&w=400&q=80" alt="Narva City Hotel">
+                <h3>Narva City Hotel</h3>
+                <div class="price">0.035 ETH / night</div>
+                <p>Conveniently located in Narva city center, close to the river and historical sites.</p>
+                <a href="narva-city-hotel.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
