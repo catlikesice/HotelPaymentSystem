@@ -66,6 +66,11 @@
             }
         }
 
+        // helper: slugify (keeps diacritics but encodes later when building the URL)
+        function slugifyCity(name) {
+            return name.toLowerCase().replace(/\s+/g, '-').replace(/[''\"]/g, '');
+        }
+
         // Populate city list when country changes and update display
         countrySelect.addEventListener('change', function() {
             const selectedCountry = this.value;
@@ -74,7 +79,7 @@
             if (cities[selectedCountry]) {
                 cities[selectedCountry].forEach(function(city) {
                     const opt = document.createElement('option');
-                    opt.value = city.toLowerCase().replace(/ /g, '-');
+                    opt.value = slugifyCity(city); // e.g., "aarhus", "pärnu" -> "pärnu"
                     opt.text = city;
                     citySelect.appendChild(opt);
                 });
@@ -86,16 +91,58 @@
         // Update display when city selection changes
         citySelect.addEventListener('change', updateLocationDisplay);
 
-        // Continue button behaviour unchanged
-        continueBtn.addEventListener('click', function() {
+        // Build the expected path for a city page:
+        // html/cities/<country>/<city>.html
+        function buildCityPath(country, citySlug) {
+            // encode each segment to be safe with special characters
+            const segments = ['html', 'cities', country, citySlug + '.html'];
+            return segments.map(encodeURIComponent).join('/');
+        }
+
+        // Check URL existence with a quick HEAD request before navigating.
+        // If HEAD is not allowed by the host, fall back to a GET check.
+        async function checkUrlExists(url) {
+            try {
+                let resp = await fetch(url, { method: 'HEAD' });
+                if (resp && resp.ok) return true;
+                // If HEAD returned non-ok, try GET (some hosts don't support HEAD)
+                resp = await fetch(url, { method: 'GET' });
+                return resp && resp.ok;
+            } catch (err) {
+                console.warn('Error while checking URL existence:', err);
+                return false;
+            }
+        }
+
+        // Continue button behaviour: build path and navigate only if the page exists
+        continueBtn.addEventListener('click', async function() {
             const selectedCountry = countrySelect.value;
             const selectedCity = citySelect.value;
             if (!selectedCountry) {
                 alert('Please select a country before continuing.');
-            } else if (!selectedCity) {
+                return;
+            }
+            if (!selectedCity) {
                 alert('Please select a city/town before continuing.');
+                return;
+            }
+
+            const path = buildCityPath(selectedCountry, selectedCity);
+
+            // Try to check the page first so user doesn't hit a raw 404
+            continueBtn.disabled = true;
+            continueBtn.textContent = 'Checking…';
+            const exists = await checkUrlExists(path);
+            continueBtn.disabled = false;
+            continueBtn.textContent = 'Continue';
+
+            if (exists) {
+                window.location.href = path;
             } else {
-                window.location.href = selectedCity + '.html';
+                // Friendly message and hint for you as repo owner
+                alert('Sorry — the selected city page was not found on the site.\n\n' +
+                      'Expected path: ' + path + '\n\n' +
+                      'If you want this city available, add the file at the above location (for example: html/cities/' + selectedCountry + '/' + selectedCity + '.html).');
             }
         });
 
