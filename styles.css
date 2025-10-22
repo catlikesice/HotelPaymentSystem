@@ -7,6 +7,45 @@ body {
     color: #2e4d25; /* Dark green text */
     line-height: 1.6;
 }
+/* --- Added: page-specific rules for selectlocation.html (scoped under body.selectlocation) --- */
+body.selectlocation {
+    background: #e6f0e6;
+    min-height: 100vh;
+    position: relative;
+}
+
+body.selectlocation .booking-form-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+}
+
+body.selectlocation .form-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+body.selectlocation select {
+    min-width: 160px;
+    padding: 0.3em;
+}
+
+body.selectlocation .continue-btn {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+}
+
+/* Responsive tweak for the page-scoped layout */
+@media (max-width: 700px) {
+    body.selectlocation .booking-form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
 
 header {
     height: 180px; /* Set desired header height */
