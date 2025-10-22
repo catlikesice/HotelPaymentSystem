@@ -1,16 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Aarhus — Denmark (Placeholder)</title>
-  <link rel="stylesheet" href="../../../styles.css">
+    <meta charset="UTF-8">
+    <title>Hotel Booking - Aarhus</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Aarhus — Denmark</h1>
-    <p>This is a placeholder page for Aarhus in Denmark. The hotel listing for this city will be added here soon.</p>
-    <p>Expected path: html/cities/denmark/aarhus.html</p>
-    <p><a href="../../../selectlocation.html">Back to Select Location</a></p>
-  </div>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>HotelPaymentSystem</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="booking-container">
+        <h2>Available Hotels in Aarhus</h2>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Royal Aarhus">
+                <h3>Hotel Royal Aarhus</h3>
+                <div class="price">0.08 ETH / night</div>
+                <p>Luxury hotel in the heart of Aarhus, featuring elegant rooms, gourmet restaurant, and spa services.</p>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Scandic Aarhus City">
+                <h3>Scandic Aarhus City</h3>
+                <div class="price">0.05 ETH / night</div>
+                <p>Modern amenities and eco-friendly design, located in the vibrant city center with easy access to attractions.</p>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Comwell Aarhus">
+                <h3>Comwell Aarhus</h3>
+                <div class="price">0.06 ETH / night</div>
+                <p>Contemporary comfort with panoramic city views, perfect for business or leisure travelers.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
