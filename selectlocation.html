@@ -12,6 +12,7 @@
     </div>
     <div class="booking-container">
         <h2>Start Your Booking</h2>
+
         <form id="bookingForm" class="booking-form-row" onsubmit="return false;">
             <div class="form-inline">
                 <label for="country"><b>Select Country:</b></label>
@@ -30,7 +31,11 @@
                 </select>
             </div>
         </form>
+
+        <!-- Added: live location display inside the page so the chosen location shows immediately -->
+        <p id="selectedLocation" aria-live="polite"></p>
     </div>
+
     <button id="continueBtn" class="btn continue-btn">Continue</button>
 
     <script>
@@ -44,9 +49,26 @@
         const countrySelect = document.getElementById('country');
         const citySelect = document.getElementById('city');
         const continueBtn = document.getElementById('continueBtn');
+        const selectedLocation = document.getElementById('selectedLocation');
 
+        function updateLocationDisplay() {
+            const countryIndex = countrySelect.selectedIndex;
+            const countryText = countryIndex >= 0 ? countrySelect.options[countryIndex].text : '';
+            const cityIndex = citySelect.selectedIndex;
+            const cityText = cityIndex >= 0 ? citySelect.options[cityIndex].text : '';
+
+            if (countrySelect.value && citySelect.value) {
+                selectedLocation.textContent = `Selected location: ${countryText} — ${cityText}`;
+            } else if (countrySelect.value) {
+                selectedLocation.textContent = `Selected country: ${countryText} (please select a city/town)`;
+            } else {
+                selectedLocation.textContent = '';
+            }
+        }
+
+        // Populate city list when country changes and update display
         countrySelect.addEventListener('change', function() {
-         const selectedCountry = this.value;
+            const selectedCountry = this.value;
             citySelect.innerHTML = '<option value="">-- Select City/Town --</option>';
             citySelect.disabled = !selectedCountry;
             if (cities[selectedCountry]) {
@@ -57,8 +79,14 @@
                     citySelect.appendChild(opt);
                 });
             }
+            // Update display after repopulating cities
+            updateLocationDisplay();
         });
 
+        // Update display when city selection changes
+        citySelect.addEventListener('change', updateLocationDisplay);
+
+        // Continue button behaviour unchanged
         continueBtn.addEventListener('click', function() {
             const selectedCountry = countrySelect.value;
             const selectedCity = citySelect.value;
@@ -70,6 +98,11 @@
                 window.location.href = selectedCity + '.html';
             }
         });
+
+        // Initialize display on load (in case the selects are pre-filled)
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLocationDisplay();
+        });
     </script>
 </body>
-</html>  
+</html>
