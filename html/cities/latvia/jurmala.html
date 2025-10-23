@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Jurmala — Latvia (Placeholder)</title>
-  <link rel="stylesheet" href="../../../styles.css">
+    <meta charset="UTF-8">
+    <title>Jurmala Hotels</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-list { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+        .hotel-card { background: #fff; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); width: 300px; padding: 1rem; text-align: center; }
+        .hotel-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 0.7rem; }
+        .hotel-card .price { font-weight: bold; color: #2e7d32; margin: 0.5rem 0; }
+        .hotel-card .book-link { display: block; margin: 1rem auto 0 auto; background: #2e7d32; color: #fff; border: none; border-radius: 0.5rem; padding: 0.7rem 1.2rem; text-decoration: none; font-weight: bold; transition: background 0.2s;}
+        .hotel-card .book-link:hover { background: #156d17; }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Jurmala — Latvia</h1>
-    <p>This is a placeholder page for Jurmala in Latvia. The hotel listing for this city will be added here soon.</p>
-    <p>Expected path: html/cities/latvia/jurmala.html</p>
-    <p><a href="../../../selectlocation.html">Back to Select Location</a></p>
-  </div>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>HotelPaymentSystem</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="booking-container">
+        <h2>Available Hotels in Jurmala</h2>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Baltic Beach Hotel">
+                <h3>Baltic Beach Hotel</h3>
+                <div class="price">0.055 ETH / night</div>
+                <p>Luxury spa hotel on the beach with beautiful sea views and upscale amenities.</p>
+                <a href="baltic-beach-hotel-jurmala.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Jurmala Spa">
+                <h3>Hotel Jurmala Spa</h3>
+                <div class="price">0.045 ETH / night</div>
+                <p>Modern spa hotel with pools, saunas, and wellness treatments in Jurmala center.</p>
+                <a href="hotel-jurmala-spa-jurmala.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Villa Joma">
+                <h3>Villa Joma</h3>
+                <div class="price">0.035 ETH / night</div>
+                <p>Charming boutique hotel near the sea, ideal for a relaxing getaway.</p>
+                <a href="villa-joma-jurmala.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
