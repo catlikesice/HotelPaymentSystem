@@ -1,7 +1,7 @@
 /* styles.css - Elegant green theme for eco-friendly appeal
-   Updated: spread the three navbar containers further apart and ensure they
-   are fully contained inside the dark-green navbar at the bottom of the header.
-   Only CSS changed; no HTML changes were made.
+   Updated: ensure three containers are spread further and fully contained
+   inside the dark-green navbar (no overlap into header or page content).
+   Only CSS changed; no HTML changes.
 */
 
 body {
@@ -49,7 +49,7 @@ body.selectlocation .continue-btn {
 
 /* Header / logo */
 header {
-    height: 180px;
+    height: 180px; /* desired header height */
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -62,7 +62,7 @@ header {
 }
 
 header, .booking-header {
-    background: #FFF9B0;
+    background: #FFF9B0; /* matches the logo background */
     color: #23441a;
     padding: 1rem 2rem;
     text-align: center;
@@ -78,7 +78,7 @@ header .logo-header img, header img { display: block !important; width: 100%; he
 .booking-header p { font-size: 1.1em; margin-bottom: 0.2em; }
 
 /* logo header container */
-.logo-header { padding: 0; margin: 0; position: relative; }
+.logo-header { padding: 0; margin: 0; position: relative; height: 100%; }
 .logo-header img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 h1, h2, h3 { margin-bottom: 0.5rem; }
@@ -131,11 +131,11 @@ footer {
 
 /* -------------------------
    NAVBAR: containers fully inside the green bar and spread further
-   - green bar drawn at bottom of header (header::before)
-   - containers placed at 12.5% / 50% / 87.5% to spread them further apart
-   - explicit dimensions (height, padding, max-width) so boxes cannot protrude
-   - center content with text-overflow ellipsis to avoid overlap when space is tight
-   - .nav-link-book overlay aligned to left container (12.5%)
+   - Green bar drawn at bottom of header (header::before)
+   - Use top positioning (relative to header/.logo-header) to guarantee boxes
+     sit fully within the bar (no protrusion)
+   - Boxes centered at 10% / 50% / 90% to spread them further apart
+   - Explicit box height, horizontal padding, and max-width prevent overflow
    ------------------------- */
 
 :root {
@@ -148,7 +148,7 @@ footer {
     --nav-box-hpad: 16px;       /* horizontal padding */
     --nav-box-radius: 6px;
     --nav-box-font-size: 0.95rem;
-    --nav-box-max-width: 220px; /* prevent containers from growing too wide and overlapping */
+    --nav-box-max-width: 220px; /* prevent containers from growing too wide */
 }
 
 /* navbar bar at bottom of header */
@@ -163,21 +163,23 @@ header::before {
     z-index: 990;
 }
 
-/* vertical centering bottom offset: place boxes fully inside navbar */
+/* precise top offset (relative to header/logo) so containers are contained inside the bar
+   top = header height - nav-height + ((nav-height - box-height)/2)
+   Because header and .logo-header are same height (logo-header height:100%), using 100% works */
 :root {
-    --nav-box-bottom: calc((var(--nav-height) - var(--nav-box-height)) / 2);
+    --nav-box-top-calc: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
 }
 
-/* shared container rules */
+/* shared container rules (use top for consistent containment) */
 header::after,
 .logo-header::before,
 .logo-header::after {
     box-sizing: border-box;
     position: absolute;
-    bottom: var(--nav-box-bottom);
+    top: var(--nav-box-top-calc); /* guarantees full containment inside navbar */
     height: var(--nav-box-height);
     line-height: var(--nav-box-height);
-    padding: 0 var(--nav-box-hpad); /* horizontal padding only so height stays fixed */
+    padding: 0 var(--nav-box-hpad); /* horizontal padding only */
     border-radius: var(--nav-box-radius);
     background: var(--nav-box-bg);
     color: var(--nav-box-color);
@@ -192,32 +194,32 @@ header::after,
     text-align: center;
 }
 
-/* center container at exact center */
+/* center container at exact center (50%) */
 header::after {
     content: "about latvia";
     left: 50%;
     transform: translateX(-50%);
 }
 
-/* left container moved further left: 12.5% */
+/* left container moved further left: 10% */
 .logo-header::before {
     content: "book with us";
-    left: 12.5%;
+    left: 10%;
     transform: translateX(-50%);
 }
 
-/* right container moved further right: 87.5% */
+/* right container moved further right: 90% */
 .logo-header::after {
     content: "contact us";
-    left: 87.5%;
+    left: 90%;
     transform: translateX(-50%);
 }
 
-/* align the invisible clickable overlay to the left container (12.5%) */
+/* align the invisible clickable overlay to the left container (10%) */
 .nav-link-book {
     position: absolute;
-    left: 12.5%;
-    bottom: var(--nav-box-bottom);
+    left: 10%;
+    top: var(--nav-box-top-calc);
     transform: translateX(-50%);
     display: inline-block;
     height: var(--nav-box-height);
@@ -233,17 +235,17 @@ header::after {
     overflow: hidden;
 }
 
-/* responsive: on mid screens, maintain spread but allow slight inward shift to avoid clipping */
+/* responsive: on mid screens, slightly pull in to avoid clipping */
 @media (max-width: 1200px) {
-    .logo-header::before { left: 14%; }
+    .logo-header::before { left: 12%; }
     header::after          { left: 50%; }
-    .logo-header::after  { left: 86%; }
-    .nav-link-book { left: 14%; }
+    .logo-header::after  { left: 88%; }
+    .nav-link-book { left: 12%; }
 }
 
 /* stack neatly inside the navbar on small screens */
 @media (max-width: 520px) {
-    :root { --nav-height: 92px; --nav-box-bottom: calc((var(--nav-height) - var(--nav-box-height)) / 2); }
+    :root { --nav-height: 92px; }
     header::before { height: var(--nav-height); }
     header::after,
     .logo-header::before,
@@ -253,14 +255,14 @@ header::after {
         display: block;
         margin-top: 6px;
         max-width: 80%;
-        bottom: var(--nav-box-bottom);
+        top: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
     }
     .nav-link-book {
         left: 50%;
         transform: translateX(-50%);
         display: block;
         margin-top: 6px;
-        bottom: var(--nav-box-bottom);
+        top: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
         max-width: 80%;
     }
 }
