@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hotel Complaint / Issue Report</title>
+
+  <!-- Primary stylesheet (tries relative root) -->
+  <link id="main-stylesheet" rel="stylesheet" href="styles.css" />
+
+  <!-- Inline critical fallback styles (only a few rules so this won't conflict with your main stylesheet).
+       This ensures the preview won't look like a bare browser form while we guarantee styles.css load. -->
+  <style id="fallback-critical">
+    /* Critical fallback: font and basic layout so preview isn't raw browser defaults */
+    html,body{height:100%}
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0;
+      background:#f4fbf4;
+      color:#2e4d25;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:1100px;margin:0 auto;padding:1rem;}
+    .site-header{background:#FFF9B0;padding:1rem 0;text-align:center;border-bottom:1px solid rgba(46,77,37,0.08)}
+    .logo{font-weight:800;letter-spacing:0.5px}
+    .hero{background:#b2e3b2;padding:2rem;border-radius:0 0 12px 12px;text-align:center;box-shadow:0 2px 6px rgba(46,77,37,0.3);margin-bottom:1.25rem}
+    .btn{display:inline-block;background:#2e4d25;color:#fff;padding:.75rem 2rem;border-radius:30px;text-decoration:none;font-weight:700;border:none;cursor:pointer}
+    form{background: #ffffff;padding:1.25rem;border-radius:10px;box-shadow:0 2px 10px rgba(46,77,37,0.06);margin-bottom:2rem}
+    fieldset{border:1px solid #dbeedb;padding:1rem;border-radius:8px;margin-bottom:1rem}
+    label{display:block;font-weight:600;margin-bottom:.35rem}
+    input[type="text"],input[type="email"],input[type="tel"],select,textarea{width:100%;padding:.6rem;border:1px solid #c9e1c9;border-radius:6px;background:#fbfff9;color:#2e4d25}
+    .form-row--split > div{display:inline-block;width:calc(50% - .5rem);vertical-align:top}
+    .form-row--split > div + div{margin-left:1rem}
+    .form-actions{display:flex;gap:1rem;align-items:center;margin-top:1rem}
+    .form-message{margin-top:1rem}
+    .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    /* keep fallback minimal so real styles.css overrides it when loaded */
+  </style>
+
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+  <a class="skip-link sr-only" href="#main-container">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container topbar">
+      <div class="brand">
+        <a class="brand-link" href="/" aria-label="HotelPaymentSystem Home">
+          <span class="logo">BALTIC COMFORT</span>
+        </a>
+      </div>
+
+      <nav class="navbar" role="navigation" aria-label="Primary navigation">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+          <span class="hamburger" aria-hidden="true">☰</span>
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+
+        <ul id="primary-nav" class="nav" aria-hidden="false">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="/support">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <label for="langSelectTop" class="lang-label">View</label>
+        <select id="langSelectTop" class="lang-select" aria-label="Select language">
+          <option value="en">English</option>
+          <option value="lv">Latviešu</option>
+          <option value="ru">Русский</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="container hero-inner">
+        <h2 class="hero-title">Accept Crypto Payments Seamlessly</h2>
+        <p class="hero-sub">Our platform enables hotels and hospitality groups to receive payments in digital currencies—with zero hassle, full transparency, and eco-friendly operations.</p>
+        <a class="btn" href="/partner">Partner With Us</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="main-container" role="main">
+    <section class="form-section">
+      <header class="form-header">
+        <h1>Report an Issue or Complaint</h1>
+        <p class="lead">Use this form to report customer service problems, technical issues, billing issues, or other problems related to the website.</p>
+      </header>
+
+      <form id="complaint-form" action="/api/complaints" method="post" enctype="multipart/form-data" novalidate>
+        <fieldset>
+          <legend>Hotel & Contact Information</legend>
+
+          <div class="form-row">
+            <label for="hotelName">Hotel / Property Name <span aria-hidden="true">*</span></label>
+            <input id="hotelName" name="hotelName" type="text" required maxlength="150" placeholder="Example Hotel" />
+          </div>
+
+          <div class="form-row form-row--split" style="margin-top:.5rem">
+            <div>
+              <label for="contactName">Contact Name <span aria-hidden="true">*</span></label>
+              <input id="contactName" name="contactName" type="text" required maxlength="100" placeholder="Jane Doe" />
+            </div>
+            <div>
+              <label for="contactEmail">Contact Email <span aria-hidden="true">*</span></label>
+              <input id="contactEmail" name="contactEmail" type="email" required placeholder="hotel@example.com" />
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:.5rem">
+            <label for="contactPhone">Contact Phone</label>
+            <input id="contactPhone" name="contactPhone" type="tel" placeholder="+1 (555) 555-5555" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Issue Details</legend>
+
+          <div class="form-row form-row--split">
+            <div>
+              <label for="incidentDate">Date of Incident</label>
+              <input id="incidentDate" name="incidentDate" type="date" />
+            </div>
+
+            <div>
+              <label for="issueType">Issue Type <span aria-hidden="true">*</span></label>
+              <select id="issueType" name="issueType" required>
+                <option value="">-- Select an issue type --</option>
+                <option value="customer-service">Customer Service</option>
+                <option value="technical">Technical Issue</option>
+                <option value="billing">Billing</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:.5rem">
+            <label for="severity">Severity</label>
+            <select id="severity" name="severity" aria-describedby="severityHelp">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+            <small id="severityHelp" class="sr-only">Choose how critical this issue is for your operations.</small>
+          </div>
+
+          <div class="form-row" style="margin-top:.5rem">
+            <label for="affectedArea">Affected Pages / Features</label>
+            <input id="affectedArea" name="affectedArea" type="text" maxlength="200" placeholder="e.g., Payment page, Login, Dashboard" />
+          </div>
+
+          <div class="form-row" style="margin-top:.5rem">
+            <label for="description">Description <span aria-hidden="true">*</span></label>
+            <textarea id="description" name="description" rows="6" required maxlength="4000" placeholder="Describe the problem in as much detail as possible..."></textarea>
+          </div>
+
+          <div class="form-row" style="margin-top:.5rem">
+            <label for="screenshots">Attach screenshot(s) (images only)</label>
+            <input id="screenshots" name="screenshots" type="file" accept="image/*" multiple />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Follow-up & Consent</legend>
+          <div class="form-row">
+            <label>Preferred contact method</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="contactByEmail" checked /> Email</label>
+              <label style="margin-left:1rem"><input type="checkbox" name="contactByPhone" /> Phone</label>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:.5rem">
+            <label class="checkbox-inline">
+              <input id="consent" name="consent" type="checkbox" required />
+              I consent to the storage and processing of this information for the purpose of investigating the issue.
+            </label>
+          </div>
+
+          <div class="form-row translation-request" style="margin-top:.5rem">
+            <p>Would you like the confirmation / follow-up translated?</p>
+            <label><input type="checkbox" name="reply_lv" /> Latvian (Latviešu)</label>
+            <label style="margin-left:1rem"><input type="checkbox" name="reply_ru" /> Russian (Русский)</label>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" id="submitBtn" class="btn">Submit Report</button>
+          <button type="reset" class="btn" style="background:#ffffff;color:#2e4d25;border:1px solid #c9e1c9">Reset</button>
+        </div>
+
+        <div id="form-message" role="status" aria-live="polite" class="form-message"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer container" role="contentinfo">
+    <div class="footer-inner">
+      <p>&copy; <span id="year"></span> Baltic Comfort</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Attempt to load stylesheet from multiple likely locations if initial link failed.
+      // If computed font-family is browser default (serif fallback), try alternates.
+      function computedIsFallback() {
+        const bodyStyle = window.getComputedStyle(document.body);
+        // If the first font in font-family is a sans-serif we expect 'Segoe' etc. If not, we assume stylesheet didn't load.
+        const ff = bodyStyle.fontFamily || '';
+        // crude check: if browser default serif appears (e.g., 'Times New Roman') then stylesheet likely not applied
+        return /Times New Roman|serif/i.test(ff);
+      }
+
+      function tryLoad(path) {
+        return new Promise((resolve, reject) => {
+          const l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = path;
+          l.onload = () => resolve(path);
+          l.onerror = () => reject(path);
+          document.head.appendChild(l);
+        });
+      }
+
+      async function ensureStyles() {
+        // give the first link some time (it is the one in the head)
+        await new Promise(r => setTimeout(r, 50));
+        if (!computedIsFallback()) {
+          // stylesheet likely applied — remove fallback critical styles to allow full stylesheet to override
+          const fallback = document.getElementById('fallback-critical');
+          if (fallback) fallback.parentNode.removeChild(fallback);
+          return;
+        }
+
+        // common alternate paths to try (adjust if you host somewhere else)
+        const candidates = [
+          './styles.css',
+          '/styles.css',
+          '/HotelPaymentSystem/styles.css',
+          '/catlikesice/HotelPaymentSystem/styles.css'
+        ];
+
+        for (const c of candidates) {
+          try {
+            await tryLoad(c);
+            // wait a moment and test again
+            await new Promise(r => setTimeout(r, 80));
+            if (!computedIsFallback()) {
+              const fallback = document.getElementById('fallback-critical');
+              if (fallback) fallback.parentNode.removeChild(fallback);
+              console.info('Loaded stylesheet from', c);
+              return;
+            }
+          } catch (err) {
+            // continue trying
+          }
+        }
+        console.warn('Unable to find styles.css via automatic paths — page will use fallback-critical styles until you fix the href.');
+      }
+
+      ensureStyles();
+
+      // small footer year fill
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // small nav toggle for preview
+      const navToggle = document.querySelector('.nav-toggle');
+      const primaryNav = document.getElementById('primary-nav');
+      if (navToggle && primaryNav) {
+        navToggle.addEventListener('click', function () {
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', String(!expanded));
+          primaryNav.classList.toggle('open');
+        });
+      }
+
+      // Form submit behavior left minimal — backend endpoint should exist at /api/complaints
+      const form = document.getElementById('complaint-form');
+      const msg = document.getElementById('form-message');
+      const submitBtn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        msg.textContent = '';
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        const fd = new FormData(form);
+        try {
+          const res = await fetch(form.action || '/api/complaints', { method: 'POST', body: fd });
+          if (res.ok) {
+            msg.textContent = 'Thank you — your report has been submitted.';
+            msg.className = 'form-success';
+            form.reset();
+          } else {
+            let text = 'Error submitting the report.';
+            try { const j = await res.json(); if (j && j.message) text = j.message; } catch(e){}
+            throw new Error(text);
+          }
+        } catch (err) {
+          msg.textContent = err.message || 'Network error';
+          msg.className = 'form-error';
+          console.error(err);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Report';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
