@@ -252,17 +252,13 @@ footer {
 
 
 /* ---------------------------------------------------------------------
-   NAVBAR REWORK — SIMPLE CONTAINERS
-   - The three nav items are now simple rectangular containers (not "buttons")
-   - They are fully contained inside the green bar at the bottom of the header,
-     so no yellow is visible above them.
-   - The containers are lighter in fill (matching the site's soft greens) and
-     have no drop-shadow — a plain container look as requested.
-   - Left/right containers are implemented with .logo-header::before and ::after
-     so we have three pseudo elements total: header::before (green bar),
-     header::after (center), .logo-header::before (left), .logo-header::after (right).
-   - The clickable overlay .nav-link-book remains in index.html and is aligned
-     to the left container; no other HTML changes.
+   NAVBAR REWORK — SIMPLE CONTAINERS, EQUIDISTANT and fully inside the green bar
+   - Navbar bar lives at the bottom of the header (header::before)
+   - Three container boxes are placed at 25% / 50% / 75% horizontally (equidistant)
+   - Boxes are vertically centered inside the navbar (so they are fully contained)
+   - Boxes use a flat pale fill and simple styling (containers, not buttons)
+   - The invisible .nav-link-book anchor is aligned to the left container
+   - No other UI changes were made
    --------------------------------------------------------------------- */
 
 :root {
@@ -273,6 +269,7 @@ footer {
     --nav-box-color: #23441a; /* text color inside containers */
     --nav-box-padding: 10px 20px;
     --nav-box-radius: 6px;
+    --nav-box-font-size: 0.95rem;
 }
 
 /* navbar background placed at the bottom edge of the header */
@@ -290,14 +287,14 @@ header::before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* center container — simple rectangular container */
+/* center container — placed at 50% horizontally, centered via translateX(-50%) */
 header::after {
     content: "about latvia";
     position: absolute;
     left: 50%;
     bottom: calc((var(--nav-height) - 36px) / 2); /* vertically center inside the green bar */
     transform: translateX(-50%);
-    z-index: 1001;
+    z-index: 995;
     background: var(--nav-box-bg);
     color: var(--nav-box-color);
     padding: var(--nav-box-padding);
@@ -305,19 +302,19 @@ header::after {
     font-weight: 700;
     letter-spacing: 0.02em;
     text-transform: lowercase;
-    font-size: 0.95rem;
+    font-size: var(--nav-box-font-size);
     box-shadow: none; /* simple container: no shadow */
     white-space: nowrap;
 }
 
-/* left container — simple rectangular container (no shadow) */
+/* left container — placed at 25% (equidistant) */
 .logo-header::before {
     content: "book with us";
     position: absolute;
-    left: 50%;
+    left: 25%;
     bottom: calc((var(--nav-height) - 36px) / 2);
-    transform: translateX(-320px); /* offset left to avoid overlap */
-    z-index: 1001;
+    transform: translateX(-50%);
+    z-index: 995;
     background: var(--nav-box-bg);
     color: var(--nav-box-color);
     padding: var(--nav-box-padding);
@@ -325,19 +322,19 @@ header::after {
     font-weight: 700;
     letter-spacing: 0.02em;
     text-transform: lowercase;
-    font-size: 0.95rem;
+    font-size: var(--nav-box-font-size);
     box-shadow: none;
     white-space: nowrap;
 }
 
-/* right container — simple rectangular container (no shadow) */
+/* right container — placed at 75% (equidistant) */
 .logo-header::after {
     content: "contact us";
     position: absolute;
-    left: 50%;
+    left: 75%;
     bottom: calc((var(--nav-height) - 36px) / 2);
-    transform: translateX(320px); /* offset right to match left */
-    z-index: 1001;
+    transform: translateX(-50%);
+    z-index: 995;
     background: var(--nav-box-bg);
     color: var(--nav-box-color);
     padding: var(--nav-box-padding);
@@ -345,15 +342,16 @@ header::after {
     font-weight: 700;
     letter-spacing: 0.02em;
     text-transform: lowercase;
-    font-size: 0.95rem;
+    font-size: var(--nav-box-font-size);
     box-shadow: none;
     white-space: nowrap;
 }
 
-/* responsive offsets for medium screens */
+/* responsive: for medium screens reduce spacing slightly (keeps equidistant feel) */
 @media (max-width: 1100px) {
-    .logo-header::before { transform: translateX(-260px); }
-    .logo-header::after  { transform: translateX(260px); }
+    .logo-header::before { left: 22%; }
+    header::after         { left: 50%; }
+    .logo-header::after  { left: 78%; }
 }
 
 /* narrow screens: stack the containers vertically inside the navbar area */
@@ -384,7 +382,7 @@ section.features {
 }
 
 /* ---------------------------------------------------------------------
-   CLICKABLE AREA OVERLAY (aligned to the left container)
+   CLICKABLE AREA OVERLAY (aligned to the left container at 25%)
    - The empty anchor .nav-link-book (present in index.html) is positioned
      absolutely to sit over the visible left container and capture clicks.
    - It is transparent and accessible (aria-label/title).
@@ -392,10 +390,10 @@ section.features {
 
 .nav-link-book {
     position: absolute;
-    left: 50%;
+    left: 25%;
     bottom: calc((var(--nav-height) - 36px) / 2);
-    transform: translateX(-320px); /* match .logo-header::before offset */
-    z-index: 1002; /* above the visible box to capture clicks */
+    transform: translateX(-50%); /* centered on the 25% position */
+    z-index: 996; /* above the visible box to capture clicks */
     display: inline-block;
     padding: var(--nav-box-padding);
     border-radius: var(--nav-box-radius);
@@ -416,7 +414,7 @@ section.features {
 
 /* responsive adjustments for the overlay */
 @media (max-width: 1100px) {
-    .nav-link-book { transform: translateX(-260px); }
+    .nav-link-book { left: 22%; transform: translateX(-50%); }
 }
 @media (max-width: 520px) {
     .nav-link-book {
