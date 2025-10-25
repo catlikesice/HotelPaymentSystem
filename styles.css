@@ -6,6 +6,8 @@ body {
     background: #f4fbf4; /* Lighter green background */
     color: #2e4d25; /* Dark green text */
     line-height: 1.6;
+    position: relative; /* used so navbar pseudo-elements positioned absolute will scroll with the page */
+    padding-top: 0; /* ensure no empty top space when page is scrolled to top */
 }
 /* --- Added: page-specific rules for selectlocation.html (scoped under body.selectlocation) --- */
 body.selectlocation {
@@ -56,6 +58,8 @@ header {
     align-items: stretch;
     justify-content: center;
     background: none;
+    position: relative; /* allow navbar pseudo-elements to position relative to page via body but header is above navbar */
+    z-index: 1000; /* keep header (logo) above the navbar area visually */
 }
 
 header, .booking-header {
@@ -65,22 +69,21 @@ header, .booking-header {
     text-align: center;
 }
 
-/* Add logo as a decorative background image on the header,
-   center it and prevent duplication if an <img> is present in the HTML.
-   NOTE: Path is relative to styles.css. If styles.css is in a subfolder,
-   update the path accordingly (e.g. url("../Baltic%20Comfort%20LTD%20logo.png")).
-*/
+/* NOTE: ensure header logo image is visible (do not hide it) */
 header {
-    background-image: url("Baltic%20Comfort%20LTD%20logo.png");
+    background-image: none;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
 }
 
-/* Hide any header <img> elements so the background logo is the only one shown */
+/* Show the header image so the logo appears as originally placed in index.html */
 header .logo-header img,
 header img {
-    display: none !important;
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .booking-header {
@@ -248,46 +251,47 @@ footer {
 
 
 /* ---------------------------------------------------------------------
-   NAVBAR ADDED VIA CSS ONLY
-   - Adds a dark-green full-width navbar at the very top (same color as .btn)
-   - Draws three centered "boxes" (left / center / right) in the dead middle of the bar
-   - Implemented with pseudo-elements so no HTML changes were required
-   - The booking-initiate section and the original features boxes are hidden
-     (these are the areas you asked to replace)
-   - Body content is pushed down so the fixed bar does not overlap visible content
+   NAVBAR ADJUSTED (non-fixed, sits directly below header, no blank area)
+   - Navbar and its three boxes are now positioned with absolute (not fixed)
+     so they scroll with the page (they are not pinned to the viewport).
+   - The navbar background is placed immediately under the header (no large top gap).
+   - Increased spacing between boxes to prevent overlap.
+   - The clickable overlay .nav-link-book is absolute (not fixed) and aligned to the visible box.
+   - Booking-initiate and features are still hidden as requested.
    --------------------------------------------------------------------- */
 
 :root {
     --nav-height: 64px;
+    --header-height: 180px; /* should match header height */
     --nav-color: #2e4d25; /* same as .btn background */
     --nav-box-bg: rgba(255,255,255,0.06); /* subtle contrast for each box */
     --nav-box-padding: 9px 18px;
     --nav-box-radius: 8px;
 }
 
-/* create the full-width navbar background at the top */
+/* navbar background placed directly below header (absolute so it scrolls with the page) */
 body::before {
     content: "";
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: var(--header-height);
     left: 0;
     right: 0;
     height: var(--nav-height);
     background: var(--nav-color);
-    z-index: 999; /* appears above page content */
+    z-index: 990; /* below header but above other content */
     box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* center group — middle box */
+/* center box — "About Latvia" */
 header::after {
     content: "About Latvia";
-    position: fixed;
+    position: absolute;
     left: 50%;
-    top: calc( (var(--nav-height) - 36px) / 2 );
+    top: calc(var(--header-height) + (var(--nav-height) - 36px) / 2);
     transform: translateX(-50%);
-    z-index: 1000;
+    z-index: 1001;
     background: var(--nav-box-bg);
     color: #ffffff;
     padding: var(--nav-box-padding);
@@ -297,16 +301,17 @@ header::after {
     text-transform: lowercase;
     font-size: 0.95rem;
     box-shadow: 0 2px 6px rgb(0 0 0 / 0.12);
+    white-space: nowrap;
 }
 
-/* left box */
+/* left box — "Book with us" (absolute so it scrolls away) */
 header::before {
     content: "Book with us";
-    position: fixed;
+    position: absolute;
     left: 50%;
-    top: calc( (var(--nav-height) - 36px) / 2 );
-    transform: translateX(-220px);
-    z-index: 1000;
+    top: calc(var(--header-height) + (var(--nav-height) - 36px) / 2);
+    transform: translateX(-320px); /* increased offset to avoid overlap */
+    z-index: 1001;
     background: var(--nav-box-bg);
     color: #ffffff;
     padding: var(--nav-box-padding);
@@ -316,16 +321,17 @@ header::before {
     text-transform: lowercase;
     font-size: 0.95rem;
     box-shadow: 0 2px 6px rgb(0 0 0 / 0.12);
+    white-space: nowrap;
 }
 
-/* right box */
+/* right box — "Contact us" */
 body::after {
     content: "Contact us";
-    position: fixed;
+    position: absolute;
     left: 50%;
-    top: calc( (var(--nav-height) - 36px) / 2 );
-    transform: translateX(220px);
-    z-index: 1000;
+    top: calc(var(--header-height) + (var(--nav-height) - 36px) / 2);
+    transform: translateX(320px); /* increased offset to avoid overlap */
+    z-index: 1001;
     background: var(--nav-box-bg);
     color: #ffffff;
     padding: var(--nav-box-padding);
@@ -335,21 +341,22 @@ body::after {
     text-transform: lowercase;
     font-size: 0.95rem;
     box-shadow: 0 2px 6px rgb(0 0 0 / 0.12);
+    white-space: nowrap;
 }
 
-/* keep the navbar visible on smaller screens, reduce spacing/offsets */
+/* responsive offsets for medium screens */
 @media (max-width: 900px) {
     header::before {
-        transform: translateX(-150px);
+        transform: translateX(-220px);
     }
     body::after {
-        transform: translateX(150px);
+        transform: translateX(220px);
     }
 }
 
-/* tighten for narrow screens and allow wrapping */
+/* narrow screens: stack the boxes vertically inside the navbar area */
 @media (max-width: 520px) {
-    :root { --nav-height: 92px; }
+    :root { --nav-height: 92px; --header-height: 180px; }
     body::before { height: var(--nav-height); }
     header::after,
     header::before,
@@ -358,21 +365,68 @@ body::after {
         transform: translateX(-50%);
         display: block;
         margin-top: 6px;
-        top: calc((var(--nav-height) - 36px) / 2);
+        top: calc(var(--header-height) + (var(--nav-height) - 36px) / 2);
     }
     header::before { margin-top: 0; }
     body::after { margin-top: 0; }
 }
 
-/* ensure page content isn't hidden behind the fixed navbar */
+/* remove any body top padding that was added to accommodate a fixed navbar previously */
 body {
-    padding-top: var(--nav-height);
+    padding-top: 0;
 }
 
 /* Hide the old booking-initiate area and the light-green feature cards
-   (these are the areas you asked to replace with the navbar).
-   NOTE: this is done with CSS only so no HTML files were modified. */
+   (these are the areas you asked to replace with the navbar). */
 .booking-initiate,
 section.features {
     display: none;
+}
+
+/* ---------------------------------------------------------------------
+   CLICKABLE AREA OVERLAY (absolute, aligned to the "Book with us" box)
+   - The empty anchor .nav-link-book (present in index.html) is positioned
+     absolutely to sit over the visible "Book with us" box and capture clicks.
+   - It is not fixed, so it scrolls away with the page and does not create
+     any grey area at the top when the page is scrolled to top.
+   --------------------------------------------------------------------- */
+
+.nav-link-book {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--header-height) + (var(--nav-height) - 36px) / 2);
+    transform: translateX(-320px); /* matches header::before offset */
+    z-index: 1002; /* above the visible box to capture clicks */
+    display: inline-block;
+    padding: var(--nav-box-padding);
+    border-radius: var(--nav-box-radius);
+    background: transparent;
+    color: transparent;
+    text-decoration: none;
+    min-width: 120px;
+    height: 36px;
+    line-height: 18px;
+    overflow: visible;
+    outline: none;
+}
+
+.nav-link-book:focus {
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+    border-radius: var(--nav-box-radius);
+}
+
+/* responsive adjustments for the overlay */
+@media (max-width: 900px) {
+    .nav-link-book {
+        transform: translateX(-220px);
+    }
+}
+@media (max-width: 520px) {
+    .nav-link-book {
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        margin-top: 6px;
+        top: calc(var(--header-height) + (var(--nav-height) - 36px) / 2);
+    }
 }
