@@ -1,14 +1,14 @@
 /* styles.css - Elegant green theme for eco-friendly appeal
-   Updated: ensure three containers are spread further and fully contained
-   inside the dark-green navbar (no overlap into header or page content).
-   Only CSS changed; no HTML changes.
+   Adjustment: prevent overlap by limiting container width relative to viewport
+   and ensure all three containers are fully contained inside the green navbar.
+   Only styles.css changed.
 */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background: #f4fbf4; /* Lighter green background */
-    color: #2e4d25; /* Dark green text */
+    background: #f4fbf4;
+    color: #2e4d25;
     line-height: 1.6;
     position: relative;
     padding-top: 0;
@@ -20,64 +20,32 @@ body.selectlocation {
     min-height: 100vh;
     position: relative;
 }
-
-body.selectlocation .booking-form-row {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-bottom: 0;
-    flex-wrap: wrap;
-}
-
-body.selectlocation .form-inline {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
+body.selectlocation .booking-form-row { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0; flex-wrap: wrap; }
+body.selectlocation .form-inline { display: flex; align-items: center; gap: 0.5rem; }
 body.selectlocation select { min-width: 160px; padding: 0.3em; }
-
-body.selectlocation .continue-btn {
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-}
-
-@media (max-width: 700px) {
-    body.selectlocation .booking-form-row { flex-direction: column; gap: 0.5rem; }
-}
+body.selectlocation .continue-btn { position: fixed; right: 2rem; bottom: 2rem; }
+@media (max-width: 700px) { body.selectlocation .booking-form-row { flex-direction: column; gap: 0.5rem; } }
 
 /* Header / logo */
 header {
-    height: 180px; /* desired header height */
+    height: 180px;
     padding: 0;
     margin: 0;
-    overflow: hidden;
+    overflow: hidden; /* keep navbar fully clipped to header */
     display: flex;
     align-items: stretch;
     justify-content: center;
     background: none;
-    position: relative; /* anchor for navbar pseudo-elements and containers */
-    z-index: 1000; /* header content (logo) sits here */
+    position: relative;
+    z-index: 1000;
 }
-
-header, .booking-header {
-    background: #FFF9B0; /* matches the logo background */
-    color: #23441a;
-    padding: 1rem 2rem;
-    text-align: center;
-}
-
-/* keep the logo <img> visible exactly as in index.html */
+header, .booking-header { background: #FFF9B0; color: #23441a; padding: 1rem 2rem; text-align: center; }
 header { background-image: none; background-repeat: no-repeat; background-position: center center; background-size: contain; }
 header .logo-header img, header img { display: block !important; width: 100%; height: 100%; object-fit: cover; }
-
-/* booking header styles unchanged */
 .booking-header { padding: 2rem 0 1.5rem 0; margin-bottom: 0.5rem; }
 .booking-header h1 { font-size: 2.2em; font-weight: 700; margin-bottom: 0.2em; }
 .booking-header p { font-size: 1.1em; margin-bottom: 0.2em; }
 
-/* logo header container */
 .logo-header { padding: 0; margin: 0; position: relative; height: 100%; }
 .logo-header img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -91,13 +59,10 @@ h1, h2, h3 { margin-bottom: 0.5rem; }
     box-shadow: 0 2px 6px rgb(46 77 37 / 0.3);
 }
 
-/* hide original booking/feature areas as requested previously */
-.booking-initiate,
-section.features {
-    display: none;
-}
+/* hide original booking/feature areas as requested */
+.booking-initiate, section.features { display: none; }
 
-/* other site styles unchanged (features, buttons, footer, etc.) */
+/* other site styles unchanged */
 section.features { display: flex; justify-content: space-around; margin: 2rem 1rem; flex-wrap: wrap; }
 .feature { background: #e5f8e5; border-radius: 12px; box-shadow: 0 1px 4px rgb(46 77 37 / 0.2); padding: 1rem 1.5rem; margin: 1rem; flex: 1 1 250px; max-width: 300px; text-align: center; }
 .feature h3 { color: #346534; margin-bottom: 0.75rem; }
@@ -130,12 +95,11 @@ footer {
 }
 
 /* -------------------------
-   NAVBAR: containers fully inside the green bar and spread further
-   - Green bar drawn at bottom of header (header::before)
-   - Use top positioning (relative to header/.logo-header) to guarantee boxes
-     sit fully within the bar (no protrusion)
-   - Boxes centered at 10% / 50% / 90% to spread them further apart
-   - Explicit box height, horizontal padding, and max-width prevent overflow
+   NAVBAR: ensure containment and avoid overlap
+   - Limit each container's max-width to one-third of the viewport minus gutter,
+     which guarantees centers at 1/6, 1/2, 5/6 will not overlap.
+   - Use top positioning relative to header (guaranteed containment inside bar)
+   - Keep overflow:hidden on header to prevent any visual protrusion
    ------------------------- */
 
 :root {
@@ -144,14 +108,15 @@ footer {
     --nav-color: #2e4d25;
     --nav-box-bg: #e5f8e5;
     --nav-box-color: #23441a;
-    --nav-box-height: 36px;     /* explicit box height (must be <= nav-height) */
-    --nav-box-hpad: 16px;       /* horizontal padding */
+    --nav-box-height: 36px;
+    --nav-box-hpad: 14px;
     --nav-box-radius: 6px;
     --nav-box-font-size: 0.95rem;
-    --nav-box-max-width: 220px; /* prevent containers from growing too wide */
+    /* IMPORTANT: each container max width = (100% / 3) - gutter to avoid overlap */
+    --nav-box-max-width: calc((100% / 3) - 40px);
 }
 
-/* navbar bar at bottom of header */
+/* green navbar bar at bottom of header */
 header::before {
     content: "";
     position: absolute;
@@ -163,23 +128,19 @@ header::before {
     z-index: 990;
 }
 
-/* precise top offset (relative to header/logo) so containers are contained inside the bar
-   top = header height - nav-height + ((nav-height - box-height)/2)
-   Because header and .logo-header are same height (logo-header height:100%), using 100% works */
-:root {
-    --nav-box-top-calc: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
-}
+/* top offset to vertically center boxes inside the navbar (relative to header) */
+:root { --nav-box-top: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2)); }
 
-/* shared container rules (use top for consistent containment) */
+/* shared container rules */
 header::after,
 .logo-header::before,
 .logo-header::after {
     box-sizing: border-box;
     position: absolute;
-    top: var(--nav-box-top-calc); /* guarantees full containment inside navbar */
+    top: var(--nav-box-top); /* ensures the entire box is inside the bar */
     height: var(--nav-box-height);
     line-height: var(--nav-box-height);
-    padding: 0 var(--nav-box-hpad); /* horizontal padding only */
+    padding: 0 var(--nav-box-hpad);
     border-radius: var(--nav-box-radius);
     background: var(--nav-box-bg);
     color: var(--nav-box-color);
@@ -189,37 +150,26 @@ header::after,
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: var(--nav-box-max-width);
+    max-width: var(--nav-box-max-width); /* prevents center box growing into neighbors */
     z-index: 1010; /* above green bar and logo */
     text-align: center;
+    box-shadow: none;
 }
 
-/* center container at exact center (50%) */
-header::after {
-    content: "about latvia";
-    left: 50%;
-    transform: translateX(-50%);
-}
+/* center at 50% */
+header::after { content: "about latvia"; left: 50%; transform: translateX(-50%); }
 
-/* left container moved further left: 10% */
-.logo-header::before {
-    content: "book with us";
-    left: 10%;
-    transform: translateX(-50%);
-}
+/* left center at 16.6667% (1/6) */
+.logo-header::before { content: "book with us"; left: 16.6666667%; transform: translateX(-50%); }
 
-/* right container moved further right: 90% */
-.logo-header::after {
-    content: "contact us";
-    left: 90%;
-    transform: translateX(-50%);
-}
+/* right center at 83.3333% (5/6) */
+.logo-header::after { content: "contact us"; left: 83.3333333%; transform: translateX(-50%); }
 
-/* align the invisible clickable overlay to the left container (10%) */
+/* clickable overlay for left container */
 .nav-link-book {
     position: absolute;
-    left: 10%;
-    top: var(--nav-box-top-calc);
+    left: 16.6666667%;
+    top: var(--nav-box-top);
     transform: translateX(-50%);
     display: inline-block;
     height: var(--nav-box-height);
@@ -229,33 +179,32 @@ header::after {
     background: transparent;
     color: transparent;
     text-decoration: none;
-    z-index: 1011; /* above containers */
+    z-index: 1011;
     box-sizing: border-box;
     max-width: var(--nav-box-max-width);
     overflow: hidden;
 }
 
-/* responsive: on mid screens, slightly pull in to avoid clipping */
+/* Slightly reduce container widths on mid/low widths to avoid overlap in narrow viewports */
 @media (max-width: 1200px) {
-    .logo-header::before { left: 12%; }
-    header::after          { left: 50%; }
-    .logo-header::after  { left: 88%; }
-    .nav-link-book { left: 12%; }
+    :root { --nav-box-max-width: calc((100% / 3) - 60px); }
+    .logo-header::before { left: 18%; }
+    header::after { left: 50%; }
+    .logo-header::after { left: 82%; }
+    .nav-link-book { left: 18%; }
 }
 
-/* stack neatly inside the navbar on small screens */
+/* Stack vertically inside the bar on very small screens */
 @media (max-width: 520px) {
-    :root { --nav-height: 92px; }
+    :root { --nav-height: 92px; --nav-box-max-width: 80%; }
     header::before { height: var(--nav-height); }
-    header::after,
-    .logo-header::before,
-    .logo-header::after {
+    header::after, .logo-header::before, .logo-header::after {
         left: 50%;
         transform: translateX(-50%);
         display: block;
         margin-top: 6px;
-        max-width: 80%;
         top: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
+        max-width: 80%;
     }
     .nav-link-book {
         left: 50%;
