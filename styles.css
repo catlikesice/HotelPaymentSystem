@@ -252,12 +252,13 @@ footer {
 
 
 /* ---------------------------------------------------------------------
-   NAVBAR REWORK — SIMPLE CONTAINERS, EQUIDISTANT and fully inside the green bar
+   NAVBAR REWORK — SIMPLE CONTAINERS, PERFECTLY EQUIDISTANT AND FULLY CONTAINED
    - Navbar bar lives at the bottom of the header (header::before)
-   - Three container boxes are placed at 25% / 50% / 75% horizontally (equidistant)
-   - Boxes are vertically centered inside the navbar (so they are fully contained)
-   - Boxes use a flat pale fill and simple styling (containers, not buttons)
-   - The invisible .nav-link-book anchor is aligned to the left container
+   - Three container boxes are placed at 16.6667% / 50% / 83.3333% horizontally
+     (these positions distribute three centers evenly across the full width)
+   - Boxes are vertically centered inside the navbar using a precise top calc so
+     they are fully inside the dark-green bar (no yellow showing above)
+   - The invisible .nav-link-book anchor is aligned to the left container (16.6667%)
    - No other UI changes were made
    --------------------------------------------------------------------- */
 
@@ -270,6 +271,7 @@ footer {
     --nav-box-padding: 10px 20px;
     --nav-box-radius: 6px;
     --nav-box-font-size: 0.95rem;
+    --nav-box-height: 36px; /* explicit height used for vertical centering */
 }
 
 /* navbar background placed at the bottom edge of the header */
@@ -287,12 +289,20 @@ header::before {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* helper: precise top formula to vertically center boxes inside the navbar area
+   top = header top + (header height - nav-height) + ((nav-height - box-height)/2)
+   since header top is 0, we use calc(var(--header-height) - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2))
+*/
+:root {
+    --nav-box-top: calc(var(--header-height) - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
+}
+
 /* center container — placed at 50% horizontally, centered via translateX(-50%) */
 header::after {
     content: "about latvia";
     position: absolute;
     left: 50%;
-    bottom: calc((var(--nav-height) - 36px) / 2); /* vertically center inside the green bar */
+    top: var(--nav-box-top);
     transform: translateX(-50%);
     z-index: 995;
     background: var(--nav-box-bg);
@@ -304,15 +314,17 @@ header::after {
     text-transform: lowercase;
     font-size: var(--nav-box-font-size);
     box-shadow: none; /* simple container: no shadow */
+    height: var(--nav-box-height);
+    line-height: var(--nav-box-height);
     white-space: nowrap;
 }
 
-/* left container — placed at 25% (equidistant) */
+/* left container — placed at 16.6667% (one-sixth) for even distribution */
 .logo-header::before {
     content: "book with us";
     position: absolute;
-    left: 25%;
-    bottom: calc((var(--nav-height) - 36px) / 2);
+    left: 16.6667%;
+    top: var(--nav-box-top);
     transform: translateX(-50%);
     z-index: 995;
     background: var(--nav-box-bg);
@@ -324,15 +336,17 @@ header::after {
     text-transform: lowercase;
     font-size: var(--nav-box-font-size);
     box-shadow: none;
+    height: var(--nav-box-height);
+    line-height: var(--nav-box-height);
     white-space: nowrap;
 }
 
-/* right container — placed at 75% (equidistant) */
+/* right container — placed at 83.3333% (five-sixths) for even distribution */
 .logo-header::after {
     content: "contact us";
     position: absolute;
-    left: 75%;
-    bottom: calc((var(--nav-height) - 36px) / 2);
+    left: 83.3333%;
+    top: var(--nav-box-top);
     transform: translateX(-50%);
     z-index: 995;
     background: var(--nav-box-bg);
@@ -344,14 +358,16 @@ header::after {
     text-transform: lowercase;
     font-size: var(--nav-box-font-size);
     box-shadow: none;
+    height: var(--nav-box-height);
+    line-height: var(--nav-box-height);
     white-space: nowrap;
 }
 
-/* responsive: for medium screens reduce spacing slightly (keeps equidistant feel) */
+/* responsive: for medium screens keep the same equidistant feel but you can tweak values if needed */
 @media (max-width: 1100px) {
-    .logo-header::before { left: 22%; }
+    .logo-header::before { left: 17.5%; }
     header::after         { left: 50%; }
-    .logo-header::after  { left: 78%; }
+    .logo-header::after  { left: 82.5%; }
 }
 
 /* narrow screens: stack the containers vertically inside the navbar area */
@@ -365,7 +381,7 @@ header::after {
         transform: translateX(-50%);
         display: block;
         margin-top: 6px;
-        bottom: calc((var(--nav-height) - 36px) / 2);
+        top: calc(var(--header-height) - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
     }
 }
 
@@ -382,7 +398,7 @@ section.features {
 }
 
 /* ---------------------------------------------------------------------
-   CLICKABLE AREA OVERLAY (aligned to the left container at 25%)
+   CLICKABLE AREA OVERLAY (aligned to the left container at 16.6667%)
    - The empty anchor .nav-link-book (present in index.html) is positioned
      absolutely to sit over the visible left container and capture clicks.
    - It is transparent and accessible (aria-label/title).
@@ -390,9 +406,9 @@ section.features {
 
 .nav-link-book {
     position: absolute;
-    left: 25%;
-    bottom: calc((var(--nav-height) - 36px) / 2);
-    transform: translateX(-50%); /* centered on the 25% position */
+    left: 16.6667%;
+    top: var(--nav-box-top);
+    transform: translateX(-50%); /* centered on the 16.6667% position */
     z-index: 996; /* above the visible box to capture clicks */
     display: inline-block;
     padding: var(--nav-box-padding);
@@ -401,8 +417,8 @@ section.features {
     color: transparent;
     text-decoration: none;
     min-width: 120px;
-    height: 36px;
-    line-height: 18px;
+    height: var(--nav-box-height);
+    line-height: var(--nav-box-height);
     overflow: visible;
     outline: none;
 }
@@ -414,7 +430,7 @@ section.features {
 
 /* responsive adjustments for the overlay */
 @media (max-width: 1100px) {
-    .nav-link-book { left: 22%; transform: translateX(-50%); }
+    .nav-link-book { left: 17.5%; transform: translateX(-50%); }
 }
 @media (max-width: 520px) {
     .nav-link-book {
@@ -422,6 +438,6 @@ section.features {
         transform: translateX(-50%);
         display: block;
         margin-top: 6px;
-        bottom: calc((var(--nav-height) - 36px) / 2);
+        top: calc(var(--header-height) - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
     }
 }
