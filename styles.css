@@ -245,3 +245,134 @@ footer {
     right: 2rem;
     bottom: 2rem;
 }
+
+
+/* ---------------------------------------------------------------------
+   NAVBAR ADDED VIA CSS ONLY
+   - Adds a dark-green full-width navbar at the very top (same color as .btn)
+   - Draws three centered "boxes" (left / center / right) in the dead middle of the bar
+   - Implemented with pseudo-elements so no HTML changes were required
+   - The booking-initiate section and the original features boxes are hidden
+     (these are the areas you asked to replace)
+   - Body content is pushed down so the fixed bar does not overlap visible content
+   --------------------------------------------------------------------- */
+
+:root {
+    --nav-height: 64px;
+    --nav-color: #2e4d25; /* same as .btn background */
+    --nav-box-bg: rgba(255,255,255,0.06); /* subtle contrast for each box */
+    --nav-box-padding: 9px 18px;
+    --nav-box-radius: 8px;
+}
+
+/* create the full-width navbar background at the top */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background: var(--nav-color);
+    z-index: 999; /* appears above page content */
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* center group — middle box */
+header::after {
+    content: "About Latvia";
+    position: fixed;
+    left: 50%;
+    top: calc( (var(--nav-height) - 36px) / 2 );
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: var(--nav-box-bg);
+    color: #ffffff;
+    padding: var(--nav-box-padding);
+    border-radius: var(--nav-box-radius);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.12);
+}
+
+/* left box */
+header::before {
+    content: "Book with us";
+    position: fixed;
+    left: 50%;
+    top: calc( (var(--nav-height) - 36px) / 2 );
+    transform: translateX(-220px);
+    z-index: 1000;
+    background: var(--nav-box-bg);
+    color: #ffffff;
+    padding: var(--nav-box-padding);
+    border-radius: var(--nav-box-radius);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.12);
+}
+
+/* right box */
+body::after {
+    content: "Contact us";
+    position: fixed;
+    left: 50%;
+    top: calc( (var(--nav-height) - 36px) / 2 );
+    transform: translateX(220px);
+    z-index: 1000;
+    background: var(--nav-box-bg);
+    color: #ffffff;
+    padding: var(--nav-box-padding);
+    border-radius: var(--nav-box-radius);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.12);
+}
+
+/* keep the navbar visible on smaller screens, reduce spacing/offsets */
+@media (max-width: 900px) {
+    header::before {
+        transform: translateX(-150px);
+    }
+    body::after {
+        transform: translateX(150px);
+    }
+}
+
+/* tighten for narrow screens and allow wrapping */
+@media (max-width: 520px) {
+    :root { --nav-height: 92px; }
+    body::before { height: var(--nav-height); }
+    header::after,
+    header::before,
+    body::after {
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        margin-top: 6px;
+        top: calc((var(--nav-height) - 36px) / 2);
+    }
+    header::before { margin-top: 0; }
+    body::after { margin-top: 0; }
+}
+
+/* ensure page content isn't hidden behind the fixed navbar */
+body {
+    padding-top: var(--nav-height);
+}
+
+/* Hide the old booking-initiate area and the light-green feature cards
+   (these are the areas you asked to replace with the navbar).
+   NOTE: this is done with CSS only so no HTML files were modified. */
+.booking-initiate,
+section.features {
+    display: none;
+}
