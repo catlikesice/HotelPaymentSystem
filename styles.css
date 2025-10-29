@@ -38,6 +38,13 @@ header {
     background: none;
     position: relative;
     z-index: 1000;
+    display: flex; /* Suggested: Set to flex container */
+    justify-content: space-between; /* Suggested: Distributes items horizontally */
+    align-items: center;      /* Suggested: Vertically aligns items */
+    height: 80px;            /* Suggested: Example height, adjust as needed */
+    padding: 0 32px;         /* Suggested: Example padding, adjust as needed */
+    background-color: #f8f8f8;/* Suggested: Example background to make it visible */
+    box-sizing: border-box;   /* Suggested: Include padding in element's total width and height */
 }
 header, .booking-header { background: #FFF9B0; color: #23441a; padding: 1rem 2rem; text-align: center; }
 header { background-image: none; background-repeat: no-repeat; background-position: center center; background-size: contain; }
@@ -154,6 +161,8 @@ header::after,
     z-index: 1010; /* above green bar and logo */
     text-align: center;
     box-shadow: none;
+    flex-shrink: 0;           /* Suggested: Prevent logo from shrinking */
+    z-index: auto;            /* Suggested: Remove any explicit z-index if it was set */
 }
 
 /* center at 50% */
@@ -194,6 +203,8 @@ a.nav-link-book {
   vertical-align: middle;
   max-width: var(--nav-box-max-width);
   overflow: hidden;
+  flex-shrink: 0;           /* Suggested: Prevent navigation link from shrinking */
+  z-index: auto;            /* Suggested: Remove any explicit z-index to avoid issues */
 }
 
 .navbar-container {
