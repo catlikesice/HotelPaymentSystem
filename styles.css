@@ -187,6 +187,14 @@ header::after { content: "about latvia"; left: 50%; transform: translateX(-50%);
     overflow: hidden;
 }
 
+.navbar-container {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Slightly reduce container widths on mid/low widths to avoid overlap in narrow viewports */
 @media (max-width: 1200px) {
     :root { --nav-box-max-width: calc((100% / 3) - 60px); }
