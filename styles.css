@@ -28,8 +28,8 @@ body.selectlocation .continue-btn { position: fixed; right: 2rem; bottom: 2rem; 
 
 /* Header / logo */
 header {
-    height: 180px;
-    padding: 0;
+    height: 80px;
+    padding: 0 32px;
     margin: 0;
     overflow: hidden; /* keep navbar fully clipped to header */
     display: flex;
