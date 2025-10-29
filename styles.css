@@ -166,25 +166,34 @@ header::after { content: "about latvia"; left: 50%; transform: translateX(-50%);
 .logo-header::after { content: "contact us"; left: 83.3333333%; transform: translateX(-50%); }
 
 /* clickable overlay for left container */
-.nav-link-book {
-    position: absolute;
-    left: 16.6666667%;
-    top: var(--nav-box-top);
-    transform: translateX(-50%);
-    display: inline-block;
-    height: var(--nav-box-height);
-    line-height: var(--nav-box-height);
-    margin: 0 10px;
-    padding: 8px 16px;
-    border-radius: var(--nav-box-radius);
-    background: transparent;
-    color: transparent;
-    text-decoration: none;
-    z-index: 1011;
-    box-sizing: border-box;
-    vertical-align: middle;
-    max-width: var(--nav-box-max-width);
-    overflow: hidden;
+a.nav-link-book {
+  /* Remove absolute positioning if you want it to be part of the flex layout */
+  position: static; /* or just remove the property */
+  /* Ensure this element is styled as a link */
+  text-decoration: none;
+  color: white; /* Or whatever color your links should be */
+  padding: 8px 15px; /* Add some padding to make it a clickable area */
+  border-radius: 5px; /* Make it look like a button/pill */
+  /* Remove float if present */
+  float: none;
+  /* Add margin for spacing between navigation links if there are multiple */
+  margin-left: 10px; /* Example, adjust as needed */
+  box-sizing: border-box;
+  /* If 'b.', 'c..' are distinct containers, they might need their own classes/elements within the header */
+  left: 16.6666667%;
+  top: var(--nav-box-top);
+  transform: translateX(-50%);
+  display: inline-block;
+  height: var(--nav-box-height);
+  line-height: var(--nav-box-height);
+  border-radius: var(--nav-box-radius);
+  background: transparent;
+  color: transparent;
+  z-index: 1011;
+  box-sizing: border-box;
+  vertical-align: middle;
+  max-width: var(--nav-box-max-width);
+  overflow: hidden;
 }
 
 .navbar-container {
