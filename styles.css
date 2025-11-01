@@ -1,9 +1,10 @@
-/* Complete styles.css - updated so navbar containers are equidistant and centered
-   - Goal: make the three .nav-box items evenly spaced (equidistant) without
-     stretching all the way to the far left/right edges of the page.
-   - Only navbar spacing/layout rules were adjusted from the previous file.
-     Everything else in the stylesheet is preserved so replacing the file will
-     not remove unrelated styles you've already added.
+/* Complete styles.css - adjusted so navbar containers are spaced further apart
+   - Change summary: only spacing-related values in the navbar section were changed
+     to increase separation between the three .nav-box items while keeping them
+     centered and equidistant. Everything else is preserved from the previous file.
+   - Key adjustments:
+     * increased --nav-group-max-width so the centered group is wider
+     * increased the gap in the inner group so spacing between boxes grows
 */
 
 /* ---------- base / typography / page layout ---------- */
@@ -247,12 +248,9 @@ footer {
     bottom: 2rem;
 }
 
-/* ---------- NAVBAR: centered equidistant layout ----------
-   Variables here control spacing. Adjust only the values here for micro-tweaks.
-   This section places the three boxes centered within a constrained max-width container,
-   and distributes them with equal spacing (via justify-content: space-between on the inner
-   flex row). The container itself is centered with margin:auto so boxes never touch the
-   far left/right edges of the page.
+/* ---------- NAVBAR: centered equidistant layout (SPACED FURTHER APART) ----------
+   Adjusted variables to increase separation between the three boxes while keeping them
+   centered and equidistant within a constrained group.
 */
 
 /* Navbar variables */
@@ -264,11 +262,15 @@ footer {
     --nav-box-color: #23441a;
     --nav-box-hpad: 14px;
 
-    /* width of the centered group that contains the three boxes */
-    --nav-group-max-width: 640px; /* adjust smaller for tighter group, larger to spread out */
+    /* Increased the max width of the centered group so items can be farther apart.
+       Increase further to spread more; reduce to bring them closer. */
+    --nav-group-max-width: 980px;
 
     /* each box max width (percentage of group width) */
-    --nav-box-max-percentage: 28%;
+    --nav-box-max-percentage: 24%;
+
+    /* inner gap between boxes */
+    --nav-inner-gap: 2.5rem;
 }
 
 /* Position the nav at the bottom of the header so it's always visible */
@@ -320,7 +322,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between; /* equal spacing between the three boxes */
-    gap: 0.75rem;
+    gap: var(--nav-inner-gap);
     box-sizing: border-box;
 }
 
@@ -391,7 +393,7 @@ header::after {
 
 /* Small-screen: stack the boxes and keep them contained */
 @media (max-width: 520px) {
-    :root { --nav-group-max-width: 100%; --nav-box-max-percentage: 100%; }
+    :root { --nav-group-max-width: 100%; --nav-box-max-percentage: 100%; --nav-inner-gap: 0.75rem; }
     .site-nav { position: absolute; height: auto; bottom: 0; }
     .site-nav::before { height: var(--nav-height); bottom: 0; }
     .nav-containers {
