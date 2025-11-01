@@ -1,10 +1,9 @@
-/* Complete styles.css - adjusted so navbar containers sit closer together
-   Requested change: ONLY bring the nav .nav-box containers closer together.
-   I changed only the spacing-related variables/rules used by the navbar:
-     - reduced --nav-container-gutter
-     - reduced --nav-box-max-percentage
-     - changed layout to center the group and use a small gap
-   All other styles are preserved exactly as before.
+/* Complete styles.css - updated so navbar containers are equidistant and centered
+   - Goal: make the three .nav-box items evenly spaced (equidistant) without
+     stretching all the way to the far left/right edges of the page.
+   - Only navbar spacing/layout rules were adjusted from the previous file.
+     Everything else in the stylesheet is preserved so replacing the file will
+     not remove unrelated styles you've already added.
 */
 
 /* ---------- base / typography / page layout ---------- */
@@ -248,24 +247,28 @@ footer {
     bottom: 2rem;
 }
 
-/* ---------- NAVBAR: minimal integrated fix (ADJUSTED spacing only) ----------
-   Only spacing-related values changed to bring the nav containers closer together.
+/* ---------- NAVBAR: centered equidistant layout ----------
+   Variables here control spacing. Adjust only the values here for micro-tweaks.
+   This section places the three boxes centered within a constrained max-width container,
+   and distributes them with equal spacing (via justify-content: space-between on the inner
+   flex row). The container itself is centered with margin:auto so boxes never touch the
+   far left/right edges of the page.
 */
 
-/* Navbar variables - tweak these single values for micro-adjustments */
+/* Navbar variables */
 :root {
     --nav-height: 64px;
     --nav-box-height: 36px;
     --nav-bg-color: #2e4d25;
     --nav-box-bg: #e5f8e5;
     --nav-box-color: #23441a;
-    --nav-box-hpad: 16px;
+    --nav-box-hpad: 14px;
 
-    /* REDUCED gutter to bring containers inward (was 48px) */
-    --nav-container-gutter: 12px;
+    /* width of the centered group that contains the three boxes */
+    --nav-group-max-width: 640px; /* adjust smaller for tighter group, larger to spread out */
 
-    /* REDUCED max width per box to let boxes sit closer (was 28% then 22%) */
-    --nav-box-max-percentage: 18%;
+    /* each box max width (percentage of group width) */
+    --nav-box-max-percentage: 28%;
 }
 
 /* Position the nav at the bottom of the header so it's always visible */
@@ -294,7 +297,7 @@ footer {
     display: block;
 }
 
-/* Flex container for the three real anchor boxes */
+/* Outer container: centers the group and constrains maximum width so items don't hug edges */
 .nav-containers {
     position: absolute;
     left: 0;
@@ -303,17 +306,22 @@ footer {
     height: var(--nav-height);
     display: flex;
     align-items: center;
-
-    /* center the group and use small gap so boxes are close together */
-    justify-content: center;
-    padding: 0 var(--nav-container-gutter);
-    box-sizing: border-box;
-
-    /* small gap between items */
-    gap: 0.5rem;
-
-    z-index: 1110; /* boxes above nav background and logo */
+    justify-content: center; /* center the inner group horizontally */
+    z-index: 1110;
     pointer-events: auto;
+    padding: 0 12px; /* small page padding so group doesn't touch viewport edges */
+    box-sizing: border-box;
+}
+
+/* Inner group: constrained width that holds the three boxes and spaces them equally */
+.nav-containers .nav-group {
+    width: 100%;
+    max-width: var(--nav-group-max-width);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* equal spacing between the three boxes */
+    gap: 0.75rem;
+    box-sizing: border-box;
 }
 
 /* Visual boxes that are also the real hyperlinks (anchors) */
@@ -383,7 +391,7 @@ header::after {
 
 /* Small-screen: stack the boxes and keep them contained */
 @media (max-width: 520px) {
-    :root { --nav-container-gutter: 12px; --nav-box-max-percentage: 100%; }
+    :root { --nav-group-max-width: 100%; --nav-box-max-percentage: 100%; }
     .site-nav { position: absolute; height: auto; bottom: 0; }
     .site-nav::before { height: var(--nav-height); bottom: 0; }
     .nav-containers {
@@ -393,8 +401,16 @@ header::after {
         bottom: 0;
         flex-direction: column;
         gap: 8px;
-        padding: 8px var(--nav-container-gutter);
+        padding: 8px;
         height: auto;
+        align-items: stretch;
+    }
+    .nav-containers .nav-group {
+        position: static;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         align-items: stretch;
     }
     .nav-box {
@@ -421,7 +437,7 @@ header::after {
     white-space: nowrap;
 }
 
-/* other page rules (unchanged) */
+/* other page rules retained */
 .booking-initiate,
 section.features {
     display: block;
