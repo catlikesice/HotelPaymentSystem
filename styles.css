@@ -1,12 +1,9 @@
-/* styles.css - full stylesheet with navbar containment and visibility fixes included
-   - This is the complete styles.css you can upload to replace the existing file.
-   - It contains the focused NAVBAR: CONTAINMENT FIX and NAVBAR VISIBILITY FIX integrated
-     so you don't need to decide where to paste anything; the rules live together here.
-   - Only navbar-related rules were added/adjusted beyond the base site styles to address:
-     * three nav-box anchors fully contained inside the dark-green navbar
-     * no overlap or protrusion above the navbar
-     * logo remains visible
-     * nav bar background is visible and links are clickable
+/* Complete styles.css - full stylesheet suitable for upload
+   - This file contains your full site styles plus the minimal, focused navbar fixes.
+   - Nothing important from your site was removed; unchanged rules remain so replacing
+     the file will not lose unrelated styles you already had.
+   - The navbar section is integrated and explicitly documented; tweak only the variables
+     near the top of the NAVBAR section if you need small spacing adjustments for your viewport.
 */
 
 /* ---------- base / typography / page layout ---------- */
@@ -65,13 +62,13 @@ header {
     height: 180px; /* desired header height */
     padding: 0;
     margin: 0;
-    overflow: hidden; /* ensure navbar and logo are clipped to header when necessary */
+    overflow: visible; /* allow the nav bar to be placed at bottom of header */
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     background: none;
-    position: relative; /* anchor for navbar pseudo-elements and containers */
-    z-index: 1000; /* header content (logo) sits here */
+    position: relative; /* anchor for nav which is absolutely positioned inside header */
+    z-index: 1000; /* header content baseline */
 }
 
 header, .booking-header {
@@ -94,11 +91,11 @@ header {
     margin: 0;
     position: relative;
     height: 100%;
-    z-index: 994; /* below nav boxes but above page content */
+    z-index: 100; /* logo above page background but below nav boxes which have higher z */
 }
 .logo-header img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    max-height: 100%;
     object-fit: contain;
     display: block;
 }
@@ -250,11 +247,14 @@ footer {
     bottom: 2rem;
 }
 
-/* ---------- NAVBAR: CONTAINMENT & VISIBILITY FIX (integrated patch) ---------- */
-/* The rules below are the focused patch: nav bar is drawn by .site-nav, boxes are real anchors
-   in .nav-containers, flex spacing prevents overlap, explicit heights/padding avoid protrusion,
-   z-index ordering preserves logo visibility while keeping the bar and boxes visible and interactive. */
+/* ---------- NAVBAR: minimal integrated fix ----------
+   Purpose: ensure the logo remains visible and the visible boxes are the real anchor elements,
+   strictly contained inside the dark-green bar placed at the bottom of the header.
+   This section is intentionally self-contained so you can adjust only the variables below
+   if slight spacing tweaks are required for a particular viewport.
+*/
 
+/* Navbar variables - tweak these single values for micro-adjustments */
 :root {
     --nav-height: 64px;
     --nav-box-height: 36px;
@@ -266,49 +266,50 @@ footer {
     --nav-box-max-percentage: 28%; /* max width per box to avoid overlap */
 }
 
-/* Make the nav a visible block and containing block for the boxes */
+/* Position the nav at the bottom of the header so it's always visible */
 .site-nav {
-    display: block;
-    position: relative;
-    z-index: 1100; /* above header background if necessary */
+    position: absolute;    /* positioning relative to header */
+    left: 0;
+    right: 0;
+    bottom: 0;
     height: var(--nav-height);
+    z-index: 1100;         /* above header background */
     pointer-events: auto;
     background: transparent;
 }
 
-/* Draw the dark-green bar inside the nav so it's always visible */
+/* Draw the green navbar bar inside the nav */
 .site-nav::before {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    bottom: 0;
     height: 100%;
     background: var(--nav-bg-color);
-    z-index: 1101; /* just below boxes but above logo background */
+    z-index: 1101; /* below boxes but above logo background */
     pointer-events: none;
     display: block;
 }
 
-/* Container that holds the three real anchors; uses flex to distribute space */
+/* Flex container for the three real anchor boxes */
 .nav-containers {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0; /* stick to top of nav so boxes remain inside the bar */
+    bottom: 0;
     height: var(--nav-height);
     display: flex;
     align-items: center;
-    justify-content: space-between; /* spread across full width */
+    justify-content: space-between;
     padding: 0 var(--nav-container-gutter);
     box-sizing: border-box;
-    z-index: 1110; /* above nav background and logo so boxes sit visually on the bar */
     gap: 1rem;
+    z-index: 1110; /* boxes above nav background and logo */
     pointer-events: auto;
 }
 
-/* Individual nav boxes: explicit height and horizontal padding only,
-   constrained max-width to prevent center box from pushing into neighbors */
+/* Visual boxes that are also the real hyperlinks (anchors) */
 .nav-box {
     display: inline-flex;
     align-items: center;
@@ -326,16 +327,25 @@ footer {
     max-width: var(--nav-box-max-percentage);
     overflow: hidden;
     text-overflow: ellipsis;
-    min-width: 56px; /* safeguard so left/other boxes don't collapse */
+    min-width: 56px;
     visibility: visible;
     opacity: 1;
 }
 
-/* clickable fallback anchor (if still present) kept transparent and aligned */
+/* Keep original nav list in DOM but move it off-screen visually for accessibility */
+.nav-links {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+}
+
+/* Optional fallback anchor; left in the DOM but not interactive */
 .nav-link-book {
     position: absolute;
     left: 16.6666667%;
-    top: calc((var(--nav-height) - var(--nav-box-height)) / 2);
+    bottom: calc((var(--nav-height) - var(--nav-box-height)) / 2);
     transform: translateX(-50%);
     display: inline-block;
     height: var(--nav-box-height);
@@ -349,30 +359,31 @@ footer {
     box-sizing: border-box;
     max-width: var(--nav-box-max-percentage);
     overflow: hidden;
+    pointer-events: none; /* don't block clicks on .nav-box anchors */
 }
 
-/* Ensure logo sits below nav boxes but still visible */
+/* Ensure logo remains visible (below boxes) */
 .logo-header {
-    z-index: 1090;
+    z-index: 100;
     position: relative;
 }
 
-/* Safety: hide header pseudo elements if legacy CSS attempted to draw the bar there */
+/* Make sure any legacy header pseudo-elements don't conflict */
 header::before,
 header::after {
     display: none !important;
 }
 
-/* small-screen: stack inside the navbar and keep boxes contained */
+/* Small-screen: stack the boxes and keep them contained */
 @media (max-width: 520px) {
     :root { --nav-container-gutter: 12px; --nav-box-max-percentage: 100%; }
-    .site-nav { height: auto; }
-    .site-nav::before { height: var(--nav-height); }
+    .site-nav { position: absolute; height: auto; bottom: 0; }
+    .site-nav::before { height: var(--nav-height); bottom: 0; }
     .nav-containers {
-        position: relative;
-        left: auto;
-        right: auto;
-        top: 0;
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        bottom: 0;
         flex-direction: column;
         gap: 8px;
         padding: 8px var(--nav-container-gutter);
@@ -387,14 +398,14 @@ header::after {
     .nav-link-book {
         left: 50%;
         transform: translateX(-50%);
-        top: auto;
+        bottom: auto;
         position: relative;
         display: block;
         max-width: 100%;
     }
 }
 
-/* ---------- accessibility: visually-hidden helper ---------- */
+/* ---------- small utility styles retained ---------- */
 .visually-hidden {
     position: absolute !important;
     height: 1px; width: 1px;
@@ -403,17 +414,17 @@ header::after {
     white-space: nowrap;
 }
 
-/* ---------- hide old duplicate elements if present (safe fallback) ---------- */
-.nav-links {
-    display: none;
-}
-
-/* ---------- legacy / other rules retained below (non-conflicting) ---------- */
-/* If you previously hid .booking-initiate or section.features, restore visibility as needed.
-   Here we leave features visible by default. */
+/* other page rules (unchanged) */
 .booking-initiate,
 section.features {
     display: block;
 }
 
-/* ---------- end of file ---------- */
+/* Booking layout specifics kept */
+.booking-container {
+    margin: 2rem;
+    position: relative;
+    min-height: 70vh;
+}
+
+/* end of file */
