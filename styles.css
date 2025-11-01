@@ -1,10 +1,7 @@
-/* Complete styles.css - adjusted so navbar containers are spaced further apart
-   - Change summary: only spacing-related values in the navbar section were changed
-     to increase separation between the three .nav-box items while keeping them
-     centered and equidistant. Everything else is preserved from the previous file.
-   - Key adjustments:
-     * increased --nav-group-max-width so the centered group is wider
-     * increased the gap in the inner group so spacing between boxes grows
+/* Complete styles.css - fix: distribute .nav-box items equidistantly without HTML changes
+   - Only navbar layout rules modified so .nav-containers itself is the centered constrained group
+     and uses space-between to separate the three boxes.
+   - All other site styles retained as before.
 */
 
 /* ---------- base / typography / page layout ---------- */
@@ -248,9 +245,9 @@ footer {
     bottom: 2rem;
 }
 
-/* ---------- NAVBAR: centered equidistant layout (SPACED FURTHER APART) ----------
-   Adjusted variables to increase separation between the three boxes while keeping them
-   centered and equidistant within a constrained group.
+/* ---------- NAVBAR: synced layout for existing HTML ----------
+   Fixes distribution: .nav-containers itself is the centered constrained group
+   and uses space-between to separate .nav-box elements. No HTML edits needed.
 */
 
 /* Navbar variables */
@@ -260,17 +257,16 @@ footer {
     --nav-bg-color: #2e4d25;
     --nav-box-bg: #e5f8e5;
     --nav-box-color: #23441a;
-    --nav-box-hpad: 14px;
+    --nav-box-hpad: 16px;
 
-    /* Increased the max width of the centered group so items can be farther apart.
-       Increase further to spread more; reduce to bring them closer. */
+    /* Width of the centered group that contains the three boxes */
     --nav-group-max-width: 980px;
 
-    /* each box max width (percentage of group width) */
-    --nav-box-max-percentage: 24%;
-
-    /* inner gap between boxes */
+    /* inner gap between boxes (used as a minimum) */
     --nav-inner-gap: 2.5rem;
+
+    /* max percent width for each box relative to group width */
+    --nav-box-max-percentage: 22%;
 }
 
 /* Position the nav at the bottom of the header so it's always visible */
@@ -299,31 +295,26 @@ footer {
     display: block;
 }
 
-/* Outer container: centers the group and constrains maximum width so items don't hug edges */
+/* Make .nav-containers the constrained centered flex row:
+   - max-width centers the group and prevents touching far edges
+   - justify-content: space-between distributes .nav-box children evenly
+*/
 .nav-containers {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%); /* center the constrained group horizontally */
     bottom: 0;
     height: var(--nav-height);
     display: flex;
     align-items: center;
-    justify-content: center; /* center the inner group horizontally */
-    z-index: 1110;
-    pointer-events: auto;
-    padding: 0 12px; /* small page padding so group doesn't touch viewport edges */
-    box-sizing: border-box;
-}
-
-/* Inner group: constrained width that holds the three boxes and spaces them equally */
-.nav-containers .nav-group {
+    justify-content: space-between; /* key: makes boxes equidistant */
     width: 100%;
     max-width: var(--nav-group-max-width);
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* equal spacing between the three boxes */
-    gap: var(--nav-inner-gap);
+    padding: 0 24px; /* small padding so group doesn't touch viewport edges */
     box-sizing: border-box;
+    gap: var(--nav-inner-gap); /* ensures at least this gap between items in modern browsers */
+    z-index: 1110; /* boxes above nav background and logo */
+    pointer-events: auto;
 }
 
 /* Visual boxes that are also the real hyperlinks (anchors) */
@@ -345,8 +336,6 @@ footer {
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 56px;
-    visibility: visible;
-    opacity: 1;
 }
 
 /* Keep original nav list in DOM but move it off-screen visually for accessibility */
@@ -394,7 +383,7 @@ header::after {
 /* Small-screen: stack the boxes and keep them contained */
 @media (max-width: 520px) {
     :root { --nav-group-max-width: 100%; --nav-box-max-percentage: 100%; --nav-inner-gap: 0.75rem; }
-    .site-nav { position: absolute; height: auto; bottom: 0; }
+    .site-nav { position: absolute; height: auto; bottom: 0; left: 0; transform: none; }
     .site-nav::before { height: var(--nav-height); bottom: 0; }
     .nav-containers {
         position: absolute;
@@ -406,14 +395,8 @@ header::after {
         padding: 8px;
         height: auto;
         align-items: stretch;
-    }
-    .nav-containers .nav-group {
-        position: static;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: stretch;
+        transform: none;
+        max-width: none;
     }
     .nav-box {
         width: 100%;
