@@ -1,9 +1,10 @@
-/* Complete styles.css - full stylesheet suitable for upload
-   - This file contains your full site styles plus the minimal, focused navbar fixes.
-   - Nothing important from your site was removed; unchanged rules remain so replacing
-     the file will not lose unrelated styles you already had.
-   - The navbar section is integrated and explicitly documented; tweak only the variables
-     near the top of the NAVBAR section if you need small spacing adjustments for your viewport.
+/* Complete styles.css - adjusted so navbar containers sit closer together
+   - Only the navbar spacing variables/rules were adjusted from the previous version:
+     * reduced --nav-container-gutter (left/right padding)
+     * reduced --nav-box-max-percentage so boxes take less width and sit nearer each other
+     * added a small gap tweak for .nav-containers
+   - Everything else from the full stylesheet is preserved so replacing the file will not
+     remove unrelated styles you've already added.
 */
 
 /* ---------- base / typography / page layout ---------- */
@@ -247,11 +248,10 @@ footer {
     bottom: 2rem;
 }
 
-/* ---------- NAVBAR: minimal integrated fix ----------
-   Purpose: ensure the logo remains visible and the visible boxes are the real anchor elements,
-   strictly contained inside the dark-green bar placed at the bottom of the header.
-   This section is intentionally self-contained so you can adjust only the variables below
-   if slight spacing tweaks are required for a particular viewport.
+/* ---------- NAVBAR: minimal integrated fix (adjusted spacing) ----------
+   Variables here control spacing. I reduced the container gutter and the max width
+   of each box so the three boxes appear closer together. If you want them even closer,
+   decrease --nav-container-gutter and/or --nav-box-max-percentage further.
 */
 
 /* Navbar variables - tweak these single values for micro-adjustments */
@@ -262,8 +262,12 @@ footer {
     --nav-box-bg: #e5f8e5;
     --nav-box-color: #23441a;
     --nav-box-hpad: 18px;
-    --nav-container-gutter: 48px; /* left/right padding inside nav */
-    --nav-box-max-percentage: 28%; /* max width per box to avoid overlap */
+
+    /* ADJUSTED: reduced gutter from 48px -> 24px to bring left/right edges in */
+    --nav-container-gutter: 24px;
+
+    /* ADJUSTED: reduced max width per box from 28% -> 22% so boxes take less room */
+    --nav-box-max-percentage: 22%;
 }
 
 /* Position the nav at the bottom of the header so it's always visible */
@@ -301,10 +305,15 @@ footer {
     height: var(--nav-height);
     display: flex;
     align-items: center;
+
+    /* Use space-between but with smaller outer gutters so items sit closer together */
     justify-content: space-between;
     padding: 0 var(--nav-container-gutter);
     box-sizing: border-box;
-    gap: 1rem;
+
+    /* slightly smaller gap between items */
+    gap: 0.5rem;
+
     z-index: 1110; /* boxes above nav background and logo */
     pointer-events: auto;
 }
@@ -341,7 +350,7 @@ footer {
     overflow: hidden !important;
 }
 
-/* Optional fallback anchor; left in the DOM but not interactive */
+/* Optional fallback anchor; left in the DOM but transparent to users (keeps compatibility) */
 .nav-link-book {
     position: absolute;
     left: 16.6666667%;
