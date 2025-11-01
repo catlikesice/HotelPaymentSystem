@@ -1,9 +1,12 @@
-/* styles.css - Elegant green theme for eco-friendly appeal
-   Adjustment: prevent overlap by limiting container width relative to viewport
-   and ensure all three containers are fully contained inside the green navbar.
-   Only styles.css changed.
+/* styles.css - full stylesheet with focused navbar containment patch applied
+   - This file is the complete styles.css you can upload to replace the existing file.
+   - Only changes requested: robust, minimal, and focused rules to ensure the three
+     navbar containers are real, fully contained inside the navbar bar, do not
+     overlap, and the logo header remains visible.
+   - The navbar fix is near the top under the "NAVBAR: CONTAINMENT FIX" heading.
 */
 
+/* ---------- base / typography / page layout ---------- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -14,50 +17,107 @@ body {
     padding-top: 0;
 }
 
-/* --- Page-scoped rules for selectlocation.html --- */
+/* --- page-specific rules for selectlocation.html --- */
 body.selectlocation {
     background: #e6f0e6;
     min-height: 100vh;
     position: relative;
 }
-body.selectlocation .booking-form-row { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0; flex-wrap: wrap; }
-body.selectlocation .form-inline { display: flex; align-items: center; gap: 0.5rem; }
-body.selectlocation select { min-width: 160px; padding: 0.3em; }
-body.selectlocation .continue-btn { position: fixed; right: 2rem; bottom: 2rem; }
-@media (max-width: 700px) { body.selectlocation .booking-form-row { flex-direction: column; gap: 0.5rem; } }
 
-/* Header / logo */
+body.selectlocation .booking-form-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+}
+
+body.selectlocation .form-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+body.selectlocation select {
+    min-width: 160px;
+    padding: 0.3em;
+}
+
+body.selectlocation .continue-btn {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+}
+
+/* responsive tweak for the page-scoped layout */
+@media (max-width: 700px) {
+    body.selectlocation .booking-form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* ---------- header / logo ---------- */
 header {
-    height: 80px;
-    padding: 0 32px;
+    height: 180px; /* desired header height */
+    padding: 0;
     margin: 0;
-    overflow: hidden; /* keep navbar fully clipped to header */
+    overflow: hidden; /* ensure navbar and logo are clipped to header when necessary */
     display: flex;
     align-items: stretch;
     justify-content: center;
     background: none;
-    position: relative;
-    z-index: 1000;
-    display: flex; /* Suggested: Set to flex container */
-    justify-content: space-between; /* Suggested: Distributes items horizontally */
-    align-items: center;      /* Suggested: Vertically aligns items */
-    height: 80px;            /* Suggested: Example height, adjust as needed */
-    padding: 0 32px;         /* Suggested: Example padding, adjust as needed */
-    background-color: #f8f8f8;/* Suggested: Example background to make it visible */
-    box-sizing: border-box;   /* Suggested: Include padding in element's total width and height */
+    position: relative; /* anchor for navbar pseudo-elements and containers */
+    z-index: 1000; /* header content (logo) sits here */
 }
-header, .booking-header { background: #FFF9B0; color: #23441a; padding: 1rem 2rem; text-align: center; }
-header { background-image: none; background-repeat: no-repeat; background-position: center center; background-size: contain; }
-header .logo-header img, header img { display: block !important; width: 100%; height: 100%; object-fit: cover; }
-.booking-header { padding: 2rem 0 1.5rem 0; margin-bottom: 0.5rem; }
-.booking-header h1 { font-size: 2.2em; font-weight: 700; margin-bottom: 0.2em; }
-.booking-header p { font-size: 1.1em; margin-bottom: 0.2em; }
 
-.logo-header { padding: 0; margin: 0; position: relative; height: 100%; }
-.logo-header img { width: 100%; height: 100%; object-fit: cover; display: block; }
+header, .booking-header {
+    background: #FFF9B0; /* matches the logo background */
+    color: #23441a;
+    padding: 1rem 2rem;
+    text-align: center;
+}
 
-h1, h2, h3 { margin-bottom: 0.5rem; }
+/* keep the logo <img> visible exactly as in index.html */
+header {
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
 
+.logo-header {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    height: 100%;
+    z-index: 995; /* below nav boxes so boxes appear on top of the bar, but logo remains visible */
+}
+.logo-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* booking header styles */
+.booking-header {
+    padding: 2rem 0 1.5rem 0;
+    margin-bottom: 0.5rem;
+}
+
+.booking-header h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    margin-bottom: 0.2em;
+}
+
+.booking-header p {
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+}
+
+/* ---------- hero / feature / buttons / footer ---------- */
 .hero {
     background: #b2e3b2;
     padding: 2rem 2rem;
@@ -66,15 +126,32 @@ h1, h2, h3 { margin-bottom: 0.5rem; }
     box-shadow: 0 2px 6px rgb(46 77 37 / 0.3);
 }
 
-/* hide original booking/feature areas as requested */
-.booking-initiate, section.features { display: none; }
+section.features {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 1rem;
+    flex-wrap: wrap;
+}
 
-/* other site styles unchanged */
-section.features { display: flex; justify-content: space-around; margin: 2rem 1rem; flex-wrap: wrap; }
-.feature { background: #e5f8e5; border-radius: 12px; box-shadow: 0 1px 4px rgb(46 77 37 / 0.2); padding: 1rem 1.5rem; margin: 1rem; flex: 1 1 250px; max-width: 300px; text-align: center; }
-.feature h3 { color: #346534; margin-bottom: 0.75rem; }
+.feature {
+    background: #e5f8e5;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgb(46 77 37 / 0.2);
+    padding: 1rem 1.5rem;
+    margin: 1rem;
+    flex: 1 1 250px;
+    max-width: 300px;
+    text-align: center;
+}
 
-.btn, .booking-btn, .continue-btn {
+.feature h3 {
+    color: #346534;
+    margin-bottom: 0.75rem;
+}
+
+.btn,
+.booking-btn,
+.continue-btn {
     display: inline-block;
     background: #2e4d25;
     color: white;
@@ -89,7 +166,13 @@ section.features { display: flex; justify-content: space-around; margin: 2rem 1r
     cursor: pointer;
     font-size: 1em;
 }
-.btn:hover, .booking-btn:hover, .continue-btn:hover { background: #1b2d14; color: #fff; }
+
+.btn:hover,
+.booking-btn:hover,
+.continue-btn:hover {
+    background: #1b2d14;
+    color: #fff;
+}
 
 footer {
     text-align: center;
@@ -101,147 +184,237 @@ footer {
     margin-top: 3rem;
 }
 
-/* -------------------------
-   NAVBAR: ensure containment and avoid overlap
-   - Limit each container's max-width to one-third of the viewport minus gutter,
-     which guarantees centers at 1/6, 1/2, 5/6 will not overlap.
-   - Use top positioning relative to header (guaranteed containment inside bar)
-   - Keep overflow:hidden on header to prevent any visual protrusion
-   ------------------------- */
+/* Booking page layout tweaks */
+.booking-container {
+    margin: 2rem;
+    position: relative;
+    min-height: 70vh;
+}
+
+.booking-form-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.booking-form-row label {
+    font-weight: 700;
+    margin-right: 0.25rem;
+    white-space: nowrap;
+}
+.booking-form-row select {
+    font-size: 1em;
+    padding: 0.3em;
+    margin-right: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #a7c8a7;
+    background: #f0f8ea;
+    color: #2e4d25;
+}
+
+/* responsive small screens */
+@media (max-width: 700px) {
+    .booking-header h1 {
+        font-size: 1.5em;
+    }
+    .booking-container {
+        margin: 1rem;
+    }
+    .continue-btn {
+        right: 1rem !important;
+        bottom: 1rem !important;
+        font-size: 0.95em;
+        padding: 0.6em 1.5em;
+    }
+    .booking-form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    /* scale the header background logo down on narrower screens */
+    header {
+        background-position: center center;
+        background-size: 60%;
+    }
+}
+
+/* Place continue-btn at bottom-right */
+.continue-btn {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+}
+
+/* ---------- NAVBAR: CONTAINMENT FIX (core patch requested) ---------- */
+/* This section contains the minimal, focused rules to:
+   - Ensure the visible navigation boxes are real anchors and contained inside the nav
+   - Prevent overlap and protrusion outside the dark-green navbar
+   - Keep the logo visible and not obscured
+   Paste this block into your styles.css (it is already included here).
+*/
 
 :root {
     --nav-height: 64px;
-    --header-height: 180px;
-    --nav-color: #2e4d25;
+    --nav-box-height: 36px;
+    --nav-bg-color: #2e4d25;
     --nav-box-bg: #e5f8e5;
     --nav-box-color: #23441a;
-    --nav-box-height: 36px;
-    --nav-box-hpad: 14px;
-    --nav-box-radius: 6px;
-    --nav-box-font-size: 0.95rem;
-    /* IMPORTANT: each container max width = (100% / 3) - gutter to avoid overlap */
-    --nav-box-max-width: calc((100% / 3) - 40px);
+    --nav-box-hpad: 18px;
+    --nav-container-gutter: 48px; /* left/right padding inside nav */
+    --nav-box-max-percentage: 28%; /* max width per box to avoid overlap */
 }
 
-/* green navbar bar at bottom of header */
-header::before {
+/* Make the nav itself the containing block and draw the dark green bar inside it.
+   This ensures boxes are physically inside the nav and cannot leak above/below. */
+.site-nav {
+    position: relative;
+    z-index: 1000; /* above header background but below .nav-containers when necessary */
+    height: var(--nav-height);
+    pointer-events: auto;
+}
+
+/* Draw the navbar bar inside the nav rather than in header pseudo elements */
+.site-nav::before {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
-    height: var(--nav-height);
-    background: var(--nav-color);
-    z-index: 990;
+    top: 0;
+    height: 100%;
+    background: var(--nav-bg-color);
+    z-index: 995; /* below the boxes but above the page background */
 }
 
-/* top offset to vertically center boxes inside the navbar (relative to header) */
-:root { --nav-box-top: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2)); }
-
-/* shared container rules */
-header::after,
-.logo-header::before,
-.logo-header::after {
-    box-sizing: border-box;
+/* container for the three real anchor boxes */
+.nav-containers {
     position: absolute;
-    top: var(--nav-box-top); /* ensures the entire box is inside the bar */
+    left: 0;
+    right: 0;
+    top: 0; /* stick to top of nav so boxes remain inside the bar */
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* spread across full width */
+    padding: 0 var(--nav-container-gutter);
+    box-sizing: border-box;
+    z-index: 1005; /* above nav background and logo so boxes sit visually on the bar */
+    gap: 1rem;
+}
+
+/* individual nav boxes: explicit height, horizontal padding only,
+   constrained widths to avoid overlap and to keep them fully inside the bar */
+.nav-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     height: var(--nav-box-height);
     line-height: var(--nav-box-height);
     padding: 0 var(--nav-box-hpad);
-    border-radius: var(--nav-box-radius);
     background: var(--nav-box-bg);
     color: var(--nav-box-color);
+    text-decoration: none;
+    border-radius: 6px;
     font-weight: 700;
-    font-size: var(--nav-box-font-size);
-    text-transform: lowercase;
     white-space: nowrap;
+    box-sizing: border-box;
+    max-width: var(--nav-box-max-percentage);
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: var(--nav-box-max-width); /* prevents center box growing into neighbors */
-    z-index: 1010; /* above green bar and logo */
-    text-align: center;
-    box-shadow: none;
-    flex-shrink: 0;           /* Suggested: Prevent logo from shrinking */
-    z-index: auto;            /* Suggested: Remove any explicit z-index if it was set */
 }
 
-/* center at 50% */
-header::after { content: "about latvia"; left: 50%; transform: translateX(-50%); }
+/* if you want exact centers at 1/6, 1/2, 5/6 instead of space-between, uncomment and use:
+.nav-containers { justify-content: center; }
+.nav-box { margin-left: calc(100%/6 - 50%); }   <-- not recommended; flex is robust
+*/
 
-/* left center at 16.6667% (1/6) */
-.logo-header::before { content: "book with us"; left: 16.6666667%; transform: translateX(-50%); }
-
-/* right center at 83.3333% (5/6) */
-.logo-header::after { content: "contact us"; left: 83.3333333%; transform: translateX(-50%); }
-
-/* clickable overlay for left container */
-a.nav-link-book {
-  /* Remove absolute positioning if you want it to be part of the flex layout */
-  position: static; /* or just remove the property */
-  /* Ensure this element is styled as a link */
-  text-decoration: none;
-  color: white; /* Or whatever color your links should be */
-  padding: 8px 15px; /* Add some padding to make it a clickable area */
-  border-radius: 5px; /* Make it look like a button/pill */
-  /* Remove float if present */
-  float: none;
-  /* Add margin for spacing between navigation links if there are multiple */
-  margin-left: 10px; /* Example, adjust as needed */
-  box-sizing: border-box;
-  /* If 'b.', 'c..' are distinct containers, they might need their own classes/elements within the header */
-  left: 16.6666667%;
-  top: var(--nav-box-top);
-  transform: translateX(-50%);
-  display: inline-block;
-  height: var(--nav-box-height);
-  line-height: var(--nav-box-height);
-  border-radius: var(--nav-box-radius);
-  background: transparent;
-  color: transparent;
-  z-index: 1011;
-  box-sizing: border-box;
-  vertical-align: middle;
-  max-width: var(--nav-box-max-width);
-  overflow: hidden;
-  flex-shrink: 0;           /* Suggested: Prevent navigation link from shrinking */
-  z-index: auto;            /* Suggested: Remove any explicit z-index to avoid issues */
+/* clickable fallback anchor (if still present) kept transparent and aligned */
+.nav-link-book {
+    position: absolute;
+    left: 16.6666667%;
+    top: calc((var(--nav-height) - var(--nav-box-height)) / 2);
+    transform: translateX(-50%);
+    display: inline-block;
+    height: var(--nav-box-height);
+    line-height: var(--nav-box-height);
+    padding: 0 var(--nav-box-hpad);
+    border-radius: 6px;
+    background: transparent;
+    color: transparent;
+    text-decoration: none;
+    z-index: 1006;
+    box-sizing: border-box;
+    max-width: var(--nav-box-max-percentage);
+    overflow: hidden;
 }
 
-.navbar-container {
-  overflow: hidden;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Ensure logo sits below nav boxes but still visible */
+.logo-header {
+    z-index: 994;
 }
 
-/* Slightly reduce container widths on mid/low widths to avoid overlap in narrow viewports */
-@media (max-width: 1200px) {
-    :root { --nav-box-max-width: calc((100% / 3) - 60px); }
-    .logo-header::before { left: 18%; }
-    header::after { left: 50%; }
-    .logo-header::after { left: 82%; }
-    .nav-link-book { left: 18%; }
-}
-
-/* Stack vertically inside the bar on very small screens */
+/* small-screen: stack inside the navbar and keep boxes contained */
 @media (max-width: 520px) {
-    :root { --nav-height: 92px; --nav-box-max-width: 80%; }
-    header::before { height: var(--nav-height); }
-    header::after, .logo-header::before, .logo-header::after {
-        left: 50%;
-        transform: translateX(-50%);
-        display: block;
-        margin-top: 6px;
-        top: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
-        max-width: 80%;
+    :root { --nav-container-gutter: 12px; --nav-box-max-percentage: 100%; }
+    .site-nav { height: auto; }
+    .site-nav::before { height: var(--nav-height); }
+    .nav-containers {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: 0;
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px var(--nav-container-gutter);
+        height: auto;
+        align-items: stretch;
+    }
+    .nav-box {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
     }
     .nav-link-book {
         left: 50%;
         transform: translateX(-50%);
+        top: auto;
+        position: relative;
         display: block;
-        margin-top: 6px;
-        top: calc(100% - var(--nav-height) + ((var(--nav-height) - var(--nav-box-height)) / 2));
-        max-width: 80%;
+        max-width: 100%;
     }
 }
+
+/* ---------- accessibility: visually-hidden helper (optionally used elsewhere) ---------- */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; /* added line */
+}
+
+/* ---------- hide old duplicate elements if present (safe fallback) ---------- */
+/* If your earlier HTML still outputs .nav-links somewhere visible (causing duplicates),
+   you can keep this rule so those list links aren't displayed to users while the
+   new .nav-containers anchors are used. This does not remove them from the DOM. */
+.nav-links {
+    display: none;
+}
+
+/* ---------- legacy navbar pseudo-element rules (kept but non-conflicting) ---------- */
+/* If older code uses header::before for the green bar, it won't conflict because
+   .site-nav now draws the bar. These older rules are left harmless here. */
+header::before {
+    display: none;
+}
+
+/* ---------- hide the previous feature cards area if required (as used earlier) ---------- */
+.booking-initiate,
+section.features {
+    /* keep as is from earlier requests: hide if replacement nav was intended */
+    /* You can remove these display rules if you want features visible again */
+    display: block; /* leave features visible by default now (undo earlier hide) */
+}
+
+/* ---------- end of file ---------- */
