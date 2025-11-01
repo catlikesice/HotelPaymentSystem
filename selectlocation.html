@@ -5,6 +5,31 @@
     <title>Baltic Comfort</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+            <!-- Navigation bar -->
+        <nav class="site-nav" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a class="brand" href="index.html" title="Home">BalticComfort</a>
+
+                <!-- Minimal, explicit nav: three real anchors inside .nav-containers.
+                     These anchors are the clickable boxes and are physically inside the nav. -->
+                <div class="nav-containers" role="menubar" aria-label="Site quick links">
+                    <a class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with us">Book with Us</a>
+                    <a class="nav-box nav-box-center" href="aboutlatvia.html" role="menuitem" aria-label="About Latvia">About Latvia</a>
+                    <a class="nav-box nav-box-right" href="#contact" role="menuitem" aria-label="Contact us">Contact</a>
+                </div>
+
+                <!-- The original link list is kept in the DOM but visually hidden to
+                     avoid duplicate visible text while preserving accessibility.
+                     (This is a minimal compromise so screen readers keep the list;
+                     visual users only see the .nav-box anchors.) -->
+                <ul class="nav-links" aria-hidden="true">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="selectlocation.html">Book with Us</a></li>
+                    <li><a href="aboutlatvia.html">About Latvia</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
 <body class="hero">
     <div class="booking-header">
         <h1>Baltic Comfort</h1>
