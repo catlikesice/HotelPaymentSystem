@@ -1,10 +1,10 @@
 /* Complete styles.css - adjusted so navbar containers sit closer together
-   - Only the navbar spacing variables/rules were adjusted from the previous version:
-     * reduced --nav-container-gutter (left/right padding)
-     * reduced --nav-box-max-percentage so boxes take less width and sit nearer each other
-     * added a small gap tweak for .nav-containers
-   - Everything else from the full stylesheet is preserved so replacing the file will not
-     remove unrelated styles you've already added.
+   Requested change: ONLY bring the nav .nav-box containers closer together.
+   I changed only the spacing-related variables/rules used by the navbar:
+     - reduced --nav-container-gutter
+     - reduced --nav-box-max-percentage
+     - changed layout to center the group and use a small gap
+   All other styles are preserved exactly as before.
 */
 
 /* ---------- base / typography / page layout ---------- */
@@ -248,10 +248,8 @@ footer {
     bottom: 2rem;
 }
 
-/* ---------- NAVBAR: minimal integrated fix (adjusted spacing) ----------
-   Variables here control spacing. I reduced the container gutter and the max width
-   of each box so the three boxes appear closer together. If you want them even closer,
-   decrease --nav-container-gutter and/or --nav-box-max-percentage further.
+/* ---------- NAVBAR: minimal integrated fix (ADJUSTED spacing only) ----------
+   Only spacing-related values changed to bring the nav containers closer together.
 */
 
 /* Navbar variables - tweak these single values for micro-adjustments */
@@ -261,13 +259,13 @@ footer {
     --nav-bg-color: #2e4d25;
     --nav-box-bg: #e5f8e5;
     --nav-box-color: #23441a;
-    --nav-box-hpad: 18px;
+    --nav-box-hpad: 16px;
 
-    /* ADJUSTED: reduced gutter from 48px -> 24px to bring left/right edges in */
-    --nav-container-gutter: 24px;
+    /* REDUCED gutter to bring containers inward (was 48px) */
+    --nav-container-gutter: 12px;
 
-    /* ADJUSTED: reduced max width per box from 28% -> 22% so boxes take less room */
-    --nav-box-max-percentage: 22%;
+    /* REDUCED max width per box to let boxes sit closer (was 28% then 22%) */
+    --nav-box-max-percentage: 18%;
 }
 
 /* Position the nav at the bottom of the header so it's always visible */
@@ -306,12 +304,12 @@ footer {
     display: flex;
     align-items: center;
 
-    /* Use space-between but with smaller outer gutters so items sit closer together */
-    justify-content: space-between;
+    /* center the group and use small gap so boxes are close together */
+    justify-content: center;
     padding: 0 var(--nav-container-gutter);
     box-sizing: border-box;
 
-    /* slightly smaller gap between items */
+    /* small gap between items */
     gap: 0.5rem;
 
     z-index: 1110; /* boxes above nav background and logo */
