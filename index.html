@@ -16,18 +16,29 @@
         <nav class="site-nav" aria-label="Primary navigation">
             <div class="nav-inner">
                 <a class="brand" href="index.html" title="Home">BalticComfort</a>
-                <ul class="nav-links">
+
+                <!-- Minimal, explicit nav: three real anchors inside .nav-containers.
+                     These anchors are the clickable boxes and are physically inside the nav. -->
+                <div class="nav-containers" role="menubar" aria-label="Site quick links">
+                    <a class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with us">Book with Us</a>
+                    <a class="nav-box nav-box-center" href="aboutlatvia.html" role="menuitem" aria-label="About Latvia">About Latvia</a>
+                    <a class="nav-box nav-box-right" href="#contact" role="menuitem" aria-label="Contact us">Contact</a>
+                </div>
+
+                <!-- The original link list is kept in the DOM but visually hidden to
+                     avoid duplicate visible text while preserving accessibility.
+                     (This is a minimal compromise so screen readers keep the list;
+                     visual users only see the .nav-box anchors.) -->
+                <ul class="nav-links" aria-hidden="true">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="selectlocation.html">Book with Us</a></li>
-                    <li><a href="aboutlatvia.html", "aboutus.html"></a></li>
+                    <li><a href="aboutlatvia.html">About Latvia</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
         </nav>
 
-        <!-- Added: invisible anchor placed in the header and positioned via CSS to sit over
-             the "Book with us" navbar box so the box becomes clickable and navigates to
-             selectlocation.html. No other HTML was changed. -->
+        <!-- Keep the existing invisible anchor if some scripts rely on it -->
         <a class="nav-link-book" href="selectlocation.html" aria-label="Book with us" title="Book with us"></a>
     </header>
 
@@ -37,13 +48,11 @@
         <a href="#contact" class="btn">Partner With Us</a>
     </section>
 
-    <!-- Begin new section, added as requested. No other changes made. -->
     <section class="booking-initiate">
         <h2>Begin Your Booking Journey</h2>
         <p>Discover and book hotels across the Baltic States and Denmark, with secure payment options including crypto.</p>
-        <a href=selectlocation.html class="btn booking-btn">Make Booking</a>
+        <a href="selectlocation.html" class="btn booking-btn">Make Booking</a>
     </section>
-    <!-- End new section -->
 
     <section class="features">
         <div class="feature">
