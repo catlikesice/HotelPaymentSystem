@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Payments and the Environment</title>
+  <!-- Reference to the repository's stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="content" id="page">
+    <header>
+      <div class="lang-switch" aria-hidden="false">
+        <label for="lang-select" class="sr-only">Language</label>
+        <select id="lang-select" aria-label="Select language">
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+          <option value="lv">Latviešu</option>
+          <option value="et">Eesti</option>
+        </select>
+      </div>
+
+      <h1 data-i18n="title">Crypto Payments and the Environment</h1>
+    </header>
+
+    <section>
+      <h2 data-i18n="section_title">Why crypto payments are better for the environment.</h2>
+
+      <p data-i18n="point1">
+        1. Proof-of-Stake networks consume far less electricity than traditional Proof-of-Work networks. When a major smart‑contract platform transitioned from Proof‑of‑Work to Proof‑of‑Stake, the network's electricity consumption fell by more than 99%, reducing the per‑transaction carbon footprint by orders of magnitude.<sup><a href="#ref-eth">1</a></sup>
+      </p>
+
+      <p data-i18n="point2">
+        2. Layer‑2 payment technologies (payment channels, state channels, and rollups) settle the vast majority of individual transfers off the base layer and only periodically finalize batches on‑chain. This amortization means the energy cost per user transfer is far lower than settling each payment on a base Proof‑of‑Work chain.<sup><a href="#ref-lightning">2</a></sup>
+      </p>
+
+      <p data-i18n="point3">
+        3. A meaningful portion of validation and mining activity uses low‑carbon and renewable electricity. Miners and validators frequently locate operations where surplus hydro, wind, or solar power is available, and some operators explicitly use curtailed or otherwise wasted renewable energy that would otherwise be unused, reducing the carbon intensity of processing transactions.<sup><a href="#ref-ccaf">3</a></sup>
+      </p>
+
+      <p data-i18n="point4">
+        4. Tokenization, programmable settlement, and instant finality reduce overhead, reconciliation steps, and the need for multiple intermediaries in financial flows. By streamlining settlement and reducing duplicated processing, crypto-based payment rails can lower the overall system energy and resource use per economic transfer compared with slower, multi‑party legacy systems.<sup><a href="#ref-academic">4</a></sup>
+      </p>
+
+      <p data-i18n="point5">
+        5. Network and protocol engineering continue to improve throughput and efficiency (for example, more efficient consensus algorithms, compact cryptographic proofs, and batching). These technical advances decrease energy per unit of useful work performed by payment systems over time.<sup><a href="#ref-industry">5</a></sup>
+      </p>
+    </section>
+
+    <section>
+      <h2 data-i18n="context_title">Important context</h2>
+      <p data-i18n="context">
+        These points describe the mechanisms and observed outcomes that make many crypto payment systems lower in carbon intensity than alternatives. The overall environmental effect depends on which networks and settlement models are used: Proof‑of‑Stake networks and Layer‑2 payments are the architectures that deliver the largest energy savings, while some Proof‑of‑Work base‑layer networks retain high absolute energy use. When evaluating environmental impact, consider the consensus mechanism, whether payments use off‑chain batching, and published data about energy sources and regional electricity mixes.<sup><a href="#ref-ccaf">3</a></sup>
+      </p>
+    </section>
+
+    <footer>
+      <p class="tagline" data-i18n="tagline">
+        This article summarizes established results and published data about how modern crypto payments reduce energy and emissions compared with older designs. See sources below for primary documentation.
+      </p>
+
+      <small class="references" aria-label="References">
+        <ol>
+          <li id="ref-eth">
+            Ethereum.org — The Merge and energy reduction: overview and post‑Merge energy comparisons.
+            <br /><a href="https://ethereum.org/en/history/the-merge/" target="_blank" rel="noopener noreferrer">https://ethereum.org/en/history/the-merge/</a>
+          </li>
+          <li id="ref-lightning">
+            Lightning Network and Layer‑2 payment documentation: payment channels, rollups, and how off‑chain settlement reduces on‑chain transaction load.
+            <br /><a href="https://lightning.network/" target="_blank" rel="noopener noreferrer">https://lightning.network/</a>
+          </li>
+          <li id="ref-ccaf">
+            Cambridge Centre for Alternative Finance — Bitcoin Electricity Consumption Index and miner distribution; regional energy mix and methodology details.
+            <br /><a href="https://ccaf.io/cbeci" target="_blank" rel="noopener noreferrer">https://ccaf.io/cbeci</a>
+          </li>
+          <li id="ref-academic">
+            Academic analyses and lifecycle studies on consensus mechanisms, settlement efficiencies, and systemic impacts of tokenized payments.
+            <br /><a href="https://www.nature.com/search?order=relevance&journal=all&q=bitcoin+energy" target="_blank" rel="noopener noreferrer">https://www.nature.com/ (search: "bitcoin energy")</a>
+          </li>
+          <li id="ref-industry">
+            Industry research (CoinShares, Bitcoin Mining Council, and other reports) on miner renewable usage, methodologies, and trends in miner behavior.
+            <br /><a href="https://www.coinshares.com/research" target="_blank" rel="noopener noreferrer">https://www.coinshares.com/research</a>
+            <br /><a href="https://www.bmcouncil.org/" target="_blank" rel="noopener noreferrer">https://www.bmcouncil.org/</a>
+          </li>
+        </ol>
+      </small>
+
+      <p class="wiki-tag" data-i18n="wiki_tag">
+        Retrieved from public documentation and research — presented here as factual summary.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    // Simple client-side translation switcher for English, Russian, Latvian, Estonian.
+    (function () {
+      const strings = {
+        en: {
+          title: "Crypto Payments and the Environment",
+          lede: "Cryptocurrencies and related payment technologies reduce the environmental footprint of digital payments in several important ways. Below is a concise, encyclopedic-style summary of how modern crypto payments achieve those reductions and where to read the original sources.",
+          section_title: "Why crypto payments are more environmentally friendly",
+          point1: "1. Proof-of-Stake networks consume far less electricity than traditional Proof-of-Work networks. When a major smart‑contract platform transitioned from Proof‑of‑Work to Proof‑of‑Stake, the network's electricity consumption fell by more than 99%, reducing the per‑transaction carbon footprint by orders of magnitude.<sup><a href=\"#ref-eth\">1</a></sup>",
+          point2: "2. Layer‑2 payment technologies (payment channels, state channels, and rollups) settle the vast majority of individual transfers off the base layer and only periodically finalize batches on‑chain. This amortization means the energy cost per user transfer is far lower than settling each payment on a base Proof‑of‑Work chain.<sup><a href=\"#ref-lightning\">2</a></sup>",
+          point3: "3. A meaningful portion of validation and mining activity uses low‑carbon and renewable electricity. Miners and validators frequently locate operations where surplus hydro, wind, or solar power is available, and some operators explicitly use curtailed or otherwise wasted renewable energy that would otherwise be unused, reducing the carbon intensity of processing transactions.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          point4: "4. Tokenization, programmable settlement, and instant finality reduce overhead, reconciliation steps, and the need for multiple intermediaries in financial flows. By streamlining settlement and reducing duplicated processing, crypto-based payment rails can lower the overall system energy and resource use per economic transfer compared with slower, multi‑party legacy systems.<sup><a href=\"#ref-academic\">4</a></sup>",
+          point5: "5. Network and protocol engineering continue to improve throughput and efficiency (for example, more efficient consensus algorithms, compact cryptographic proofs, and batching). These technical advances decrease energy per unit of useful work performed by payment systems over time.<sup><a href=\"#ref-industry\">5</a></sup>",
+          context_title: "Important context",
+          context: "These points describe the mechanisms and observed outcomes that make many crypto payment systems lower in carbon intensity than alternatives. The overall environmental effect depends on which networks and settlement models are used: Proof‑of‑Stake networks and Layer‑2 payments are the architectures that deliver the largest energy savings, while some Proof‑of‑Work base‑layer networks retain high absolute energy use. When evaluating environmental impact, consider the consensus mechanism, whether payments use off‑chain batching, and published data about energy sources and regional electricity mixes.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          tagline: "This article summarizes established results and published data about how modern crypto payments reduce energy and emissions compared with older designs. See sources below for primary documentation.",
+          wiki_tag: "Retrieved from public documentation and research — presented here as factual summary."
+        },
+        ru: {
+          title: "Криптоплатежи и окружающая среда",
+          lede: "Криптовалюты и связанные с ними технологии платежей снижают экологический след цифровых платежей по нескольким важным направлениям. Ниже приводится краткое энциклопедическое изложение того, как современные криптоплатежи достигают этих сокращений и где найти первоисточники.",
+          section_title: "Почему криптоплатежи более экологичны",
+          point1: "1. Сети с доказательством доли (Proof‑of‑Stake) потребляют значительно меньше электроэнергии, чем традиционные сети с доказательством работы (Proof‑of‑Work). Когда одна крупная платформа перешла с PoW на PoS, потребление электроэнергии сети сократилось более чем на 99%, что снизило углеродный след на транзакцию на порядки.<sup><a href=\"#ref-eth\">1</a></sup>",
+          point2: "2. Технологии Layer‑2 (платежные каналы, state channels и rollups) обрабатывают большинство отдельных переводов вне базового уровня и периодически фиксируют батчи в блокчейне. Это амортизация делает энергозатраты на один перевод значительно ниже по сравнению с прямой записью каждой транзакции в PoW‑сеть.<sup><a href=\"#ref-lightning\">2</a></sup>",
+          point3: "3. Значительная доля майнинга и валидации использует низкоуглеродную и возобновляемую электроэнергию. Майнеры и валидаторы часто размещают мощности в регионах с избыточной гидро-, ветровой или солнечной энергией, а некоторые операторы используют прекращаемую или избыточную возобновляемую энергию, которая в противном случае оставалась бы невостребованной, уменьшая углеродную интенсивность обработки транзакций.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          point4: "4. Токенизация, программируемая клиринг и мгновенная финализация уменьшают накладные расходы, шаги согласования и необходимость в многочисленных посредниках. Оптимизация расчетов и снижение дублирования операций позволяют снизить энергопотребление системы на единицу экономического перевода по сравнению с медленными многопартийными системами.<sup><a href=\"#ref-academic\">4</a></sup>",
+          point5: "5. Сетевые и протокольные улучшения повышают пропускную способность и эффективность (например, более эффективные алгоритмы консенсуса, компактные криптографические доказательства и пакетирование). Эти технические достижения снижают энергию на единицу полезной работы платежных систем со временем.<sup><a href=\"#ref-industry\">5</a></sup>",
+          context_title: "Важный контекст",
+          context: "Эти пункты описывают механизмы и наблюдаемые результаты, которые делают многие криптоплатежные системы менее углеродоёмкими по сравнению с альтернативами. Общий экологический эффект зависит от используемых сетей и моделей расчёта: PoS‑сети и Layer‑2 платежи дают наибольшую экономию энергии, в то время как некоторые PoW‑базовые сети сохраняют высокое абсолютное энергопотребление. При оценке влияния на окружающую среду учитывайте механизм консенсуса, использование off‑chain батчинга и публикации об источниках энергии и региональных энергосетях.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          tagline: "Эта статья суммирует установленные результаты и опубликованные данные о том, как современные криптоплатежи сокращают потребление энергии и выбросы по сравнению со старыми решениями. См. источники ниже.",
+          wiki_tag: "Получено из открытой документации и исследований — представлено как фактическое изложение."
+        },
+        lv: {
+          title: "Kripto maksājumi un vide",
+          lede: "Kriptovalūtas un ar tām saistītās maksājumu tehnoloģijas samazina digitālo maksājumu ietekmi uz vidi vairākos svarīgos veidos. Zemāk ir īss enciklopēdisks kopsavilkums par to, kā mūsdienu kripto maksājumi panāk šīs samazināšanas un kur atrast galvenos avotus.",
+          section_title: "Kāpēc kripto maksājumi ir videi draudzīgāki",
+          point1: "1. Proof‑of‑Stake tīklos tiek patērēts daudz mazāk elektrības nekā tradicionālajos Proof‑of‑Work tīklos. Kad viena liela platforma pārgāja no PoW uz PoS, tīkla elektroenerģijas patēriņš samazinājās vairāk nekā par 99%, kas ievērojami samazināja oglekļa pēdas nospiedumu uz darījumu.<sup><a href=\"#ref-eth\">1</a></sup>",
+          point2: "2. Layer‑2 maksājumu tehnoloģijas (maksājumu kanāli, state channels un rollups) apstrādā lielāko daļu individuālo pārskaitījumu ārpus bāzes slāņa un periodiski vienkāršo partijās blokķēdē. Šī amortizācija nozīmē, ka enerģijas izmaksas uz vienu lietotāja pārskaitījumu ir daudz zemākas.<sup><a href=\"#ref-lightning\">2</a></sup>",
+          point3: "3. Nozīmīga daļa validācijas un ieguves darbību izmanto zemu oglekļa emisiju un atjaunojamu elektroenerģiju. Kalnrači un validatori bieži izvieto darbības tur, kur pieejama pārmērīga hidro, vēja vai saules enerģija, un daži operatori izmanto atjaunojamo enerģiju, kas citādi tiktu neizmantota, samazinot darījumu apstrādes oglekļa intensitāti.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          point4: "4. Tokenizācija, programmējama norēķinu loģika un tūlītēja finišēšana samazina pārvaldības izmaksas, saskaņošanas soļus un starpnieku nepieciešamību. Samazinot dublēšanos un racionalizējot norēķinus, kripto maksājumu slāņi var samazināt sistēmas enerģijas un resursu patēriņu uz ekonomisko pārskaitījumu vienību.<sup><a href=\"#ref-academic\">4</a></sup>",
+          point5: "5. Tīklu un protokolu inženierija turpina uzlabot caurlaidību un efektivitāti (piemēram, efektīvākas konsensa metodes, kompakti kriptogrāfiski pierādījumi un partijēšana). Šīs tehniskās uzlabojumus samazina patērēto enerģiju uz lietderīgā darba vienību laikā.<sup><a href=\"#ref-industry\">5</a></sup>",
+          context_title: "Svarīgs konteksts",
+          context: "Šie punkti apraksta mehānismus un novērotos rezultātus, kas padara daudzus kripto maksājumu risinājumus mazāk oglekļietilpīgus salīdzinājumā ar alternatīvām. Kopējā ietekme uz vidi ir atkarīga no izmantotajiem tīkliem un norēķinu modeļiem: PoS tīkli un Layer‑2 maksājumi nodrošina lielāko enerģijas ietaupījumu, savukārt daži PoW pamata slāņi saglabā augstu absolūto enerģijas patēriņu. Novērtējot ietekmi, ņemiet vērā konsensa mehānismu, vai maksājumi izmanto off‑chain partijēšanu, un publiskotos datus par enerģijas avotiem un reģionālajiem elektrības maisījumiem.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          tagline: "Šis raksts apkopo publiski pieejamus rezultātus un datus par to, kā mūsdienu kripto maksājumi samazina enerģijas patēriņu un emisijas salīdzinājumā ar vecākām sistēmām. Skatiet avotus zemāk.",
+          wiki_tag: "Iegūts no publiskas dokumentācijas un pētījumiem — sniegts kā faktu kopsavilkums."
+        },
+        et: {
+          title: "Krüptomaksed ja keskkond",
+          lede: "Krüptovaluutad ja nendega seotud maksetehnoloogiad vähendavad digitaalsete maksete keskkonnajalajälge mitmel olulisel viisil. Allpool on lühike entsüklopeediline kokkuvõte selle kohta, kuidas kaasaegsed krüptomaksed saavutavad need vähendused ja kust leida algallikaid.",
+          section_title: "Miks krüptomaksed on keskkonnasõbralikumad",
+          point1: "1. Proof‑of‑Stake võrgud tarbivad palju vähem elektrit kui traditsioonilised Proof‑of‑Work võrgud. Kui üks suur nuttlepingute platvorm läks üle PoW‑lt PoS‑ile, vähenes võrgu elektritarbimine üle 99%, vähendades tehingu kohta arvutatavat süsiniku jalajälge oluliselt.<sup><a href=\"#ref-eth\">1</a></sup>",
+          point2: "2. Layer‑2 maksetehnoloogiad (maksekanalid, state channels ja rollups) sooritavad suure osa üksikülekannetest baasitasandist väljaspool ja ainult perioodiliselt kinnitavad partiisid on‑chain. See amortisatsioon tähendab, et ühe kasutajaülekande energiakulu on palju madalam kui iga tehingu salvestamisel PoW‑võrgus.<sup><a href=\"#ref-lightning\">2</a></sup>",
+          point3: "3. Märkimisväärne osa valideerimisest ja kaevandamisest kasutab madala süsinikuheitega ja taastuvenergiat. Kaevurid ja valideerijad paiknevad sageli kohtades, kus on üleliigne hüdro-, tuule- või päikeseenergia, ja mõned operaatorid kasutavad ära katkestatud või muidu raisku läinud taastuvenergiat, vähendades tehingute töötlemise süsiniku intensiivsust.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          point4: "4. Tokeniseerimine, programmeeritavad lahendused ja kohene lõplikkus vähendavad halduskulusid, kooskõlastusastmeid ja vahendajate vajadust. Optimeerides arveldusi ja vähendades dubleerimist, võivad krüptopõhised makserööpad vähendada süsteemi energiatarbimist ja ressursikasutust ühe majandusülekande kohta.<sup><a href=\"#ref-academic\">4</a></sup>",
+          point5: "5. Võrgu- ja protokolliinsenerid jätkavad läbilaskevõime ja efektiivsuse parandamist (nt efektiivsemad konsensusalgoritmid, kompaktsemad krüptograafilised tõendid ja partiiseerimine). Need tehnilised edusammud vähendavad aja jooksul süsteemi tarbitavat energiat kasuliku tööühiku kohta.<sup><a href=\"#ref-industry\">5</a></sup>",
+          context_title: "Oluline kontekst",
+          context: "Need punktid kirjeldavad mehhanisme ja täheldatud tulemusi, mis muudavad paljud krüptomaksete süsteemid vähem süsiniku intensiivseteks võrreldes alternatiividega. Üldine keskkonnamõju sõltub kasutatavatest võrkudest ja arveldusmudelitest: PoS‑võrgud ja Layer‑2 maksed toovad suurima energiakulude kokkuhoiu, samas kui mõned PoW baasvõrgud säilitavad kõrge absoluutse energiatarbimise. Hinnates keskkonnamõju, arvestage konsensusmehhanismi, kas maksed kasutavad off‑chain partiiseerimist ja avaldatud andmeid energiaallikate ning piirkondlike elektri‑segu kohta.<sup><a href=\"#ref-ccaf\">3</a></sup>",
+          tagline: "See artikkel koondab avalikke dokumente ja uurimusi selle kohta, kuidas kaasaegsed krüptomaksed vähendavad energiatarvet ja heitmeid võrreldes vanemate lahendustega. Vaadake allikaid allpool.",
+          wiki_tag: "Pärit avalikust dokumentatsioonist ja teadustööst — esitatud kui faktiline kokkuvõte."
+        }
+      };
+
+      const select = document.getElementById('lang-select');
+      const elems = document.querySelectorAll('[data-i18n]');
+
+      function setLanguage(lang) {
+        if (!strings[lang]) lang = 'en';
+        elems.forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (strings[lang][key]) {
+            el.innerHTML = strings[lang][key];
+          }
+        });
+        document.documentElement.lang = lang;
+        select.value = lang;
+      }
+
+      // Initialize default language
+      setLanguage('en');
+
+      // Save preference in localStorage
+      select.addEventListener('change', (e) => {
+        const lang = e.target.value;
+        setLanguage(lang);
+        try { localStorage.setItem('crypto_env_lang', lang); } catch (e) {}
+      });
+
+      // Load saved preference if available
+      try {
+        const saved = localStorage.getItem('crypto_env_lang');
+        if (saved) setLanguage(saved);
+      } catch (e) {}
+
+      // Allow ?lang=xx query param to override
+      try {
+        const params = new URLSearchParams(location.search);
+        const qlang = params.get('lang');
+        if (qlang && strings[qlang]) setLanguage(qlang);
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>
