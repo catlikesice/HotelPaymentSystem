@@ -211,7 +211,7 @@ footer {
     color: #2e4d25;
 }
 
-/* responsive small screens */
+ /* responsive small screens */
 @media (max-width: 700px) {
     .booking-header h1 {
         font-size: 1.5em;
@@ -433,6 +433,48 @@ section.features {
     margin: 2rem;
     position: relative;
     min-height: 70vh;
+}
+
+/* --- Language Selector Styles --- */
+
+#lang-select {
+    margin: 1.5rem auto 1.5rem auto;
+    display: block;
+    min-width: 170px;
+    max-width: 220px;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    border: 1px solid #a7c8a7;
+    background: #f0f8ea;
+    color: #2e4d25;
+    box-shadow: 0 1px 3px rgb(46 77 37 / 0.10);
+    transition: border-color 0.2s;
+}
+
+#lang-select:focus {
+    outline: none;
+    border-color: #2e4d25;
+    box-shadow: 0 0 0 2px #b2e3b2;
+}
+
+/* Optionally, style the label if it becomes visible */
+label[for="lang-select"] {
+    display: block;
+    margin: 1rem auto 0.25rem auto;
+    text-align: center;
+    font-weight: 600;
+    color: #346534;
+    font-size: 1em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+    #lang-select {
+        min-width: 120px;
+        font-size: 0.97em;
+        padding: 0.4em 0.7em;
+    }
 }
 
 /* end of file */
