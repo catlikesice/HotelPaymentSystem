@@ -108,7 +108,7 @@
     </select>
 
     <div class="booking-container">
-        <h2 style="text-align:center; color:#305b31;">Available Hotels in Esbjerg</h2>
+        <h2 id="available-hotels" style="text-align:center; color:#305b31;">Available Hotels in Esbjerg</h2>
         <div class="hotel-grid">
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Hotel Britannia">
@@ -133,5 +133,62 @@
             </div>
         </div>
     </div>
+
+    <div class="back-link" style="text-align: center; margin: 2rem 0;">
+        <p><a href="selectlocation.html" style="color: #305b31; text-decoration: none; font-weight: bold;"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+    <footer style="text-align: center; padding: 1rem 2rem; font-size: 0.9rem; background: #b2e3b2; color: #2e4d25; border-top: 1px solid #2e4d25; margin-top: 3rem;">
+        <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+    </footer>
+
+    <script>
+    // Translation data for supported languages
+    const translations = {
+      en: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Book your stay with secure crypto payments",
+        "available-hotels": "Available Hotels in Esbjerg",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами",
+        "available-hotels": "Доступные отели в Esbjerg",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
+      },
+      lv: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Rezervējiet uzturēšanos ar drošiem kripto maksājumiem",
+        "available-hotels": "Pieejamās viesnīcas pilsētā Esbjerg",
+        "back-link-text": "Atpakaļ uz rezervāciju",
+        "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
+      },
+      et: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Broneeri oma viibimine turvaliste krüpto maksetega",
+        "available-hotels": "Saadaolevad hotellid linnas Esbjerg",
+        "back-link-text": "Tagasi broneeringusse",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
+      },
+    };
+
+    // On language change, update all translatable elements
+    document.getElementById('lang-select').addEventListener('change', function() {
+      const lang = this.value;
+      const mapping = translations[lang] || translations['en'];
+      Object.keys(mapping).forEach(function(key) {
+        const el = document.getElementById(key);
+        if (el) {
+          if (key === "footer-text") {
+            el.innerHTML = mapping[key];
+          } else {
+            el.textContent = mapping[key];
+          }
+        }
+      });
+    });
+    </script>
 </body>
 </html>
