@@ -41,39 +41,39 @@
         <!-- Keep the existing invisible anchor if some scripts rely on it -->
         <a class="nav-link-book" href="selectlocation.html" aria-label="Book with us" title="Book with us"></a>
     </header>
-      <label for="lang-select" class="sr-only">Language</label>
-        <select id="lang-select" aria-label="Select language">
-          <option value="en">English</option>
-          <option value="ru">Русский</option>
-          <option value="lv">Latviešu</option>
-          <option value="et">Eesti</option>
-        </select>
+    <label for="lang-select" class="sr-only">Language</label>
+    <select id="lang-select" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+      <option value="lv">Latviešu</option>
+      <option value="et">Eesti</option>
+    </select>
 
     <section class="hero">
-        <h2>Accept Crypto Payments Seamlessly</h2>
-        <p>Our platform enables hotels and hospitality groups to receive payments in digital currencies—with zero hassle, full transparency, and eco-friendly operations.</p>
-        <a href="#contact" class="btn">Partner With Us</a>
+        <h2 id="hero-title">Accept Crypto Payments Seamlessly</h2>
+        <p id="hero-desc">Our platform enables hotels and hospitality groups to receive payments in digital currencies—with zero hassle, full transparency, and eco-friendly operations.</p>
+        <a href="#contact" class="btn" id="hero-btn">Partner With Us</a>
     </section>
 
-  + <section class="features">
+    <section class="features">
         <div class="feature">
-            <h3>Tailored for Hotel Chains</h3>
-            <p>Custom integrations to match your operations—simple API or dashboard onboarding for any sized property.</p>
+            <h3 id="feature1-title">Tailored for Hotel Chains</h3>
+            <p id="feature1-desc">Custom integrations to match your operations—simple API or dashboard onboarding for any sized property.</p>
         </div>
         <div class="feature">
-            <h3><a href="#crypto-environment.html">Eco-Conscious Technology</a></h3>
-            <p>Reduced carbon footprint, green hosting, and options for carbon-neutral transactions.</p>
+            <h3 id="feature2-title"><a href="#crypto-environment.html">Eco-Conscious Technology</a></h3>
+            <p id="feature2-desc">Reduced carbon footprint, green hosting, and options for carbon-neutral transactions.</p>
         </div>
         <div class="feature">
-            <h3>Reliable, Secure Payments</h3>
-            <p>Instant blockchain settlements, payment transparency, and enhanced guest trust.</p>
+            <h3 id="feature3-title">Reliable, Secure Payments</h3>
+            <p id="feature3-desc">Instant blockchain settlements, payment transparency, and enhanced guest trust.</p>
         </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2>Get Started With Blockchain Payments</h2>
-        <p>Are you a hotel group, chain, or property manager interested in accepting crypto and digital currencies for bookings?</p>
-        <p><strong>Contact our team to learn more, request a demo, or begin onboarding:</strong></p>
+        <h2 id="contact-title">Get Started With Blockchain Payments</h2>
+        <p id="contact-desc">Are you a hotel group, chain, or property manager interested in accepting crypto and digital currencies for bookings?</p>
+        <p id="contact-instruct"><strong>Contact our team to learn more, request a demo, or begin onboarding:</strong></p>
         <form class="contact-form">
             <label>
                 Hotel/Chain Name:<br>
@@ -91,13 +91,103 @@
                 Message:<br>
                 <textarea name="message" rows="4" placeholder="Tell us about your property or request a demo…" required></textarea>
             </label><br>
-            <button type="submit" class="btn">Send Inquiry</button>
+            <button type="submit" class="btn" id="contact-btn">Send Inquiry</button>
         </form>
-        <p>Or email us directly at <a href="mailto:partners@hotelpaymentsystem.com">partners@hotelpaymentsystem.com</a></p>
+        <p id="contact-email">Or email us directly at <a href="mailto:partners@hotelpaymentsystem.com">partners@hotelpaymentsystem.com</a></p>
     </section>
 
     <footer>
-        <p>&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+        <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
     </footer>
+
+    <script>
+    // Translation data for supported languages
+    const translations = {
+      en: {
+        "hero-title": "Accept Crypto Payments Seamlessly",
+        "hero-desc": "Our platform enables hotels and hospitality groups to receive payments in digital currencies—with zero hassle, full transparency, and eco-friendly operations.",
+        "hero-btn": "Partner With Us",
+        "feature1-title": "Tailored for Hotel Chains",
+        "feature1-desc": "Custom integrations to match your operations—simple API or dashboard onboarding for any sized property.",
+        "feature2-title": "Eco-Conscious Technology",
+        "feature2-desc": "Reduced carbon footprint, green hosting, and options for carbon-neutral transactions.",
+        "feature3-title": "Reliable, Secure Payments",
+        "feature3-desc": "Instant blockchain settlements, payment transparency, and enhanced guest trust.",
+        "contact-title": "Get Started With Blockchain Payments",
+        "contact-desc": "Are you a hotel group, chain, or property manager interested in accepting crypto and digital currencies for bookings?",
+        "contact-instruct": "Contact our team to learn more, request a demo, or begin onboarding:",
+        "contact-btn": "Send Inquiry",
+        "contact-email": "Or email us directly at <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "hero-title": "Принимайте криптовалюту легко",
+        "hero-desc": "Наша платформа позволяет отелям и гостиничным группам получать оплату в цифровых валютах — без хлопот, с полной прозрачностью и заботой об экологии.",
+        "hero-btn": "Стать партнером",
+        "feature1-title": "Индивидуальные решения для сетей отелей",
+        "feature1-desc": "Интеграции под ваши процессы — простой API или панель для любых объектов.",
+        "feature2-title": "Экологичные технологии",
+        "feature2-desc": "Меньше выбросов, зеленый хостинг и нейтральные транзакции.",
+        "feature3-title": "Надежные и безопасные платежи",
+        "feature3-desc": "Мгновенные расчеты в блокчейне, прозрачность платежей, доверие гостей.",
+        "contact-title": "Начните принимать платежи в блокчейне",
+        "contact-desc": "Вы группа отелей, сеть или управляющий объектом и хотите принимать криптовалюту?",
+        "contact-instruct": "Свяжитесь с нашей командой, чтобы узнать больше, запросить демо или начать интеграцию:",
+        "contact-btn": "Отправить запрос",
+        "contact-email": "Или напишите нам напрямую: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+        "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
+      },
+      lv: {
+        "hero-title": "Pieņemiet kriptomaksājumus vienkārši",
+        "hero-desc": "Mūsu platforma ļauj viesnīcām un viesmīlības grupām pieņemt digitālos maksājumus — bez sarežģījumiem, ar pilnu pārskatāmību un videi draudzīgu darbību.",
+        "hero-btn": "Kļūt par partneri",
+        "feature1-title": "Pielāgots viesnīcu ķēdēm",
+        "feature1-desc": "Integrācija jūsu vajadzībām — vienkāršs API vai vadības panelis jebkura izmēra īpašumam.",
+        "feature2-title": "Videi draudzīgas tehnoloģijas",
+        "feature2-desc": "Samazināts oglekļa nospiedums, zaļa hostēšana un neitrālas transakcijas.",
+        "feature3-title": "Droši un uzticami maksājumi",
+        "feature3-desc": "Tūlītēji blokķēdes norēķini, pārskatāmība un klientu uzticība.",
+        "contact-title": "Sāciet izmantot blokķēdes maksājumus",
+        "contact-desc": "Vai esat viesnīcu grupa, ķēde vai īpašuma pārvaldnieks, kas vēlas pieņemt kriptovalūtu?",
+        "contact-instruct": "Sazinieties ar mūsu komandu, lai uzzinātu vairāk, pieprasītu demonstrāciju vai uzsāktu integrāciju:",
+        "contact-btn": "Sūtīt pieprasījumu",
+        "contact-email": "Vai rakstiet mums tieši: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+        "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
+      },
+      et: {
+        "hero-title": "Võta vastu krüptomakseid lihtsalt",
+        "hero-desc": "Meie platvorm võimaldab hotellidel ja majutuskettidel vastu võtta digitaalseid makseid — ilma probleemideta, täieliku läbipaistvuse ja keskkonnasõbraliku tegevusega.",
+        "hero-btn": "Liitu partneritega",
+        "feature1-title": "Kohandatud hotellikettidele",
+        "feature1-desc": "Kohandatud integratsioonid — lihtne API või juhtpaneel igas suuruses kinnistule.",
+        "feature2-title": "Keskkonnateadlik tehnoloogia",
+        "feature2-desc": "Väiksem süsiniku jalajälg, roheline hostimine ja neutraalsed tehingud.",
+        "feature3-title": "Usaldusväärsed, turvalised maksed",
+        "feature3-desc": "Hetkeline blockchaini arveldus, maksete läbipaistvus, suurem külaliste usaldus.",
+        "contact-title": "Alusta blockchain-maksetega",
+        "contact-desc": "Kas oled hotellikett või haldad kinnistut ja soovid vastu võtta krüpto- või digivaluutat?",
+        "contact-instruct": "Võta meie tiimiga ühendust, küsi demo või alusta liitumist:",
+        "contact-btn": "Saada päring",
+        "contact-email": "Või kirjuta otse: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
+      },
+    };
+
+    // On language change, update all translatable elements
+    document.getElementById('lang-select').addEventListener('change', function() {
+      const lang = this.value;
+      const mapping = translations[lang] || translations['en'];
+      Object.keys(mapping).forEach(function(key) {
+        const el = document.getElementById(key);
+        if (el) {
+          if (key === "contact-email" || key === "footer-text") {
+            el.innerHTML = mapping[key];
+          } else {
+            el.textContent = mapping[key];
+          }
+        }
+      });
+    });
+    </script>
 </body>
 </html>
