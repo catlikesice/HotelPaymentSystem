@@ -2,114 +2,221 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Book Hotels in Copenhagen – HotelPaymentSystem</title>
+    <title>Hotels in Copenhagen</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .hotel-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin: 3rem 0;
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
         }
-        .hotel-card {
-            background: #cde7cd;
-            border-radius: 12px;
-            box-shadow: 0 1px 6px rgb(46 77 37 / 0.18);
-            max-width: 330px;
-            min-width: 270px;
-            padding: 1.5rem 1rem 1rem 1rem;
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 1.5rem 0;
         }
-        .hotel-card img {
-            width: 90%;
-            max-width: 270px;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            object-fit: cover;
-            height: 160px;
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
         }
         .hotel-card h3 {
-            color: #346534;
-            margin-bottom: 0.4rem;
-        }
-        .hotel-chain {
-            font-size: 1em;
             color: #2e4d25;
-            margin-bottom: 0.7rem;
-            font-weight: 600;
+            margin: 0.5rem 0;
         }
-        .hotel-price {
-            margin-bottom: 1rem;
-            font-size: 1.1em;
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
             font-weight: bold;
-            color: #274e13;
         }
-        .booking-btn {
-            margin-top: auto;
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
         }
     </style>
 </head>
-<body>
+<body style="background:#e6f0e6;min-height:100vh;">
     <div class="booking-header">
-        <h1>Hotels in Copenhagen</h1>
+        <h1>Baltic Comfort</h1>
         <p>Book your stay with secure crypto payments</p>
     </div>
-    <div class="hotel-list">
-        <!-- Hotel 1: Scandic Palace Hotel -->
-        <div class="hotel-card">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Scandic Palace Hotel">
-            <h3>Scandic Palace Hotel</h3>
-            <div class="hotel-chain">Scandic Hotels</div>
-            <div class="hotel-price">0.042 ETH / night</div>
-            <a href="scandic-copenhagen.html" class="booking-btn btn">Book Now</a>
+    <div class="booking-container">
+        <h2>Available Hotels in Copenhagen</h2>
+        <div class="currency-selector">
+            <label for="currency">Select Currency:</label>
+            <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+            </select>
         </div>
-        <!-- Hotel 2: Comwell Copenhagen Portside -->
-        <div class="hotel-card">
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Comwell Copenhagen Portside">
-            <h3>Comwell Copenhagen Portside</h3>
-            <div class="hotel-chain">Comwell Hotels</div>
-            <div class="hotel-price">0.038 ETH / night</div>
-            <a href="#" class="booking-btn btn">Book Now</a>
-        </div>
-        <!-- Hotel 3: Imperial Hotel -->
-        <div class="hotel-card">
-            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Imperial Hotel">
-            <h3>Imperial Hotel</h3>
-            <div class="hotel-chain">Arp-Hansen Hotel Group</div>
-            <div class="hotel-price">0.045 ETH / night</div>
-            <a href="#" class="booking-btn btn">Book Now</a>
-        </div>
-        <!-- Hotel 4: CABINN City -->
-        <div class="hotel-card">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="CABINN City">
-            <h3>CABINN City</h3>
-            <div class="hotel-chain">Cabinn Hotels</div>
-            <div class="hotel-price">0.021 ETH / night</div>
-            <a href="#" class="booking-btn btn">Book Now</a>
-        </div>
-        <!-- Hotel 5: Zleep Hotel Copenhagen City -->
-        <div class="hotel-card">
-            <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80" alt="Zleep Hotel Copenhagen City">
-            <h3>Zleep Hotel Copenhagen City</h3>
-            <div class="hotel-chain">Zleep Hotels</div>
-            <div class="hotel-price">0.027 ETH / night</div>
-            <a href="#" class="booking-btn btn">Book Now</a>
-        </div>
-        <!-- Hotel 6: First Hotel Kong Frederik -->
-        <div class="hotel-card">
-            <img src="https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80" alt="First Hotel Kong Frederik">
-            <h3>First Hotel Kong Frederik</h3>
-            <div class="hotel-chain">First Hotels</div>
-            <div class="hotel-price">0.033 ETH / night</div>
-            <a href="#" class="booking-btn btn">Book Now</a>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Scandic Palace Hotel">
+                <h3>Scandic Palace Hotel</h3>
+                <div class="hotel-chain">Scandic Hotels</div>
+                <div class="price" data-eth="0.042" data-btc="0.0007" data-usdt="120">0.042 ETH / night</div>
+                <a href="scandic-copenhagen.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Comwell Copenhagen Portside">
+                <h3>Comwell Copenhagen Portside</h3>
+                <div class="hotel-chain">Comwell Hotels</div>
+                <div class="price" data-eth="0.038" data-btc="0.00063" data-usdt="110">0.038 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Imperial Hotel">
+                <h3>Imperial Hotel</h3>
+                <div class="hotel-chain">Arp-Hansen Hotel Group</div>
+                <div class="price" data-eth="0.045" data-btc="0.00075" data-usdt="130">0.045 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="CABINN City">
+                <h3>CABINN City</h3>
+                <div class="hotel-chain">Cabinn Hotels</div>
+                <div class="price" data-eth="0.021" data-btc="0.00035" data-usdt="60">0.021 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80" alt="Zleep Hotel Copenhagen City">
+                <h3>Zleep Hotel Copenhagen City</h3>
+                <div class="hotel-chain">Zleep Hotels</div>
+                <div class="price" data-eth="0.027" data-btc="0.00045" data-usdt="77">0.027 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80" alt="First Hotel Kong Frederik">
+                <h3>First Hotel Kong Frederik</h3>
+                <div class="hotel-chain">First Hotels</div>
+                <div class="price" data-eth="0.033" data-btc="0.00055" data-usdt="95">0.033 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
         </div>
     </div>
+    <div class="back-link">
+        <p><a href="selectlocation.html">Back to Booking</a></p>
+    </div>
     <footer>
-        <p>&copy; 2025 HotelPaymentSystem – All bookings made with secure blockchain payments.</p>
+        <p>&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
     </footer>
+    <script>
+        function updatePrices() {
+            const currency = document.getElementById('currency').value;
+            const priceElements = document.querySelectorAll('.price');
+            
+            priceElements.forEach(priceEl => {
+                const ethPrice = priceEl.getAttribute('data-eth');
+                const btcPrice = priceEl.getAttribute('data-btc');
+                const usdtPrice = priceEl.getAttribute('data-usdt');
+                
+                let newPrice;
+                if (currency === 'ETH') {
+                    newPrice = `${ethPrice} ETH / night`;
+                } else if (currency === 'BTC') {
+                    newPrice = `${btcPrice} BTC / night`;
+                } else if (currency === 'USDT') {
+                    newPrice = `${usdtPrice} USDT / night`;
+                }
+                
+                priceEl.textContent = newPrice;
+            });
+        }
+    </script>
 </body>
 </html>

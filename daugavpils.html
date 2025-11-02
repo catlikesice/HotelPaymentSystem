@@ -2,47 +2,202 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Daugavpils Hotels</title>
+    <title>Hotels in Daugavpils</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .hotel-list { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
-        .hotel-card { background: #fff; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); width: 300px; padding: 1rem; text-align: center; }
-        .hotel-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 0.7rem; }
-        .hotel-card .price { font-weight: bold; color: #2e7d32; margin: 0.5rem 0; }
-        .hotel-card .book-link { display: block; margin: 1rem auto 0 auto; background: #2e7d32; color: #fff; border: none; border-radius: 0.5rem; padding: 0.7rem 1.2rem; text-decoration: none; font-weight: bold; transition: background 0.2s;}
-        .hotel-card .book-link:hover { background: #156d17; }
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
     </style>
 </head>
 <body style="background:#e6f0e6;min-height:100vh;">
     <div class="booking-header">
-        <h1>HotelPaymentSystem</h1>
+        <h1>Baltic Comfort</h1>
         <p>Book your stay with secure crypto payments</p>
     </div>
     <div class="booking-container">
         <h2>Available Hotels in Daugavpils</h2>
+        <div class="currency-selector">
+            <label for="currency">Select Currency:</label>
+            <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+            </select>
+        </div>
         <div class="hotel-list">
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Park Hotel Latgola">
                 <h3>Park Hotel Latgola</h3>
-                <div class="price">0.04 ETH / night</div>
+                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
                 <p>Modern hotel in the city center with panoramic views and conference facilities.</p>
-                <a href="park-hotel-latgola-daugavpils.html" class="book-link">View & Book</a>
+                <a href="selectlocation.html" class="book-link">View & Book</a>
             </div>
+
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Dinaburg">
                 <h3>Hotel Dinaburg</h3>
-                <div class="price">0.03 ETH / night</div>
+                <div class="price" data-eth="0.03" data-btc="0.0005" data-usdt="86">0.03 ETH / night</div>
                 <p>Comfortable rooms, restaurant, and wellness area close to Daugavpils fortress.</p>
-                <a href="hotel-dinaburg-daugavpils.html" class="book-link">View & Book</a>
+                <a href="selectlocation.html" class="book-link">View & Book</a>
             </div>
+
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Biplan Hotel">
                 <h3>Biplan Hotel</h3>
-                <div class="price">0.025 ETH / night</div>
+                <div class="price" data-eth="0.025" data-btc="0.0004" data-usdt="71">0.025 ETH / night</div>
                 <p>Budget-friendly hotel with cozy rooms and a convenient location.</p>
-                <a href="biplan-hotel-daugavpils.html" class="book-link">View & Book</a>
+                <a href="selectlocation.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
+    <div class="back-link">
+        <p><a href="selectlocation.html">Back to Booking</a></p>
+    </div>
+    <footer>
+        <p>&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+    </footer>
+    <script>
+        function updatePrices() {{
+            const currency = document.getElementById('currency').value;
+            const priceElements = document.querySelectorAll('.price');
+            
+            priceElements.forEach(priceEl => {{
+                const ethPrice = priceEl.getAttribute('data-eth');
+                const btcPrice = priceEl.getAttribute('data-btc');
+                const usdtPrice = priceEl.getAttribute('data-usdt');
+                
+                let newPrice;
+                if (currency === 'ETH') {{
+                    newPrice = `${{ethPrice}} ETH / night`;
+                }} else if (currency === 'BTC') {{
+                    newPrice = `${{btcPrice}} BTC / night`;
+                }} else if (currency === 'USDT') {{
+                    newPrice = `${{usdtPrice}} USDT / night`;
+                }}
+                
+                priceEl.textContent = newPrice;
+            }});
+        }}
+    </script>
 </body>
 </html>
