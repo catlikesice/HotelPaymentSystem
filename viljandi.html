@@ -6,11 +6,55 @@
   <link rel="stylesheet" href="../../../styles.css">
 </head>
 <body>
+  <label for="lang-select" class="sr-only">Language</label>
+  <select id="lang-select" aria-label="Select language">
+    <option value="en">English</option>
+    <option value="ru">Русский</option>
+    <option value="lv">Latviešu</option>
+    <option value="et">Eesti</option>
+  </select>
+
   <div class="container">
-    <h1>Viljandi — Estonia</h1>
-    <p>This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.</p>
+    <h1 id="page-title">Viljandi — Estonia</h1>
+    <p id="placeholder-text">This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.</p>
     <p>Expected path: html/cities/estonia/viljandi.html</p>
-    <p><a href="../../../selectlocation.html">Back to Select Location</a></p>
+    <p><a href="../../../selectlocation.html"><span id="back-link-text">Back to Select Location</span></a></p>
   </div>
+
+  <script>
+  const translations = {
+    en: {
+      "page-title": "Viljandi — Estonia",
+      "placeholder-text": "This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.",
+      "back-link-text": "Back to Select Location"
+    },
+    ru: {
+      "page-title": "Вильянди — Эстония",
+      "placeholder-text": "Это страница-заполнитель для Вильянди в Эстонии. Список отелей для этого города скоро будет добавлен.",
+      "back-link-text": "Назад к выбору местоположения"
+    },
+    lv: {
+      "page-title": "Viljandi — Igaunija",
+      "placeholder-text": "Šī ir viettura lapa Viljandi Igaunijā. Viesnīcu saraksts šai pilsētai tiks pievienots drīzumā.",
+      "back-link-text": "Atpakaļ uz atrašanās vietas izvēli"
+    },
+    et: {
+      "page-title": "Viljandi — Eesti",
+      "placeholder-text": "See on kohatäitja leht Viljandile Eestis. Hotellide loend selle linna jaoks lisatakse varsti.",
+      "back-link-text": "Tagasi asukoha valikusse"
+    },
+  };
+
+  document.getElementById('lang-select').addEventListener('change', function() {
+    const lang = this.value;
+    const mapping = translations[lang] || translations['en'];
+    Object.keys(mapping).forEach(function(key) {
+      const el = document.getElementById(key);
+      if (el) {
+        el.textContent = mapping[key];
+      }
+    });
+  });
+  </script>
 </body>
 </html>

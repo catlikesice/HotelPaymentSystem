@@ -126,13 +126,21 @@
 </head>
 <body style="background:#e6f0e6;min-height:100vh;">
     <div class="booking-header">
-        <h1>Baltic Comfort</h1>
-        <p>Book your stay with secure crypto payments</p>
+        <h1 id="booking-header-title">Baltic Comfort</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments</p>
     </div>
+    <label for="lang-select" class="sr-only">Language</label>
+    <select id="lang-select" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+      <option value="lv">Latviešu</option>
+      <option value="et">Eesti</option>
+    </select>
+
     <div class="booking-container">
-        <h2>Available Hotels in Vilnius</h2>
+        <h2 id="available-hotels">Available Hotels in Vilnius</h2>
         <div class="currency-selector">
-            <label for="currency">Select Currency:</label>
+            <label for="currency" id="currency-label">Select Currency:</label>
             <select id="currency" onchange="updatePrices()">
                 <option value="ETH">ETH (Ethereum)</option>
                 <option value="BTC">BTC (Bitcoin)</option>
@@ -169,10 +177,10 @@
         </div>
     </div>
     <div class="back-link">
-        <p><a href="selectlocation.html">Back to Booking</a></p>
+        <p><a href="selectlocation.html"><span id="back-link-text">Back to Booking</span></a></p>
     </div>
     <footer>
-        <p>&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+        <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
     </footer>
     <script>
         function updatePrices() {
@@ -224,6 +232,65 @@
                 priceEl.textContent = newPrice;
             });
         }
+
+    <script>
+    // Translation data for supported languages
+    const translations = {
+      en: {
+        "booking-header-title": "Baltic Comfort",
+        "booking-header-desc": "Book your stay with secure crypto payments",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Baltic Comfort",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
+      },
+      lv: {
+        "booking-header-title": "Baltic Comfort",
+        "booking-header-desc": "Rezervējiet uzturēšanos ar drošiem kripto maksājumiem",
+        "available-hotels": "Pieejamās viesnīcas pilsētā {city}",
+        "currency-label": "Izvēlieties valūtu:",
+        "back-link-text": "Atpakaļ uz rezervāciju",
+        "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
+      },
+      et: {
+        "booking-header-title": "Baltic Comfort",
+        "booking-header-desc": "Broneeri oma viibimine turvaliste krüpto maksetega",
+        "available-hotels": "Saadaolevad hotellid linnas {city}",
+        "currency-label": "Vali valuuta:",
+        "back-link-text": "Tagasi broneeringusse",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
+      },
+    };
+
+    // On language change, update all translatable elements
+    document.getElementById('lang-select').addEventListener('change', function() {
+      const lang = this.value;
+      const mapping = translations[lang] || translations['en'];
+      Object.keys(mapping).forEach(function(key) {
+        const el = document.getElementById(key);
+        if (el) {
+          if (key === "footer-text") {
+            el.innerHTML = mapping[key];
+          } else if (key === "available-hotels") {
+            // Keep the city name from the original text
+            const originalText = el.textContent;
+            const cityMatch = originalText.match(/in (.+)$/);
+            const cityName = cityMatch ? cityMatch[1] : '';
+            el.textContent = mapping[key].replace('{city}', cityName);
+          } else {
+            el.textContent = mapping[key];
+          }
+        }
+      });
+    });
     </script>
 </body>
 </html>

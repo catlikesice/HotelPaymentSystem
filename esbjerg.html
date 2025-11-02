@@ -96,9 +96,17 @@
 </head>
 <body>
     <div class="booking-header">
-        <h1>HotelPaymentSystem</h1>
-        <p>Book your stay with secure crypto payments</p>
+        <h1 id="booking-header-title">HotelPaymentSystem</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments</p>
     </div>
+    <label for="lang-select" class="sr-only">Language</label>
+    <select id="lang-select" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+      <option value="lv">Latviešu</option>
+      <option value="et">Eesti</option>
+    </select>
+
     <div class="booking-container">
         <h2 style="text-align:center; color:#305b31;">Available Hotels in Esbjerg</h2>
         <div class="hotel-grid">

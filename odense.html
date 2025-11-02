@@ -7,11 +7,19 @@
 </head>
 <body style="background:#e6f0e6;min-height:100vh;">
     <div class="booking-header">
-        <h1>HotelPaymentSystem</h1>
-        <p>Book your stay with secure crypto payments</p>
+        <h1 id="booking-header-title">HotelPaymentSystem</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments</p>
     </div>
+    <label for="lang-select" class="sr-only">Language</label>
+    <select id="lang-select" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+      <option value="lv">Latviešu</option>
+      <option value="et">Eesti</option>
+    </select>
+
     <div class="booking-container">
-        <h2>Available Hotels in Odense</h2>
+        <h2 id="available-hotels">Available Hotels in Odense</h2>
         <ul class="hotel-list">
             <li>
                 <h3>Hotel Odeon</h3>
