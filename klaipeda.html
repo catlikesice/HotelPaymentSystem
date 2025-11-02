@@ -1,37 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Klaipėda — Lithuania</title>
-   <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Hotels in Klaipėda</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Hotels in Klaipėda</h1>
-
-    <div class="city-grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Seaside Hotel Klaipeda" class="card-img">
-        <div class="card-body">
-          <h2>Seaside Harbour Hotel</h2>
-          <p class="price"><strong>0.07 ETH / night</strong></p>
-          <p>Seafront hotel with beautiful views of the Baltic Sea, fresh seafood nearby and easy access to the ferry terminal.</p>
-          <a class="btn-book" href="../../../selectlocation.html">View &amp; Book</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Klaipeda City Hotel" class="card-img">
-        <div class="card-body">
-          <h2>Portside Boutique</h2>
-          <p class="price"><strong>0.05 ETH / night</strong></p>
-          <p>Charming boutique hotel in the city centre, close to restaurants, theatres and the Old Town promenade.</p>
-          <a class="btn-book" href="../../../selectlocation.html">View &amp; Book</a>
-        </div>
-      </div>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>Baltic Comfort</h1>
+        <p>Book your stay with secure crypto payments</p>
     </div>
-
-    <p><a href="../../../selectlocation.html">Back to Select Location</a></p>
-  </div>
+    <div class="booking-container">
+        <h2>Available Hotels in Klaipėda</h2>
+        <div class="currency-selector">
+            <label for="currency">Select Currency:</label>
+            <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Seaside Harbour Hotel">
+                <h3>Seaside Harbour Hotel</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Seafront hotel with beautiful views of the Baltic Sea, fresh seafood nearby and easy access to the ferry terminal.</p>
+                <a href="selectlocation.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Portside Boutique">
+                <h3>Portside Boutique</h3>
+                <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="140">0.05 ETH / night</div>
+                <p>Charming boutique hotel in the city centre, close to restaurants, theatres and the Old Town promenade.</p>
+                <a href="selectlocation.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="selectlocation.html">Back to Booking</a></p>
+    </div>
+    <footer>
+        <p>&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+    </footer>
+    <script>
+        function updatePrices() {
+            const currency = document.getElementById('currency').value;
+            const priceElements = document.querySelectorAll('.price');
+            
+            priceElements.forEach(priceEl => {
+                const ethPrice = priceEl.getAttribute('data-eth');
+                const btcPrice = priceEl.getAttribute('data-btc');
+                const usdtPrice = priceEl.getAttribute('data-usdt');
+                
+                let newPrice;
+                if (currency === 'ETH') {
+                    newPrice = `${ethPrice} ETH / night`;
+                } else if (currency === 'BTC') {
+                    newPrice = `${btcPrice} BTC / night`;
+                } else if (currency === 'USDT') {
+                    newPrice = `${usdtPrice} USDT / night`;
+                }
+                
+                priceEl.textContent = newPrice;
+            });
+        }
+    </script>
 </body>
 </html>
