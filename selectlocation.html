@@ -32,14 +32,22 @@
             </div>
         </nav>
 <body class="hero">
+    <label for="lang-select" class="sr-only">Language</label>
+    <select id="lang-select" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+      <option value="lv">Latviešu</option>
+      <option value="et">Eesti</option>
+    </select>
+
     <div class="booking-container">
-        <h2>Start Your Booking</h2>
+        <h2 id="booking-title">Start Your Booking</h2>
 
         <form id="bookingForm" class="booking-form-row" onsubmit="return false;">
             <div class="form-inline">
-                <label for="country"><b>Select Country:</b></label>
+                <label for="country" id="country-label"><b>Select Country:</b></label>
                 <select id="country" name="country">
-                    <option value="">-- Select Country --</option>
+                    <option value="" id="country-placeholder">-- Select Country --</option>
                     <option value="denmark">Denmark</option>
                     <option value="estonia">Estonia</option>
                     <option value="latvia">Latvia</option>
@@ -47,9 +55,9 @@
                 </select>
             </div>
             <div class="form-inline">
-                <label for="city"><b>Select City/Town:</b></label>
+                <label for="city" id="city-label"><b>Select City/Town:</b></label>
                 <select id="city" name="city" disabled>
-                    <option value="">-- Select City/Town --</option>
+                    <option value="" id="city-placeholder">-- Select City/Town --</option>
                 </select>
             </div>
         </form>
@@ -61,6 +69,68 @@
     <button id="continueBtn" class="btn continue-btn">Continue</button>
 
     <script>
+    // Translation data for supported languages
+    const translations = {
+      en: {
+        "booking-title": "Start Your Booking",
+        "country-label": "Select Country:",
+        "country-placeholder": "-- Select Country --",
+        "city-label": "Select City/Town:",
+        "city-placeholder": "-- Select City/Town --",
+        "continueBtn": "Continue",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-title": "Начать бронирование",
+        "country-label": "Выберите страну:",
+        "country-placeholder": "-- Выберите страну --",
+        "city-label": "Выберите город:",
+        "city-placeholder": "-- Выберите город --",
+        "continueBtn": "Продолжить",
+        "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
+      },
+      lv: {
+        "booking-title": "Sāciet rezervāciju",
+        "country-label": "Izvēlieties valsti:",
+        "country-placeholder": "-- Izvēlieties valsti --",
+        "city-label": "Izvēlieties pilsētu:",
+        "city-placeholder": "-- Izvēlieties pilsētu --",
+        "continueBtn": "Turpināt",
+        "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
+      },
+      et: {
+        "booking-title": "Alusta broneerimist",
+        "country-label": "Vali riik:",
+        "country-placeholder": "-- Vali riik --",
+        "city-label": "Vali linn:",
+        "city-placeholder": "-- Vali linn --",
+        "continueBtn": "Jätka",
+        "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
+      },
+    };
+
+    // On language change, update all translatable elements
+    document.getElementById('lang-select').addEventListener('change', function() {
+      const lang = this.value;
+      const mapping = translations[lang] || translations['en'];
+      Object.keys(mapping).forEach(function(key) {
+        const el = document.getElementById(key);
+        if (el) {
+          if (key === "footer-text") {
+            el.innerHTML = mapping[key];
+          } else {
+            el.textContent = mapping[key];
+          }
+        }
+      });
+      
+      // Update city dropdown placeholder after language change
+      const citySelect = document.getElementById('city');
+      if (citySelect.options.length === 1 && citySelect.options[0].value === '') {
+        citySelect.options[0].text = mapping["city-placeholder"];
+      }
+    });
+
         const cities = {
             denmark: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
             estonia: ["Tallinn", "Tartu", "Narva", "Pärnu", "Viljandi"],
@@ -91,7 +161,11 @@
         // Populate city list when country changes and update display
         countrySelect.addEventListener('change', function() {
             const selectedCountry = this.value;
-            citySelect.innerHTML = '<option value="">-- Select City/Town --</option>';
+            const langSelect = document.getElementById('lang-select');
+            const lang = langSelect ? langSelect.value : 'en';
+            const mapping = translations[lang] || translations['en'];
+            
+            citySelect.innerHTML = '<option value="" id="city-placeholder">' + mapping["city-placeholder"] + '</option>';
             citySelect.disabled = !selectedCountry;
             if (cities[selectedCountry]) {
                 cities[selectedCountry].forEach(function(city) {
@@ -128,6 +202,6 @@
     </script>
 </body>
     <footer>
-        <p>&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+        <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
     </footer>
 </html>
