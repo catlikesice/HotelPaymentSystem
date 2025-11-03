@@ -279,6 +279,8 @@ footer {
     z-index: 1100;         /* above header background */
     pointer-events: auto;
     background: transparent;
+    margin-top: 0;      /* Ensures nav stays close to logo but below it */
+    display: block;
 }
 
 /* Draw the green navbar bar inside the nav */
