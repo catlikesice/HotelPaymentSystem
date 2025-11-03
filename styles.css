@@ -1,7 +1,8 @@
-/* styles.css — Consolidated, final stylesheet with the requested nav color snippet reinserted
-   - This is the full stylesheet (drop-in) for index.html and related pages.
-   - I restored the original navbar green and pill background variables exactly as you requested,
-     and included a defensive override for the nav band and pill colors so the look matches your screenshot.
+/* styles.css — Consolidated, final stylesheet with restored navbar green
+   - Full stylesheet (drop-in). Restored the navbar green exactly as requested:
+     --color-nav-bg: #23441a and --color-nav-box: #e5f8e5
+   - This file preserves header/logo sizing and sets .features to lay out horizontally
+     on wide screens and wrap/stack on smaller screens.
    - Backup your current file before replacing: cp styles.css styles.css.bak
 */
 
