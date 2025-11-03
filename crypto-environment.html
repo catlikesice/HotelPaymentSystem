@@ -30,7 +30,76 @@
   </header>
 
   <main class="content" id="page">
-    <!-- ... rest of the page content ... -->
+        <section>
+      <h2 data-i18n="section_title">Why crypto payments are better for the environment.</h2>
+
+      <p data-i18n="point1">
+        1. Proof-of-Stake networks consume far less electricity than traditional Proof-of-Work networks. When a major smart‑contract platform transitioned from Proof‑of‑Work to Proof‑of‑Stake, the network's electricity consumption fell by more than 99%, reducing the per‑transaction carbon footprint by orders of magnitude.<sup><a href="#ref-eth">1</a></sup>
+      </p>
+
+      <p data-i18n="point2">
+        2. Layer‑2 payment technologies (payment channels, state channels, and rollups) settle the vast majority of individual transfers off the base layer and only periodically finalize batches on‑chain. This amortization means the energy cost per user transfer is far lower than settling each payment on a base Proof‑of‑Work chain.<sup><a href="#ref-lightning">2</a></sup>
+      </p>
+
+      <p data-i18n="point3">
+        3. A meaningful portion of validation and mining activity uses low‑carbon and renewable electricity. Miners and validators frequently locate operations where surplus hydro, wind, or solar power is available, and some operators explicitly use curtailed or otherwise wasted renewable energy that would otherwise be unused, reducing the carbon intensity of processing transactions.<sup><a href="#ref-ccaf">3</a></sup>
+      </p>
+
+      <p data-i18n="point4">
+        4. Tokenization, programmable settlement, and instant finality reduce overhead, reconciliation steps, and the need for multiple intermediaries in financial flows. By streamlining settlement and reducing duplicated processing, crypto-based payment rails can lower the overall system energy and resource use per economic transfer compared with slower, multi‑party legacy systems.<sup><a href="#ref-academic">4</a></sup>
+      </p>
+
+      <p data-i18n="point5">
+        5. Network and protocol engineering continue to improve throughput and efficiency (for example, more efficient consensus algorithms, compact cryptographic proofs, and batching). These technical advances decrease energy per unit of useful work performed by payment systems over time.<sup><a href="#ref-industry">5</a></sup>
+      </p>
+    </section>
+
+    <section>
+      <h2 data-i18n="context_title">Important context</h2>
+      <p data-i18n="context">
+        These points describe the mechanisms and observed outcomes that make many crypto payment systems lower in carbon intensity than alternatives. The overall environmental effect depends on which networks and settlement models are used: Proof‑of‑Stake networks and Layer‑2 payments are the architectures that deliver the largest energy savings, while some Proof‑of‑Work base‑layer networks retain high absolute energy use. When evaluating environmental impact, consider the consensus mechanism, whether payments use off‑chain batching, and published data about energy sources and regional electricity mixes.<sup><a href="#ref-ccaf">3</a></sup>
+      </p>
+    </section>
+
+    <footer>
+      <p class="tagline" data-i18n="tagline">
+        This article summarizes established results and published data about how modern crypto payments reduce energy and emissions compared with older designs. See sources below for primary documentation.
+      </p>
+
+      <small class="references" aria-label="References">
+        <ol>
+          <li id="ref-eth">
+            Ethereum.org — The Merge and energy reduction: overview and post‑Merge energy comparisons.
+            <br /><a href="https://ethereum.org/en/history/the-merge/" target="_blank" rel="noopener noreferrer">https://ethereum.org/en/history/the-merge/</a>
+          </li>
+          <li id="ref-lightning">
+            Lightning Network and Layer‑2 payment documentation: payment channels, rollups, and how off‑chain settlement reduces on‑chain transaction load.
+            <br /><a href="https://lightning.network/" target="_blank" rel="noopener noreferrer">https://lightning.network/</a>
+          </li>
+          <li id="ref-ccaf">
+            Cambridge Centre for Alternative Finance — Bitcoin Electricity Consumption Index and miner distribution; regional energy mix and methodology details.
+            <br /><a href="https://ccaf.io/cbeci" target="_blank" rel="noopener noreferrer">https://ccaf.io/cbeci</a>
+          </li>
+          <li id="ref-academic">
+            Academic analyses and lifecycle studies on consensus mechanisms, settlement efficiencies, and systemic impacts of tokenized payments.
+            <br /><a href="https://www.nature.com/search?order=relevance&journal=all&q=bitcoin+energy" target="_blank" rel="noopener noreferrer">https://www.nature.com/ (search: "bitcoin energy")</a>
+          </li>
+          <li id="ref-industry">
+            Industry research (CoinShares, Bitcoin Mining Council, and other reports) on miner renewable usage, methodologies, and trends in miner behavior.
+            <br /><a href="https://www.coinshares.com/research" target="_blank" rel="noopener noreferrer">https://www.coinshares.com/research</a>
+            <br /><a href="https://www.bmcouncil.org/" target="_blank" rel="noopener noreferrer">https://www.bmcouncil.org/</a>
+          </li>
+        </ol>
+      </small>
+
+      <p class="wiki-tag" data-i18n="wiki_tag">
+        Retrieved from public documentation and research — presented here as factual summary.
+      </p>
+    </footer>
+   
+    <footer>
+        <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+    </footer>
   </main>
   <!-- ... page footer ... -->
 </body>
