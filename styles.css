@@ -249,4 +249,36 @@ header a { position: static !important; left: auto !important; right: auto !impo
 .contact-form { max-width: 820px; margin: 1rem auto; padding: 1.25rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(46,77,37,0.04); }
 footer { text-align: center; padding: 1.5rem 0; color: var(--color-text); }
 
+/* Force navbar band to exact green from screenshot.
+   Append this to the END of styles.css (backup first). */
+.nav-band,
+.site-nav,
+header .nav-band,
+header > .nav-band,
+header .site-nav,
+header > .site-nav {
+  background-color: #23441a !important;   /* exact green */
+  background-image: none !important;      /* remove any gradient or image */
+  background: #23441a !important;         /* fallback shorthand */
+  box-shadow: none !important;            /* remove any overlay shadow that alters perception */
+  color: inherit !important;
+}
+
+/* Remove any pseudo-element overlay that could be showing a different color */
+.nav-band::before,
+.nav-band::after,
+.site-nav::before,
+.site-nav::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* If there is an absolute/positioned overlay element inside header used to tint the band,
+   hide it (defensive) — low risk, scoped to header children only. */
+header > .overlay,
+header .nav-overlay,
+header .nav-tint {
+  display: none !important;
+}
+
 /* End of file */
