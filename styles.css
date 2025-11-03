@@ -1,5 +1,5 @@
 /* ================================
-   HotelPaymentSystem: Improved Styles
+   HotelPaymentSystem: Balanced Header/Nav Styles
    ================================ */
 
 /* ---------- Base / Typography / Page layout ---------- */
@@ -54,14 +54,14 @@ body.selectlocation .continue-btn {
 
 /* ---------- Site Header and Logo ---------- */
 header {
-    /* Remove fixed height for snug fit and close logo/navbar gap */
-    height: auto;
-    padding: 32px 0 0 0;
+    /* Reduced height for balance: not giant, not tiny */
+    height: 140px;
+    padding: 0;
     margin: 0;
     overflow: visible;
     display: flex;
-    flex-direction: column;  /* Stack logo and nav vertically */
-    align-items: center;     /* Center both horizontally */
+    flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
     background: #FFF9B0;
     position: relative;
@@ -75,22 +75,22 @@ header {
     position: relative;
     width: 100%;
     z-index: 100;
+    margin-bottom: 8px;
 }
 
 .logo-header img {
     width: auto;
-    max-height: 55px;      /* Cut logo size in half! */
+    max-height: 70px;      /* Mid-sized logo */
     object-fit: contain;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 12px;    /* Space below logo and above navbar */
 }
 
 /* ---------- Navbar ---------- */
 .site-nav {
     width: 100%;
-    margin-top: -6px;         /* Pull nav up closer to logo, maybe overlap slightly */
+    margin: 0 auto;
 }
 
 .nav-inner {
@@ -105,12 +105,11 @@ header {
     width: 50%;
     margin: 0 auto;
     background: #23441a;
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
     padding: 8px 0;
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
 }
 
+/* Restore previous nav style (no border-top-radius, no negative margin, etc.) */
 .nav-box {
     display: inline-block;
     background: #e5f8e5;
@@ -173,22 +172,20 @@ header {
         border-radius: 12px;
     }
     .logo-header img {
-        max-height: 30px; /* Also cut in half for mobile/tablet */
-        margin-bottom: 8px;
+        max-height: 48px;
     }
     header {
-        padding-top: 18px;
+        height: 96px;
     }
 }
 
 @media (max-width: 700px) {
     header {
-        padding-top: 12px;
+        height: auto;
         background-size: 60%;
     }
     .logo-header img {
-        max-height: 24px;
-        margin-bottom: 5px;
+        max-height: 32px;
     }
     .nav-containers {
         flex-direction: column;
