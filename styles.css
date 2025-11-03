@@ -1,6 +1,9 @@
-/* styles.css — Final authoritative stylesheet: restore navbar green precisely,
-   keep layout and ensure .features cards sit horizontally on wide screens.
-   Replace your current styles.css with this file (backup first).
+/* styles.css — authoritative stylesheet (navbar band color fixed)
+   - This replacement ensures the NAV BAR (the full horizontal band behind the pills)
+     uses the dark green from your screenshot: #23441a.
+   - No other color/layout changes beyond preserving the existing page look:
+     logo sizing, centered pill group, and .features horizontal layout remain intact.
+   - Backup your current file first: cp styles.css styles.css.bak
 */
 
 /* -------------------------
@@ -8,8 +11,8 @@
    ------------------------- */
 :root{
   --color-header-bg: #FFF9B0;
-  --color-nav-bg: #23441a;     /* exact navbar green from your screenshot */
-  --color-nav-box: #e5f8e5;    /* exact pale pill background from your screenshot */
+  --color-nav-bg: #23441a;     /* exact navbar band green from your screenshot */
+  --color-nav-box: #e5f8e5;    /* pill background */
   --color-text: #23421a;
   --accent: #2e7d32;
   --max-width: 1200px;
@@ -79,12 +82,16 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 /* -------------------------
    Full-width nav band with centered pills
+   (this band is the element you want green)
    ------------------------- */
 .site-nav { width: 100%; margin: 1rem 0 0 0; padding: 0; }
+
+/* The NAV BAND spans full viewport width; set its background to the green */
 .nav-band {
   width: 100%;
-  background: var(--color-nav-bg);
+  background: #23441a; /* explicit color so this rule wins against other color rules */
   padding: 12px 0;
+  box-sizing: border-box;
 }
 
 /* Centered container for the nav pills */
@@ -100,7 +107,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
   border-radius: 10px;
 }
 
-/* Pill items */
+/* Pill items (unchanged) */
 .nav-box {
   background: var(--color-nav-box);
   color: var(--color-text);
@@ -116,9 +123,8 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 .nav-box:hover, .nav-box:focus { background: #e6f5e6; }
 
-/* Defensive color overrides so the correct greens show even if there are other rules */
-.nav-band { background: var(--color-nav-bg) !important; }
-.nav-box  { background: var(--color-nav-box) !important; color: var(--color-text) !important; }
+/* Defensive override for pill color only (keeps pills as pale) */
+.nav-box { background: var(--color-nav-box) !important; color: var(--color-text) !important; }
 
 /* keep original list visually hidden but available for assistive tech */
 .nav-links {
