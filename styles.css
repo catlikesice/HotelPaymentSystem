@@ -1,34 +1,16 @@
 /* ================================
-   HotelPaymentSystem: Consolidated Styles (header/logo/nav fix)
-   - Single header{} block (no duplicates)
-   - Balanced header height (not huge, not tiny)
-   - Mid-size logo (visually half-way)
-   - Restored navbar layout and spacing to original behavior
-   - Add comments to help future edits
-   ================================ */
+   HotelPaymentSystem: Improved Styles
+   ================================
+*/
 
 /* ---------- Base / Typography / Page layout ---------- */
-:root {
-    --color-bg: #f4fbf4;
-    --color-text: #2e4d25;
-    --color-header-bg: #FFF9B0;
-    --color-nav-bg: #23441a;
-    --color-nav-box: #e5f8e5;
-    --nav-width: 50%;
-}
-
-* { box-sizing: border-box; }
-
-html, body {
-    height: 100%;
-}
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background: var(--color-bg);
-    color: var(--color-text);
+    background: #f4fbf4;
+    color: #2e4d25;
     line-height: 1.6;
+    position: relative;
     padding-top: 0;
 }
 
@@ -64,128 +46,96 @@ body.selectlocation .continue-btn {
     bottom: 2rem;
 }
 
-/* ---------- Site Header / Logo / Nav (single authoritative block) ---------- */
-/* Notes:
-   - Use one header{} to avoid later duplicates overriding values.
-   - Height chosen to be balanced: large enough for a decent logo but not dominating.
-   - Logo scaled to mid-size. Adjust max-height below if you want slightly larger/smaller.
-   - Navbar restored to original appearance and positioned directly beneath header content.
-*/
+@media (max-width: 700px) {
+    body.selectlocation .booking-form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* ---------- Site Header and Logo ---------- */
 header {
-    height: 140px;                /* balanced header: not giant, not tiny */
+    /* Sufficient height for both logo and navbar */
+    height: 220px;
     padding: 0;
     margin: 0;
     overflow: visible;
     display: flex;
-    flex-direction: column;       /* stack logo then navbar */
-    align-items: center;
-    justify-content: center;      /* center vertically inside the header height */
-    background: var(--color-header-bg);
+    flex-direction: column;  /* Stack logo and nav vertically */
+    align-items: center;     /* Center both horizontally */
+    justify-content: flex-start;
+    background: #FFF9B0;
     position: relative;
     z-index: 1000;
     text-align: center;
 }
 
-/* Logo container */
 .logo-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0 6px 0;        /* small top/bottom breathing room */
+    padding: 0;
     margin: 0;
-    z-index: 101;
+    position: relative;
+    width: 100%;
+    z-index: 100;
+    margin-bottom: 18px;    /* Space below logo for navbar */
 }
 
 .logo-header img {
-    display: block;
     width: auto;
-    max-height: 85px;             /* mid-size logo (halfway between extremes) */
+    max-height: 90px;      /* Restrict logo height, adjust as needed */
     object-fit: contain;
-    margin: 0;
-    padding: 0;
-}
-
-/* Keep brand link styling if present */
-.brand {
     display: block;
-    margin-top: 6px;
-    color: var(--color-text);
-    text-decoration: underline;
+    margin: 0 auto;
 }
 
-/* ---------- Navbar (restored to previous look / no overlap hacks) ---------- */
+/* ---------- Navbar ---------- */
 .site-nav {
     width: 100%;
-    margin: 0;
-    padding: 0;
-    z-index: 1100;
+    margin: 0 auto;
 }
 
 .nav-inner {
     display: flex;
-    justify-content: center;
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nav-containers {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: var(--nav-width);
+    width: 50%;
     margin: 0 auto;
-    background: var(--color-nav-bg);
+    background: #23441a;
     border-radius: 12px;
-    padding: 10px 12px;
-    box-shadow: none;
+    padding: 8px 0;
 }
 
-/* Nav buttons/boxes */
 .nav-box {
     display: inline-block;
-    background: var(--color-nav-box);
-    color: var(--color-text);
+    background: #e5f8e5;
+    color: #23441a;
     padding: 0.6em 1.2em;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
-    box-shadow: 0 1px 4px rgba(46,77,37,0.06);
-    margin: 0 6px;
-    transition: background 0.18s ease;
-}
-.nav-box:hover,
-.nav-box:focus {
-    background: #cfeed0;
-}
-
-/* keep the original hidden list for accessibility */
-.nav-links {
-    position: absolute !important;
-    left: -9999px !important;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-}
-
-/* Invisible anchor used by scripts — keep it transparent but present */
-.nav-link-book {
-    position: absolute;
-    left: 16.6666667%;
-    bottom: calc((64px - 36px) / 2);
-    transform: translateX(-50%);
-    display: inline-block;
-    height: 36px;
-    line-height: 36px;
-    padding: 0 12px;
     border-radius: 6px;
-    background: transparent;
-    color: transparent;
     text-decoration: none;
-    z-index: 1115;
-    pointer-events: none;
+    font-weight: bold;
+    box-shadow: 0px 1px 4px 0px rgba(46,77,37,0.06);
+    margin: 0 4px;
+    transition: background 0.2s;
+}
+.nav-box:hover {
+    background: #c6ecc6;
 }
 
-/* ---------- Booking header (page-specific) ---------- */
+/* Hide original nav list visually but keep for accessibility */
+.nav-links {
+    display: none !important;
+}
+
+/* --- Invisible anchor for script use --- */
+.nav-link-book {
+    display: none;
+}
+
+/* ---------- Booking Header (other pages) ---------- */
 .booking-header {
     background: #ffeec0;
     padding: 2rem 0 1.5rem 0;
@@ -206,46 +156,46 @@ header {
     color: #2e7d32;
 }
 
-/* ---------- Hero / Content / Footer ---------- */
+/* ---------- Hero Section / Feature / Footer ---------- */
 .hero {
     background: #b2e3b2;
     padding: 2rem 2rem;
     text-align: center;
 }
 
-/* ---------- Responsiveness ---------- */
-@media (max-width: 1024px) {
-    :root { --nav-width: 70%; }
-    header { height: 120px; }
-    .logo-header img { max-height: 70px; }
-}
-
+/* ----- Responsive Tweaks ----- */
 @media (max-width: 820px) {
-    :root { --nav-width: 90%; }
-    header { height: 100px; }
-    .logo-header img { max-height: 48px; }
-    .nav-containers { padding: 8px 10px; border-radius: 10px; }
+    .nav-containers {
+        width: 90%;
+        padding: 8px 0;
+    }
+    .logo-header img {
+        max-height: 60px;
+    }
+    header {
+        height: 150px;
+    }
 }
 
 @media (max-width: 700px) {
     header {
-        height: auto;          /* let content decide on small screens */
-        padding: 10px 0 6px 0;
+        height: auto;  /* Let contents decide */
+        background-size: 60%;
     }
-    .logo-header img { max-height: 36px; }
+    .logo-header img {
+        max-height: 48px;
+    }
     .nav-containers {
         flex-direction: column;
-        align-items: stretch;
         width: 95%;
-        padding: 8px;
     }
     .nav-box {
-        margin: 8px 0;
-        width: 100%;
-        text-align: center;
+        margin: 6px 0;
     }
 }
 
-/* ---------- Utility tweaks you may need ---------- */
-/* If you still see another header{} rule in DevTools, remove it or merge its content here.
-   If some pages need a taller header,
+/* ---------- Utility Classes, Forms, Buttons, etc. ---------- */
+/* Add more site styles as needed below */
+/* ... */
+
+/* ---------- End of file ---------- */
