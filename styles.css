@@ -46,6 +46,7 @@ header.site-header,
   background: var(--color-header-bg);
   position: relative;
   z-index: 1000;
+  overflow: hidden;    
   text-align: center;
 }
 
@@ -66,10 +67,12 @@ header.site-header,
 */
 .logo-header img {
   display: block;
+  height: auto;
   width: auto;
-  max-height: 120px;    /* mid-large logo, reduces the huge look */
+  max-height: 110px;    /* mid-large logo, reduces the huge look */
+  max-width: 70%;
   object-fit: contain;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
