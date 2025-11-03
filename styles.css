@@ -1,9 +1,6 @@
-/* styles.css — Consolidated, final stylesheet with restored navbar green
-   - Full stylesheet (drop-in). Restored the navbar green exactly as requested:
-     --color-nav-bg: #23441a and --color-nav-box: #e5f8e5
-   - This file preserves header/logo sizing and sets .features to lay out horizontally
-     on wide screens and wrap/stack on smaller screens.
-   - Backup your current file before replacing: cp styles.css styles.css.bak
+/* styles.css — Final authoritative stylesheet: restore navbar green precisely,
+   keep layout and ensure .features cards sit horizontally on wide screens.
+   Replace your current styles.css with this file (backup first).
 */
 
 /* -------------------------
@@ -11,8 +8,8 @@
    ------------------------- */
 :root{
   --color-header-bg: #FFF9B0;
-  --color-nav-bg: #23441a;     /* restored navbar green from your referenced screenshot */
-  --color-nav-box: #e5f8e5;    /* restored light pill background from screenshot */
+  --color-nav-bg: #23441a;     /* exact navbar green from your screenshot */
+  --color-nav-box: #e5f8e5;    /* exact pale pill background from your screenshot */
   --color-text: #23421a;
   --accent: #2e7d32;
   --max-width: 1200px;
@@ -121,7 +118,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 /* Defensive color overrides so the correct greens show even if there are other rules */
 .nav-band { background: var(--color-nav-bg) !important; }
-.nav-box { background: var(--color-nav-box) !important; color: var(--color-text) !important; }
+.nav-box  { background: var(--color-nav-box) !important; color: var(--color-text) !important; }
 
 /* keep original list visually hidden but available for assistive tech */
 .nav-links {
