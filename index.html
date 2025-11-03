@@ -17,18 +17,14 @@
             <div class="nav-inner">
                 <a class="brand" href="index.html" title="Home">BalticComfort</a>
 
-                <!-- Minimal, explicit nav: three real anchors inside .nav-containers.
-                     These anchors are the clickable boxes and are physically inside the nav. -->
+                <!-- Minimal, explicit nav: three real anchors inside .nav-containers. -->
                 <div class="nav-containers" role="menubar" aria-label="Site quick links">
-                    <a class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with us">Book with Us</a>
+                    <a class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with Us">Book with Us</a>
                     <a class="nav-box nav-box-center" href="aboutlatvia.html" role="menuitem" aria-label="About Latvia">About Latvia</a>
                     <a class="nav-box nav-box-right" href="#contact" role="menuitem" aria-label="Contact us">Contact</a>
                 </div>
 
-                <!-- The original link list is kept in the DOM but visually hidden to
-                     avoid duplicate visible text while preserving accessibility.
-                     (This is a minimal compromise so screen readers keep the list;
-                     visual users only see the .nav-box anchors.) -->
+                <!-- Visually hidden original link list -->
                 <ul class="nav-links" aria-hidden="true">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="selectlocation.html">Book with Us</a></li>
@@ -37,8 +33,7 @@
                 </ul>
             </div>
         </nav>
-
-        <!-- Keep the existing invisible anchor if some scripts rely on it -->
+        <!-- Invisible anchor for possible script use -->
         <a class="nav-link-book" href="selectlocation.html" aria-label="Book with us" title="Book with us"></a>
     </header>
     <label for="lang-select" class="sr-only">Language</label>
@@ -61,7 +56,7 @@
             <p id="feature1-desc">Custom integrations to match your operations—simple API or dashboard onboarding for any sized property.</p>
         </div>
         <div class="feature">
-            <h3 id="feature2-title"><a href="#crypto-environment.html">Eco-Conscious Technology</a></h3>
+            <h3 id="feature2-title"><a href="crypto-environment.html">Eco-Conscious Technology</a></h3>
             <p id="feature2-desc">Reduced carbon footprint, green hosting, and options for carbon-neutral transactions.</p>
         </div>
         <div class="feature">
@@ -122,7 +117,7 @@
       },
       ru: {
         "hero-title": "Принимайте криптовалюту легко",
-        "hero-desc": "Наша платформа позволяет отелям и гостиничным группам получать оплату в цифровых валютах — без хлопот, с полной прозрачностью и заботой об экологии.",
+        "hero-desc": "Наша платформа позволяет отелям и гостиничным группам получать оплату в цифровых валютах — без ...",
         "hero-btn": "Стать партнером",
         "feature1-title": "Индивидуальные решения для сетей отелей",
         "feature1-desc": "Интеграции под ваши процессы — простой API или панель для любых объектов.",
@@ -170,7 +165,7 @@
         "contact-btn": "Saada päring",
         "contact-email": "Või kirjuta otse: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
         "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
-      },
+      }
     };
 
     // On language change, update all translatable elements
