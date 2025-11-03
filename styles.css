@@ -304,4 +304,65 @@ header .band-overlay {
   color: var(--color-text) !important;
 }
 
+/* NAV: force band color and remove overlays that could tint it */
+.nav-band,
+.site-nav,
+header .nav-band,
+header > .nav-band,
+header .site-nav,
+header > .site-nav {
+  background: #23441a !important;    /* exact green you want */
+  background-image: none !important; /* remove gradients/images */
+  box-shadow: none !important;       /* remove tinting shadows */
+  min-height: 0 !important;
+  padding: 6px 0 !important;         /* desired vertical padding */
+  height: auto !important;
+}
+
+/* NAV pseudo-elements / overlays that may paint a different color */
+.nav-band::before,
+.nav-band::after,
+.site-nav::before,
+.site-nav::after,
+header > .overlay,
+header .nav-overlay,
+header .nav-tint,
+header .band-overlay {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Centered nav container: keep internal spacing constrained */
+.nav-containers {
+  padding: 6px 12px !important; /* matches .nav-band padding so pills are centered */
+  min-height: 0 !important;
+}
+
+/* Pills: force size so they fit inside the shorter band */
+.nav-box {
+  background: #e5f8e5 !important; /* pale pill bg from screenshot */
+  color: var(--color-text) !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  padding: 0 0.9rem !important;
+  box-sizing: border-box !important;
+}
+
+/* FOOTER: restore/lock the lime strip color */
+footer {
+  background: #bfe6bd !important; /* your lime footer color */
+  color: var(--color-text) !important;
+}
+
+/* Small safety: prevent a later rule from setting nav elements to display:block with forced height */
+header, header.site-header, .site-nav, .nav-band {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* End of defensive block */
+
 /* End of file */
