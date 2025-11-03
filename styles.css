@@ -57,7 +57,7 @@ body.selectlocation .continue-btn {
 
 /* ---------- header / logo ---------- */
 header {
-    height: 350px; /* desired header height */
+    height: 500px; /* desired header height */
     padding: 0;
     margin: 0;
     overflow: visible; /* allow the nav bar to be placed at bottom of header */
