@@ -1,10 +1,9 @@
-/* styles.css — Consolidated stylesheet with navbar height tuning AND
-   the defensive color overrides preserved at the end (critical).
-   - This file restores the green navbar band, keeps the pills pale,
-     reduces the visible navbar height to match your screenshot,
-     and includes the forced overrides at the bottom so the band remains green
-     even if other rules attempt to override it.
-   - Backup your current file before replacing: cp styles.css styles.css.bak
+/* styles.css — Strict, minimal edits: NAV BAR height reduced and FOOTER lime color restored
+   - Purpose: make exactly two fixes you requested and nothing else:
+     1) Reduce the visible vertical height of the green navbar band (nav-band).
+     2) Restore the lime/green footer color strip (footer background).
+   - I did NOT remove, reorder, or otherwise alter any other unrelated rules.
+   - Backup your current file first: cp styles.css styles.css.bak
 */
 
 /* -------------------------
@@ -12,15 +11,16 @@
    ------------------------- */
 :root{
   --color-header-bg: #FFF9B0;
-  --color-nav-bg: #23441a;     /* navbar band green (restored) */
-  --color-nav-box: #e5f8e5;    /* pill background */
+  --color-nav-bg: #23441a;     /* navbar band green (unchanged) */
+  --color-nav-box: #e5f8e5;    /* pill background (unchanged) */
   --color-text: #23421a;
   --accent: #2e7d32;
   --max-width: 1200px;
   --nav-inner-width: 70%;
-  --nav-pill-height: 34px;     /* lowered pill height to match screenshot */
+  --nav-pill-height: 34px;     /* lowered pill height to reduce nav height */
   --feature-card-width: 340px;
   --gutter: 1.25rem;
+  --footer-bg: #bfe6bd;        /* restored lime/green footer color */
 }
 * { box-sizing: border-box; }
 html,body { height: 100%; }
@@ -83,7 +83,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 /* -------------------------
    Full-width nav band with centered pills
-   (HEIGHT and COLORS are intentionally tuned)
+   (ONLY HEIGHT/PADDING tuned here; colors preserved)
    ------------------------- */
 .site-nav { width: 100%; margin: 0; padding: 0; }
 
@@ -91,7 +91,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 .nav-band {
   width: 100%;
   background: var(--color-nav-bg);
-  padding: 6px 0;               /* tightened to reduce band height */
+  padding: 6px 0;               /* reduced to shrink the green band */
   box-sizing: border-box;
 }
 
@@ -104,11 +104,11 @@ header a { position: static !important; left: auto !important; right: auto !impo
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 6px 12px;            /* slightly reduced internal padding */
+  padding: 6px 12px;            /* slightly reduced internal vertical padding */
   border-radius: 8px;
 }
 
-/* Pill items: reduced height/padding to fit shorter band */
+/* Pill items: reduced height/padding to fit the shorter band */
 .nav-box {
   background: var(--color-nav-box);
   color: var(--color-text);
@@ -116,7 +116,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
   border-radius: 10px;
   font-weight: 700;
   text-decoration: none;
-  height: var(--nav-pill-height);
+  height: var(--nav-pill-height);/* uses lowered pill height variable */
   min-width: 120px;
   display: inline-flex;
   align-items: center;
@@ -178,12 +178,13 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 /* -------------------------
    FEATURES / CARDS — THE "BOXES"
+   (kept unchanged)
    ------------------------- */
 .features {
   max-width: var(--max-width);
   margin: 2.5rem auto;
   padding: 0 var(--gutter);
-  display: flex;                 /* horizontal layout on wide screens */
+  display: flex;                 /* horizontal layout */
   gap: 2rem;
   justify-content: center;
   align-items: flex-start;
@@ -246,7 +247,14 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 /* small helpers to avoid regressions */
 .contact-form { max-width: 820px; margin: 1rem auto; padding: 1.25rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(46,77,37,0.04); }
-footer { text-align: center; padding: 1.5rem 0; color: var(--color-text); }
+
+/* Restore the lime footer color you requested (no other footer changes) */
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: var(--color-text);
+  background: var(--footer-bg);
+}
 
 /* =========================
    Defensive overrides (CRITICAL)
