@@ -1,9 +1,10 @@
-/* styles.css — authoritative stylesheet (navbar band color fixed)
-   - This replacement ensures the NAV BAR (the full horizontal band behind the pills)
-     uses the dark green from your screenshot: #23441a.
-   - No other color/layout changes beyond preserving the existing page look:
-     logo sizing, centered pill group, and .features horizontal layout remain intact.
-   - Backup your current file first: cp styles.css styles.css.bak
+/* styles.css — Consolidated stylesheet with navbar height tuning AND
+   the defensive color overrides preserved at the end (critical).
+   - This file restores the green navbar band, keeps the pills pale,
+     reduces the visible navbar height to match your screenshot,
+     and includes the forced overrides at the bottom so the band remains green
+     even if other rules attempt to override it.
+   - Backup your current file before replacing: cp styles.css styles.css.bak
 */
 
 /* -------------------------
@@ -11,13 +12,13 @@
    ------------------------- */
 :root{
   --color-header-bg: #FFF9B0;
-  --color-nav-bg: #23441a;     /* exact navbar band green from your screenshot */
+  --color-nav-bg: #23441a;     /* navbar band green (restored) */
   --color-nav-box: #e5f8e5;    /* pill background */
   --color-text: #23421a;
   --accent: #2e7d32;
   --max-width: 1200px;
   --nav-inner-width: 70%;
-  --nav-pill-height: 40px;
+  --nav-pill-height: 34px;     /* lowered pill height to match screenshot */
   --feature-card-width: 340px;
   --gutter: 1.25rem;
 }
@@ -82,15 +83,15 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 /* -------------------------
    Full-width nav band with centered pills
-   (this band is the element you want green)
+   (HEIGHT and COLORS are intentionally tuned)
    ------------------------- */
-.site-nav { width: 100%; margin: 1rem 0 0 0; padding: 0; }
+.site-nav { width: 100%; margin: 0; padding: 0; }
 
-/* The NAV BAND spans full viewport width; set its background to the green */
+/* NAV BAND: reduced vertical padding to lower visible band height */
 .nav-band {
   width: 100%;
-  background: #23441a; /* explicit color so this rule wins against other color rules */
-  padding: 12px 0;
+  background: var(--color-nav-bg);
+  padding: 6px 0;               /* tightened to reduce band height */
   box-sizing: border-box;
 }
 
@@ -103,28 +104,26 @@ header a { position: static !important; left: auto !important; right: auto !impo
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 8px 12px;
-  border-radius: 10px;
+  padding: 6px 12px;            /* slightly reduced internal padding */
+  border-radius: 8px;
 }
 
-/* Pill items (unchanged) */
+/* Pill items: reduced height/padding to fit shorter band */
 .nav-box {
   background: var(--color-nav-box);
   color: var(--color-text);
-  padding: 0.5rem 1.1rem;
+  padding: 0.35rem 0.9rem;      /* tightened padding */
   border-radius: 10px;
   font-weight: 700;
   text-decoration: none;
   height: var(--nav-pill-height);
-  min-width: 130px;
+  min-width: 120px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04) inset;
 }
 .nav-box:hover, .nav-box:focus { background: #e6f5e6; }
-
-/* Defensive override for pill color only (keeps pills as pale) */
-.nav-box { background: var(--color-nav-box) !important; color: var(--color-text) !important; }
 
 /* keep original list visually hidden but available for assistive tech */
 .nav-links {
@@ -184,7 +183,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
   max-width: var(--max-width);
   margin: 2.5rem auto;
   padding: 0 var(--gutter);
-  display: flex;                 /* horizontal layout */
+  display: flex;                 /* horizontal layout on wide screens */
   gap: 2rem;
   justify-content: center;
   align-items: flex-start;
@@ -226,7 +225,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
    Responsive adjustments
    ------------------------- */
 @media (max-width: 1200px) {
-  .nav-containers { width: 85%; }
+  .nav-containers { width: 85%; padding: 6px 10px; }
   .logo-header img { max-width: 60%; max-height: 180px; }
   .features { gap: 1.5rem; }
   .feature { width: 300px; }
@@ -239,7 +238,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 @media (max-width: 700px) {
   /* small screens: stack vertically */
   .nav-containers { width: 95%; flex-direction: column; gap: .6rem; padding: 8px; }
-  .nav-box { width: 100%; text-align: center; }
+  .nav-box { width: 100%; text-align: center; height: auto; padding: .6rem 1rem; }
   .features { flex-direction: column; align-items: stretch; padding: 0 var(--gutter); gap: 1rem; }
   .feature { width: 100%; }
   .logo-header img { max-width: 80%; max-height: 140px; }
@@ -249,17 +248,24 @@ header a { position: static !important; left: auto !important; right: auto !impo
 .contact-form { max-width: 820px; margin: 1rem auto; padding: 1.25rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(46,77,37,0.04); }
 footer { text-align: center; padding: 1.5rem 0; color: var(--color-text); }
 
-/* Force navbar band to exact green from screenshot.
-   Append this to the END of styles.css (backup first). */
+/* =========================
+   Defensive overrides (CRITICAL)
+   - These ensure the visible navbar band and pills adopt the green
+     even if other rules, inline styles, gradients, pseudo-elements,
+     or overlays try to paint a different color.
+   - Keep this block at the end of the stylesheet so it wins by source order.
+   ========================= */
+
+/* Force navbar band and site-nav to exact green and remove images/gradients */
 .nav-band,
 .site-nav,
 header .nav-band,
 header > .nav-band,
 header .site-nav,
 header > .site-nav {
-  background-color: #23441a !important;   /* exact green */
+  background-color: #23441a !important;   /* exact green from screenshot */
   background-image: none !important;      /* remove any gradient or image */
-  background: #23441a !important;         /* fallback shorthand */
+  background: #23441a !important;         /* shorthand fallback */
   box-shadow: none !important;            /* remove any overlay shadow that alters perception */
   color: inherit !important;
 }
@@ -271,14 +277,23 @@ header > .site-nav {
 .site-nav::after {
   content: none !important;
   display: none !important;
+  background: none !important;
 }
 
-/* If there is an absolute/positioned overlay element inside header used to tint the band,
-   hide it (defensive) — low risk, scoped to header children only. */
+/* Hide common overlay elements scoped to header that may tint the band */
 header > .overlay,
 header .nav-overlay,
-header .nav-tint {
+header .nav-tint,
+header .band-overlay {
   display: none !important;
+  opacity: 0 !important;
+  background: none !important;
+}
+
+/* Also ensure pills keep the pale background */
+.nav-box {
+  background: #e5f8e5 !important;
+  color: var(--color-text) !important;
 }
 
 /* End of file */
