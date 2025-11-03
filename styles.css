@@ -1,9 +1,8 @@
-/* Final styles.css — tuned to match your header/nav screenshot
-   and ensure the "boxes" (.features > .feature) sit horizontally on wide screens.
-   - Designed to be a safe, conservative replacement: targets header/nav/hero/features
-   - Responsive: wraps the cards on narrower viewports, stacks on mobile
-   - Defensive: prevents stray left-floating brand anchors and constrains logo size
-   - Append/backup before replacing: cp styles.css styles.css.bak
+/* styles.css — Consolidated, final stylesheet with the requested nav color snippet reinserted
+   - This is the full stylesheet (drop-in) for index.html and related pages.
+   - I restored the original navbar green and pill background variables exactly as you requested,
+     and included a defensive override for the nav band and pill colors so the look matches your screenshot.
+   - Backup your current file before replacing: cp styles.css styles.css.bak
 */
 
 /* -------------------------
@@ -11,14 +10,14 @@
    ------------------------- */
 :root{
   --color-header-bg: #FFF9B0;
-  --color-nav-bg: #213d1e;
-  --color-nav-box: #e8f7e8;
+  --color-nav-bg: #23441a;     /* restored navbar green from your referenced screenshot */
+  --color-nav-box: #e5f8e5;    /* restored light pill background from screenshot */
   --color-text: #23421a;
   --accent: #2e7d32;
   --max-width: 1200px;
   --nav-inner-width: 70%;
   --nav-pill-height: 40px;
-  --feature-card-width: 340px; /* a touch wider for the content you show */
+  --feature-card-width: 340px;
   --gutter: 1.25rem;
 }
 * { box-sizing: border-box; }
@@ -41,7 +40,7 @@ body {
 }
 
 /* -------------------------
-   Header / large logo (matches screenshot)
+   Header / large logo
    ------------------------- */
 header, header.site-header, .site-header {
   background: var(--color-header-bg);
@@ -81,7 +80,7 @@ header, header.site-header, .site-header {
 header a { position: static !important; left: auto !important; right: auto !important; }
 
 /* -------------------------
-   Full-width nav band with centered pills (matches screenshot)
+   Full-width nav band with centered pills
    ------------------------- */
 .site-nav { width: 100%; margin: 1rem 0 0 0; padding: 0; }
 .nav-band {
@@ -89,6 +88,8 @@ header a { position: static !important; left: auto !important; right: auto !impo
   background: var(--color-nav-bg);
   padding: 12px 0;
 }
+
+/* Centered container for the nav pills */
 .nav-containers {
   max-width: var(--max-width);
   width: var(--nav-inner-width);
@@ -100,6 +101,8 @@ header a { position: static !important; left: auto !important; right: auto !impo
   padding: 8px 12px;
   border-radius: 10px;
 }
+
+/* Pill items */
 .nav-box {
   background: var(--color-nav-box);
   color: var(--color-text);
@@ -114,6 +117,10 @@ header a { position: static !important; left: auto !important; right: auto !impo
   justify-content: center;
 }
 .nav-box:hover, .nav-box:focus { background: #e6f5e6; }
+
+/* Defensive color overrides so the correct greens show even if there are other rules */
+.nav-band { background: var(--color-nav-bg) !important; }
+.nav-box { background: var(--color-nav-box) !important; color: var(--color-text) !important; }
 
 /* keep original list visually hidden but available for assistive tech */
 .nav-links {
@@ -167,9 +174,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 
 /* -------------------------
-   FEATURES / CARDS — THE "BOXES" YOU REFER TO
-   - Key: horizontal row on wide screens; wrap or stack on smaller screens
-   - Cards width chosen to match the visual density in your screenshots
+   FEATURES / CARDS — THE "BOXES"
    ------------------------- */
 .features {
   max-width: var(--max-width);
