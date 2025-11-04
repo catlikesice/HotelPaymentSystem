@@ -530,33 +530,35 @@ header > .nav-containers {
 
 /* ===========================================
    2025-11-04 Nav height alignment (no color changes)
-   - Increase visible navbar band height and ensure
-     the pills/brand fill the same height without
-     reintroducing earlier bubble styling.
+   - Ensure the nav containers share the same fixed
+     height so there is no extra green band around
+     the buttons on desktop.
 =========================================== */
 :root {
-  --nav-height: 54px;
-  --nav-band-height: 54px;
-  --nav-box-height: 54px;
-  --nav-pill-height: 54px;
+  --nav-height: 48px;
+  --nav-band-height: 48px;
+  --nav-box-height: 48px;
+  --nav-pill-height: 48px;
   --nav-box-hpad: 1.25rem;
 }
 
 .site-nav,
 header .site-nav,
 .nav-band {
-  height: var(--nav-height);
-  min-height: var(--nav-height);
-  padding: 0 !important;
   display: flex !important;
   align-items: stretch !important;
+  justify-content: center;
+  height: var(--nav-height) !important;
+  min-height: var(--nav-height) !important;
+  padding: 0 !important;
 }
 
 .site-nav .nav-inner {
-  display: flex;
+  display: flex !important;
   align-items: stretch !important;
-  min-height: var(--nav-height);
-  height: 100%;
+  min-height: var(--nav-height) !important;
+  height: 100% !important;
+  gap: var(--nav-inner-gap, 0.6rem) !important;
 }
 
 .nav-containers,
@@ -564,10 +566,10 @@ header .nav-containers,
 header > .nav-containers {
   display: flex !important;
   align-items: stretch !important;
-  min-height: var(--nav-height);
-  height: 100%;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  min-height: var(--nav-height) !important;
+  height: 100% !important;
+  padding: 0 !important;
+  gap: var(--nav-inner-gap, 0.6rem) !important;
 }
 
 .site-nav .nav-inner > *,
@@ -578,27 +580,31 @@ header > .nav-containers {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  min-height: var(--nav-height);
   height: 100% !important;
-  max-height: none !important;
+  min-height: var(--nav-height) !important;
   padding: 0 var(--nav-box-hpad) !important;
-  overflow: visible !important;
+  line-height: 1 !important;
 }
 
 @media (max-width: 700px) {
+  :root {
+    --nav-height: auto;
+  }
+
   .site-nav,
   header .site-nav,
   .nav-band {
-    height: auto;
-    min-height: 0;
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   .site-nav .nav-inner,
   .nav-containers,
   header .nav-containers,
   header > .nav-containers {
-    min-height: 0;
-    height: auto;
+    min-height: 0 !important;
+    height: auto !important;
+    gap: 0.6rem !important;
   }
 
   .site-nav .nav-inner > *,
@@ -606,7 +612,8 @@ header > .nav-containers {
   .site-nav .brand,
   .nav-box,
   .nav-containers .nav-box {
-    min-height: 0;
+    min-height: 0 !important;
     height: auto !important;
+    padding: 0.6rem 1rem !important;
   }
 }
