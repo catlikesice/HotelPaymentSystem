@@ -621,8 +621,8 @@ header > .nav-containers {
 @media (min-width: 701px) {
   .site-nav .nav-inner {
     position: relative !important;
-    justify-content: center !important;
-    gap: 4rem !important;
+      justify-content: center !important;
+      gap: 4rem !important;
   }
 
   .nav-containers,
@@ -632,8 +632,8 @@ header > .nav-containers {
     max-width: 860px !important;
     width: 100% !important;
     margin: 0 auto !important;
-    justify-content: space-evenly !important;
-    gap: 4rem !important;
+      justify-content: space-evenly !important;
+      gap: 4rem !important;
   }
 
   .nav-containers .nav-box {
@@ -641,12 +641,9 @@ header > .nav-containers {
   }
 
   .site-nav .brand {
-    position: absolute !important;
-    left: var(--gutter);
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0 !important;
-    height: auto !important;
-    line-height: 1 !important;
+      position: static !important;
+      transform: none !important;
+      margin: 0 var(--nav-box-hpad, 1.25rem) 0 0 !important;
+      flex: 0 0 auto !important;
   }
 }
