@@ -467,4 +467,60 @@ header .band-overlay, header .nav-overlay, header .nav-tint {
 
 /* End of defensive block */
 
+/* Final nav layout corrections: keep nav height tightly matched to its inner content */
+.site-nav {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.site-nav .nav-inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nav-inner-gap, 0.6rem);
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+  min-height: var(--nav-box-height, 28px);
+}
+
+.site-nav .brand {
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--nav-box-hpad, 0.7rem);
+  height: var(--nav-box-height, 28px);
+  line-height: var(--nav-box-height, 28px);
+}
+
+.site-nav .nav-containers,
+header .nav-containers,
+header > .nav-containers {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .site-nav .nav-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    padding: 0 var(--gutter);
+  }
+
+  .site-nav .brand {
+    height: auto;
+    line-height: 1.2;
+    padding: 0;
+  }
+}
+
 /* End of file */
