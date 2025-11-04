@@ -430,7 +430,7 @@ header .nav-box,
 .site-nav .nav-box,
 .nav-containers .nav-box {
   height: 28px !important;
-  line-length: 28px !important;
+  line-height: 28px !important;
   padding: 0 var(--nav-box-hpad) !important;
   box-sizing: border-box !important;
   min-width: 56px !important;
@@ -543,54 +543,70 @@ header > .nav-containers {
 }
 
 .site-nav,
-header .site-nav {
-  min-height: var(--nav-height);
+header .site-nav,
+.nav-band {
   height: var(--nav-height);
+  min-height: var(--nav-height);
   padding: 0 !important;
-  align-items: stretch !important;
   display: flex !important;
+  align-items: stretch !important;
 }
 
 .site-nav .nav-inner {
-  min-height: var(--nav-box-height);
-  height: 100%;
   display: flex;
-  align-items: center !important;
+  align-items: stretch !important;
+  min-height: var(--nav-height);
+  height: 100%;
 }
 
 .nav-containers,
 header .nav-containers,
 header > .nav-containers {
-  min-height: 100%;
+  display: flex !important;
+  align-items: stretch !important;
+  min-height: var(--nav-height);
   height: 100%;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  align-items: center !important;
-  display: flex !important;
 }
 
+.site-nav .nav-inner > *,
+.nav-containers > *,
 .site-nav .brand,
 .nav-box,
 .nav-containers .nav-box {
-  min-height: 100%;
-  height: 100% !important;
-  max-height: none !important;
-  padding: 0 var(--nav-box-hpad) !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  line-height: 1.2 !important;
+  min-height: var(--nav-height);
+  height: 100% !important;
+  max-height: none !important;
+  padding: 0 var(--nav-box-hpad) !important;
   overflow: visible !important;
 }
 
-.site-nav .nav-inner {
-    align-items: stretch !important;
-}
+@media (max-width: 700px) {
+  .site-nav,
+  header .site-nav,
+  .nav-band {
+    height: auto;
+    min-height: 0;
+  }
 
-.site-nav .nav-inner > * {
-    height: 100% !important;
-}
+  .site-nav .nav-inner,
+  .nav-containers,
+  header .nav-containers,
+  header > .nav-containers {
+    min-height: 0;
+    height: auto;
+  }
 
-.nav-containers > * {
-    height: 100% !important;
+  .site-nav .nav-inner > *,
+  .nav-containers > *,
+  .site-nav .brand,
+  .nav-box,
+  .nav-containers .nav-box {
+    min-height: 0;
+    height: auto !important;
+  }
 }
