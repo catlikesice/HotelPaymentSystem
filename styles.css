@@ -10,6 +10,7 @@
    Variables & reset
    ------------------------- */
 :root{
+  /* Existing project variables (preserved) */
   --color-header-bg: #FFF9B0;
   --color-nav-bg: #23441a;     /* navbar band green (unchanged) */
   --color-nav-box: #e5f8e5;    /* pill background (unchanged) */
@@ -17,17 +18,31 @@
   --accent: #2e7d32;
   --max-width: 1200px;
   --nav-inner-width: 70%;
-  --nav-pill-height: 34px;     /* lowered pill height to reduce nav height */
+  --nav-pill-height: 34px;     /* preserved existing fallback used in file */
   --feature-card-width: 340px;
   --gutter: 1.25rem;
   --footer-bg: #bfe6bd;        /* restored lime/green footer color */
-  
-    --nav-height: 48px;            /* reduced from 64px to match the shorter look */
-    --nav-box-height: 28px;        /* reduced from 36px to keep boxes proportionate */
-    --nav-bg-color: #2e4d25;
-    --nav-box-bg: #e5f8e5;
-    --nav-box-color: #23441a;
-    --nav-box-hpad: 12px;          /* slightly reduced horizontal padding for visual balance */
+
+  /* -------------------------------------------------------------------
+     NAV: additional fallback variables (added)
+  ------------------------------------------------------------------- */
+
+  /* Desired visual sizes (primary values to use) */
+  --nav-height: 48px;            /* overall nav band visual target */
+  --nav-band-height: 48px;
+  --nav-box-height: 28px;        /* pill / anchor visual height target */
+  --nav-pill-height: 28px;       /* also kept to override earlier 34px fallback */
+  --nav-pill-h: 28px;
+  --nav-box-h: 28px;
+
+  /* Band/padding fallbacks */
+  --nav-band-padding-vertical: 4px;
+  --nav-band-padding: 4px 0;
+  --nav-inner-gap: 0.6rem;
+
+  /* Pill horizontal padding fallbacks */
+  --nav-box-hpad: 0.7rem;
+  --nav-pill-hpad: 0.7rem;
 }
 * { box-sizing: border-box; }
 html,body { height: 100%; }
@@ -370,50 +385,27 @@ header, header.site-header, .site-nav, .nav-band {
   max-height: none !important;
 }
 
-/* ===== NAV: Force shorter band & pill sizes (append at end of file) =====
-   This block:
-   1) Defines many fallback variable names so any rule referencing a variable
-      will pick up the 28px pill / 48px band intention.
-   2) Applies final !important overrides on the same selectors the site uses,
-      ensuring the visual height is reduced even if earlier rules used literals
-      or !important.
-   Place this at the very end of styles.css and hard-refresh.
-*/
-
-/* 1) Fallback variable definitions (cover all likely names) */
+/* ===== NAV: Force shorter band & pill sizes (append at end of file) ===== */
 :root {
-  /* your desired visual sizes */
   --nav-height: 48px;
   --nav-band-height: 48px;
   --nav-box-height: 28px;
   --nav-pill-height: 28px;
-  --nav-pill-h: 28px;
-  --nav-box-h: 28px;
-
-  /* band/padding fallbacks */
-  --nav-band-padding-vertical: 4px;
-  --nav-band-padding: 4px 0;
-  --nav-inner-gap: 0.6rem;
-
-  /* pill horizontal padding fallback */
   --nav-box-hpad: 0.7rem;
-  --nav-pill-hpad: 0.7rem;
 }
 
-/* 2) Strong selector overrides (last in file, use !important) */
 .nav-band,
 .site-nav,
 header .nav-band,
 header .site-nav,
 header > .nav-band,
 header > .site-nav {
-  padding: 4px 0 !important;           /* thinner green band */
+  padding: 4px 0 !important;
   height: auto !important;
   min-height: 0 !important;
   box-sizing: border-box !important;
 }
 
-/* keep the centered container tight to the band */
 .nav-containers,
 header .nav-containers,
 header > .nav-containers {
@@ -424,7 +416,6 @@ header > .nav-containers {
   box-sizing: border-box !important;
 }
 
-/* Force the visible pill height and centering */
 .nav-box,
 header .nav-box,
 .site-nav .nav-box,
@@ -438,22 +429,11 @@ header .nav-box,
   overflow: hidden !important;
 }
 
-/* cover variants where scripts or other CSS add inline style attributes */
-header [style*="height"],
-.site-nav [style*="height"],
-.nav-band [style*="height"] {
-  min-height: 0 !important;
-  max-height: none !important;
-}
-
-/* 3) Optional: slightly reduce header vertical padding if nav still feels tall in context.
-   Apply only if you want header a bit tighter. */
 header, header.site-header {
   padding-top: 1.75rem !important;
   padding-bottom: 0.35rem !important;
 }
 
-/* 4) Safety: remove interfering pseudo-elements on nav that could add visual height */
 .nav-band::before, .nav-band::after,
 .site-nav::before, .site-nav::after,
 header .band-overlay, header .nav-overlay, header .nav-tint {
@@ -464,7 +444,3 @@ header .band-overlay, header .nav-overlay, header .nav-tint {
   margin: 0 !important;
   padding: 0 !important;
 }
-
-/* End of defensive block */
-
-/* End of file */
