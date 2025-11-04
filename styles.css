@@ -21,6 +21,13 @@
   --feature-card-width: 340px;
   --gutter: 1.25rem;
   --footer-bg: #bfe6bd;        /* restored lime/green footer color */
+  
+    --nav-height: 48px;            /* reduced from 64px to match the shorter look */
+    --nav-box-height: 28px;        /* reduced from 36px to keep boxes proportionate */
+    --nav-bg-color: #2e4d25;
+    --nav-box-bg: #e5f8e5;
+    --nav-box-color: #23441a;
+    --nav-box-hpad: 12px;          /* slightly reduced horizontal padding for visual balance */
 }
 * { box-sizing: border-box; }
 html,body { height: 100%; }
