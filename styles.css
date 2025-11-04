@@ -620,6 +620,8 @@ header > .nav-containers {
 
 @media (min-width: 701px) {
   .site-nav .nav-inner {
+    position: relative !important;
+    justify-content: center !important;
     gap: 4rem !important;
   }
 
@@ -636,5 +638,15 @@ header > .nav-containers {
 
   .nav-containers .nav-box {
     flex: 0 0 auto !important;
+  }
+
+  .site-nav .brand {
+    position: absolute !important;
+    left: var(--gutter);
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 !important;
+    height: auto !important;
+    line-height: 1 !important;
   }
 }
