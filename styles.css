@@ -620,7 +620,7 @@ header > .nav-containers {
 
 @media (min-width: 701px) {
   .site-nav .nav-inner {
-      gap: 2.5rem !important;
+    gap: 4rem !important;
   }
 
   .nav-containers,
@@ -631,7 +631,7 @@ header > .nav-containers {
     width: 100% !important;
     margin: 0 auto !important;
     justify-content: space-evenly !important;
-      gap: 2.5rem !important;
+    gap: 4rem !important;
   }
 
   .nav-containers .nav-box {
