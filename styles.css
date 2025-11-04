@@ -524,3 +524,52 @@ header > .nav-containers {
 }
 
 /* End of file */
+
+/* ===========================================
+   2025-11-04 Nav height alignment (no color changes)
+   - Increase visible navbar band height and ensure
+     the pills/brand fill the same height without
+     reintroducing earlier bubble styling.
+=========================================== */
+:root {
+  --nav-height: 68px;
+  --nav-band-height: 68px;
+  --nav-box-height: 44px;
+  --nav-pill-height: 44px;
+  --nav-box-hpad: 1.25rem;
+}
+
+.site-nav,
+header .site-nav {
+  min-height: var(--nav-height);
+  padding: 12px 0 !important;
+  align-items: center !important;
+}
+
+.site-nav .nav-inner {
+  min-height: var(--nav-box-height);
+  align-items: center !important;
+}
+
+.nav-containers,
+header .nav-containers,
+header > .nav-containers {
+  min-height: var(--nav-box-height);
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  align-items: center !important;
+}
+
+.site-nav .brand,
+.nav-box,
+.nav-containers .nav-box {
+  min-height: var(--nav-box-height);
+  height: auto !important;
+  max-height: none !important;
+  padding: 0 var(--nav-box-hpad) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1.2 !important;
+  overflow: visible !important;
+}
