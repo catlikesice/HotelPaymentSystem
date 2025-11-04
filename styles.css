@@ -579,3 +579,15 @@ header > .nav-containers {
   line-height: 1.2 !important;
   overflow: visible !important;
 }
+
+.site-nav .nav-inner {
+    align-items: stretch !important;
+}
+
+.site-nav .nav-inner > * {
+    height: 100% !important;
+}
+
+.nav-containers > * {
+    height: 100% !important;
+}
