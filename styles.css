@@ -247,7 +247,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
   /* small screens: stack vertically */
   .nav-containers { width: 95%; flex-direction: column; gap: .6rem; padding: 8px; }
   .nav-box { width: 100%; text-align: center; height: auto; padding: .6rem 1rem; }
-  .features { flex-direction: column; align-items: stretch; padding: 0 var(--gutter); gap: 1rem; }
+  .features { flex-direction: column; alignments: stretch; padding: 0 var(--gutter); gap: 1rem; }
   .feature { width: 100%; }
   .logo-header img { max-width: 80%; max-height: 140px; }
 }
@@ -439,9 +439,9 @@ header .nav-box,
 }
 
 /* cover variants where scripts or other CSS add inline style attributes */
-header [style*="height"],
-.site-nav [style*="height"],
-.nav-band [style*="height"] {
+header [style*=\"height\"],
+.site-nav [style*=\"height\"],
+.nav-band [style*=\"height\"] {
   min-height: 0 !important;
   max-height: none !important;
 }
@@ -532,39 +532,45 @@ header > .nav-containers {
      reintroducing earlier bubble styling.
 =========================================== */
 :root {
-  --nav-height: 68px;
-  --nav-band-height: 68px;
-  --nav-box-height: 44px;
-  --nav-pill-height: 44px;
+  --nav-height: 54px;
+  --nav-band-height: 54px;
+  --nav-box-height: 54px;
+  --nav-pill-height: 54px;
   --nav-box-hpad: 1.25rem;
 }
 
 .site-nav,
 header .site-nav {
   min-height: var(--nav-height);
-  padding: 12px 0 !important;
-  align-items: center !important;
+  height: var(--nav-height);
+  padding: 0 !important;
+  align-items: stretch !important;
+  display: flex !important;
 }
 
 .site-nav .nav-inner {
   min-height: var(--nav-box-height);
+  height: 100%;
+  display: flex;
   align-items: center !important;
 }
 
 .nav-containers,
 header .nav-containers,
 header > .nav-containers {
-  min-height: var(--nav-box-height);
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+  min-height: 100%;
+  height: 100%;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
   align-items: center !important;
+  display: flex !important;
 }
 
 .site-nav .brand,
 .nav-box,
 .nav-containers .nav-box {
-  min-height: var(--nav-box-height);
-  height: auto !important;
+  min-height: 100%;
+  height: 100% !important;
   max-height: none !important;
   padding: 0 var(--nav-box-hpad) !important;
   display: inline-flex !important;
