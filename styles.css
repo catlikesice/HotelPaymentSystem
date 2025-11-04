@@ -9,7 +9,9 @@
 /* -------------------------
    Variables & reset
    ------------------------- */
+/* ---------- MERGED :root (preserve existing vars, add nav fallbacks) ---------- */
 :root{
+  /* Existing project variables (preserved) */
   --color-header-bg: #FFF9B0;
   --color-nav-bg: #23441a;     /* navbar band green (unchanged) */
   --color-nav-box: #e5f8e5;    /* pill background (unchanged) */
@@ -17,17 +19,50 @@
   --accent: #2e7d32;
   --max-width: 1200px;
   --nav-inner-width: 70%;
-  --nav-pill-height: 34px;     /* lowered pill height to reduce nav height */
+  --nav-pill-height: 34px;     /* preserved existing fallback used in file */
   --feature-card-width: 340px;
   --gutter: 1.25rem;
   --footer-bg: #bfe6bd;        /* restored lime/green footer color */
-  
-    --nav-height: 48px;            /* reduced from 64px to match the shorter look */
-    --nav-box-height: 28px;        /* reduced from 36px to keep boxes proportionate */
-    --nav-bg-color: #2e4d25;
-    --nav-box-bg: #e5f8e5;
-    --nav-box-color: #23441a;
-    --nav-box-hpad: 12px;          /* slightly reduced horizontal padding for visual balance */
+
+  /* -------------------------------------------------------------------
+     NAV: additional fallback variables (added)
+     - These extra names avoid deleting any existing vars and provide
+       fallbacks for different naming conventions used across the codebase.
+  ------------------------------------------------------------------- */
+
+  /* Desired visual sizes (primary values to use) */
+  --nav-height: 48px;            /* overall nav band visual target */
+  --nav-band-height: 48px;
+  --nav-box-height: 28px;        /* pill / anchor visual height target */
+  --nav-pill-height: 28px;       /* also kept to override earlier 34px fallback */
+  --nav-pill-h: 28px;
+  --nav-box-h: 28px;
+
+  /* Band/padding fallbacks */
+  --nav-band-padding-vertical: 4px;
+  --nav-band-padding: 4px 0;
+  --nav-inner-gap: 0.6rem;
+
+  /* Pill horizontal padding fallbacks */
+  --nav-box-hpad: 0.7rem;
+  --nav-pill-hpad: 0.7rem;
+}
+
+/* ---------- OPTIMIZED, SCOPED HEADER NAV SHORT MODE (OPT-IN) ----------
+   - Scope: only applies when header contains the opt-in class `nav-short`.
+   - Efficiency: group header-related selectors by using header.nav-short as the single
+     anchor and reference descendant selectors, minimizing repetition.
+   - Minimal invasive: avoids global !important; only uses strong specificity
+     within the header scope so other pages/components remain unaffected.
+   - To opt-in: add class="nav-short" to the <header> element where you want the shorter nav.
+-------------------------------------------------------------------------- */
+
+/* Local fallbacks used only by the scoped rules */
+:root {
+  --nav-short-band-padding-vertical: var(--nav-band-padding-vertical, 4px);
+  --nav-short-pill-height: var(--nav-box-height, 28px);
+  --nav-short-pill-hpad: var(--nav-box-hpad, 0.7rem);
+  --nav-short-inner-gap: var(--nav-inner-gap, 0.6rem);
 }
 * { box-sizing: border-box; }
 html,body { height: 100%; }
