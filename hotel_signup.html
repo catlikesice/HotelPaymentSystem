@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hotel Payment Processor — Hotel Chain Signup</title>
+  <meta name="description" content="Signup form for hotel chains to register with the Hotel Payment Processor" />
+  <link rel="stylesheet" href="styles.css">
+  <!-- Minimal page-scoped adjustments so the page layout stays consistent with the repository styling -->
+  <style>
+    .hotel-signup.container { max-width: 980px; margin: 28px auto; padding: 22px; background:transparent; }
+    .hotel-signup h1{ margin-top:0; }
+    .hotel-signup .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:14px; align-items:start; }
+    .hotel-signup .form-group { margin-bottom:12px; }
+    .hotel-signup .full-width { grid-column: 1 / -1; }
+    .hotel-signup .file-list { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .hotel-signup .file-item { padding:6px 8px; background:#f1f6fb; border-radius:8px; border:1px dashed #d9e9ff; font-size:13px; }
+    .logo-header img { max-height:44px; display:block; }
+    .site-nav { display:flex; gap:16px; align-items:center; }
+    .site-nav a { color:inherit; text-decoration:none; padding:8px 10px; border-radius:6px; }
+    .site-nav a:hover { background:rgba(11,116,222,0.06); }
+    .header-bar { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid rgba(0,0,0,0.05); background:transparent; }
+    @media (max-width:720px){ .hotel-signup .two-col{ grid-template-columns:1fr } .site-nav{display:none} }
+  </style>
+</head>
+<body>
+  <!-- Header with logo, navigation and language selector — matches pattern used across the repo -->
+  <header class="header-bar" role="banner">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="logo-header" aria-hidden="false">
+        <!-- Keep the same logo file name used in repo; replace path if the logo lives elsewhere -->
+        <a href="index.html" aria-label="Home">
+          <img src="Baltic%20Comfort%20LTD%20logo.png" alt="Baltic Comfort Logo">
+        </a>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="selectlocation.html">Book</a>
+        <a href="aboutlatvia.html">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select" class="sr-only">Language</label>
+        <div class="language-switcher__select">
+          <select id="lang-select" aria-label="Select language">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="lv">Latviešu</option>
+            <option value="et">Eesti</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="auth-links" aria-hidden="true" style="opacity:0.9;font-size:14px">
+        <a href="signin.html">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="hotel-signup container" role="main" aria-labelledby="signup-title">
+    <h1 id="signup-title">Hotel Chain Signup</h1>
+    <p class="lead">Register your hotel chain to connect to the Hotel Payment Processor. We'll review and contact you within 3 business days.</p>
+
+    <form id="signupForm" method="post" action="/api/hotel-chains/signup" enctype="multipart/form-data" novalidate>
+      <fieldset>
+        <legend>Company details</legend>
+        <div class="two-col">
+          <div class="form-group">
+            <label for="chainName">Chain / Company Name <span class="required" aria-hidden="true">*</span></label>
+            <input id="chainName" name="chainName" type="text" required autocomplete="organization" placeholder="e.g., Blue Harbor Hotels" />
+            <small class="helper">Legal business name.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="url" placeholder="https://www.examplehotels.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="founded">Year Founded</label>
+            <input id="founded" name="founded" type="text" inputmode="numeric" maxlength="4" placeholder="YYYY" />
+          </div>
+
+          <div class="form-group">
+            <label for="locations">Number of Locations</label>
+            <input id="locations" name="locations" type="text" inputmode="numeric" placeholder="e.g., 45" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Headquarter address</legend>
+        <div class="two-col">
+          <div class="form-group">
+            <label for="street">Street address</label>
+            <input id="street" name="street" type="text" placeholder="123 Main St" />
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" placeholder="City" />
+          </div>
+
+          <div class="form-group">
+            <label for="state">State / Province</label>
+            <input id="state" name="state" type="text" placeholder="State or province" />
+          </div>
+
+          <div class="form-group">
+            <label for="postal">Postal / ZIP</label>
+            <input id="postal" name="postal" type="text" inputmode="numeric" placeholder="Postal code" />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="country">Country</label>
+            <select id="country" name="country" aria-label="Country">
+              <option value="">Select country</option>
+              <option value="LA">Latvia</option>
+              <option value="EST">Estonia</option>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Primary contacts</legend>
+        <div class="two-col">
+          <div class="form-group">
+            <label for="techName">Technical Contact Name <span class="required" aria-hidden="true">*</span></label>
+            <input id="techName" name="techName" type="text" required placeholder="Name" />
+          </div>
+
+          <div class="form-group">
+            <label for="techEmail">Technical Contact Email <span class="required" aria-hidden="true">*</span></label>
+            <input id="techEmail" name="techEmail" type="email" required placeholder="email@company.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="techPhone">Technical Contact Phone</label>
+            <input id="techPhone" name="techPhone" type="tel" placeholder="+1 555 555 5555" />
+          </div>
+
+          <div class="form-group">
+            <label for="bizName">Business Contact Name</label>
+            <input id="bizName" name="bizName" type="text" placeholder="Billing or commercial contact" />
+          </div>
+
+          <div class="form-group">
+            <label for="bizEmail">Business Contact Email</label>
+            <input id="bizEmail" name="bizEmail" type="email" placeholder="billing@company.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="bizPhone">Business Contact Phone</label>
+            <input id="bizPhone" name="bizPhone" type="tel" placeholder="+1 555 555 1234" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Business & Compliance</legend>
+        <div class="two-col">
+          <div class="form-group">
+            <label for="businessType">Business Type</label>
+            <select id="businessType" name="businessType">
+              <option value="">Select business type</option>
+              <option value="private">Private company</option>
+              <option value="public">Public company</option>
+              <option value="franchise">Franchise</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="taxId">Tax / Business ID</label>
+            <input id="taxId" name="taxId" type="text" placeholder="EIN, VAT, etc." />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="integration">Current PMS / Booking Engine / Gateway</label>
+            <input id="integration" name="integration" type="text" placeholder="e.g., Opera PMS, Cloudbeds, Stripe" />
+            <small class="helper">List any PMS or payment gateways you currently use.</small>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="notes">Notes / Additional info</label>
+            <textarea id="notes" name="notes" placeholder="Integration requirements, expected transaction volume, regions of operation"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Documents (optional but recommended)</legend>
+        <div class="form-group full-width">
+          <label for="docs">Upload documents (certificate of incorporation, W-9, compliance docs)</label>
+          <input id="docs" name="docs" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" />
+          <div id="fileList" class="file-list" aria-live="polite"></div>
+          <small class="helper">Accepted: PDF, JPG, PNG, DOC. Max 10MB per file.</small>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <label>
+          <input id="terms" name="terms" type="checkbox" required />
+          I agree to the <a href="/terms" target="_blank" rel="noopener">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.
+        </label>
+      </div>
+
+      <div style="position:absolute;left:-9999px;top:auto;overflow:hidden" aria-hidden="true">
+        <label>Leave this field empty<input name="website_check" type="text" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <div class="form-actions" style="display:flex;gap:12px;align-items:center;margin-top:12px">
+        <button class="btn primary" type="submit">Request Access</button>
+        <button class="btn secondary" type="reset">Reset</button>
+        <p class="note" style="margin-left:auto">After submitting, we'll send a confirmation email and next steps for integration.</p>
+      </div>
+
+      <noscript>
+        <div class="no-js-warning">JavaScript is disabled — the form will still submit but inline validation won't be available.</div>
+      </noscript>
+    </form>
+  </main>
+
+  <footer style="padding:18px;text-align:center;border-top:1px solid rgba(0,0,0,0.04);margin-top:28px">
+    <small>&copy; Baltic Comfort — Hotel Payment Processor</small>
+  </footer>
+
+  <script>
+    (function(){
+      const form = document.getElementById('signupForm');
+      const fileInput = document.getElementById('docs');
+      const fileList = document.getElementById('fileList');
+
+      fileInput.addEventListener('change', () => {
+        fileList.innerHTML = '';
+        Array.from(fileInput.files).forEach(f => {
+          const el = document.createElement('div');
+          el.className = 'file-item';
+          const sizeKB = Math.round(f.size/1024);
+          el.textContent = f.name + ' (' + sizeKB + ' KB)';
+          fileList.appendChild(el);
+        });
+      });
+
+      form.addEventListener('submit', (e) => {
+        const required = form.querySelectorAll('[required]');
+        let firstInvalid = null;
+        Array.from(required).forEach(field => {
+          const valid = field.checkValidity();
+          if (!valid && !firstInvalid) firstInvalid = field;
+        });
+        if (firstInvalid) {
+          e.preventDefault();
+          firstInvalid.focus();
+        } else {
+          const btn = form.querySelector('button[type="submit"]');
+          if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+        }
+      });
+
+      ['techPhone','bizPhone','postal','locations','founded'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('blur', () => { el.value = el.value.trim(); });
+      });
+
+      // Language selector hook used across the repo; sets document language and can be adapted to navigate to localized pages.
+      const langSelect = document.getElementById('lang-select');
+      if (langSelect) {
+        langSelect.addEventListener('change', (e) => {
+          const val = e.target.value;
+          document.documentElement.lang = val;
+          // If your site uses folder-based locales (e.g., /lv/index.html), uncomment and adapt:
+          // window.location.href = val === 'en' ? '/index.html' : '/' + val + '/index.html';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
