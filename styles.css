@@ -647,3 +647,9 @@ header > .nav-containers {
       flex: 0 0 auto !important;
   }
 }
+
+@media (min-width: 701px) {
+  .site-nav .nav-containers {
+    transform: translateX(-25%) !important;
+  }
+}
