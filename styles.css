@@ -16,18 +16,19 @@
   --color-text: #23421a;
   --accent: #2e7d32;
   --max-width: 1200px;
-  --nav-inner-width: 70%;
-  --nav-pill-height: 34px;     /* lowered pill height to reduce nav height */
+  --nav-inner-width: 78%;
+  --nav-pill-height: 44px;     /* updated pill height for taller nav */
   --feature-card-width: 340px;
   --gutter: 1.25rem;
   --footer-bg: #bfe6bd;        /* restored lime/green footer color */
   
-    --nav-height: 48px;            /* reduced from 64px to match the shorter look */
-    --nav-box-height: 28px;        /* reduced from 36px to keep boxes proportionate */
+    --nav-height: 68px;            /* increased overall nav height */
+    --nav-box-height: 44px;        /* increased pill/container height */
     --nav-bg-color: #2e4d25;
     --nav-box-bg: #e5f8e5;
     --nav-box-color: #23441a;
-    --nav-box-hpad: 12px;          /* slightly reduced horizontal padding for visual balance */
+    --nav-box-hpad: 1.25rem;       /* wider horizontal padding for larger pills */
+    --nav-inner-gap: 1.25rem;
 }
 * { box-sizing: border-box; }
 html,body { height: 100%; }
@@ -94,34 +95,39 @@ header a { position: static !important; left: auto !important; right: auto !impo
    ------------------------- */
 .site-nav { width: 100%; margin: 0; padding: 0; }
 
-/* NAV BAND: reduced vertical padding to lower visible band height */
+/* NAV BAND: softened band with extra vertical breathing room */
 .nav-band {
   width: 100%;
   background: var(--color-nav-bg);
-  padding: 6px 0;               /* reduced to shrink the green band */
+  padding: 12px 0;               /* increased vertical padding for taller band */
   box-sizing: border-box;
 }
 
-/* Centered container for the nav pills */
+/* Elevated container for the nav pills */
 .nav-containers {
   max-width: var(--max-width);
-  width: var(--nav-inner-width);
+  width: auto;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  flex: 1 1 auto;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 6px 12px;            /* slightly reduced internal vertical padding */
-  border-radius: 8px;
+  gap: var(--nav-inner-gap, 1.25rem);
+  padding: 10px 18px;            /* extra breathing room inside the nav */
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  min-height: var(--nav-box-height);
 }
 
-/* Pill items: reduced height/padding to fit the shorter band */
+/* Pill items: sized to match the taller band */
 .nav-box {
   background: var(--color-nav-box);
   color: var(--color-text);
-  padding: 0.35rem 0.9rem;      /* tightened padding */
+  padding: 0 1.25rem;           /* balanced padding for taller pills */
   border-radius: 10px;
   font-weight: 700;
+  font-size: 0.95rem;
   text-decoration: none;
   height: var(--nav-pill-height);/* uses lowered pill height variable */
   min-width: 120px;
@@ -143,6 +149,64 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 /* invisible script anchor — hide (not used visually) */
 .nav-link-book { display: none !important; }
+
+/* Language selector placed inside the navbar */
+.nav-language {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--color-nav-box);
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: 0 1.1rem 0 1.25rem;
+  height: var(--nav-box-height);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04) inset;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-language-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.nav-language-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-language-control select {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0 1.8rem 0 0.4rem;
+  height: 100%;
+  line-height: var(--nav-box-height, 44px);
+  cursor: pointer;
+}
+
+.nav-language-control select:focus {
+  outline: none;
+}
+
+.nav-language-control::after {
+  content: "";
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid var(--color-text);
+  border-bottom: 2px solid var(--color-text);
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}
 
 /* -------------------------
    Language strip (beneath nav band)
@@ -233,13 +297,20 @@ header a { position: static !important; left: auto !important; right: auto !impo
    Responsive adjustments
    ------------------------- */
 @media (max-width: 1200px) {
-  .nav-containers { width: 85%; padding: 6px 10px; }
+  .nav-containers {
+    width: 100%;
+    padding: 10px 16px;
+  }
   .logo-header img { max-width: 60%; max-height: 180px; }
   .features { gap: 1.5rem; }
   .feature { width: 300px; }
 }
 @media (max-width: 1024px) {
-  .nav-containers { width: 92%; }
+  .nav-containers {
+    width: 100%;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
   .features { flex-wrap: wrap; gap: 1.25rem; justify-content: center; }
   .feature { width: 300px; }
 }
@@ -322,7 +393,7 @@ header > .site-nav {
   background-image: none !important; /* remove gradients/images */
   box-shadow: none !important;       /* remove tinting shadows */
   min-height: 0 !important;
-  padding: 6px 0 !important;         /* desired vertical padding */
+  padding: 12px 0 !important;        /* desired vertical padding */
   height: auto !important;
 }
 
@@ -344,17 +415,17 @@ header .band-overlay {
 
 /* Centered nav container: keep internal spacing constrained */
 .nav-containers {
-  padding: 6px 12px !important; /* matches .nav-band padding so pills are centered */
-  min-height: 0 !important;
+  padding: 10px 18px !important; /* matches taller band padding so pills are centered */
+  min-height: var(--nav-box-height, 44px) !important;
 }
 
-/* Pills: force size so they fit inside the shorter band */
+/* Pills: enforce sizing so they fill the taller band */
 .nav-box {
   background: #e5f8e5 !important; /* pale pill bg from screenshot */
   color: var(--color-text) !important;
-  height: 34px !important;
-  line-height: 34px !important;
-  padding: 0 0.9rem !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  padding: 0 1.25rem !important;
   box-sizing: border-box !important;
 }
 
@@ -370,34 +441,34 @@ header, header.site-header, .site-nav, .nav-band {
   max-height: none !important;
 }
 
-/* ===== NAV: Force shorter band & pill sizes (append at end of file) =====
+/* ===== NAV: Force taller band & pill sizes (append at end of file) =====
    This block:
-   1) Defines many fallback variable names so any rule referencing a variable
-      will pick up the 28px pill / 48px band intention.
-   2) Applies final !important overrides on the same selectors the site uses,
-      ensuring the visual height is reduced even if earlier rules used literals
-      or !important.
+     1) Defines many fallback variable names so any rule referencing a variable
+        will pick up the 44px pill / 68px band intention.
+    2) Applies final !important overrides on the same selectors the site uses,
+       ensuring the visual height stays consistent even if earlier rules used literals
+       or !important.
    Place this at the very end of styles.css and hard-refresh.
 */
 
 /* 1) Fallback variable definitions (cover all likely names) */
 :root {
   /* your desired visual sizes */
-  --nav-height: 48px;
-  --nav-band-height: 48px;
-  --nav-box-height: 28px;
-  --nav-pill-height: 28px;
-  --nav-pill-h: 28px;
-  --nav-box-h: 28px;
+  --nav-height: 68px;
+  --nav-band-height: 68px;
+  --nav-box-height: 44px;
+  --nav-pill-height: 44px;
+  --nav-pill-h: 44px;
+  --nav-box-h: 44px;
 
   /* band/padding fallbacks */
-  --nav-band-padding-vertical: 4px;
-  --nav-band-padding: 4px 0;
-  --nav-inner-gap: 0.6rem;
+  --nav-band-padding-vertical: 12px;
+  --nav-band-padding: 12px 0;
+  --nav-inner-gap: 1.25rem;
 
   /* pill horizontal padding fallback */
-  --nav-box-hpad: 0.7rem;
-  --nav-pill-hpad: 0.7rem;
+  --nav-box-hpad: 1.25rem;
+  --nav-pill-hpad: 1.25rem;
 }
 
 /* 2) Strong selector overrides (last in file, use !important) */
@@ -407,9 +478,9 @@ header .nav-band,
 header .site-nav,
 header > .nav-band,
 header > .site-nav {
-  padding: 4px 0 !important;           /* thinner green band */
+  padding: 12px 0 !important;          /* taller green band */
   height: auto !important;
-  min-height: 0 !important;
+  min-height: var(--nav-band-height, 68px) !important;
   box-sizing: border-box !important;
 }
 
@@ -417,8 +488,8 @@ header > .site-nav {
 .nav-containers,
 header .nav-containers,
 header > .nav-containers {
-  padding-top: 4px !important;
-  padding-bottom: 4px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
   gap: var(--nav-inner-gap) !important;
   align-items: center !important;
   box-sizing: border-box !important;
@@ -429,13 +500,12 @@ header > .nav-containers {
 header .nav-box,
 .site-nav .nav-box,
 .nav-containers .nav-box {
-  height: 28px !important;
-  line-height: 28px !important;
+  height: 44px !important;
+  line-height: 44px !important;
   padding: 0 var(--nav-box-hpad) !important;
   box-sizing: border-box !important;
-  min-width: 56px !important;
-  max-height: 28px !important;
-  overflow: hidden !important;
+  min-width: 120px !important;
+  max-height: 44px !important;
 }
 
 /* cover variants where scripts or other CSS add inline style attributes */
@@ -471,7 +541,7 @@ header .band-overlay, header .nav-overlay, header .nav-tint {
 .site-nav {
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
@@ -483,12 +553,12 @@ header .band-overlay, header .nav-overlay, header .nav-tint {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--nav-inner-gap, 0.6rem);
+  column-gap: 1.5rem;
+  row-gap: 0.8rem;
   flex-wrap: wrap;
-  row-gap: 0.4rem;
-  padding: 0 var(--gutter);
+  padding: 0 clamp(1rem, 3vw, var(--gutter));
   box-sizing: border-box;
-  min-height: var(--nav-box-height, 28px);
+  min-height: var(--nav-height, 68px);
 }
 
 .site-nav .brand {
@@ -496,30 +566,61 @@ header .band-overlay, header .nav-overlay, header .nav-tint {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 var(--nav-box-hpad, 0.7rem);
-  height: var(--nav-box-height, 28px);
-  line-height: var(--nav-box-height, 28px);
+  padding: 0 var(--nav-box-hpad, 1.25rem);
+  height: var(--nav-box-height, 44px);
+  line-height: 1;
+  border-radius: 999px;
+  background: rgba(229, 248, 229, 0.9);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04) inset;
 }
 
 .site-nav .nav-containers,
 header .nav-containers,
 header > .nav-containers {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
 
 @media (max-width: 700px) {
   .site-nav .nav-inner {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.6rem;
-    padding: 0 var(--gutter);
+    gap: 0.75rem;
+    padding: 0 clamp(0.75rem, 4vw, var(--gutter));
   }
 
   .site-nav .brand {
+    width: 100%;
+    justify-content: center;
     height: auto;
+    min-height: var(--nav-box-height, 44px);
+    padding: 0.75rem;
     line-height: 1.2;
-    padding: 0;
+  }
+
+  .nav-containers {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .nav-box {
+    width: 100%;
+    justify-content: center;
+    height: auto;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .nav-language {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-language-control select {
+    width: 100%;
   }
 }
 
