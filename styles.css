@@ -489,6 +489,8 @@ header .band-overlay, header .nav-overlay, header .nav-tint {
   padding: 0 var(--gutter);
   box-sizing: border-box;
   min-height: var(--nav-box-height, 28px);
+  align-items: stretch !important;
+  height: 100% !important;
 }
 
 .site-nav .brand {
@@ -506,6 +508,7 @@ header .nav-containers,
 header > .nav-containers {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+  
 }
 
 @media (max-width: 700px) {
