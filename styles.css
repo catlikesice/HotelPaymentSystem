@@ -683,7 +683,15 @@ header > .nav-containers {
   --nav-band-height: 48px;
   --nav-box-height: 48px;
   --nav-pill-height: 48px;
-  --nav-box-hpad: 1.25rem;
+    --nav-box-hpad: 1.35rem;
+    --nav-pill-bg: linear-gradient(145deg, #fefef8 0%, #e5f6e4 100%);
+    --nav-pill-bg-hover: linear-gradient(145deg, #ffffff 0%, #ddf1dc 100%);
+    --nav-pill-bg-active: linear-gradient(145deg, #edf8ec 0%, #d4ebd3 100%);
+    --nav-pill-border: rgba(35, 68, 26, 0.16);
+    --nav-pill-border-strong: rgba(35, 68, 26, 0.32);
+    --nav-pill-shadow: 0 16px 30px -18px rgba(18, 41, 13, 0.58);
+    --nav-pill-shadow-strong: 0 20px 36px -16px rgba(18, 41, 13, 0.6);
+    --nav-pill-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.82);
 }
 
 .site-nav,
@@ -730,6 +738,86 @@ header > .nav-containers {
   line-height: 1 !important;
 }
 
+  .nav-containers {
+    position: relative !important;
+    border-radius: 999px !important;
+    padding: 0.35rem 0.5rem !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow:
+      0 20px 38px -24px rgba(12, 28, 8, 0.7) !important,
+      inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    gap: 2.8rem !important;
+  }
+
+  .nav-containers > * {
+    border-radius: 999px !important;
+  }
+
+  .site-nav .brand,
+  .nav-box,
+  .nav-containers .nav-box {
+    background: var(--nav-pill-bg) !important;
+    border-radius: 999px !important;
+    border: 1px solid var(--nav-pill-border) !important;
+    box-shadow:
+      var(--nav-pill-shadow) !important,
+      var(--nav-pill-shadow-inset) !important;
+    color: var(--color-text) !important;
+    font-weight: 700 !important;
+    transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease, border-color 200ms ease !important;
+  }
+
+  .nav-box:hover,
+  .nav-box:focus-visible,
+  .site-nav .brand:hover,
+  .site-nav .brand:focus-visible {
+    background: var(--nav-pill-bg-hover) !important;
+    border-color: var(--nav-pill-border-strong) !important;
+    box-shadow:
+      var(--nav-pill-shadow-strong) !important,
+      var(--nav-pill-shadow-inset) !important;
+    transform: translateY(-2px);
+  }
+
+  .nav-box:active,
+  .site-nav .brand:active {
+    transform: translateY(0);
+    background: var(--nav-pill-bg-active) !important;
+    border-color: var(--nav-pill-border) !important;
+    box-shadow:
+      0 10px 24px -14px rgba(12, 28, 8, 0.62) !important,
+      inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .nav-dropdown {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .nav-dropdown-menu {
+    border-radius: 18px !important;
+    border: 1px solid var(--nav-pill-border) !important;
+    background: linear-gradient(160deg, #ffffff 0%, #e6f4e4 100%) !important;
+    box-shadow: 0 24px 46px -20px rgba(12, 28, 8, 0.55) !important;
+    padding: 0.45rem 0 !important;
+  }
+
+  .nav-dropdown-menu a {
+    border-radius: 12px !important;
+    margin: 0.1rem 0.35rem !important;
+    transition: background 180ms ease, transform 180ms ease !important;
+  }
+
+  .nav-dropdown-menu a:hover,
+  .nav-dropdown-menu a:focus-visible {
+    background: rgba(35, 68, 26, 0.08) !important;
+    transform: translateX(2px);
+  }
+
 @media (max-width: 700px) {
   :root {
     --nav-height: auto;
@@ -748,7 +836,12 @@ header > .nav-containers {
   header > .nav-containers {
     min-height: 0 !important;
     height: auto !important;
-    gap: 0.6rem !important;
+      gap: 0.6rem !important;
+      border-radius: 20px !important;
+      padding: 0.6rem !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      backdrop-filter: blur(4px) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
   }
 
   .site-nav .nav-inner > *,
@@ -758,7 +851,10 @@ header > .nav-containers {
   .nav-containers .nav-box {
     min-height: 0 !important;
     height: auto !important;
-    padding: 0.6rem 1rem !important;
+      padding: 0.65rem 1.05rem !important;
+      box-shadow:
+        0 14px 28px -20px rgba(12, 28, 8, 0.6) !important,
+        inset 0 1px 0 rgba(255, 255, 255, 0.75) !important;
   }
 }
 
