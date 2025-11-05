@@ -208,7 +208,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 .nav-box:hover, .nav-box:focus { background: #e6f5e6; }
 
-/* Dropdown variant: keep summary styled like other nav pills */
+/* Dropdown-ready styling: ensures <details>/<summary> match nav pills */
 .nav-dropdown {
   position: relative;
   display: inline-flex;
