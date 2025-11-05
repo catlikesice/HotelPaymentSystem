@@ -216,20 +216,69 @@
     };
 
     // On language change, update all translatable elements
-    document.getElementById('lang-select').addEventListener('change', function() {
-      const lang = this.value;
-      const mapping = translations[lang] || translations['en'];
-      Object.keys(mapping).forEach(function(key) {
-        const el = document.getElementById(key);
-        if (el) {
-          if (key === "contact-email" || key === "footer-text") {
-            el.innerHTML = mapping[key];
-          } else {
-            el.textContent = mapping[key];
+      document.getElementById('lang-select').addEventListener('change', function() {
+        const lang = this.value;
+        const mapping = translations[lang] || translations['en'];
+        Object.keys(mapping).forEach(function(key) {
+          const el = document.getElementById(key);
+          if (el) {
+            if (key === "contact-email" || key === "footer-text") {
+              el.innerHTML = mapping[key];
+            } else {
+              el.textContent = mapping[key];
+            }
           }
-        }
+        });
       });
-    });
+
+      const navDropdown = document.querySelector('.nav-dropdown');
+      if (navDropdown) {
+        const summary = navDropdown.querySelector('summary');
+        const menu = navDropdown.querySelector('.nav-dropdown-menu');
+        let closeTimerId = null;
+
+        const syncAriaExpanded = () => {
+          if (summary) {
+            summary.setAttribute('aria-expanded', navDropdown.hasAttribute('open') ? 'true' : 'false');
+          }
+        };
+
+        const scheduleClose = () => {
+          if (!navDropdown.hasAttribute('open')) {
+            return;
+          }
+          if (closeTimerId) {
+            window.clearTimeout(closeTimerId);
+          }
+          closeTimerId = window.setTimeout(() => {
+            navDropdown.removeAttribute('open');
+            closeTimerId = null;
+          }, 150);
+        };
+
+        const cancelClose = () => {
+          if (closeTimerId) {
+            window.clearTimeout(closeTimerId);
+            closeTimerId = null;
+          }
+        };
+
+        navDropdown.addEventListener('toggle', syncAriaExpanded);
+        syncAriaExpanded();
+
+        if (summary) {
+          summary.addEventListener('pointerenter', cancelClose);
+          summary.addEventListener('pointerleave', scheduleClose);
+        }
+
+        if (menu) {
+          menu.addEventListener('pointerenter', cancelClose);
+          menu.addEventListener('pointerleave', scheduleClose);
+        }
+
+        navDropdown.addEventListener('pointerleave', scheduleClose);
+        navDropdown.addEventListener('pointerenter', cancelClose);
+      }
     </script>
 </body>
 </html>
