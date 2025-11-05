@@ -800,3 +800,18 @@ header > .nav-containers {
   }
 }
 
+/* =========================
+   selectlocation.html: remove outer gutters while keeping nav centered
+   ========================= */
+html.page-selectlocation .site-nav .nav-inner {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (max-width: 700px) {
+  html.page-selectlocation .site-nav .nav-inner {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
