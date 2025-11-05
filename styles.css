@@ -525,9 +525,9 @@ header [style*=\"height\"],
 /* 3) Optional: slightly reduce header vertical padding if nav still feels tall in context.
    Apply only if you want header a bit tighter. */
 header, header.site-header {
-  padding-top: 1.75rem !important;
-  padding-bottom: 0.35rem !important;
-}
+    padding-top: 1.75rem !important;
+    padding-bottom: 0 !important;
+  }
 
 /* 4) Safety: remove interfering pseudo-elements on nav that could add visual height */
 .nav-band::before, .nav-band::after,
