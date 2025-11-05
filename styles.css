@@ -58,6 +58,11 @@ header, header.site-header, .site-header {
   position: relative;
 }
 
+/* Remove the Baltic Comfort booking banner from city and hotel detail pages */
+.booking-header {
+  display: none !important;
+}
+
 /* Top-left language selector */
 .language-switcher {
   position: absolute;
