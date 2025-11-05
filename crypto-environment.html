@@ -16,7 +16,7 @@
           <a class="brand" href="index.html" title="Home">BalticComfort</a>
           <div class="nav-containers" role="menubar" aria-label="Site quick links">
             <a class="nav-box nav-box-home" href="index.html" role="menuitem" aria-label="Home">Home</a>
-            <a class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with Us">Book with Us</a>
+              <a id="book-with-us-link" class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with Us">Book with Us</a>
             <details class="nav-dropdown" role="none">
               <summary class="nav-box nav-box-center" role="menuitem" aria-haspopup="true">About the Baltic States</summary>
               <div class="nav-dropdown-menu" role="menu">
@@ -109,6 +109,33 @@
         <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
     </footer>
   </main>
-  <!-- ... page footer ... -->
-</body>
-</html>
+    <!-- ... page footer ... -->
+    <script>
+      (function ensureBookWithUsLink() {
+        const navContainers = document.querySelectorAll('.nav-containers');
+        navContainers.forEach((container) => {
+          const existingLink = container.querySelector('a[href="selectlocation.html"]');
+          if (existingLink) {
+            existingLink.id = existingLink.id || 'book-with-us-link';
+            return;
+          }
+
+          const bookLink = document.createElement('a');
+          bookLink.id = 'book-with-us-link';
+          bookLink.className = 'nav-box nav-box-left';
+          bookLink.href = 'selectlocation.html';
+          bookLink.setAttribute('role', 'menuitem');
+          bookLink.setAttribute('aria-label', 'Book with Us');
+          bookLink.textContent = 'Book with Us';
+
+          const homeLink = container.querySelector('.nav-box-home');
+          if (homeLink && homeLink.nextSibling) {
+            container.insertBefore(bookLink, homeLink.nextSibling);
+          } else {
+            container.appendChild(bookLink);
+          }
+        });
+      })();
+    </script>
+  </body>
+  </html>
