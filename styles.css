@@ -638,7 +638,13 @@ header .band-overlay, header .nav-overlay, header .nav-tint {
 }
 
 .site-nav .brand {
-  display: none !important;
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--nav-box-hpad, 0.7rem);
+  height: var(--nav-box-height, 28px);
+  line-height: var(--nav-box-height, 28px);
 }
 
 .site-nav .nav-containers,
@@ -855,15 +861,15 @@ header > .nav-containers {
 @media (min-width: 701px) {
   .site-nav .nav-inner {
     position: relative !important;
-    display: flex !important;
-    justify-content: center !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
     align-items: center !important;
-    gap: var(--nav-inner-gap, 0.6rem) !important;
+    gap: 0 !important;
   }
 
   .site-nav .nav-inner::after {
-    content: none !important;
-    display: none !important;
+    content: "" !important;
+    display: block !important;
   }
 
   .nav-containers,
@@ -874,8 +880,9 @@ header > .nav-containers {
     width: auto !important;
     max-width: none !important;
     margin: 0 auto !important;
+    justify-self: center !important;
     justify-content: center !important;
-    gap: 3rem !important;
+    gap: 3.5rem !important;
     transform: none !important;
   }
 
@@ -884,7 +891,8 @@ header > .nav-containers {
   }
 
   .site-nav .brand {
-    display: none !important;
+    justify-self: start !important;
+    margin: 0 !important;
   }
 }
 
