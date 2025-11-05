@@ -208,6 +208,61 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 .nav-box:hover, .nav-box:focus { background: #e6f5e6; }
 
+/* Dropdown-ready styling: ensures <details>/<summary> match nav pills */
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  height: 100%;
+  margin: 0;
+}
+
+.nav-dropdown > summary.nav-box {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.nav-dropdown > summary.nav-box::-webkit-details-marker,
+.nav-dropdown > summary.nav-box::marker {
+  display: none;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-nav-box);
+  border-radius: 12px;
+  border: 1px solid rgba(35, 68, 26, 0.12);
+  box-shadow: 0 10px 24px rgba(35, 68, 26, 0.18);
+  padding: 0.35rem 0;
+  display: none;
+  min-width: 190px;
+  z-index: 20;
+}
+
+.nav-dropdown[open] .nav-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.nav-dropdown-menu a {
+  padding: 0.45rem 1rem;
+  color: var(--color-text);
+  text-decoration: none;
+  display: block;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:focus {
+  background: #e6f5e6;
+}
+
 /* keep original list visually hidden but available for assistive tech */
 .nav-links {
   position: absolute !important;
@@ -326,6 +381,19 @@ header a { position: static !important; left: auto !important; right: auto !impo
   .features { flex-direction: column; alignments: stretch; padding: 0 var(--gutter); gap: 1rem; }
   .feature { width: 100%; }
   .logo-header img { max-width: 80%; max-height: 140px; }
+
+  .nav-dropdown { width: 100%; }
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    width: 100%;
+    min-width: 0;
+    margin-top: 0.35rem;
+    box-shadow: 0 6px 18px rgba(35, 68, 26, 0.12);
+  }
+  .nav-dropdown[open] .nav-dropdown-menu {
+    display: block;
+  }
 }
 
 /* small helpers to avoid regressions */
