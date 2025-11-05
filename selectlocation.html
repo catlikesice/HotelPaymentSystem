@@ -77,6 +77,14 @@
                             <option value="" id="city-placeholder">-- Select City/Town --</option>
                         </select>
                     </div>
+                    <div class="form-inline form-inline--date">
+                        <label for="checkIn" id="checkin-label"><b>Check-in date:</b></label>
+                        <input type="date" id="checkIn" name="checkIn" aria-describedby="selectedLocation">
+                    </div>
+                    <div class="form-inline form-inline--date">
+                        <label for="checkOut" id="checkout-label"><b>Check-out date:</b></label>
+                        <input type="date" id="checkOut" name="checkOut" aria-describedby="selectedLocation">
+                    </div>
                 </form>
 
                 <!-- Added: live location display inside the page so the chosen location shows immediately -->
@@ -88,136 +96,215 @@
     </main>
 
     <script>
-    // Translation data for supported languages
-    const translations = {
-      en: {
-        "booking-title": "Start Your Booking",
-        "country-label": "Select Country:",
-        "country-placeholder": "-- Select Country --",
-        "city-label": "Select City/Town:",
-        "city-placeholder": "-- Select City/Town --",
-        "continueBtn": "Continue",
-        "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
-      },
-      ru: {
-        "booking-title": "Начать бронирование",
-        "country-label": "Выберите страну:",
-        "country-placeholder": "-- Выберите страну --",
-        "city-label": "Выберите город:",
-        "city-placeholder": "-- Выберите город --",
-        "continueBtn": "Продолжить",
-        "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
-      },
-      lv: {
-        "booking-title": "Sāciet rezervāciju",
-        "country-label": "Izvēlieties valsti:",
-        "country-placeholder": "-- Izvēlieties valsti --",
-        "city-label": "Izvēlieties pilsētu:",
-        "city-placeholder": "-- Izvēlieties pilsētu --",
-        "continueBtn": "Turpināt",
-        "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
-      },
-      et: {
-        "booking-title": "Alusta broneerimist",
-        "country-label": "Vali riik:",
-        "country-placeholder": "-- Vali riik --",
-        "city-label": "Vali linn:",
-        "city-placeholder": "-- Vali linn --",
-        "continueBtn": "Jätka",
-        "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
-      },
-    };
+      // Translation data for supported languages
+      const translations = {
+        en: {
+          "booking-title": "Start Your Booking",
+          "country-label": "Select Country:",
+          "country-placeholder": "-- Select Country --",
+          "city-label": "Select City/Town:",
+          "city-placeholder": "-- Select City/Town --",
+          "checkin-label": "Check-in date:",
+          "checkout-label": "Check-out date:",
+          "continueBtn": "Continue",
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
+        },
+        ru: {
+          "booking-title": "Начать бронирование",
+          "country-label": "Выберите страну:",
+          "country-placeholder": "-- Выберите страну --",
+          "city-label": "Выберите город:",
+          "city-placeholder": "-- Выберите город --",
+          "checkin-label": "Дата заезда:",
+          "checkout-label": "Дата выезда:",
+          "continueBtn": "Продолжить",
+          "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
+        },
+        lv: {
+          "booking-title": "Sāciet rezervāciju",
+          "country-label": "Izvēlieties valsti:",
+          "country-placeholder": "-- Izvēlieties valsti --",
+          "city-label": "Izvēlieties pilsētu:",
+          "city-placeholder": "-- Izvēlieties pilsētu --",
+          "checkin-label": "Ierašanās datums:",
+          "checkout-label": "Izbraukšanas datums:",
+          "continueBtn": "Turpināt",
+          "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
+        },
+        et: {
+          "booking-title": "Alusta broneerimist",
+          "country-label": "Vali riik:",
+          "country-placeholder": "-- Vali riik --",
+          "city-label": "Vali linn:",
+          "city-placeholder": "-- Vali linn --",
+          "checkin-label": "Saabumiskuupäev:",
+          "checkout-label": "Lahkumiskuupäev:",
+          "continueBtn": "Jätka",
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
+        }
+      };
 
-    // On language change, update all translatable elements
-    document.getElementById('lang-select').addEventListener('change', function() {
-      const lang = this.value;
-      const mapping = translations[lang] || translations['en'];
-      Object.keys(mapping).forEach(function(key) {
-        const el = document.getElementById(key);
-        if (el) {
-          if (key === "footer-text") {
-            el.innerHTML = mapping[key];
-          } else {
-            el.textContent = mapping[key];
+      const localeByLang = {
+        en: 'en-GB',
+        ru: 'ru-RU',
+        lv: 'lv-LV',
+        et: 'et-EE'
+      };
+
+      const cities = {
+        denmark: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
+        estonia: ["Tallinn", "Tartu", "Narva", "Pärnu", "Viljandi"],
+        latvia: ["Riga", "Daugavpils", "Liepaja", "Jelgava", "Jurmala"],
+        lithuania: ["Vilnius", "Kaunas", "Klaipeda", "Šiauliai", "Panevėžys"]
+      };
+
+      const langSelectEl = document.getElementById('lang-select');
+      const countrySelect = document.getElementById('country');
+      const citySelect = document.getElementById('city');
+      const checkInInput = document.getElementById('checkIn');
+      const checkOutInput = document.getElementById('checkOut');
+      const continueBtn = document.getElementById('continueBtn');
+      const selectedLocation = document.getElementById('selectedLocation');
+      const todayISO = new Date().toISOString().split('T')[0];
+
+      checkInInput.min = todayISO;
+      checkOutInput.min = todayISO;
+
+      function getActiveLang() {
+        return langSelectEl ? langSelectEl.value : 'en';
+      }
+
+      function getActiveLocale() {
+        return localeByLang[getActiveLang()] || 'en-GB';
+      }
+
+      function formatDate(dateValue, locale) {
+        if (!dateValue) {
+          return '';
+        }
+        const parts = dateValue.split('-').map(Number);
+        if (parts.length !== 3 || parts.some(Number.isNaN)) {
+          return '';
+        }
+        const [year, month, day] = parts;
+        const date = new Date(Date.UTC(year, month - 1, day));
+        return new Intl.DateTimeFormat(locale, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        }).format(date);
+      }
+
+      function updateLocationDisplay() {
+        const countryIndex = countrySelect.selectedIndex;
+        const countryText = countryIndex >= 0 ? countrySelect.options[countryIndex].text : '';
+        const cityIndex = citySelect.selectedIndex;
+        const cityText = cityIndex >= 0 ? citySelect.options[cityIndex].text : '';
+
+        const checkInValue = checkInInput.value;
+        const checkOutValue = checkOutInput.value;
+        const locale = getActiveLocale();
+        const checkInText = formatDate(checkInValue, locale);
+        const checkOutText = formatDate(checkOutValue, locale);
+
+        const summaryParts = [];
+
+        if (countrySelect.value && citySelect.value) {
+          summaryParts.push(`Selected location: ${countryText} — ${cityText}`);
+        } else if (countrySelect.value) {
+          summaryParts.push(`Selected country: ${countryText} (please select a city/town)`);
+        } else if (citySelect.value) {
+          summaryParts.push(`Selected city/town: ${cityText}`);
+        }
+
+        if (checkInValue && checkOutValue) {
+          summaryParts.push(`Stay: ${checkInText} – ${checkOutText}`);
+        } else if (checkInValue) {
+          summaryParts.push(`Check-in: ${checkInText}`);
+        } else if (checkOutValue) {
+          summaryParts.push(`Check-out: ${checkOutText}`);
+        }
+
+        selectedLocation.textContent = summaryParts.join(' | ');
+      }
+
+      if (langSelectEl) {
+        langSelectEl.addEventListener('change', function() {
+          const lang = this.value;
+          const mapping = translations[lang] || translations['en'];
+          Object.keys(mapping).forEach(function(key) {
+            const el = document.getElementById(key);
+            if (el) {
+              if (key === 'footer-text') {
+                el.innerHTML = mapping[key];
+              } else {
+                el.textContent = mapping[key];
+              }
+            }
+          });
+
+          if (citySelect.options.length === 1 && citySelect.options[0].value === '') {
+            citySelect.options[0].text = mapping['city-placeholder'];
           }
+
+          updateLocationDisplay();
+        });
+      }
+
+      countrySelect.addEventListener('change', function() {
+        const selectedCountry = this.value;
+        const mapping = translations[getActiveLang()] || translations['en'];
+
+        citySelect.innerHTML = '<option value="" id="city-placeholder">' + mapping['city-placeholder'] + '</option>';
+        citySelect.disabled = !selectedCountry;
+        if (cities[selectedCountry]) {
+          cities[selectedCountry].forEach(function(city) {
+            const opt = document.createElement('option');
+            opt.value = city.toLowerCase().replace(/ /g, '-');
+            opt.text = city;
+            citySelect.appendChild(opt);
+          });
+        }
+        updateLocationDisplay();
+      });
+
+      citySelect.addEventListener('change', updateLocationDisplay);
+
+      checkInInput.addEventListener('change', function() {
+        checkOutInput.min = checkInInput.value || todayISO;
+        if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
+          checkOutInput.value = '';
+        }
+        updateLocationDisplay();
+      });
+
+      checkOutInput.addEventListener('change', updateLocationDisplay);
+
+      continueBtn.addEventListener('click', function() {
+        const selectedCountry = countrySelect.value;
+        const selectedCity = citySelect.value;
+        const checkInDate = checkInInput.value;
+        const checkOutDate = checkOutInput.value;
+
+        if (!selectedCountry) {
+          alert('Please select a country before continuing.');
+        } else if (!selectedCity) {
+          alert('Please select a city/town before continuing.');
+        } else if (!checkInDate) {
+          alert('Please select a check-in date before continuing.');
+        } else if (!checkOutDate) {
+          alert('Please select a check-out date before continuing.');
+        } else if (checkOutDate <= checkInDate) {
+          alert('Your check-out date must be after your check-in date.');
+        } else {
+          window.location.href = selectedCity + '.html';
         }
       });
-      
-      // Update city dropdown placeholder after language change
-      const citySelect = document.getElementById('city');
-      if (citySelect.options.length === 1 && citySelect.options[0].value === '') {
-        citySelect.options[0].text = mapping["city-placeholder"];
-      }
-    });
 
-        const cities = {
-            denmark: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
-            estonia: ["Tallinn", "Tartu", "Narva", "Pärnu", "Viljandi"],
-            latvia: ["Riga", "Daugavpils", "Liepaja", "Jelgava", "Jurmala"],
-            lithuania: ["Vilnius", "Kaunas", "Klaipeda", "Šiauliai", "Panevėžys"]
-        };
-
-        const countrySelect = document.getElementById('country');
-        const citySelect = document.getElementById('city');
-        const continueBtn = document.getElementById('continueBtn');
-        const selectedLocation = document.getElementById('selectedLocation');
-
-        function updateLocationDisplay() {
-            const countryIndex = countrySelect.selectedIndex;
-            const countryText = countryIndex >= 0 ? countrySelect.options[countryIndex].text : '';
-            const cityIndex = citySelect.selectedIndex;
-            const cityText = cityIndex >= 0 ? citySelect.options[cityIndex].text : '';
-
-            if (countrySelect.value && citySelect.value) {
-                selectedLocation.textContent = `Selected location: ${countryText} — ${cityText}`;
-            } else if (countrySelect.value) {
-                selectedLocation.textContent = `Selected country: ${countryText} (please select a city/town)`;
-            } else {
-                selectedLocation.textContent = '';
-            }
-        }
-
-        // Populate city list when country changes and update display
-        countrySelect.addEventListener('change', function() {
-            const selectedCountry = this.value;
-            const langSelect = document.getElementById('lang-select');
-            const lang = langSelect ? langSelect.value : 'en';
-            const mapping = translations[lang] || translations['en'];
-            
-            citySelect.innerHTML = '<option value="" id="city-placeholder">' + mapping["city-placeholder"] + '</option>';
-            citySelect.disabled = !selectedCountry;
-            if (cities[selectedCountry]) {
-                cities[selectedCountry].forEach(function(city) {
-                    const opt = document.createElement('option');
-                    opt.value = city.toLowerCase().replace(/ /g, '-');
-                    opt.text = city;
-                    citySelect.appendChild(opt);
-                });
-            }
-            // Update display after repopulating cities
-            updateLocationDisplay();
-        });
-
-        // Update display when city selection changes
-        citySelect.addEventListener('change', updateLocationDisplay);
-
-        // Continue button behaviour unchanged
-        continueBtn.addEventListener('click', function() {
-            const selectedCountry = countrySelect.value;
-            const selectedCity = citySelect.value;
-            if (!selectedCountry) {
-                alert('Please select a country before continuing.');
-            } else if (!selectedCity) {
-                alert('Please select a city/town before continuing.');
-            } else {
-                window.location.href = selectedCity + '.html';
-            }
-        });
-
-        // Initialize display on load (in case the selects are pre-filled)
-        document.addEventListener('DOMContentLoaded', function() {
-            updateLocationDisplay();
-        });
+      document.addEventListener('DOMContentLoaded', function() {
+        checkOutInput.min = checkInInput.value || todayISO;
+        updateLocationDisplay();
+      });
     </script>
 
     <footer>
