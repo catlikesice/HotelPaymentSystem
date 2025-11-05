@@ -801,43 +801,17 @@ header > .nav-containers {
 }
 
 /* =========================
-   selectlocation.html: ensure navbar spans edge-to-edge
+   selectlocation.html: remove outer gutters while keeping nav centered
    ========================= */
-html.page-selectlocation .site-nav {
-  width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-}
-
 html.page-selectlocation .site-nav .nav-inner {
-  max-width: none;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
-html.page-selectlocation .site-nav .nav-containers {
-  max-width: none;
-  width: auto;
-  flex: 1 1 auto;
-  padding-left: 0;
-  padding-right: 0;
-  justify-content: space-between;
-}
-
-@media (min-width: 701px) {
+@media (max-width: 700px) {
   html.page-selectlocation .site-nav .nav-inner {
-    display: flex !important;
-    grid-template-columns: none !important;
-  }
-
-  html.page-selectlocation .site-nav .nav-inner::after {
-    content: none !important;
-    display: none !important;
-  }
-
-  html.page-selectlocation .site-nav .nav-containers {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    gap: var(--nav-inner-gap, 0.6rem) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
+
