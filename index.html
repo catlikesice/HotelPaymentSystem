@@ -77,66 +77,66 @@
     </section>
 
     <section id="baltic-travel">
-  <h2>Discover the Baltic States: A Hidden Gem for Travelers</h2>
-  <p>
-    The Baltic States—Estonia, Latvia, and Lithuania—offer a captivating blend of history, culture, and natural beauty. Whether you're an adventurer, history buff, foodie, or simply curious, the Baltic region promises something special. Two cities not to miss are <strong>Tallinn</strong> and <strong>Riga</strong>, each with their own distinct charm.
-  </p>
-  <h3>Unforgettable Sights in Tallinn, Estonia</h3>
-  <ul>
-    <li>
-      <strong>Medieval Old Town:</strong>
-      Wander the cobbled streets of the UNESCO-listed Old Town, complete with preserved medieval walls and fairy-tale towers.
-    </li>
-    <li>
-      <strong>Toompea Castle & Alexander Nevsky Cathedral:</strong>
-      Explore Estonia’s seat of power and admire the ornate Russian Orthodox cathedral.
-    </li>
-    <li>
-      <strong>Seaplane Harbour:</strong>
-      One of Europe’s best maritime museums, boasting historic ships and interactive exhibits.
-    </li>
-    <li>
-      <strong>Local Cafés & Vibrant Nightlife:</strong>
-      Enjoy cozy cafés, lively bars, and sample craft beer in eclectic settings.
-    </li>
-  </ul>
+    <h2 id="baltic-heading">Discover the Baltic States: A Hidden Gem for Travelers</h2>
+    <p id="baltic-intro">
+      The Baltic States—Estonia, Latvia, and Lithuania—offer a captivating blend of history, culture, and natural beauty. Whether you're an adventurer, history buff, foodie, or simply curious, the Baltic region promises something special. Two cities not to miss are <strong>Tallinn</strong> and <strong>Riga</strong>, each with their own distinct charm.
+    </p>
+    <h3 id="baltic-tallinn-title">Unforgettable Sights in Tallinn, Estonia</h3>
+    <ul>
+      <li id="baltic-tallinn-old-town">
+        <strong>Medieval Old Town:</strong>
+        Wander the cobbled streets of the UNESCO-listed Old Town, complete with preserved medieval walls and fairy-tale towers.
+      </li>
+      <li id="baltic-tallinn-toompea">
+        <strong>Toompea Castle &amp; Alexander Nevsky Cathedral:</strong>
+        Explore Estonia’s seat of power and admire the ornate Russian Orthodox cathedral.
+      </li>
+      <li id="baltic-tallinn-seaplane">
+        <strong>Seaplane Harbour:</strong>
+        One of Europe’s best maritime museums, boasting historic ships and interactive exhibits.
+      </li>
+      <li id="baltic-tallinn-nightlife">
+        <strong>Local Cafés &amp; Vibrant Nightlife:</strong>
+        Enjoy cozy cafés, lively bars, and sample craft beer in eclectic settings.
+      </li>
+    </ul>
 
-  <h3>Must-See Attractions in Riga, Latvia</h3>
-  <ul>
-    <li>
-      <strong>Art Nouveau District:</strong>
-      Stroll Alberta iela to see some of the world’s most magnificent art nouveau architecture.
-    </li>
-    <li>
-      <strong>Riga Old Town:</strong>
-      Get lost in cobblestone lanes, charming squares, and striking landmarks like the House of the Blackheads.
-    </li>
-    <li>
-      <strong>Central Market:</strong>
-      Discover Europe’s largest market housed in old Zeppelin hangars—perfect for sampling regional delicacies.
-    </li>
-    <li>
-      <strong>Museum of the Occupation of Latvia:</strong>
-      Gain insights into Latvia’s complex past through engaging exhibits.
-    </li>
-  </ul>
+    <h3 id="baltic-riga-title">Must-See Attractions in Riga, Latvia</h3>
+    <ul>
+      <li id="baltic-riga-art-nouveau">
+        <strong>Art Nouveau District:</strong>
+        Stroll Alberta iela to see some of the world’s most magnificent art nouveau architecture.
+      </li>
+      <li id="baltic-riga-old-town">
+        <strong>Riga Old Town:</strong>
+        Get lost in cobblestone lanes, charming squares, and striking landmarks like the House of the Blackheads.
+      </li>
+      <li id="baltic-riga-market">
+        <strong>Central Market:</strong>
+        Discover Europe’s largest market housed in old Zeppelin hangars—perfect for sampling regional delicacies.
+      </li>
+      <li id="baltic-riga-museum">
+        <strong>Museum of the Occupation of Latvia:</strong>
+        Gain insights into Latvia’s complex past through engaging exhibits.
+      </li>
+    </ul>
 
-  <h3>Why Visit the Baltics?</h3>
-  <ul>
-    <li>
-      <strong>Beautiful Coastlines:</strong> The Baltic Sea offers sandy beaches, picturesque islands, and fresh sea air.
-    </li>
-    <li>
-      <strong>Outdoor Adventures:</strong> Hiking in national parks, cycling through forests, or relaxing in rural countryside villages.
-    </li>
-    <li>
-      <strong>Festivals & Events:</strong> Experience vibrant folk festivals, open-air concerts, and magical Christmas markets.
-    </li>
-  </ul>
+    <h3 id="baltic-why-title">Why Visit the Baltics?</h3>
+    <ul>
+      <li id="baltic-why-coastlines">
+        <strong>Beautiful Coastlines:</strong> The Baltic Sea offers sandy beaches, picturesque islands, and fresh sea air.
+      </li>
+      <li id="baltic-why-outdoors">
+        <strong>Outdoor Adventures:</strong> Hiking in national parks, cycling through forests, or relaxing in rural countryside villages.
+      </li>
+      <li id="baltic-why-festivals">
+        <strong>Festivals &amp; Events:</strong> Experience vibrant folk festivals, open-air concerts, and magical Christmas markets.
+      </li>
+    </ul>
 
-  <p>
-    The Baltic States are an accessible, safe, and affordable destination for every kind of traveler. Explore Tallinn and Riga, and uncover countless treasures waiting for you in this enchanting region!
-  </p>
+    <p id="baltic-outro">
+      The Baltic States are an accessible, safe, and affordable destination for every kind of traveler. Explore Tallinn and Riga, and uncover countless treasures waiting for you in this enchanting region!
+    </p>
 </section>
 
     <footer>
@@ -146,9 +146,26 @@
       <script src="site-preferences.js"></script>
       <script src="assets/nav-translations.js"></script>
     <script>
-    // Translation data for supported languages
-    const translations = {
-      en: {
+      // Translation data for supported languages
+      const HTML_TRANSLATION_KEYS = new Set([
+        'contact-email',
+        'footer-text',
+        'baltic-intro',
+        'baltic-tallinn-old-town',
+        'baltic-tallinn-toompea',
+        'baltic-tallinn-seaplane',
+        'baltic-tallinn-nightlife',
+        'baltic-riga-art-nouveau',
+        'baltic-riga-old-town',
+        'baltic-riga-market',
+        'baltic-riga-museum',
+        'baltic-why-coastlines',
+        'baltic-why-outdoors',
+        'baltic-why-festivals'
+      ]);
+
+        const translations = {
+          en: {
         "hero-title": "Accept Crypto Payments Seamlessly",
         "hero-desc": "Our platform enables hotels and hospitality groups to receive payments in digital currencies—with zero hassle, full transparency, and eco-friendly operations.",
         "hero-btn": "Partner With Us",
@@ -160,12 +177,29 @@
         "feature3-desc": "Instant blockchain settlements, payment transparency, and enhanced guest trust.",
         "contact-title": "Get Started With Blockchain Payments",
         "contact-desc": "Are you a hotel group, chain, or property manager interested in accepting crypto and digital currencies for bookings?",
-        "contact-instruct": "Contact our team to learn more, request a demo, or begin onboarding:",
-        "contact-btn": "Send Inquiry",
-        "contact-email": "Or email us directly at <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
-        "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
-      },
-      ru: {
+          "contact-instruct": "Contact our team to learn more, request a demo, or begin onboarding:",
+          "contact-btn": "Send Inquiry",
+          "contact-email": "Or email us directly at <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.",
+          "baltic-heading": "Discover the Baltic States: A Hidden Gem for Travelers",
+          "baltic-intro": "The Baltic States—Estonia, Latvia, and Lithuania—offer a captivating blend of history, culture, and natural beauty. Whether you're an adventurer, history buff, foodie, or simply curious, the Baltic region promises something special. Two cities not to miss are <strong>Tallinn</strong> and <strong>Riga</strong>, each with their own distinct charm.",
+          "baltic-tallinn-title": "Unforgettable Sights in Tallinn, Estonia",
+          "baltic-tallinn-old-town": "<strong>Medieval Old Town:</strong> Wander the cobbled streets of the UNESCO-listed Old Town, complete with preserved medieval walls and fairy-tale towers.",
+          "baltic-tallinn-toompea": "<strong>Toompea Castle &amp; Alexander Nevsky Cathedral:</strong> Explore Estonia’s seat of power and admire the ornate Russian Orthodox cathedral.",
+          "baltic-tallinn-seaplane": "<strong>Seaplane Harbour:</strong> One of Europe’s best maritime museums, boasting historic ships and interactive exhibits.",
+          "baltic-tallinn-nightlife": "<strong>Local Cafés &amp; Vibrant Nightlife:</strong> Enjoy cozy cafés, lively bars, and sample craft beer in eclectic settings.",
+          "baltic-riga-title": "Must-See Attractions in Riga, Latvia",
+          "baltic-riga-art-nouveau": "<strong>Art Nouveau District:</strong> Stroll Alberta iela to see some of the world’s most magnificent art nouveau architecture.",
+          "baltic-riga-old-town": "<strong>Riga Old Town:</strong> Get lost in cobblestone lanes, charming squares, and striking landmarks like the House of the Blackheads.",
+          "baltic-riga-market": "<strong>Central Market:</strong> Discover Europe’s largest market housed in old Zeppelin hangars—perfect for sampling regional delicacies.",
+          "baltic-riga-museum": "<strong>Museum of the Occupation of Latvia:</strong> Gain insights into Latvia’s complex past through engaging exhibits.",
+          "baltic-why-title": "Why Visit the Baltics?",
+          "baltic-why-coastlines": "<strong>Beautiful Coastlines:</strong> The Baltic Sea offers sandy beaches, picturesque islands, and fresh sea air.",
+          "baltic-why-outdoors": "<strong>Outdoor Adventures:</strong> Hiking in national parks, cycling through forests, or relaxing in rural countryside villages.",
+          "baltic-why-festivals": "<strong>Festivals &amp; Events:</strong> Experience vibrant folk festivals, open-air concerts, and magical Christmas markets.",
+          "baltic-outro": "The Baltic States are an accessible, safe, and affordable destination for every kind of traveler. Explore Tallinn and Riga, and uncover countless treasures waiting for you in this enchanting region!"
+        },
+        ru: {
         "hero-title": "Принимайте криптовалюту легко",
         "hero-desc": "Наша платформа позволяет отелям и гостиничным группам получать оплату в цифровых валютах — без ...",
         "hero-btn": "Стать партнером",
@@ -177,11 +211,28 @@
         "feature3-desc": "Мгновенные расчеты в блокчейне, прозрачность платежей, доверие гостей.",
         "contact-title": "Начните принимать платежи в блокчейне",
         "contact-desc": "Вы группа отелей, сеть или управляющий объектом и хотите принимать криптовалюту?",
-        "contact-instruct": "Свяжитесь с нашей командой, чтобы узнать больше, запросить демо или начать интеграцию:",
-        "contact-btn": "Отправить запрос",
-        "contact-email": "Или напишите нам напрямую: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
-        "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
-      },
+          "contact-instruct": "Свяжитесь с нашей командой, чтобы узнать больше, запросить демо или начать интеграцию:",
+          "contact-btn": "Отправить запрос",
+          "contact-email": "Или напишите нам напрямую: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+          "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии.",
+          "baltic-heading": "Откройте страны Балтии: скрытая жемчужина для путешественников",
+          "baltic-intro": "Страны Балтии — Эстония, Латвия и Литва — предлагают завораживающее сочетание истории, культуры и природной красоты. Независимо от того, любите ли вы приключения, истории или гастрономию, балтийский регион обещает нечто особенное. Два города, которые стоит посетить, — <strong>Таллин</strong> и <strong>Рига</strong>, каждый со своей неповторимой атмосферой.",
+          "baltic-tallinn-title": "Незабываемые места Таллина, Эстония",
+          "baltic-tallinn-old-town": "<strong>Средневековый Старый город:</strong> Пройдитесь по мощёным улочкам объекта ЮНЕСКО с сохранёнными крепостными стенами и сказочными башнями.",
+          "baltic-tallinn-toompea": "<strong>Замок Тоомпеа и собор Александра Невского:</strong> Откройте резиденцию государственной власти Эстонии и полюбуйтесь величественным православным собором.",
+          "baltic-tallinn-seaplane": "<strong>Морской музей Seaplane Harbour:</strong> Один из лучших морских музеев Европы с историческими кораблями и интерактивными экспозициями.",
+          "baltic-tallinn-nightlife": "<strong>Местные кафе и яркая ночная жизнь:</strong> Наслаждайтесь уютными кафе, оживлёнными барами и крафтовым пивом в атмосферных местах.",
+          "baltic-riga-title": "Что посмотреть в Риге, Латвия",
+          "baltic-riga-art-nouveau": "<strong>Район арт-нуво:</strong> Прогуляйтесь по улице Альберта, чтобы увидеть один из лучших в мире ансамблей модерна.",
+          "baltic-riga-old-town": "<strong>Старый город Риги:</strong> Заблудитесь в мощёных улочках, уютных площадях и полюбуйтесь Домом Черноголовых.",
+          "baltic-riga-market": "<strong>Центральный рынок:</strong> Откройте для себя крупнейший рынок Европы в бывших ангарах цеппелинов и попробуйте местные деликатесы.",
+          "baltic-riga-museum": "<strong>Музей оккупации Латвии:</strong> Узнайте о сложной истории страны через захватывающие экспозиции.",
+          "baltic-why-title": "Почему стоит посетить Прибалтику?",
+          "baltic-why-coastlines": "<strong>Живописное побережье:</strong> Балтийское море предлагает песчаные пляжи, живописные острова и свежий морской воздух.",
+          "baltic-why-outdoors": "<strong>Активный отдых на природе:</strong> Пешие походы в национальных парках, велопрогулки по лесам и отдых в деревенских усадьбах.",
+          "baltic-why-festivals": "<strong>Фестивали и события:</strong> Наслаждайтесь народными праздниками, концертами под открытым небом и волшебными рождественскими ярмарками.",
+          "baltic-outro": "Страны Балтии — доступное, безопасное и недорогое направление для любого путешественника. Посетите Таллин и Ригу и откройте бесчисленные сокровища этого очаровательного региона!"
+        },
       lv: {
         "hero-title": "Pieņemiet kriptomaksājumus vienkārši",
         "hero-desc": "Mūsu platforma ļauj viesnīcām un viesmīlības grupām pieņemt digitālos maksājumus — bez sarežģījumiem, ar pilnu pārskatāmību un videi draudzīgu darbību.",
@@ -196,8 +247,25 @@
         "contact-desc": "Vai esat viesnīcu grupa, ķēde vai īpašuma pārvaldnieks, kas vēlas pieņemt kriptovalūtu?",
         "contact-instruct": "Sazinieties ar mūsu komandu, lai uzzinātu vairāk, pieprasītu demonstrāciju vai uzsāktu integrāciju:",
         "contact-btn": "Sūtīt pieprasījumu",
-        "contact-email": "Vai rakstiet mums tieši: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
-        "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
+          "contact-email": "Vai rakstiet mums tieši: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+          "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai.",
+          "baltic-heading": "Atklājiet Baltijas valstis – ceļotāju apslēptais dārgums",
+          "baltic-intro": "Baltijas valstis — Igaunija, Latvija un Lietuva — piedāvā aizraujošu vēstures, kultūras un dabas bagātību. Neatkarīgi no tā, vai esat piedzīvojumu meklētājs, vēstures entuziasts, gardēdis vai vienkārši ziņkārīgs ceļotājs, Baltija sola ko īpašu. Divas pilsētas, kuras noteikti jāapmeklē, ir <strong>Tallina</strong> un <strong>Rīga</strong>, katra ar savu neatkārtojamo šarmu.",
+          "baltic-tallinn-title": "Neaizmirstami apskates objekti Tallinā, Igaunijā",
+          "baltic-tallinn-old-town": "<strong>Viduslaiku vecpilsēta:</strong> Pastaigājieties pa bruģētajām ielām UNESCO sarakstā iekļautajā vecpilsētā ar saglabātām viduslaiku sienām un pasaku torņiem.",
+          "baltic-tallinn-toompea": "<strong>Toompea pils un Aleksandra Ņevska katedrāle:</strong> Iepazīstiet Igaunijas varas sēdekli un baudiet grezno pareizticīgo katedrāli.",
+          "baltic-tallinn-seaplane": "<strong>Seaplane Harbour muzejs:</strong> Viens no labākajiem jūras muzejiem Eiropā ar vēsturiskiem kuģiem un interaktīvām ekspozīcijām.",
+          "baltic-tallinn-nightlife": "<strong>Vietējās kafejnīcas un dzīvīga naktsdzīve:</strong> Izbaudiet mājīgas kafejnīcas, rosīgus bārus un nogaršojiet kraftalus unikālā atmosfērā.",
+          "baltic-riga-title": "Ko noteikti apskatīt Rīgā, Latvijā",
+          "baltic-riga-art-nouveau": "<strong>Jūgendstila kvartāls:</strong> Pastaigājieties pa Alberta ielu, lai redzētu vienus no iespaidīgākajiem jūgendstila paraugiem pasaulē.",
+          "baltic-riga-old-town": "<strong>Rīgas vecpilsēta:</strong> Apmaldieties bruģētajās ieliņās, burvīgajos laukumos un apbrīnojiet Melngalvju namu.",
+          "baltic-riga-market": "<strong>Centrāltirgus:</strong> Atklājiet lielāko tirgu Eiropā, kas izvietots bijušajos dirižabļu angāros, un nogaršojiet reģiona gardumus.",
+          "baltic-riga-museum": "<strong>Latvijas Okupācijas muzejs:</strong> Iegūstiet ieskatu valsts sarežģītajā vēsturē saistošās ekspozīcijās.",
+          "baltic-why-title": "Kāpēc apmeklēt Baltiju?",
+          "baltic-why-coastlines": "<strong>Skaistas piekrastes:</strong> Baltijas jūra piedāvā smilšainas pludmales, gleznainas salas un svaigu jūras gaisu.",
+          "baltic-why-outdoors": "<strong>Aktīva atpūta dabā:</strong> Pārgājieni nacionālajos parkos, velo braucieni pa mežiem vai atpūta lauku sētās.",
+          "baltic-why-festivals": "<strong>Festivāli un pasākumi:</strong> Piedzīvojiet košus tautas svētkus, brīvdabas koncertus un burvīgus Ziemassvētku tirdziņus.",
+          "baltic-outro": "Baltijas valstis ir pieejams, drošs un izdevīgs galamērķis ikvienam ceļotājam. Izpētiet Tallinu un Rīgu un atklājiet bezgalīgi daudz jaunu iespaidu šajā valdzinājuma pilnajā reģionā!"
       },
       et: {
         "hero-title": "Võta vastu krüptomakseid lihtsalt",
@@ -213,8 +281,25 @@
         "contact-desc": "Kas oled hotellikett või haldad kinnistut ja soovid vastu võtta krüpto- või digivaluutat?",
         "contact-instruct": "Võta meie tiimiga ühendust, küsi demo või alusta liitumist:",
         "contact-btn": "Saada päring",
-        "contact-email": "Või kirjuta otse: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
-        "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
+          "contact-email": "Või kirjuta otse: <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele.",
+          "baltic-heading": "Avasta Balti riigid – reisisõprade peidetud pärl",
+          "baltic-intro": "Balti riigid — Eesti, Läti ja Leedu — pakuvad lummavat segu ajaloost, kultuurist ja loodusest. Ükskõik, kas oled seikleja, ajaloohuviline, gurmaan või lihtsalt uudishimulik rändur, Baltikum pakub midagi erilist. Kaks linna, mida kindlasti külastada, on <strong>Tallinn</strong> ja <strong>Riia</strong>, mõlemad oma erilise võluga.",
+          "baltic-tallinn-title": "Unustamatud paigad Tallinnas, Eestis",
+          "baltic-tallinn-old-town": "<strong>Keskaegne vanalinn:</strong> Jaluta UNESCO nimekirja kuuluva vanalinna munakivisillutisel, kus seisavad säilinud müürid ja muinasjutulised tornid.",
+          "baltic-tallinn-toompea": "<strong>Toompea loss ja Aleksander Nevski katedraal:</strong> Avastage Eesti võimukeskus ja imetlege uhket õigeusu katedraali.",
+          "baltic-tallinn-seaplane": "<strong>Lennusadam:</strong> Üks Euroopa parimaid meremuuseume, kus ootavad ajaloolised laevad ja käed-külge ekspositsioonid.",
+          "baltic-tallinn-nightlife": "<strong>Kohalikud kohvikud ja särav ööelu:</strong> Naudi hubaseid kohvikuid, elavaid baare ja käsitööõlut omanäolistes paikades.",
+          "baltic-riga-title": "Kohad, mida Riias kindlasti näha",
+          "baltic-riga-art-nouveau": "<strong>Juugendstiili kvartal:</strong> Jaluta Alberta tänaval ja vaata maailma uhkeimaid juugendstiili hooneid.",
+          "baltic-riga-old-town": "<strong>Riia vanalinn:</strong> Eksle munakivis tänavatel, imeilusatel väljakutel ja külasta Mustpeade maja.",
+          "baltic-riga-market": "<strong>Keskturg:</strong> Avastage Euroopa suurim turg endistes tsepeliinide angaarides ja maitsege kohalikke hõrgutisi.",
+          "baltic-riga-museum": "<strong>Läti okupatsioonimuuseum:</strong> Saage põnevate väljapanekute kaudu aimu Läti keerukast ajaloost.",
+          "baltic-why-title": "Miks külastada Baltikumi?",
+          "baltic-why-coastlines": "<strong>Kaunid rannikud:</strong> Läänemeri pakub liivarandu, maalilisi saari ja värsket mereõhku.",
+          "baltic-why-outdoors": "<strong>Seiklused looduses:</strong> Matka rahvusparkides, sõida jalgrattaga metsades või puhka rahulikes külades.",
+          "baltic-why-festivals": "<strong>Festivalid ja üritused:</strong> Koge rahvuspidusid, vabaõhukontserte ja võluvaid jõuluturge.",
+          "baltic-outro": "Balti riigid on ligipääsetav, turvaline ja taskukohane sihtkoht igale reisijale. Avastage Tallinn ja Riia ning leidke loendamatuid aardeid selles lummavas piirkonnas!"
       },
       de: {
         "hero-title": "Kryptozahlungen nahtlos akzeptieren",
@@ -230,8 +315,25 @@
         "contact-desc": "Sind Sie eine Hotelgruppe, -kette oder ein Property-Manager, der Krypto- und Digitalwährungen für Buchungen akzeptieren möchte?",
         "contact-instruct": "Kontaktieren Sie unser Team, um mehr zu erfahren, eine Demo anzufordern oder das Onboarding zu starten:",
         "contact-btn": "Anfrage senden",
-        "contact-email": "Oder schreiben Sie uns direkt an <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
-        "footer-text": "&copy; 2025 BalticComfort. Blockchain-Lösungen für die Hotellerie."
+          "contact-email": "Oder schreiben Sie uns direkt an <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain-Lösungen für die Hotellerie.",
+          "baltic-heading": "Entdecken Sie die baltischen Staaten: Ein Geheimtipp für Reisende",
+          "baltic-intro": "Die baltischen Staaten – Estland, Lettland und Litauen – verbinden Geschichte, Kultur und Natur auf faszinierende Weise. Ob Abenteurer, Geschichtsfan, Feinschmecker oder neugieriger Entdecker: Im Baltikum findet jeder etwas Besonderes. Zwei Städte, die Sie nicht verpassen sollten, sind <strong>Tallinn</strong> und <strong>Riga</strong>, jede mit ganz eigenem Charme.",
+          "baltic-tallinn-title": "Unvergessliche Highlights in Tallinn, Estland",
+          "baltic-tallinn-old-town": "<strong>Mittelalterliche Altstadt:</strong> Schlendern Sie durch die kopfsteingepflasterten Gassen der UNESCO-geschützten Altstadt mit ihren erhaltenen Stadtmauern und märchenhaften Türmen.",
+          "baltic-tallinn-toompea": "<strong>Schloss Toompea und Alexander-Newski-Kathedrale:</strong> Erkunden Sie den Sitz der estnischen Regierung und bestaunen Sie die prachtvolle orthodoxe Kathedrale.",
+          "baltic-tallinn-seaplane": "<strong>Seaplane Harbour:</strong> Eines der besten Marinemuseen Europas mit historischen Schiffen und interaktiven Ausstellungen.",
+          "baltic-tallinn-nightlife": "<strong>Lokale Cafés und lebendiges Nachtleben:</strong> Genießen Sie gemütliche Cafés, pulsierende Bars und probieren Sie Craft-Bier in außergewöhnlicher Atmosphäre.",
+          "baltic-riga-title": "Sehenswürdigkeiten in Riga, Lettland",
+          "baltic-riga-art-nouveau": "<strong>Jugendstilviertel:</strong> Spazieren Sie über die Alberta iela und bewundern Sie einige der prachtvollsten Jugendstilbauten der Welt.",
+          "baltic-riga-old-town": "<strong>Altstadt von Riga:</strong> Verlieren Sie sich in Kopfsteinpflastergassen, charmanten Plätzen und Wahrzeichen wie dem Schwarzhäupterhaus.",
+          "baltic-riga-market": "<strong>Zentralmarkt:</strong> Entdecken Sie Europas größten Markt in ehemaligen Zeppelin-Hangars und probieren Sie regionale Spezialitäten.",
+          "baltic-riga-museum": "<strong>Museum der Okkupation Lettlands:</strong> Gewinnen Sie spannende Einblicke in die bewegte Geschichte des Landes.",
+          "baltic-why-title": "Warum das Baltikum besuchen?",
+          "baltic-why-coastlines": "<strong>Wunderschöne Küsten:</strong> Die Ostsee lockt mit Sandstränden, malerischen Inseln und frischer Meeresluft.",
+          "baltic-why-outdoors": "<strong>Outdoor-Abenteuer:</strong> Wandern in Nationalparks, Radfahren durch Wälder oder Entspannen in ländlichen Dörfern.",
+          "baltic-why-festivals": "<strong>Feste und Events:</strong> Erleben Sie farbenfrohe Volksfeste, Open-Air-Konzerte und stimmungsvolle Weihnachtsmärkte.",
+          "baltic-outro": "Die baltischen Staaten sind ein gut erreichbares, sicheres und erschwingliches Reiseziel für jeden. Erkunden Sie Tallinn und Riga und entdecken Sie unzählige Schätze in dieser bezaubernden Region!"
       }
     };
 
@@ -240,7 +342,7 @@
         Object.keys(mapping).forEach(function(key) {
           const el = document.getElementById(key);
           if (el) {
-            if (key === 'contact-email' || key === 'footer-text') {
+            if (HTML_TRANSLATION_KEYS.has(key)) {
               el.innerHTML = mapping[key];
             } else {
               el.textContent = mapping[key];
