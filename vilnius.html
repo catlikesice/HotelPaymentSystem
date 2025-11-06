@@ -142,7 +142,7 @@
     </div>
 
     <div class="booking-container">
-        <h2 id="available-hotels">Available Hotels in Vilnius</h2>
+        <h2 id="available-hotels" data-city="Vilnius">Available Hotels in Vilnius</h2>
         <div class="currency-selector">
             <label for="currency" id="currency-label">Select Currency:</label>
             <select id="currency" onchange="updatePrices()">
@@ -238,9 +238,10 @@
         }
     </script>
 
-    <script>
-    // Translation data for supported languages
-    const translations = {
+    <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
       en: {
         "booking-header-title": "Baltic Comfort",
         "booking-header-desc": "Book your stay with secure crypto payments",
@@ -275,27 +276,59 @@
       },
     };
 
-    // On language change, update all translatable elements
-    document.getElementById('lang-select').addEventListener('change', function() {
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations['en'];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === 'footer-text') {
+      el.innerHTML = mapping[key];
+    } else if (key === 'available-hotels' && el.hasAttribute('data-city')) {
+      const cityName = el.getAttribute('data-city') || '';
+      el.textContent = mapping[key].replace('{city}', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || 'en');
+});
+
+const langSelect = document.getElementById('lang-select');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === 'function')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || 'en') : 'en');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === 'function') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute('lang', initialLang);
+    langSelect.addEventListener('change', function() {
       const lang = this.value;
-      const mapping = translations[lang] || translations['en'];
-      Object.keys(mapping).forEach(function(key) {
-        const el = document.getElementById(key);
-        if (el) {
-          if (key === "footer-text") {
-            el.innerHTML = mapping[key];
-          } else if (key === "available-hotels") {
-            // Keep the city name from the original text
-            const originalText = el.textContent;
-            const cityMatch = originalText.match(/in (.+)$/);
-            const cityName = cityMatch ? cityMatch[1] : '';
-            el.textContent = mapping[key].replace('{city}', cityName);
-          } else {
-            el.textContent = mapping[key];
-          }
-        }
-      });
+      applyTranslations(lang);
+      document.documentElement.setAttribute('lang', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = 'preferredLanguage=' + encodeURIComponent(lang) + ';expires=' + expires.toUTCString() + ';path=/;SameSite=Lax';
     });
-    </script>
+  }
+}
+</script>
 </body>
 </html>

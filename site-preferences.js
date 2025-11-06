@@ -51,6 +51,12 @@
       return;
     }
 
+    if (select.dataset.languagePreferenceInitialized === 'true') {
+      return;
+    }
+
+    select.dataset.languagePreferenceInitialized = 'true';
+
     const savedLanguage = getCookie(LANGUAGE_COOKIE_NAME);
     const initialLanguage = savedLanguage && optionExists(select, savedLanguage)
       ? savedLanguage
@@ -78,4 +84,14 @@
     COOKIE_NAME: LANGUAGE_COOKIE_NAME,
     CHANGE_EVENT: LANGUAGE_CHANGE_EVENT
   };
+
+  function autoInit() {
+    initLanguagePreference();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit, { once: true });
+  } else {
+    autoInit();
+  }
 })();

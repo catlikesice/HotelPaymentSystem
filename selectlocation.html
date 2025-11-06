@@ -95,6 +95,7 @@
         </section>
     </main>
 
+    <script src="site-preferences.js"></script>
     <script>
       // Translation data for supported languages
       const translations = {
@@ -228,15 +229,15 @@
         selectedLocation.textContent = summaryParts.join(' | ');
       }
 
-      if (langSelectEl) {
-        langSelectEl.addEventListener('change', function() {
-          const lang = this.value;
+        function applyTranslations(lang) {
           const mapping = translations[lang] || translations['en'];
           Object.keys(mapping).forEach(function(key) {
             const el = document.getElementById(key);
             if (el) {
               if (key === 'footer-text') {
                 el.innerHTML = mapping[key];
+              } else if (key === 'booking-title') {
+                el.textContent = mapping[key];
               } else {
                 el.textContent = mapping[key];
               }
@@ -248,8 +249,44 @@
           }
 
           updateLocationDisplay();
+        }
+
+        const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
+        document.addEventListener(languageEventName, function(event) {
+          applyTranslations((event.detail && event.detail.lang) || 'en');
         });
-      }
+
+        if (langSelectEl) {
+          const availableLanguages = Array.prototype.map.call(langSelectEl.options, function(option) { return option.value; });
+          const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === 'function')
+            ? window.LanguagePreferences.getPreferredLanguage()
+            : null;
+          const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+            ? preferredLanguage
+            : (langSelectEl.value || availableLanguages[0] || 'en');
+
+          if (initialLang && langSelectEl.value !== initialLang) {
+            langSelectEl.value = initialLang;
+          }
+
+          applyTranslations(initialLang);
+
+          if (window.LanguagePreferences && typeof window.LanguagePreferences.init === 'function') {
+            window.LanguagePreferences.init(langSelectEl);
+          } else {
+            document.documentElement.setAttribute('lang', initialLang);
+            langSelectEl.addEventListener('change', function() {
+              const lang = this.value;
+              applyTranslations(lang);
+              document.documentElement.setAttribute('lang', lang);
+              const expires = new Date();
+              expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+              document.cookie = 'preferredLanguage=' + encodeURIComponent(lang) + ';expires=' + expires.toUTCString() + ';path=/;SameSite=Lax';
+            });
+          }
+        } else {
+          applyTranslations('en');
+        }
 
       countrySelect.addEventListener('change', function() {
         const selectedCountry = this.value;
