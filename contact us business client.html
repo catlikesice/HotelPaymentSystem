@@ -209,7 +209,8 @@
     </div>
   </footer>
 
-  <script>
+    <script src="site-preferences.js"></script>
+    <script>
     (function () {
       // Attempt to load stylesheet from multiple likely locations if initial link failed.
       // If computed font-family is browser default (serif fallback), try alternates.
@@ -290,7 +291,7 @@
       const msg = document.getElementById('form-message');
       const submitBtn = document.getElementById('submitBtn');
 
-      form.addEventListener('submit', async function (e) {
+        form.addEventListener('submit', async function (e) {
         e.preventDefault();
         msg.textContent = '';
         if (!form.checkValidity()) {
@@ -320,7 +321,43 @@
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Report';
         }
-      });
+        });
+
+        const langSelectTop = document.getElementById('langSelectTop');
+        const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
+
+        document.addEventListener(languageEventName, function(event) {
+          const lang = (event.detail && event.detail.lang) || 'en';
+          document.documentElement.lang = lang;
+        });
+
+        if (langSelectTop) {
+          const availableLanguages = Array.prototype.map.call(langSelectTop.options, option => option.value);
+          const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === 'function')
+            ? window.LanguagePreferences.getPreferredLanguage()
+            : null;
+          const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+            ? preferredLanguage
+            : (langSelectTop.value || availableLanguages[0] || 'en');
+
+          if (initialLang && langSelectTop.value !== initialLang) {
+            langSelectTop.value = initialLang;
+          }
+
+          document.documentElement.lang = initialLang;
+
+          if (window.LanguagePreferences && typeof window.LanguagePreferences.init === 'function') {
+            window.LanguagePreferences.init(langSelectTop);
+          } else {
+            langSelectTop.addEventListener('change', function(event) {
+              const lang = event.target.value;
+              document.documentElement.lang = lang;
+              const expires = new Date();
+              expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+              document.cookie = 'preferredLanguage=' + encodeURIComponent(lang) + ';expires=' + expires.toUTCString() + ';path=/;SameSite=Lax';
+            });
+          }
+        }
     })();
   </script>
 </body>

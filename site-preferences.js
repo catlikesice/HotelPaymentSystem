@@ -33,33 +33,118 @@
     });
   }
 
-  function applyLanguage(select, lang) {
-    if (!lang) return;
-    if (select && optionExists(select, lang)) {
-      select.value = lang;
+  const LANGUAGE_SELECT_SELECTOR = 'select[data-language-preference], select.lang-select, select#lang-select';
+
+  function isSelectable(node) {
+    return !!node && node.nodeName === 'SELECT';
+  }
+
+  function toArray(collection) {
+    if (!collection) {
+      return [];
     }
+    if (Array.isArray(collection)) {
+      return collection.filter(isSelectable);
+    }
+    if (typeof collection.length === 'number' && typeof collection !== 'string') {
+      return Array.prototype.filter.call(collection, isSelectable);
+    }
+    return isSelectable(collection) ? [collection] : [];
+  }
+
+  function collectLanguageSelects(selectElement) {
+    const discovered = Array.prototype.slice.call(document.querySelectorAll(LANGUAGE_SELECT_SELECTOR));
+
+    if (!selectElement) {
+      return discovered;
+    }
+
+    const explicit = toArray(selectElement);
+    if (!explicit.length) {
+      return discovered;
+    }
+
+    const seen = new Set();
+    const merged = [];
+
+    explicit.concat(discovered).forEach(function(select) {
+      if (!select || seen.has(select)) {
+        return;
+      }
+      seen.add(select);
+      merged.push(select);
+    });
+
+    return merged;
+  }
+
+  function applyLanguage(selectCollection, lang, options) {
+    if (!lang) return;
+
+    const selects = selectCollection === undefined
+      ? collectLanguageSelects()
+      : toArray(selectCollection);
+    const settings = options || {};
+
+    selects.forEach(function(select) {
+      if (optionExists(select, lang)) {
+        select.value = lang;
+      }
+    });
+
     if (document.documentElement) {
       document.documentElement.setAttribute('lang', lang);
     }
-    setCookie(LANGUAGE_COOKIE_NAME, lang, LANGUAGE_COOKIE_LIFETIME_DAYS);
+
+    if (settings.persist !== false) {
+      setCookie(LANGUAGE_COOKIE_NAME, lang, LANGUAGE_COOKIE_LIFETIME_DAYS);
+    }
+
     dispatchLanguageChange(lang);
   }
 
   function initLanguagePreference(selectElement) {
-    const select = selectElement || document.getElementById('lang-select');
-    if (!select) {
+    const selects = collectLanguageSelects(selectElement);
+
+    const savedLanguage = getCookie(LANGUAGE_COOKIE_NAME);
+
+    if (!selects.length) {
+      if (savedLanguage) {
+        applyLanguage(undefined, savedLanguage);
+      }
       return;
     }
 
-    const savedLanguage = getCookie(LANGUAGE_COOKIE_NAME);
-    const initialLanguage = savedLanguage && optionExists(select, savedLanguage)
+    const initialLanguageCandidate = selects.reduce(function(found, current) {
+      if (found) return found;
+      if (current && current.value) {
+        return current.value;
+      }
+      if (current && current.options && current.options.length > 0) {
+        return current.options[0].value;
+      }
+      return found;
+    }, '') || 'en';
+
+    const savedLanguageMatches = savedLanguage && selects.some(function(select) {
+      return optionExists(select, savedLanguage);
+    });
+
+    const initialLanguage = savedLanguageMatches
       ? savedLanguage
-      : select.value || select.options[0]?.value || 'en';
+      : initialLanguageCandidate;
 
-    applyLanguage(select, initialLanguage);
+    applyLanguage(undefined, initialLanguage);
 
-    select.addEventListener('change', function(event) {
-      applyLanguage(select, event.target.value);
+    selects.forEach(function(select) {
+      if (select.dataset.languagePreferenceInitialized === 'true') {
+        return;
+      }
+
+      select.dataset.languagePreferenceInitialized = 'true';
+      select.addEventListener('change', function(event) {
+        applyLanguage(undefined, event.target.value);
+      });
     });
   }
 
@@ -69,13 +154,22 @@
       return getCookie(LANGUAGE_COOKIE_NAME);
     },
     setPreferredLanguage: function(lang) {
-      const select = document.getElementById('lang-select');
       if (!lang) {
         return;
       }
-      applyLanguage(select, lang);
+      applyLanguage(undefined, lang);
     },
     COOKIE_NAME: LANGUAGE_COOKIE_NAME,
     CHANGE_EVENT: LANGUAGE_CHANGE_EVENT
   };
+
+  function autoInit() {
+    initLanguagePreference();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit, { once: true });
+  } else {
+    autoInit();
+  }
 })();
