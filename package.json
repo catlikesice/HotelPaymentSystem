@@ -10,7 +10,7 @@
     "dotenv": "^16.2.0",
     "express": "^4.21.2",
     "qrcode": "^1.5.3",
-    "tronweb": "^5.3.4"
-    "nowpayments":"1.0.5"
+    "tronweb": "^5.3.4",
+    "express-rate-limit": "^7.0.0"
   }
 }
