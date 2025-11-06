@@ -97,7 +97,8 @@
         </section>
     </main>
 
-    <script src="site-preferences.js"></script>
+      <script src="site-preferences.js"></script>
+      <script src="assets/nav-translations.js"></script>
     <script>
       // Translation data for supported languages
       const translations = {
@@ -263,6 +264,10 @@
           }
 
           updateLocationDisplay();
+
+        if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
+          window.NavBarTranslations.apply(lang);
+        }
         }
 
         const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';

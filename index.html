@@ -140,10 +140,11 @@
 </section>
 
     <footer>
-        <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
-    </footer>
+          <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+      </footer>
 
-    <script src="site-preferences.js"></script>
+      <script src="site-preferences.js"></script>
+      <script src="assets/nav-translations.js"></script>
     <script>
     // Translation data for supported languages
     const translations = {
@@ -234,19 +235,23 @@
       }
     };
 
-    function applyTranslations(lang) {
-      const mapping = translations[lang] || translations['en'];
-      Object.keys(mapping).forEach(function(key) {
-        const el = document.getElementById(key);
-        if (el) {
-          if (key === 'contact-email' || key === 'footer-text') {
-            el.innerHTML = mapping[key];
-          } else {
-            el.textContent = mapping[key];
+      function applyTranslations(lang) {
+        const mapping = translations[lang] || translations['en'];
+        Object.keys(mapping).forEach(function(key) {
+          const el = document.getElementById(key);
+          if (el) {
+            if (key === 'contact-email' || key === 'footer-text') {
+              el.innerHTML = mapping[key];
+            } else {
+              el.textContent = mapping[key];
+            }
           }
+        });
+
+        if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
+          window.NavBarTranslations.apply(lang);
         }
-      });
-    }
+      }
 
     const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
     document.addEventListener(languageEventName, function(event) {
