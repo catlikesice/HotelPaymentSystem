@@ -319,6 +319,15 @@ header a { position: static !important; left: auto !important; right: auto !impo
   display: inline-block;
 }
 
+.confirm-button {
+  text-decoration: none;
+}
+
+.confirm-button:hover,
+.confirm-button:focus {
+  text-decoration: none;
+}
+
 /* -------------------------
    FEATURES / CARDS — THE "BOXES"
    (kept unchanged)
