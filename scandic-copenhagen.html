@@ -26,56 +26,35 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
         }
-        .hotel-detail form {
+        .booking-summary {
             margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
+            padding: 1.5rem;
+            background: #f1f7f1;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(46, 125, 50, 0.2);
+            color: #2e4d25;
+            line-height: 1.6;
         }
-        .hotel-detail label {
-            margin-right: 0.5rem;
+        .booking-summary p {
+            margin: 0.35rem 0;
         }
-        .hotel-detail input[type="date"] {
-            padding: 0.3rem;
-        }
-        .hotel-detail .total-price {
+        .booking-summary__total {
             font-weight: bold;
             color: #2e7d32;
-            margin-left: 1rem;
+            font-size: 1.05rem;
         }
-        .hotel-detail button {
-            background: #2e7d32;
-            color: #fff;
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0.5rem 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
+        .booking-summary__notice {
+            font-weight: 600;
         }
-        .hotel-detail button:hover {
-            background: #156d17;
+        .booking-summary__reminder a {
+            color: #2e7d32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .booking-summary__reminder a:hover {
+            text-decoration: underline;
         }
     </style>
-    <script>
-        function calculateTotalPrice() {
-            const pricePerNight = 0.07;
-            const checkin = document.getElementById('checkin').value;
-            const checkout = document.getElementById('checkout').value;
-            const totalPriceSpan = document.getElementById('totalPrice');
-            let nights = 0;
-            if (checkin && checkout) {
-                const inDate = new Date(checkin);
-                const outDate = new Date(checkout);
-                nights = (outDate - inDate) / (1000 * 60 * 60 * 24);
-            }
-            if (nights > 0) {
-                totalPriceSpan.textContent = 'Total: ' + (nights * pricePerNight).toFixed(2) + ' ETH';
-            } else {
-                totalPriceSpan.textContent = '';
-            }
-        }
-    </script>
 </head>
 <body style="background:#e6f0e6;min-height:100vh;">
     <div class="booking-header">
@@ -85,18 +64,14 @@
     <div class="hotel-detail">
         <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=600&q=80" alt="Scandic Copenhagen">
         <h2>Scandic Copenhagen</h2>
-        <div class="price">0.07 ETH / night</div>
+        <div class="price" data-rate-value="0.07" data-rate-currency="ETH" data-rate-decimals="2">0.07 ETH / night</div>
         <p>
             Scandic Copenhagen is located near Tivoli Gardens and offers modern, spacious rooms, excellent conference facilities, and a stylish restaurant.
         </p>
-        <form id="bookingForm" onsubmit="event.preventDefault(); alert('Booking request submitted!');">
-            <label for="checkin"><b>Check-in:</b></label>
-            <input type="date" id="checkin" name="checkin" required onchange="calculateTotalPrice()">
-            <label for="checkout"><b>Check-out:</b></label>
-            <input type="date" id="checkout" name="checkout" required onchange="calculateTotalPrice()">
-            <span id="totalPrice" class="total-price"></span>
-            <button type="submit">Book Now</button>
-        </form>
+        <div class="booking-summary" aria-live="polite">
+            <p class="booking-summary__notice">Loading your booking summary…</p>
+        </div>
     </div>
+    <script src="assets/hotel-booking-summary.js"></script>
 </body>
 </html>
