@@ -190,61 +190,11 @@
     <div class="back-link">
         <p><a href="selectlocation.html"><span id="back-link-text">Back to Booking</span></a></p>
     </div>
-    <footer>
-        <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
-    </footer>
-        <script>
-        function updatePrices() {
-            const currency = document.getElementById('currency').value;
-            const priceElements = document.querySelectorAll('.price');
-            
-            // Approximate conversion rates (USDT as base)
-            const conversionRates = {
-                'ETH': 0.00035,      // 1 USDT ≈ 0.00035 ETH
-                'BTC': 0.0000058,    // 1 USDT ≈ 0.0000058 BTC
-                'USDT': 1,
-                'LTC': 0.0105,       // 1 USDT ≈ 0.0105 LTC
-                'BCH': 0.00235,      // 1 USDT ≈ 0.00235 BCH
-                'DOGE': 9.5,         // 1 USDT ≈ 9.5 DOGE
-                'XRP': 1.9,          // 1 USDT ≈ 1.9 XRP
-                'XMR': 0.006,        // 1 USDT ≈ 0.006 XMR
-                'XNO': 0.95,         // 1 USDT ≈ 0.95 XNO
-                'DASH': 0.0335,      // 1 USDT ≈ 0.0335 DASH
-                'VET': 28,           // 1 USDT ≈ 28 VET
-                'UNI': 0.14,         // 1 USDT ≈ 0.14 UNI
-                'SOL': 0.0065,       // 1 USDT ≈ 0.0065 SOL
-                'ADA': 1.3,          // 1 USDT ≈ 1.3 ADA
-                'TRN': 5.5           // 1 USDT ≈ 5.5 TRN
-            };
-            
-            priceElements.forEach(priceEl => {
-                const ethPrice = priceEl.getAttribute('data-eth');
-                const btcPrice = priceEl.getAttribute('data-btc');
-                const usdtPrice = priceEl.getAttribute('data-usdt');
-                
-                let newPrice;
-                if (currency === 'ETH') {
-                    newPrice = `${ethPrice} ETH / night`;
-                } else if (currency === 'BTC') {
-                    newPrice = `${btcPrice} BTC / night`;
-                } else if (currency === 'USDT') {
-                    newPrice = `${usdtPrice} USDT / night`;
-                } else {
-                    // Calculate price for new currencies based on USDT
-                    const rate = conversionRates[currency];
-                    if (rate && usdtPrice) {
-                        const convertedPrice = (parseFloat(usdtPrice) * rate).toFixed(rate < 0.001 ? 6 : rate < 0.1 ? 4 : 2);
-                        newPrice = `${convertedPrice} ${currency} / night`;
-                    } else {
-                        newPrice = `${usdtPrice} USDT / night`;
-                    }
-                }
-                
-                priceEl.textContent = newPrice;
-            });
-        }
-
-    <script src="site-preferences.js"></script>
+      <footer>
+          <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="site-preferences.js"></script>
 <script>
 // Translation data for supported languages
 const translations = {

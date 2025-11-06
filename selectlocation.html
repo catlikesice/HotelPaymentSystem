@@ -174,14 +174,16 @@
         lithuania: ["Vilnius", "Kaunas", "Klaipeda", "Šiauliai", "Panevėžys"]
       };
 
-      const langSelectEl = document.getElementById('lang-select');
-      const countrySelect = document.getElementById('country');
-      const citySelect = document.getElementById('city');
-      const checkInInput = document.getElementById('checkIn');
-      const checkOutInput = document.getElementById('checkOut');
-      const continueBtn = document.getElementById('continueBtn');
-      const selectedLocation = document.getElementById('selectedLocation');
-      const todayISO = new Date().toISOString().split('T')[0];
+        const langSelectEl = document.getElementById('lang-select');
+        const countrySelect = document.getElementById('country');
+        const citySelect = document.getElementById('city');
+        const checkInInput = document.getElementById('checkIn');
+        const checkOutInput = document.getElementById('checkOut');
+        const continueBtn = document.getElementById('continueBtn');
+        const selectedLocation = document.getElementById('selectedLocation');
+        const todayISO = new Date().toISOString().split('T')[0];
+        const BOOKING_STORAGE_KEY = 'balticComfortBooking';
+        const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
       checkInInput.min = todayISO;
       checkOutInput.min = todayISO;
@@ -211,11 +213,47 @@
         }).format(date);
       }
 
-      function updateLocationDisplay() {
-        const countryIndex = countrySelect.selectedIndex;
-        const countryText = countryIndex >= 0 ? countrySelect.options[countryIndex].text : '';
-        const cityIndex = citySelect.selectedIndex;
-        const cityText = cityIndex >= 0 ? citySelect.options[cityIndex].text : '';
+        function calculateNights(checkInValue, checkOutValue) {
+          if (!checkInValue || !checkOutValue) {
+            return null;
+          }
+
+          const checkInParts = checkInValue.split('-').map(Number);
+          const checkOutParts = checkOutValue.split('-').map(Number);
+
+          if (checkInParts.length !== 3 || checkOutParts.length !== 3 || checkInParts.some(Number.isNaN) || checkOutParts.some(Number.isNaN)) {
+            return null;
+          }
+
+          const checkInUTC = Date.UTC(checkInParts[0], checkInParts[1] - 1, checkInParts[2]);
+          const checkOutUTC = Date.UTC(checkOutParts[0], checkOutParts[1] - 1, checkOutParts[2]);
+          const diff = checkOutUTC - checkInUTC;
+
+          if (diff <= 0) {
+            return null;
+          }
+
+          return Math.round(diff / MS_PER_DAY);
+        }
+
+        function persistBookingSelection(details) {
+          if (!details) {
+            return;
+          }
+
+          try {
+            const payload = Object.assign({ updatedAt: new Date().toISOString() }, details);
+            window.sessionStorage && window.sessionStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(payload));
+          } catch (error) {
+            console.warn('Unable to persist booking selection details', error);
+          }
+        }
+
+        function updateLocationDisplay() {
+          const countryIndex = countrySelect.selectedIndex;
+          const countryText = countryIndex >= 0 ? countrySelect.options[countryIndex].text : '';
+          const cityIndex = citySelect.selectedIndex;
+          const cityText = cityIndex >= 0 ? citySelect.options[cityIndex].text : '';
 
         const checkInValue = checkInInput.value;
         const checkOutValue = checkOutInput.value;
@@ -223,7 +261,7 @@
         const checkInText = formatDate(checkInValue, locale);
         const checkOutText = formatDate(checkOutValue, locale);
 
-        const summaryParts = [];
+          const summaryParts = [];
 
         if (countrySelect.value && citySelect.value) {
           summaryParts.push(`Selected location: ${countryText} — ${cityText}`);
@@ -241,7 +279,12 @@
           summaryParts.push(`Check-out: ${checkOutText}`);
         }
 
-        selectedLocation.textContent = summaryParts.join(' | ');
+          const nights = calculateNights(checkInValue, checkOutValue);
+          if (nights && nights > 0) {
+            summaryParts.push(`Nights: ${nights}`);
+          }
+
+          selectedLocation.textContent = summaryParts.join(' | ');
       }
 
         function applyTranslations(lang) {
@@ -336,7 +379,7 @@
 
       checkOutInput.addEventListener('change', updateLocationDisplay);
 
-      continueBtn.addEventListener('click', function() {
+        continueBtn.addEventListener('click', function() {
         const selectedCountry = countrySelect.value;
         const selectedCity = citySelect.value;
         const checkInDate = checkInInput.value;
@@ -352,8 +395,20 @@
           alert('Please select a check-out date before continuing.');
         } else if (checkOutDate <= checkInDate) {
           alert('Your check-out date must be after your check-in date.');
-        } else {
-          window.location.href = selectedCity + '.html';
+          } else {
+            const nights = calculateNights(checkInDate, checkOutDate) || 1;
+            const cityDisplayName = citySelect.options[citySelect.selectedIndex] ? citySelect.options[citySelect.selectedIndex].text : selectedCity;
+
+            persistBookingSelection({
+              country: selectedCountry,
+              citySlug: selectedCity,
+              cityName: cityDisplayName,
+              checkInDate,
+              checkOutDate,
+              nights: nights > 0 ? nights : 1
+            });
+
+            window.location.href = selectedCity + '.html';
         }
       });
 
