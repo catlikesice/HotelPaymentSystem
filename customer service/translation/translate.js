@@ -10,7 +10,7 @@
  * Configuration via environment variables:
  * - TRANSLATE_API_URL: translation endpoint (default: https://libretranslate.com/translate)
  * - TRANSLATE_API_KEY: optional API key for the translation service
- * - TARGET_LANGS: comma-separated list (default: "lv,ru")
+ * - TARGET_LANGS: comma-separated list (default: "lv,ru,de")
  *
  * Usage:
  *   npm run translate
@@ -35,7 +35,7 @@ const CACHE_FILE = path.join(PROJECT_ROOT, '.translation-cache.json');
 // Config
 const TRANSLATE_API_URL = process.env.TRANSLATE_API_URL || 'https://libretranslate.com/translate';
 const TRANSLATE_API_KEY = process.env.TRANSLATE_API_KEY || '';
-const TARGET_LANGS = (process.env.TARGET_LANGS || 'lv,ru').split(',').map(s => s.trim()).filter(Boolean);
+const TARGET_LANGS = (process.env.TARGET_LANGS || 'lv,ru,de').split(',').map(s => s.trim()).filter(Boolean);
 
 // File globs (ignore node_modules and dist)
 const FILE_GLOBS = [
