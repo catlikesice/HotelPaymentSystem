@@ -134,13 +134,17 @@
         <h1 id="booking-header-title">Baltic Comfort</h1>
         <p id="booking-header-desc">Book your stay with secure crypto payments</p>
     </div>
-    <label for="lang-select" class="sr-only">Language</label>
-    <select id="lang-select" aria-label="Select language">
-      <option value="en">English</option>
-      <option value="ru">Русский</option>
-      <option value="lv">Latviešu</option>
-      <option value="et">Eesti</option>
-    </select>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="lv">Latviešu</option>
+                <option value="et">Eesti</option>
+            </select>
+        </div>
+    </div>
 
     <div class="booking-container">
         <h2 id="available-hotels">Available Hotels in Espoo</h2>
