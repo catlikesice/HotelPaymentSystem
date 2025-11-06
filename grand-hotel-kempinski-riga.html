@@ -54,6 +54,25 @@
         .booking-summary__reminder a:hover {
             text-decoration: underline;
         }
+        .confirm-button {
+            display: inline-block;
+            width: 100%;
+            margin-top: 1.75rem;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1.4rem;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+        .confirm-button:hover,
+        .confirm-button:focus {
+            background: #156d17;
+        }
     </style>
 </head>
 <body style="background:#e6f0e6;min-height:100vh;">
@@ -71,6 +90,7 @@
         <div class="booking-summary" aria-live="polite">
             <p class="booking-summary__notice">Loading your booking summary…</p>
         </div>
+        <button type="button" class="confirm-button">Confirm Booking</button>
     </div>
     <script src="assets/hotel-booking-summary.js"></script>
 </body>
