@@ -25,8 +25,9 @@
     <p><a href="../../../selectlocation.html"><span id="back-link-text">Back to Select Location</span></a></p>
   </div>
 
-  <script>
-  const translations = {
+    <script src="../../../site-preferences.js"></script>
+    <script>
+    const translations = {
     en: {
       "page-title": "Aalborg — Denmark",
       "placeholder-text": "This is a placeholder page for Aalborg in Denmark. The hotel listing for this city will be added here soon.",
@@ -49,16 +50,36 @@
     },
   };
 
-  document.getElementById('lang-select').addEventListener('change', function() {
-    const lang = this.value;
-    const mapping = translations[lang] || translations['en'];
-    Object.keys(mapping).forEach(function(key) {
-      const el = document.getElementById(key);
-      if (el) {
-        el.textContent = mapping[key];
-      }
+    function applyTranslations(lang) {
+      const mapping = translations[lang] || translations['en'];
+      Object.keys(mapping).forEach(function(key) {
+        const el = document.getElementById(key);
+        if (el) {
+          el.textContent = mapping[key];
+        }
+      });
+    }
+
+    const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
+    document.addEventListener(languageEventName, function(event) {
+      applyTranslations((event.detail && event.detail.lang) || 'en');
     });
-  });
+
+    if (window.LanguagePreferences && typeof window.LanguagePreferences.init === 'function') {
+      LanguagePreferences.init(document.getElementById('lang-select'));
+    } else {
+      const fallbackSelect = document.getElementById('lang-select');
+      if (fallbackSelect) {
+        const initialLanguage = fallbackSelect.value || 'en';
+        document.documentElement.setAttribute('lang', initialLanguage);
+        applyTranslations(initialLanguage);
+        fallbackSelect.addEventListener('change', function() {
+          const lang = this.value;
+          document.documentElement.setAttribute('lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    }
   </script>
 </body>
 </html>
