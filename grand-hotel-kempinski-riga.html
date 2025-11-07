@@ -26,94 +26,6 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
         }
-        .room-options,
-        .addon-options {
-            margin-top: 1.75rem;
-            padding: 0;
-            border: none;
-        }
-        .room-options legend,
-        .addon-options legend {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: #2e4d25;
-            margin-bottom: 0.85rem;
-        }
-        .room-option,
-        .addon-option {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem 1.15rem;
-            margin-bottom: 0.85rem;
-            border: 1px solid rgba(46, 125, 50, 0.25);
-            border-radius: 0.9rem;
-            background: #f9fdf9;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-            cursor: pointer;
-        }
-        .room-option:hover,
-        .addon-option:hover {
-            border-color: rgba(21, 109, 23, 0.55);
-            background: #f1fbf1;
-            box-shadow: 0 4px 12px rgba(21,109,23,0.08);
-        }
-        .room-option:focus-within,
-        .addon-option:focus-within {
-            outline: 3px solid rgba(21, 109, 23, 0.35);
-            outline-offset: 2px;
-        }
-        .room-option input,
-        .addon-option input {
-            margin-top: 0.3rem;
-        }
-        .room-option__details,
-        .addon-option__details {
-            flex: 1;
-        }
-        .addon-option__title {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-            color: #1f4b23;
-        }
-        .room-option__title {
-            font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 0.35rem;
-            color: #1f4b23;
-        }
-        .room-option__rate,
-        .addon-option__rate {
-            font-weight: 600;
-            color: #2e7d32;
-            margin-bottom: 0.45rem;
-        }
-        .room-option__description,
-        .addon-option__description {
-            color: #2e4d25;
-            margin: 0;
-            line-height: 1.5;
-        }
-        .booking-summary__room,
-        .booking-summary__addons-nightly,
-        .booking-summary__addons-stay,
-        .booking-summary__nightly-total {
-            margin: 0.45rem 0;
-        }
-        .booking-summary__addons-heading {
-            margin-top: 1rem;
-            font-weight: 600;
-            color: #1f4b23;
-        }
-        .booking-summary__addons-list {
-            margin: 0.35rem 0 0;
-            padding-left: 1.15rem;
-            color: #2e4d25;
-        }
-        .booking-summary__addons-list li {
-            margin: 0.25rem 0;
-        }
         .booking-summary {
             margin-top: 2rem;
             padding: 1.5rem;
@@ -172,103 +84,59 @@
         <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?fit=crop&w=600&q=80" alt="Grand Hotel Kempinski Riga">
         <h2>Grand Hotel Kempinski Riga</h2>
         <div class="price" data-rate-value="0.09" data-rate-currency="ETH" data-rate-decimals="2">0.09 ETH / night</div>
-        <p>
-          Overlooking the Latvian National Opera, Grand Hotel Kempinski Riga combines five-star elegance with a tranquil spa, signature rooftop bar, and bespoke concierge service for memorable stays in the capital.
-        </p>
-          <fieldset class="room-options" aria-labelledby="room-options-heading">
-              <legend id="room-options-heading">Choose your preferred room type</legend>
-              <label class="room-option">
-                  <input type="radio" name="roomOption" value="deluxe-room"
-                      data-label="Opera Deluxe Room"
-                      data-nightly-rate="0.09"
-                      data-currency="ETH"
-                      data-decimals="2"
-                      checked>
-                  <div class="room-option__details">
-                      <div class="room-option__title">Opera Deluxe Room</div>
-                      <div class="room-option__rate">0.09 ETH / night</div>
-                      <p class="room-option__description">
-                          Elegant 40 m² room overlooking the National Opera, marble bathroom, daily turndown service, and complimentary artisanal breakfast.
-                      </p>
-                  </div>
-              </label>
-              <label class="room-option">
-                  <input type="radio" name="roomOption" value="signature-suite"
-                      data-label="Signature Opera Suite"
-                      data-nightly-rate="0.14"
-                      data-currency="ETH"
-                      data-decimals="2">
-                  <div class="room-option__details">
-                      <div class="room-option__title">Signature Opera Suite</div>
-                      <div class="room-option__rate">0.14 ETH / night</div>
-                      <p class="room-option__description">
-                          65 m² suite with separate living room, private concierge line, evening champagne service, and in-room Peloton bike upon request.
-                      </p>
-                  </div>
-              </label>
-              <label class="room-option">
-                  <input type="radio" name="roomOption" value="royal-opera-suite"
-                      data-label="Royal Opera Suite"
-                      data-nightly-rate="0.21"
-                      data-currency="ETH"
-                      data-decimals="2">
-                  <div class="room-option__details">
-                      <div class="room-option__title">Royal Opera Suite</div>
-                      <div class="room-option__rate">0.21 ETH / night</div>
-                      <p class="room-option__description">
-                          Top-floor 100 m² suite featuring panoramic city views, private terrace, butler service, and chauffeured arrival in a vintage Riga cabriolet.
-                      </p>
-                  </div>
-              </label>
-          </fieldset>
-          <fieldset class="addon-options" aria-labelledby="addon-options-heading">
-              <legend id="addon-options-heading">Enhance your stay</legend>
-              <label class="addon-option">
-                  <input type="checkbox" name="addonOption" value="spa-access"
-                      data-label="Kempinski The Spa access"
-                      data-price="0.01"
-                      data-billing="per-night"
-                      data-currency="ETH"
-                      data-decimals="2">
-                  <div class="addon-option__details">
-                      <div class="addon-option__title">Kempinski The Spa access</div>
-                      <div class="addon-option__rate">+0.01 ETH / night</div>
-                      <p class="addon-option__description">
-                          Unlimited daily access to thermal suites, saunas, and the relaxation pool for all registered guests.
-                      </p>
-                  </div>
-              </label>
-              <label class="addon-option">
-                  <input type="checkbox" name="addonOption" value="airport-transfer"
-                      data-label="Private airport transfer"
-                      data-price="0.05"
-                      data-billing="per-stay"
-                      data-currency="ETH"
-                      data-decimals="2">
-                  <div class="addon-option__details">
-                      <div class="addon-option__title">Private airport transfer</div>
-                      <div class="addon-option__rate">+0.05 ETH once per stay</div>
-                      <p class="addon-option__description">
-                          Chauffeured Tesla Model X pick-up and drop-off with on-board refreshments and concierge check-in.
-                      </p>
-                  </div>
-              </label>
-              <label class="addon-option">
-                  <input type="checkbox" name="addonOption" value="rooftop-tasting"
-                      data-label="Rooftop tasting menu"
-                      data-price="0.03"
-                      data-billing="per-night"
-                      data-currency="ETH"
-                      data-decimals="2">
-                  <div class="addon-option__details">
-                      <div class="addon-option__title">Rooftop tasting menu</div>
-                      <div class="addon-option__rate">+0.03 ETH / night</div>
-                      <p class="addon-option__description">
-                          Five-course chef’s tasting menu with wine pairings on the Skyline Terrace each night of your stay.
-                      </p>
-                  </div>
-              </label>
-          </fieldset>
+          <p>
+            Overlooking the Latvian National Opera, Grand Hotel Kempinski Riga combines five-star elegance with a tranquil spa, signature rooftop bar, and bespoke concierge service for memorable stays in the capital.
+          </p>
+          <script type="application/json" data-hotel-config>
+          {
+            "roomLegend": "Choose your preferred room type",
+            "rooms": [
+              {
+                "id": "deluxe-room",
+                "label": "Opera Deluxe Room",
+                "nightlyRate": 0.09,
+                "description": "Elegant 40 m² room overlooking the National Opera with marble bathroom, daily turndown service, and complimentary artisanal breakfast.",
+                "default": true
+              },
+              {
+                "id": "signature-suite",
+                "label": "Signature Opera Suite",
+                "nightlyRate": 0.14,
+                "description": "65 m² suite with separate living room, private concierge line, evening champagne service, and in-room Peloton bike upon request."
+              },
+              {
+                "id": "royal-opera-suite",
+                "label": "Royal Opera Suite",
+                "nightlyRate": 0.21,
+                "description": "Top-floor 100 m² suite featuring panoramic city views, private terrace, butler service, and chauffeured arrival in a vintage Riga cabriolet."
+              }
+            ],
+            "addonLegend": "Enhance your stay",
+            "addons": [
+              {
+                "id": "spa-access",
+                "label": "Kempinski The Spa access",
+                "price": 0.01,
+                "billing": "per-night",
+                "description": "Unlimited daily access to thermal suites, saunas, and the relaxation pool for all registered guests."
+              },
+              {
+                "id": "airport-transfer",
+                "label": "Private airport transfer",
+                "price": 0.05,
+                "billing": "per-stay",
+                "description": "Chauffeured Tesla Model X pick-up and drop-off with on-board refreshments and concierge check-in."
+              },
+              {
+                "id": "rooftop-tasting",
+                "label": "Rooftop tasting menu",
+                "price": 0.03,
+                "billing": "per-night",
+                "description": "Five-course chef’s tasting menu with wine pairings on the Skyline Terrace each night of your stay."
+              }
+            ]
+          }
+          </script>
         <div class="booking-summary" aria-live="polite">
             <p class="booking-summary__notice">Loading your booking summary…</p>
         </div>

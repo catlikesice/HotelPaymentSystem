@@ -87,6 +87,56 @@
         <p>
             Situated between Riga Old Town and the Daugava River, Wellton Riverside offers contemporary rooms, a panoramic rooftop terrace, and a wellness area with sauna, pool, and hydro-massage.
         </p>
+          <script type="application/json" data-hotel-config>
+          {
+            "roomLegend": "Select your room category",
+            "rooms": [
+              {
+                "id": "riverside-deluxe",
+                "label": "Riverside Deluxe Room",
+                "nightlyRate": 0.06,
+                "description": "Bright 32 m² room with river views, walk-in rain shower, and complimentary Baltic breakfast buffet.",
+                "default": true
+              },
+              {
+                "id": "panorama-suite",
+                "label": "Panorama Suite",
+                "nightlyRate": 0.095,
+                "description": "Spacious corner suite featuring wraparound windows, private sauna access, and evening prosecco service."
+              },
+              {
+                "id": "club-suite",
+                "label": "Riverside Club Suite",
+                "nightlyRate": 0.13,
+                "description": "Executive-level suite with separate lounge, dedicated concierge, and exclusive club lounge refreshments."
+              }
+            ],
+            "addonLegend": "Optional enhancements",
+            "addons": [
+              {
+                "id": "thermal-spa",
+                "label": "Spa & Thermal zone access",
+                "price": 0.008,
+                "billing": "per-night",
+                "description": "Unlimited use of saunas, steam room, and hydrotherapy pool throughout your stay."
+              },
+              {
+                "id": "river-cruise",
+                "label": "Daugava evening river cruise",
+                "price": 0.04,
+                "billing": "per-stay",
+                "description": "Private two-hour sunset cruise with sommelier-selected wines and local mezze platter."
+              },
+              {
+                "id": "wine-tasting",
+                "label": "Latvian wine tasting flight",
+                "price": 0.02,
+                "billing": "per-night",
+                "description": "Sommelier-guided tasting of boutique Latvian wines served in the Sky Bar."
+              }
+            ]
+          }
+          </script>
         <div class="booking-summary" aria-live="polite">
             <p class="booking-summary__notice">Loading your booking summary…</p>
         </div>

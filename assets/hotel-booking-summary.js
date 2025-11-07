@@ -8,6 +8,7 @@
     et: 'et-EE',
     de: 'de-DE'
   };
+  const optionsConfigCache = new WeakMap();
 
   function safeGetSessionStorage() {
     try {
@@ -144,6 +145,260 @@
     return Math.max(0, Math.min(8, numeric));
   }
 
+  function getBaseCurrency(priceEl) {
+    if (!priceEl || !priceEl.dataset) {
+      return 'ETH';
+    }
+    return priceEl.dataset.rateCurrency || priceEl.dataset.currency || 'ETH';
+  }
+
+  function getBaseDecimals(priceEl) {
+    if (!priceEl || !priceEl.dataset) {
+      return 2;
+    }
+    return toSafeDecimals(priceEl.dataset.rateDecimals || priceEl.dataset.decimals, 2);
+  }
+
+  function readOptionsConfig(detailContainer) {
+    if (!detailContainer) {
+      return null;
+    }
+
+    if (optionsConfigCache.has(detailContainer)) {
+      return optionsConfigCache.get(detailContainer);
+    }
+
+    const scriptSelector = [
+      'script[type="application/json"][data-hotel-config]',
+      'script[type="application/json"][data-room-config]',
+      'script[type="application/json"].hotel-room-config'
+    ].join(', ');
+
+    const scriptEl = detailContainer.querySelector(scriptSelector);
+    if (!scriptEl) {
+      optionsConfigCache.set(detailContainer, null);
+      return null;
+    }
+
+    try {
+      const raw = (scriptEl.textContent || '').trim();
+      if (!raw) {
+        optionsConfigCache.set(detailContainer, null);
+        return null;
+      }
+      const parsed = JSON.parse(raw);
+      optionsConfigCache.set(detailContainer, parsed);
+      return parsed;
+    } catch (error) {
+      console.warn('Unable to parse hotel options config:', error);
+      optionsConfigCache.set(detailContainer, null);
+      return null;
+    }
+  }
+
+  function createRoomOptions(detailContainer, config, priceEl, insertionPoint) {
+    const rooms = Array.isArray(config && config.rooms)
+      ? config.rooms
+      : Array.isArray(config && config.roomOptions)
+        ? config.roomOptions
+        : [];
+
+    if (!rooms.length || detailContainer.querySelector('.room-options')) {
+      return;
+    }
+
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'room-options';
+
+    const legend = document.createElement('legend');
+    legend.textContent = config.roomLegend || config.roomsLegend || 'Choose your room type';
+    fieldset.appendChild(legend);
+
+    const baseCurrency = getBaseCurrency(priceEl);
+    const baseDecimals = getBaseDecimals(priceEl);
+    const hasValidExplicitDefault = rooms.some(function(room) {
+      if (!room) {
+        return false;
+      }
+      const rate = parseFloat(room.nightlyRate);
+      return Number.isFinite(rate) && rate > 0 && room.default;
+    });
+    let defaultAssigned = false;
+    let hasValidOption = false;
+
+    rooms.forEach(function(room, index) {
+      if (!room) {
+        return;
+      }
+
+      const nightlyRate = parseFloat(room.nightlyRate);
+      if (!Number.isFinite(nightlyRate) || nightlyRate <= 0) {
+        return;
+      }
+
+      const currency = room.currency || baseCurrency;
+      const decimals = toSafeDecimals(room.decimals, baseDecimals);
+      const labelText = room.label || 'Room option';
+
+      const labelEl = document.createElement('label');
+      labelEl.className = 'room-option';
+
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'roomOption';
+      input.value = room.id || 'room-' + index;
+      input.dataset.label = labelText;
+      input.dataset.nightlyRate = String(nightlyRate);
+      input.dataset.currency = currency;
+      input.dataset.decimals = String(decimals);
+      input.setAttribute('aria-label', labelText);
+
+      if (!defaultAssigned) {
+        if (room.default) {
+          input.checked = true;
+          defaultAssigned = true;
+        } else if (!hasValidExplicitDefault) {
+          input.checked = true;
+          defaultAssigned = true;
+        }
+      }
+
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'room-option__details';
+
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'room-option__title';
+      titleDiv.textContent = labelText;
+      detailsDiv.appendChild(titleDiv);
+
+      const rateDiv = document.createElement('div');
+      rateDiv.className = 'room-option__rate';
+      rateDiv.textContent = formatAmount(nightlyRate, decimals) + ' ' + currency + ' / night';
+      detailsDiv.appendChild(rateDiv);
+
+      if (room.description) {
+        const descP = document.createElement('p');
+        descP.className = 'room-option__description';
+        descP.textContent = room.description;
+        detailsDiv.appendChild(descP);
+      }
+
+      labelEl.appendChild(input);
+      labelEl.appendChild(detailsDiv);
+      fieldset.appendChild(labelEl);
+      hasValidOption = true;
+    });
+
+    if (hasValidOption) {
+      detailContainer.insertBefore(fieldset, insertionPoint);
+    }
+  }
+
+  function createAddOnOptions(detailContainer, config, priceEl, insertionPoint) {
+    const addOns = Array.isArray(config && config.addons)
+      ? config.addons
+      : Array.isArray(config && config.addOns)
+        ? config.addOns
+        : [];
+
+    if (!addOns.length || detailContainer.querySelector('.addon-options')) {
+      return;
+    }
+
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'addon-options';
+
+    const legend = document.createElement('legend');
+    legend.textContent = config.addonLegend || config.addOnsLegend || 'Enhance your stay';
+    fieldset.appendChild(legend);
+
+    const baseCurrency = getBaseCurrency(priceEl);
+    const baseDecimals = getBaseDecimals(priceEl);
+    let hasValidAddOn = false;
+
+    addOns.forEach(function(addOn, index) {
+      if (!addOn) {
+        return;
+      }
+
+      const price = parseFloat(addOn.price);
+      if (!Number.isFinite(price) || price <= 0) {
+        return;
+      }
+
+      const billing = (addOn.billing || '').toLowerCase() === 'per-night' ? 'per-night' : 'per-stay';
+      const currency = addOn.currency || baseCurrency;
+      const decimals = toSafeDecimals(addOn.decimals, baseDecimals);
+      const labelText = addOn.label || 'Add-on';
+
+      const labelEl = document.createElement('label');
+      labelEl.className = 'addon-option';
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.name = 'addonOption';
+      input.value = addOn.id || 'addon-' + index;
+      input.dataset.label = labelText;
+      input.dataset.price = String(price);
+      input.dataset.billing = billing;
+      input.dataset.currency = currency;
+      input.dataset.decimals = String(decimals);
+      input.setAttribute('aria-label', labelText);
+      if (addOn.preselected) {
+        input.checked = true;
+      }
+
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'addon-option__details';
+
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'addon-option__title';
+      titleDiv.textContent = labelText;
+      detailsDiv.appendChild(titleDiv);
+
+      const rateDiv = document.createElement('div');
+      rateDiv.className = 'addon-option__rate';
+      const unitLabel = billing === 'per-night' ? ' / night' : ' per stay';
+      rateDiv.textContent = '+' + formatAmount(price, decimals) + ' ' + currency + unitLabel;
+      detailsDiv.appendChild(rateDiv);
+
+      if (addOn.description) {
+        const descP = document.createElement('p');
+        descP.className = 'addon-option__description';
+        descP.textContent = addOn.description;
+        detailsDiv.appendChild(descP);
+      }
+
+      labelEl.appendChild(input);
+      labelEl.appendChild(detailsDiv);
+      fieldset.appendChild(labelEl);
+      hasValidAddOn = true;
+    });
+
+    if (hasValidAddOn) {
+      detailContainer.insertBefore(fieldset, insertionPoint);
+    }
+  }
+
+  function ensureOptionControls(detailContainer) {
+    if (!detailContainer) {
+      return;
+    }
+
+    const priceEl = detailContainer.querySelector('.price');
+    const summaryEl = detailContainer.querySelector('.booking-summary');
+    const fallbackAnchor = detailContainer.querySelector('.confirm-button') || detailContainer.lastElementChild;
+    const insertionPoint = summaryEl || fallbackAnchor;
+    const config = readOptionsConfig(detailContainer);
+
+    if (!config || !insertionPoint) {
+      return;
+    }
+
+    createRoomOptions(detailContainer, config, priceEl, insertionPoint);
+    createAddOnOptions(detailContainer, config, priceEl, insertionPoint);
+  }
+
   function getSelectedRoom(detailContainer, priceEl) {
     if (!detailContainer) {
       return null;
@@ -222,6 +477,8 @@
     if (!detailContainer) {
       return;
     }
+
+    ensureOptionControls(detailContainer);
 
     const priceEl = detailContainer.querySelector('.price');
     const roomSelection = getSelectedRoom(detailContainer, priceEl);
@@ -356,6 +613,8 @@
     if (!detailContainer) {
       return;
     }
+
+    ensureOptionControls(detailContainer);
 
     const priceEl = detailContainer.querySelector('.price');
     const initialRoom = getSelectedRoom(detailContainer, priceEl);
