@@ -7,12 +7,175 @@
  */
 (function () {
   const RANGE_KEYS = ["cheap", "midrange", "luxury"];
-  const LABELS = { cheap: "Cheap", midrange: "Midrange", luxury: "Luxury" };
   const EPSILON = 1e-6;
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
+  const DEFAULT_TRANSLATIONS = {
+    en: {
+      badge: "Price Guide",
+      heading: "Stay by Budget",
+      description: "Choose a budget tier to spotlight hotels that match.",
+      ariaLabel: "Highlight hotels by nightly rate",
+      noteDefault: "Select a tier to highlight matching stays.",
+      noteUniform:
+        "All listed rooms share a similar nightly rate. Compare amenities to find your fit.",
+      noteDynamic:
+        "Ranges update automatically from the prices shown for this city.",
+      options: {
+        cheap: "Cheap",
+        midrange: "Midrange",
+        luxury: "Luxury",
+      },
+      hints: {
+        cheap: "Up to {amount} {unit}",
+        midrange: "{min} - {max} {unit}",
+        luxury: "Above {amount} {unit}",
+        uniform: "{amount} {unit}",
+      },
+      combinationSeparator: " • ",
+    },
+    ru: {
+      badge: "Гид по ценам",
+      heading: "Выбор по бюджету",
+      description: "Выберите бюджет, чтобы подсветить подходящие отели.",
+      ariaLabel: "Подсветить отели по ночной цене",
+      noteDefault: "Выберите категорию, чтобы увидеть подходящие варианты.",
+      noteUniform:
+        "Все номера имеют схожую стоимость за ночь. Сравните удобства, чтобы выбрать свой вариант.",
+      noteDynamic:
+        "Диапазоны рассчитываются автоматически на основе цен для этого города.",
+      options: {
+        cheap: "Эконом",
+        midrange: "Стандарт",
+        luxury: "Премиум",
+      },
+      hints: {
+        cheap: "До {amount} {unit}",
+        midrange: "{min} — {max} {unit}",
+        luxury: "Выше {amount} {unit}",
+        uniform: "{amount} {unit}",
+      },
+    },
+    lv: {
+      badge: "Cenu ceļvedis",
+      heading: "Uzturēšanās pēc budžeta",
+      description:
+        "Izvēlieties budžeta līmeni, lai izceltu piemērotās viesnīcas.",
+      ariaLabel: "Izcelt viesnīcas pēc nakts cenas",
+      noteDefault: "Izvēlieties līmeni, lai izceltu atbilstošās iespējas.",
+      noteUniform:
+        "Visiem numuriem ir līdzīga cena par nakti. Salīdziniet ērtības, lai atrastu piemērotāko.",
+      noteDynamic:
+        "Robežas tiek aprēķinātas automātiski, izmantojot šajā pilsētā norādītās cenas.",
+      options: {
+        cheap: "Ekonomisks",
+        midrange: "Vidējs",
+        luxury: "Luksusa",
+      },
+      hints: {
+        cheap: "Līdz {amount} {unit}",
+        midrange: "{min}–{max} {unit}",
+        luxury: "Virs {amount} {unit}",
+        uniform: "{amount} {unit}",
+      },
+    },
+    et: {
+      badge: "Hinnajuht",
+      heading: "Majutus eelarve järgi",
+      description:
+        "Vali eelarvekategooria, et esile tõsta sobivad hotellid.",
+      ariaLabel: "Tõsta esile hotellid öö hinna järgi",
+      noteDefault: "Vali tase, et näha sobivaid majutusvõimalusi.",
+      noteUniform:
+        "Kõigil tubadel on sarnane ööhind. Võrdle mugavusi, et leida sobivaim.",
+      noteDynamic:
+        "Vahemikud uuenevad automaatselt selle linna hindade põhjal.",
+      options: {
+        cheap: "Soodne",
+        midrange: "Keskmine",
+        luxury: "Luksus",
+      },
+      hints: {
+        cheap: "Kuni {amount} {unit}",
+        midrange: "{min}–{max} {unit}",
+        luxury: "Üle {amount} {unit}",
+        uniform: "{amount} {unit}",
+      },
+    },
+    de: {
+      badge: "Preisübersicht",
+      heading: "Übernachtung nach Budget",
+      description:
+        "Wählen Sie eine Budgetstufe, um passende Hotels hervorzuheben.",
+      ariaLabel: "Hotels nach Übernachtungspreis hervorheben",
+      noteDefault: "Wählen Sie eine Stufe, um passende Angebote zu sehen.",
+      noteUniform:
+        "Alle Zimmer haben einen ähnlichen Übernachtungspreis. Vergleichen Sie die Ausstattung, um das Richtige zu finden.",
+      noteDynamic:
+        "Die Bereiche aktualisieren sich automatisch anhand der Preise dieser Stadt.",
+      options: {
+        cheap: "Preiswert",
+        midrange: "Mittelklasse",
+        luxury: "Premium",
+      },
+      hints: {
+        cheap: "Bis {amount} {unit}",
+        midrange: "{min}–{max} {unit}",
+        luxury: "Über {amount} {unit}",
+        uniform: "{amount} {unit}",
+      },
+    },
+  };
+
+  const contexts = [];
+  const customTranslations = {};
+  let currentLanguage = "en";
+  let languageHooksBound = false;
+
+  function mergeDeep(target, source) {
+    if (!source) {
+      return target;
+    }
+    Object.keys(source).forEach(function (key) {
+      var value = source[key];
+      if (
+        value &&
+        typeof value === "object" &&
+        !Array.isArray(value)
+      ) {
+        if (
+          !target[key] ||
+          typeof target[key] !== "object" ||
+          Array.isArray(target[key])
+        ) {
+          target[key] = {};
+        }
+        mergeDeep(target[key], value);
+      } else {
+        target[key] = value;
+      }
+    });
+    return target;
+  }
+
+  function composeTranslation(lang) {
+    var normalized = typeof lang === "string" ? lang.toLowerCase() : "en";
+    var merged = mergeDeep({}, DEFAULT_TRANSLATIONS.en);
+    if (customTranslations.en) {
+      mergeDeep(merged, customTranslations.en);
+    }
+    if (normalized !== "en") {
+      if (DEFAULT_TRANSLATIONS[normalized]) {
+        mergeDeep(merged, DEFAULT_TRANSLATIONS[normalized]);
+      }
+      if (customTranslations[normalized]) {
+        mergeDeep(merged, customTranslations[normalized]);
+      }
+    }
+    return merged;
+  }
 
   function formatEth(value) {
     if (!Number.isFinite(value)) return null;
@@ -24,11 +187,23 @@
     return currencyFormatter.format(Math.round(value));
   }
 
+  function getFormatter(unit) {
+    if (unit === "ETH") {
+      return formatEth;
+    }
+    if (unit === "USDT") {
+      return formatUsdt;
+    }
+    return null;
+  }
+
   function computeThresholds(values) {
     if (!values.length) return null;
-    const sorted = values.slice().sort(function (a, b) {
-      return a - b;
-    });
+    const sorted = values
+      .slice()
+      .sort(function (a, b) {
+        return a - b;
+      });
     const min = sorted[0];
     const max = sorted[sorted.length - 1];
     const spread = max - min;
@@ -47,63 +222,309 @@
     };
   }
 
-  function buildHintText(thresholds, type, unit, formatter) {
-    if (!thresholds) return "";
-    const convert = function (value) {
-      return formatter ? formatter(value) : value;
-    };
+  function formatTemplate(template, values) {
+    if (!template) {
+      return "";
+    }
+    return template.replace(/\{(\w+)\}/g, function (_, key) {
+      if (Object.prototype.hasOwnProperty.call(values, key)) {
+        var value = values[key];
+        if (value !== undefined && value !== null) {
+          return value;
+        }
+      }
+      return "";
+    });
+  }
+
+  function buildHintText(thresholds, type, unit, formatter, hintTemplates) {
+    if (!thresholds) {
+      return "";
+    }
+    const templates = hintTemplates || {};
+    const formatValue =
+      typeof formatter === "function"
+        ? function (value) {
+            if (!Number.isFinite(value)) {
+              return null;
+            }
+            return formatter(value);
+          }
+        : function (value) {
+            if (!Number.isFinite(value)) {
+              return null;
+            }
+            return String(value);
+          };
 
     if (thresholds.spread < EPSILON) {
-      const base = convert(thresholds.min);
-      return base != null ? base + " " + unit : "";
+      const uniformValue = formatValue(thresholds.min);
+      if (uniformValue == null) {
+        return "";
+      }
+      const template = templates.uniform || templates[type];
+      if (!template) {
+        return uniformValue + " " + unit;
+      }
+      return formatTemplate(template, {
+        amount: uniformValue,
+        unit: unit,
+      });
     }
 
     if (type === "cheap") {
-      const upTo = convert(thresholds.cheap);
-      return upTo != null ? "Up to " + upTo + " " + unit : "";
+      const upTo = formatValue(thresholds.cheap);
+      if (upTo == null) {
+        return "";
+      }
+      const template = templates.cheap;
+      if (!template) {
+        return "Up to " + upTo + " " + unit;
+      }
+      return formatTemplate(template, {
+        amount: upTo,
+        unit: unit,
+      });
     }
+
     if (type === "midrange") {
-      const low = convert(thresholds.cheap);
-      const high = convert(thresholds.luxury);
-      if (low != null && high != null) {
+      const low = formatValue(thresholds.cheap);
+      const high = formatValue(thresholds.luxury);
+      if (low == null || high == null) {
+        return "";
+      }
+      const template = templates.midrange;
+      if (!template) {
         return low + " - " + high + " " + unit;
       }
-      return "";
+      return formatTemplate(template, {
+        min: low,
+        max: high,
+        unit: unit,
+      });
     }
+
     if (type === "luxury") {
-      const over = convert(thresholds.luxury);
-      return over != null ? "Above " + over + " " + unit : "";
+      const over = formatValue(thresholds.luxury);
+      if (over == null) {
+        return "";
+      }
+      const template = templates.luxury;
+      if (!template) {
+        return "Above " + over + " " + unit;
+      }
+      return formatTemplate(template, {
+        amount: over,
+        unit: unit,
+      });
     }
+
     return "";
   }
 
-  function applyHints(sidebar, options) {
+  function applyStaticTranslations(sidebar, strings) {
+    if (!sidebar || !strings) {
+      return;
+    }
+
+    const badge = sidebar.querySelector(".price-range-tag");
+    if (badge && strings.badge) {
+      badge.textContent = strings.badge;
+    }
+
+    const heading = sidebar.querySelector("h3");
+    if (heading && strings.heading) {
+      heading.textContent = strings.heading;
+    }
+
+    const desc = sidebar.querySelector(".price-range-desc");
+    if (desc && strings.description) {
+      desc.textContent = strings.description;
+    }
+
+    const optionsGroup = sidebar.querySelector(".price-range-options");
+    if (optionsGroup && strings.ariaLabel) {
+      optionsGroup.setAttribute("aria-label", strings.ariaLabel);
+    }
+
     RANGE_KEYS.forEach(function (key) {
-      const target = sidebar.querySelector('[data-range-hint="' + key + '"]');
-      if (!target) return;
-      const lines = [];
-      if (options.primary && options.primary.text[key]) {
-        lines.push(options.primary.text[key]);
+      const button = sidebar.querySelector(
+        '.price-range-option[data-filter="' + key + '"]'
+      );
+      if (!button) {
+        return;
       }
-      if (options.secondary && options.secondary.text[key]) {
-        lines.push(options.secondary.text[key]);
+      const label = button.querySelector(".range-label");
+      if (label && strings.options && strings.options[key]) {
+        label.textContent = strings.options[key];
       }
-      target.textContent = lines.join(" • ");
     });
 
     const note = sidebar.querySelector("[data-range-note]");
-    if (note && options.primary) {
-      if (options.primary.thresholds.spread < EPSILON) {
+    if (note && strings.noteDefault) {
+      note.textContent = strings.noteDefault;
+    }
+  }
+
+  function updateHintValues(context, strings) {
+    const sidebar = context && context.sidebar;
+    if (!sidebar) {
+      return;
+    }
+
+    const metrics = context.metrics;
+    const separator =
+      (strings && strings.combinationSeparator) || " • ";
+    const note = sidebar.querySelector("[data-range-note]");
+
+    if (!metrics || !metrics.primary) {
+      RANGE_KEYS.forEach(function (key) {
+        const hintEl = sidebar.querySelector(
+          '[data-range-hint="' + key + '"]'
+        );
+        if (hintEl) {
+          hintEl.textContent = "";
+        }
+      });
+      if (note && strings && strings.noteDefault) {
+        note.textContent = strings.noteDefault;
+      }
+      return;
+    }
+
+    const primary = metrics.primary;
+    const secondary = metrics.secondary || null;
+
+    RANGE_KEYS.forEach(function (key) {
+      const hintEl = sidebar.querySelector(
+        '[data-range-hint="' + key + '"]'
+      );
+      if (!hintEl) {
+        return;
+      }
+      const segments = [];
+      const primaryText = buildHintText(
+        primary.thresholds,
+        key,
+        primary.unit,
+        primary.formatter,
+        strings && strings.hints
+      );
+      if (primaryText) {
+        segments.push(primaryText);
+      }
+      if (secondary) {
+        const secondaryText = buildHintText(
+          secondary.thresholds,
+          key,
+          secondary.unit,
+          secondary.formatter,
+          strings && strings.hints
+        );
+        if (secondaryText) {
+          segments.push(secondaryText);
+        }
+      }
+      hintEl.textContent = segments.join(separator);
+    });
+
+    if (note) {
+      if (primary.thresholds && primary.thresholds.spread < EPSILON) {
         note.textContent =
-          "All listed rooms share a similar nightly rate. Compare amenities to find your fit.";
+          (strings && strings.noteUniform) ||
+          (strings && strings.noteDefault) ||
+          "";
       } else {
         note.textContent =
-          "Ranges update automatically from the prices shown for this city.";
+          (strings && strings.noteDynamic) ||
+          (strings && strings.noteDefault) ||
+          "";
       }
+    }
+  }
+
+  function renderSidebar(context, strings) {
+    if (!context || !context.sidebar) {
+      return;
+    }
+    applyStaticTranslations(context.sidebar, strings);
+    updateHintValues(context, strings);
+  }
+
+  function refreshSidebars() {
+    const strings = composeTranslation(currentLanguage);
+    contexts.forEach(function (context) {
+      renderSidebar(context, strings);
+    });
+  }
+
+  function setLanguage(lang) {
+    var normalized = typeof lang === "string" ? lang.toLowerCase() : "en";
+    if (
+      !DEFAULT_TRANSLATIONS[normalized] &&
+      !customTranslations[normalized]
+    ) {
+      normalized = "en";
+    }
+    if (normalized !== currentLanguage) {
+      currentLanguage = normalized;
+    }
+    refreshSidebars();
+    return currentLanguage;
+  }
+
+  function registerTranslations(map) {
+    if (!map) {
+      return;
+    }
+    Object.keys(map).forEach(function (langKey) {
+      const normalized = langKey.toLowerCase();
+      if (!customTranslations[normalized]) {
+        customTranslations[normalized] = {};
+      }
+      mergeDeep(customTranslations[normalized], map[langKey]);
+    });
+    refreshSidebars();
+  }
+
+  function detectLanguage() {
+    const select = document.getElementById("lang-select");
+    if (select && select.value) {
+      return select.value.toLowerCase();
+    }
+    if (document.documentElement && document.documentElement.lang) {
+      return document.documentElement.lang.toLowerCase();
+    }
+    return currentLanguage || "en";
+  }
+
+  function bindLanguageHooks() {
+    if (languageHooksBound) {
+      return;
+    }
+    languageHooksBound = true;
+
+    const languageEventName =
+      (window.LanguagePreferences &&
+        window.LanguagePreferences.CHANGE_EVENT) ||
+      "preferredLanguageChange";
+
+    document.addEventListener(languageEventName, function (event) {
+      const nextLang =
+        (event && event.detail && event.detail.lang) || detectLanguage();
+      setLanguage(nextLang);
+    });
+
+    const select = document.getElementById("lang-select");
+    if (select) {
+      select.addEventListener("change", function () {
+        setLanguage(this.value || "en");
+      });
     }
   }
 
   function createSidebar(index) {
+    const strings = DEFAULT_TRANSLATIONS.en;
     const aside = document.createElement("aside");
     const headingId = "price-range-heading-" + index;
     aside.className = "price-range-sidebar";
@@ -111,23 +532,26 @@
 
     const badge = document.createElement("span");
     badge.className = "price-range-tag";
-    badge.textContent = "Price Guide";
+    badge.textContent = strings.badge;
     aside.appendChild(badge);
 
     const heading = document.createElement("h3");
     heading.id = headingId;
-    heading.textContent = "Stay by Budget";
+    heading.textContent = strings.heading;
     aside.appendChild(heading);
 
     const desc = document.createElement("p");
     desc.className = "price-range-desc";
-    desc.textContent = "Choose a budget tier to spotlight hotels that match.";
+    desc.textContent = strings.description;
     aside.appendChild(desc);
 
     const options = document.createElement("div");
     options.className = "price-range-options";
     options.setAttribute("role", "group");
-    options.setAttribute("aria-label", "Highlight hotels by nightly rate");
+    options.setAttribute(
+      "aria-label",
+      strings.ariaLabel || "Highlight hotels by nightly rate"
+    );
 
     RANGE_KEYS.forEach(function (key) {
       const button = document.createElement("button");
@@ -137,7 +561,8 @@
 
       const label = document.createElement("span");
       label.className = "range-label";
-      label.textContent = LABELS[key] || key;
+      label.textContent =
+        (strings.options && strings.options[key]) || key;
 
       const value = document.createElement("span");
       value.className = "range-value";
@@ -154,7 +579,7 @@
     const note = document.createElement("p");
     note.className = "price-range-footnote";
     note.setAttribute("data-range-note", "");
-    note.textContent = "Select a tier to highlight matching stays.";
+    note.textContent = strings.noteDefault;
     aside.appendChild(note);
 
     return aside;
@@ -193,11 +618,14 @@
     return sidebar;
   }
 
-  function initSidebar(sidebar, container) {
+  function initSidebar(context, container) {
+    const sidebar = context.sidebar;
     const hotelCards = Array.prototype.slice.call(
       container.querySelectorAll(".hotel-list .hotel-card")
     );
     if (!hotelCards.length) {
+      context.metrics = null;
+      renderSidebar(context, composeTranslation(currentLanguage));
       return;
     }
 
@@ -218,6 +646,8 @@
       .filter(Boolean);
 
     if (!priceEntries.length) {
+      context.metrics = null;
+      renderSidebar(context, composeTranslation(currentLanguage));
       return;
     }
 
@@ -228,6 +658,7 @@
       .filter(function (value) {
         return Number.isFinite(value);
       });
+
     const usdtValues = priceEntries
       .map(function (entry) {
         return entry.usdt;
@@ -246,8 +677,8 @@
 
     priceEntries.forEach(function (entry) {
       var category = "midrange";
-      var reference;
-      var thresholds;
+      var reference = null;
+      var thresholds = null;
 
       if (Number.isFinite(entry.eth) && ethThresholds) {
         reference = entry.eth;
@@ -257,7 +688,11 @@
         thresholds = usdtThresholds;
       }
 
-      if (thresholds && Number.isFinite(reference) && thresholds.spread >= EPSILON) {
+      if (
+        thresholds &&
+        Number.isFinite(reference) &&
+        thresholds.spread >= EPSILON
+      ) {
         if (reference <= thresholds.cheap + EPSILON) {
           category = "cheap";
         } else if (reference > thresholds.luxury + EPSILON) {
@@ -275,19 +710,13 @@
         ? {
             unit: "ETH",
             thresholds: ethThresholds,
-            text: RANGE_KEYS.reduce(function (acc, key) {
-              acc[key] = buildHintText(ethThresholds, key, "ETH", formatEth);
-              return acc;
-            }, {}),
+            formatter: formatEth,
           }
         : usdtThresholds && usdtValues.length
         ? {
             unit: "USDT",
             thresholds: usdtThresholds,
-            text: RANGE_KEYS.reduce(function (acc, key) {
-              acc[key] = buildHintText(usdtThresholds, key, "USDT", formatUsdt);
-              return acc;
-            }, {}),
+            formatter: formatUsdt,
           }
         : null;
 
@@ -296,25 +725,21 @@
       secondary = {
         unit: "USDT",
         thresholds: usdtThresholds,
-        text: RANGE_KEYS.reduce(function (acc, key) {
-          acc[key] = buildHintText(usdtThresholds, key, "USDT", formatUsdt);
-          return acc;
-        }, {}),
+        formatter: formatUsdt,
       };
     } else if (primary && primary.unit === "USDT" && ethThresholds) {
       secondary = {
         unit: "ETH",
         thresholds: ethThresholds,
-        text: RANGE_KEYS.reduce(function (acc, key) {
-          acc[key] = buildHintText(ethThresholds, key, "ETH", formatEth);
-          return acc;
-        }, {}),
+        formatter: formatEth,
       };
     }
 
-    if (primary) {
-      applyHints(sidebar, { primary, secondary });
-    }
+    context.metrics = primary
+      ? { primary: primary, secondary: secondary }
+      : null;
+
+    renderSidebar(context, composeTranslation(currentLanguage));
 
     const buttons = Array.prototype.slice.call(
       sidebar.querySelectorAll(".price-range-option")
@@ -360,10 +785,16 @@
     const containers = document.querySelectorAll(".booking-container");
     containers.forEach(function (container, index) {
       const sidebar = ensureLayout(container, index);
-      if (sidebar) {
-        initSidebar(sidebar, container);
+      if (!sidebar) {
+        return;
       }
+      const context = { sidebar: sidebar, metrics: null };
+      contexts.push(context);
+      initSidebar(context, container);
     });
+
+    bindLanguageHooks();
+    setLanguage(detectLanguage());
   }
 
   if (document.readyState === "loading") {
@@ -371,4 +802,9 @@
   } else {
     boot();
   }
+
+  var api = window.PriceRangeSidebar || {};
+  api.setLanguage = setLanguage;
+  api.registerTranslations = registerTranslations;
+  window.PriceRangeSidebar = api;
 })();
