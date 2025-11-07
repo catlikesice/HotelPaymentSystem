@@ -8,6 +8,18 @@
 </head>
 <body>
   <header>
+    <div class="language-switcher" aria-label="Language selector">
+      <label for="lang-select">Language</label>
+      <div class="language-switcher__select">
+        <select id="lang-select" aria-label="Select language">
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+          <option value="lv">Latviešu</option>
+          <option value="et">Eesti</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+    </div>
     <div class="logo-header">
       <img src="Baltic%20Comfort%20LTD%20logo.png" alt="Baltic Comfort Logo">
     </div>
@@ -61,5 +73,85 @@
       </ol>
     </section>
   </main>
+    
+    <footer>
+      <p id="footer-text">&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.</p>
+    </footer>
+
+    <script src="site-preferences.js"></script>
+    <script src="assets/nav-translations.js"></script>
+    <script>
+      const translations = {
+        en: {
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry."
+        },
+        ru: {
+          "footer-text": "&copy; 2025 BalticComfort. Блокчейн-решения для гостиничной индустрии."
+        },
+        lv: {
+          "footer-text": "&copy; 2025 BalticComfort. Blokķēdes risinājumi viesmīlības industrijai."
+        },
+        et: {
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain-lahendused hotellindusele."
+        },
+        de: {
+          "footer-text": "&copy; 2025 BalticComfort. Blockchain-Lösungen für die Hotellerie."
+        }
+      };
+
+      function applyTranslations(lang) {
+        const mapping = translations[lang] || translations.en;
+        Object.keys(mapping).forEach(function(key) {
+          const el = document.getElementById(key);
+          if (!el) {
+            return;
+          }
+          if (key === 'footer-text') {
+            el.innerHTML = mapping[key];
+          } else {
+            el.textContent = mapping[key];
+          }
+        });
+      }
+
+      const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
+      document.addEventListener(languageEventName, function(event) {
+        applyTranslations((event.detail && event.detail.lang) || 'en');
+      });
+
+      const langSelect = document.getElementById('lang-select');
+      const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+      const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === 'function')
+        ? window.LanguagePreferences.getPreferredLanguage()
+        : null;
+      const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+        ? preferredLanguage
+        : (langSelect ? (langSelect.value || availableLanguages[0] || 'en') : 'en');
+
+      applyTranslations(initialLang);
+
+      if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
+        window.NavBarTranslations.apply(initialLang);
+      }
+
+      if (langSelect) {
+        if (window.LanguagePreferences && typeof window.LanguagePreferences.init === 'function') {
+          LanguagePreferences.init(langSelect);
+        } else {
+          document.documentElement.setAttribute('lang', initialLang);
+          langSelect.addEventListener('change', function() {
+            const lang = this.value;
+            applyTranslations(lang);
+            document.documentElement.setAttribute('lang', lang);
+            if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
+              window.NavBarTranslations.apply(lang);
+            }
+            const expires = new Date();
+            expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+            document.cookie = 'preferredLanguage=' + encodeURIComponent(lang) + ';expires=' + expires.toUTCString() + ';path=/;SameSite=Lax';
+          });
+        }
+      }
+    </script>
 </body>
 </html>
