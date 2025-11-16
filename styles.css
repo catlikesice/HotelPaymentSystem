@@ -1216,3 +1216,103 @@ html.page-selectlocation .site-nav .nav-inner {
   }
 }
 
+/* -------------------------
+   Hotel room & add-on selectors
+   ------------------------- */
+.hotel-detail .room-options,
+.hotel-detail .addon-options {
+  margin-top: 1.75rem;
+  padding: 0;
+  border: none;
+}
+
+.hotel-detail .room-options legend,
+.hotel-detail .addon-options legend {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2e4d25;
+  margin-bottom: 0.85rem;
+}
+
+.hotel-detail .room-option,
+.hotel-detail .addon-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  margin-bottom: 0.85rem;
+  border: 1px solid rgba(46, 125, 50, 0.25);
+  border-radius: 0.9rem;
+  background: #f9fdf9;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+
+.hotel-detail .room-option:hover,
+.hotel-detail .addon-option:hover {
+  border-color: rgba(21, 109, 23, 0.55);
+  background: #f1fbf1;
+  box-shadow: 0 4px 12px rgba(21, 109, 23, 0.08);
+}
+
+.hotel-detail .room-option:focus-within,
+.hotel-detail .addon-option:focus-within {
+  outline: 3px solid rgba(21, 109, 23, 0.35);
+  outline-offset: 2px;
+}
+
+.hotel-detail .room-option input,
+.hotel-detail .addon-option input {
+  margin-top: 0.3rem;
+}
+
+.hotel-detail .room-option__details,
+.hotel-detail .addon-option__details {
+  flex: 1;
+}
+
+.hotel-detail .room-option__title,
+.hotel-detail .addon-option__title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  color: #1f4b23;
+}
+
+.hotel-detail .room-option__rate,
+.hotel-detail .addon-option__rate {
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 0.45rem;
+}
+
+.hotel-detail .room-option__description,
+.hotel-detail .addon-option__description {
+  color: #2e4d25;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.hotel-detail .booking-summary__room,
+.hotel-detail .booking-summary__addons-nightly,
+.hotel-detail .booking-summary__addons-stay,
+.hotel-detail .booking-summary__nightly-total {
+  margin: 0.45rem 0;
+}
+
+.hotel-detail .booking-summary__addons-heading {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #1f4b23;
+}
+
+.hotel-detail .booking-summary__addons-list {
+  margin: 0.35rem 0 0;
+  padding-left: 1.15rem;
+  color: #2e4d25;
+}
+
+.hotel-detail .booking-summary__addons-list li {
+  margin: 0.25rem 0;
+}
+

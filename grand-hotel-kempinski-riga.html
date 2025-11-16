@@ -84,9 +84,59 @@
         <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?fit=crop&w=600&q=80" alt="Grand Hotel Kempinski Riga">
         <h2>Grand Hotel Kempinski Riga</h2>
         <div class="price" data-rate-value="0.09" data-rate-currency="ETH" data-rate-decimals="2">0.09 ETH / night</div>
-        <p>
+          <p>
             Overlooking the Latvian National Opera, Grand Hotel Kempinski Riga combines five-star elegance with a tranquil spa, signature rooftop bar, and bespoke concierge service for memorable stays in the capital.
-        </p>
+          </p>
+          <script type="application/json" data-hotel-config>
+          {
+            "roomLegend": "Choose your preferred room type",
+            "rooms": [
+              {
+                "id": "deluxe-room",
+                "label": "Opera Deluxe Room",
+                "nightlyRate": 0.09,
+                "description": "Elegant 40 m² room overlooking the National Opera with marble bathroom, daily turndown service, and complimentary artisanal breakfast.",
+                "default": true
+              },
+              {
+                "id": "signature-suite",
+                "label": "Signature Opera Suite",
+                "nightlyRate": 0.14,
+                "description": "65 m² suite with separate living room, private concierge line, evening champagne service, and in-room Peloton bike upon request."
+              },
+              {
+                "id": "royal-opera-suite",
+                "label": "Royal Opera Suite",
+                "nightlyRate": 0.21,
+                "description": "Top-floor 100 m² suite featuring panoramic city views, private terrace, butler service, and chauffeured arrival in a vintage Riga cabriolet."
+              }
+            ],
+            "addonLegend": "Enhance your stay",
+            "addons": [
+              {
+                "id": "spa-access",
+                "label": "Kempinski The Spa access",
+                "price": 0.01,
+                "billing": "per-night",
+                "description": "Unlimited daily access to thermal suites, saunas, and the relaxation pool for all registered guests."
+              },
+              {
+                "id": "airport-transfer",
+                "label": "Private airport transfer",
+                "price": 0.05,
+                "billing": "per-stay",
+                "description": "Chauffeured Tesla Model X pick-up and drop-off with on-board refreshments and concierge check-in."
+              },
+              {
+                "id": "rooftop-tasting",
+                "label": "Rooftop tasting menu",
+                "price": 0.03,
+                "billing": "per-night",
+                "description": "Five-course chef’s tasting menu with wine pairings on the Skyline Terrace each night of your stay."
+              }
+            ]
+          }
+          </script>
         <div class="booking-summary" aria-live="polite">
             <p class="booking-summary__notice">Loading your booking summary…</p>
         </div>
