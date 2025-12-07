@@ -15,7 +15,7 @@
     .hotel-signup .full-width { grid-column: 1 / -1; }
     .hotel-signup .file-list { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
     .hotel-signup .file-item { padding:6px 8px; background:#f1f6fb; border-radius:8px; border:1px dashed #d9e9ff; font-size:13px; }
-    .logo-header img { max-height:44px; display:block; }
+    .logo-header .brand { font-size:1.35rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; color:inherit; display:block; }
     .site-nav { display:flex; gap:16px; align-items:center; }
     .site-nav a { color:inherit; text-decoration:none; padding:8px 10px; border-radius:6px; }
     .site-nav a:hover { background:rgba(11,116,222,0.06); }
@@ -27,10 +27,9 @@
   <!-- Header with logo, navigation and language selector — matches pattern used across the repo -->
   <header class="header-bar" role="banner">
     <div style="display:flex;align-items:center;gap:16px">
-      <div class="logo-header" aria-hidden="false">
-        <!-- Keep the same logo file name used in repo; replace path if the logo lives elsewhere -->
-        <a href="index.html" aria-label="Home">
-          <img src="Baltic%20Holliday%20LTD%20logo.png" alt="Baltic Holliday Logo">
+      <div class="logo-header" aria-label="Baltic Holliday wordmark">
+        <a href="index.html" aria-label="Home" class="brand">
+          Baltic Holliday
         </a>
       </div>
 

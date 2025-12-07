@@ -155,6 +155,13 @@ header, header.site-header, .site-header {
   object-fit: contain;
   margin: 0 auto;
 }
+.logo-header .brand {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-text);
+}
 
 /* textual brand centered beneath logo if present */
 .brand, .brand-link {
