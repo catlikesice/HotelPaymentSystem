@@ -8,25 +8,14 @@
 </head>
 <body>
     <header>
-        <div class="language-switcher" aria-label="Language selector">
-            <label for="lang-select">Language</label>
-            <div class="language-switcher__select">
-                <select id="lang-select" aria-label="Select language">
-                    <option value="en">English</option>
-                    <option value="ru">Русский</option>
-                    <option value="lv">Latviešu</option>
-                    <option value="et">Eesti</option>
-                    <option value="de">Deutsch</option>
-                </select>
-            </div>
-        </div>
-        <div class="logo-header">
-            <img src="Baltic%20Holliday%20LTD%20logo.png" alt="Baltic Holliday Logo">
-        </div>
-
-        <!-- Navigation bar -->
+        <!-- Navigation bar at top with logo on the left -->
         <nav class="site-nav" aria-label="Primary navigation">
             <div class="nav-inner">
+                <div class="logo-header">
+                    <a href="index.html" aria-label="Baltic Holliday Home">
+                        <img src="Baltic%20Holliday%20LTD%20logo.png" alt="Baltic Holliday Logo">
+                    </a>
+                </div>
 
                 <!-- Minimal, explicit nav: four real anchors inside .nav-containers. -->
                 <div class="nav-containers" role="menubar" aria-label="Site quick links">
@@ -40,6 +29,19 @@
                         </div>
                     </details>
                     <a class="nav-box nav-box-right" href="#contact" role="menuitem" aria-label="Contact us">Contact</a>
+                </div>
+
+                <div class="language-switcher" aria-label="Language selector">
+                    <label for="lang-select">Language</label>
+                    <div class="language-switcher__select">
+                        <select id="lang-select" aria-label="Select language">
+                            <option value="en">English</option>
+                            <option value="ru">Русский</option>
+                            <option value="lv">Latviešu</option>
+                            <option value="et">Eesti</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- Visually hidden original link list -->
