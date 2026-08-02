@@ -10,6 +10,7 @@
       aboutMenuAria: 'About the Baltic States',
       aboutLatvia: 'About Latvia',
       aboutEstonia: 'About Estonia',
+      aboutLithuania: 'About Lithuania',
       contact: 'Contact',
       contactAria: 'Contact us'
     },
@@ -23,6 +24,7 @@
       aboutMenuAria: 'О странах Балтии',
       aboutLatvia: 'О Латвии',
       aboutEstonia: 'Об Эстонии',
+      aboutLithuania: 'О Литве',
       contact: 'Контакты',
       contactAria: 'Связаться с нами'
     },
@@ -36,6 +38,7 @@
       aboutMenuAria: 'Par Baltijas valstīm',
       aboutLatvia: 'Par Latviju',
       aboutEstonia: 'Par Igauniju',
+      aboutLithuania: 'Par Lietuvu',
       contact: 'Kontakti',
       contactAria: 'Sazinieties ar mums'
     },
@@ -49,6 +52,7 @@
       aboutMenuAria: 'Balti riikidest',
       aboutLatvia: 'Läti kohta',
       aboutEstonia: 'Eesti kohta',
+      aboutLithuania: 'Leedu kohta',
       contact: 'Kontakt',
       contactAria: 'Võtke meiega ühendust'
     },
@@ -62,6 +66,7 @@
       aboutMenuAria: 'Über die baltischen Staaten',
       aboutLatvia: 'Über Lettland',
       aboutEstonia: 'Über Estland',
+      aboutLithuania: 'Über Litauen',
       contact: 'Kontakt',
       contactAria: 'Kontaktieren Sie uns'
     }
@@ -162,6 +167,9 @@
 
         const estoniaLink = dropdownMenu.querySelector('a[href$="aboutestonia.html"]');
         updateLinkContent(estoniaLink, mapping.aboutEstonia, mapping.aboutEstonia);
+
+        const lithuaniaLink = dropdownMenu.querySelector('a[href$="aboutlithuania.html"]');
+        updateLinkContent(lithuaniaLink, mapping.aboutLithuania, mapping.aboutLithuania);
       }
     } else {
       const latviaDirectLink = navRoot.querySelector('.nav-box-center[href$="aboutlatvia.html"]');
@@ -170,6 +178,11 @@
       const estoniaDirectLink = navRoot.querySelector('.nav-box[href$="aboutestonia.html"]');
       if (estoniaDirectLink && !estoniaDirectLink.classList.contains('nav-box-left') && !estoniaDirectLink.classList.contains('nav-box-right')) {
         updateLinkContent(estoniaDirectLink, mapping.aboutEstonia, mapping.aboutEstonia);
+      }
+
+      const lithuaniaDirectLink = navRoot.querySelector('.nav-box[href$="aboutlithuania.html"]');
+      if (lithuaniaDirectLink && !lithuaniaDirectLink.classList.contains('nav-box-left') && !lithuaniaDirectLink.classList.contains('nav-box-right')) {
+        updateLinkContent(lithuaniaDirectLink, mapping.aboutLithuania, mapping.aboutLithuania);
       }
     }
 
@@ -186,6 +199,8 @@
           updateLinkContent(anchor, mapping.aboutLatvia, mapping.aboutLatvia);
         } else if (href === 'aboutestonia.html') {
           updateLinkContent(anchor, mapping.aboutEstonia, mapping.aboutEstonia);
+        } else if (href === 'aboutlithuania.html') {
+          updateLinkContent(anchor, mapping.aboutLithuania, mapping.aboutLithuania);
         } else if (href === '#contact') {
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
         }
