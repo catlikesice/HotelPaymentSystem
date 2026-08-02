@@ -202,6 +202,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
   color: var(--color-text);
   padding: 0.35rem 0.9rem;      /* tightened padding */
   border-radius: 10px;
+  border: 1px solid rgba(35, 68, 26, 0.16);
   font-weight: 700;
   text-decoration: none;
   height: var(--nav-pill-height);/* uses lowered pill height variable */
@@ -211,7 +212,10 @@ header a { position: static !important; left: auto !important; right: auto !impo
   justify-content: center;
   box-shadow: 0 1px 0 rgba(0,0,0,0.04) inset;
 }
-.nav-box:hover, .nav-box:focus { background: #e6f5e6; }
+.nav-box:hover, .nav-box:focus {
+  background: #e6f5e6;
+  border-color: rgba(35, 68, 26, 0.32);
+}
 
 /* Dropdown-ready styling: ensures <details>/<summary> match nav pills */
 .nav-dropdown {
@@ -347,6 +351,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 .feature {
   background: #eefbf0;
   border-radius: 12px;
+  border: 1px solid rgba(35, 68, 26, 0.16);
   padding: 1.6rem 1.4rem;
   width: var(--feature-card-width);
   min-height: 180px;
@@ -924,7 +929,7 @@ header > .nav-containers {
 
   .nav-containers > * {
     border-radius: 12px !important;
-    border: none !important;
+    border: 1px solid var(--nav-pill-border) !important;
     box-shadow: none !important;
   }
 
@@ -933,11 +938,11 @@ header > .nav-containers {
   .nav-containers .nav-box {
     background: #e5f8e5 !important;
     border-radius: 12px !important;
-    border: none !important;
+    border: 1px solid var(--nav-pill-border) !important;
     box-shadow: none !important;
     color: var(--color-text) !important;
     font-weight: 700 !important;
-    transition: background 200ms ease, color 200ms ease !important;
+    transition: background 200ms ease, color 200ms ease, border-color 200ms ease !important;
   }
 
   .nav-box:hover,
@@ -945,6 +950,7 @@ header > .nav-containers {
   .site-nav .brand:hover,
   .site-nav .brand:focus-visible {
     background: #e6f5e6 !important;
+    border-color: var(--nav-pill-border-strong) !important;
     color: var(--color-text) !important;
     transform: none !important;
   }
