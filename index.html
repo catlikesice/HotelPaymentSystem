@@ -187,7 +187,7 @@
           "contact-email": "Or email us directly at <a href=\"mailto:partners@hotelpaymentsystem.com\">partners@hotelpaymentsystem.com</a>",
           "footer-text": "&copy; 2025 BalticComfort. Blockchain solutions for the hospitality industry.",
           "baltic-heading": "Discover the Baltic States: A Hidden Gem for Travelers",
-          "baltic-intro": "The Baltic States—Estonia, Latvia, and Lithuania—offer a captivating blend of history, culture, and natural beauty. Whether you're an adventurer, history buff, foodie, or simply curious, the Baltic region promises something special. Two cities not to miss are <strong>Tallinn</strong> and <strong>Riga</strong>, each with their own distinct charm.",
+          "baltic-intro": "Northern Europe—The Baltic States, Denmark, Scotland, and Iceland offer a captivating blend of history, culture, and natural beauty. Whether you're an adventurer, history buff, foodie, or want to try something new, Northern Europe promises something special.",
           "baltic-tallinn-title": "Unforgettable Sights in Tallinn, Estonia",
           "baltic-tallinn-old-town": "<strong>Medieval Old Town:</strong> Wander the cobbled streets of the UNESCO-listed Old Town, complete with preserved medieval walls and fairy-tale towers.",
           "baltic-tallinn-toompea": "<strong>Toompea Castle &amp; Alexander Nevsky Cathedral:</strong> Explore Estonia’s seat of power and admire the ornate Russian Orthodox cathedral.",
@@ -198,11 +198,11 @@
           "baltic-riga-old-town": "<strong>Riga Old Town:</strong> Get lost in cobblestone lanes, charming squares, and striking landmarks like the House of the Blackheads.",
           "baltic-riga-market": "<strong>Central Market:</strong> Discover Europe’s largest market housed in old Zeppelin hangars—perfect for sampling regional delicacies.",
           "baltic-riga-museum": "<strong>Museum of the Occupation of Latvia:</strong> Gain insights into Latvia’s complex past through engaging exhibits.",
-          "baltic-why-title": "Why Visit the Baltics?",
+          "baltic-why-title": "Why Visit Northern Europe?",
           "baltic-why-coastlines": "<strong>Beautiful Coastlines:</strong> The Baltic Sea offers sandy beaches, picturesque islands, and fresh sea air.",
           "baltic-why-outdoors": "<strong>Outdoor Adventures:</strong> Hiking in national parks, cycling through forests, or relaxing in rural countryside villages.",
           "baltic-why-festivals": "<strong>Festivals &amp; Events:</strong> Experience vibrant folk festivals, open-air concerts, and magical Christmas markets.",
-          "baltic-outro": "The Baltic States are an accessible, safe, and affordable destination for every kind of traveler. Explore Tallinn and Riga, and uncover countless treasures waiting for you in this enchanting region!"
+          "baltic-outro": "Northern Europe is a great destination for every kind of traveler. !"
         },
         ru: {
         "hero-title": "Принимайте криптовалюту легко",
@@ -359,6 +359,20 @@
           window.NavBarTranslations.apply(lang);
         }
       }
+
+      // Keep English in sync with the markup in index.html so GitHub Pages
+      // (and local preview) cannot show stale translation-dictionary text.
+      function syncEnglishFromDom() {
+        Object.keys(translations.en).forEach(function(key) {
+          const el = document.getElementById(key);
+          if (!el) {
+            return;
+          }
+          translations.en[key] = HTML_TRANSLATION_KEYS.has(key) ? el.innerHTML : el.textContent;
+        });
+      }
+
+      syncEnglishFromDom();
 
     const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
     document.addEventListener(languageEventName, function(event) {
