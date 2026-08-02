@@ -1582,3 +1582,34 @@ header .site-nav .language-switcher,
     padding: 0.65rem 1.05rem !important;
   }
 }
+
+/* =========================
+   Fixed navbar at top
+   Pin the primary site navbar on every page that includes it.
+   Uses sticky so the nav stays in document flow (no content jump)
+   while remaining fixed at the top during scroll.
+   ========================= */
+body > header:has(> .site-nav) {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: var(--color-nav-bg, #23441a) !important;
+}
+
+/* Keep dropdown menus above page content while the nav is pinned */
+body > header:has(> .site-nav) .nav-dropdown-menu {
+  z-index: 1001 !important;
+}
+
+/* Anchor jumps (#contact, etc.) clear the pinned navbar */
+html:has(body > header > .site-nav) {
+  scroll-padding-top: calc(var(--nav-height, 96px) + 0.5rem);
+}
+
+/* Hotel signup page uses a distinct header bar with the same nav role */
+body > header.header-bar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: var(--color-body-bg, #FFF9B0) !important;
+}
