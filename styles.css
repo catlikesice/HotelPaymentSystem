@@ -12,6 +12,7 @@
 :root{
   --color-header-bg: transparent;
   --color-body-bg: #FFF9B0;    /* former header yellow now used for page body */
+  --color-hero-bg: #bfe6bd;    /* retain original lime green hero */
   --color-nav-bg: #23441a;     /* navbar band green (unchanged) */
   --color-nav-box: #e5f8e5;    /* pill background (unchanged) */
   --color-text: #23421a;
@@ -305,10 +306,10 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 
 /* -------------------------
-   Hero section (former header yellow)
+   Hero section (lime green)
    ------------------------- */
 .hero {
-  background: var(--color-body-bg);
+  background: var(--color-hero-bg);
   padding: 2.75rem var(--gutter);
   text-align: center;
 }
@@ -1338,6 +1339,7 @@ html.page-selectlocation .site-nav .nav-inner {
    ========================= */
 :root {
   --color-body-bg: #FFF9B0;
+  --color-hero-bg: #bfe6bd;
   --nav-height: 96px;
   --nav-band-height: 96px;
   --nav-box-height: 40px;
@@ -1359,7 +1361,7 @@ header.site-header,
 }
 
 .hero {
-  background: var(--color-body-bg) !important;
+  background: var(--color-hero-bg) !important;
 }
 
 .features,
