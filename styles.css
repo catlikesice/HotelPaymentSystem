@@ -1340,6 +1340,7 @@ html.page-selectlocation .site-nav .nav-inner {
 :root {
   --color-body-bg: #FFF9B0;
   --color-hero-bg: #bfe6bd;
+  --footer-bg: #bfe6bd;
   --nav-height: 96px;
   --nav-band-height: 96px;
   --nav-box-height: 40px;
@@ -1362,6 +1363,10 @@ header.site-header,
 
 .hero {
   background: var(--color-hero-bg) !important;
+}
+
+footer {
+  background: var(--footer-bg) !important;
 }
 
 .features,
