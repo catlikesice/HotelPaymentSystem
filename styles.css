@@ -33,7 +33,8 @@
     --nav-logo-height: 64px;
 }
 * { box-sizing: border-box; }
-html,body { height: 100%; }
+/* min-height (not height) so position:sticky on the navbar can pin while scrolling */
+html, body { min-height: 100%; }
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -1581,4 +1582,42 @@ header .site-nav .language-switcher,
     min-height: 0 !important;
     padding: 0.65rem 1.05rem !important;
   }
+}
+
+/* =========================
+   Fixed navbar at top
+   Pin the primary site navbar on every page that includes it.
+   position:sticky keeps the nav in document flow (no content jump)
+   while remaining fixed at the top during scroll. Requires
+   html/body min-height (not height:100%) above.
+   ========================= */
+body > header:has(> .site-nav) {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: var(--color-nav-bg, #23441a) !important;
+}
+
+/* Keep dropdown menus above page content while the nav is pinned */
+body > header:has(> .site-nav) .nav-dropdown-menu {
+  z-index: 1001 !important;
+}
+
+/* Anchor jumps (#contact, etc.) clear the pinned navbar */
+html:has(body > header > .site-nav) {
+  scroll-padding-top: 6.5rem;
+}
+
+@media (max-width: 900px) {
+  html:has(body > header > .site-nav) {
+    scroll-padding-top: 24rem;
+  }
+}
+
+/* Hotel signup page uses a distinct header bar with the same nav role */
+body > header.header-bar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: var(--color-body-bg, #FFF9B0) !important;
 }
