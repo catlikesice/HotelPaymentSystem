@@ -354,7 +354,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
   gap: 2rem;
   justify-content: center;
   align-items: flex-start;
-  flex-wrap: nowrap;             /* prefer single horizontal row on wide screens */
+  flex-wrap: wrap;               /* wrap when four feature cards exceed one row */
   background: transparent;
 }
 
