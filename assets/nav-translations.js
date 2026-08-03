@@ -11,6 +11,9 @@
       aboutLatvia: 'About Latvia',
       aboutEstonia: 'About Estonia',
       aboutLithuania: 'About Lithuania',
+      aboutScotland: 'About Scotland',
+      aboutSweden: 'About Sweden',
+      aboutIceland: 'About Iceland',
       contact: 'Contact',
       contactAria: 'Contact us'
     },
@@ -25,6 +28,9 @@
       aboutLatvia: 'О Латвии',
       aboutEstonia: 'Об Эстонии',
       aboutLithuania: 'О Литве',
+      aboutScotland: 'О Шотландии',
+      aboutSweden: 'О Швеции',
+      aboutIceland: 'Об Исландии',
       contact: 'Контакты',
       contactAria: 'Связаться с нами'
     },
@@ -39,6 +45,9 @@
       aboutLatvia: 'Par Latviju',
       aboutEstonia: 'Par Igauniju',
       aboutLithuania: 'Par Lietuvu',
+      aboutScotland: 'Par Skotiju',
+      aboutSweden: 'Par Zviedriju',
+      aboutIceland: 'Par Islandi',
       contact: 'Kontakti',
       contactAria: 'Sazinieties ar mums'
     },
@@ -53,6 +62,9 @@
       aboutLatvia: 'Läti kohta',
       aboutEstonia: 'Eesti kohta',
       aboutLithuania: 'Leedu kohta',
+      aboutScotland: 'Šotimaa kohta',
+      aboutSweden: 'Rootsi kohta',
+      aboutIceland: 'Islandi kohta',
       contact: 'Kontakt',
       contactAria: 'Võtke meiega ühendust'
     },
@@ -67,6 +79,9 @@
       aboutLatvia: 'Über Lettland',
       aboutEstonia: 'Über Estland',
       aboutLithuania: 'Über Litauen',
+      aboutScotland: 'Über Schottland',
+      aboutSweden: 'Über Schweden',
+      aboutIceland: 'Über Island',
       contact: 'Kontakt',
       contactAria: 'Kontaktieren Sie uns'
     }
@@ -170,6 +185,15 @@
 
         const lithuaniaLink = dropdownMenu.querySelector('a[href$="aboutlithuania.html"]');
         updateLinkContent(lithuaniaLink, mapping.aboutLithuania, mapping.aboutLithuania);
+
+        const scotlandLink = dropdownMenu.querySelector('a[href$="aboutscotland.html"]');
+        updateLinkContent(scotlandLink, mapping.aboutScotland, mapping.aboutScotland);
+
+        const swedenLink = dropdownMenu.querySelector('a[href$="aboutsweden.html"]');
+        updateLinkContent(swedenLink, mapping.aboutSweden, mapping.aboutSweden);
+
+        const icelandLink = dropdownMenu.querySelector('a[href$="abouticeland.html"]');
+        updateLinkContent(icelandLink, mapping.aboutIceland, mapping.aboutIceland);
       }
     } else {
       const latviaDirectLink = navRoot.querySelector('.nav-box-center[href$="aboutlatvia.html"]');
@@ -183,6 +207,21 @@
       const lithuaniaDirectLink = navRoot.querySelector('.nav-box[href$="aboutlithuania.html"]');
       if (lithuaniaDirectLink && !lithuaniaDirectLink.classList.contains('nav-box-left') && !lithuaniaDirectLink.classList.contains('nav-box-right')) {
         updateLinkContent(lithuaniaDirectLink, mapping.aboutLithuania, mapping.aboutLithuania);
+      }
+
+      const scotlandDirectLink = navRoot.querySelector('.nav-box[href$="aboutscotland.html"]');
+      if (scotlandDirectLink && !scotlandDirectLink.classList.contains('nav-box-left') && !scotlandDirectLink.classList.contains('nav-box-right')) {
+        updateLinkContent(scotlandDirectLink, mapping.aboutScotland, mapping.aboutScotland);
+      }
+
+      const swedenDirectLink = navRoot.querySelector('.nav-box[href$="aboutsweden.html"]');
+      if (swedenDirectLink && !swedenDirectLink.classList.contains('nav-box-left') && !swedenDirectLink.classList.contains('nav-box-right')) {
+        updateLinkContent(swedenDirectLink, mapping.aboutSweden, mapping.aboutSweden);
+      }
+
+      const icelandDirectLink = navRoot.querySelector('.nav-box[href$="abouticeland.html"]');
+      if (icelandDirectLink && !icelandDirectLink.classList.contains('nav-box-left') && !icelandDirectLink.classList.contains('nav-box-right')) {
+        updateLinkContent(icelandDirectLink, mapping.aboutIceland, mapping.aboutIceland);
       }
     }
 
@@ -201,6 +240,12 @@
           updateLinkContent(anchor, mapping.aboutEstonia, mapping.aboutEstonia);
         } else if (href === 'aboutlithuania.html') {
           updateLinkContent(anchor, mapping.aboutLithuania, mapping.aboutLithuania);
+        } else if (href === 'aboutscotland.html') {
+          updateLinkContent(anchor, mapping.aboutScotland, mapping.aboutScotland);
+        } else if (href === 'aboutsweden.html') {
+          updateLinkContent(anchor, mapping.aboutSweden, mapping.aboutSweden);
+        } else if (href === 'abouticeland.html') {
+          updateLinkContent(anchor, mapping.aboutIceland, mapping.aboutIceland);
         } else if (href === '#contact') {
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
         }
