@@ -441,6 +441,77 @@ header a { position: static !important; left: auto !important; right: auto !impo
 /* small helpers to avoid regressions */
 .contact-form { max-width: 820px; margin: 1rem auto; padding: 1.25rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(46,77,37,0.04); }
 
+/* -------------------------
+   Culture Blog page
+   ------------------------- */
+.culture-blog {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem var(--gutter) 3rem;
+  color: var(--color-text);
+}
+
+.culture-blog .blog-intro {
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.culture-blog .blog-intro h2 {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+}
+
+.culture-blog .blog-intro p {
+  margin: 0;
+  line-height: 1.7;
+  color: #214a27;
+}
+
+.culture-blog .blog-posts {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0 auto 2.5rem;
+  max-width: 860px;
+}
+
+.culture-blog .blog-post {
+  background: #eefbf0;
+  border: 1px solid rgba(35, 68, 26, 0.16);
+  border-radius: 12px;
+  padding: 1.4rem 1.35rem;
+}
+
+.culture-blog .blog-post h3 {
+  margin: 0 0 0.65rem;
+  color: var(--color-text);
+  font-size: 1.2rem;
+}
+
+.culture-blog .blog-post p {
+  margin: 0;
+  line-height: 1.65;
+  color: #214a27;
+}
+
+.culture-blog .blog-contact {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.culture-blog .blog-contact h2 {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+}
+
+.culture-blog .blog-contact p {
+  margin: 0 0 1.2rem;
+  line-height: 1.7;
+  color: #214a27;
+}
+
 /* =========================
    City listings: price range sidebar
    ========================= */
