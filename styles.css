@@ -1460,6 +1460,22 @@ main {
   background: transparent;
 }
 
+/* Inset readable page copy slightly toward the centre (not flush left) */
+main.content,
+#northern-travel {
+  max-width: min(var(--max-width), 56rem);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.5rem, 8vw, 4.5rem);
+  padding-right: clamp(1.5rem, 8vw, 4.5rem);
+  box-sizing: border-box;
+}
+
+#northern-travel {
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .site-nav,
 header .site-nav,
 .nav-band {
