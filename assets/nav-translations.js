@@ -15,7 +15,13 @@
       aboutSweden: 'About Sweden',
       aboutIceland: 'About Iceland',
       contact: 'Contact',
-      contactAria: 'Contact us'
+      contactAria: 'Contact us',
+      account: 'Account',
+      accountAria: 'Account',
+      login: 'Login',
+      loginAria: 'Login',
+      register: 'Register',
+      registerAria: 'Register'
     },
     ru: {
       home: 'Главная',
@@ -32,7 +38,13 @@
       aboutSweden: 'О Швеции',
       aboutIceland: 'Об Исландии',
       contact: 'Контакты',
-      contactAria: 'Связаться с нами'
+      contactAria: 'Связаться с нами',
+      account: 'Аккаунт',
+      accountAria: 'Аккаунт',
+      login: 'Вход',
+      loginAria: 'Вход',
+      register: 'Регистрация',
+      registerAria: 'Регистрация'
     },
     lv: {
       home: 'Sākums',
@@ -49,7 +61,13 @@
       aboutSweden: 'Par Zviedriju',
       aboutIceland: 'Par Islandi',
       contact: 'Kontakti',
-      contactAria: 'Sazinieties ar mums'
+      contactAria: 'Sazinieties ar mums',
+      account: 'Konts',
+      accountAria: 'Konts',
+      login: 'Pieslēgties',
+      loginAria: 'Pieslēgties',
+      register: 'Reģistrēties',
+      registerAria: 'Reģistrēties'
     },
     et: {
       home: 'Avaleht',
@@ -66,7 +84,13 @@
       aboutSweden: 'Rootsi kohta',
       aboutIceland: 'Islandi kohta',
       contact: 'Kontakt',
-      contactAria: 'Võtke meiega ühendust'
+      contactAria: 'Võtke meiega ühendust',
+      account: 'Konto',
+      accountAria: 'Konto',
+      login: 'Logi sisse',
+      loginAria: 'Logi sisse',
+      register: 'Registreeru',
+      registerAria: 'Registreeru'
     },
     de: {
       home: 'Startseite',
@@ -83,7 +107,13 @@
       aboutSweden: 'Über Schweden',
       aboutIceland: 'Über Island',
       contact: 'Kontakt',
-      contactAria: 'Kontaktieren Sie uns'
+      contactAria: 'Kontaktieren Sie uns',
+      account: 'Konto',
+      accountAria: 'Konto',
+      login: 'Anmelden',
+      loginAria: 'Anmelden',
+      register: 'Registrieren',
+      registerAria: 'Registrieren'
     }
   };
 
@@ -170,7 +200,26 @@
       updateLinkContent(link, mapping.book, mapping.navLinkBookAria || mapping.bookAria || mapping.book);
     });
 
-    const navDropdown = navRoot.querySelector('.nav-dropdown');
+    const accountDropdown = navRoot.querySelector('.nav-dropdown-account');
+    if (accountDropdown) {
+      const accountSummary = accountDropdown.querySelector('summary.nav-box-account');
+      // Avoid overwriting the signed-in first-name label managed by AuthClient.
+      const signedIn = Boolean(window.AuthClient && typeof window.AuthClient.getUser === 'function' && window.AuthClient.getUser());
+      if (!signedIn) {
+        updateSummaryContent(accountSummary, mapping.account, mapping.accountAria);
+      }
+
+      const accountMenu = accountDropdown.querySelector('.nav-dropdown-menu');
+      if (accountMenu) {
+        const loginLink = accountMenu.querySelector('.nav-account-login');
+        updateLinkContent(loginLink, mapping.login, mapping.loginAria);
+
+        const registerLink = accountMenu.querySelector('.nav-account-register');
+        updateLinkContent(registerLink, mapping.register, mapping.registerAria);
+      }
+    }
+
+    const navDropdown = navRoot.querySelector('.nav-dropdown:not(.nav-dropdown-account)');
     if (navDropdown) {
       const summary = navDropdown.querySelector('summary.nav-box');
       updateSummaryContent(summary, mapping.aboutMenu, mapping.aboutMenuAria);
@@ -246,8 +295,12 @@
           updateLinkContent(anchor, mapping.aboutSweden, mapping.aboutSweden);
         } else if (href === 'abouticeland.html') {
           updateLinkContent(anchor, mapping.aboutIceland, mapping.aboutIceland);
-        } else if (href === '#contact') {
+        } else if (href === '#contact' || href === 'index.html#contact') {
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
+        } else if (href === 'login.html') {
+          updateLinkContent(anchor, mapping.login, mapping.loginAria);
+        } else if (href === 'register.html') {
+          updateLinkContent(anchor, mapping.register, mapping.registerAria);
         }
       });
     }

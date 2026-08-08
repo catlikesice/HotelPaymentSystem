@@ -30,6 +30,13 @@
             </div>
           </details>
           <a class="nav-box nav-box-right" href="#contact" role="menuitem" aria-label="Contact us">Contact</a>
+          <details class="nav-dropdown nav-dropdown-account" role="none">
+              <summary class="nav-box nav-box-account" role="menuitem" aria-haspopup="true">Account</summary>
+              <div class="nav-dropdown-menu" role="menu">
+                  <a href="login.html" role="menuitem" class="nav-account-login">Login</a>
+                  <a href="register.html" role="menuitem" class="nav-account-register">Register</a>
+              </div>
+          </details>
         </div>
         <div class="language-switcher" aria-label="Language selector">
           <label for="lang-select">Language</label>
@@ -53,6 +60,8 @@
           <li><a href="aboutsweden.html">About Sweden</a></li>
           <li><a href="abouticeland.html">About Iceland</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
         </ul>
       </div>
     </nav>
@@ -114,6 +123,7 @@
 
   <script src="site-preferences.js"></script>
   <script src="assets/nav-translations.js"></script>
+  <script src="assets/auth-client.js"></script>
   <script>
     const HTML_TRANSLATION_KEYS = new Set(['footer-text']);
 
@@ -250,8 +260,7 @@
       }
     }
 
-    const navDropdown = document.querySelector('.nav-dropdown');
-    if (navDropdown) {
+    document.querySelectorAll('.nav-dropdown').forEach(function(navDropdown) {
       const summary = navDropdown.querySelector('summary');
       if (summary) {
         summary.setAttribute('aria-expanded', navDropdown.hasAttribute('open') ? 'true' : 'false');
@@ -259,7 +268,7 @@
           summary.setAttribute('aria-expanded', navDropdown.hasAttribute('open') ? 'true' : 'false');
         });
       }
-    }
+    });
   </script>
 </body>
 </html>
