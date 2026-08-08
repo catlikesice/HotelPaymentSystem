@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – Baltic Holliday</title>
+  <meta name="description" content="Sign in to your Baltic Holliday account">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <div class="nav-inner">
+        <div class="logo-header">
+          <a href="index.html" aria-label="Baltic Holliday Home">
+            <img src="Baltic%20Holliday%20LTD%20logo.png" alt="Baltic Holliday Logo">
+          </a>
+        </div>
+
+        <div class="nav-containers" role="menubar" aria-label="Site quick links">
+          <a class="nav-box nav-box-home" href="index.html" role="menuitem" aria-label="Home">Home</a>
+          <a class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with Us">Book with Us</a>
+          <details class="nav-dropdown" role="none">
+            <summary class="nav-box nav-box-center" role="menuitem" aria-haspopup="true">Places to Visit</summary>
+            <div class="nav-dropdown-menu" role="menu">
+              <a href="aboutlatvia.html" role="menuitem">About Latvia</a>
+              <a href="aboutestonia.html" role="menuitem">About Estonia</a>
+              <a href="aboutlithuania.html" role="menuitem">About Lithuania</a>
+              <a href="aboutscotland.html" role="menuitem">About Scotland</a>
+              <a href="aboutsweden.html" role="menuitem">About Sweden</a>
+              <a href="abouticeland.html" role="menuitem">About Iceland</a>
+            </div>
+          </details>
+          <a class="nav-box nav-box-right" href="index.html#contact" role="menuitem" aria-label="Contact us">Contact</a>
+          <details class="nav-dropdown nav-dropdown-account" role="none">
+            <summary class="nav-box nav-box-account" role="menuitem" aria-haspopup="true">Account</summary>
+            <div class="nav-dropdown-menu" role="menu">
+              <a href="login.html" role="menuitem" class="nav-account-login" aria-current="page">Login</a>
+              <a href="register.html" role="menuitem" class="nav-account-register">Register</a>
+            </div>
+          </details>
+        </div>
+
+        <div class="language-switcher" aria-label="Language selector">
+          <label for="lang-select">Language</label>
+          <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+              <option value="lv">Latviešu</option>
+              <option value="et">Eesti</option>
+              <option value="de">Deutsch</option>
+            </select>
+          </div>
+        </div>
+
+        <ul class="nav-links" aria-hidden="true">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="selectlocation.html">Book with Us</a></li>
+          <li><a href="aboutlatvia.html">About Latvia</a></li>
+          <li><a href="aboutestonia.html">About Estonia</a></li>
+          <li><a href="aboutlithuania.html">About Lithuania</a></li>
+          <li><a href="aboutscotland.html">About Scotland</a></li>
+          <li><a href="aboutsweden.html">About Sweden</a></li>
+          <li><a href="abouticeland.html">About Iceland</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-page" role="main">
+    <section class="auth-panel" aria-labelledby="login-title">
+      <h1 id="login-title">Login</h1>
+      <p class="auth-lead">Sign in to manage bookings and your Baltic Holliday profile.</p>
+      <p class="auth-status" id="auth-form-status" role="status" aria-live="polite"></p>
+      <p data-auth-status hidden></p>
+
+      <form id="loginForm" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password <span class="required" aria-hidden="true">*</span></label>
+          <input id="password" name="password" type="password" required autocomplete="current-password" minlength="8" placeholder="Your password" />
+        </div>
+
+        <div class="auth-actions">
+          <button class="btn" type="submit">Sign in</button>
+        </div>
+      </form>
+
+      <p class="auth-switch">New here? <a href="register.html">Create an account</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <small>&copy; Baltic Holliday</small>
+  </footer>
+
+  <script src="site-preferences.js"></script>
+  <script src="assets/nav-translations.js"></script>
+  <script src="assets/auth-client.js"></script>
+  <script>
+    (function() {
+      if (window.LanguagePreferences && typeof window.LanguagePreferences.init === 'function') {
+        LanguagePreferences.init(document.getElementById('lang-select'));
+      }
+
+      document.querySelectorAll('.nav-dropdown').forEach(function(navDropdown) {
+        const summary = navDropdown.querySelector('summary');
+        const menu = navDropdown.querySelector('.nav-dropdown-menu');
+        let closeTimerId = null;
+
+        const syncAriaExpanded = function() {
+          if (summary) {
+            summary.setAttribute('aria-expanded', navDropdown.hasAttribute('open') ? 'true' : 'false');
+          }
+        };
+
+        const scheduleClose = function() {
+          if (!navDropdown.hasAttribute('open')) return;
+          if (closeTimerId) window.clearTimeout(closeTimerId);
+          closeTimerId = window.setTimeout(function() {
+            navDropdown.removeAttribute('open');
+            closeTimerId = null;
+          }, 150);
+        };
+
+        const cancelClose = function() {
+          if (closeTimerId) {
+            window.clearTimeout(closeTimerId);
+            closeTimerId = null;
+          }
+        };
+
+        navDropdown.addEventListener('toggle', syncAriaExpanded);
+        syncAriaExpanded();
+        if (summary) {
+          summary.addEventListener('pointerenter', cancelClose);
+          summary.addEventListener('pointerleave', scheduleClose);
+        }
+        if (menu) {
+          menu.addEventListener('pointerenter', cancelClose);
+          menu.addEventListener('pointerleave', scheduleClose);
+        }
+        navDropdown.addEventListener('pointerleave', scheduleClose);
+        navDropdown.addEventListener('pointerenter', cancelClose);
+      });
+    })();
+  </script>
+</body>
+</html>
