@@ -263,6 +263,12 @@ header a { position: static !important; left: auto !important; right: auto !impo
   z-index: 20;
 }
 
+.nav-dropdown-home .nav-dropdown-menu {
+  min-width: 230px;
+  left: 0;
+  transform: none;
+}
+
 .nav-dropdown[open] .nav-dropdown-menu {
   display: flex;
   flex-direction: column;
