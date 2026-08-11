@@ -3,6 +3,8 @@
     en: {
       home: 'Home',
       homeAria: 'Home',
+      aboutUsPartners: 'About Us and Partners',
+      aboutUsPartnersAria: 'About Us and Partners',
       book: 'Book with Us',
       bookAria: 'Book with Us',
       navLinkBookAria: 'Book with us',
@@ -26,6 +28,8 @@
     ru: {
       home: 'Главная',
       homeAria: 'Главная',
+      aboutUsPartners: 'О нас и партнёрах',
+      aboutUsPartnersAria: 'О нас и партнёрах',
       book: 'Забронировать у нас',
       bookAria: 'Забронировать у нас',
       navLinkBookAria: 'Забронировать у нас',
@@ -49,6 +53,8 @@
     lv: {
       home: 'Sākums',
       homeAria: 'Sākums',
+      aboutUsPartners: 'Par mums un partneriem',
+      aboutUsPartnersAria: 'Par mums un partneriem',
       book: 'Rezervēt pie mums',
       bookAria: 'Rezervēt pie mums',
       navLinkBookAria: 'Rezervēt pie mums',
@@ -72,6 +78,8 @@
     et: {
       home: 'Avaleht',
       homeAria: 'Avaleht',
+      aboutUsPartners: 'Meist ja partneritest',
+      aboutUsPartnersAria: 'Meist ja partneritest',
       book: 'Broneeri meie juures',
       bookAria: 'Broneeri meie juures',
       navLinkBookAria: 'Broneeri meie juures',
@@ -95,6 +103,8 @@
     de: {
       home: 'Startseite',
       homeAria: 'Startseite',
+      aboutUsPartners: 'Über uns und Partner',
+      aboutUsPartnersAria: 'Über uns und Partner',
       book: 'Bei uns buchen',
       bookAria: 'Bei uns buchen',
       navLinkBookAria: 'Bei uns buchen',
@@ -180,10 +190,25 @@
       return;
     }
 
-    const homeLinks = navRoot.querySelectorAll('.nav-box-home');
-    homeLinks.forEach(function(link) {
-      updateLinkContent(link, mapping.home, mapping.homeAria);
-    });
+    const homeDropdown = navRoot.querySelector('.nav-dropdown-home');
+    if (homeDropdown) {
+      const homeSummary = homeDropdown.querySelector('summary.nav-box-home');
+      updateSummaryContent(homeSummary, mapping.home, mapping.homeAria);
+
+      const homeMenu = homeDropdown.querySelector('.nav-dropdown-menu');
+      if (homeMenu) {
+        const homeLink = homeMenu.querySelector('.nav-home-link, a[href$="index.html"]');
+        updateLinkContent(homeLink, mapping.home, mapping.homeAria);
+
+        const aboutPartnersLink = homeMenu.querySelector('.nav-about-partners, a[href$="about-us-and-partners.html"]');
+        updateLinkContent(aboutPartnersLink, mapping.aboutUsPartners, mapping.aboutUsPartnersAria);
+      }
+    } else {
+      const homeLinks = navRoot.querySelectorAll('.nav-box-home');
+      homeLinks.forEach(function(link) {
+        updateLinkContent(link, mapping.home, mapping.homeAria);
+      });
+    }
 
     const bookLinks = navRoot.querySelectorAll('.nav-box-left');
     bookLinks.forEach(function(link) {
@@ -219,12 +244,13 @@
       }
     }
 
-    const navDropdown = navRoot.querySelector('.nav-dropdown:not(.nav-dropdown-account)');
-    if (navDropdown) {
-      const summary = navDropdown.querySelector('summary.nav-box');
+    const placesDropdown = navRoot.querySelector('.nav-dropdown-places') ||
+      navRoot.querySelector('.nav-dropdown:not(.nav-dropdown-account):not(.nav-dropdown-home)');
+    if (placesDropdown) {
+      const summary = placesDropdown.querySelector('summary.nav-box');
       updateSummaryContent(summary, mapping.aboutMenu, mapping.aboutMenuAria);
 
-      const dropdownMenu = navDropdown.querySelector('.nav-dropdown-menu');
+      const dropdownMenu = placesDropdown.querySelector('.nav-dropdown-menu');
       if (dropdownMenu) {
         const latviaLink = dropdownMenu.querySelector('a[href$="aboutlatvia.html"]');
         updateLinkContent(latviaLink, mapping.aboutLatvia, mapping.aboutLatvia);
@@ -281,6 +307,8 @@
         const href = anchor.getAttribute('href');
         if (href === 'index.html') {
           updateLinkContent(anchor, mapping.home, mapping.homeAria);
+        } else if (href === 'about-us-and-partners.html') {
+          updateLinkContent(anchor, mapping.aboutUsPartners, mapping.aboutUsPartnersAria);
         } else if (href === 'selectlocation.html') {
           updateLinkContent(anchor, mapping.book, mapping.bookAria);
         } else if (href === 'aboutlatvia.html') {
