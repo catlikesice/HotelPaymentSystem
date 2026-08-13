@@ -1568,16 +1568,24 @@ header .site-nav .logo-header img,
 .site-nav .logo-header .brand,
 header .site-nav .logo-header .brand,
 .logo-header .brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   margin: 0 !important;
   text-align: left !important;
-  font-size: 1.05rem !important;
-  letter-spacing: 0.08em;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--color-text);
   text-decoration: none;
   white-space: nowrap;
-  line-height: 1.2;
+  line-height: 1 !important;
+  height: var(--nav-box-height) !important;
+  min-height: 0 !important;
+  max-height: var(--nav-box-height) !important;
+  padding: 0 0.7rem !important;
+  box-sizing: border-box !important;
 }
 
 .site-nav .nav-containers,
@@ -1608,7 +1616,7 @@ header > .nav-containers {
   padding: 0 var(--nav-box-hpad) !important;
 }
 
-/* Keep the original language bar visible inside the taller navbar */
+/* Keep the language bar inside the navbar without overflowing it */
 .site-nav .language-switcher,
 header .site-nav .language-switcher,
 .site-nav .nav-inner > .language-switcher {
@@ -1621,25 +1629,26 @@ header .site-nav .language-switcher,
   margin-left: auto !important;
   height: auto !important;
   min-height: 0 !important;
-  max-height: none !important;
+  max-height: calc(var(--nav-height) - 1.2rem) !important;
   width: auto !important;
-  min-width: 180px !important;
-  padding: 0.65rem 0.85rem !important;
+  min-width: 132px !important;
+  padding: 0.2rem 0.5rem !important;
   background: rgba(255, 255, 255, 0.95) !important;
   border: 1px solid rgba(46, 77, 37, 0.18) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 10px 24px rgba(35, 68, 26, 0.12) !important;
-  gap: 0.35rem !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 14px rgba(35, 68, 26, 0.1) !important;
+  gap: 0.1rem !important;
   overflow: visible !important;
-  line-height: normal !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
 }
 
 .site-nav .language-switcher label,
 .site-nav .nav-inner > .language-switcher label {
   display: block !important;
   margin: 0 !important;
-  font-size: 0.7rem !important;
-  letter-spacing: 0.08em !important;
+  font-size: 0.58rem !important;
+  letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
   font-weight: 600 !important;
   color: var(--accent) !important;
@@ -1649,6 +1658,7 @@ header .site-nav .language-switcher,
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  line-height: 1 !important;
 }
 
 .site-nav .language-switcher select,
@@ -1656,15 +1666,22 @@ header .site-nav .language-switcher,
   width: 100% !important;
   height: auto !important;
   min-height: 0 !important;
-  padding: 0.55rem 2.4rem 0.55rem 0.75rem !important;
-  font-size: 0.95rem !important;
+  padding: 0.18rem 1.55rem 0.18rem 0.45rem !important;
+  font-size: 0.78rem !important;
   font-weight: 600 !important;
   line-height: 1.2 !important;
   background: linear-gradient(135deg, #f8fff8 0%, #e4f5e4 100%) !important;
   border: 1px solid #c9e5c5 !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   color: var(--color-text) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+}
+
+.site-nav .language-switcher__select::after {
+  right: 0.45rem !important;
+  border-left-width: 4px;
+  border-right-width: 4px;
+  border-top-width: 5px;
 }
 
 @media (max-width: 900px) {
@@ -1900,4 +1917,24 @@ body > header.header-bar {
   .auth-panel {
     padding: 1.35rem 1.1rem;
   }
+}
+
+/* Keep the Northern Express wordmark and language widget inside the green header */
+.site-nav .nav-inner > .logo-header,
+.site-nav .logo-header,
+.site-nav .nav-inner > .language-switcher {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(var(--nav-height) - 1.2rem) !important;
+  align-self: center !important;
+}
+
+.site-nav .brand,
+.site-nav .logo-header .brand {
+  height: var(--nav-box-height) !important;
+  min-height: 0 !important;
+  max-height: var(--nav-box-height) !important;
+  padding: 0 0.7rem !important;
+  font-size: 0.78rem !important;
+  line-height: 1 !important;
 }
