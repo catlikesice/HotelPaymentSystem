@@ -155,7 +155,8 @@ header, header.site-header, .site-header {
 .logo-header a {
   display: inline-flex;
   align-items: center;
-  line-height: 0;
+  line-height: 1.2;
+  text-decoration: none;
 }
 .logo-header img {
   display: block;
@@ -165,6 +166,18 @@ header, header.site-header, .site-header {
   height: auto;
   object-fit: contain;
   margin: 0;
+}
+.logo-header .brand {
+  display: block;
+  margin: 0;
+  text-align: left;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 /* textual brand centered beneath logo if present */
@@ -1550,6 +1563,21 @@ header .site-nav .logo-header img,
   width: auto !important;
   height: auto !important;
   margin: 0 !important;
+}
+
+.site-nav .logo-header .brand,
+header .site-nav .logo-header .brand,
+.logo-header .brand {
+  margin: 0 !important;
+  text-align: left !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .site-nav .nav-containers,
