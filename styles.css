@@ -1473,7 +1473,7 @@ footer {
 }
 
 .features,
-#northern-travel,
+#boreal-travel,
 main.content,
 main {
   background: transparent;
@@ -1482,7 +1482,7 @@ main {
 /* Inset readable page copy slightly toward the centre (not flush left) */
 main.content,
 section.content,
-#northern-travel {
+#boreal-travel {
   max-width: min(var(--max-width), 56rem);
   margin-left: auto;
   margin-right: auto;
@@ -1491,7 +1491,7 @@ section.content,
   box-sizing: border-box;
 }
 
-#northern-travel {
+#boreal-travel {
   max-width: min(var(--max-width), 48rem);
   padding-top: 1.5rem;
   padding-bottom: 2.5rem;
@@ -1499,13 +1499,13 @@ section.content,
   padding-right: clamp(2rem, 10vw, 5.5rem);
 }
 
-#northern-travel #northern-heading,
-#northern-travel #northern-intro,
-#northern-travel #northern-outro {
+#boreal-travel #boreal-heading,
+#boreal-travel #boreal-intro,
+#boreal-travel #boreal-outro {
   text-align: center;
 }
 
-#northern-travel ul {
+#boreal-travel ul {
   max-width: 40rem;
   margin-left: auto;
   margin-right: auto;
@@ -1919,7 +1919,7 @@ body > header.header-bar {
   }
 }
 
-/* Keep the Northern Express wordmark and language widget inside the green header */
+/* Keep the Boreal Horizons wordmark and language widget inside the green header */
 .site-nav .nav-inner > .logo-header,
 .site-nav .logo-header,
 .site-nav .nav-inner > .language-switcher {
