@@ -15,7 +15,11 @@
             <span class="brand">Boreal Horizons</span>
           </a>
         </div>
-        <div class="nav-containers" role="menubar" aria-label="Site quick links">
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav-links">
+            <span class="sr-only">Menu</span>
+            <span class="nav-toggle__bars" aria-hidden="true"></span>
+        </button>
+        <div class="nav-containers" id="site-nav-links" role="menubar" aria-label="Site quick links">
           <details class="nav-dropdown nav-dropdown-home" role="none">
             <summary class="nav-box nav-box-home" role="menuitem" aria-haspopup="true" aria-label="Home">Home</summary>
             <div class="nav-dropdown-menu" role="menu">
@@ -44,7 +48,12 @@
               </div>
           </details>
         </div>
-        <div class="language-switcher" aria-label="Language selector">
+        <div class="nav-tools">
+            <form class="nav-search" action="search.html" method="get" role="search">
+                <label class="sr-only" for="nav-search-q">Search hotels and cities</label>
+                <input id="nav-search-q" class="nav-search__input" name="q" type="search" placeholder="Search..." autocomplete="off" enterkeyhint="search">
+            </form>
+            <div class="language-switcher" aria-label="Language selector">
           <label for="lang-select">Language</label>
           <div class="language-switcher__select">
             <select id="lang-select" aria-label="Select language">
@@ -55,6 +64,7 @@
               <option value="de">Deutsch</option>
             </select>
           </div>
+        </div>
         </div>
         <ul class="nav-links" aria-hidden="true">
           <li><a href="index.html">Home</a></li>
@@ -130,6 +140,7 @@
 
   <script src="site-preferences.js"></script>
   <script src="assets/nav-translations.js"></script>
+  <script src="assets/nav-rail.js"></script>
   <script src="assets/auth-client.js"></script>
   <script>
     const HTML_TRANSLATION_KEYS = new Set(['footer-text']);

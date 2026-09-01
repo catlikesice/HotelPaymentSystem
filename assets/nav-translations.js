@@ -23,7 +23,10 @@
       login: 'Login',
       loginAria: 'Login',
       register: 'Register',
-      registerAria: 'Register'
+      registerAria: 'Register',
+      searchPlaceholder: 'Search...',
+      searchAria: 'Search hotels and cities',
+      menu: 'Menu'
     },
     ru: {
       home: 'Главная',
@@ -48,7 +51,10 @@
       login: 'Вход',
       loginAria: 'Вход',
       register: 'Регистрация',
-      registerAria: 'Регистрация'
+      registerAria: 'Регистрация',
+      searchPlaceholder: 'Поиск...',
+      searchAria: 'Поиск отелей и городов',
+      menu: 'Меню'
     },
     lv: {
       home: 'Sākums',
@@ -73,7 +79,10 @@
       login: 'Pieslēgties',
       loginAria: 'Pieslēgties',
       register: 'Reģistrēties',
-      registerAria: 'Reģistrēties'
+      registerAria: 'Reģistrēties',
+      searchPlaceholder: 'Meklēt...',
+      searchAria: 'Meklēt viesnīcas un pilsētas',
+      menu: 'Izvēlne'
     },
     et: {
       home: 'Avaleht',
@@ -98,7 +107,10 @@
       login: 'Logi sisse',
       loginAria: 'Logi sisse',
       register: 'Registreeru',
-      registerAria: 'Registreeru'
+      registerAria: 'Registreeru',
+      searchPlaceholder: 'Otsi...',
+      searchAria: 'Otsi hotelle ja linnu',
+      menu: 'Menüü'
     },
     de: {
       home: 'Startseite',
@@ -123,7 +135,10 @@
       login: 'Anmelden',
       loginAria: 'Anmelden',
       register: 'Registrieren',
-      registerAria: 'Registrieren'
+      registerAria: 'Registrieren',
+      searchPlaceholder: 'Suchen...',
+      searchAria: 'Hotels und Städte suchen',
+      menu: 'Menü'
     }
   };
 
@@ -298,6 +313,26 @@
       if (icelandDirectLink && !icelandDirectLink.classList.contains('nav-box-left') && !icelandDirectLink.classList.contains('nav-box-right')) {
         updateLinkContent(icelandDirectLink, mapping.aboutIceland, mapping.aboutIceland);
       }
+    }
+
+    const searchInput = navRoot.querySelector('.nav-search__input, .nav-search input[type="search"]');
+    if (searchInput) {
+      if (mapping.searchPlaceholder) {
+        searchInput.setAttribute('placeholder', mapping.searchPlaceholder);
+      }
+      if (mapping.searchAria) {
+        searchInput.setAttribute('aria-label', mapping.searchAria);
+      }
+    }
+
+    const searchLabel = navRoot.querySelector('.nav-search label');
+    if (searchLabel && mapping.searchAria) {
+      searchLabel.textContent = mapping.searchAria;
+    }
+
+    const menuLabel = navRoot.querySelector('.nav-toggle .sr-only');
+    if (menuLabel && mapping.menu) {
+      menuLabel.textContent = mapping.menu;
     }
 
     const hiddenNavList = navRoot.querySelector('.nav-links');
