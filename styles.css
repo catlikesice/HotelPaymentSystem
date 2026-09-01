@@ -2492,6 +2492,8 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
 
   header:has(.nav-inner) .site-nav.is-open .nav-containers {
     display: flex !important;
+    text-align: left !important;
+    align-items: stretch !important;
   }
 
   header:has(.nav-inner) .nav-containers > *,
@@ -2500,15 +2502,21 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
     height: auto !important;
     flex-direction: column !important;
     align-items: stretch !important;
+    justify-content: flex-start !important;
   }
 
   header:has(.nav-inner) .nav-box,
   header:has(.nav-inner) .site-nav .nav-box,
-  header:has(.nav-inner) .nav-containers .nav-box {
+  header:has(.nav-inner) .nav-containers .nav-box,
+  header:has(.nav-inner) .nav-containers > a.nav-box,
+  header:has(.nav-inner) .nav-containers summary.nav-box {
+    display: flex !important;
     width: 100% !important;
+    max-width: none !important;
     height: auto !important;
     justify-content: flex-start !important;
-    padding: 0.85rem 0.2rem !important;
+    text-align: left !important;
+    padding: 0.85rem 0.35rem !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.1em !important;
   }
