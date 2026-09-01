@@ -2594,3 +2594,27 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
   }
 }
 
+/* Last-wins mobile menu: turn links into left-aligned blocks so
+   leftover pill justify-content:center rules cannot center CONTACT / Book. */
+@media (max-width: 1080px) {
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-left,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-right,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > .nav-dropdown,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers summary.nav-box {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0.85rem 0.5rem !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    align-self: stretch !important;
+    height: auto !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+
