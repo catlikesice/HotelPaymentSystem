@@ -18,6 +18,8 @@
       aboutIceland: 'About Iceland',
       contact: 'Contact',
       contactAria: 'Contact us',
+      cultureBlog: 'Culture Blog',
+      cultureBlogAria: 'Culture Blog',
       account: 'Account',
       accountAria: 'Account',
       login: 'Login',
@@ -46,6 +48,8 @@
       aboutIceland: 'Об Исландии',
       contact: 'Контакты',
       contactAria: 'Связаться с нами',
+      cultureBlog: 'Культурный блог',
+      cultureBlogAria: 'Культурный блог',
       account: 'Аккаунт',
       accountAria: 'Аккаунт',
       login: 'Вход',
@@ -74,6 +78,8 @@
       aboutIceland: 'Par Islandi',
       contact: 'Kontakti',
       contactAria: 'Sazinieties ar mums',
+      cultureBlog: 'Kultūras blogs',
+      cultureBlogAria: 'Kultūras blogs',
       account: 'Konts',
       accountAria: 'Konts',
       login: 'Pieslēgties',
@@ -102,6 +108,8 @@
       aboutIceland: 'Islandi kohta',
       contact: 'Kontakt',
       contactAria: 'Võtke meiega ühendust',
+      cultureBlog: 'Kultuuriblogi',
+      cultureBlogAria: 'Kultuuriblogi',
       account: 'Konto',
       accountAria: 'Konto',
       login: 'Logi sisse',
@@ -130,6 +138,8 @@
       aboutIceland: 'Über Island',
       contact: 'Kontakt',
       contactAria: 'Kontaktieren Sie uns',
+      cultureBlog: 'Kulturblog',
+      cultureBlogAria: 'Kulturblog',
       account: 'Konto',
       accountAria: 'Konto',
       login: 'Anmelden',
@@ -233,6 +243,14 @@
     const contactLinks = navRoot.querySelectorAll('.nav-box-right');
     contactLinks.forEach(function(link) {
       updateLinkContent(link, mapping.contact, mapping.contactAria);
+    });
+
+    const cultureBlogLinks = navRoot.querySelectorAll('.nav-box-blog, a[href$="culture-blog.html"]');
+    cultureBlogLinks.forEach(function(link) {
+      if (link.closest('.nav-links')) {
+        return;
+      }
+      updateLinkContent(link, mapping.cultureBlog, mapping.cultureBlogAria);
     });
 
     const navLinkBookLinks = document.querySelectorAll('.nav-link-book');
@@ -358,6 +376,8 @@
           updateLinkContent(anchor, mapping.aboutSweden, mapping.aboutSweden);
         } else if (href === 'abouticeland.html') {
           updateLinkContent(anchor, mapping.aboutIceland, mapping.aboutIceland);
+        } else if (href === 'culture-blog.html') {
+          updateLinkContent(anchor, mapping.cultureBlog, mapping.cultureBlogAria);
         } else if (href === '#contact' || href === 'index.html#contact') {
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
         } else if (href === 'login.html') {

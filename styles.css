@@ -2603,6 +2603,7 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-left,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-blog,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-right,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > .nav-dropdown,
   header:has(.nav-inner) .site-nav.is-open .nav-containers summary.nav-box {
