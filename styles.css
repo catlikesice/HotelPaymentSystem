@@ -1941,18 +1941,20 @@ body > header.header-bar {
 
 /* =========================
    Editorial top rail (Travala-inspired)
-   Slim white bar flush to the viewport top: brand left,
-   uppercase text links centered, search + language on the right.
+   Slim dark bar flush to the viewport top: brand left,
+   uppercase light text links centered, search + language on the right.
+   Colours are inverted from the original white-bar / dark-ink pair so
+   the writing inside the navbar stays readable on the dark band.
    Scoped to headers that use the shared .nav-inner layout so
    hotel_signup.html's distinct header-bar is left alone.
    ========================= */
 :root {
-  --nav-rail-bg: #ffffff;
-  --nav-rail-ink: #163024;
-  --nav-rail-muted: #4d6756;
-  --nav-rail-line: rgba(22, 48, 36, 0.12);
-  --nav-rail-accent: #2e7d32;
-  --nav-rail-hover: #1f5b28;
+  --nav-rail-bg: #163024;
+  --nav-rail-ink: #ffffff;
+  --nav-rail-muted: #c5d4ca;
+  --nav-rail-line: rgba(255, 255, 255, 0.18);
+  --nav-rail-accent: #8fd392;
+  --nav-rail-hover: #c8f0c4;
   --nav-rail-height: 56px;
   --nav-height: 56px;
   --nav-band-height: 56px;
@@ -1972,7 +1974,7 @@ header.site-header:has(.nav-inner) {
   width: 100% !important;
   min-height: 0 !important;
   max-height: none !important;
-  box-shadow: 0 1px 0 var(--nav-rail-line), 0 8px 24px rgba(22, 48, 36, 0.05) !important;
+  box-shadow: 0 1px 0 var(--nav-rail-line), 0 8px 24px rgba(22, 48, 36, 0.28) !important;
 }
 
 header:has(.nav-inner) .site-nav,
@@ -1987,6 +1989,7 @@ header:has(.nav-inner) > .site-nav {
   background: var(--nav-rail-bg) !important;
   background-image: none !important;
   color: var(--nav-rail-ink) !important;
+  color-scheme: dark;
   box-shadow: none !important;
   box-sizing: border-box !important;
 }
@@ -2202,10 +2205,10 @@ header:has(.nav-inner) .nav-dropdown-menu {
   min-width: 220px !important;
   margin: 0 !important;
   padding: 0.45rem 0 !important;
-  background: #ffffff !important;
+  background: #1c3a2c !important;
   border: 1px solid var(--nav-rail-line) !important;
   border-radius: 12px !important;
-  box-shadow: 0 18px 40px rgba(22, 48, 36, 0.14) !important;
+  box-shadow: 0 18px 40px rgba(22, 48, 36, 0.35) !important;
   z-index: 1002 !important;
 }
 
@@ -2235,7 +2238,7 @@ header:has(.nav-inner) .nav-dropdown-menu a:hover,
 header:has(.nav-inner) .nav-dropdown-menu a:focus,
 header:has(.nav-inner) .nav-dropdown-menu button.nav-account-logout:hover,
 header:has(.nav-inner) .nav-dropdown-menu button.nav-account-logout:focus {
-  background: #eef7ee !important;
+  background: rgba(255, 255, 255, 0.1) !important;
   color: var(--nav-rail-hover) !important;
 }
 
@@ -2264,9 +2267,9 @@ header:has(.nav-inner) .nav-search__input {
   width: 168px;
   height: 34px;
   padding: 0 0.95rem 0 2.15rem;
-  border: 1px solid rgba(22, 48, 36, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 999px;
-  background: #f7faf6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%234d6756' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") 0.7rem 50% no-repeat;
+  background: rgba(255, 255, 255, 0.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23c5d4ca' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") 0.7rem 50% no-repeat;
   color: var(--nav-rail-ink);
   font: inherit;
   font-size: 0.82rem;
@@ -2280,14 +2283,14 @@ header:has(.nav-inner) .nav-search__input::placeholder {
 }
 
 header:has(.nav-inner) .nav-search__input:hover {
-  border-color: rgba(46, 125, 50, 0.45);
+  border-color: rgba(143, 211, 146, 0.55);
 }
 
 header:has(.nav-inner) .nav-search__input:focus {
   width: 210px;
   border-color: var(--nav-rail-accent);
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.16);
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(143, 211, 146, 0.22);
 }
 
 header:has(.nav-inner) .site-nav .language-switcher,
@@ -2308,7 +2311,7 @@ header:has(.nav-inner) .nav-tools .language-switcher {
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
-  border: 1px solid rgba(22, 48, 36, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
   border-radius: 999px !important;
   box-shadow: none !important;
   gap: 0 !important;
@@ -2383,9 +2386,9 @@ header:has(.nav-inner) .site-nav .nav-inner > .nav-toggle {
   height: 40px !important;
   margin: 0 !important;
   padding: 0 !important;
-  border: 1px solid rgba(22, 48, 36, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
   border-radius: 10px !important;
-  background: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   color: var(--nav-rail-ink) !important;
   box-shadow: none !important;
   cursor: pointer;
@@ -2600,6 +2603,7 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-left,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-blog,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-right,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > .nav-dropdown,
   header:has(.nav-inner) .site-nav.is-open .nav-containers summary.nav-box {
