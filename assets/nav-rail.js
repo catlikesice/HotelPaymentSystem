@@ -84,27 +84,5 @@
         setMenuOpen(false);
       }
     });
-
-    const searchForm = nav.querySelector('.nav-search');
-    const searchInput = nav.querySelector('.nav-search__input, .nav-search input[type="search"]');
-    if (searchForm && searchInput) {
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const query = (params.get('q') || '').trim();
-        if (query && !searchInput.value) {
-          searchInput.value = query;
-        }
-      } catch (err) {
-        // Ignore URL parsing issues and still bind submit handling.
-      }
-
-      searchForm.addEventListener('submit', function (event) {
-        const value = searchInput.value.trim();
-        if (!value) {
-          event.preventDefault();
-          searchInput.focus();
-        }
-      });
-    }
   });
 })();
