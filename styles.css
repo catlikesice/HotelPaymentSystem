@@ -330,7 +330,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
    ------------------------- */
 .hero {
   background: var(--color-hero-bg);
-  padding: 2.75rem var(--gutter);
+  padding: 2.75rem var(--gutter) 3.4rem;
   text-align: center;
 }
 .hero h2 {
@@ -351,6 +351,100 @@ header a { position: static !important; left: auto !important; right: auto !impo
   text-decoration: none;
   font-weight: 700;
   display: inline-block;
+}
+
+/* Booking-style destination + dates bar under the homepage hero */
+.hero-search {
+  display: grid;
+  grid-template-columns: minmax(12rem, 2.2fr) 1fr 1fr auto;
+  gap: 0.65rem 0.85rem;
+  align-items: end;
+  width: min(980px, calc(100% - 2.5rem));
+  margin: -1.65rem auto 0;
+  padding: 1rem 1.1rem 0.85rem;
+  background: #fff;
+  border: 1px solid rgba(35, 68, 26, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 14px 36px rgba(35, 68, 26, 0.16);
+  position: relative;
+  z-index: 4;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.hero-search__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.hero-search__field label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2e4d25;
+}
+
+.hero-search__field input[type="text"],
+.hero-search__field input[type="date"] {
+  width: 100%;
+  height: 48px;
+  padding: 0 0.85rem;
+  border: 1px solid #c9e5c5;
+  border-radius: 12px;
+  background: #f8fff8;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.98rem;
+}
+
+.hero-search__field input[type="text"]:focus,
+.hero-search__field input[type="date"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+  background: #fff;
+}
+
+.hero-search button[type="submit"] {
+  height: 48px;
+  padding: 0 1.4rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hero-search button[type="submit"]:hover,
+.hero-search button[type="submit"]:focus {
+  background: #23441a;
+}
+
+.hero-search__status {
+  grid-column: 1 / -1;
+  min-height: 1.2em;
+  margin: 0;
+  color: #8a2b2b;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .hero-search {
+    grid-template-columns: 1fr;
+    margin-top: -1.1rem;
+    width: min(100% - 2rem, 980px);
+  }
+
+  .hero-search button[type="submit"] {
+    width: 100%;
+  }
 }
 
 .confirm-button {
