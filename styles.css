@@ -62,7 +62,7 @@ header, header.site-header, .site-header {
   position: relative;
 }
 
-/* Remove the Baltic Holliday booking banner from city and hotel detail pages */
+/* Remove the Boreal Horizons booking banner from city and hotel detail pages */
 .booking-header {
   display: none !important;
 }
