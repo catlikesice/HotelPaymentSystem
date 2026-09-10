@@ -8,14 +8,6 @@
       book: 'Book with Us',
       bookAria: 'Book with Us',
       navLinkBookAria: 'Book with us',
-      aboutMenu: 'Places to Visit',
-      aboutMenuAria: 'Places to Visit',
-      aboutLatvia: 'About Latvia',
-      aboutEstonia: 'About Estonia',
-      aboutLithuania: 'About Lithuania',
-      aboutScotland: 'About Scotland',
-      aboutSweden: 'About Sweden',
-      aboutIceland: 'About Iceland',
       contact: 'Contact',
       contactAria: 'Contact us',
       cultureBlog: 'Culture Blog',
@@ -38,14 +30,6 @@
       book: 'Забронировать у нас',
       bookAria: 'Забронировать у нас',
       navLinkBookAria: 'Забронировать у нас',
-      aboutMenu: 'Места для посещения',
-      aboutMenuAria: 'Места для посещения',
-      aboutLatvia: 'О Латвии',
-      aboutEstonia: 'Об Эстонии',
-      aboutLithuania: 'О Литве',
-      aboutScotland: 'О Шотландии',
-      aboutSweden: 'О Швеции',
-      aboutIceland: 'Об Исландии',
       contact: 'Контакты',
       contactAria: 'Связаться с нами',
       cultureBlog: 'Культурный блог',
@@ -68,14 +52,6 @@
       book: 'Rezervēt pie mums',
       bookAria: 'Rezervēt pie mums',
       navLinkBookAria: 'Rezervēt pie mums',
-      aboutMenu: 'Vietas, ko apmeklēt',
-      aboutMenuAria: 'Vietas, ko apmeklēt',
-      aboutLatvia: 'Par Latviju',
-      aboutEstonia: 'Par Igauniju',
-      aboutLithuania: 'Par Lietuvu',
-      aboutScotland: 'Par Skotiju',
-      aboutSweden: 'Par Zviedriju',
-      aboutIceland: 'Par Islandi',
       contact: 'Kontakti',
       contactAria: 'Sazinieties ar mums',
       cultureBlog: 'Kultūras blogs',
@@ -98,14 +74,6 @@
       book: 'Broneeri meie juures',
       bookAria: 'Broneeri meie juures',
       navLinkBookAria: 'Broneeri meie juures',
-      aboutMenu: 'Külastamisväärsed kohad',
-      aboutMenuAria: 'Külastamisväärsed kohad',
-      aboutLatvia: 'Läti kohta',
-      aboutEstonia: 'Eesti kohta',
-      aboutLithuania: 'Leedu kohta',
-      aboutScotland: 'Šotimaa kohta',
-      aboutSweden: 'Rootsi kohta',
-      aboutIceland: 'Islandi kohta',
       contact: 'Kontakt',
       contactAria: 'Võtke meiega ühendust',
       cultureBlog: 'Kultuuriblogi',
@@ -128,14 +96,6 @@
       book: 'Bei uns buchen',
       bookAria: 'Bei uns buchen',
       navLinkBookAria: 'Bei uns buchen',
-      aboutMenu: 'Orte zum Besuchen',
-      aboutMenuAria: 'Orte zum Besuchen',
-      aboutLatvia: 'Über Lettland',
-      aboutEstonia: 'Über Estland',
-      aboutLithuania: 'Über Litauen',
-      aboutScotland: 'Über Schottland',
-      aboutSweden: 'Über Schweden',
-      aboutIceland: 'Über Island',
       contact: 'Kontakt',
       contactAria: 'Kontaktieren Sie uns',
       cultureBlog: 'Kulturblog',
@@ -277,62 +237,6 @@
       }
     }
 
-    const placesDropdown = navRoot.querySelector('.nav-dropdown-places') ||
-      navRoot.querySelector('.nav-dropdown:not(.nav-dropdown-account):not(.nav-dropdown-home)');
-    if (placesDropdown) {
-      const summary = placesDropdown.querySelector('summary.nav-box');
-      updateSummaryContent(summary, mapping.aboutMenu, mapping.aboutMenuAria);
-
-      const dropdownMenu = placesDropdown.querySelector('.nav-dropdown-menu');
-      if (dropdownMenu) {
-        const latviaLink = dropdownMenu.querySelector('a[href$="aboutlatvia.html"]');
-        updateLinkContent(latviaLink, mapping.aboutLatvia, mapping.aboutLatvia);
-
-        const estoniaLink = dropdownMenu.querySelector('a[href$="aboutestonia.html"]');
-        updateLinkContent(estoniaLink, mapping.aboutEstonia, mapping.aboutEstonia);
-
-        const lithuaniaLink = dropdownMenu.querySelector('a[href$="aboutlithuania.html"]');
-        updateLinkContent(lithuaniaLink, mapping.aboutLithuania, mapping.aboutLithuania);
-
-        const scotlandLink = dropdownMenu.querySelector('a[href$="aboutscotland.html"]');
-        updateLinkContent(scotlandLink, mapping.aboutScotland, mapping.aboutScotland);
-
-        const swedenLink = dropdownMenu.querySelector('a[href$="aboutsweden.html"]');
-        updateLinkContent(swedenLink, mapping.aboutSweden, mapping.aboutSweden);
-
-        const icelandLink = dropdownMenu.querySelector('a[href$="abouticeland.html"]');
-        updateLinkContent(icelandLink, mapping.aboutIceland, mapping.aboutIceland);
-      }
-    } else {
-      const latviaDirectLink = navRoot.querySelector('.nav-box-center[href$="aboutlatvia.html"]');
-      updateLinkContent(latviaDirectLink, mapping.aboutLatvia, mapping.aboutLatvia);
-
-      const estoniaDirectLink = navRoot.querySelector('.nav-box[href$="aboutestonia.html"]');
-      if (estoniaDirectLink && !estoniaDirectLink.classList.contains('nav-box-left') && !estoniaDirectLink.classList.contains('nav-box-right')) {
-        updateLinkContent(estoniaDirectLink, mapping.aboutEstonia, mapping.aboutEstonia);
-      }
-
-      const lithuaniaDirectLink = navRoot.querySelector('.nav-box[href$="aboutlithuania.html"]');
-      if (lithuaniaDirectLink && !lithuaniaDirectLink.classList.contains('nav-box-left') && !lithuaniaDirectLink.classList.contains('nav-box-right')) {
-        updateLinkContent(lithuaniaDirectLink, mapping.aboutLithuania, mapping.aboutLithuania);
-      }
-
-      const scotlandDirectLink = navRoot.querySelector('.nav-box[href$="aboutscotland.html"]');
-      if (scotlandDirectLink && !scotlandDirectLink.classList.contains('nav-box-left') && !scotlandDirectLink.classList.contains('nav-box-right')) {
-        updateLinkContent(scotlandDirectLink, mapping.aboutScotland, mapping.aboutScotland);
-      }
-
-      const swedenDirectLink = navRoot.querySelector('.nav-box[href$="aboutsweden.html"]');
-      if (swedenDirectLink && !swedenDirectLink.classList.contains('nav-box-left') && !swedenDirectLink.classList.contains('nav-box-right')) {
-        updateLinkContent(swedenDirectLink, mapping.aboutSweden, mapping.aboutSweden);
-      }
-
-      const icelandDirectLink = navRoot.querySelector('.nav-box[href$="abouticeland.html"]');
-      if (icelandDirectLink && !icelandDirectLink.classList.contains('nav-box-left') && !icelandDirectLink.classList.contains('nav-box-right')) {
-        updateLinkContent(icelandDirectLink, mapping.aboutIceland, mapping.aboutIceland);
-      }
-    }
-
     const searchInput = navRoot.querySelector('.nav-search__input, .nav-search input[type="search"]');
     if (searchInput) {
       if (mapping.searchPlaceholder) {
@@ -364,18 +268,6 @@
           updateLinkContent(anchor, mapping.aboutUsPartners, mapping.aboutUsPartnersAria);
         } else if (href === 'selectlocation.html') {
           updateLinkContent(anchor, mapping.book, mapping.bookAria);
-        } else if (href === 'aboutlatvia.html') {
-          updateLinkContent(anchor, mapping.aboutLatvia, mapping.aboutLatvia);
-        } else if (href === 'aboutestonia.html') {
-          updateLinkContent(anchor, mapping.aboutEstonia, mapping.aboutEstonia);
-        } else if (href === 'aboutlithuania.html') {
-          updateLinkContent(anchor, mapping.aboutLithuania, mapping.aboutLithuania);
-        } else if (href === 'aboutscotland.html') {
-          updateLinkContent(anchor, mapping.aboutScotland, mapping.aboutScotland);
-        } else if (href === 'aboutsweden.html') {
-          updateLinkContent(anchor, mapping.aboutSweden, mapping.aboutSweden);
-        } else if (href === 'abouticeland.html') {
-          updateLinkContent(anchor, mapping.aboutIceland, mapping.aboutIceland);
         } else if (href === 'culture-blog.html') {
           updateLinkContent(anchor, mapping.cultureBlog, mapping.cultureBlogAria);
         } else if (href === '#contact' || href === 'index.html#contact') {
