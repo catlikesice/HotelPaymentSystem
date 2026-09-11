@@ -37,7 +37,7 @@
       justify-content: center;
       align-items: stretch;
       margin: 1.5rem auto 0;
-      max-width: 640px;
+      max-width: 720px;
     }
 
     .search-form__field {
@@ -76,6 +76,13 @@
     .search-form button:hover,
     .search-form button:focus {
       background: #23441a;
+    }
+
+    .search-stay {
+      margin: 0.85rem auto 0;
+      max-width: 40rem;
+      color: #3d5c34;
+      font-size: 0.95rem;
     }
 
     .search-status {
@@ -280,8 +287,14 @@
             enterkeyhint="search"
           >
         </div>
+        <input type="hidden" id="search-checkin" name="checkIn">
+        <input type="hidden" id="search-checkout" name="checkOut">
+        <input type="hidden" id="search-adults" name="adults">
+        <input type="hidden" id="search-children" name="children">
         <button type="submit">Search</button>
       </form>
+
+      <p id="search-stay" class="search-stay" hidden></p>
 
       <p id="search-status" class="search-status" aria-live="polite"></p>
     </section>
