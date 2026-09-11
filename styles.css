@@ -356,8 +356,8 @@ header a { position: static !important; left: auto !important; right: auto !impo
 /* Booking-style destination + dates + guests bar under the homepage hero */
 .hero-search {
   display: grid;
-  grid-template-columns: minmax(11rem, 2fr) 1fr 1fr minmax(11.5rem, 1.45fr) auto;
-  gap: 0.65rem 0.85rem;
+  grid-template-columns: minmax(11rem, 2.2fr) 1fr 1fr 5.75rem 5.75rem auto;
+  gap: 0.65rem 0.75rem;
   align-items: end;
   width: min(1180px, calc(100% - 2.5rem));
   margin: -1.65rem auto 0;
@@ -387,32 +387,6 @@ header a { position: static !important; left: auto !important; right: auto !impo
   color: #2e4d25;
 }
 
-.hero-search__legend {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #2e4d25;
-}
-
-.hero-search__guests {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.45rem;
-}
-
-.hero-search__guest {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
-}
-
-.hero-search__guest label {
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
-}
-
 .hero-search__field input[type="text"],
 .hero-search__field input[type="date"],
 .hero-search__field input[type="number"] {
@@ -438,7 +412,13 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 
 .hero-search__field input[type="number"] {
-  padding-right: 0.45rem;
+  padding-right: 0.35rem;
+  -moz-appearance: textfield;
+}
+
+.hero-search__field input[type="number"]::-webkit-outer-spin-button,
+.hero-search__field input[type="number"]::-webkit-inner-spin-button {
+  height: 1.2em;
 }
 
 .hero-search button[type="submit"] {
@@ -475,7 +455,6 @@ header a { position: static !important; left: auto !important; right: auto !impo
   }
 
   .hero-search__field--destination,
-  .hero-search__field--guests,
   .hero-search button[type="submit"] {
     grid-column: 1 / -1;
   }
@@ -488,8 +467,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
     width: min(100% - 2rem, 980px);
   }
 
-  .hero-search__field--destination,
-  .hero-search__field--guests {
+  .hero-search__field--destination {
     grid-column: auto;
   }
 
