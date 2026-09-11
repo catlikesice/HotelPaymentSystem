@@ -688,7 +688,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
 .contact-form { max-width: 820px; margin: 1rem auto; padding: 1.25rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(46,77,37,0.04); }
 
 /* -------------------------
-   Culture Blog page
+   Blog page
    ------------------------- */
 .culture-blog {
   max-width: var(--max-width);
