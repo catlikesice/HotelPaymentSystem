@@ -95,16 +95,35 @@
             <label id="hero-search-checkout-label" for="hero-search-checkout">Check-out</label>
             <input id="hero-search-checkout" name="checkOut" type="date">
         </div>
-        <div class="hero-search__field hero-search__field--guests">
-            <span id="hero-search-guests-label" class="hero-search__legend">Guests</span>
-            <div class="hero-search__guests">
-                <div class="hero-search__guest">
-                    <label id="hero-search-adults-label" for="hero-search-adults">Adults</label>
-                    <input id="hero-search-adults" name="adults" type="number" min="1" max="20" value="2" inputmode="numeric" required>
+        <div class="hero-search__field hero-search__field--guests guest-picker" data-guest-picker>
+            <label id="hero-search-guests-label" for="hero-search-guests-toggle">Guests</label>
+            <button
+                type="button"
+                id="hero-search-guests-toggle"
+                class="guest-picker__toggle"
+                data-guest-toggle
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="hero-search-guests-menu"
+            >
+                <span data-guest-summary>2 adults</span>
+            </button>
+            <div id="hero-search-guests-menu" class="guest-picker__menu" data-guest-menu hidden>
+                <div class="guest-picker__row">
+                    <span id="hero-search-adults-label" class="guest-picker__name">Adults</span>
+                    <div class="guest-picker__stepper">
+                        <button type="button" class="guest-picker__btn" data-guest-step="adults" data-guest-delta="-1" aria-label="Decrease adults">−</button>
+                        <input id="hero-search-adults" class="guest-picker__count" name="adults" type="number" min="1" max="20" value="2" inputmode="numeric" required data-guest-adults readonly tabindex="-1" aria-live="polite">
+                        <button type="button" class="guest-picker__btn" data-guest-step="adults" data-guest-delta="1" aria-label="Increase adults">+</button>
+                    </div>
                 </div>
-                <div class="hero-search__guest">
-                    <label id="hero-search-children-label" for="hero-search-children">Children</label>
-                    <input id="hero-search-children" name="children" type="number" min="0" max="10" value="0" inputmode="numeric">
+                <div class="guest-picker__row">
+                    <span id="hero-search-children-label" class="guest-picker__name">Children</span>
+                    <div class="guest-picker__stepper">
+                        <button type="button" class="guest-picker__btn" data-guest-step="children" data-guest-delta="-1" aria-label="Decrease children">−</button>
+                        <input id="hero-search-children" class="guest-picker__count" name="children" type="number" min="0" max="10" value="0" inputmode="numeric" data-guest-children readonly tabindex="-1" aria-live="polite">
+                        <button type="button" class="guest-picker__btn" data-guest-step="children" data-guest-delta="1" aria-label="Increase children">+</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -319,6 +338,7 @@
   <script src="assets/nav-rail.js"></script>
   <script src="assets/auth-client.js"></script>
   <script src="assets/search-catalog.js"></script>
+  <script src="assets/guest-picker.js"></script>
   <script src="assets/hero-search.js"></script>
     <script>
       // Translation data for supported languages
