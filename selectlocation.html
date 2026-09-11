@@ -99,13 +99,38 @@
                         <label for="checkOut" id="checkout-label"><b>Check-out date:</b></label>
                         <input type="date" id="checkOut" name="checkOut" aria-describedby="selectedLocation">
                     </div>
-                    <div class="form-inline form-inline--guests">
-                        <label for="adults" id="adults-label"><b>Adults:</b></label>
-                        <input type="number" id="adults" name="adults" min="1" max="20" value="2" inputmode="numeric" aria-describedby="selectedLocation">
-                    </div>
-                    <div class="form-inline form-inline--guests">
-                        <label for="children" id="children-label"><b>Children:</b></label>
-                        <input type="number" id="children" name="children" min="0" max="10" value="0" inputmode="numeric" aria-describedby="selectedLocation">
+                    <div class="form-inline form-inline--guests guest-picker" data-guest-picker>
+                        <label for="guests-toggle" id="guests-label"><b>Guests:</b></label>
+                        <button
+                            type="button"
+                            id="guests-toggle"
+                            class="guest-picker__toggle"
+                            data-guest-toggle
+                            aria-expanded="false"
+                            aria-haspopup="true"
+                            aria-controls="guests-menu"
+                            aria-describedby="selectedLocation"
+                        >
+                            <span data-guest-summary>2 adults</span>
+                        </button>
+                        <div id="guests-menu" class="guest-picker__menu" data-guest-menu hidden>
+                            <div class="guest-picker__row">
+                                <span id="adults-label" class="guest-picker__name">Adults</span>
+                                <div class="guest-picker__stepper">
+                                    <button type="button" class="guest-picker__btn" data-guest-step="adults" data-guest-delta="-1" aria-label="Decrease adults">−</button>
+                                    <input type="number" id="adults" class="guest-picker__count" name="adults" min="1" max="20" value="2" inputmode="numeric" data-guest-adults readonly tabindex="-1" aria-live="polite">
+                                    <button type="button" class="guest-picker__btn" data-guest-step="adults" data-guest-delta="1" aria-label="Increase adults">+</button>
+                                </div>
+                            </div>
+                            <div class="guest-picker__row">
+                                <span id="children-label" class="guest-picker__name">Children</span>
+                                <div class="guest-picker__stepper">
+                                    <button type="button" class="guest-picker__btn" data-guest-step="children" data-guest-delta="-1" aria-label="Decrease children">−</button>
+                                    <input type="number" id="children" class="guest-picker__count" name="children" min="0" max="10" value="0" inputmode="numeric" data-guest-children readonly tabindex="-1" aria-live="polite">
+                                    <button type="button" class="guest-picker__btn" data-guest-step="children" data-guest-delta="1" aria-label="Increase children">+</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
 
@@ -121,6 +146,7 @@
       <script src="assets/nav-translations.js"></script>
   <script src="assets/nav-rail.js"></script>
   <script src="assets/auth-client.js"></script>
+  <script src="assets/guest-picker.js"></script>
     <script>
       // Translation data for supported languages
       const translations = {
@@ -132,8 +158,9 @@
           "city-placeholder": "-- Select City/Town --",
           "checkin-label": "Check-in date:",
           "checkout-label": "Check-out date:",
-          "adults-label": "Adults:",
-          "children-label": "Children:",
+          "guests-label": "Guests:",
+          "adults-label": "Adults",
+          "children-label": "Children",
           "continueBtn": "Continue",
           "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
         },
@@ -145,8 +172,9 @@
           "city-placeholder": "-- Выберите город --",
           "checkin-label": "Дата заезда:",
           "checkout-label": "Дата выезда:",
-          "adults-label": "Взрослые:",
-          "children-label": "Дети:",
+          "guests-label": "Гости:",
+          "adults-label": "Взрослые",
+          "children-label": "Дети",
           "continueBtn": "Продолжить",
           "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
         },
@@ -158,8 +186,9 @@
           "city-placeholder": "-- Izvēlieties pilsētu --",
           "checkin-label": "Ierašanās datums:",
           "checkout-label": "Izbraukšanas datums:",
-          "adults-label": "Pieaugušie:",
-          "children-label": "Bērni:",
+          "guests-label": "Viesi:",
+          "adults-label": "Pieaugušie",
+          "children-label": "Bērni",
           "continueBtn": "Turpināt",
           "footer-text": "&copy; 2026 Boreal Horizons. Blokķēdes risinājumi viesmīlības industrijai."
         },
@@ -171,8 +200,9 @@
           "city-placeholder": "-- Vali linn --",
           "checkin-label": "Saabumiskuupäev:",
           "checkout-label": "Lahkumiskuupäev:",
-          "adults-label": "Täiskasvanud:",
-          "children-label": "Lapsed:",
+          "guests-label": "Külalised:",
+          "adults-label": "Täiskasvanud",
+          "children-label": "Lapsed",
           "continueBtn": "Jätka",
           "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-lahendused hotellindusele."
         },
@@ -184,8 +214,9 @@
           "city-placeholder": "-- Stadt/Ort auswählen --",
           "checkin-label": "Check-in-Datum:",
           "checkout-label": "Check-out-Datum:",
-          "adults-label": "Erwachsene:",
-          "children-label": "Kinder:",
+          "guests-label": "Gäste:",
+          "adults-label": "Erwachsene",
+          "children-label": "Kinder",
           "continueBtn": "Weiter",
           "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
         }
@@ -474,8 +505,14 @@
           alert('Your check-out date must be after your check-in date.');
         } else if (!Number.isFinite(adults) || adults < MIN_ADULTS) {
           alert('Please add at least one adult guest.');
+          if (window.GuestPicker && adultsInput) {
+            window.GuestPicker.open(adultsInput.closest('[data-guest-picker]'));
+          }
         } else if (!Number.isFinite(children) || children < MIN_CHILDREN) {
           alert('Please enter how many children are travelling, or 0 if none.');
+          if (window.GuestPicker && childrenInput) {
+            window.GuestPicker.open(childrenInput.closest('[data-guest-picker]'));
+          }
           } else {
             const nights = calculateNights(checkInDate, checkOutDate) || 1;
             const cityDisplayName = citySelect.options[citySelect.selectedIndex] ? citySelect.options[citySelect.selectedIndex].text : selectedCity;
@@ -509,6 +546,9 @@
             }
             if (childrenInput && stored.children != null) {
               childrenInput.value = String(parseGuestCount(stored.children, MIN_CHILDREN, MAX_CHILDREN, 0));
+            }
+            if (adultsInput) {
+              adultsInput.dispatchEvent(new Event('input', { bubbles: true }));
             }
           }
         } catch (error) {

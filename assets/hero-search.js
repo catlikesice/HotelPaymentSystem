@@ -215,6 +215,8 @@
     if (stored.children != null) {
       childrenInput.value = String(parseGuestCount(stored.children, MIN_CHILDREN, MAX_CHILDREN, DEFAULT_CHILDREN));
     }
+
+    adultsInput.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   function init() {
@@ -289,6 +291,9 @@
       if (!Number.isFinite(adults) || adults < MIN_ADULTS) {
         event.preventDefault();
         setStatus('Please add at least one adult guest.');
+        if (window.GuestPicker && typeof window.GuestPicker.open === 'function') {
+          window.GuestPicker.open(adultsInput.closest('[data-guest-picker]'));
+        }
         adultsInput.focus();
         return;
       }
@@ -296,6 +301,9 @@
       if (!Number.isFinite(children) || children < MIN_CHILDREN) {
         event.preventDefault();
         setStatus('Please enter how many children are travelling, or 0 if none.');
+        if (window.GuestPicker && typeof window.GuestPicker.open === 'function') {
+          window.GuestPicker.open(childrenInput.closest('[data-guest-picker]'));
+        }
         childrenInput.focus();
         return;
       }
