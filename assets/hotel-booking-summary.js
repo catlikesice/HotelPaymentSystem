@@ -75,6 +75,39 @@
     return Math.round(diff / MS_PER_DAY);
   }
 
+  function parseGuestCount(value, min, max, fallback) {
+    const parsed = parseInt(value, 10);
+    if (!Number.isFinite(parsed)) {
+      return fallback;
+    }
+    return Math.max(min, Math.min(max, parsed));
+  }
+
+  function formatGuestSummary(details) {
+    if (!details) {
+      return '';
+    }
+
+    const adults = parseGuestCount(details.adults, 0, 20, NaN);
+    const children = parseGuestCount(details.children, 0, 10, NaN);
+    const parts = [];
+
+    if (Number.isFinite(adults) && adults > 0) {
+      parts.push(adults === 1 ? '1 adult' : adults + ' adults');
+    }
+    if (Number.isFinite(children) && children > 0) {
+      parts.push(children === 1 ? '1 child' : children + ' children');
+    } else if (Number.isFinite(children) && children === 0 && parts.length) {
+      parts.push('no children');
+    }
+
+    if (!parts.length && typeof details.guests === 'number' && details.guests > 0) {
+      parts.push(details.guests === 1 ? '1 guest' : details.guests + ' guests');
+    }
+
+    return parts.join(', ');
+  }
+
   function getDocumentLocale() {
     const lang = (document.documentElement.getAttribute('lang') || 'en').toLowerCase();
     return LOCALE_FALLBACK[lang] || 'en-GB';
@@ -512,6 +545,13 @@
       message.className = 'booking-summary__notice';
       message.textContent = 'Booking dates saved. Nightly pricing information is unavailable for this property.';
       summaryEl.appendChild(message);
+      const guestLabelWithoutRate = formatGuestSummary(bookingDetails);
+      if (guestLabelWithoutRate) {
+        const guestsEl = document.createElement('p');
+        guestsEl.className = 'booking-summary__guests';
+        guestsEl.textContent = 'Guests: ' + guestLabelWithoutRate;
+        summaryEl.appendChild(guestsEl);
+      }
       return;
     }
 
@@ -529,6 +569,14 @@
       nightsEl.className = 'booking-summary__nights';
       nightsEl.textContent = 'Booked stay length: ' + nightsLabel;
       summaryEl.appendChild(nightsEl);
+    }
+
+    const guestLabel = formatGuestSummary(bookingDetails);
+    if (guestLabel) {
+      const guestsEl = document.createElement('p');
+      guestsEl.className = 'booking-summary__guests';
+      guestsEl.textContent = 'Guests: ' + guestLabel;
+      summaryEl.appendChild(guestsEl);
     }
 
     if (roomSelection) {

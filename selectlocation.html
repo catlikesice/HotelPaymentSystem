@@ -99,6 +99,14 @@
                         <label for="checkOut" id="checkout-label"><b>Check-out date:</b></label>
                         <input type="date" id="checkOut" name="checkOut" aria-describedby="selectedLocation">
                     </div>
+                    <div class="form-inline form-inline--guests">
+                        <label for="adults" id="adults-label"><b>Adults:</b></label>
+                        <input type="number" id="adults" name="adults" min="1" max="20" value="2" inputmode="numeric" aria-describedby="selectedLocation">
+                    </div>
+                    <div class="form-inline form-inline--guests">
+                        <label for="children" id="children-label"><b>Children:</b></label>
+                        <input type="number" id="children" name="children" min="0" max="10" value="0" inputmode="numeric" aria-describedby="selectedLocation">
+                    </div>
                 </form>
 
                 <!-- Added: live location display inside the page so the chosen location shows immediately -->
@@ -124,6 +132,8 @@
           "city-placeholder": "-- Select City/Town --",
           "checkin-label": "Check-in date:",
           "checkout-label": "Check-out date:",
+          "adults-label": "Adults:",
+          "children-label": "Children:",
           "continueBtn": "Continue",
           "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
         },
@@ -135,6 +145,8 @@
           "city-placeholder": "-- Выберите город --",
           "checkin-label": "Дата заезда:",
           "checkout-label": "Дата выезда:",
+          "adults-label": "Взрослые:",
+          "children-label": "Дети:",
           "continueBtn": "Продолжить",
           "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
         },
@@ -146,6 +158,8 @@
           "city-placeholder": "-- Izvēlieties pilsētu --",
           "checkin-label": "Ierašanās datums:",
           "checkout-label": "Izbraukšanas datums:",
+          "adults-label": "Pieaugušie:",
+          "children-label": "Bērni:",
           "continueBtn": "Turpināt",
           "footer-text": "&copy; 2026 Boreal Horizons. Blokķēdes risinājumi viesmīlības industrijai."
         },
@@ -157,6 +171,8 @@
           "city-placeholder": "-- Vali linn --",
           "checkin-label": "Saabumiskuupäev:",
           "checkout-label": "Lahkumiskuupäev:",
+          "adults-label": "Täiskasvanud:",
+          "children-label": "Lapsed:",
           "continueBtn": "Jätka",
           "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-lahendused hotellindusele."
         },
@@ -168,6 +184,8 @@
           "city-placeholder": "-- Stadt/Ort auswählen --",
           "checkin-label": "Check-in-Datum:",
           "checkout-label": "Check-out-Datum:",
+          "adults-label": "Erwachsene:",
+          "children-label": "Kinder:",
           "continueBtn": "Weiter",
           "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
         }
@@ -193,11 +211,17 @@
         const citySelect = document.getElementById('city');
         const checkInInput = document.getElementById('checkIn');
         const checkOutInput = document.getElementById('checkOut');
+        const adultsInput = document.getElementById('adults');
+        const childrenInput = document.getElementById('children');
         const continueBtn = document.getElementById('continueBtn');
         const selectedLocation = document.getElementById('selectedLocation');
         const todayISO = new Date().toISOString().split('T')[0];
         const BOOKING_STORAGE_KEY = 'balticComfortBooking';
         const MS_PER_DAY = 24 * 60 * 60 * 1000;
+        const MIN_ADULTS = 1;
+        const MAX_ADULTS = 20;
+        const MIN_CHILDREN = 0;
+        const MAX_CHILDREN = 10;
 
       checkInInput.min = todayISO;
       checkOutInput.min = todayISO;
@@ -250,6 +274,27 @@
           return Math.round(diff / MS_PER_DAY);
         }
 
+        function parseGuestCount(value, min, max, fallback) {
+          const parsed = parseInt(value, 10);
+          if (!Number.isFinite(parsed)) {
+            return fallback;
+          }
+          return Math.max(min, Math.min(max, parsed));
+        }
+
+        function formatGuestSummary(adults, children) {
+          const parts = [];
+          if (Number.isFinite(adults) && adults > 0) {
+            parts.push(adults === 1 ? '1 adult' : adults + ' adults');
+          }
+          if (Number.isFinite(children) && children > 0) {
+            parts.push(children === 1 ? '1 child' : children + ' children');
+          } else if (Number.isFinite(children) && children === 0 && parts.length) {
+            parts.push('no children');
+          }
+          return parts.join(', ');
+        }
+
         function persistBookingSelection(details) {
           if (!details) {
             return;
@@ -296,6 +341,13 @@
           const nights = calculateNights(checkInValue, checkOutValue);
           if (nights && nights > 0) {
             summaryParts.push(`Nights: ${nights}`);
+          }
+
+          const adults = parseGuestCount(adultsInput && adultsInput.value, MIN_ADULTS, MAX_ADULTS, NaN);
+          const children = parseGuestCount(childrenInput && childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
+          const guestSummary = formatGuestSummary(adults, children);
+          if (guestSummary) {
+            summaryParts.push('Guests: ' + guestSummary);
           }
 
           selectedLocation.textContent = summaryParts.join(' | ');
@@ -393,11 +445,22 @@
 
       checkOutInput.addEventListener('change', updateLocationDisplay);
 
+      if (adultsInput) {
+        adultsInput.addEventListener('input', updateLocationDisplay);
+        adultsInput.addEventListener('change', updateLocationDisplay);
+      }
+      if (childrenInput) {
+        childrenInput.addEventListener('input', updateLocationDisplay);
+        childrenInput.addEventListener('change', updateLocationDisplay);
+      }
+
         continueBtn.addEventListener('click', function() {
         const selectedCountry = countrySelect.value;
         const selectedCity = citySelect.value;
         const checkInDate = checkInInput.value;
         const checkOutDate = checkOutInput.value;
+        const adults = parseGuestCount(adultsInput && adultsInput.value, MIN_ADULTS, MAX_ADULTS, NaN);
+        const children = parseGuestCount(childrenInput && childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
 
         if (!selectedCountry) {
           alert('Please select a country before continuing.');
@@ -409,9 +472,16 @@
           alert('Please select a check-out date before continuing.');
         } else if (checkOutDate <= checkInDate) {
           alert('Your check-out date must be after your check-in date.');
+        } else if (!Number.isFinite(adults) || adults < MIN_ADULTS) {
+          alert('Please add at least one adult guest.');
+        } else if (!Number.isFinite(children) || children < MIN_CHILDREN) {
+          alert('Please enter how many children are travelling, or 0 if none.');
           } else {
             const nights = calculateNights(checkInDate, checkOutDate) || 1;
             const cityDisplayName = citySelect.options[citySelect.selectedIndex] ? citySelect.options[citySelect.selectedIndex].text : selectedCity;
+
+            if (adultsInput) adultsInput.value = String(adults);
+            if (childrenInput) childrenInput.value = String(children);
 
             persistBookingSelection({
               country: selectedCountry,
@@ -419,7 +489,10 @@
               cityName: cityDisplayName,
               checkInDate,
               checkOutDate,
-              nights: nights > 0 ? nights : 1
+              nights: nights > 0 ? nights : 1,
+              adults,
+              children,
+              guests: adults + children
             });
 
             window.location.href = selectedCity + '.html';
@@ -428,6 +501,19 @@
 
       document.addEventListener('DOMContentLoaded', function() {
         checkOutInput.min = checkInInput.value || todayISO;
+        try {
+          const stored = window.sessionStorage && JSON.parse(window.sessionStorage.getItem(BOOKING_STORAGE_KEY) || 'null');
+          if (stored) {
+            if (adultsInput && stored.adults != null) {
+              adultsInput.value = String(parseGuestCount(stored.adults, MIN_ADULTS, MAX_ADULTS, 2));
+            }
+            if (childrenInput && stored.children != null) {
+              childrenInput.value = String(parseGuestCount(stored.children, MIN_CHILDREN, MAX_CHILDREN, 0));
+            }
+          }
+        } catch (error) {
+          console.warn('Unable to restore stored guest counts', error);
+        }
         updateLocationDisplay();
       });
     </script>

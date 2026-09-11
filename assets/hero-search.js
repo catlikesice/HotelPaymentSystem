@@ -1,14 +1,21 @@
 /**
- * Homepage booking search bar: destination + stay dates.
+ * Homepage booking search bar: destination + stay dates + guests.
  * Persists the same session key as selectlocation.html so hotel pages
  * can price the stay. When SQL search is ready, city matching can move
- * to GET /api/search while this form still posts q, checkIn, and checkOut.
+ * to GET /api/search while this form still posts q, checkIn, checkOut,
+ * adults, and children.
  */
 (function () {
   'use strict';
 
   var BOOKING_STORAGE_KEY = 'balticComfortBooking';
   var MS_PER_DAY = 24 * 60 * 60 * 1000;
+  var MIN_ADULTS = 1;
+  var MAX_ADULTS = 20;
+  var MIN_CHILDREN = 0;
+  var MAX_CHILDREN = 10;
+  var DEFAULT_ADULTS = 2;
+  var DEFAULT_CHILDREN = 0;
 
   function normalize(text) {
     return String(text || '')
@@ -48,6 +55,27 @@
     }
 
     return Math.round(diff / MS_PER_DAY);
+  }
+
+  function parseGuestCount(value, min, max, fallback) {
+    var parsed = parseInt(value, 10);
+    if (!Number.isFinite(parsed)) {
+      return fallback;
+    }
+    return Math.max(min, Math.min(max, parsed));
+  }
+
+  function readStoredBooking() {
+    try {
+      if (!window.sessionStorage) {
+        return null;
+      }
+      var raw = window.sessionStorage.getItem(BOOKING_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      console.warn('Unable to read stored booking details', error);
+      return null;
+    }
   }
 
   function persistBookingSelection(details) {
@@ -153,18 +181,40 @@
     }
   }
 
-  function goToMatch(match, checkInDate, checkOutDate, nights) {
+  function guestPayload(adults, children) {
+    return {
+      adults: adults,
+      children: children,
+      guests: adults + children
+    };
+  }
+
+  function goToMatch(match, checkInDate, checkOutDate, nights, adults, children) {
     var item = match.item;
     var cityName = item.city || item.name;
-    persistBookingSelection({
+    persistBookingSelection(Object.assign({
       country: countryToSlug(item.country),
       citySlug: String(item.url || '').replace(/\.html?$/i, ''),
       cityName: cityName,
       checkInDate: checkInDate,
       checkOutDate: checkOutDate,
       nights: nights
-    });
+    }, guestPayload(adults, children)));
     window.location.href = item.url;
+  }
+
+  function restoreGuestFields(adultsInput, childrenInput) {
+    var stored = readStoredBooking();
+    if (!stored) {
+      return;
+    }
+
+    if (stored.adults != null) {
+      adultsInput.value = String(parseGuestCount(stored.adults, MIN_ADULTS, MAX_ADULTS, DEFAULT_ADULTS));
+    }
+    if (stored.children != null) {
+      childrenInput.value = String(parseGuestCount(stored.children, MIN_CHILDREN, MAX_CHILDREN, DEFAULT_CHILDREN));
+    }
   }
 
   function init() {
@@ -172,13 +222,16 @@
     var destination = document.getElementById('hero-search-destination');
     var checkIn = document.getElementById('hero-search-checkin');
     var checkOut = document.getElementById('hero-search-checkout');
+    var adultsInput = document.getElementById('hero-search-adults');
+    var childrenInput = document.getElementById('hero-search-children');
     var datalist = document.getElementById('hero-search-destinations');
 
-    if (!form || !destination || !checkIn || !checkOut) {
+    if (!form || !destination || !checkIn || !checkOut || !adultsInput || !childrenInput) {
       return;
     }
 
     fillDestinationList(datalist);
+    restoreGuestFields(adultsInput, childrenInput);
 
     var minDate = todayISO();
     checkIn.min = minDate;
@@ -196,10 +249,19 @@
       setStatus('');
     });
 
+    adultsInput.addEventListener('input', function () {
+      setStatus('');
+    });
+    childrenInput.addEventListener('input', function () {
+      setStatus('');
+    });
+
     form.addEventListener('submit', function (event) {
       var query = destination.value.trim();
       var checkInDate = checkIn.value;
       var checkOutDate = checkOut.value;
+      var adults = parseGuestCount(adultsInput.value, MIN_ADULTS, MAX_ADULTS, NaN);
+      var children = parseGuestCount(childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
       var nights;
 
       if (!query) {
@@ -224,20 +286,37 @@
         return;
       }
 
-      var match = findDestination(query);
-      if (match && match.item && match.item.url) {
+      if (!Number.isFinite(adults) || adults < MIN_ADULTS) {
         event.preventDefault();
-        goToMatch(match, checkInDate, checkOutDate, nights);
+        setStatus('Please add at least one adult guest.');
+        adultsInput.focus();
         return;
       }
 
-      persistBookingSelection({
+      if (!Number.isFinite(children) || children < MIN_CHILDREN) {
+        event.preventDefault();
+        setStatus('Please enter how many children are travelling, or 0 if none.');
+        childrenInput.focus();
+        return;
+      }
+
+      adultsInput.value = String(adults);
+      childrenInput.value = String(children);
+
+      var match = findDestination(query);
+      if (match && match.item && match.item.url) {
+        event.preventDefault();
+        goToMatch(match, checkInDate, checkOutDate, nights, adults, children);
+        return;
+      }
+
+      persistBookingSelection(Object.assign({
         cityName: query,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
         nights: nights
-      });
-      // Fall through to GET search.html?q=...&checkIn=...&checkOut=...
+      }, guestPayload(adults, children)));
+      // Fall through to GET search.html?q=...&checkIn=...&checkOut=...&adults=...&children=...
     });
   }
 

@@ -11,6 +11,7 @@
   // Flip this when the Express + SQL search endpoint is ready.
   var USE_SQL_API = false;
   var SQL_SEARCH_ENDPOINT = '/api/search';
+  var BOOKING_STORAGE_KEY = 'balticComfortBooking';
 
   function normalize(text) {
     return String(text || '')
@@ -22,6 +23,116 @@
   function getQueryFromUrl() {
     var params = new URLSearchParams(window.location.search);
     return (params.get('q') || '').trim();
+  }
+
+  function parseGuestCount(value, min, max, fallback) {
+    var parsed = parseInt(value, 10);
+    if (!Number.isFinite(parsed)) {
+      return fallback;
+    }
+    return Math.max(min, Math.min(max, parsed));
+  }
+
+  function readStoredBooking() {
+    try {
+      if (!window.sessionStorage) {
+        return null;
+      }
+      var raw = window.sessionStorage.getItem(BOOKING_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      console.warn('Unable to read stored booking details', error);
+      return null;
+    }
+  }
+
+  function persistBookingSelection(details) {
+    if (!details) {
+      return;
+    }
+
+    try {
+      var stored = readStoredBooking() || {};
+      var payload = Object.assign({}, stored, details, { updatedAt: new Date().toISOString() });
+      if (window.sessionStorage) {
+        window.sessionStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(payload));
+      }
+    } catch (error) {
+      console.warn('Unable to persist booking selection details', error);
+    }
+  }
+
+  function formatGuestSummary(adults, children) {
+    var parts = [];
+    if (Number.isFinite(adults) && adults > 0) {
+      parts.push(adults === 1 ? '1 adult' : adults + ' adults');
+    }
+    if (Number.isFinite(children) && children > 0) {
+      parts.push(children === 1 ? '1 child' : children + ' children');
+    } else if (Number.isFinite(children) && children === 0 && parts.length) {
+      parts.push('no children');
+    }
+    return parts.join(', ');
+  }
+
+  function getStayFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var stored = readStoredBooking() || {};
+    var checkIn = (params.get('checkIn') || stored.checkInDate || '').trim();
+    var checkOut = (params.get('checkOut') || stored.checkOutDate || '').trim();
+    var adults = parseGuestCount(params.get('adults') != null ? params.get('adults') : stored.adults, 1, 20, NaN);
+    var children = parseGuestCount(params.get('children') != null ? params.get('children') : stored.children, 0, 10, NaN);
+
+    return {
+      checkIn: checkIn,
+      checkOut: checkOut,
+      adults: adults,
+      children: children
+    };
+  }
+
+  function syncStayFields(stay) {
+    var checkInEl = document.getElementById('search-checkin');
+    var checkOutEl = document.getElementById('search-checkout');
+    var adultsEl = document.getElementById('search-adults');
+    var childrenEl = document.getElementById('search-children');
+    var stayEl = document.getElementById('search-stay');
+
+    if (checkInEl) checkInEl.value = stay.checkIn || '';
+    if (checkOutEl) checkOutEl.value = stay.checkOut || '';
+    if (adultsEl && Number.isFinite(stay.adults)) adultsEl.value = String(stay.adults);
+    if (childrenEl && Number.isFinite(stay.children)) childrenEl.value = String(stay.children);
+
+    var parts = [];
+    if (stay.checkIn && stay.checkOut) {
+      parts.push('Stay: ' + stay.checkIn + ' – ' + stay.checkOut);
+    }
+    var guestLabel = formatGuestSummary(stay.adults, stay.children);
+    if (guestLabel) {
+      parts.push('Guests: ' + guestLabel);
+    }
+
+    if (stayEl) {
+      if (parts.length) {
+        stayEl.hidden = false;
+        stayEl.textContent = parts.join(' · ');
+      } else {
+        stayEl.hidden = true;
+        stayEl.textContent = '';
+      }
+    }
+
+    if (stay.checkIn || stay.checkOut || Number.isFinite(stay.adults) || Number.isFinite(stay.children)) {
+      var payload = {};
+      if (stay.checkIn) payload.checkInDate = stay.checkIn;
+      if (stay.checkOut) payload.checkOutDate = stay.checkOut;
+      if (Number.isFinite(stay.adults)) payload.adults = stay.adults;
+      if (Number.isFinite(stay.children)) payload.children = stay.children;
+      if (Number.isFinite(stay.adults) && Number.isFinite(stay.children)) {
+        payload.guests = stay.adults + stay.children;
+      }
+      persistBookingSelection(payload);
+    }
   }
 
   function matchesQuery(item, query) {
@@ -173,10 +284,13 @@
     var form = document.getElementById('site-search-form');
     var input = document.getElementById('site-search-input');
     var query = getQueryFromUrl();
+    var stay = getStayFromUrl();
 
     if (input) {
       input.value = query;
     }
+
+    syncStayFields(stay);
 
     if (form) {
       form.addEventListener('submit', function (event) {
