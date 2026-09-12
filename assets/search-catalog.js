@@ -21,6 +21,30 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Akureyri",
+      "city": "Akureyri",
+      "country": "Iceland",
+      "url": "akureyri.html",
+      "description": "Browse hotels in Akureyri, Iceland."
+    },
+    {
+      "type": "city",
+      "name": "Bergen",
+      "city": "Bergen",
+      "country": "Norway",
+      "url": "bergen.html",
+      "description": "Browse hotels in Bergen, Norway."
+    },
+    {
+      "type": "city",
+      "name": "Berwick-upon-Tweed",
+      "city": "Berwick-upon-Tweed",
+      "country": "United Kingdom",
+      "url": "berwick-upon-tweed.html",
+      "description": "Browse hotels in Berwick-upon-Tweed, United Kingdom."
+    },
+    {
+      "type": "city",
       "name": "Copenhagen",
       "city": "Copenhagen",
       "country": "Denmark",
@@ -50,6 +74,22 @@ window.SEARCH_CATALOG = {
       "country": "Finland",
       "url": "espoo.html",
       "description": "Browse hotels in Espoo, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Gothenburg",
+      "city": "Gothenburg",
+      "country": "Sweden",
+      "url": "gothenburg.html",
+      "description": "Browse hotels in Gothenburg, Sweden."
+    },
+    {
+      "type": "city",
+      "name": "Hafnarfjörður",
+      "city": "Hafnarfjörður",
+      "country": "Iceland",
+      "url": "hafnarfjörður.html",
+      "description": "Browse hotels in Hafnarfjörður, Iceland."
     },
     {
       "type": "city",
@@ -93,11 +133,43 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Kristiansand",
+      "city": "Kristiansand",
+      "country": "Norway",
+      "url": "kristiansand.html",
+      "description": "Browse hotels in Kristiansand, Norway."
+    },
+    {
+      "type": "city",
+      "name": "Kópavogur",
+      "city": "Kópavogur",
+      "country": "Iceland",
+      "url": "kópavogur.html",
+      "description": "Browse hotels in Kópavogur, Iceland."
+    },
+    {
+      "type": "city",
       "name": "Liepāja",
       "city": "Liepāja",
       "country": "Latvia",
       "url": "liepaja.html",
       "description": "Browse hotels in Liepāja, Latvia."
+    },
+    {
+      "type": "city",
+      "name": "Linköping",
+      "city": "Linköping",
+      "country": "Sweden",
+      "url": "linköping.html",
+      "description": "Browse hotels in Linköping, Sweden."
+    },
+    {
+      "type": "city",
+      "name": "Malmö",
+      "city": "Malmö",
+      "country": "Sweden",
+      "url": "malmö.html",
+      "description": "Browse hotels in Malmö, Sweden."
     },
     {
       "type": "city",
@@ -109,11 +181,27 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Newcastle",
+      "city": "Newcastle",
+      "country": "United Kingdom",
+      "url": "newcastle.html",
+      "description": "Browse hotels in Newcastle upon Tyne, United Kingdom."
+    },
+    {
+      "type": "city",
       "name": "Odense",
       "city": "Odense",
       "country": "Denmark",
       "url": "odense.html",
       "description": "Browse hotels in Odense, Denmark."
+    },
+    {
+      "type": "city",
+      "name": "Oslo",
+      "city": "Oslo",
+      "country": "Norway",
+      "url": "oslo.html",
+      "description": "Browse hotels in Oslo, Norway."
     },
     {
       "type": "city",
@@ -141,11 +229,43 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Reykjanesbær",
+      "city": "Reykjanesbær",
+      "country": "Iceland",
+      "url": "reykjanesbær.html",
+      "description": "Browse hotels in Reykjanesbær, Iceland."
+    },
+    {
+      "type": "city",
+      "name": "Reykjavík",
+      "city": "Reykjavík",
+      "country": "Iceland",
+      "url": "reykjavík.html",
+      "description": "Browse hotels in Reykjavík, Iceland."
+    },
+    {
+      "type": "city",
       "name": "Riga",
       "city": "Riga",
       "country": "Latvia",
       "url": "riga.html",
       "description": "Browse hotels in Riga, Latvia."
+    },
+    {
+      "type": "city",
+      "name": "Stavanger",
+      "city": "Stavanger",
+      "country": "Norway",
+      "url": "stavanger.html",
+      "description": "Browse hotels in Stavanger, Norway."
+    },
+    {
+      "type": "city",
+      "name": "Stockholm",
+      "city": "Stockholm",
+      "country": "Sweden",
+      "url": "stockholm.html",
+      "description": "Browse hotels in Stockholm, Sweden."
     },
     {
       "type": "city",
@@ -173,11 +293,27 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Trondheim",
+      "city": "Trondheim",
+      "country": "Norway",
+      "url": "trondheim.html",
+      "description": "Browse hotels in Trondheim, Norway."
+    },
+    {
+      "type": "city",
       "name": "Turku",
       "city": "Turku",
       "country": "Finland",
       "url": "turku.html",
       "description": "Browse hotels in Turku, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Uppsala",
+      "city": "Uppsala",
+      "country": "Sweden",
+      "url": "uppsala.html",
+      "description": "Browse hotels in Uppsala, Sweden."
     },
     {
       "type": "city",
@@ -199,6 +335,303 @@ window.SEARCH_CATALOG = {
   "hotels": [
     {
       "type": "hotel",
+      "name": "Airport Hotel Aurora Star",
+      "city": "Reykjanesbær",
+      "country": "Iceland",
+      "url": "reykjanesbær.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Convenient overnight beside Keflavík International Airport with a 24-hour desk."
+    },
+    {
+      "type": "hotel",
+      "name": "Britannia Hotel",
+      "city": "Trondheim",
+      "country": "Norway",
+      "url": "trondheim.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.14 ETH / night",
+      "priceEth": 0.14,
+      "description": "Restored palatial hotel with a palm court, spa, and several celebrated restaurants."
+    },
+    {
+      "type": "hotel",
+      "name": "Canopy by Hilton Reykjavik City Centre",
+      "city": "Reykjavík",
+      "country": "Iceland",
+      "url": "reykjavík.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.11 ETH / night",
+      "priceEth": 0.11,
+      "description": "Design-led hotel on Laugavegur with local art, a café, and easy access to nightlife."
+    },
+    {
+      "type": "hotel",
+      "name": "Center Hotels Plaza",
+      "city": "Reykjavík",
+      "country": "Iceland",
+      "url": "reykjavík.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Practical city-centre stay on Ingólfstorg, close to shops, bars, and the Old Harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Admiral",
+      "city": "Bergen",
+      "country": "Norway",
+      "url": "bergen.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Waterfront hotel facing Bryggen, with harbour-view rooms and a rooftop restaurant."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Ernst",
+      "city": "Kristiansand",
+      "country": "Norway",
+      "url": "kristiansand.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Landmark hotel on the main square, a short stroll from the cathedral and fish market."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Gillet",
+      "city": "Uppsala",
+      "country": "Sweden",
+      "url": "uppsala.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Central hotel by the river Fyris, walking distance to the cathedral and university."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Malmö Live",
+      "city": "Malmö",
+      "country": "Sweden",
+      "url": "malmö.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "High-rise waterfront hotel with a sky bar and concert hall next door."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Post",
+      "city": "Gothenburg",
+      "country": "Sweden",
+      "url": "gothenburg.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Converted central post office with a rooftop pool, next to Drottningtorget and the station."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Stavanger",
+      "city": "Stavanger",
+      "country": "Norway",
+      "url": "stavanger.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Central high-rise with a rooftop restaurant and views over the harbour and old town."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Trondheim",
+      "city": "Trondheim",
+      "country": "Norway",
+      "url": "trondheim.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Harbourfront hotel on Brattøra, a short walk from the aquarium and city centre."
+    },
+    {
+      "type": "hotel",
+      "name": "Crowne Plaza Newcastle",
+      "city": "Newcastle",
+      "country": "United Kingdom",
+      "url": "newcastle.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Modern city hotel near St James’ Park, well placed for business and match-day stays."
+    },
+    {
+      "type": "hotel",
+      "name": "Elite Hotel Academia",
+      "city": "Uppsala",
+      "country": "Sweden",
+      "url": "uppsala.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Contemporary stay beside Uppsala Central Station with a restaurant and gym."
+    },
+    {
+      "type": "hotel",
+      "name": "Grand Hotel Hörnan",
+      "city": "Uppsala",
+      "country": "Sweden",
+      "url": "uppsala.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Boutique hotel in a historic corner building overlooking the river and old town."
+    },
+    {
+      "type": "hotel",
+      "name": "Grand Hotel Oslo",
+      "city": "Oslo",
+      "country": "Norway",
+      "url": "oslo.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.15 ETH / night",
+      "priceEth": 0.15,
+      "description": "Historic hotel on Karl Johans gate, facing the Storting and a stroll from the palace."
+    },
+    {
+      "type": "hotel",
+      "name": "Grand Hôtel Stockholm",
+      "city": "Stockholm",
+      "country": "Sweden",
+      "url": "stockholm.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.16 ETH / night",
+      "priceEth": 0.16,
+      "description": "Landmark waterfront palace facing the Royal Palace, with a Nordic spa and fine dining."
+    },
+    {
+      "type": "hotel",
+      "name": "Helguhús Guesthouse",
+      "city": "Hafnarfjörður",
+      "country": "Iceland",
+      "url": "hafnarfjörður.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.035 ETH / night",
+      "priceEth": 0.035,
+      "description": "Homely guesthouse in a quiet neighbourhood, a short drive from the capital."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Borg",
+      "city": "Reykjavík",
+      "country": "Iceland",
+      "url": "reykjavík.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.14 ETH / night",
+      "priceEth": 0.14,
+      "description": "Art Deco landmark on Austurvöllur square, steps from the parliament and harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Continental",
+      "city": "Oslo",
+      "country": "Norway",
+      "url": "oslo.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.11 ETH / night",
+      "priceEth": 0.11,
+      "description": "Family-run landmark beside Nationaltheatret, known for Theatercaféen and city views."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Diplomat",
+      "city": "Stockholm",
+      "country": "Sweden",
+      "url": "stockholm.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.11 ETH / night",
+      "priceEth": 0.11,
+      "description": "Elegant Art Nouveau hotel on Strandvägen, steps from Östermalm boutiques and Djurgården."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel du Vin Newcastle",
+      "city": "Newcastle",
+      "country": "United Kingdom",
+      "url": "newcastle.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Boutique hotel in a converted warehouse beside the Quayside, with a bistro and wine cellar."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Eggers",
+      "city": "Gothenburg",
+      "country": "Sweden",
+      "url": "gothenburg.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Classic 19th-century hotel by the railway station, close to Avenyn and the opera."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Kea",
+      "city": "Akureyri",
+      "country": "Iceland",
+      "url": "akureyri.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Long-standing harbour hotel facing the fjord, steps from the church and downtown cafés."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Keflavik",
+      "city": "Reykjanesbær",
+      "country": "Iceland",
+      "url": "reykjanesbær.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Well-known airport-town hotel with a restaurant, handy for early flights and the lagoon."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Keilir",
+      "city": "Reykjanesbær",
+      "country": "Iceland",
+      "url": "reykjanesbær.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Modern stay in central Keflavík, close to the waterfront and the Viking World museum."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Nordurland",
+      "city": "Akureyri",
+      "country": "Iceland",
+      "url": "akureyri.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Compact central hotel on Hafnarstræti, a practical base for north-Iceland day trips."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Norge by Scandic",
+      "city": "Bergen",
+      "country": "Norway",
+      "url": "bergen.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.1 ETH / night",
+      "priceEth": 0.1,
+      "description": "Rebuilt city-centre icon on Ole Bulls plass, a short walk from the fish market."
+    },
+    {
+      "type": "hotel",
       "name": "Hotel Royal Aarhus",
       "city": "Aarhus",
       "country": "Denmark",
@@ -207,6 +640,138 @@ window.SEARCH_CATALOG = {
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
       "description": "Luxury hotel in the heart of Aarhus, featuring elegant rooms, gourmet restaurant, and spa services."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Savoy Malmö",
+      "city": "Malmö",
+      "country": "Sweden",
+      "url": "malmö.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Historic city hotel opposite the central station, a short hop from the Turning Torso."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Vellir",
+      "city": "Kópavogur",
+      "country": "Iceland",
+      "url": "kópavogur.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Contemporary hotel in Kópavogur with spacious rooms and quick links into Reykjavík."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Victoria Stavanger",
+      "city": "Stavanger",
+      "country": "Norway",
+      "url": "stavanger.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Historic hotel on Skansegt, close to the cathedral and the ferry to Tau."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Viking",
+      "city": "Hafnarfjörður",
+      "country": "Iceland",
+      "url": "hafnarfjörður.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.065 ETH / night",
+      "priceEth": 0.065,
+      "description": "Characterful harbour hotel with Norse-inspired interiors and a popular restaurant."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Hafnarfjörður",
+      "city": "Hafnarfjörður",
+      "country": "Iceland",
+      "url": "hafnarfjörður.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Straightforward town hotel close to the lava fields, harbour, and Reykjavík bus routes."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Smárinn",
+      "city": "Kópavogur",
+      "country": "Iceland",
+      "url": "kópavogur.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Practical stay near Smáralind shopping centre, useful for families and longer visits."
+    },
+    {
+      "type": "hotel",
+      "name": "Icelandair Hotel Akureyri",
+      "city": "Akureyri",
+      "country": "Iceland",
+      "url": "akureyri.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.075 ETH / night",
+      "priceEth": 0.075,
+      "description": "Contemporary hotel near the botanical garden, with views toward the ski slopes."
+    },
+    {
+      "type": "hotel",
+      "name": "Kórinn Guesthouse",
+      "city": "Kópavogur",
+      "country": "Iceland",
+      "url": "kópavogur.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.04 ETH / night",
+      "priceEth": 0.04,
+      "description": "Quiet guesthouse-style rooms with easy access to local pools and coastal paths."
+    },
+    {
+      "type": "hotel",
+      "name": "Malmaison Newcastle",
+      "city": "Newcastle",
+      "country": "United Kingdom",
+      "url": "newcastle.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges."
+    },
+    {
+      "type": "hotel",
+      "name": "Marshall Meadows Country House",
+      "city": "Berwick-upon-Tweed",
+      "country": "United Kingdom",
+      "url": "berwick-upon-tweed.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Georgian country house on the coast just north of town, with sea views and period rooms."
+    },
+    {
+      "type": "hotel",
+      "name": "Quality Hotel Ekoxen",
+      "city": "Linköping",
+      "country": "Sweden",
+      "url": "linköping.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Well-equipped city hotel with a pool and spa, close to Linköping’s main square."
+    },
+    {
+      "type": "hotel",
+      "name": "Radisson Blu Atlantic",
+      "city": "Stavanger",
+      "country": "Norway",
+      "url": "stavanger.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Waterfront hotel on the lake, walking distance to the petroleum museum and colour houses."
     },
     {
       "type": "hotel",
@@ -229,6 +794,50 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Contemporary comfort with panoramic city views, perfect for business or leisure travelers."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Continental",
+      "city": "Stockholm",
+      "country": "Sweden",
+      "url": "stockholm.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Central eco-minded hotel beside Stockholm Central Station, ideal for exploring the islands."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Frimurarehotellet",
+      "city": "Linköping",
+      "country": "Sweden",
+      "url": "linköping.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Landmark hotel in the city centre with easy access to the cathedral and old town."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Kristiansand Bystranda",
+      "city": "Kristiansand",
+      "country": "Norway",
+      "url": "kristiansand.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Beachfront hotel on Bystranda with a pool, close to the boardwalk and Kilden."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Nidelven",
+      "city": "Trondheim",
+      "country": "Norway",
+      "url": "trondheim.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Riverside hotel famous for its breakfast, next to the Solsiden quarter."
     },
     {
       "type": "hotel",
@@ -273,6 +882,94 @@ window.SEARCH_CATALOG = {
       "price": "0.021 ETH / night",
       "priceEth": 0.021,
       "description": ""
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Triangeln",
+      "city": "Malmö",
+      "country": "Sweden",
+      "url": "malmö.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Modern tower hotel above Triangeln station, handy for Möllevången and shopping."
+    },
+    {
+      "type": "hotel",
+      "name": "Steens Hotel",
+      "city": "Bergen",
+      "country": "Norway",
+      "url": "bergen.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Intimate Swiss-chalet style guesthouse near Nygårdsparken, handy for the funicular."
+    },
+    {
+      "type": "hotel",
+      "name": "Stora Hotellet Linköping",
+      "city": "Linköping",
+      "country": "Sweden",
+      "url": "linköping.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.045 ETH / night",
+      "priceEth": 0.045,
+      "description": "Classic independent hotel with a restaurant, a short walk from the railway station."
+    },
+    {
+      "type": "hotel",
+      "name": "The King’s Arms Hotel",
+      "city": "Berwick-upon-Tweed",
+      "country": "United Kingdom",
+      "url": "berwick-upon-tweed.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.04 ETH / night",
+      "priceEth": 0.04,
+      "description": "Historic coaching inn in the town centre, a short walk from the Elizabethan walls."
+    },
+    {
+      "type": "hotel",
+      "name": "The Thief",
+      "city": "Oslo",
+      "country": "Norway",
+      "url": "oslo.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.13 ETH / night",
+      "priceEth": 0.13,
+      "description": "Design hotel on Tjuvholmen with contemporary art, harbour views, and a spa."
+    },
+    {
+      "type": "hotel",
+      "name": "The Walls Guest House",
+      "city": "Berwick-upon-Tweed",
+      "country": "United Kingdom",
+      "url": "berwick-upon-tweed.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.03 ETH / night",
+      "priceEth": 0.03,
+      "description": "Friendly townhouse stay beside Berwick’s ramparts, close to the Tweed estuary."
+    },
+    {
+      "type": "hotel",
+      "name": "Thon Hotel Wergeland",
+      "city": "Kristiansand",
+      "country": "Norway",
+      "url": "kristiansand.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Compact city hotel beside Wergeland’s park, handy for the Posebyen old town."
+    },
+    {
+      "type": "hotel",
+      "name": "Upper House",
+      "city": "Gothenburg",
+      "country": "Sweden",
+      "url": "gothenburg.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.12 ETH / night",
+      "priceEth": 0.12,
+      "description": "Design hotel high above Liseberg with a spa, skyline views, and Nordic cuisine."
     },
     {
       "type": "hotel",
