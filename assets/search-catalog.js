@@ -165,6 +165,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Kiruna",
+      "city": "Kiruna",
+      "country": "Sweden",
+      "url": "kiruna.html",
+      "description": "Browse hotels in Kiruna, Sweden."
+    },
+    {
+      "type": "city",
       "name": "Klaipėda",
       "city": "Klaipėda",
       "country": "Lithuania",
@@ -293,6 +301,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Rovaniemi",
+      "city": "Rovaniemi",
+      "country": "Finland",
+      "url": "rovaniemi.html",
+      "description": "Browse hotels in Rovaniemi, Finland."
+    },
+    {
+      "type": "city",
       "name": "Stavanger",
       "city": "Stavanger",
       "country": "Norway",
@@ -338,6 +354,14 @@ window.SEARCH_CATALOG = {
       "country": "Estonia",
       "url": "tartu.html",
       "description": "Browse hotels in Tartu, Estonia."
+    },
+    {
+      "type": "city",
+      "name": "Tromsø",
+      "city": "Tromsø",
+      "country": "Norway",
+      "url": "tromso.html",
+      "description": "Browse hotels in Tromsø, Norway."
     },
     {
       "type": "city",
@@ -1010,6 +1034,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Camp Ripan",
+      "city": "Kiruna",
+      "country": "Sweden",
+      "url": "kiruna.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Arctic spa hotel on the edge of Kiruna, with northern lights views and a base for Kebnekaise trails."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Arctic Eden",
+      "city": "Kiruna",
+      "country": "Sweden",
+      "url": "kiruna.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Lapland-inspired rooms in the town centre, close to Kiruna’s relocated church and new city district."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Kiruna",
+      "city": "Kiruna",
+      "country": "Sweden",
+      "url": "kiruna.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Modern hotel near the town centre, handy for aurora trips, Abisko, and the Icehotel in Jukkasjärvi."
+    },
+    {
+      "type": "hotel",
       "name": "Portside Boutique",
       "city": "Klaipėda",
       "country": "Lithuania",
@@ -1428,6 +1485,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Arctic Light Hotel",
+      "city": "Rovaniemi",
+      "country": "Finland",
+      "url": "rovaniemi.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.10 ETH / night",
+      "priceEth": 0.1,
+      "description": "Boutique hotel in a converted city hall, steps from Rovaniemi’s centre and Santa Claus Village day trips."
+    },
+    {
+      "type": "hotel",
+      "name": "Lapland Hotels Sky Ounasvaara",
+      "city": "Rovaniemi",
+      "country": "Finland",
+      "url": "rovaniemi.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Hilltop hotel above the Kemijoki, with northern lights views and forest trails just outside town."
+    },
+    {
+      "type": "hotel",
+      "name": "Santa's Hotel Santa Claus",
+      "city": "Rovaniemi",
+      "country": "Finland",
+      "url": "rovaniemi.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront."
+    },
+    {
+      "type": "hotel",
       "name": "Clarion Hotel Stavanger",
       "city": "Stavanger",
       "country": "Norway",
@@ -1601,6 +1691,39 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Modern high-rise hotel offering panoramic city views, pool and business facilities."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel The Edge",
+      "city": "Tromsø",
+      "country": "Norway",
+      "url": "tromso.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.10 ETH / night",
+      "priceEth": 0.1,
+      "description": "Waterfront hotel on the Tromsø Sound with harbour views and a short hop to the Arctic Cathedral."
+    },
+    {
+      "type": "hotel",
+      "name": "Radisson Blu Hotel Tromsø",
+      "city": "Tromsø",
+      "country": "Norway",
+      "url": "tromso.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Central Arctic-city hotel with a rooftop bar looking over the island and surrounding peaks."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Ishavshotel",
+      "city": "Tromsø",
+      "country": "Norway",
+      "url": "tromso.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Harbourfront stay on the quay, a short walk from Tromsø city centre and the polar museum."
     },
     {
       "type": "hotel",
