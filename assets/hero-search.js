@@ -1,6 +1,6 @@
 /**
  * Homepage booking search bar: destination + stay dates + guests.
- * Persists the same session key as selectlocation.html so hotel pages
+ * Persists booking dates and guests from the homepage search so hotel pages
  * can price the stay. When SQL search is ready, city matching can move
  * to GET /api/search while this form still posts q, checkIn, checkOut,
  * adults, and children.

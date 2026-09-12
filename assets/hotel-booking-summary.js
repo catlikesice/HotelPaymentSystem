@@ -652,7 +652,7 @@
 
     const reminderEl = document.createElement('p');
     reminderEl.className = 'booking-summary__reminder';
-    reminderEl.innerHTML = 'Need to change your dates? <a href="selectlocation.html">Update your booking details.</a>';
+    reminderEl.innerHTML = 'Need to change your dates? <a href="index.html">Update your booking details.</a>';
     summaryEl.appendChild(reminderEl);
   }
 
