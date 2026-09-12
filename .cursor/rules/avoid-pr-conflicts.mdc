@@ -1,0 +1,29 @@
+---
+description: Always branch from latest origin/main so Cloud Agent PRs do not start with merge conflicts
+alwaysApply: true
+---
+
+# Keep pull requests mergeable
+
+Cloud Agent VMs for this repo often boot with a stale local `main` (prebuilt snapshot reuse). Opening a PR from that tip is why new PRs show merge conflicts against GitHub `main`.
+
+## Before creating a feature branch
+
+1. Run `git fetch origin main`.
+2. Branch from `origin/main`, not from the local `main` ref:
+
+```bash
+git checkout -b cursor/<descriptive-name> origin/main
+```
+
+3. If you are already on a feature branch created from stale `main`, run `scripts/sync-with-main.sh` before editing.
+
+## Before opening or updating a PR
+
+1. Run `scripts/sync-with-main.sh`.
+2. If it reports conflicts, resolve them, commit, and push.
+3. Do not open or update a PR while it would be `CONFLICTING` against `origin/main`.
+
+## Reduce repeat conflicts
+
+Prefer editing a shared script (`site-preferences.js`, `assets/nav-translations.js`, `assets/nav-rail.js`) instead of copy-pasting the same navbar, language `<option>` list, or login popup into every HTML page.

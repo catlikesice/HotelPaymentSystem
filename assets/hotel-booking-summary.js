@@ -4,8 +4,7 @@
   const LOCALE_FALLBACK = {
     en: 'en-GB',
     ru: 'ru-RU',
-    lv: 'lv-LV',
-    et: 'et-EE',
+    sv: 'sv-SE',
     de: 'de-DE'
   };
   const optionsConfigCache = new WeakMap();
