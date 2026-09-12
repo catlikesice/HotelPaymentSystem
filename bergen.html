@@ -2,35 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hotels in Jelgava</title>
+    <title>Hotels in Bergen</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .booking-header { 
-            background: #ffeec0; 
-            padding: 2rem 1rem; 
-            text-align: center; 
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
         }
-        .booking-header h1 { 
-            font-weight: bold; 
-            color: #2e7d32; 
-            margin: 0 0 0.5rem 0; 
-            font-size: 2.2rem; 
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
         }
-        .booking-header p { 
-            font-weight: bold; 
-            color: #2e7d32; 
-            margin: 0; 
-            font-size: 1.1rem; 
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
         }
-        .booking-container { 
-            margin: 2rem auto; 
-            max-width: 1200px; 
-            padding: 0 1rem; 
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
         }
-        .booking-container h2 { 
-            text-align: center; 
-            color: #2e4d25; 
-            margin-bottom: 1rem; 
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
         }
         .currency-selector {
             text-align: center;
@@ -51,25 +51,25 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .hotel-list { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 2rem; 
-            justify-content: center; 
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
         }
-        .hotel-card { 
-            background: #fff; 
-            border-radius: 1rem; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
-            width: 300px; 
-            padding: 1rem; 
-            text-align: center; 
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
         }
-        .hotel-card img { 
-            width: 100%; 
-            height: 160px; 
-            object-fit: cover; 
-            border-radius: 0.7rem; 
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
         }
         .hotel-card h3 {
             color: #2e4d25;
@@ -80,10 +80,10 @@
             color: #2e4d25;
             margin-bottom: 0.3rem;
         }
-        .hotel-card .price { 
-            font-weight: bold; 
-            color: #2e7d32; 
-            margin: 0.5rem 0; 
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
             font-size: 1.1rem;
         }
         .hotel-card p {
@@ -91,20 +91,20 @@
             line-height: 1.5;
             margin: 0.5rem 0;
         }
-        .hotel-card .book-link { 
-            display: block; 
-            margin: 1rem auto 0 auto; 
-            background: #2e7d32; 
-            color: #fff; 
-            border: none; 
-            border-radius: 0.5rem; 
-            padding: 0.7rem 1.2rem; 
-            text-decoration: none; 
-            font-weight: bold; 
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
             transition: background 0.2s;
         }
-        .hotel-card .book-link:hover { 
-            background: #156d17; 
+        .hotel-card .book-link:hover {
+            background: #156d17;
         }
         .back-link {
             text-align: center;
@@ -148,7 +148,7 @@
     </div>
 
     <div class="booking-container">
-        <h2 id="available-hotels" data-city="Jelgava">Available Hotels in Jelgava</h2>
+        <h2 id="available-hotels" data-city="Bergen">Available Hotels in Bergen</h2>
         <div class="currency-selector">
             <label for="currency" id="currency-label">Select Currency:</label>
                         <select id="currency" onchange="updatePrices()">
@@ -171,12 +171,29 @@
         </div>
         <div class="hotel-list">
             <div class="hotel-card">
-                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Jelgava Hotel">
-                <h3>Jelgava Hotel</h3>
-                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
-                <p>Modern hotel in the city center with comfortable rooms and restaurant.</p>
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Norge by Scandic">
+                <h3>Hotel Norge by Scandic</h3>
+                <div class="price" data-eth="0.1" data-btc="0.0017" data-usdt="285">0.1 ETH / night</div>
+                <p>Rebuilt city-centre icon on Ole Bulls plass, a short walk from the fish market.</p>
                 <a href="index.html" class="book-link">View & Book</a>
             </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Clarion Hotel Admiral">
+                <h3>Clarion Hotel Admiral</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Waterfront hotel facing Bryggen, with harbour-view rooms and a rooftop restaurant.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Steens Hotel">
+                <h3>Steens Hotel</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Intimate Swiss-chalet style guesthouse near Nygårdsparken, handy for the funicular.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
         </div>
     </div>
     <div class="back-link">
