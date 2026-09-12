@@ -1,0 +1,163 @@
+name: Keep PR branches current
+
+# Cloud Agent VMs often branch from a stale snapshot of main. When main
+# moves, GitHub reports those PRs as conflicting even if the feature work
+# would merge cleanly. This workflow asks GitHub to merge the latest main
+# into open PR branches. True overlapping edits still need a human/agent.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: keep-pr-current-${{ github.event.pull_request.number || 'main' }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update PR branches with latest main
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const COMMENT_MARKER = '<!-- keep-pr-current -->';
+            const { owner, repo } = context.repo;
+
+            if (context.eventName === 'pull_request' && context.actor === 'github-actions[bot]') {
+              core.info('Skipping pull_request event triggered by github-actions[bot]');
+              return;
+            }
+
+            function conflictMessage(pull) {
+              return [
+                COMMENT_MARKER,
+                `GitHub could not merge \`${pull.base.ref}\` into \`${pull.head.ref}\` because of conflicts.`,
+                '',
+                'On the PR branch, run:',
+                '',
+                '```bash',
+                'git fetch origin main',
+                'bash scripts/sync-with-main.sh',
+                '```',
+                '',
+                'Resolve any listed files, commit, and push. Cloud Agent VMs must branch from latest `origin/main`, not the stale local `main` from the environment snapshot.'
+              ].join('\n');
+            }
+
+            async function commentOnce(pull) {
+              const { data: comments } = await github.rest.issues.listComments({
+                owner,
+                repo,
+                issue_number: pull.number,
+                per_page: 100
+              });
+              if (comments.some((comment) => comment.body && comment.body.includes(COMMENT_MARKER))) {
+                return;
+              }
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: pull.number,
+                body: conflictMessage(pull)
+              });
+            }
+
+            async function refreshPull(number) {
+              const { data: pull } = await github.rest.pulls.get({
+                owner,
+                repo,
+                pull_number: number
+              });
+              if (pull.mergeable == null || pull.mergeable_state === 'unknown') {
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+                const retry = await github.rest.pulls.get({
+                  owner,
+                  repo,
+                  pull_number: number
+                });
+                return retry.data;
+              }
+              return pull;
+            }
+
+            async function updatePull(pull) {
+              const current = await refreshPull(pull.number);
+
+              if (current.state !== 'open') {
+                return 'closed';
+              }
+              if (current.head.repo && current.head.repo.full_name !== `${owner}/${repo}`) {
+                return 'fork';
+              }
+
+              if (current.mergeable === false || current.mergeable_state === 'dirty') {
+                core.warning(`#${current.number} has merge conflicts with ${current.base.ref}`);
+                await commentOnce(current);
+                return 'conflict';
+              }
+
+              try {
+                await github.rest.pulls.updateBranch({
+                  owner,
+                  repo,
+                  pull_number: current.number,
+                  expected_head_sha: current.head.sha
+                });
+                core.info(`Updated #${current.number} (${current.head.ref}) with ${current.base.ref}`);
+                return 'updated';
+              } catch (error) {
+                const status = error.status || (error.response && error.response.status);
+                const payload = (error.response && error.response.data) || {};
+                const message = String(payload.message || error.message || '');
+                const alreadyCurrent = /not behind|up.to.date|already|no new commits/i.test(message);
+                const hasConflict = /conflict/i.test(message);
+
+                if (alreadyCurrent) {
+                  core.info(`#${current.number} already contains ${current.base.ref}`);
+                  return 'current';
+                }
+
+                if (hasConflict || status === 409) {
+                  core.warning(`#${current.number} needs a manual merge: ${message}`);
+                  await commentOnce(current);
+                  return 'conflict';
+                }
+
+                if (status === 422) {
+                  core.info(`#${current.number} was not updated (${message})`);
+                  return 'skipped';
+                }
+
+                throw error;
+              }
+            }
+
+            const pulls = [];
+            if (context.eventName === 'pull_request') {
+              pulls.push(context.payload.pull_request);
+            } else {
+              const listed = await github.paginate(github.rest.pulls.list, {
+                owner,
+                repo,
+                state: 'open',
+                base: 'main',
+                per_page: 100
+              });
+              pulls.push(...listed);
+            }
+
+            const results = [];
+            for (const pull of pulls) {
+              results.push(`${pull.number}:${await updatePull(pull)}`);
+            }
+            core.info(`Finished: ${results.join(', ') || 'no open PRs'}`);
