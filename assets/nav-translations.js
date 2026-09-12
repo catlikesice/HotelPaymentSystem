@@ -5,6 +5,8 @@
       homeAria: 'Home',
       aboutUsPartners: 'About Us and Partners',
       aboutUsPartnersAria: 'About Us and Partners',
+      hotelChains: 'Tailored for Hotel Chains',
+      hotelChainsAria: 'Tailored for Hotel Chains',
       contact: 'Contact',
       contactAria: 'Contact us',
       cultureBlog: 'Blog',
@@ -35,6 +37,8 @@
       homeAria: 'Главная',
       aboutUsPartners: 'О нас и партнёрах',
       aboutUsPartnersAria: 'О нас и партнёрах',
+      hotelChains: 'Индивидуальные решения для сетей отелей',
+      hotelChainsAria: 'Индивидуальные решения для сетей отелей',
       contact: 'Контакты',
       contactAria: 'Связаться с нами',
       cultureBlog: 'Блог',
@@ -65,6 +69,8 @@
       homeAria: 'Sākums',
       aboutUsPartners: 'Par mums un partneriem',
       aboutUsPartnersAria: 'Par mums un partneriem',
+      hotelChains: 'Pielāgots viesnīcu ķēdēm',
+      hotelChainsAria: 'Pielāgots viesnīcu ķēdēm',
       contact: 'Kontakti',
       contactAria: 'Sazinieties ar mums',
       cultureBlog: 'Blogs',
@@ -95,6 +101,8 @@
       homeAria: 'Avaleht',
       aboutUsPartners: 'Meist ja partneritest',
       aboutUsPartnersAria: 'Meist ja partneritest',
+      hotelChains: 'Kohandatud hotellikettidele',
+      hotelChainsAria: 'Kohandatud hotellikettidele',
       contact: 'Kontakt',
       contactAria: 'Võtke meiega ühendust',
       cultureBlog: 'Blogi',
@@ -125,6 +133,8 @@
       homeAria: 'Startseite',
       aboutUsPartners: 'Über uns und Partner',
       aboutUsPartnersAria: 'Über uns und Partner',
+      hotelChains: 'Maßgeschneidert für Hotelketten',
+      hotelChainsAria: 'Maßgeschneidert für Hotelketten',
       contact: 'Kontakt',
       contactAria: 'Kontaktieren Sie uns',
       cultureBlog: 'Blog',
@@ -227,6 +237,9 @@
 
         const aboutPartnersLink = homeMenu.querySelector('.nav-about-partners, a[href$="about-us-and-partners.html"]');
         updateLinkContent(aboutPartnersLink, mapping.aboutUsPartners, mapping.aboutUsPartnersAria);
+
+        const hotelChainsLink = homeMenu.querySelector('.nav-hotel-chains, a[href$="hotel-chains.html"]');
+        updateLinkContent(hotelChainsLink, mapping.hotelChains, mapping.hotelChainsAria);
       }
     } else {
       const homeLinks = navRoot.querySelectorAll('.nav-box-home');
@@ -369,6 +382,8 @@
           updateLinkContent(anchor, mapping.home, mapping.homeAria);
         } else if (href === 'about-us-and-partners.html') {
           updateLinkContent(anchor, mapping.aboutUsPartners, mapping.aboutUsPartnersAria);
+        } else if (href === 'hotel-chains.html') {
+          updateLinkContent(anchor, mapping.hotelChains, mapping.hotelChainsAria);
         } else if (href === 'culture-blog.html') {
           updateLinkContent(anchor, mapping.cultureBlog, mapping.cultureBlogAria);
         } else if (href === 'crypto-environment.html') {
