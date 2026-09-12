@@ -393,15 +393,15 @@
     const mapping = window.NavBarTranslations && window.NavBarTranslations.translations
       ? (window.NavBarTranslations.translations[document.documentElement.lang] || window.NavBarTranslations.translations.en)
       : null;
-    const accountLabel = (mapping && mapping.account) || 'Account';
+    const loginLabel = (mapping && mapping.login) || 'Login';
 
     accountButtons.forEach(function(button) {
       if (user && user.name) {
         button.textContent = user.name.split(' ')[0];
         button.setAttribute('aria-label', 'Account menu for ' + user.name);
       } else {
-        button.textContent = accountLabel;
-        button.setAttribute('aria-label', (mapping && mapping.accountAria) || accountLabel);
+        button.textContent = loginLabel;
+        button.setAttribute('aria-label', (mapping && mapping.loginAria) || loginLabel);
       }
     });
 
