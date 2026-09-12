@@ -58,51 +58,28 @@
         uniform: "{amount} {unit}",
       },
     },
-    lv: {
-      badge: "Cenu ceļvedis",
-      heading: "Uzturēšanās pēc budžeta",
-      description:
-        "Izvēlieties budžeta līmeni, lai izceltu piemērotās viesnīcas.",
-      ariaLabel: "Izcelt viesnīcas pēc nakts cenas",
-      noteDefault: "Izvēlieties līmeni, lai izceltu atbilstošās iespējas.",
+    sv: {
+      badge: "Prisguide",
+      heading: "Boende efter budget",
+      description: "Välj en budgetnivå för att lyfta fram hotell som passar.",
+      ariaLabel: "Markera hotell efter nattpris",
+      noteDefault: "Välj en nivå för att visa matchande boenden.",
       noteUniform:
-        "Visiem numuriem ir līdzīga cena par nakti. Salīdziniet ērtības, lai atrastu piemērotāko.",
+        "Alla listade rum har ett liknande nattpris. Jämför bekvämligheter för att hitta rätt.",
       noteDynamic:
-        "Robežas tiek aprēķinātas automātiski, izmantojot šajā pilsētā norādītās cenas.",
+        "Intervallen uppdateras automatiskt utifrån priserna som visas för den här staden.",
       options: {
-        cheap: "Ekonomisks",
-        midrange: "Vidējs",
-        luxury: "Luksusa",
+        cheap: "Budget",
+        midrange: "Mellanklass",
+        luxury: "Lyx",
       },
       hints: {
-        cheap: "Līdz {amount} {unit}",
-        midrange: "{min}–{max} {unit}",
-        luxury: "Virs {amount} {unit}",
+        cheap: "Upp till {amount} {unit}",
+        midrange: "{min} - {max} {unit}",
+        luxury: "Över {amount} {unit}",
         uniform: "{amount} {unit}",
       },
-    },
-    et: {
-      badge: "Hinnajuht",
-      heading: "Majutus eelarve järgi",
-      description:
-        "Vali eelarvekategooria, et esile tõsta sobivad hotellid.",
-      ariaLabel: "Tõsta esile hotellid öö hinna järgi",
-      noteDefault: "Vali tase, et näha sobivaid majutusvõimalusi.",
-      noteUniform:
-        "Kõigil tubadel on sarnane ööhind. Võrdle mugavusi, et leida sobivaim.",
-      noteDynamic:
-        "Vahemikud uuenevad automaatselt selle linna hindade põhjal.",
-      options: {
-        cheap: "Soodne",
-        midrange: "Keskmine",
-        luxury: "Luksus",
-      },
-      hints: {
-        cheap: "Kuni {amount} {unit}",
-        midrange: "{min}–{max} {unit}",
-        luxury: "Üle {amount} {unit}",
-        uniform: "{amount} {unit}",
-      },
+      combinationSeparator: " • ",
     },
     de: {
       badge: "Preisübersicht",
