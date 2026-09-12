@@ -1,6 +1,10 @@
 ;(function() {
   const TOKEN_KEY = 'bh_auth_token';
   const USER_KEY = 'bh_auth_user';
+  const LOGIN_POPUP_ID = 'login-popup';
+
+  let lastAccountTrigger = null;
+  let loginPopupBound = false;
 
   function apiBase() {
     if (typeof window === 'undefined') {
@@ -120,10 +124,288 @@
     }
   }
 
+  function loginPopupMarkup() {
+    return (
+      '<div class="login-popup__backdrop" data-login-close></div>' +
+      '<div class="login-popup__dialog" role="dialog" aria-modal="true" aria-labelledby="login-popup-title">' +
+        '<button type="button" class="login-popup__close" data-login-close aria-label="Close">' +
+          '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '<h2 id="login-popup-title" class="login-popup__title">Login</h2>' +
+        '<p class="login-popup__status" id="login-popup-status" role="status" aria-live="polite"></p>' +
+        '<form id="loginPopupForm" class="login-popup__form" novalidate>' +
+          '<label class="sr-only" for="login-popup-email">Email</label>' +
+          '<input id="login-popup-email" name="email" type="email" required autocomplete="email" placeholder="Email">' +
+          '<label class="sr-only" for="login-popup-password">Password</label>' +
+          '<input id="login-popup-password" name="password" type="password" required autocomplete="current-password" minlength="8" placeholder="Password">' +
+          '<button type="submit" class="btn login-popup__submit">Sign in</button>' +
+        '</form>' +
+        '<div class="login-popup__session" hidden>' +
+          '<p class="login-popup__signed-in" data-login-signed-in></p>' +
+          '<button type="button" class="btn login-popup__logout">Log out</button>' +
+        '</div>' +
+        '<p class="login-popup__links">' +
+          '<a href="register.html" class="login-popup__link" data-login-register>Register</a>' +
+          '<a href="forgot-password.html" class="login-popup__link" data-login-forgot>Forgot Password</a>' +
+        '</p>' +
+      '</div>'
+    );
+  }
+
+  function ensureLoginPopup() {
+    let popup = document.getElementById(LOGIN_POPUP_ID);
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = LOGIN_POPUP_ID;
+      popup.className = 'login-popup';
+      popup.hidden = true;
+      popup.innerHTML = loginPopupMarkup();
+      document.body.appendChild(popup);
+    }
+    return popup;
+  }
+
+  function getFocusable(container) {
+    if (!container) {
+      return [];
+    }
+    return Array.prototype.slice.call(
+      container.querySelectorAll('a[href], button:not([disabled]), textarea, input:not([disabled]), select')
+    ).filter(function(el) {
+      return !el.hasAttribute('hidden') && el.offsetParent !== null;
+    });
+  }
+
+  function syncLoginPopupState() {
+    const popup = document.getElementById(LOGIN_POPUP_ID);
+    if (!popup) {
+      return;
+    }
+
+    const user = getStoredUser();
+    const form = popup.querySelector('#loginPopupForm');
+    const session = popup.querySelector('.login-popup__session');
+    const links = popup.querySelector('.login-popup__links');
+    const signedIn = popup.querySelector('[data-login-signed-in]');
+    const mapping = window.NavBarTranslations && window.NavBarTranslations.translations
+      ? (window.NavBarTranslations.translations[document.documentElement.lang] || window.NavBarTranslations.translations.en)
+      : null;
+    const signedInPrefix = (mapping && mapping.signedInAs) || 'Signed in as';
+
+    if (user && user.email) {
+      if (form) {
+        form.hidden = true;
+      }
+      if (session) {
+        session.hidden = false;
+      }
+      if (links) {
+        links.hidden = true;
+      }
+      if (signedIn) {
+        signedIn.textContent = signedInPrefix + ' ' + user.email;
+      }
+    } else {
+      if (form) {
+        form.hidden = false;
+      }
+      if (session) {
+        session.hidden = true;
+      }
+      if (links) {
+        links.hidden = false;
+      }
+    }
+  }
+
+  function setAccountButtonsExpanded(isOpen) {
+    document.querySelectorAll('.nav-account-btn, [data-login-open]').forEach(function(btn) {
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  function openLoginPopup(trigger) {
+    const popup = ensureLoginPopup();
+    lastAccountTrigger = trigger || document.activeElement;
+    syncLoginPopupState();
+
+    const status = popup.querySelector('#login-popup-status');
+    if (status) {
+      status.textContent = '';
+      status.className = 'login-popup__status';
+    }
+
+    popup.hidden = false;
+    document.body.classList.add('login-popup-open');
+    setAccountButtonsExpanded(true);
+
+    if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
+      window.NavBarTranslations.apply(document.documentElement.lang || 'en');
+    }
+
+    window.setTimeout(function() {
+      const user = getStoredUser();
+      const emailInput = popup.querySelector('#login-popup-email');
+      const logoutBtn = popup.querySelector('.login-popup__logout');
+      if (user) {
+        if (logoutBtn) {
+          logoutBtn.focus();
+        }
+      } else if (emailInput) {
+        emailInput.focus();
+      }
+    }, 0);
+  }
+
+  function closeLoginPopup() {
+    const popup = document.getElementById(LOGIN_POPUP_ID);
+    if (!popup || popup.hidden) {
+      return;
+    }
+    popup.hidden = true;
+    document.body.classList.remove('login-popup-open');
+    setAccountButtonsExpanded(false);
+    if (lastAccountTrigger && typeof lastAccountTrigger.focus === 'function') {
+      lastAccountTrigger.focus();
+    }
+  }
+
+  function bindLoginPopup() {
+    if (loginPopupBound) {
+      return;
+    }
+    loginPopupBound = true;
+
+    const popup = ensureLoginPopup();
+    if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
+      window.NavBarTranslations.apply(document.documentElement.lang || 'en');
+    }
+
+    document.addEventListener('click', function(event) {
+      const opener = event.target.closest('[data-login-open], .nav-account-btn');
+      if (opener) {
+        event.preventDefault();
+        if (popup.hidden) {
+          openLoginPopup(opener);
+        } else {
+          closeLoginPopup();
+        }
+        return;
+      }
+
+      if (event.target.closest('[data-login-close]')) {
+        event.preventDefault();
+        closeLoginPopup();
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (popup.hidden) {
+        return;
+      }
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeLoginPopup();
+        return;
+      }
+      if (event.key !== 'Tab') {
+        return;
+      }
+      const dialog = popup.querySelector('.login-popup__dialog');
+      const focusable = getFocusable(dialog);
+      if (!focusable.length) {
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    const form = popup.querySelector('#loginPopupForm');
+    if (form && !form.getAttribute('data-bound')) {
+      form.setAttribute('data-bound', 'true');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const status = popup.querySelector('#login-popup-status');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const email = form.email.value.trim();
+        const password = form.password.value;
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Signing in...';
+        }
+        if (status) {
+          status.textContent = '';
+          status.className = 'login-popup__status';
+        }
+
+        login({ email, password })
+          .then(function() {
+            if (status) {
+              status.textContent = 'Welcome back!';
+              status.className = 'login-popup__status auth-status--success';
+            }
+            syncLoginPopupState();
+            window.setTimeout(closeLoginPopup, 450);
+          })
+          .catch(function(error) {
+            if (status) {
+              status.textContent = error.message;
+              status.className = 'login-popup__status auth-status--error';
+            }
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              const mapping = window.NavBarTranslations && window.NavBarTranslations.translations
+                ? (window.NavBarTranslations.translations[document.documentElement.lang] || window.NavBarTranslations.translations.en)
+                : null;
+              submitBtn.textContent = (mapping && mapping.signIn) || 'Sign in';
+            }
+          });
+      });
+    }
+
+    const logoutBtn = popup.querySelector('.login-popup__logout');
+    if (logoutBtn && !logoutBtn.getAttribute('data-bound')) {
+      logoutBtn.setAttribute('data-bound', 'true');
+      logoutBtn.addEventListener('click', function() {
+        logout().then(function() {
+          closeLoginPopup();
+        });
+      });
+    }
+  }
+
   function updateAccountNav() {
     const user = getStoredUser();
-    const accountDropdowns = document.querySelectorAll('.nav-dropdown-account');
+    const accountButtons = document.querySelectorAll('.nav-account-btn');
+    const mapping = window.NavBarTranslations && window.NavBarTranslations.translations
+      ? (window.NavBarTranslations.translations[document.documentElement.lang] || window.NavBarTranslations.translations.en)
+      : null;
+    const loginLabel = (mapping && mapping.login) || 'Login';
 
+    accountButtons.forEach(function(button) {
+      if (user && user.name) {
+        button.textContent = user.name.split(' ')[0];
+        button.setAttribute('aria-label', 'Account menu for ' + user.name);
+      } else {
+        button.textContent = loginLabel;
+        button.setAttribute('aria-label', (mapping && mapping.loginAria) || loginLabel);
+      }
+    });
+
+    const accountDropdowns = document.querySelectorAll('.nav-dropdown-account');
     accountDropdowns.forEach(function(dropdown) {
       const summary = dropdown.querySelector('summary.nav-box-account');
       const menu = dropdown.querySelector('.nav-dropdown-menu');
@@ -146,7 +428,6 @@
           });
         }
       } else {
-        // Keep translated labels if NavBarTranslations already ran; only reset structure when empty.
         if (!menu.querySelector('.nav-account-login')) {
           menu.innerHTML =
             '<a href="login.html" role="menuitem" class="nav-account-login">Login</a>' +
@@ -172,6 +453,8 @@
         el.hidden = true;
       }
     });
+
+    syncLoginPopupState();
   }
 
   function escapeHtml(value) {
@@ -285,9 +568,33 @@
           });
       });
     }
+
+    const forgotForm = document.getElementById('forgotPasswordForm');
+    if (forgotForm) {
+      forgotForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const status = document.getElementById('auth-form-status');
+        const submitBtn = forgotForm.querySelector('button[type="submit"]');
+        const email = forgotForm.email.value.trim();
+
+        if (!forgotForm.checkValidity()) {
+          forgotForm.reportValidity();
+          return;
+        }
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
+        if (status) {
+          status.textContent = 'If an account exists for ' + email + ', reset instructions will be sent.';
+          status.className = 'auth-status auth-status--success';
+        }
+      });
+    }
   }
 
   function init() {
+    bindLoginPopup();
     updateAccountNav();
     bindAuthForms();
     // Refresh session quietly when a token exists.
@@ -309,6 +616,8 @@
     me: me,
     getToken: getToken,
     getUser: getStoredUser,
-    updateAccountNav: updateAccountNav
+    updateAccountNav: updateAccountNav,
+    openLoginPopup: openLoginPopup,
+    closeLoginPopup: closeLoginPopup
   };
 })();

@@ -18,6 +18,13 @@
       loginAria: 'Login',
       register: 'Register',
       registerAria: 'Register',
+      affiliatedEmail: 'Email',
+      password: 'Password',
+      forgotPassword: 'Forgot Password',
+      signIn: 'Sign in',
+      closeLogin: 'Close',
+      signedInAs: 'Signed in as',
+      logOut: 'Log out',
       searchPlaceholder: 'Search...',
       searchAria: 'Search hotels and cities',
       menu: 'Menu'
@@ -40,6 +47,13 @@
       loginAria: 'Вход',
       register: 'Регистрация',
       registerAria: 'Регистрация',
+      affiliatedEmail: 'Эл. почта',
+      password: 'Пароль',
+      forgotPassword: 'Забыли пароль',
+      signIn: 'Войти',
+      closeLogin: 'Закрыть',
+      signedInAs: 'Вы вошли как',
+      logOut: 'Выйти',
       searchPlaceholder: 'Поиск...',
       searchAria: 'Поиск отелей и городов',
       menu: 'Меню'
@@ -62,6 +76,13 @@
       loginAria: 'Pieslēgties',
       register: 'Reģistrēties',
       registerAria: 'Reģistrēties',
+      affiliatedEmail: 'E-pasts',
+      password: 'Parole',
+      forgotPassword: 'Aizmirsu paroli',
+      signIn: 'Pieslēgties',
+      closeLogin: 'Aizvērt',
+      signedInAs: 'Pieslēdzies kā',
+      logOut: 'Iziet',
       searchPlaceholder: 'Meklēt...',
       searchAria: 'Meklēt viesnīcas un pilsētas',
       menu: 'Izvēlne'
@@ -84,6 +105,13 @@
       loginAria: 'Logi sisse',
       register: 'Registreeru',
       registerAria: 'Registreeru',
+      affiliatedEmail: 'E-post',
+      password: 'Parool',
+      forgotPassword: 'Unustasin parooli',
+      signIn: 'Logi sisse',
+      closeLogin: 'Sulge',
+      signedInAs: 'Sisse logitud kui',
+      logOut: 'Logi välja',
       searchPlaceholder: 'Otsi...',
       searchAria: 'Otsi hotelle ja linnu',
       menu: 'Menüü'
@@ -106,6 +134,13 @@
       loginAria: 'Anmelden',
       register: 'Registrieren',
       registerAria: 'Registrieren',
+      affiliatedEmail: 'E-Mail',
+      password: 'Passwort',
+      forgotPassword: 'Passwort vergessen',
+      signIn: 'Anmelden',
+      closeLogin: 'Schließen',
+      signedInAs: 'Angemeldet als',
+      logOut: 'Abmelden',
       searchPlaceholder: 'Suchen...',
       searchAria: 'Hotels und Städte suchen',
       menu: 'Menü'
@@ -218,11 +253,19 @@
       updateLinkContent(link, mapping.book, mapping.navLinkBookAria || mapping.bookAria || mapping.book);
     });
 
+    const signedIn = Boolean(window.AuthClient && typeof window.AuthClient.getUser === 'function' && window.AuthClient.getUser());
+
+    const accountButtons = navRoot.querySelectorAll('.nav-account-btn');
+    accountButtons.forEach(function(button) {
+      if (!signedIn) {
+        updateSummaryContent(button, mapping.login, mapping.loginAria);
+      }
+    });
+
     const accountDropdown = navRoot.querySelector('.nav-dropdown-account');
     if (accountDropdown) {
       const accountSummary = accountDropdown.querySelector('summary.nav-box-account');
       // Avoid overwriting the signed-in first-name label managed by AuthClient.
-      const signedIn = Boolean(window.AuthClient && typeof window.AuthClient.getUser === 'function' && window.AuthClient.getUser());
       if (!signedIn) {
         updateSummaryContent(accountSummary, mapping.account, mapping.accountAria);
       }
@@ -234,6 +277,55 @@
 
         const registerLink = accountMenu.querySelector('.nav-account-register');
         updateLinkContent(registerLink, mapping.register, mapping.registerAria);
+      }
+    }
+
+    const loginPopup = document.getElementById('login-popup');
+    if (loginPopup) {
+      const title = loginPopup.querySelector('#login-popup-title');
+      if (title && mapping.login) {
+        title.textContent = mapping.login;
+      }
+
+      const closeBtn = loginPopup.querySelector('.login-popup__close');
+      if (closeBtn && mapping.closeLogin) {
+        closeBtn.setAttribute('aria-label', mapping.closeLogin);
+      }
+
+      const emailInput = loginPopup.querySelector('#login-popup-email');
+      const emailLabel = loginPopup.querySelector('label[for="login-popup-email"]');
+      if (emailInput && mapping.affiliatedEmail) {
+        emailInput.setAttribute('placeholder', mapping.affiliatedEmail);
+        emailInput.setAttribute('aria-label', mapping.affiliatedEmail);
+      }
+      if (emailLabel && mapping.affiliatedEmail) {
+        emailLabel.textContent = mapping.affiliatedEmail;
+      }
+
+      const passwordInput = loginPopup.querySelector('#login-popup-password');
+      const passwordLabel = loginPopup.querySelector('label[for="login-popup-password"]');
+      if (passwordInput && mapping.password) {
+        passwordInput.setAttribute('placeholder', mapping.password);
+        passwordInput.setAttribute('aria-label', mapping.password);
+      }
+      if (passwordLabel && mapping.password) {
+        passwordLabel.textContent = mapping.password;
+      }
+
+      const submitBtn = loginPopup.querySelector('.login-popup__submit');
+      if (submitBtn && mapping.signIn && !submitBtn.disabled) {
+        submitBtn.textContent = mapping.signIn;
+      }
+
+      const registerLink = loginPopup.querySelector('[data-login-register]');
+      updateLinkContent(registerLink, mapping.register, mapping.registerAria);
+
+      const forgotLink = loginPopup.querySelector('[data-login-forgot]');
+      updateLinkContent(forgotLink, mapping.forgotPassword, mapping.forgotPassword);
+
+      const logoutBtn = loginPopup.querySelector('.login-popup__logout');
+      if (logoutBtn && mapping.logOut) {
+        logoutBtn.textContent = mapping.logOut;
       }
     }
 
