@@ -12,6 +12,10 @@
       contactAria: 'Contact us',
       cultureBlog: 'Blog',
       cultureBlogAria: 'Blog',
+      environmentMission: 'Environment Mission',
+      environmentMissionAria: 'Environment Mission',
+      reliableBlockchain: 'Reliable Blockchain',
+      reliableBlockchainAria: 'Reliable Blockchain',
       account: 'Account',
       accountAria: 'Account',
       login: 'Login',
@@ -41,6 +45,10 @@
       contactAria: 'Связаться с нами',
       cultureBlog: 'Блог',
       cultureBlogAria: 'Блог',
+      environmentMission: 'Экологическая миссия',
+      environmentMissionAria: 'Экологическая миссия',
+      reliableBlockchain: 'Надёжный блокчейн',
+      reliableBlockchainAria: 'Надёжный блокчейн',
       account: 'Аккаунт',
       accountAria: 'Аккаунт',
       login: 'Вход',
@@ -70,6 +78,10 @@
       contactAria: 'Sazinieties ar mums',
       cultureBlog: 'Blogs',
       cultureBlogAria: 'Blogs',
+      environmentMission: 'Vides misija',
+      environmentMissionAria: 'Vides misija',
+      reliableBlockchain: 'Uzticama blokķēde',
+      reliableBlockchainAria: 'Uzticama blokķēde',
       account: 'Konts',
       accountAria: 'Konts',
       login: 'Pieslēgties',
@@ -99,6 +111,10 @@
       contactAria: 'Võtke meiega ühendust',
       cultureBlog: 'Blogi',
       cultureBlogAria: 'Blogi',
+      environmentMission: 'Keskkonnamissioon',
+      environmentMissionAria: 'Keskkonnamissioon',
+      reliableBlockchain: 'Usaldusväärne plokiahel',
+      reliableBlockchainAria: 'Usaldusväärne plokiahel',
       account: 'Konto',
       accountAria: 'Konto',
       login: 'Logi sisse',
@@ -128,6 +144,10 @@
       contactAria: 'Kontaktieren Sie uns',
       cultureBlog: 'Blog',
       cultureBlogAria: 'Blog',
+      environmentMission: 'Umweltmission',
+      environmentMissionAria: 'Umweltmission',
+      reliableBlockchain: 'Zuverlässige Blockchain',
+      reliableBlockchainAria: 'Zuverlässige Blockchain',
       account: 'Konto',
       accountAria: 'Konto',
       login: 'Anmelden',
@@ -248,6 +268,22 @@
       updateLinkContent(link, mapping.cultureBlog, mapping.cultureBlogAria);
     });
 
+    const environmentMissionLinks = navRoot.querySelectorAll('.nav-box-environment, a[href$="crypto-environment.html"]');
+    environmentMissionLinks.forEach(function(link) {
+      if (link.closest('.nav-links')) {
+        return;
+      }
+      updateLinkContent(link, mapping.environmentMission, mapping.environmentMissionAria);
+    });
+
+    const reliableBlockchainLinks = navRoot.querySelectorAll('.nav-box-reliability, a[href$="crypto-reliability.html"]');
+    reliableBlockchainLinks.forEach(function(link) {
+      if (link.closest('.nav-links')) {
+        return;
+      }
+      updateLinkContent(link, mapping.reliableBlockchain, mapping.reliableBlockchainAria);
+    });
+
     const navLinkBookLinks = document.querySelectorAll('.nav-link-book');
     navLinkBookLinks.forEach(function(link) {
       updateLinkContent(link, mapping.book, mapping.navLinkBookAria || mapping.bookAria || mapping.book);
@@ -362,6 +398,10 @@
           updateLinkContent(anchor, mapping.book, mapping.bookAria);
         } else if (href === 'culture-blog.html') {
           updateLinkContent(anchor, mapping.cultureBlog, mapping.cultureBlogAria);
+        } else if (href === 'crypto-environment.html') {
+          updateLinkContent(anchor, mapping.environmentMission, mapping.environmentMissionAria);
+        } else if (href === 'crypto-reliability.html') {
+          updateLinkContent(anchor, mapping.reliableBlockchain, mapping.reliableBlockchainAria);
         } else if (href === '#contact' || href === 'index.html#contact') {
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
         } else if (href === 'login.html') {
