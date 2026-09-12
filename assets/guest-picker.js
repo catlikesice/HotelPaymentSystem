@@ -1,6 +1,6 @@
 /**
  * Shared Adults / Children dropdown under a single Guests field.
- * Used by the homepage search bar and the Book with Us form.
+ * Used by the homepage search bar.
  */
 (function () {
   'use strict';

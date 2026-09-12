@@ -358,7 +358,7 @@
           updateLinkContent(anchor, mapping.home, mapping.homeAria);
         } else if (href === 'about-us-and-partners.html') {
           updateLinkContent(anchor, mapping.aboutUsPartners, mapping.aboutUsPartnersAria);
-        } else if (href === 'selectlocation.html') {
+        } else if (href === 'index.html#hero-search-form' || (href && href.indexOf('#hero-search-form') !== -1)) {
           updateLinkContent(anchor, mapping.book, mapping.bookAria);
         } else if (href === 'culture-blog.html') {
           updateLinkContent(anchor, mapping.cultureBlog, mapping.cultureBlogAria);
