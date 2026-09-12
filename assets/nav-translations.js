@@ -258,7 +258,7 @@
     const accountButtons = navRoot.querySelectorAll('.nav-account-btn');
     accountButtons.forEach(function(button) {
       if (!signedIn) {
-        updateSummaryContent(button, mapping.account, mapping.accountAria);
+        updateSummaryContent(button, mapping.login, mapping.loginAria);
       }
     });
 
