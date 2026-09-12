@@ -2242,16 +2242,16 @@ header:has(.nav-inner) .nav-containers .nav-box {
   min-width: 0 !important;
   width: auto !important;
   margin: 0 !important;
-  padding: 0 0.85rem !important;
+  padding: 0 0.65rem !important;
   background: transparent !important;
   background-image: none !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   color: var(--nav-rail-ink) !important;
-  font-size: 0.72rem !important;
+  font-size: 0.68rem !important;
   font-weight: 700 !important;
-  letter-spacing: 0.12em !important;
+  letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
   line-height: 1.2 !important;
@@ -2259,6 +2259,13 @@ header:has(.nav-inner) .nav-containers .nav-box {
   overflow: visible !important;
   cursor: pointer;
   position: relative;
+}
+
+header:has(.nav-inner) .nav-box-environment,
+header:has(.nav-inner) .nav-box-reliability {
+  white-space: normal !important;
+  line-height: 1.15 !important;
+  text-align: center;
 }
 
 header:has(.nav-inner) .nav-box::after {
@@ -2297,8 +2304,8 @@ header:has(.nav-inner) .nav-box:focus-visible {
 header:has(.nav-inner) .nav-box::before {
   content: "";
   position: absolute;
-  left: 0.85rem;
-  right: 0.85rem;
+  left: 0.65rem;
+  right: 0.65rem;
   bottom: 0;
   height: 2px;
   background: var(--nav-rail-accent);
@@ -2544,17 +2551,17 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
   transform: rotate(-45deg);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   header:has(.nav-inner) .nav-box,
   header:has(.nav-inner) .site-nav .nav-box {
-    padding: 0 0.55rem !important;
-    letter-spacing: 0.08em !important;
-    font-size: 0.68rem !important;
+    padding: 0 0.45rem !important;
+    letter-spacing: 0.06em !important;
+    font-size: 0.64rem !important;
   }
 
   header:has(.nav-inner) .nav-box::before {
-    left: 0.55rem;
-    right: 0.55rem;
+    left: 0.45rem;
+    right: 0.45rem;
   }
 
   header:has(.nav-inner) .nav-search__input {
@@ -2566,7 +2573,7 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   html:has(body > header > .site-nav .nav-inner) {
     scroll-padding-top: 4.25rem;
   }
@@ -2637,6 +2644,7 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
     padding: 0.85rem 0.35rem !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.1em !important;
+    white-space: nowrap !important;
   }
 
   header:has(.nav-inner) .nav-box::before {
@@ -2714,10 +2722,12 @@ header:has(.nav-inner) .site-nav.is-open .nav-toggle__bars::after {
 
 /* Last-wins mobile menu: turn links into left-aligned blocks so
    leftover pill justify-content:center rules cannot center CONTACT. */
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-blog,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-environment,
+  header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-reliability,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > a.nav-box-right,
   header:has(.nav-inner) .site-nav.is-open .nav-containers > .nav-dropdown,
   header:has(.nav-inner) .site-nav.is-open .nav-containers summary.nav-box {

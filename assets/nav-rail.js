@@ -45,14 +45,14 @@
       });
 
       dropdown.addEventListener('mouseenter', function () {
-        if (!hoverMq.matches || window.innerWidth <= 1080) {
+        if (!hoverMq.matches || window.innerWidth <= 1200) {
           return;
         }
         dropdown.open = true;
       });
 
       dropdown.addEventListener('mouseleave', function () {
-        if (!hoverMq.matches || window.innerWidth <= 1080) {
+        if (!hoverMq.matches || window.innerWidth <= 1200) {
           return;
         }
         dropdown.open = false;
@@ -80,7 +80,7 @@
     });
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 1080) {
+      if (window.innerWidth > 1200) {
         setMenuOpen(false);
       }
     });
