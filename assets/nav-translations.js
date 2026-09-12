@@ -5,9 +5,6 @@
       homeAria: 'Home',
       aboutUsPartners: 'About Us and Partners',
       aboutUsPartnersAria: 'About Us and Partners',
-      book: 'Book with Us',
-      bookAria: 'Book with Us',
-      navLinkBookAria: 'Book with us',
       contact: 'Contact',
       contactAria: 'Contact us',
       cultureBlog: 'Blog',
@@ -34,9 +31,6 @@
       homeAria: 'Главная',
       aboutUsPartners: 'О нас и партнёрах',
       aboutUsPartnersAria: 'О нас и партнёрах',
-      book: 'Забронировать у нас',
-      bookAria: 'Забронировать у нас',
-      navLinkBookAria: 'Забронировать у нас',
       contact: 'Контакты',
       contactAria: 'Связаться с нами',
       cultureBlog: 'Блог',
@@ -63,9 +57,6 @@
       homeAria: 'Sākums',
       aboutUsPartners: 'Par mums un partneriem',
       aboutUsPartnersAria: 'Par mums un partneriem',
-      book: 'Rezervēt pie mums',
-      bookAria: 'Rezervēt pie mums',
-      navLinkBookAria: 'Rezervēt pie mums',
       contact: 'Kontakti',
       contactAria: 'Sazinieties ar mums',
       cultureBlog: 'Blogs',
@@ -92,9 +83,6 @@
       homeAria: 'Avaleht',
       aboutUsPartners: 'Meist ja partneritest',
       aboutUsPartnersAria: 'Meist ja partneritest',
-      book: 'Broneeri meie juures',
-      bookAria: 'Broneeri meie juures',
-      navLinkBookAria: 'Broneeri meie juures',
       contact: 'Kontakt',
       contactAria: 'Võtke meiega ühendust',
       cultureBlog: 'Blogi',
@@ -121,9 +109,6 @@
       homeAria: 'Startseite',
       aboutUsPartners: 'Über uns und Partner',
       aboutUsPartnersAria: 'Über uns und Partner',
-      book: 'Bei uns buchen',
-      bookAria: 'Bei uns buchen',
-      navLinkBookAria: 'Bei uns buchen',
       contact: 'Kontakt',
       contactAria: 'Kontaktieren Sie uns',
       cultureBlog: 'Blog',
@@ -230,11 +215,6 @@
       });
     }
 
-    const bookLinks = navRoot.querySelectorAll('.nav-box-left');
-    bookLinks.forEach(function(link) {
-      updateLinkContent(link, mapping.book, mapping.bookAria);
-    });
-
     const contactLinks = navRoot.querySelectorAll('.nav-box-right');
     contactLinks.forEach(function(link) {
       updateLinkContent(link, mapping.contact, mapping.contactAria);
@@ -246,11 +226,6 @@
         return;
       }
       updateLinkContent(link, mapping.cultureBlog, mapping.cultureBlogAria);
-    });
-
-    const navLinkBookLinks = document.querySelectorAll('.nav-link-book');
-    navLinkBookLinks.forEach(function(link) {
-      updateLinkContent(link, mapping.book, mapping.navLinkBookAria || mapping.bookAria || mapping.book);
     });
 
     const signedIn = Boolean(window.AuthClient && typeof window.AuthClient.getUser === 'function' && window.AuthClient.getUser());
@@ -358,8 +333,6 @@
           updateLinkContent(anchor, mapping.home, mapping.homeAria);
         } else if (href === 'about-us-and-partners.html') {
           updateLinkContent(anchor, mapping.aboutUsPartners, mapping.aboutUsPartnersAria);
-        } else if (href === 'selectlocation.html') {
-          updateLinkContent(anchor, mapping.book, mapping.bookAria);
         } else if (href === 'culture-blog.html') {
           updateLinkContent(anchor, mapping.cultureBlog, mapping.cultureBlogAria);
         } else if (href === '#contact' || href === 'index.html#contact') {
