@@ -21,6 +21,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Aberdeen",
+      "city": "Aberdeen",
+      "country": "Scotland",
+      "url": "aberdeen.html",
+      "description": "Browse hotels in Aberdeen, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Copenhagen",
       "city": "Copenhagen",
       "country": "Denmark",
@@ -34,6 +42,22 @@ window.SEARCH_CATALOG = {
       "country": "Latvia",
       "url": "daugavpils.html",
       "description": "Browse hotels in Daugavpils, Latvia."
+    },
+    {
+      "type": "city",
+      "name": "Dundee",
+      "city": "Dundee",
+      "country": "Scotland",
+      "url": "dundee.html",
+      "description": "Browse hotels in Dundee, Scotland."
+    },
+    {
+      "type": "city",
+      "name": "Edinburgh",
+      "city": "Edinburgh",
+      "country": "Scotland",
+      "url": "edinburgh.html",
+      "description": "Browse hotels in Edinburgh, Scotland."
     },
     {
       "type": "city",
@@ -53,11 +77,27 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Glasgow",
+      "city": "Glasgow",
+      "country": "Scotland",
+      "url": "glasgow.html",
+      "description": "Browse hotels in Glasgow, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Helsinki",
       "city": "Helsinki",
       "country": "Finland",
       "url": "helsinki.html",
       "description": "Browse hotels in Helsinki, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Inverness",
+      "city": "Inverness",
+      "country": "Scotland",
+      "url": "inverness.html",
+      "description": "Browse hotels in Inverness, Scotland."
     },
     {
       "type": "city",
@@ -149,6 +189,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Stirling",
+      "city": "Stirling",
+      "country": "Scotland",
+      "url": "stirling.html",
+      "description": "Browse hotels in Stirling, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Tallinn",
       "city": "Tallinn",
       "country": "Estonia",
@@ -229,6 +277,39 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Contemporary comfort with panoramic city views, perfect for business or leisure travelers."
+    },
+    {
+      "type": "hotel",
+      "name": "The Marcliffe Hotel and Spa",
+      "city": "Aberdeen",
+      "country": "Scotland",
+      "url": "aberdeen.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Country-house luxury on the edge of Aberdeen with gardens and spa."
+    },
+    {
+      "type": "hotel",
+      "name": "Mercure Aberdeen Caledonian",
+      "city": "Aberdeen",
+      "country": "Scotland",
+      "url": "aberdeen.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Classic city-centre hotel close to Union Street and the harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "Sandman Signature Aberdeen",
+      "city": "Aberdeen",
+      "country": "Scotland",
+      "url": "aberdeen.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Modern hotel near the beach and Aberdeen’s exhibition centre."
     },
     {
       "type": "hotel",
@@ -331,6 +412,72 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Apex City Quay Hotel & Spa",
+      "city": "Dundee",
+      "country": "Scotland",
+      "url": "dundee.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Waterfront hotel on Dundee’s City Quay with spa and easy access to the V&A."
+    },
+    {
+      "type": "hotel",
+      "name": "Malmaison Dundee",
+      "city": "Dundee",
+      "country": "Scotland",
+      "url": "dundee.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Characterful hotel in a converted church, walking distance from the waterfront."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Indigo Dundee",
+      "city": "Dundee",
+      "country": "Scotland",
+      "url": "dundee.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Design hotel in a historic jute mill near Dundee city centre."
+    },
+    {
+      "type": "hotel",
+      "name": "The Balmoral",
+      "city": "Edinburgh",
+      "country": "Scotland",
+      "url": "edinburgh.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.14 ETH / night",
+      "priceEth": 0.14,
+      "description": "Historic luxury hotel on Princes Street, steps from Waverley Station and Edinburgh Castle."
+    },
+    {
+      "type": "hotel",
+      "name": "Waldorf Astoria Edinburgh",
+      "city": "Edinburgh",
+      "country": "Scotland",
+      "url": "edinburgh.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.12 ETH / night",
+      "priceEth": 0.12,
+      "description": "Grand landmark hotel at the west end of Princes Street with spa and castle views."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel du Vin Edinburgh",
+      "city": "Edinburgh",
+      "country": "Scotland",
+      "url": "edinburgh.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Boutique townhouse hotel in the Old Town, close to the Royal Mile."
+    },
+    {
+      "type": "hotel",
       "name": "Hotel Britannia",
       "city": "Esbjerg",
       "country": "Denmark",
@@ -397,6 +544,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Kimpton Blythswood Square",
+      "city": "Glasgow",
+      "country": "Scotland",
+      "url": "glasgow.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.10 ETH / night",
+      "priceEth": 0.10,
+      "description": "Elegant Georgian square hotel with spa in the heart of Glasgow."
+    },
+    {
+      "type": "hotel",
+      "name": "Radisson Blu Hotel, Glasgow",
+      "city": "Glasgow",
+      "country": "Scotland",
+      "url": "glasgow.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Contemporary hotel beside Glasgow Central Station, ideal for exploring the city."
+    },
+    {
+      "type": "hotel",
+      "name": "Motel One Glasgow",
+      "city": "Glasgow",
+      "country": "Scotland",
+      "url": "glasgow.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.04 ETH / night",
+      "priceEth": 0.04,
+      "description": "Stylish budget-friendly stay on Argyle Street near the River Clyde."
+    },
+    {
+      "type": "hotel",
       "name": "Hotel Kämp",
       "city": "Helsinki",
       "country": "Finland",
@@ -427,6 +607,39 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Stylish boutique hotel with Finnish design and cozy atmosphere."
+    },
+    {
+      "type": "hotel",
+      "name": "Kingsmills Hotel",
+      "city": "Inverness",
+      "country": "Scotland",
+      "url": "inverness.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Highland hotel with gardens and golf, a short walk from Inverness city centre."
+    },
+    {
+      "type": "hotel",
+      "name": "Rocpool Reserve Hotel",
+      "city": "Inverness",
+      "country": "Scotland",
+      "url": "inverness.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Boutique luxury stay overlooking the River Ness."
+    },
+    {
+      "type": "hotel",
+      "name": "Glen Mhor Hotel",
+      "city": "Inverness",
+      "country": "Scotland",
+      "url": "inverness.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Riverside hotel with restaurant, close to Inverness Castle."
     },
     {
       "type": "hotel",
@@ -647,6 +860,39 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Modern hotel with river views, wellness area and rooftop terrace."
+    },
+    {
+      "type": "hotel",
+      "name": "Stirling Highland Hotel",
+      "city": "Stirling",
+      "country": "Scotland",
+      "url": "stirling.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Historic hotel beside Stirling Castle, in a former high school building."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Colessio",
+      "city": "Stirling",
+      "country": "Scotland",
+      "url": "stirling.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Stylish boutique hotel on the edge of Stirling’s old town."
+    },
+    {
+      "type": "hotel",
+      "name": "Golden Lion Hotel",
+      "city": "Stirling",
+      "country": "Scotland",
+      "url": "stirling.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.045 ETH / night",
+      "priceEth": 0.045,
+      "description": "Traditional city-centre inn, a convenient base for exploring Stirling."
     },
     {
       "type": "hotel",
