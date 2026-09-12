@@ -3018,8 +3018,9 @@ header:has(.nav-inner) .nav-account-btn:focus-visible {
 
 .login-popup__links {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
   margin: 0.85rem 0 0;
 }
 
