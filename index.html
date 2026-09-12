@@ -16,7 +16,7 @@
                     <span class="nav-toggle__bars" aria-hidden="true"></span>
                 </button>
 
-                <!-- Nav links: Home, Book, Blog, Contact, Account -->
+                <!-- Nav links: Home, Book, Blog, Contact. Account sits with language. -->
                 <div class="nav-containers" id="site-nav-links" role="menubar" aria-label="Site quick links">
                     <details class="nav-dropdown nav-dropdown-home" role="none">
                         <summary class="nav-box nav-box-home" role="menuitem" aria-haspopup="true" aria-label="Home">Home</summary>
@@ -28,16 +28,10 @@
                     <a class="nav-box nav-box-left" href="selectlocation.html" role="menuitem" aria-label="Book with Us">Book with Us</a>
                     <a class="nav-box nav-box-blog" href="culture-blog.html" role="menuitem" aria-label="Blog">Blog</a>
                     <a class="nav-box nav-box-right" href="#contact" role="menuitem" aria-label="Contact us">Contact</a>
-                    <details class="nav-dropdown nav-dropdown-account" role="none">
-                        <summary class="nav-box nav-box-account" role="menuitem" aria-haspopup="true">Account</summary>
-                        <div class="nav-dropdown-menu" role="menu">
-                            <a href="login.html" role="menuitem" class="nav-account-login">Login</a>
-                            <a href="register.html" role="menuitem" class="nav-account-register">Register</a>
-                        </div>
-                    </details>
                 </div>
 
                 <div class="nav-tools">
+                    <button type="button" class="nav-account-btn" data-login-open aria-haspopup="dialog" aria-controls="login-popup" aria-expanded="false">Account</button>
                     <div class="language-switcher" aria-label="Language selector">
                     <label for="lang-select">Language</label>
                     <div class="language-switcher__select">
@@ -67,6 +61,33 @@
         <!-- Invisible anchor for possible script use -->
         <a class="nav-link-book" href="selectlocation.html" aria-label="Book with us" title="Book with us"></a>
     </header>
+
+    <div id="login-popup" class="login-popup" hidden>
+        <div class="login-popup__backdrop" data-login-close></div>
+        <div class="login-popup__dialog" role="dialog" aria-modal="true" aria-labelledby="login-popup-title">
+            <button type="button" class="login-popup__close" data-login-close aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 id="login-popup-title" class="login-popup__title">Login</h2>
+            <p class="login-popup__status" id="login-popup-status" role="status" aria-live="polite"></p>
+            <form id="loginPopupForm" class="login-popup__form" novalidate>
+                <label class="sr-only" for="login-popup-email">Affiliated email address</label>
+                <input id="login-popup-email" name="email" type="email" required autocomplete="email" placeholder="Affiliated email address">
+                <label class="sr-only" for="login-popup-password">Password</label>
+                <input id="login-popup-password" name="password" type="password" required autocomplete="current-password" minlength="8" placeholder="Password">
+                <button type="submit" class="btn login-popup__submit">Sign in</button>
+            </form>
+            <div class="login-popup__session" hidden>
+                <p class="login-popup__signed-in" data-login-signed-in></p>
+                <button type="button" class="btn login-popup__logout">Log out</button>
+            </div>
+            <p class="login-popup__links">
+                <a href="register.html" class="login-popup__link" data-login-register>Register</a>
+                <a href="forgot-password.html" class="login-popup__link" data-login-forgot>Forgot Password</a>
+            </p>
+        </div>
+    </div>
+
     <section class="hero">
         <h2 id="hero-title">Accept Crypto Payments Seamlessly</h2>
         <p id="hero-desc">Our platform enables hotels and hospitality groups to receive payments in digital currencies—with zero hassle, full transparency, and eco-friendly operations.</p>
