@@ -134,8 +134,8 @@
         '<h2 id="login-popup-title" class="login-popup__title">Login</h2>' +
         '<p class="login-popup__status" id="login-popup-status" role="status" aria-live="polite"></p>' +
         '<form id="loginPopupForm" class="login-popup__form" novalidate>' +
-          '<label class="sr-only" for="login-popup-email">Affiliated email address</label>' +
-          '<input id="login-popup-email" name="email" type="email" required autocomplete="email" placeholder="Affiliated email address">' +
+          '<label class="sr-only" for="login-popup-email">Email</label>' +
+          '<input id="login-popup-email" name="email" type="email" required autocomplete="email" placeholder="Email">' +
           '<label class="sr-only" for="login-popup-password">Password</label>' +
           '<input id="login-popup-password" name="password" type="password" required autocomplete="current-password" minlength="8" placeholder="Password">' +
           '<button type="submit" class="btn login-popup__submit">Sign in</button>' +
