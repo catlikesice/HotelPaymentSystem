@@ -145,7 +145,7 @@
           '<button type="button" class="btn login-popup__logout">Log out</button>' +
         '</div>' +
         '<p class="login-popup__links">' +
-          '<a href="personal-register.html" class="login-popup__link" data-login-register>Register</a>' +
+          '<a href="register.html" class="login-popup__link" data-login-register>Register</a>' +
           '<a href="forgot-password.html" class="login-popup__link" data-login-forgot>Forgot Password</a>' +
         '</p>' +
       '</div>'
@@ -431,7 +431,7 @@
         if (!menu.querySelector('.nav-account-login')) {
           menu.innerHTML =
             '<a href="login.html" role="menuitem" class="nav-account-login">Login</a>' +
-            '<a href="personal-register.html" role="menuitem" class="nav-account-register">Register</a>';
+            '<a href="register.html" role="menuitem" class="nav-account-register">Register</a>';
           if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
             const lang = document.documentElement.lang || 'en';
             window.NavBarTranslations.apply(lang);

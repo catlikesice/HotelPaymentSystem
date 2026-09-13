@@ -1875,7 +1875,8 @@ body > header.header-bar {
   margin-bottom: 0.35rem;
 }
 
-.auth-form input {
+.auth-form input,
+.auth-form select {
   width: 100%;
   padding: 0.7rem 0.8rem;
   border-radius: 10px;
@@ -1885,7 +1886,12 @@ body > header.header-bar {
   font: inherit;
 }
 
-.auth-form input:focus {
+.auth-form select {
+  cursor: pointer;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
   outline: 2px solid rgba(46, 125, 50, 0.35);
   border-color: var(--accent);
 }
