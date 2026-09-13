@@ -1899,6 +1899,70 @@ body > header.header-bar {
   gap: 0 0.9rem;
 }
 
+.auth-form .address-intro,
+.auth-form .address-hint,
+.auth-form .address-empty,
+.auth-form .field-hint {
+  margin: 0 0 0.85rem;
+  color: #4a6b43;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.auth-form .field-hint {
+  display: block;
+  margin: 0.35rem 0 0;
+  font-weight: 450;
+}
+
+.auth-form .field-local {
+  font-weight: 500;
+  color: #5a7a52;
+}
+
+.address-fields {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  column-gap: 0.9rem;
+}
+
+.address-fields .form-group--6 {
+  grid-column: span 6;
+}
+
+.address-fields .form-group--3 {
+  grid-column: span 3;
+}
+
+.address-fields .form-group--2 {
+  grid-column: span 2;
+}
+
+.address-preview {
+  margin: 0.35rem 0 0.95rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 10px;
+  background: rgba(255, 253, 242, 0.9);
+  border: 1px dashed rgba(35, 68, 26, 0.22);
+}
+
+.address-preview__label {
+  margin: 0 0 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #4a6b43;
+}
+
+.address-preview__text {
+  margin: 0;
+  font: inherit;
+  font-weight: 600;
+  white-space: pre-wrap;
+  color: var(--color-text);
+}
+
 .auth-form input,
 .auth-form select,
 .auth-form textarea {
@@ -2017,6 +2081,11 @@ body > header.header-bar {
 
   .auth-form .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .address-fields .form-group--2,
+  .address-fields .form-group--3 {
+    grid-column: span 6;
   }
 }
 

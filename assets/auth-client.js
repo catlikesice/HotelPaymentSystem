@@ -523,7 +523,7 @@
         const email = registerForm.email.value.trim();
         const password = registerForm.password.value;
         const confirm = registerForm.confirmPassword ? registerForm.confirmPassword.value : password;
-        const optionalFields = ['accountType', 'companyName', 'businessType', 'phone', 'vatId', 'website', 'country', 'city'];
+        const optionalFields = ['accountType', 'companyName', 'businessType', 'phone', 'vatId', 'website', 'country'];
         const extra = {};
         optionalFields.forEach(function(fieldName) {
           const field = registerForm.elements[fieldName];
@@ -543,6 +543,33 @@
             status.className = 'auth-status auth-status--error';
           }
           return;
+        }
+
+        const addressRoot = registerForm.querySelector('#address-fields');
+        if (addressRoot) {
+          if (!window.CountryAddress) {
+            if (status) {
+              status.textContent = 'Address form failed to load. Please refresh the page.';
+              status.className = 'auth-status auth-status--error';
+            }
+            return;
+          }
+          const addressResult = window.CountryAddress.validateAddress(
+            extra.country || (registerForm.country && registerForm.country.value) || '',
+            window.CountryAddress.collectValues(addressRoot),
+            { companyName: extra.companyName || '' }
+          );
+          if (!addressResult.ok) {
+            if (status) {
+              status.textContent = addressResult.message;
+              status.className = 'auth-status auth-status--error';
+            }
+            return;
+          }
+          extra.country = extra.country || registerForm.country.value;
+          extra.city = addressResult.values.city || '';
+          extra.address = addressResult.values;
+          extra.addressFormatted = addressResult.formatted;
         }
 
         const submitLabel = submitBtn ? submitBtn.textContent : 'Create account';
