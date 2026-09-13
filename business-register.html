@@ -114,31 +114,36 @@
               <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+371 2000 0000" />
-            </div>
-            <div class="form-group">
-              <label for="country">Country</label>
-              <select id="country" name="country" autocomplete="country-name">
-                <option value="">Select country</option>
-                <option value="Denmark">Denmark</option>
-                <option value="Estonia">Estonia</option>
-                <option value="Finland">Finland</option>
-                <option value="Iceland">Iceland</option>
-                <option value="Latvia">Latvia</option>
-                <option value="Lithuania">Lithuania</option>
-                <option value="Norway">Norway</option>
-                <option value="Sweden">Sweden</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
           <div class="form-group">
-            <label for="city">City</label>
-            <input id="city" name="city" type="text" autocomplete="address-level2" placeholder="Riga" />
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+371 2000 0000" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Business address</legend>
+          <p class="address-intro">Choose the country or region first. The remaining fields follow how a postal address is written there, not just the city.</p>
+          <div class="form-group">
+            <label for="country">Country / region <span class="required" aria-hidden="true">*</span></label>
+            <select id="country" name="country" required autocomplete="country-name">
+              <option value="">Select country or region</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Estonia">Estonia</option>
+              <option value="Finland">Finland</option>
+              <option value="Iceland">Iceland</option>
+              <option value="Latvia">Latvia</option>
+              <option value="Lithuania">Lithuania</option>
+              <option value="Northeast England">Northeast England</option>
+              <option value="Norway">Norway</option>
+              <option value="Scotland">Scotland</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div id="address-fields" class="address-fields"></div>
+          <div id="address-preview" class="address-preview" hidden>
+            <p class="address-preview__label">Postal address</p>
+            <pre id="address-preview-text" class="address-preview__text"></pre>
           </div>
         </fieldset>
 
@@ -178,6 +183,7 @@
   <script src="site-preferences.js"></script>
   <script src="assets/nav-translations.js"></script>
   <script src="assets/nav-rail.js"></script>
+  <script src="assets/country-address.js"></script>
   <script src="assets/auth-client.js"></script>
   <script>
     (function() {

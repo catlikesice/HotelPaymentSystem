@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
+const CountryAddress = require('../assets/country-address');
 
 const router = express.Router();
 
@@ -82,6 +83,8 @@ function publicUser(user) {
     website: user.website || '',
     country: user.country || '',
     city: user.city || '',
+    address: user.address || null,
+    addressFormatted: user.addressFormatted || '',
     createdAt: user.createdAt
   };
 }
@@ -143,7 +146,9 @@ router.post('/register', authLimiter, (req, res) => {
   const vatId = String(body.vatId || '').trim();
   const website = String(body.website || '').trim();
   const country = String(body.country || '').trim();
-  const city = String(body.city || '').trim();
+  let city = String(body.city || '').trim();
+  let address = body.address && typeof body.address === 'object' ? body.address : null;
+  let addressFormatted = String(body.addressFormatted || '').trim();
 
   if (!name || name.length < 2) {
     return res.status(400).json({ error: 'Please enter your full name (at least 2 characters).' });
@@ -162,6 +167,15 @@ router.post('/register', authLimiter, (req, res) => {
   }
   if (!isValidWebsite(website)) {
     return res.status(400).json({ error: 'Please enter a valid website URL.' });
+  }
+  if (accountType === 'business') {
+    const addressResult = CountryAddress.validateAddress(country, address || {}, { companyName });
+    if (!addressResult.ok) {
+      return res.status(400).json({ error: addressResult.message });
+    }
+    city = addressResult.values.city || city;
+    address = addressResult.values;
+    addressFormatted = addressResult.formatted;
   }
 
   const users = readJson(USERS_FILE, []);
@@ -182,6 +196,8 @@ router.post('/register', authLimiter, (req, res) => {
     website,
     country,
     city,
+    address,
+    addressFormatted,
     passwordSalt: salt,
     passwordHash: hash,
     createdAt: new Date().toISOString()
