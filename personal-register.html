@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forgot Password – Boreal Horizons</title>
-  <meta name="description" content="Reset your Boreal Horizons account password">
+  <title>Register – Boreal Horizons</title>
+  <meta name="description" content="Create a Boreal Horizons account">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -62,23 +62,39 @@
   </header>
 
   <main class="auth-page" role="main">
-    <section class="auth-panel" aria-labelledby="forgot-title">
-      <h1 id="forgot-title">Forgot Password</h1>
-      <p class="auth-lead">Enter your email and we will send reset instructions if an account exists.</p>
+    <section class="auth-panel" aria-labelledby="register-title">
+      <h1 id="register-title">Create account</h1>
+      <p class="auth-lead">Register to save preferences and book stays across Northern Europe.</p>
       <p class="auth-status" id="auth-form-status" role="status" aria-live="polite"></p>
+      <p data-auth-status hidden></p>
 
-      <form id="forgotPasswordForm" class="auth-form" novalidate>
+      <form id="registerForm" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="name">Full name <span class="required" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" required autocomplete="name" minlength="2" placeholder="Your name" />
+        </div>
+
         <div class="form-group">
           <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
           <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
         </div>
 
+        <div class="form-group">
+          <label for="password">Password <span class="required" aria-hidden="true">*</span></label>
+          <input id="password" name="password" type="password" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters" />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm password <span class="required" aria-hidden="true">*</span></label>
+          <input id="confirmPassword" name="confirmPassword" type="password" required autocomplete="new-password" minlength="8" placeholder="Re-enter password" />
+        </div>
+
         <div class="auth-actions">
-          <button class="btn" type="submit">Send reset instructions</button>
+          <button class="btn" type="submit">Create account</button>
         </div>
       </form>
 
-      <p class="auth-switch"><a href="personal-register.html">Register</a> · <a href="index.html">Back to home</a></p>
+      <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
     </section>
   </main>
 

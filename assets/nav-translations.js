@@ -362,7 +362,7 @@
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
         } else if (href === 'login.html') {
           updateLinkContent(anchor, mapping.login, mapping.loginAria);
-        } else if (href === 'register.html') {
+        } else if (href === 'register.html' || href === 'personal-register.html') {
           updateLinkContent(anchor, mapping.register, mapping.registerAria);
         }
       });
