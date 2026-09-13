@@ -523,6 +523,14 @@
         const email = registerForm.email.value.trim();
         const password = registerForm.password.value;
         const confirm = registerForm.confirmPassword ? registerForm.confirmPassword.value : password;
+        const optionalFields = ['accountType', 'companyName', 'businessType', 'phone', 'vatId', 'website', 'country', 'city'];
+        const extra = {};
+        optionalFields.forEach(function(fieldName) {
+          const field = registerForm.elements[fieldName];
+          if (field && String(field.value || '').trim()) {
+            extra[fieldName] = String(field.value).trim();
+          }
+        });
 
         if (!registerForm.checkValidity()) {
           registerForm.reportValidity();
@@ -537,6 +545,7 @@
           return;
         }
 
+        const submitLabel = submitBtn ? submitBtn.textContent : 'Create account';
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.textContent = 'Creating account...';
@@ -546,10 +555,12 @@
           status.className = 'auth-status';
         }
 
-        register({ name, email, password })
+        register(Object.assign({ name: name, email: email, password: password }, extra))
           .then(function() {
             if (status) {
-              status.textContent = 'Account created! Redirecting...';
+              status.textContent = extra.accountType === 'business'
+                ? 'Business account created! Redirecting...'
+                : 'Account created! Redirecting...';
               status.className = 'auth-status auth-status--success';
             }
             window.setTimeout(function() {
@@ -563,7 +574,7 @@
             }
             if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.textContent = 'Create account';
+              submitBtn.textContent = submitLabel;
             }
           });
       });

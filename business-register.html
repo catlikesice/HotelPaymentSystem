@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Business Registration – Boreal Horizons</title>
-  <meta name="description" content="Business registration for a Boreal Horizons account">
+  <meta name="description" content="Register your company for a Boreal Horizons business account">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -61,40 +61,113 @@
     </nav>
   </header>
 
-  <main class="auth-page" role="main">
+  <main class="auth-page auth-page--wide" role="main">
     <section class="auth-panel" aria-labelledby="register-title">
       <h1 id="register-title">Business Registration</h1>
-      <p class="auth-lead">Register to save preferences and book stays across Northern Europe.</p>
+      <p class="auth-lead">Create a company account to manage bookings, invoicing, and crypto payments across Northern Europe.</p>
       <p class="auth-status" id="auth-form-status" role="status" aria-live="polite"></p>
       <p data-auth-status hidden></p>
 
       <form id="registerForm" class="auth-form" novalidate>
-        <div class="form-group">
-          <label for="name">Full name <span class="required" aria-hidden="true">*</span></label>
-          <input id="name" name="name" type="text" required autocomplete="name" minlength="2" placeholder="Your name" />
-        </div>
+        <input type="hidden" name="accountType" value="business">
 
-        <div class="form-group">
-          <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
-          <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
-        </div>
+        <fieldset>
+          <legend>Company details</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="companyName">Company name <span class="required" aria-hidden="true">*</span></label>
+              <input id="companyName" name="companyName" type="text" required autocomplete="organization" minlength="2" placeholder="Legal business name" />
+            </div>
+            <div class="form-group">
+              <label for="businessType">Business type <span class="required" aria-hidden="true">*</span></label>
+              <select id="businessType" name="businessType" required>
+                <option value="" selected disabled>Select one</option>
+                <option value="independent-hotel">Independent hotel</option>
+                <option value="hotel-chain">Hotel chain</option>
+                <option value="travel-agency">Travel agency</option>
+                <option value="corporate">Corporate travel</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="vatId">VAT / business ID</label>
+              <input id="vatId" name="vatId" type="text" autocomplete="off" placeholder="e.g. LV40003123456" />
+            </div>
+            <div class="form-group">
+              <label for="website">Website</label>
+              <input id="website" name="website" type="url" autocomplete="url" placeholder="https://www.example.com" />
+            </div>
+          </div>
+        </fieldset>
 
-        <div class="form-group">
-          <label for="password">Password <span class="required" aria-hidden="true">*</span></label>
-          <input id="password" name="password" type="password" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters" />
-        </div>
+        <fieldset>
+          <legend>Primary contact</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Contact name <span class="required" aria-hidden="true">*</span></label>
+              <input id="name" name="name" type="text" required autocomplete="name" minlength="2" placeholder="Jane Doe" />
+            </div>
+            <div class="form-group">
+              <label for="email">Work email <span class="required" aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+371 2000 0000" />
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select id="country" name="country" autocomplete="country-name">
+                <option value="">Select country</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Estonia">Estonia</option>
+                <option value="Finland">Finland</option>
+                <option value="Iceland">Iceland</option>
+                <option value="Latvia">Latvia</option>
+                <option value="Lithuania">Lithuania</option>
+                <option value="Norway">Norway</option>
+                <option value="Sweden">Sweden</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" autocomplete="address-level2" placeholder="Riga" />
+          </div>
+        </fieldset>
 
-        <div class="form-group">
-          <label for="confirmPassword">Confirm password <span class="required" aria-hidden="true">*</span></label>
-          <input id="confirmPassword" name="confirmPassword" type="password" required autocomplete="new-password" minlength="8" placeholder="Re-enter password" />
+        <fieldset>
+          <legend>Account password</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Password <span class="required" aria-hidden="true">*</span></label>
+              <input id="password" name="password" type="password" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters" />
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm password <span class="required" aria-hidden="true">*</span></label>
+              <input id="confirmPassword" name="confirmPassword" type="password" required autocomplete="new-password" minlength="8" placeholder="Re-enter password" />
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-group form-check">
+          <input id="companyConfirm" name="companyConfirm" type="checkbox" required>
+          <label for="companyConfirm">I confirm I am registering on behalf of this company. <span class="required" aria-hidden="true">*</span></label>
         </div>
 
         <div class="auth-actions">
-          <button class="btn" type="submit">Create account</button>
+          <button class="btn" type="submit">Create business account</button>
         </div>
       </form>
 
       <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
+      <p class="auth-switch">Need a guest account? <a href="personal-register.html">Customer registration</a> · <a href="register.html">Change account type</a></p>
     </section>
   </main>
 

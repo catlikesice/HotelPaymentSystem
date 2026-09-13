@@ -74,8 +74,29 @@ function publicUser(user) {
     id: user.id,
     name: user.name,
     email: user.email,
+    accountType: user.accountType || 'customer',
+    companyName: user.companyName || '',
+    businessType: user.businessType || '',
+    phone: user.phone || '',
+    vatId: user.vatId || '',
+    website: user.website || '',
+    country: user.country || '',
+    city: user.city || '',
     createdAt: user.createdAt
   };
+}
+
+function isValidWebsite(value) {
+  if (!value) {
+    return true;
+  }
+  try {
+    const withProtocol = /^(https?:)?\/\//i.test(value) ? value : 'https://' + value;
+    const url = new URL(withProtocol);
+    return Boolean(url.hostname && url.hostname.includes('.'));
+  } catch (error) {
+    return false;
+  }
 }
 
 function createSession(userId) {
@@ -111,9 +132,18 @@ function findUserByToken(token) {
 }
 
 router.post('/register', authLimiter, (req, res) => {
-  const name = String((req.body && req.body.name) || '').trim();
-  const email = normalizeEmail(req.body && req.body.email);
-  const password = String((req.body && req.body.password) || '');
+  const body = req.body || {};
+  const name = String(body.name || '').trim();
+  const email = normalizeEmail(body.email);
+  const password = String(body.password || '');
+  const accountType = body.accountType === 'business' ? 'business' : 'customer';
+  const companyName = String(body.companyName || '').trim();
+  const businessType = String(body.businessType || '').trim();
+  const phone = String(body.phone || '').trim();
+  const vatId = String(body.vatId || '').trim();
+  const website = String(body.website || '').trim();
+  const country = String(body.country || '').trim();
+  const city = String(body.city || '').trim();
 
   if (!name || name.length < 2) {
     return res.status(400).json({ error: 'Please enter your full name (at least 2 characters).' });
@@ -123,6 +153,15 @@ router.post('/register', authLimiter, (req, res) => {
   }
   if (password.length < 8) {
     return res.status(400).json({ error: 'Password must be at least 8 characters.' });
+  }
+  if (accountType === 'business' && (!companyName || companyName.length < 2)) {
+    return res.status(400).json({ error: 'Please enter your company name (at least 2 characters).' });
+  }
+  if (accountType === 'business' && !businessType) {
+    return res.status(400).json({ error: 'Please select a business type.' });
+  }
+  if (!isValidWebsite(website)) {
+    return res.status(400).json({ error: 'Please enter a valid website URL.' });
   }
 
   const users = readJson(USERS_FILE, []);
@@ -135,6 +174,14 @@ router.post('/register', authLimiter, (req, res) => {
     id: crypto.randomUUID(),
     name,
     email,
+    accountType,
+    companyName,
+    businessType,
+    phone,
+    vatId,
+    website,
+    country,
+    city,
     passwordSalt: salt,
     passwordHash: hash,
     createdAt: new Date().toISOString()
