@@ -619,6 +619,7 @@
 
     countrySelect.addEventListener('change', renderForCountry);
     fieldsRoot.addEventListener('input', refreshPreview);
+    fieldsRoot.addEventListener('change', refreshPreview);
     if (companyInput) {
       companyInput.addEventListener('input', refreshPreview);
     }

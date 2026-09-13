@@ -1926,6 +1926,11 @@ body > header.header-bar {
   column-gap: 0.9rem;
 }
 
+.address-fields .address-hint,
+.address-fields .address-empty {
+  grid-column: 1 / -1;
+}
+
 .address-fields .form-group--6 {
   grid-column: span 6;
 }
