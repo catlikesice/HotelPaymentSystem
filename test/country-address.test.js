@@ -88,6 +88,71 @@ test('formats Scotland and Northeast England in Royal Mail order', () => {
   );
 });
 
+test('formats remaining Northern European addresses in local order', () => {
+  assert.equal(
+    CountryAddress.formatAddress('Estonia', {
+      streetName: 'Pärnu mnt',
+      houseNumber: '12',
+      apartment: '5',
+      postalCode: '10148',
+      city: 'Tallinn'
+    }),
+    'Pärnu mnt 12-5\n10148 Tallinn\nEstonia'
+  );
+
+  assert.equal(
+    CountryAddress.formatAddress('Iceland', {
+      streetName: 'Laugavegur',
+      houseNumber: '11',
+      postalCode: '101',
+      city: 'Reykjavík'
+    }),
+    'Laugavegur 11\n101 Reykjavík\nIceland'
+  );
+
+  assert.equal(
+    CountryAddress.formatAddress('Lithuania', {
+      streetName: 'Gedimino pr.',
+      houseNumber: '9',
+      apartment: '1',
+      postalCode: 'LT-01103',
+      city: 'Vilnius'
+    }),
+    'Gedimino pr. 9-1\n01103 Vilnius\nLithuania'
+  );
+
+  assert.equal(
+    CountryAddress.formatAddress('Norway', {
+      streetName: 'Karl Johans gate',
+      houseNumber: '15',
+      postalCode: '0154',
+      city: 'Oslo'
+    }),
+    'Karl Johans gate 15\n0154 Oslo\nNorway'
+  );
+
+  const other = CountryAddress.validateAddress('Other', {
+    line1: 'Main Street 1',
+    city: 'Tórshavn',
+    postalCode: '100',
+    countryName: 'Faroe Islands'
+  });
+  assert.equal(other.ok, true);
+  assert.equal(other.formatted, 'Main Street 1\nTórshavn\n100\nFaroe Islands');
+});
+
+test('every listed country has a local address schema', () => {
+  CountryAddress.countries.forEach(function (country) {
+    const schema = CountryAddress.getSchema(country.id);
+    assert.ok(schema, country.id + ' is missing an address schema');
+    assert.ok(schema.fields.length > 1, country.id + ' should collect more than a city');
+    const ids = schema.fields.map((field) => field.id);
+    if (country.id !== 'Other') {
+      assert.ok(ids.includes('city') || ids.includes('postalCode'));
+    }
+  });
+});
+
 test('rejects incomplete addresses and unknown countries', () => {
   const missingCity = CountryAddress.validateAddress('Norway', {
     streetName: 'Karl Johans gate',
