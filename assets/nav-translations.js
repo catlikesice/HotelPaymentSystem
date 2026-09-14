@@ -11,8 +11,10 @@
       contactAria: 'Contact us',
       cultureBlog: 'Blog',
       cultureBlogAria: 'Blog',
-      environmentMission: 'Environment Mission',
-      environmentMissionAria: 'Environment Mission',
+      environmentMission: 'Environmental Mission',
+      environmentMissionAria: 'Environmental Mission',
+      aboutEcoTourism: 'About EcoTourism',
+      aboutEcoTourismAria: 'About EcoTourism',
       reliableBlockchain: 'Reliable Blockchain',
       reliableBlockchainAria: 'Reliable Blockchain',
       account: 'Account',
@@ -45,6 +47,8 @@
       cultureBlogAria: 'Блог',
       environmentMission: 'Экологическая миссия',
       environmentMissionAria: 'Экологическая миссия',
+      aboutEcoTourism: 'Об экотуризме',
+      aboutEcoTourismAria: 'Об экотуризме',
       reliableBlockchain: 'Надёжный блокчейн',
       reliableBlockchainAria: 'Надёжный блокчейн',
       account: 'Аккаунт',
@@ -77,6 +81,8 @@
       cultureBlogAria: 'Blogg',
       environmentMission: 'Miljöuppdrag',
       environmentMissionAria: 'Miljöuppdrag',
+      aboutEcoTourism: 'Om ekoturism',
+      aboutEcoTourismAria: 'Om ekoturism',
       reliableBlockchain: 'Tillförlitlig blockkedja',
       reliableBlockchainAria: 'Tillförlitlig blockkedja',
       account: 'Konto',
@@ -109,6 +115,8 @@
       cultureBlogAria: 'Blog',
       environmentMission: 'Umweltmission',
       environmentMissionAria: 'Umweltmission',
+      aboutEcoTourism: 'Über Ökotourismus',
+      aboutEcoTourismAria: 'Über Ökotourismus',
       reliableBlockchain: 'Zuverlässige Blockchain',
       reliableBlockchainAria: 'Zuverlässige Blockchain',
       account: 'Konto',
@@ -229,13 +237,28 @@
       updateLinkContent(link, mapping.cultureBlog, mapping.cultureBlogAria);
     });
 
-    const environmentMissionLinks = navRoot.querySelectorAll('.nav-box-environment, a[href$="crypto-environment.html"]');
-    environmentMissionLinks.forEach(function(link) {
-      if (link.closest('.nav-links')) {
-        return;
+    const environmentDropdown = navRoot.querySelector('.nav-dropdown-environment');
+    if (environmentDropdown) {
+      const environmentSummary = environmentDropdown.querySelector('summary.nav-box-environment');
+      updateSummaryContent(environmentSummary, mapping.environmentMission, mapping.environmentMissionAria);
+
+      const environmentMenu = environmentDropdown.querySelector('.nav-dropdown-menu');
+      if (environmentMenu) {
+        const environmentLink = environmentMenu.querySelector('.nav-environment-link, a[href$="crypto-environment.html"]');
+        updateLinkContent(environmentLink, mapping.environmentMission, mapping.environmentMissionAria);
+
+        const aboutEcoTourismLink = environmentMenu.querySelector('.nav-about-ecotourism, a[href$="about-ecotourism.html"]');
+        updateLinkContent(aboutEcoTourismLink, mapping.aboutEcoTourism, mapping.aboutEcoTourismAria);
       }
-      updateLinkContent(link, mapping.environmentMission, mapping.environmentMissionAria);
-    });
+    } else {
+      const environmentMissionLinks = navRoot.querySelectorAll('.nav-box-environment, a[href$="crypto-environment.html"]');
+      environmentMissionLinks.forEach(function(link) {
+        if (link.closest('.nav-links')) {
+          return;
+        }
+        updateLinkContent(link, mapping.environmentMission, mapping.environmentMissionAria);
+      });
+    }
 
     const reliableBlockchainLinks = navRoot.querySelectorAll('.nav-box-reliability, a[href$="crypto-reliability.html"]');
     reliableBlockchainLinks.forEach(function(link) {
@@ -356,6 +379,8 @@
           updateLinkContent(anchor, mapping.cultureBlog, mapping.cultureBlogAria);
         } else if (href === 'crypto-environment.html') {
           updateLinkContent(anchor, mapping.environmentMission, mapping.environmentMissionAria);
+        } else if (href === 'about-ecotourism.html') {
+          updateLinkContent(anchor, mapping.aboutEcoTourism, mapping.aboutEcoTourismAria);
         } else if (href === 'crypto-reliability.html') {
           updateLinkContent(anchor, mapping.reliableBlockchain, mapping.reliableBlockchainAria);
         } else if (href === '#contact' || href === 'index.html#contact') {
