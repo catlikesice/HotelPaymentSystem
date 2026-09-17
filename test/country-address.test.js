@@ -9,12 +9,12 @@ test('country list uses Scotland and Northeast England instead of the United Kin
   assert.ok(ids.includes('Northeast England'));
 });
 
-test('country list includes Åland Islands, Svalbard, the Faroe Islands, and Greenland', () => {
+test('country list includes Åland Islands, the Faroe Islands, and Greenland', () => {
   const ids = CountryAddress.countries.map((country) => country.id);
   assert.ok(ids.includes('Åland Islands'));
-  assert.ok(ids.includes('Svalbard'));
   assert.ok(ids.includes('Faroe Islands'));
   assert.ok(ids.includes('Greenland'));
+  assert.equal(ids.includes('Svalbard'), false);
 });
 
 test('formats a Latvian business address in local order', () => {
@@ -149,7 +149,7 @@ test('formats remaining Northern European addresses in local order', () => {
   assert.equal(other.formatted, 'Main Street 1\nDouglas\nIM1 1AA\nIsle of Man');
 });
 
-test('formats Åland, Svalbard, Faroe Islands, and Greenland addresses in local order', () => {
+test('formats Åland, Faroe Islands, and Greenland addresses in local order', () => {
   const aland = CountryAddress.validateAddress('Åland Islands', {
     streetName: 'Torggatan',
     houseNumber: '1',
@@ -161,14 +161,6 @@ test('formats Åland, Svalbard, Faroe Islands, and Greenland addresses in local 
   assert.equal(aland.ok, true);
   assert.equal(aland.values.postalCode, '22100');
   assert.equal(aland.formatted, 'Torggatan 1 A 5\n22100 Mariehamn\nÅland Islands');
-
-  const svalbard = CountryAddress.formatAddress('Svalbard', {
-    streetName: 'Hilmar Rekstens vei',
-    houseNumber: '2',
-    postalCode: '9170',
-    city: 'Longyearbyen'
-  });
-  assert.equal(svalbard, 'Hilmar Rekstens vei 2\n9170 Longyearbyen\nSvalbard');
 
   const faroe = CountryAddress.validateAddress('Faroe Islands', {
     streetName: 'Tinghúsvegur',
@@ -224,6 +216,14 @@ test('rejects incomplete addresses and unknown countries', () => {
     city: 'London'
   });
   assert.equal(unitedKingdom.ok, false);
+
+  const svalbard = CountryAddress.validateAddress('Svalbard', {
+    streetName: 'Hilmar Rekstens vei',
+    houseNumber: '2',
+    postalCode: '9170',
+    city: 'Longyearbyen'
+  });
+  assert.equal(svalbard.ok, false);
 
   const badAland = CountryAddress.validateAddress('Åland Islands', {
     streetName: 'Torggatan',

@@ -20,7 +20,6 @@
     { id: 'Northeast England', name: 'Northeast England' },
     { id: 'Norway', name: 'Norway' },
     { id: 'Scotland', name: 'Scotland' },
-    { id: 'Svalbard', name: 'Svalbard' },
     { id: 'Sweden', name: 'Sweden' },
     { id: 'Other', name: 'Other' }
   ];
@@ -154,15 +153,6 @@
         field('floor', 'Floor / door', { local: 'Etage / dør', required: false, placeholder: '2. th', width: 'half', maxlength: 20, hint: 'Optional, for example st., 2. th, or 3. tv.' }),
         field('postalCode', 'Postal code', { local: 'Postnummer', placeholder: '3900', autocomplete: 'postal-code', inputmode: 'numeric', width: 'half', maxlength: 4, hint: '4 digits starting with 39, for example 3900.' }),
         field('city', 'Town', { local: 'By / illoqarfik', placeholder: 'Nuuk', autocomplete: 'address-level2', width: 'half' })
-      ]
-    },
-    Svalbard: {
-      hint: 'Svalbard addresses follow the Norwegian layout: street and number, then the 4-digit postcode and post town.',
-      fields: [
-        field('streetName', 'Street name', { local: 'Gate', placeholder: 'Hilmar Rekstens vei', autocomplete: 'address-line1' }),
-        field('houseNumber', 'House number', { local: 'Nummer', placeholder: '2', width: 'half', maxlength: 12 }),
-        field('postalCode', 'Postal code', { local: 'Postnummer', placeholder: '9170', autocomplete: 'postal-code', inputmode: 'numeric', width: 'half', maxlength: 4, hint: '4 digits, for example 9170.' }),
-        field('city', 'Post town', { local: 'Poststed', placeholder: 'Longyearbyen', autocomplete: 'address-level2', width: 'half' })
       ]
     },
     Iceland: {
@@ -340,7 +330,7 @@
       key = schema.fields[i].id;
       next[key] = trimValue(source[key]);
     }
-    if (countryId === 'Denmark' || countryId === 'Estonia' || countryId === 'Finland' || countryId === 'Greenland' || countryId === 'Iceland' || countryId === 'Norway' || countryId === 'Svalbard') {
+    if (countryId === 'Denmark' || countryId === 'Estonia' || countryId === 'Finland' || countryId === 'Greenland' || countryId === 'Iceland' || countryId === 'Norway') {
       if (next.postalCode) {
         next.postalCode = digitsOnly(next.postalCode);
       }
@@ -384,9 +374,6 @@
     }
     if (countryId === 'Norway' && !/^\d{4}$/.test(postalCode)) {
       return 'Norwegian postcodes are 4 digits, for example 0154.';
-    }
-    if (countryId === 'Svalbard' && !/^\d{4}$/.test(postalCode)) {
-      return 'Svalbard postcodes are 4 digits, for example 9170.';
     }
     if (countryId === 'Sweden' && !/^\d{3}\s\d{2}$/.test(postalCode)) {
       return 'Swedish postcodes are 5 digits, written as 111 51.';
