@@ -9,6 +9,14 @@ test('country list uses Scotland and Northeast England instead of the United Kin
   assert.ok(ids.includes('Northeast England'));
 });
 
+test('country list includes Åland Islands, Svalbard, the Faroe Islands, and Greenland', () => {
+  const ids = CountryAddress.countries.map((country) => country.id);
+  assert.ok(ids.includes('Åland Islands'));
+  assert.ok(ids.includes('Svalbard'));
+  assert.ok(ids.includes('Faroe Islands'));
+  assert.ok(ids.includes('Greenland'));
+});
+
 test('formats a Latvian business address in local order', () => {
   const result = CountryAddress.validateAddress('Latvia', {
     streetName: 'Brīvības iela',
@@ -133,12 +141,53 @@ test('formats remaining Northern European addresses in local order', () => {
 
   const other = CountryAddress.validateAddress('Other', {
     line1: 'Main Street 1',
-    city: 'Tórshavn',
-    postalCode: '100',
-    countryName: 'Faroe Islands'
+    city: 'Douglas',
+    postalCode: 'IM1 1AA',
+    countryName: 'Isle of Man'
   });
   assert.equal(other.ok, true);
-  assert.equal(other.formatted, 'Main Street 1\nTórshavn\n100\nFaroe Islands');
+  assert.equal(other.formatted, 'Main Street 1\nDouglas\nIM1 1AA\nIsle of Man');
+});
+
+test('formats Åland, Svalbard, Faroe Islands, and Greenland addresses in local order', () => {
+  const aland = CountryAddress.validateAddress('Åland Islands', {
+    streetName: 'Torggatan',
+    houseNumber: '1',
+    staircase: 'A',
+    apartment: '5',
+    postalCode: 'AX-22100',
+    city: 'Mariehamn'
+  });
+  assert.equal(aland.ok, true);
+  assert.equal(aland.values.postalCode, '22100');
+  assert.equal(aland.formatted, 'Torggatan 1 A 5\n22100 Mariehamn\nÅland Islands');
+
+  const svalbard = CountryAddress.formatAddress('Svalbard', {
+    streetName: 'Hilmar Rekstens vei',
+    houseNumber: '2',
+    postalCode: '9170',
+    city: 'Longyearbyen'
+  });
+  assert.equal(svalbard, 'Hilmar Rekstens vei 2\n9170 Longyearbyen\nSvalbard');
+
+  const faroe = CountryAddress.validateAddress('Faroe Islands', {
+    streetName: 'Tinghúsvegur',
+    houseNumber: '9',
+    postalCode: '100',
+    city: 'Tórshavn'
+  });
+  assert.equal(faroe.ok, true);
+  assert.equal(faroe.values.postalCode, 'FO-100');
+  assert.equal(faroe.formatted, 'Tinghúsvegur 9\nFO-100 Tórshavn\nFaroe Islands');
+
+  const greenland = CountryAddress.formatAddress('Greenland', {
+    streetName: 'Aqqusinersuaq',
+    houseNumber: '4',
+    floor: '2. th',
+    postalCode: '3900',
+    city: 'Nuuk'
+  });
+  assert.equal(greenland, 'Aqqusinersuaq 4, 2. th\n3900 Nuuk\nGreenland');
 });
 
 test('every listed country has a local address schema', () => {
@@ -175,4 +224,13 @@ test('rejects incomplete addresses and unknown countries', () => {
     city: 'London'
   });
   assert.equal(unitedKingdom.ok, false);
+
+  const badAland = CountryAddress.validateAddress('Åland Islands', {
+    streetName: 'Torggatan',
+    houseNumber: '1',
+    postalCode: '00100',
+    city: 'Mariehamn'
+  });
+  assert.equal(badAland.ok, false);
+  assert.match(badAland.message, /22/);
 });
