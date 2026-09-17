@@ -8,9 +8,12 @@
   'use strict';
 
   var COUNTRIES = [
+    { id: 'Åland Islands', name: 'Åland Islands' },
     { id: 'Denmark', name: 'Denmark' },
     { id: 'Estonia', name: 'Estonia' },
+    { id: 'Faroe Islands', name: 'Faroe Islands' },
     { id: 'Finland', name: 'Finland' },
+    { id: 'Greenland', name: 'Greenland' },
     { id: 'Iceland', name: 'Iceland' },
     { id: 'Latvia', name: 'Latvia' },
     { id: 'Lithuania', name: 'Lithuania' },
@@ -119,6 +122,37 @@
         field('apartment', 'Apartment', { local: 'Huoneisto', required: false, placeholder: '5', width: 'third', maxlength: 8 }),
         field('postalCode', 'Postal code', { local: 'Postinumero', placeholder: '00100', autocomplete: 'postal-code', inputmode: 'numeric', width: 'half', maxlength: 5, hint: '5 digits.' }),
         field('city', 'Post town', { local: 'Postitoimipaikka', placeholder: 'Helsinki', autocomplete: 'address-level2', width: 'half' })
+      ]
+    },
+    'Åland Islands': {
+      hint: 'Åland addresses follow the Finnish layout in Swedish: street, number, optional staircase and apartment, then the 5-digit 22xxx postcode and post town.',
+      fields: [
+        field('streetName', 'Street name', { local: 'Gata', placeholder: 'Torggatan', autocomplete: 'address-line1' }),
+        field('houseNumber', 'House number', { local: 'Nummer', placeholder: '1', width: 'third', maxlength: 12 }),
+        field('staircase', 'Staircase', { local: 'Uppgång', required: false, placeholder: 'A', width: 'third', maxlength: 4 }),
+        field('apartment', 'Apartment', { local: 'Lägenhet', required: false, placeholder: '5', width: 'third', maxlength: 8 }),
+        field('postalCode', 'Postal code', { local: 'Postnummer', placeholder: '22100', autocomplete: 'postal-code', width: 'half', maxlength: 8, hint: '5 digits starting with 22, optionally prefixed with AX-.' }),
+        field('city', 'Post town', { local: 'Postort', placeholder: 'Mariehamn', autocomplete: 'address-level2', width: 'half' })
+      ]
+    },
+    'Faroe Islands': {
+      hint: 'Faroese addresses put the street and number first, then the FO- postcode and town on the next line.',
+      fields: [
+        field('streetName', 'Street name', { local: 'Gøta', placeholder: 'Tinghúsvegur', autocomplete: 'address-line1', width: 'full' }),
+        field('houseNumber', 'House number', { local: 'Húsnummar', placeholder: '9', width: 'half', maxlength: 12 }),
+        field('floor', 'Floor / door', { local: 'Hædd / hurð', required: false, placeholder: '2. th', width: 'half', maxlength: 20, hint: 'Optional, for example st., 2. th, or 3. tv.' }),
+        field('postalCode', 'Postal code', { local: 'Postnummar', placeholder: 'FO-100', autocomplete: 'postal-code', width: 'half', maxlength: 7, hint: 'FO- and 3 digits, for example FO-100.' }),
+        field('city', 'Town', { local: 'Býur', placeholder: 'Tórshavn', autocomplete: 'address-level2', width: 'half' })
+      ]
+    },
+    Greenland: {
+      hint: 'Greenlandic addresses put the street and number first, then the 4-digit 39xx postcode and town.',
+      fields: [
+        field('streetName', 'Street name', { local: 'Aqqusineq / gade', placeholder: 'Aqqusinersuaq', autocomplete: 'address-line1', width: 'full' }),
+        field('houseNumber', 'House number', { local: 'Nummer', placeholder: '4', width: 'half', maxlength: 12 }),
+        field('floor', 'Floor / door', { local: 'Etage / dør', required: false, placeholder: '2. th', width: 'half', maxlength: 20, hint: 'Optional, for example st., 2. th, or 3. tv.' }),
+        field('postalCode', 'Postal code', { local: 'Postnummer', placeholder: '3900', autocomplete: 'postal-code', inputmode: 'numeric', width: 'half', maxlength: 4, hint: '4 digits starting with 39, for example 3900.' }),
+        field('city', 'Town', { local: 'By / illoqarfik', placeholder: 'Nuuk', autocomplete: 'address-level2', width: 'half' })
       ]
     },
     Iceland: {
@@ -254,6 +288,22 @@
     return trimValue(value).toUpperCase();
   }
 
+  function formatFaroePostcode(value) {
+    var digits = digitsOnly(value);
+    if (digits.length === 3) {
+      return 'FO-' + digits;
+    }
+    return trimValue(value).toUpperCase();
+  }
+
+  function formatAlandPostcode(value) {
+    var digits = digitsOnly(value);
+    if (digits.length === 5) {
+      return digits;
+    }
+    return trimValue(value).toUpperCase();
+  }
+
   function getSchema(countryId) {
     return SCHEMAS[countryId] || null;
   }
@@ -280,10 +330,14 @@
       key = schema.fields[i].id;
       next[key] = trimValue(source[key]);
     }
-    if (countryId === 'Denmark' || countryId === 'Estonia' || countryId === 'Finland' || countryId === 'Iceland' || countryId === 'Norway') {
+    if (countryId === 'Denmark' || countryId === 'Estonia' || countryId === 'Finland' || countryId === 'Greenland' || countryId === 'Iceland' || countryId === 'Norway') {
       if (next.postalCode) {
         next.postalCode = digitsOnly(next.postalCode);
       }
+    } else if (countryId === 'Åland Islands') {
+      next.postalCode = formatAlandPostcode(next.postalCode);
+    } else if (countryId === 'Faroe Islands') {
+      next.postalCode = formatFaroePostcode(next.postalCode);
     } else if (countryId === 'Sweden') {
       next.postalCode = formatSwedishPostcode(next.postalCode);
     } else if (countryId === 'Latvia') {
@@ -305,6 +359,15 @@
     }
     if (countryId === 'Finland' && !/^\d{5}$/.test(postalCode)) {
       return 'Finnish postcodes are 5 digits, for example 00100.';
+    }
+    if (countryId === 'Åland Islands' && !/^22\d{3}$/.test(postalCode)) {
+      return 'Åland postcodes are 5 digits starting with 22, for example 22100.';
+    }
+    if (countryId === 'Faroe Islands' && !/^FO-\d{3}$/.test(postalCode)) {
+      return 'Faroese postcodes use FO- and 3 digits, for example FO-100.';
+    }
+    if (countryId === 'Greenland' && !/^39\d{2}$/.test(postalCode)) {
+      return 'Greenlandic postcodes are 4 digits starting with 39, for example 3900.';
     }
     if (countryId === 'Iceland' && !/^\d{3}$/.test(postalCode)) {
       return 'Icelandic postcodes are 3 digits, for example 101.';
@@ -338,14 +401,14 @@
     var regionLabel = countryId === 'Other' ? trimValue(data.countryName) : countryId;
     var lines;
 
-    if (countryId === 'Denmark') {
+    if (countryId === 'Denmark' || countryId === 'Faroe Islands' || countryId === 'Greenland') {
       lines = [
         companyName,
         joinLine([streetLine(data), data.floor], ', '),
         joinLine([data.postalCode, data.city]),
         regionLabel
       ];
-    } else if (countryId === 'Finland') {
+    } else if (countryId === 'Finland' || countryId === 'Åland Islands') {
       lines = [
         companyName,
         joinLine([data.streetName, data.houseNumber, data.staircase, data.apartment]),
