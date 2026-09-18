@@ -3135,17 +3135,52 @@ body.login-popup-open {
   overflow: hidden;
 }
 
-/* Account portal — Concept A overview of real bookings */
+/* Account portal — Concept A overview of real bookings.
+   Keep the signed-in shell inside the viewport so the left nav cannot
+   scroll under the sticky site header or off the top of the page. */
+html:has(body.portal-open) {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.portal-open {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body.portal-open > header,
+body.portal-open > footer {
+  flex: 0 0 auto;
+}
+
 body.portal-open #account-page {
   max-width: none;
   margin: 0;
   padding: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .portal {
   max-width: 1180px;
+  width: 100%;
   margin: 0 auto 2.5rem;
   padding: 1.1rem 1.15rem 2rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body.portal-open .portal {
+  margin-bottom: 0;
+  padding-bottom: 1rem;
 }
 
 .portal-top {
@@ -3154,6 +3189,7 @@ body.portal-open #account-page {
   align-items: center;
   gap: 0.85rem 1rem;
   margin-bottom: 1rem;
+  flex: 0 0 auto;
 }
 
 .portal-brand {
@@ -3205,6 +3241,8 @@ body.portal-open #account-page {
   grid-template-columns: 220px minmax(0, 1fr);
   gap: 1.15rem;
   align-items: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .portal-nav {
@@ -3215,12 +3253,10 @@ body.portal-open #account-page {
   border-radius: 16px;
   background: #23441a;
   align-self: start;
-  position: sticky;
-  top: calc(var(--nav-rail-height, 56px) + 0.75rem);
-  max-height: calc(100vh - var(--nav-rail-height, 56px) - 1.5rem);
+  max-height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  z-index: 2;
+  overscroll-behavior: contain;
 }
 
 .portal-nav a {
@@ -3242,6 +3278,9 @@ body.portal-open #account-page {
 
 .portal-main {
   min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .portal-hero {
@@ -3362,8 +3401,6 @@ body.portal-open #account-page {
     overflow-x: auto;
     overflow-y: hidden;
     max-height: none;
-    top: var(--nav-rail-height, 56px);
-    z-index: 5;
   }
 
   .portal-nav a {
