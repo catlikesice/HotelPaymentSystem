@@ -3079,8 +3079,7 @@ header:has(.nav-inner) .nav-account-btn:focus-visible {
 }
 
 .login-popup__submit,
-.login-popup__logout,
-.login-popup__account {
+.login-popup__logout {
   display: block;
   width: 100%;
   margin-top: 0.15rem;
@@ -3088,10 +3087,6 @@ header:has(.nav-inner) .nav-account-btn:focus-visible {
   cursor: pointer;
   text-align: center;
   box-sizing: border-box;
-}
-
-.login-popup__account {
-  margin-bottom: 0.55rem;
 }
 
 .login-popup__submit:disabled,
