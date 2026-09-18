@@ -3358,3 +3358,80 @@ body.portal-open #account-page {
   }
 }
 
+/* =========================
+   Overflow containment
+   Long URLs, fixed-width hotel cards, and images were pushing a
+   horizontal scrollbar on city, hotel, and article pages.
+   ========================= */
+html {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+img,
+video,
+iframe,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+a,
+.references a,
+.content a,
+main a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.booking-container,
+.booking-layout,
+.booking-content,
+.hotel-list,
+.hotel-grid,
+.language-switcher,
+.hotel-detail,
+.search-card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.booking-layout,
+.booking-content,
+.hotel-list,
+.hotel-grid {
+  min-width: 0;
+}
+
+.hotel-list .hotel-card,
+.search-card {
+  width: min(100%, 300px) !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.hotel-grid .hotel-card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.hotel-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)) !important;
+}
+
+.hotel-detail {
+  max-width: min(600px, calc(100% - 2rem)) !important;
+}
+
+.hotel-card img,
+.hotel-detail img,
+.search-card__image {
+  max-width: 100%;
+  object-fit: cover;
+}
+
