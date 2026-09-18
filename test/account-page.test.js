@@ -74,3 +74,14 @@ test('account styles hide empty profile rows', () => {
   assert.match(css, /\.portal-nav/);
   assert.match(css, /\.portal-stats/);
 });
+
+test('account portal keeps the sidebar on screen while the main column scrolls', () => {
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /body\.portal-open\s*\{[^}]*overflow:\s*hidden/s);
+  assert.match(css, /body\.portal-open #account-page\s*\{[^}]*overflow:\s*hidden/s);
+  const navBlock = css.match(/\.portal-nav\s*\{[^}]+\}/);
+  assert.ok(navBlock, 'expected a .portal-nav rule');
+  assert.match(navBlock[0], /max-height:\s*100%/);
+  assert.match(navBlock[0], /overflow-y:\s*auto/);
+  assert.match(css, /\.portal-main\s*\{[^}]*overflow-y:\s*auto/s);
+});
