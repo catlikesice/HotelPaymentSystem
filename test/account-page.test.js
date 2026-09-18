@@ -74,3 +74,13 @@ test('account styles hide empty profile rows', () => {
   assert.match(css, /\.portal-nav/);
   assert.match(css, /\.portal-stats/);
 });
+
+test('account portal nav stays in view instead of scrolling under the site header', () => {
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  const navBlock = css.match(/\.portal-nav\s*\{[^}]+\}/);
+  assert.ok(navBlock, 'expected a .portal-nav rule');
+  assert.match(navBlock[0], /position:\s*sticky/);
+  assert.match(navBlock[0], /top:\s*calc\(var\(--nav-rail-height/);
+  assert.match(navBlock[0], /max-height:\s*calc\(100vh/);
+  assert.match(navBlock[0], /overflow-y:\s*auto/);
+});

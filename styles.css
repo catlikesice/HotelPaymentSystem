@@ -3204,7 +3204,7 @@ body.portal-open #account-page {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
   gap: 1.15rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .portal-nav {
@@ -3214,6 +3214,13 @@ body.portal-open #account-page {
   padding: 0.75rem;
   border-radius: 16px;
   background: #23441a;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--nav-rail-height, 56px) + 0.75rem);
+  max-height: calc(100vh - var(--nav-rail-height, 56px) - 1.5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 2;
 }
 
 .portal-nav a {
@@ -3222,6 +3229,8 @@ body.portal-open #account-page {
   font-weight: 650;
   padding: 0.55rem 0.7rem;
   border-radius: 10px;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .portal-nav a:hover,
@@ -3351,6 +3360,10 @@ body.portal-open #account-page {
     flex-direction: row;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
+    max-height: none;
+    top: var(--nav-rail-height, 56px);
+    z-index: 5;
   }
 
   .portal-nav a {
