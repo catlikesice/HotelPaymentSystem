@@ -7,17 +7,21 @@ const CountryAddress = require('../assets/country-address');
 
 const router = express.Router();
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
+const DATA_DIR = process.env.AUTH_DATA_DIR
+  ? path.resolve(process.env.AUTH_DATA_DIR)
+  : path.join(__dirname, '..', 'data');
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
 const SESSIONS_FILE = path.join(DATA_DIR, 'sessions.json');
 
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 30,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'Too many authentication attempts. Please try again later.' }
-});
+const authLimiter = process.env.AUTH_RATE_LIMIT_DISABLED === '1'
+  ? function skipAuthLimit(req, res, next) { next(); }
+  : rateLimit({
+      windowMs: 15 * 60 * 1000,
+      max: 30,
+      standardHeaders: true,
+      legacyHeaders: false,
+      message: { error: 'Too many authentication attempts. Please try again later.' }
+    });
 
 function ensureDataStore() {
   if (!fs.existsSync(DATA_DIR)) {

@@ -30,6 +30,7 @@
       closeLogin: 'Close',
       signedInAs: 'Signed in as',
       logOut: 'Log out',
+      viewAccount: 'View account',
       searchPlaceholder: 'Search...',
       searchAria: 'Search hotels and cities',
       menu: 'Menu'
@@ -64,6 +65,7 @@
       closeLogin: 'Закрыть',
       signedInAs: 'Вы вошли как',
       logOut: 'Выйти',
+      viewAccount: 'Аккаунт',
       searchPlaceholder: 'Поиск...',
       searchAria: 'Поиск отелей и городов',
       menu: 'Меню'
@@ -98,6 +100,7 @@
       closeLogin: 'Stäng',
       signedInAs: 'Inloggad som',
       logOut: 'Logga ut',
+      viewAccount: 'Visa konto',
       searchPlaceholder: 'Sök...',
       searchAria: 'Sök hotell och städer',
       menu: 'Meny'
@@ -132,6 +135,7 @@
       closeLogin: 'Schließen',
       signedInAs: 'Angemeldet als',
       logOut: 'Abmelden',
+      viewAccount: 'Konto ansehen',
       searchPlaceholder: 'Suchen...',
       searchAria: 'Hotels und Städte suchen',
       menu: 'Menü'
@@ -292,6 +296,14 @@
 
         const registerLink = accountMenu.querySelector('.nav-account-register');
         updateLinkContent(registerLink, mapping.register, mapping.registerAria);
+
+        const accountPageLink = accountMenu.querySelector('.nav-account-page');
+        updateLinkContent(accountPageLink, mapping.viewAccount, mapping.viewAccount);
+
+        const logoutBtn = accountMenu.querySelector('.nav-account-logout');
+        if (logoutBtn && mapping.logOut) {
+          logoutBtn.textContent = mapping.logOut;
+        }
       }
     }
 
@@ -342,6 +354,9 @@
       if (logoutBtn && mapping.logOut) {
         logoutBtn.textContent = mapping.logOut;
       }
+
+      const viewAccountLink = loginPopup.querySelector('[data-login-account], .login-popup__account');
+      updateLinkContent(viewAccountLink, mapping.viewAccount, mapping.viewAccount);
     }
 
     const searchInput = navRoot.querySelector('.nav-search__input, .nav-search input[type="search"]');
@@ -387,6 +402,8 @@
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
         } else if (href === 'login.html') {
           updateLinkContent(anchor, mapping.login, mapping.loginAria);
+        } else if (href === 'account.html') {
+          updateLinkContent(anchor, mapping.account, mapping.accountAria);
         } else if (href === 'register.html' || href === 'personal-register.html' || href === 'business-register.html') {
           updateLinkContent(anchor, mapping.register, mapping.registerAria);
         }

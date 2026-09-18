@@ -9,6 +9,7 @@ const navPages = [
   'index.html',
   'about-ecotourism.html',
   'about-us-and-partners.html',
+  'account.html',
   'business-register.html',
   'crypto-environment.html',
   'crypto-reliability.html',
