@@ -1,5 +1,6 @@
 ;(function() {
   const STORAGE_KEY = 'balticComfortBooking';
+  const PENDING_CHECKOUT_KEY = 'bh_pending_checkout';
   const MS_PER_DAY = 24 * 60 * 60 * 1000;
   const LOCALE_FALLBACK = {
     en: 'en-GB',
@@ -688,9 +689,144 @@
     });
   }
 
+  function inferLocation(detailContainer) {
+    const dataset = (detailContainer && detailContainer.dataset) || {};
+    const heading = detailContainer ? detailContainer.querySelector('h2') : null;
+    const propertyName = (dataset.propertyName || (heading && heading.textContent) || '').replace(/\s+/g, ' ').trim();
+    let city = (dataset.city || '').trim();
+    let country = (dataset.country || '').trim();
+    const path = (window.location.pathname.split('/').pop() || '').toLowerCase();
+
+    if (!city) {
+      if (path.indexOf('riga') !== -1) {
+        city = 'Riga';
+        country = country || 'Latvia';
+      } else if (path.indexOf('copenhagen') !== -1) {
+        city = 'Copenhagen';
+        country = country || 'Denmark';
+      }
+    }
+
+    return {
+      propertyName: propertyName,
+      city: city,
+      country: country,
+      propertyUrl: path
+    };
+  }
+
+  function computeStayQuote(detailContainer) {
+    if (!detailContainer) {
+      return null;
+    }
+
+    const location = inferLocation(detailContainer);
+    const bookingDetails = readBookingDetails() || {};
+    const nights = computeNights(bookingDetails) || 0;
+    const priceEl = detailContainer.querySelector('.price');
+    const roomSelection = getSelectedRoom(detailContainer, priceEl);
+    if (priceEl && roomSelection) {
+      applyRoomRate(priceEl, roomSelection);
+    }
+    const rate = getNightlyRate(priceEl);
+    const addOns = getSelectedAddOns(
+      detailContainer,
+      rate ? rate.currency : (roomSelection && roomSelection.currency) || 'ETH',
+      rate ? rate.decimals : (roomSelection && roomSelection.decimals) || 2
+    );
+
+    let perNightAddOnTotal = 0;
+    let perStayAddOnTotal = 0;
+    addOns.forEach(function(addOn) {
+      if (rate && addOn.currency !== rate.currency) {
+        return;
+      }
+      if (addOn.billing === 'per-night') {
+        perNightAddOnTotal += addOn.price;
+      } else {
+        perStayAddOnTotal += addOn.price;
+      }
+    });
+
+    const stayNights = nights > 0 ? nights : 1;
+    const nightly = rate ? rate.value : 0;
+    const totalAmount = (nightly + perNightAddOnTotal) * stayNights + perStayAddOnTotal;
+
+    return {
+      kind: 'stay',
+      propertyName: location.propertyName,
+      city: location.city,
+      country: location.country,
+      propertyUrl: location.propertyUrl,
+      checkInDate: bookingDetails.checkInDate || '',
+      checkOutDate: bookingDetails.checkOutDate || '',
+      nights: nights,
+      guests: {
+        adults: parseGuestCount(bookingDetails.adults, 1, 20, 1),
+        children: parseGuestCount(bookingDetails.children, 0, 10, 0)
+      },
+      roomLabel: roomSelection ? roomSelection.label : '',
+      addOns: addOns.map(function(addOn) {
+        return {
+          id: addOn.id,
+          label: addOn.label,
+          price: addOn.price,
+          billing: addOn.billing
+        };
+      }),
+      amount: totalAmount,
+      currency: rate ? rate.currency : 'ETH',
+      decimals: rate ? rate.decimals : 2,
+      hasDates: nights > 0,
+      hasRate: Boolean(rate)
+    };
+  }
+
+  function persistPendingCheckout(payload) {
+    try {
+      if (!window.sessionStorage) {
+        return false;
+      }
+      window.sessionStorage.setItem(PENDING_CHECKOUT_KEY, JSON.stringify(payload));
+      return true;
+    } catch (error) {
+      console.warn('Unable to store checkout details:', error);
+      return false;
+    }
+  }
+
+  function checkoutHref() {
+    const path = window.location.pathname || '';
+    if (path.indexOf('/assets/') !== -1) {
+      return '../checkout.html';
+    }
+    return 'checkout.html';
+  }
+
+  function bindPayNow(detailContainer) {
+    if (!detailContainer) {
+      return;
+    }
+    const payNow = detailContainer.querySelector('.confirm-button');
+    if (!payNow) {
+      return;
+    }
+    payNow.setAttribute('href', checkoutHref());
+    payNow.addEventListener('click', function(event) {
+      const quote = computeStayQuote(detailContainer);
+      if (!quote || !quote.propertyName) {
+        return;
+      }
+      persistPendingCheckout(quote);
+      event.preventDefault();
+      window.location.href = checkoutHref();
+    });
+  }
+
   function start() {
     initializeOptionControls();
     renderSummary();
+    bindPayNow(document.querySelector('.hotel-detail'));
   }
 
   if (document.readyState === 'loading') {

@@ -66,6 +66,7 @@ test('auth-client falls back to local accounts when the API is missing', () => {
   assert.match(source, /shouldUseLocalFallback/);
   assert.match(source, /localAccounts\.register/);
   assert.match(source, /assets\/local-auth\.js|window\.LocalAuth/);
+  assert.match(source, /localBookings/);
 });
 
 test('register pages load the local account helper', () => {

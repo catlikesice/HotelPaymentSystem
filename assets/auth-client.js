@@ -8,6 +8,9 @@
   const localAccounts = (typeof window !== 'undefined' && window.LocalAuth)
     ? window.LocalAuth.create({ storage: window.localStorage })
     : null;
+  const localBookings = (typeof window !== 'undefined' && window.LocalBookings)
+    ? window.LocalBookings.create({ storage: window.localStorage })
+    : null;
 
   function apiBase() {
     if (typeof window === 'undefined') {
@@ -580,7 +583,56 @@
     return Boolean(document.getElementById('account-page'));
   }
 
+  function isLocalToken(token) {
+    return String(token || '').indexOf('local.') === 0;
+  }
+
+  function getUserId() {
+    const user = getStoredUser();
+    return user && user.id ? user.id : '';
+  }
+
+  async function listBookings() {
+    try {
+      return await request('/api/bookings');
+    } catch (error) {
+      if (localBookings && (shouldUseLocalFallback(error) || isLocalToken(getToken()))) {
+        const userId = getUserId();
+        if (!userId) {
+          return { bookings: [] };
+        }
+        return { bookings: localBookings.list(userId) };
+      }
+      throw error;
+    }
+  }
+
+  async function createBooking(payload) {
+    try {
+      return await request('/api/bookings', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+    } catch (error) {
+      if (localBookings && (shouldUseLocalFallback(error) || isLocalToken(getToken()))) {
+        const userId = getUserId();
+        if (!userId) {
+          throw error;
+        }
+        return { booking: localBookings.create(userId, payload) };
+      }
+      throw error;
+    }
+  }
+
   function goToAccountPage() {
+    if (document.getElementById('checkout-page')) {
+      closeLoginPopup();
+      if (window.CheckoutPage && typeof window.CheckoutPage.refresh === 'function') {
+        window.CheckoutPage.refresh();
+      }
+      return;
+    }
     if (isAccountPage()) {
       closeLoginPopup();
       renderAccountPage(getStoredUser());
@@ -673,10 +725,15 @@
     if (user && user.email) {
       guest.hidden = true;
       dashboard.hidden = false;
+      document.body.classList.add('portal-open');
       fillAccountDashboard(user);
+      if (window.AccountPortal && typeof window.AccountPortal.render === 'function') {
+        window.AccountPortal.render(user);
+      }
     } else {
       guest.hidden = false;
       dashboard.hidden = true;
+      document.body.classList.remove('portal-open');
     }
   }
 
@@ -886,6 +943,8 @@
     me: me,
     getToken: getToken,
     getUser: getStoredUser,
+    listBookings: listBookings,
+    createBooking: createBooking,
     updateAccountNav: updateAccountNav,
     openLoginPopup: openLoginPopup,
     closeLoginPopup: closeLoginPopup,

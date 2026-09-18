@@ -69,82 +69,191 @@
     </nav>
   </header>
 
-  <main class="auth-page auth-page--account" id="account-page" role="main">
-    <section id="account-guest" class="auth-panel" aria-labelledby="account-guest-title">
-      <h1 id="account-guest-title">Your account</h1>
-      <p class="auth-lead">Create a guest or business account to open a profile. This is where your details and future bookings will live.</p>
-      <div class="account-actions">
-        <a class="btn" href="register.html">Create account</a>
-        <a class="btn btn--secondary" href="login.html">Sign in</a>
+  <main id="account-page" role="main">
+    <section id="account-guest" class="auth-page auth-page--account">
+      <div class="auth-panel" aria-labelledby="account-guest-title">
+        <h1 id="account-guest-title">Your account</h1>
+        <p class="auth-lead">Create a guest or business account to open a profile. This is where your details and future bookings will live.</p>
+        <div class="account-actions">
+          <a class="btn" href="register.html">Create account</a>
+          <a class="btn btn--secondary" href="login.html">Sign in</a>
+        </div>
       </div>
     </section>
 
-    <section id="account-dashboard" class="auth-panel" hidden aria-labelledby="account-dashboard-title">
-      <p class="account-eyebrow">Signed in</p>
-      <div class="account-heading">
-        <h1 id="account-dashboard-title" data-account-greeting>Welcome</h1>
-        <p class="account-badge" data-account-type-badge>Guest account</p>
-      </div>
-      <p class="auth-lead" data-account-lead>Your Boreal Horizons profile is ready. Bookings you make will appear on this page.</p>
-
-      <div class="account-grid">
-        <article class="account-card" aria-labelledby="account-profile-title">
-          <h2 id="account-profile-title">Profile</h2>
-          <dl class="account-dl">
-            <div>
-              <dt>Name</dt>
-              <dd data-account-name></dd>
-            </div>
-            <div>
-              <dt>Email</dt>
-              <dd data-account-email></dd>
-            </div>
-            <div data-account-row="phone" hidden>
-              <dt>Phone</dt>
-              <dd data-account-phone></dd>
-            </div>
-            <div>
-              <dt>Member since</dt>
-              <dd data-account-created></dd>
-            </div>
-          </dl>
-        </article>
-
-        <article class="account-card" data-account-business hidden aria-labelledby="account-company-title">
-          <h2 id="account-company-title">Company</h2>
-          <dl class="account-dl">
-            <div>
-              <dt>Company name</dt>
-              <dd data-account-company></dd>
-            </div>
-            <div data-account-row="businessType" hidden>
-              <dt>Business type</dt>
-              <dd data-account-business-type></dd>
-            </div>
-            <div data-account-row="vatId" hidden>
-              <dt>VAT / business ID</dt>
-              <dd data-account-vat></dd>
-            </div>
-            <div data-account-row="website" hidden>
-              <dt>Website</dt>
-              <dd data-account-website></dd>
-            </div>
-            <div data-account-row="address" hidden>
-              <dt>Postal address</dt>
-              <dd data-account-address class="account-address"></dd>
-            </div>
-          </dl>
-        </article>
-
-        <article class="account-card account-card--wide" aria-labelledby="account-bookings-title">
-          <h2 id="account-bookings-title">Bookings</h2>
-          <p class="account-empty">You have no bookings yet. Search stays across Northern Europe and they will be listed here after checkout.</p>
-          <a class="btn btn--secondary" href="search.html">Find a stay</a>
-        </article>
+    <section id="account-dashboard" class="portal" hidden aria-labelledby="account-dashboard-title">
+      <div class="portal-top">
+        <a class="portal-brand" href="index.html">Boreal Horizons</a>
+        <form class="portal-search" action="search.html" method="get" role="search">
+          <label class="sr-only" for="portal-search-q">Search stays, cities or events</label>
+          <input id="portal-search-q" name="q" type="search" placeholder="Search stays, cities or events...">
+          <button type="submit" aria-label="Search">S</button>
+        </form>
       </div>
 
-      <div class="account-actions">
-        <button type="button" class="btn btn--secondary" id="account-logout">Log out</button>
+      <div class="portal-shell">
+        <nav class="portal-nav" aria-label="Account">
+          <a href="#overview" data-portal-section="overview" class="is-active" aria-current="page">Overview</a>
+          <a href="#trips" data-portal-section="trips">My trips</a>
+          <a href="#accommodation" data-portal-section="accommodation">Accommodation</a>
+          <a href="#events" data-portal-section="events">Events &amp; tickets</a>
+          <a href="#messages" data-portal-section="messages">Messages</a>
+          <a href="#saved" data-portal-section="saved">Saved</a>
+          <a href="#payments" data-portal-section="payments">Payments &amp; refunds</a>
+          <a href="#profile" data-portal-section="profile">Profile &amp; settings</a>
+        </nav>
+
+        <div class="portal-main">
+          <section data-portal-panel="overview" aria-labelledby="account-dashboard-title">
+            <div class="portal-hero">
+              <div>
+                <p class="account-eyebrow" data-account-greeting>Signed in</p>
+                <h1 id="account-dashboard-title">Your next adventure</h1>
+                <p class="portal-hero__lead">Everything booked through Boreal Horizons</p>
+              </div>
+              <a class="btn btn--secondary" href="search.html">Explore events</a>
+            </div>
+
+            <div class="portal-stats">
+              <article class="portal-stat">
+                <p class="portal-stat__label">Next trip</p>
+                <p class="portal-stat__value"><span data-next-trip-days>—</span> <span class="portal-stat__unit" data-next-trip-days-label></span></p>
+                <p class="portal-stat__meta" data-next-trip-place>No upcoming stay</p>
+              </article>
+              <article class="portal-stat">
+                <p class="portal-stat__label">Upcoming bookings</p>
+                <p class="portal-stat__value" data-upcoming-count>0</p>
+                <p class="portal-stat__meta" data-upcoming-breakdown>No stays or event tickets yet</p>
+              </article>
+              <article class="portal-stat">
+                <p class="portal-stat__label">Wallet payment</p>
+                <p class="portal-stat__value" data-wallet-status>—</p>
+                <p class="portal-stat__meta" data-wallet-amount>No payments yet</p>
+              </article>
+            </div>
+
+            <article class="portal-panel" aria-labelledby="upcoming-stay-title">
+              <h2 id="upcoming-stay-title">Upcoming trip</h2>
+              <p class="portal-kicker">Accommodation</p>
+              <div data-upcoming-stay>
+                <div class="portal-empty">
+                  <p>You have not booked a stay yet. Search Northern Europe and complete checkout to see it here.</p>
+                  <a class="btn btn--secondary" href="search.html">Find a stay</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="portal-panel" aria-labelledby="stay-events-title">
+              <h2 id="stay-events-title">Events near your stay</h2>
+              <div data-stay-events>
+                <div class="portal-empty">
+                  <p>Book a stay first, then add event tickets for those dates.</p>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section data-portal-panel="trips" hidden aria-labelledby="account-bookings-title">
+            <h1 id="account-bookings-title">My trips</h1>
+            <p class="portal-hero__lead">Confirmed stays and event tickets, grouped as upcoming journeys.</p>
+            <div data-trip-list></div>
+          </section>
+
+          <section data-portal-panel="accommodation" hidden aria-labelledby="account-stays-title">
+            <h1 id="account-stays-title">Accommodation</h1>
+            <p class="portal-hero__lead">Hotel and hostel bookings paid through Boreal Horizons.</p>
+            <div data-stay-list></div>
+          </section>
+
+          <section data-portal-panel="events" hidden aria-labelledby="account-events-title">
+            <h1 id="account-events-title">Events &amp; tickets</h1>
+            <p class="portal-hero__lead">Only tickets you have actually booked are listed here.</p>
+            <div data-event-list></div>
+          </section>
+
+          <section data-portal-panel="messages" hidden aria-labelledby="account-messages-title">
+            <h1 id="account-messages-title">Messages</h1>
+            <div class="portal-empty">
+              <p>No host or trip messages yet. Threads will appear here after a stay is confirmed.</p>
+            </div>
+          </section>
+
+          <section data-portal-panel="saved" hidden aria-labelledby="account-saved-title">
+            <h1 id="account-saved-title">Saved</h1>
+            <div class="portal-empty">
+              <p>You have not saved any stays yet.</p>
+              <a class="btn btn--secondary" href="search.html">Browse stays</a>
+            </div>
+          </section>
+
+          <section data-portal-panel="payments" hidden aria-labelledby="account-payments-title">
+            <h1 id="account-payments-title">Payments &amp; refunds</h1>
+            <p class="portal-hero__lead">Crypto payments attached to bookings on this account.</p>
+            <div data-payment-list></div>
+          </section>
+
+          <section data-portal-panel="profile" hidden aria-labelledby="account-profile-title">
+            <div class="account-heading">
+              <h1 id="account-profile-heading">Profile &amp; settings</h1>
+              <p class="account-badge" data-account-type-badge>Guest account</p>
+            </div>
+            <p class="auth-lead" data-account-lead>Your Boreal Horizons profile is ready. Bookings you make will appear on this page.</p>
+
+            <div class="account-grid">
+              <article class="account-card" aria-labelledby="account-profile-title">
+                <h2 id="account-profile-title">Profile</h2>
+                <dl class="account-dl">
+                  <div>
+                    <dt>Name</dt>
+                    <dd data-account-name></dd>
+                  </div>
+                  <div>
+                    <dt>Email</dt>
+                    <dd data-account-email></dd>
+                  </div>
+                  <div data-account-row="phone" hidden>
+                    <dt>Phone</dt>
+                    <dd data-account-phone></dd>
+                  </div>
+                  <div>
+                    <dt>Member since</dt>
+                    <dd data-account-created></dd>
+                  </div>
+                </dl>
+              </article>
+
+              <article class="account-card" data-account-business hidden aria-labelledby="account-company-title">
+                <h2 id="account-company-title">Company</h2>
+                <dl class="account-dl">
+                  <div>
+                    <dt>Company name</dt>
+                    <dd data-account-company></dd>
+                  </div>
+                  <div data-account-row="businessType" hidden>
+                    <dt>Business type</dt>
+                    <dd data-account-business-type></dd>
+                  </div>
+                  <div data-account-row="vatId" hidden>
+                    <dt>VAT / business ID</dt>
+                    <dd data-account-vat></dd>
+                  </div>
+                  <div data-account-row="website" hidden>
+                    <dt>Website</dt>
+                    <dd data-account-website></dd>
+                  </div>
+                  <div data-account-row="address" hidden>
+                    <dt>Postal address</dt>
+                    <dd data-account-address class="account-address"></dd>
+                  </div>
+                </dl>
+              </article>
+            </div>
+
+            <div class="account-actions">
+              <button type="button" class="btn btn--secondary" id="account-logout">Log out</button>
+            </div>
+          </section>
+        </div>
       </div>
     </section>
   </main>
@@ -157,7 +266,10 @@
   <script src="assets/nav-translations.js"></script>
   <script src="assets/nav-rail.js"></script>
   <script src="assets/local-auth.js"></script>
+  <script src="assets/booking-records.js"></script>
+  <script src="assets/local-bookings.js"></script>
   <script src="assets/auth-client.js"></script>
+  <script src="assets/account-portal.js"></script>
   <script>
     (function() {
       if (window.LanguagePreferences && typeof window.LanguagePreferences.init === 'function') {

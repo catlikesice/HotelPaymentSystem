@@ -3135,3 +3135,226 @@ body.login-popup-open {
   overflow: hidden;
 }
 
+/* Account portal — Concept A overview of real bookings */
+body.portal-open #account-page {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.portal {
+  max-width: 1180px;
+  margin: 0 auto 2.5rem;
+  padding: 1.1rem 1.15rem 2rem;
+}
+
+.portal-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.portal-brand {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.portal-search {
+  display: flex;
+  flex: 1 1 18rem;
+  min-width: 0;
+  gap: 0.45rem;
+}
+
+.portal-search input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0 0.9rem;
+  border: 2px solid rgba(46, 125, 50, 0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-text);
+  font: inherit;
+}
+
+.portal-search button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.portal-search button:hover,
+.portal-search button:focus-visible {
+  background: #23441a;
+}
+
+.portal-shell {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 1.15rem;
+  align-items: start;
+}
+
+.portal-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem;
+  border-radius: 16px;
+  background: #23441a;
+}
+
+.portal-nav a {
+  color: #e5f8e5;
+  text-decoration: none;
+  font-weight: 650;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+}
+
+.portal-nav a:hover,
+.portal-nav a:focus-visible,
+.portal-nav a.is-active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.portal-main {
+  min-width: 0;
+}
+
+.portal-hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.85rem 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.portal-hero h1,
+.portal-main > section > h1 {
+  margin: 0 0 0.25rem;
+}
+
+.portal-hero__lead {
+  margin: 0;
+  color: #4a6b43;
+}
+
+.portal-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.portal-stat,
+.portal-panel,
+.portal-booking,
+.portal-payment {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(35, 68, 26, 0.14);
+  border-radius: 14px;
+  padding: 1rem 1.05rem;
+}
+
+.portal-stat__label,
+.portal-kicker,
+.portal-booking__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.portal-stat__value {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.portal-stat__unit {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.portal-stat__meta,
+.portal-booking__meta,
+.portal-booking__detail,
+.portal-booking__confirm {
+  margin: 0.35rem 0 0;
+  color: #4a6b43;
+}
+
+.portal-panel {
+  margin-top: 0.9rem;
+}
+
+.portal-panel h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.portal-booking,
+.portal-payment {
+  margin-top: 0.75rem;
+}
+
+.portal-booking__title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.portal-booking__link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.portal-empty {
+  margin-top: 0.75rem;
+}
+
+.portal-empty p {
+  margin: 0 0 0.85rem;
+  color: #4a6b43;
+}
+
+.checkout-dl {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 860px) {
+  .portal-shell,
+  .portal-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .portal-nav a {
+    white-space: nowrap;
+  }
+}
+
