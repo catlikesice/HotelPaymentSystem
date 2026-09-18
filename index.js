@@ -17,13 +17,13 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api/auth', authRouter);
+
 // Serve the static multi-page site alongside the API.
 app.use(express.static(path.join(__dirname)));
 
-// Apply rate limiter middleware before route handlers
+// Apply rate limiter middleware before remaining route handlers
 app.use(rateLimiter);
-
-app.use('/api/auth', authRouter);
 
 let tronWeb = null;
 function getTronWeb() {

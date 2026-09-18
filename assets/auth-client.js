@@ -5,6 +5,9 @@
 
   let lastAccountTrigger = null;
   let loginPopupBound = false;
+  const localAccounts = (typeof window !== 'undefined' && window.LocalAuth)
+    ? window.LocalAuth.create({ storage: window.localStorage })
+    : null;
 
   function apiBase() {
     if (typeof window === 'undefined') {
@@ -64,47 +67,133 @@
     }
 
     const response = await fetch(apiBase() + path, Object.assign({}, opts, { headers }));
-    let data = null;
+    let rawText = '';
     try {
-      data = await response.json();
+      rawText = await response.text();
     } catch (error) {
-      data = null;
+      rawText = '';
+    }
+    let data = null;
+    if (rawText) {
+      try {
+        data = JSON.parse(rawText);
+      } catch (error) {
+        data = null;
+      }
     }
 
     if (!response.ok) {
-      const message = (data && data.error) || 'Request failed. Please try again.';
+      const message = (data && data.error)
+        || (typeof data === 'string' && data)
+        || defaultRequestError(response.status);
       const err = new Error(message);
       err.status = response.status;
       err.data = data;
+      err.unavailable = isUnavailableStatus(response.status, data);
+      throw err;
+    }
+
+    if (!data || typeof data !== 'object') {
+      const err = new Error(defaultRequestError(404));
+      err.status = response.status || 404;
+      err.unavailable = true;
       throw err;
     }
 
     return data;
   }
 
+  function defaultRequestError(status) {
+    if (status === 404 || status === 405) {
+      return 'The account service is not running on this host.';
+    }
+    if (status === 429) {
+      return 'Too many attempts. Please try again later.';
+    }
+    return 'Request failed. Please try again.';
+  }
+
+  function isUnavailableStatus(status, data) {
+    if (!status) {
+      return true;
+    }
+    if (status === 404 || status === 405 || status === 501 || status === 502 || status === 503) {
+      return true;
+    }
+    return !data && status >= 500;
+  }
+
+  function shouldUseLocalFallback(error) {
+    if (!localAccounts) {
+      return false;
+    }
+    if (!error) {
+      return true;
+    }
+    if (error.unavailable) {
+      return true;
+    }
+    if (!error.status) {
+      return true;
+    }
+    return isUnavailableStatus(error.status, error.data);
+  }
+
   async function register(payload) {
-    const data = await request('/api/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-    setSession(data.token, data.user);
-    return data;
+    try {
+      const data = await request('/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+      setSession(data.token, data.user);
+      return data;
+    } catch (error) {
+      if (!shouldUseLocalFallback(error)) {
+        throw error;
+      }
+      const data = localAccounts.register(payload);
+      setSession(data.token, data.user);
+      return data;
+    }
   }
 
   async function login(payload) {
-    const data = await request('/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-    setSession(data.token, data.user);
-    return data;
+    try {
+      const data = await request('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+      setSession(data.token, data.user);
+      return data;
+    } catch (error) {
+      if (!shouldUseLocalFallback(error) && error.status !== 401) {
+        throw error;
+      }
+      try {
+        const data = localAccounts ? localAccounts.login(payload) : null;
+        if (data) {
+          setSession(data.token, data.user);
+          return data;
+        }
+      } catch (localError) {
+        if (!shouldUseLocalFallback(error)) {
+          throw error.status === 401 ? error : localError;
+        }
+        throw localError;
+      }
+      throw error;
+    }
   }
 
   async function logout() {
+    const token = getToken();
     try {
       await request('/api/auth/logout', { method: 'POST', body: '{}' });
     } catch (error) {
       // Clear local session even if the network call fails.
+    }
+    if (localAccounts) {
+      localAccounts.logout(token);
     }
     clearSession();
   }
@@ -119,6 +208,16 @@
       setSession(token, data.user);
       return data.user;
     } catch (error) {
+      if (localAccounts) {
+        const local = localAccounts.me(token);
+        if (local && local.user) {
+          setSession(token, local.user);
+          return local.user;
+        }
+      }
+      if (shouldUseLocalFallback(error)) {
+        return getStoredUser();
+      }
       clearSession();
       return null;
     }
