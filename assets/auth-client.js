@@ -142,7 +142,8 @@
         '</form>' +
         '<div class="login-popup__session" hidden>' +
           '<p class="login-popup__signed-in" data-login-signed-in></p>' +
-          '<button type="button" class="btn login-popup__logout">Log out</button>' +
+          '<a href="account.html" class="btn login-popup__account" data-login-account>View account</a>' +
+          '<button type="button" class="btn btn--secondary login-popup__logout">Log out</button>' +
         '</div>' +
         '<p class="login-popup__links">' +
           '<a href="register.html" class="login-popup__link" data-login-register>Register</a>' +
@@ -354,11 +355,11 @@
         login({ email, password })
           .then(function() {
             if (status) {
-              status.textContent = 'Welcome back!';
+              status.textContent = 'Welcome back! Opening your account...';
               status.className = 'login-popup__status auth-status--success';
             }
             syncLoginPopupState();
-            window.setTimeout(closeLoginPopup, 450);
+            window.setTimeout(goToAccountPage, 450);
           })
           .catch(function(error) {
             if (status) {
@@ -382,6 +383,7 @@
       logoutBtn.addEventListener('click', function() {
         logout().then(function() {
           closeLoginPopup();
+          renderAccountPage(null);
         });
       });
     }
@@ -417,15 +419,24 @@
         summary.textContent = user.name.split(' ')[0];
         summary.setAttribute('aria-label', 'Account menu for ' + user.name);
         menu.innerHTML =
-          '<a href="login.html" role="menuitem" class="nav-account-status">Signed in as ' + escapeHtml(user.email) + '</a>' +
+          '<a href="account.html" role="menuitem" class="nav-account-page">View account</a>' +
+          '<span class="nav-account-status">Signed in as ' + escapeHtml(user.email) + '</span>' +
           '<button type="button" role="menuitem" class="nav-account-logout">Log out</button>';
         const logoutBtn = menu.querySelector('.nav-account-logout');
         if (logoutBtn) {
+          if (mapping && mapping.logOut) {
+            logoutBtn.textContent = mapping.logOut;
+          }
           logoutBtn.addEventListener('click', function() {
             logout().then(function() {
               window.location.href = 'index.html';
             });
           });
+        }
+        const accountPageLink = menu.querySelector('.nav-account-page');
+        if (accountPageLink && mapping && mapping.viewAccount) {
+          accountPageLink.textContent = mapping.viewAccount;
+          accountPageLink.setAttribute('aria-label', mapping.viewAccount);
         }
       } else {
         if (!menu.querySelector('.nav-account-login')) {
@@ -466,6 +477,131 @@
       .replace(/'/g, '&#39;');
   }
 
+  function isAccountPage() {
+    return Boolean(document.getElementById('account-page'));
+  }
+
+  function goToAccountPage() {
+    if (isAccountPage()) {
+      closeLoginPopup();
+      renderAccountPage(getStoredUser());
+      return;
+    }
+    window.location.href = 'account.html';
+  }
+
+  function setAccountText(selector, value) {
+    const el = document.querySelector(selector);
+    if (el) {
+      el.textContent = value || '';
+    }
+  }
+
+  function setAccountRow(field, value) {
+    const row = document.querySelector('[data-account-row="' + field + '"]');
+    if (!row) {
+      return;
+    }
+    const hasValue = Boolean(value);
+    row.hidden = !hasValue;
+    const dd = row.querySelector('dd');
+    if (dd && hasValue) {
+      dd.textContent = value;
+    }
+  }
+
+  function businessTypeLabel(value) {
+    const labels = {
+      'independent-hotel': 'Independent hotel',
+      'hotel-chain': 'Hotel chain',
+      'travel-agency': 'Travel agency',
+      'corporate': 'Corporate travel',
+      'other': 'Other'
+    };
+    return labels[value] || value || '';
+  }
+
+  function formatJoinedDate(iso) {
+    if (!iso) {
+      return 'Just now';
+    }
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) {
+      return iso;
+    }
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  function fillAccountDashboard(user) {
+    const firstName = String(user.name || '').trim().split(/\s+/)[0] || 'there';
+    const isBusiness = user.accountType === 'business';
+    setAccountText('[data-account-greeting]', 'Welcome, ' + firstName);
+    setAccountText('[data-account-type-badge]', isBusiness ? 'Business account' : 'Guest account');
+    setAccountText(
+      '[data-account-lead]',
+      isBusiness
+        ? 'Company details from registration are saved on this profile. Bookings for your properties will appear below.'
+        : 'Your guest profile is ready. Stays you book will appear below.'
+    );
+    setAccountText('[data-account-name]', user.name || '');
+    setAccountText('[data-account-email]', user.email || '');
+    setAccountText('[data-account-created]', formatJoinedDate(user.createdAt));
+    setAccountRow('phone', user.phone);
+
+    const businessCard = document.querySelector('[data-account-business]');
+    if (businessCard) {
+      businessCard.hidden = !isBusiness;
+    }
+    if (isBusiness) {
+      setAccountText('[data-account-company]', user.companyName || '');
+      setAccountRow('businessType', businessTypeLabel(user.businessType));
+      setAccountRow('vatId', user.vatId);
+      setAccountRow('website', user.website);
+      setAccountRow('address', user.addressFormatted);
+    }
+  }
+
+  function renderAccountPage(user) {
+    const guest = document.getElementById('account-guest');
+    const dashboard = document.getElementById('account-dashboard');
+    if (!guest || !dashboard) {
+      return;
+    }
+    if (user && user.email) {
+      guest.hidden = true;
+      dashboard.hidden = false;
+      fillAccountDashboard(user);
+    } else {
+      guest.hidden = false;
+      dashboard.hidden = true;
+    }
+  }
+
+  function bindAccountPage() {
+    if (!isAccountPage()) {
+      return;
+    }
+
+    const logoutBtn = document.getElementById('account-logout');
+    if (logoutBtn && !logoutBtn.getAttribute('data-bound')) {
+      logoutBtn.setAttribute('data-bound', 'true');
+      logoutBtn.addEventListener('click', function() {
+        logout().then(function() {
+          renderAccountPage(null);
+        });
+      });
+    }
+
+    renderAccountPage(getStoredUser());
+    me().then(function(user) {
+      renderAccountPage(user);
+    });
+  }
+
   function bindAuthForms() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -496,9 +632,7 @@
               status.textContent = 'Welcome back! Redirecting...';
               status.className = 'auth-status auth-status--success';
             }
-            window.setTimeout(function() {
-              window.location.href = 'index.html';
-            }, 600);
+            window.setTimeout(goToAccountPage, 600);
           })
           .catch(function(error) {
             if (status) {
@@ -590,9 +724,7 @@
                 : 'Account created! Redirecting...';
               status.className = 'auth-status auth-status--success';
             }
-            window.setTimeout(function() {
-              window.location.href = 'index.html';
-            }, 600);
+            window.setTimeout(goToAccountPage, 600);
           })
           .catch(function(error) {
             if (status) {
@@ -635,8 +767,9 @@
     bindLoginPopup();
     updateAccountNav();
     bindAuthForms();
+    bindAccountPage();
     // Refresh session quietly when a token exists.
-    if (getToken()) {
+    if (getToken() && !isAccountPage()) {
       me();
     }
   }
@@ -656,6 +789,7 @@
     getUser: getStoredUser,
     updateAccountNav: updateAccountNav,
     openLoginPopup: openLoginPopup,
-    closeLoginPopup: closeLoginPopup
+    closeLoginPopup: closeLoginPopup,
+    goToAccountPage: goToAccountPage
   };
 })();
