@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Booking - Esbjerg</title>
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -31,7 +32,7 @@
         }
         .hotel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
