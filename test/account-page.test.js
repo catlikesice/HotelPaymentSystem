@@ -38,3 +38,8 @@ test('nav translations include View account', () => {
   const source = fs.readFileSync(path.join(root, 'assets/nav-translations.js'), 'utf8');
   assert.match(source, /viewAccount: 'View account'/);
 });
+
+test('account styles hide empty profile rows', () => {
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /account-dl > div\[hidden\]/);
+});
