@@ -256,9 +256,14 @@
     if (!upcoming.length) {
       setText(document, '[data-upcoming-breakdown]', 'No stays or event tickets yet');
     } else {
-      const stayLabel = upcomingStays.length === 1 ? '1 stay' : upcomingStays.length + ' stays';
-      const eventLabel = upcomingEvents.length === 1 ? '1 event' : upcomingEvents.length + ' events';
-      setText(document, '[data-upcoming-breakdown]', stayLabel + ' · ' + eventLabel);
+      const parts = [];
+      if (upcomingStays.length) {
+        parts.push(upcomingStays.length === 1 ? '1 stay' : upcomingStays.length + ' stays');
+      }
+      if (upcomingEvents.length) {
+        parts.push(upcomingEvents.length === 1 ? '1 event' : upcomingEvents.length + ' events');
+      }
+      setText(document, '[data-upcoming-breakdown]', parts.join(' · '));
     }
 
     if (stay && stay.paymentStatus === 'paid') {
