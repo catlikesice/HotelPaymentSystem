@@ -354,9 +354,6 @@
       if (logoutBtn && mapping.logOut) {
         logoutBtn.textContent = mapping.logOut;
       }
-
-      const viewAccountLink = loginPopup.querySelector('[data-login-account], .login-popup__account');
-      updateLinkContent(viewAccountLink, mapping.viewAccount, mapping.viewAccount);
     }
 
     const searchInput = navRoot.querySelector('.nav-search__input, .nav-search input[type="search"]');

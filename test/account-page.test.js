@@ -50,22 +50,32 @@ test('login and register send people to the account page after success', () => {
   const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
   assert.match(source, /window\.location\.href = 'account\.html'/);
   assert.match(source, /function goToAccountPage/);
-  assert.match(source, /data-login-account/);
   assert.match(source, /function bindAccountPage/);
   assert.match(source, /function listBookings/);
   assert.match(source, /function createBooking/);
 });
 
-test('homepage login popup includes a View account link', () => {
+test('homepage login popup no longer includes a View account button', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  assert.match(html, /href="account\.html"/);
-  assert.match(html, /data-login-account/);
-  assert.match(html, /View account/);
+  assert.doesNotMatch(html, /data-login-account/);
+  assert.doesNotMatch(html, /View account/);
+  assert.doesNotMatch(html, /login-popup__account/);
 });
 
-test('nav translations include View account', () => {
+test('signed-in navbar account button goes to the account page', () => {
+  const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  assert.match(
+    source,
+    /const opener = event\.target\.closest\('\[data-login-open\], \.nav-account-btn'\);[\s\S]*?if \(user && user\.email\) \{[\s\S]*?goToAccountPage\(\);/
+  );
+  assert.doesNotMatch(source, /data-login-account/);
+  assert.doesNotMatch(source, /login-popup__account/);
+});
+
+test('nav translations still include View account for the account dropdown', () => {
   const source = fs.readFileSync(path.join(root, 'assets/nav-translations.js'), 'utf8');
   assert.match(source, /viewAccount: 'View account'/);
+  assert.doesNotMatch(source, /data-login-account/);
 });
 
 test('account styles hide empty profile rows', () => {

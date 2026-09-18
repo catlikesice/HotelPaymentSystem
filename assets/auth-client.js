@@ -244,7 +244,6 @@
         '</form>' +
         '<div class="login-popup__session" hidden>' +
           '<p class="login-popup__signed-in" data-login-signed-in></p>' +
-          '<a href="account.html" class="btn login-popup__account" data-login-account>View account</a>' +
           '<button type="button" class="btn btn--secondary login-popup__logout">Log out</button>' +
         '</div>' +
         '<p class="login-popup__links">' +
@@ -388,6 +387,12 @@
       const opener = event.target.closest('[data-login-open], .nav-account-btn');
       if (opener) {
         event.preventDefault();
+        const user = getStoredUser();
+        if (user && user.email) {
+          closeLoginPopup();
+          goToAccountPage();
+          return;
+        }
         if (popup.hidden) {
           openLoginPopup(opener);
         } else {
@@ -502,10 +507,16 @@
     accountButtons.forEach(function(button) {
       if (user && user.name) {
         button.textContent = user.name.split(' ')[0];
-        button.setAttribute('aria-label', 'Account menu for ' + user.name);
+        button.setAttribute('aria-label', (mapping && mapping.accountAria) || ('Account for ' + user.name));
+        button.removeAttribute('aria-haspopup');
+        button.removeAttribute('aria-controls');
+        button.removeAttribute('aria-expanded');
       } else {
         button.textContent = loginLabel;
         button.setAttribute('aria-label', (mapping && mapping.loginAria) || loginLabel);
+        button.setAttribute('aria-haspopup', 'dialog');
+        button.setAttribute('aria-controls', LOGIN_POPUP_ID);
+        button.setAttribute('aria-expanded', 'false');
       }
     });
 
