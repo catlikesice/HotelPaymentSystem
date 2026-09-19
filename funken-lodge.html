@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funken Lodge</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-detail {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+            padding: 2rem;
+        }
+        .hotel-detail img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+            margin-bottom: 1rem;
+        }
+        .hotel-detail .price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .booking-summary {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f1f7f1;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(46, 125, 50, 0.2);
+            color: #2e4d25;
+            line-height: 1.6;
+        }
+        .booking-summary p {
+            margin: 0.35rem 0;
+        }
+        .booking-summary__total {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.05rem;
+        }
+        .booking-summary__notice {
+            font-weight: 600;
+        }
+        .booking-summary__reminder a {
+            color: #2e7d32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .booking-summary__reminder a:hover {
+            text-decoration: underline;
+        }
+        .confirm-button {
+            display: inline-block;
+            width: 100%;
+            margin-top: 1.75rem;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1.4rem;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+        .confirm-button:hover,
+        .confirm-button:focus {
+            background: #156d17;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>Boreal Horizons</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="hotel-detail" data-property-name="Funken Lodge" data-city="Longyearbyen" data-country="Svalbard">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=600&q=80" alt="Funken Lodge">
+        <h2>Funken Lodge</h2>
+        <div class="price" data-rate-value="0.11" data-rate-currency="ETH" data-rate-decimals="2">0.11 ETH / night</div>
+        <p>
+            A restored mining-era lodge in Nybyen, with a well-known restaurant, a small spa, and wide views over Adventfjorden—an atmospheric base for exploring Longyearbyen and Svalbard’s polar wilderness.
+        </p>
+          <script type="application/json" data-hotel-config>
+          {
+            "roomLegend": "Choose your preferred room type",
+            "rooms": [
+              {
+                "id": "nybyen-room",
+                "label": "Nybyen Lodge Room",
+                "nightlyRate": 0.11,
+                "description": "Quiet room in the historic lodge, with mountain views, wool throws, and breakfast overlooking Adventfjorden.",
+                "default": true
+              },
+              {
+                "id": "fjord-deluxe",
+                "label": "Fjord Deluxe Room",
+                "nightlyRate": 0.14,
+                "description": "Larger room with a seating nook, spa access included, and a window toward the glacier-carved valley."
+              },
+              {
+                "id": "funken-suite",
+                "label": "Funken Suite",
+                "nightlyRate": 0.19,
+                "description": "Top-floor suite with a separate sitting room, in-room coffee, and priority restaurant seating."
+              }
+            ],
+            "addonLegend": "Enhance your stay",
+            "addons": [
+              {
+                "id": "spa-access",
+                "label": "Lodge spa evening",
+                "price": 0.012,
+                "billing": "per-night",
+                "description": "Sauna and relaxation room after glacier hikes or snowmobile days."
+              },
+              {
+                "id": "snowmobile",
+                "label": "Guided snowmobile day trip",
+                "price": 0.08,
+                "billing": "per-stay",
+                "description": "Full-day outing across the plateau with a certified guide, thermal suit, and hot lunch in the field."
+              },
+              {
+                "id": "funken-dinner",
+                "label": "Funken set dinner",
+                "price": 0.03,
+                "billing": "per-night",
+                "description": "Three-course polar dinner with wine pairing in the lodge restaurant."
+              }
+            ]
+          }
+          </script>
+        <div class="booking-summary" aria-live="polite">
+            <p class="booking-summary__notice">Loading your booking summary…</p>
+        </div>
+        <a href="checkout.html" class="confirm-button">Pay Now</a>
+    </div>
+    <script src="assets/hotel-booking-summary.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basecamp Hotel</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-detail {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+            padding: 2rem;
+        }
+        .hotel-detail img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+            margin-bottom: 1rem;
+        }
+        .hotel-detail .price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .booking-summary {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f1f7f1;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(46, 125, 50, 0.2);
+            color: #2e4d25;
+            line-height: 1.6;
+        }
+        .booking-summary p {
+            margin: 0.35rem 0;
+        }
+        .booking-summary__total {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.05rem;
+        }
+        .booking-summary__notice {
+            font-weight: 600;
+        }
+        .booking-summary__reminder a {
+            color: #2e7d32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .booking-summary__reminder a:hover {
+            text-decoration: underline;
+        }
+        .confirm-button {
+            display: inline-block;
+            width: 100%;
+            margin-top: 1.75rem;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1.4rem;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+        .confirm-button:hover,
+        .confirm-button:focus {
+            background: #156d17;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>Boreal Horizons</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="hotel-detail" data-property-name="Basecamp Hotel" data-city="Longyearbyen" data-country="Svalbard">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=600&q=80" alt="Basecamp Hotel">
+        <h2>Basecamp Hotel</h2>
+        <div class="price" data-rate-value="0.09" data-rate-currency="ETH" data-rate-decimals="2">0.09 ETH / night</div>
+        <p>
+            A trapper-style hotel in the centre of Longyearbyen, with timber interiors, a lively common room, and a front desk that organises boat trips, glacier hikes, and snowmobile expeditions across Svalbard.
+        </p>
+          <script type="application/json" data-hotel-config>
+          {
+            "roomLegend": "Choose your preferred room type",
+            "rooms": [
+              {
+                "id": "trapper-cabin",
+                "label": "Trapper Cabin Room",
+                "nightlyRate": 0.09,
+                "description": "Compact timber room with furs, a writing desk, and shared access to the common room fireplace.",
+                "default": true
+              },
+              {
+                "id": "expedition-room",
+                "label": "Expedition Room",
+                "nightlyRate": 0.115,
+                "description": "Larger room with extra storage for expedition kit, a seating area, and a view toward the valley."
+              },
+              {
+                "id": "basecamp-suite",
+                "label": "Basecamp Suite",
+                "nightlyRate": 0.155,
+                "description": "Corner suite with a sitting room, coffee station, and priority booking on Basecamp-guided tours."
+              }
+            ],
+            "addonLegend": "Enhance your stay",
+            "addons": [
+              {
+                "id": "boat-safari",
+                "label": "Isfjorden boat safari",
+                "price": 0.055,
+                "billing": "per-stay",
+                "description": "Half-day cruise among glaciers and bird cliffs, with a chance to spot seals, whales, and Arctic wildlife."
+              },
+              {
+                "id": "museum-pass",
+                "label": "Svalbard Museum visit",
+                "price": 0.008,
+                "billing": "per-stay",
+                "description": "Admission to the Svalbard Museum, covering mining history, polar exploration, and High Arctic nature."
+              },
+              {
+                "id": "packed-lunch",
+                "label": "Expedition packed lunch",
+                "price": 0.01,
+                "billing": "per-night",
+                "description": "Thermos coffee and trail lunch packed each morning for glacier walks or town rambles."
+              }
+            ]
+          }
+          </script>
+        <div class="booking-summary" aria-live="polite">
+            <p class="booking-summary__notice">Loading your booking summary…</p>
+        </div>
+        <a href="checkout.html" class="confirm-button">Pay Now</a>
+    </div>
+    <script src="assets/hotel-booking-summary.js"></script>
+</body>
+</html>

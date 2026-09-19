@@ -221,6 +221,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Longyearbyen",
+      "city": "Longyearbyen",
+      "country": "Svalbard",
+      "url": "longyearbyen.html",
+      "description": "Browse hotels in Longyearbyen, Svalbard."
+    },
+    {
+      "type": "city",
       "name": "Malmö",
       "city": "Malmö",
       "country": "Sweden",
@@ -1283,6 +1291,39 @@ window.SEARCH_CATALOG = {
       "price": "0.045 ETH / night",
       "priceEth": 0.045,
       "description": "Classic independent hotel with a restaurant, a short walk from the railway station."
+    },
+    {
+      "type": "hotel",
+      "name": "Basecamp Hotel",
+      "city": "Longyearbyen",
+      "country": "Svalbard",
+      "url": "basecamp-hotel-svalbard.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes."
+    },
+    {
+      "type": "hotel",
+      "name": "Funken Lodge",
+      "city": "Longyearbyen",
+      "country": "Svalbard",
+      "url": "funken-lodge.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.11 ETH / night",
+      "priceEth": 0.11,
+      "description": "Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks."
+    },
+    {
+      "type": "hotel",
+      "name": "Radisson Blu Polar Hotel Spitsbergen",
+      "city": "Longyearbyen",
+      "country": "Svalbard",
+      "url": "radisson-blu-polar-spitsbergen.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.13 ETH / night",
+      "priceEth": 0.13,
+      "description": "Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours."
     },
     {
       "type": "hotel",
