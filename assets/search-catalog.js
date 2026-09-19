@@ -133,6 +133,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Ilulissat",
+      "city": "Ilulissat",
+      "country": "Greenland",
+      "url": "ilulissat.html",
+      "description": "Browse hotels in Ilulissat, Greenland."
+    },
+    {
+      "type": "city",
       "name": "Inverness",
       "city": "Inverness",
       "country": "Scotland",
@@ -221,6 +229,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Mariehamn",
+      "city": "Mariehamn",
+      "country": "Åland Islands",
+      "url": "mariehamn.html",
+      "description": "Browse hotels in Mariehamn, Åland Islands."
+    },
+    {
+      "type": "city",
       "name": "Narva",
       "city": "Narva",
       "country": "Estonia",
@@ -234,6 +250,14 @@ window.SEARCH_CATALOG = {
       "country": "Northeast England",
       "url": "newcastle.html",
       "description": "Browse hotels in Newcastle upon Tyne, Northeast England."
+    },
+    {
+      "type": "city",
+      "name": "Nuuk",
+      "city": "Nuuk",
+      "country": "Greenland",
+      "url": "nuuk.html",
+      "description": "Browse hotels in Nuuk, Greenland."
     },
     {
       "type": "city",
@@ -354,6 +378,14 @@ window.SEARCH_CATALOG = {
       "country": "Estonia",
       "url": "tartu.html",
       "description": "Browse hotels in Tartu, Estonia."
+    },
+    {
+      "type": "city",
+      "name": "Tórshavn",
+      "city": "Tórshavn",
+      "country": "Faroe Islands",
+      "url": "tórshavn.html",
+      "description": "Browse hotels in Tórshavn, Faroe Islands."
     },
     {
       "type": "city",
@@ -968,6 +1000,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Hotel Arctic",
+      "city": "Ilulissat",
+      "country": "Greenland",
+      "url": "ilulissat.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.14 ETH / night",
+      "priceEth": 0.14,
+      "description": "Clifftop hotel above the UNESCO icefjord, with midnight-sun terraces and views of drifting icebergs."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Icefiord",
+      "city": "Ilulissat",
+      "country": "Greenland",
+      "url": "ilulissat.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.12 ETH / night",
+      "priceEth": 0.12,
+      "description": "Harbour hotel facing Disko Bay, steps from boat departures into the icefjord."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Hvide Falk",
+      "city": "Ilulissat",
+      "country": "Greenland",
+      "url": "ilulissat.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley."
+    },
+    {
+      "type": "hotel",
       "name": "Jelgava Hotel",
       "city": "Jelgava",
       "country": "Latvia",
@@ -1254,6 +1319,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Hotel Arkipelag",
+      "city": "Mariehamn",
+      "country": "Åland Islands",
+      "url": "mariehamn.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Waterfront hotel by Mariehamn’s western harbour, a short walk from shops, ferries, and the maritime quarter."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Pommern",
+      "city": "Mariehamn",
+      "country": "Åland Islands",
+      "url": "mariehamn.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Relaxed hotel near the Åland Maritime Museum and the historic four-masted barque Pommern."
+    },
+    {
+      "type": "hotel",
+      "name": "Park Alandia Hotel",
+      "city": "Mariehamn",
+      "country": "Åland Islands",
+      "url": "mariehamn.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Central Åland stay beside the town park, handy for the sailing harbour and the road to Kastelholm."
+    },
+    {
+      "type": "hotel",
       "name": "Narva City Hotel",
       "city": "Narva",
       "country": "Estonia",
@@ -1306,6 +1404,39 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Hans Egede",
+      "city": "Nuuk",
+      "country": "Greenland",
+      "url": "nuuk.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.11 ETH / night",
+      "priceEth": 0.11,
+      "description": "Landmark hotel on Aqqusinersuaq, with fjord views and a base for exploring Greenland’s capital."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Nuuk",
+      "city": "Nuuk",
+      "country": "Greenland",
+      "url": "nuuk.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.075 ETH / night",
+      "priceEth": 0.075,
+      "description": "Hillside stay overlooking Nuuk Fjord, a quiet launch point for boat trips and city walks."
+    },
+    {
+      "type": "hotel",
+      "name": "Inuit Hotel",
+      "city": "Nuuk",
+      "country": "Greenland",
+      "url": "nuuk.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Contemporary rooms near the colonial harbour, close to Katuaq and the waterfront boardwalk."
     },
     {
       "type": "hotel",
@@ -1691,6 +1822,39 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Modern high-rise hotel offering panoramic city views, pool and business facilities."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Føroyar",
+      "city": "Tórshavn",
+      "country": "Faroe Islands",
+      "url": "tórshavn.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.10 ETH / night",
+      "priceEth": 0.1,
+      "description": "Hillside hotel above the capital, with grass-roof rooms and wide views over Tórshavn and Nólsoy."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Hafnia",
+      "city": "Tórshavn",
+      "country": "Faroe Islands",
+      "url": "tórshavn.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Classic downtown hotel on Áarvegur, walking distance to Tinganes and the harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Streym",
+      "city": "Tórshavn",
+      "country": "Faroe Islands",
+      "url": "tórshavn.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Harbour-side stay near the ferry terminal, a practical base for island-hopping around the Faroes."
     },
     {
       "type": "hotel",
