@@ -75,7 +75,30 @@ test('signed-in navbar account button goes to the account page', () => {
 test('nav translations still include View account for the account dropdown', () => {
   const source = fs.readFileSync(path.join(root, 'assets/nav-translations.js'), 'utf8');
   assert.match(source, /viewAccount: 'View account'/);
+  assert.match(source, /viewDetails: 'View details'/);
   assert.doesNotMatch(source, /data-login-account/);
+});
+
+test('account portal has an account dropdown with details and logout links', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
+  assert.match(html, /class="portal-account"/);
+  assert.match(html, /id="portal-account-menu"/);
+  assert.match(html, /data-portal-account="details"/);
+  assert.match(html, /href="#profile"/);
+  assert.match(html, /View details/);
+  assert.match(html, /data-portal-account="logout"/);
+  assert.match(html, /href="logout\.html"/);
+});
+
+test('logout page signs the visitor out and returns them to login', () => {
+  const html = fs.readFileSync(path.join(root, 'logout.html'), 'utf8');
+  assert.match(html, /id="logout-page"/);
+  assert.match(html, /id="logout-status"/);
+  assert.match(html, /assets\/auth-client\.js/);
+  assert.match(html, /assets\/local-auth\.js/);
+  const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  assert.match(source, /function bindLogoutPage/);
+  assert.match(source, /window\.location\.href = 'login\.html'/);
 });
 
 test('account styles hide empty profile rows', () => {
@@ -83,6 +106,8 @@ test('account styles hide empty profile rows', () => {
   assert.match(css, /account-dl > div\[hidden\]/);
   assert.match(css, /\.portal-nav/);
   assert.match(css, /\.portal-stats/);
+  assert.match(css, /\.portal-account/);
+  assert.match(css, /\.portal-account__menu/);
 });
 
 test('account portal keeps the sidebar on screen while the main column scrolls', () => {
