@@ -70,7 +70,7 @@ test('auth-client falls back to local accounts when the API is missing', () => {
 });
 
 test('register pages load the local account helper', () => {
-  ['personal-register.html', 'login.html', 'account.html', 'index.html'].forEach((fileName) => {
+  ['personal-register.html', 'login.html', 'logout.html', 'account.html', 'index.html'].forEach((fileName) => {
     const html = fs.readFileSync(path.join(__dirname, '..', fileName), 'utf8');
     assert.match(html, /assets\/local-auth\.js/, fileName + ' should load local-auth.js');
   });

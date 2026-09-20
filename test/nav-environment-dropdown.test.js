@@ -17,6 +17,7 @@ const navPages = [
   'forgot-password.html',
   'hotel-chains.html',
   'login.html',
+  'logout.html',
   'personal-register.html',
   'register.html',
   'search.html'

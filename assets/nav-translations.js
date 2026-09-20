@@ -31,6 +31,7 @@
       signedInAs: 'Signed in as',
       logOut: 'Log out',
       viewAccount: 'View account',
+      viewDetails: 'View details',
       searchPlaceholder: 'Search...',
       searchAria: 'Search hotels and cities',
       menu: 'Menu'
@@ -66,6 +67,7 @@
       signedInAs: 'Вы вошли как',
       logOut: 'Выйти',
       viewAccount: 'Аккаунт',
+      viewDetails: 'Личные данные',
       searchPlaceholder: 'Поиск...',
       searchAria: 'Поиск отелей и городов',
       menu: 'Меню'
@@ -101,6 +103,7 @@
       signedInAs: 'Inloggad som',
       logOut: 'Logga ut',
       viewAccount: 'Visa konto',
+      viewDetails: 'Visa uppgifter',
       searchPlaceholder: 'Sök...',
       searchAria: 'Sök hotell och städer',
       menu: 'Meny'
@@ -136,6 +139,7 @@
       signedInAs: 'Angemeldet als',
       logOut: 'Abmelden',
       viewAccount: 'Konto ansehen',
+      viewDetails: 'Daten ansehen',
       searchPlaceholder: 'Suchen...',
       searchAria: 'Hotels und Städte suchen',
       menu: 'Menü'
@@ -374,6 +378,15 @@
     const menuLabel = navRoot.querySelector('.nav-toggle .sr-only');
     if (menuLabel && mapping.menu) {
       menuLabel.textContent = mapping.menu;
+    }
+
+    const portalAccount = document.querySelector('.portal-account');
+    if (portalAccount) {
+      const detailsLink = portalAccount.querySelector('[data-portal-account="details"]');
+      updateLinkContent(detailsLink, mapping.viewDetails || mapping.viewAccount, mapping.viewDetails || mapping.viewAccount);
+
+      const logoutLink = portalAccount.querySelector('[data-portal-account="logout"]');
+      updateLinkContent(logoutLink, mapping.logOut, mapping.logOut);
     }
 
     const hiddenNavList = navRoot.querySelector('.nav-links');

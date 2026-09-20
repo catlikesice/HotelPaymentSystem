@@ -1,4 +1,5 @@
 ;(function () {
+  let hashBound = false;
   const SECTIONS = [
     'overview',
     'trips',
@@ -368,31 +369,81 @@
     });
   }
 
-  function bindNav() {
-    const nav = document.querySelector('.portal-nav');
-    if (!nav || nav.getAttribute('data-bound')) {
+  function bindAccountMenu() {
+    const menu = document.getElementById('portal-account-menu');
+    if (!menu || menu.getAttribute('data-bound')) {
       return;
     }
-    nav.setAttribute('data-bound', 'true');
-    nav.addEventListener('click', function (event) {
-      const link = event.target.closest('[data-portal-section]');
-      if (!link) {
-        return;
+    menu.setAttribute('data-bound', 'true');
+    const summary = menu.querySelector('summary');
+
+    function syncExpanded() {
+      if (summary) {
+        summary.setAttribute('aria-expanded', menu.hasAttribute('open') ? 'true' : 'false');
       }
-      const section = link.getAttribute('data-portal-section');
-      if (SECTIONS.indexOf(section) === -1) {
-        return;
-      }
-      event.preventDefault();
-      if (window.location.hash !== '#' + section) {
-        window.location.hash = section;
-      } else {
-        showSection(section);
+    }
+
+    menu.addEventListener('toggle', syncExpanded);
+    syncExpanded();
+
+    menu.addEventListener('click', function (event) {
+      if (event.target.closest('a')) {
+        menu.removeAttribute('open');
+        syncExpanded();
       }
     });
-    window.addEventListener('hashchange', function () {
-      showSection(currentSection());
+
+    document.addEventListener('click', function (event) {
+      if (!menu.hasAttribute('open') || menu.contains(event.target)) {
+        return;
+      }
+      menu.removeAttribute('open');
+      syncExpanded();
     });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape' || !menu.hasAttribute('open')) {
+        return;
+      }
+      menu.removeAttribute('open');
+      syncExpanded();
+      if (summary) {
+        summary.focus();
+      }
+    });
+  }
+
+  function bindNav() {
+    const roots = document.querySelectorAll('.portal-nav, .portal-account');
+    roots.forEach(function (root) {
+      if (!root || root.getAttribute('data-section-bound')) {
+        return;
+      }
+      root.setAttribute('data-section-bound', 'true');
+      root.addEventListener('click', function (event) {
+        const link = event.target.closest('[data-portal-section]');
+        if (!link) {
+          return;
+        }
+        const section = link.getAttribute('data-portal-section');
+        if (SECTIONS.indexOf(section) === -1) {
+          return;
+        }
+        event.preventDefault();
+        if (window.location.hash !== '#' + section) {
+          window.location.hash = section;
+        } else {
+          showSection(section);
+        }
+      });
+    });
+    if (!hashBound) {
+      hashBound = true;
+      window.addEventListener('hashchange', function () {
+        showSection(currentSection());
+      });
+    }
+    bindAccountMenu();
   }
 
   function renderLists(bookings) {

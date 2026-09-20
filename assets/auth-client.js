@@ -702,6 +702,11 @@
     const firstName = String(user.name || '').trim().split(/\s+/)[0] || 'there';
     const isBusiness = user.accountType === 'business';
     setAccountText('[data-account-greeting]', 'Welcome, ' + firstName);
+    const accountToggle = document.querySelector('[data-portal-account-label]');
+    if (accountToggle) {
+      accountToggle.textContent = firstName || 'Account';
+      accountToggle.setAttribute('aria-label', 'Account menu for ' + (user.name || firstName));
+    }
     setAccountText('[data-account-type-badge]', isBusiness ? 'Business account' : 'Guest account');
     setAccountText(
       '[data-account-lead]',
@@ -746,6 +751,31 @@
       dashboard.hidden = true;
       document.body.classList.remove('portal-open');
     }
+  }
+
+  function bindLogoutPage() {
+    if (!document.getElementById('logout-page')) {
+      return;
+    }
+    const status = document.getElementById('logout-status');
+    const finish = function () {
+      window.setTimeout(function () {
+        window.location.href = 'login.html';
+      }, 400);
+    };
+    logout().then(function () {
+      if (status) {
+        status.textContent = 'You have been signed out. Redirecting to login...';
+        status.className = 'auth-status auth-status--success';
+      }
+      finish();
+    }).catch(function () {
+      if (status) {
+        status.textContent = 'Signed out. Redirecting to login...';
+        status.className = 'auth-status auth-status--success';
+      }
+      finish();
+    });
   }
 
   function bindAccountPage() {
@@ -935,6 +965,7 @@
     updateAccountNav();
     bindAuthForms();
     bindAccountPage();
+    bindLogoutPage();
     // Refresh session quietly when a token exists.
     if (getToken() && !isAccountPage()) {
       me();
