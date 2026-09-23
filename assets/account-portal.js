@@ -49,20 +49,11 @@
   }
 
   function formatDate(value) {
-    const date = parseISODate(value);
-    if (!date) {
-      return value || '';
+    if (window.BookingDates && typeof window.BookingDates.toEuropean === 'function') {
+      return window.BookingDates.toEuropean(value) || value || '';
     }
-    try {
-      return new Intl.DateTimeFormat(undefined, {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        timeZone: 'UTC'
-      }).format(date);
-    } catch (error) {
-      return value;
-    }
+    const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return match ? match[3] + '/' + match[2] + '/' + match[1] : (value || '');
   }
 
   function formatDateRange(start, end) {

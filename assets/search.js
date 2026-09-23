@@ -74,11 +74,29 @@
     return parts.join(', ');
   }
 
+  function canonicalDate(value) {
+    var text = String(value || '').trim();
+    if (!text) {
+      return '';
+    }
+    if (window.BookingDates && typeof window.BookingDates.toISO === 'function') {
+      return window.BookingDates.toISO(text) || text;
+    }
+    return text;
+  }
+
+  function displayDate(value) {
+    if (window.BookingDates && typeof window.BookingDates.toEuropean === 'function') {
+      return window.BookingDates.toEuropean(value) || value;
+    }
+    return value;
+  }
+
   function getStayFromUrl() {
     var params = new URLSearchParams(window.location.search);
     var stored = readStoredBooking() || {};
-    var checkIn = (params.get('checkIn') || stored.checkInDate || '').trim();
-    var checkOut = (params.get('checkOut') || stored.checkOutDate || '').trim();
+    var checkIn = canonicalDate(params.get('checkIn') || stored.checkInDate || '');
+    var checkOut = canonicalDate(params.get('checkOut') || stored.checkOutDate || '');
     var adults = parseGuestCount(params.get('adults') != null ? params.get('adults') : stored.adults, 1, 20, NaN);
     var children = parseGuestCount(params.get('children') != null ? params.get('children') : stored.children, 0, 10, NaN);
 
@@ -104,7 +122,7 @@
 
     var parts = [];
     if (stay.checkIn && stay.checkOut) {
-      parts.push('Stay: ' + stay.checkIn + ' – ' + stay.checkOut);
+      parts.push('Stay: ' + displayDate(stay.checkIn) + ' – ' + displayDate(stay.checkOut));
     }
     var guestLabel = formatGuestSummary(stay.adults, stay.children);
     if (guestLabel) {

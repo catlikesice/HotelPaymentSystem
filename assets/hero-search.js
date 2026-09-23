@@ -32,6 +32,46 @@
     return new Date().toISOString().split('T')[0];
   }
 
+  function datesApi() {
+    return window.BookingDates || null;
+  }
+
+  function toISODate(value) {
+    var api = datesApi();
+    return api && typeof api.toISO === 'function' ? api.toISO(value) : '';
+  }
+
+  function toEuropeanDate(value) {
+    var api = datesApi();
+    return api && typeof api.toEuropean === 'function' ? api.toEuropean(value) : '';
+  }
+
+  function applyDateMask(input) {
+    var api = datesApi();
+    if (!input || !api || typeof api.maskInput !== 'function') {
+      return;
+    }
+    var start = input.selectionStart;
+    var raw = input.value;
+    var digitsBefore = raw.slice(0, start == null ? raw.length : start).replace(/\D/g, '').length;
+    var masked = api.maskInput(raw);
+    if (input.value === masked) {
+      return;
+    }
+    input.value = masked;
+    var pos = 0;
+    var seen = 0;
+    while (pos < masked.length && seen < digitsBefore) {
+      if (/\d/.test(masked.charAt(pos))) {
+        seen += 1;
+      }
+      pos += 1;
+    }
+    if (typeof input.setSelectionRange === 'function') {
+      input.setSelectionRange(pos, pos);
+    }
+  }
+
   function calculateNights(checkInValue, checkOutValue) {
     if (!checkInValue || !checkOutValue) {
       return null;
@@ -241,11 +281,64 @@
     adultsInput.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
+  function writeDateField(textInput, picker, iso) {
+    var european = toEuropeanDate(iso);
+    if (!european) {
+      return;
+    }
+    textInput.value = european;
+    if (picker) {
+      picker.value = iso;
+    }
+  }
+
+  function syncPicker(textInput, picker) {
+    if (!picker) {
+      return;
+    }
+    var iso = toISODate(textInput.value);
+    if (iso) {
+      picker.value = iso;
+    }
+  }
+
+  function bindDateField(textInput, picker, onChange) {
+    textInput.addEventListener('input', function () {
+      applyDateMask(textInput);
+      syncPicker(textInput, picker);
+      setStatus('');
+      if (onChange) {
+        onChange();
+      }
+    });
+    textInput.addEventListener('blur', function () {
+      var iso = toISODate(textInput.value);
+      if (iso) {
+        writeDateField(textInput, picker, iso);
+      }
+    });
+    if (picker) {
+      picker.addEventListener('change', function () {
+        if (picker.value) {
+          writeDateField(textInput, picker, picker.value);
+        }
+        setStatus('');
+        if (onChange) {
+          onChange();
+        }
+      });
+    }
+  }
+
   function init() {
     var form = document.getElementById('hero-search-form');
     var destination = document.getElementById('hero-search-destination');
     var checkIn = document.getElementById('hero-search-checkin');
     var checkOut = document.getElementById('hero-search-checkout');
+    var checkInPicker = document.getElementById('hero-search-checkin-picker');
+    var checkOutPicker = document.getElementById('hero-search-checkout-picker');
+    var checkInValue = document.getElementById('hero-search-checkin-value');
+    var checkOutValue = document.getElementById('hero-search-checkout-value');
     var adultsInput = document.getElementById('hero-search-adults');
     var childrenInput = document.getElementById('hero-search-children');
     var datalist = document.getElementById('hero-search-destinations');
@@ -258,20 +351,40 @@
     restoreGuestFields(adultsInput, childrenInput);
 
     var minDate = todayISO();
-    checkIn.min = minDate;
-    checkOut.min = minDate;
+    if (checkInPicker) {
+      checkInPicker.min = minDate;
+    }
+    if (checkOutPicker) {
+      checkOutPicker.min = minDate;
+    }
 
-    checkIn.addEventListener('change', function () {
-      checkOut.min = checkIn.value || minDate;
-      if (checkOut.value && checkOut.value <= checkIn.value) {
-        checkOut.value = '';
+    var storedDates = readStoredBooking();
+    if (storedDates) {
+      if (storedDates.checkInDate) {
+        writeDateField(checkIn, checkInPicker, storedDates.checkInDate);
       }
-      setStatus('');
-    });
+      if (storedDates.checkOutDate) {
+        writeDateField(checkOut, checkOutPicker, storedDates.checkOutDate);
+      }
+    }
 
-    checkOut.addEventListener('change', function () {
-      setStatus('');
-    });
+    function refreshCheckoutMin() {
+      var checkInISO = toISODate(checkIn.value);
+      if (checkOutPicker) {
+        checkOutPicker.min = checkInISO || minDate;
+      }
+      var checkOutISO = toISODate(checkOut.value);
+      if (checkInISO && checkOutISO && checkOutISO <= checkInISO) {
+        checkOut.value = '';
+        if (checkOutPicker) {
+          checkOutPicker.value = '';
+        }
+      }
+    }
+
+    bindDateField(checkIn, checkInPicker, refreshCheckoutMin);
+    bindDateField(checkOut, checkOutPicker);
+    refreshCheckoutMin();
 
     adultsInput.addEventListener('input', function () {
       setStatus('');
@@ -282,8 +395,8 @@
 
     form.addEventListener('submit', function (event) {
       var query = destination.value.trim();
-      var checkInDate = checkIn.value;
-      var checkOutDate = checkOut.value;
+      var checkInDate = toISODate(checkIn.value);
+      var checkOutDate = toISODate(checkOut.value);
       var adults = parseGuestCount(adultsInput.value, MIN_ADULTS, MAX_ADULTS, NaN);
       var children = parseGuestCount(childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
       var nights;
@@ -295,10 +408,24 @@
         return;
       }
 
-      if (!checkInDate || !checkOutDate) {
+      if (!checkIn.value.trim() || !checkOut.value.trim()) {
         event.preventDefault();
         setStatus('Please choose check-in and check-out dates.');
+        (checkIn.value.trim() ? checkOut : checkIn).focus();
+        return;
+      }
+
+      if (!checkInDate || !checkOutDate) {
+        event.preventDefault();
+        setStatus('Enter dates as dd/mm/yyyy.');
         (checkInDate ? checkOut : checkIn).focus();
+        return;
+      }
+
+      if (checkInDate < minDate) {
+        event.preventDefault();
+        setStatus('Check-in cannot be in the past.');
+        checkIn.focus();
         return;
       }
 
@@ -332,6 +459,12 @@
 
       adultsInput.value = String(adults);
       childrenInput.value = String(children);
+      if (checkInValue) {
+        checkInValue.value = checkInDate;
+      }
+      if (checkOutValue) {
+        checkOutValue.value = checkOutDate;
+      }
 
       var match = findDestination(query);
       if (match && match.item && match.item.url) {

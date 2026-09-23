@@ -412,6 +412,56 @@ header a { position: static !important; left: auto !important; right: auto !impo
   background: #fff;
 }
 
+.date-field {
+  position: relative;
+}
+
+.hero-search__field input.date-field__text[type="text"] {
+  padding-right: 2.6rem;
+}
+
+.hero-search__field input.date-field__picker[type="date"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.6rem;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0 12px 12px 0;
+  background: transparent;
+  box-shadow: none;
+  color: transparent;
+  cursor: pointer;
+}
+
+.hero-search__field input.date-field__picker[type="date"]:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+}
+
+.date-field__picker::-webkit-datetime-edit,
+.date-field__picker::-webkit-datetime-edit-fields-wrapper,
+.date-field__picker::-webkit-datetime-edit-text,
+.date-field__picker::-webkit-datetime-edit-month-field,
+.date-field__picker::-webkit-datetime-edit-day-field,
+.date-field__picker::-webkit-datetime-edit-year-field {
+  display: none;
+}
+
+.date-field__picker::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 .hero-search button[type="submit"] {
   height: 48px;
   padding: 0 1.4rem;
