@@ -1,5 +1,6 @@
 /* Static stand-in for a future SQL-backed hotel/city catalog.
  * Replace SEARCH_CATALOG usage with GET /api/search when the database is ready.
+ * Schema and queries: docs/sql/hotel-search.md.
  */
 window.SEARCH_CATALOG = {
   "cities": [
