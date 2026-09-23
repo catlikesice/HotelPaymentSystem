@@ -93,6 +93,13 @@ test('account portal dropdown opens underneath the account control on hover', ()
   assert.match(css, /\.portal-account__menu::before/);
 });
 
+test('account portal does not include a search bar', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
+  assert.doesNotMatch(html, /class="portal-search"/);
+  assert.doesNotMatch(html, /id="portal-search-q"/);
+  assert.doesNotMatch(html, /Search stays, cities or events/);
+});
+
 test('account portal has an account dropdown with details and logout links', () => {
   const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
   assert.match(html, /class="portal-account"/);
