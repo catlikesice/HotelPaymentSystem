@@ -90,6 +90,7 @@ test('account portal dropdown opens underneath the account control on hover', ()
   assert.ok(accountRule, 'expected a .portal-account rule');
   assert.match(accountRule[0], /z-index:\s*30/);
   assert.match(css, /\.portal-account:hover\s*>\s*\.portal-account__menu/);
+  assert.doesNotMatch(css, /@media \(hover: hover\) and \(pointer: fine\) \{\s*\.portal-account:hover/s);
   assert.match(css, /\.portal-account__menu::before/);
 });
 

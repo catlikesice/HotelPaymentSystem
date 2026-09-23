@@ -383,8 +383,6 @@
       }
     }
 
-    const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
-
     function setOpen(isOpen) {
       if (isOpen) {
         menu.setAttribute('open', '');
@@ -395,7 +393,7 @@
     }
 
     menu.addEventListener('toggle', function () {
-      if (hoverQuery.matches && !menu.hasAttribute('open') && menu.matches(':hover')) {
+      if (!menu.hasAttribute('open') && menu.matches(':hover')) {
         setOpen(true);
         return;
       }
@@ -404,16 +402,10 @@
     syncExpanded();
 
     menu.addEventListener('mouseenter', function () {
-      if (!hoverQuery.matches) {
-        return;
-      }
       setOpen(true);
     });
 
     menu.addEventListener('mouseleave', function () {
-      if (!hoverQuery.matches) {
-        return;
-      }
       setOpen(false);
     });
 

@@ -2983,6 +2983,41 @@ header:has(.nav-inner) .nav-account-btn:focus-visible {
   outline-offset: 2px;
 }
 
+/* Account menu hangs under the navbar account control on hover. */
+header:has(.nav-inner) .nav-tools .nav-dropdown.nav-dropdown-account {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn {
+  list-style: none;
+}
+
+header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn::-webkit-details-marker,
+header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn::marker {
+  display: none;
+}
+
+header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 0.4rem;
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-top: 4px solid currentColor;
+  opacity: 0.8;
+}
+
+header:has(.nav-inner) .nav-dropdown-account:hover > .nav-dropdown-menu,
+header:has(.nav-inner) .nav-dropdown-account[open] > .nav-dropdown-menu {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
 @media (max-width: 700px) {
   header:has(.nav-inner) .nav-account-btn {
     padding: 0 0.7rem;
@@ -3308,14 +3343,9 @@ body.portal-open .portal {
   height: 0.55rem;
 }
 
-.portal-account[open] > .portal-account__menu {
-  display: block;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .portal-account:hover > .portal-account__menu {
-    display: block;
-  }
+.portal-account[open] > .portal-account__menu,
+.portal-account:hover > .portal-account__menu {
+  display: block !important;
 }
 
 .portal-account__menu a {

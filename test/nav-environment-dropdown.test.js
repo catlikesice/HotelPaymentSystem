@@ -39,6 +39,21 @@ test('About EcoTourism page explains the EcoTourism commitment', () => {
   assert.match(html, /nav-about-ecotourism" aria-current="page"/);
 });
 
+test('navbar account control has a dropdown under the accounts portal', () => {
+  navPages.concat(['checkout.html']).forEach((fileName) => {
+    const html = fs.readFileSync(path.join(root, fileName), 'utf8');
+    assert.match(html, /nav-dropdown-account/, `${fileName} should include the account dropdown`);
+    assert.match(html, /nav-account-login/, `${fileName} should link to login`);
+    assert.match(html, /nav-account-register/, `${fileName} should link to register`);
+    assert.match(html, /class="nav-account-btn nav-box-account"/, `${fileName} should keep the account control`);
+  });
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /\.nav-dropdown-account:hover\s*>\s*\.nav-dropdown-menu/);
+  const rail = fs.readFileSync(path.join(root, 'assets/nav-rail.js'), 'utf8');
+  assert.match(rail, /mouseenter/);
+  assert.doesNotMatch(rail, /hover: hover/);
+});
+
 test('nav translations include Environmental Mission and About EcoTourism', () => {
   const source = fs.readFileSync(path.join(root, 'assets/nav-translations.js'), 'utf8');
   assert.match(source, /environmentMission: 'Environmental Mission'/);
