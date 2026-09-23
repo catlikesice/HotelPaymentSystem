@@ -15,7 +15,6 @@
 
     const toggle = nav.querySelector('.nav-toggle');
     const dropdowns = Array.prototype.slice.call(nav.querySelectorAll('.nav-dropdown'));
-    const hoverMq = window.matchMedia('(hover: hover) and (pointer: fine)');
 
     function setMenuOpen(isOpen) {
       nav.classList.toggle('is-open', isOpen);
@@ -45,14 +44,14 @@
       });
 
       dropdown.addEventListener('mouseenter', function () {
-        if (!hoverMq.matches || window.innerWidth <= 1200) {
+        if (window.innerWidth <= 1200) {
           return;
         }
         dropdown.open = true;
       });
 
       dropdown.addEventListener('mouseleave', function () {
-        if (!hoverMq.matches || window.innerWidth <= 1200) {
+        if (window.innerWidth <= 1200) {
           return;
         }
         dropdown.open = false;
