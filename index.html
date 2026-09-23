@@ -124,11 +124,19 @@
         </div>
         <div class="hero-search__field">
             <label id="hero-search-checkin-label" for="hero-search-checkin">Check-in</label>
-            <input id="hero-search-checkin" name="checkIn" type="date">
+            <div class="date-field">
+                <input id="hero-search-checkin" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
+                <input id="hero-search-checkin-picker" class="date-field__picker" type="date" lang="en-GB" aria-label="Open check-in calendar" tabindex="-1">
+            </div>
+            <input type="hidden" name="checkIn" id="hero-search-checkin-value">
         </div>
         <div class="hero-search__field">
             <label id="hero-search-checkout-label" for="hero-search-checkout">Check-out</label>
-            <input id="hero-search-checkout" name="checkOut" type="date">
+            <div class="date-field">
+                <input id="hero-search-checkout" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
+                <input id="hero-search-checkout-picker" class="date-field__picker" type="date" lang="en-GB" aria-label="Open check-out calendar" tabindex="-1">
+            </div>
+            <input type="hidden" name="checkOut" id="hero-search-checkout-value">
         </div>
         <div class="hero-search__field hero-search__field--guests guest-picker" data-guest-picker>
             <label id="hero-search-guests-label" for="hero-search-guests-toggle">Guests</label>
@@ -436,6 +444,7 @@
   <script src="assets/auth-client.js"></script>
   <script src="assets/search-catalog.js"></script>
   <script src="assets/guest-picker.js"></script>
+  <script src="assets/booking-dates.js"></script>
   <script src="assets/hero-search.js"></script>
     <script>
       // Translation data for supported languages
