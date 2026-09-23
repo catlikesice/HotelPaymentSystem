@@ -1,6 +1,6 @@
-/* Static stand-in for a future SQL-backed hotel/city catalog.
- * Replace SEARCH_CATALOG usage with GET /api/search when the database is ready.
- * Schema and queries: docs/sql/hotel-search.md.
+/* Static catalog of places that have an HTML page.
+ * GET /api/search loads this list and also places with no page of their own
+ * (lib/places-without-pages.js). Schema: docs/sql/hotel-search.md.
  */
 window.SEARCH_CATALOG = {
   "cities": [

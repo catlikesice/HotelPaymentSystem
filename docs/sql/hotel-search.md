@@ -1,10 +1,10 @@
 # Hotel search SQL
 
-Search on the site still filters `window.SEARCH_CATALOG` in the browser (`assets/search.js`, `assets/search-catalog.js`, `assets/hero-search.js`). This document is the SQL contract for that same behavior, so `GET /api/search` can replace the static catalog without changing the pages.
+`GET /api/search` reads this schema (`routes/search.js`, `lib/search-db.js`). The results page uses that response. If the API cannot be reached, `assets/search.js` falls back to `window.SEARCH_CATALOG`. The homepage datalist uses `GET /api/search/destinations` the same way.
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. Fold accents in application code before the query. SQLite has no `unaccent`.
 
-The catalog today is 55 cities and 146 hotels. The SQL file loads a five-city example so the queries can be run as written. A loader should copy every catalog row into the same columns.
+The static catalog is 55 cities and 146 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, and Abisko. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
 
 ## What a search is
 
@@ -21,24 +21,24 @@ A blank `q` returns no rows. `search.js` treats an empty query as `{ "cities": [
 
 ## Tables
 
-`cities` is one row per destination page.
+`cities` is one row per destination. A destination does not need an HTML file.
 
 | Column | Catalog field | Notes |
 | --- | --- | --- |
 | `name` | `name` and `city` | Same string on a city row |
 | `country` | `country` | Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Åland Islands, Greenland, Faroe Islands, Svalbard |
-| `page_url` | `url` | Includes `.html`, for example `aarhus.html` |
+| `page_url` | `url` | Includes `.html`, for example `aarhus.html`. NULL when the place has no HTML page |
 | `description` | `description` | |
 | `sort_order` | array order | `Array.filter` keeps catalog order; `ORDER BY sort_order` does the same |
 | `name_key` | | Homepage compare key. See normalization |
 | `search_text` | | Results haystack |
 
-`hotels` is one row per hotel card. `city_id` references `cities`. `page_url` is usually the city page. A few hotels have their own page (`grand-hotel-kempinski-riga.html`, `wellton-riverside-riga.html`). `(city_id, name)` is unique. `page_url` is not unique, because several hotels share a city page.
+`hotels` is one row per hotel card. `city_id` references `cities`. `page_url` is usually the city page. A few hotels have their own page (`grand-hotel-kempinski-riga.html`, `wellton-riverside-riga.html`). `page_url` is NULL when the hotel has no HTML page. `(city_id, name)` is unique. `page_url` is not unique, because several hotels share a city page, and more than one row may be NULL.
 
 | Column | Catalog field | Notes |
 | --- | --- | --- |
 | `name` | `name` | |
-| `page_url` | `url` | |
+| `page_url` | `url` | NULL when the hotel has no HTML page. The JSON also includes `cityUrl`, the city's `page_url`, so a hotel without its own page can still link to the city page |
 | `image_url` | `image` | Null when the card has no photo |
 | `price_label` | `price` | Exact display string, such as `0.08 ETH / night` or `0.10 ETH / night` |
 | `price_eth` | `priceEth` | Nightly ETH number. Stored for the JSON field. Search does not filter on it |
@@ -100,7 +100,7 @@ Examples:
 `GET /api/search?q=royal%20aarhus`
 
 1. Trim `q`. If it is empty, respond `{ "cities": [], "hotels": [] }` and stop.
-2. Run `normalizeResults` on `q` and split on whitespace. Drop empty tokens.
+2. Run `normalizeResults` on `q`, treat `—` and `–` as spaces, and split on whitespace. Drop empty tokens. The em dash is the separator in a homepage label such as `Hotel Nida Marina — Nida`.
 3. Insert each token into `query_tokens` (see the SQL file). Bind the token values. Do not paste the typed text into the statement.
 4. Run the city `SELECT` and the hotel `SELECT`. A row matches when every token is found with `instr(search_text, token) > 0`.
 5. Return both lists in `sort_order`.
@@ -130,6 +130,7 @@ Response shape, one object per row, same keys the cards already read:
       "city": "Aarhus",
       "country": "Denmark",
       "url": "aarhus.html",
+      "cityUrl": "aarhus.html",
       "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
@@ -139,7 +140,7 @@ Response shape, one object per row, same keys the cards already read:
 }
 ```
 
-`search.html` reads `name`, `city`, `country`, `description`, `url`, and for hotels also `image` and `price`.
+`search.html` reads `name`, `city`, `country`, `description`, `url`, and for hotels also `image`, `price`, and `cityUrl`. A null `url` still renders the card.
 
 The worked example in `hotel-search.sql` is loaded with tokens `royal` and `aarhus`. Both tokens have to match, so the city query returns nothing and the hotel query returns Hotel Royal Aarhus. A single token `aarhus` returns the Aarhus city row and that hotel.
 
@@ -151,7 +152,27 @@ Other checks against that sample:
 | `kempinski` | none | Grand Hotel Kempinski |
 | `torshavn` | Tórshavn | Hotel Føroyar |
 | `0.10` | none | Hotel Føroyar, Clarion Hotel The Edge |
+| `nida` | Nida (`url` null) | Hotel Nida Marina (`url` and `cityUrl` null) |
 | *(empty)* | none | none |
+
+## Places without an HTML page
+
+A row is searchable when `page_url` is NULL. Search does not check that a file exists on disk.
+
+Hotels that only appear on a city page are the other case. They have a `page_url`, and it is the city file (`copenhagen.html` for CABINN City), not a page of their own. Those rows are already in the static catalog and stay in the SQL results.
+
+`lib/places-without-pages.js` adds destinations that have no file at all:
+
+| Place | Country | Hotel |
+| --- | --- | --- |
+| Nida | Lithuania | Hotel Nida Marina |
+| Barentsburg | Svalbard | Barentsburg Guesthouse |
+| Pyramiden | Svalbard | Pyramiden Harbour House |
+| Abisko | Sweden | Abisko Mountain Lodge |
+
+The results card still renders. When `url` is null and the hotel's `cityUrl` is also null, the card says the place has no separate page. When the hotel has no page but the city does, the card links to `cityUrl`.
+
+The homepage opens a page only when the matched catalog row has a `url`. A place with no page is submitted to `search.html?q=...`, which loads it from `GET /api/search`. `GET /api/search/destinations` adds those names to the homepage datalist.
 
 ## Homepage destination query
 
@@ -166,7 +187,7 @@ Then take the first row of the union in `hotel-search.sql`, ordered by priority 
 3. The city key starts with the needle, or the needle starts with the city key.
 4. The hotel key contains the needle.
 
-The sample statement uses the literal needle `reykjavik` and returns the Reykjavík city row. `kempinski` returns Grand Hotel Kempinski. `tromso` returns the Tromsø city row (priority 1) rather than Clarion Hotel The Edge.
+The sample statement uses the literal needle `reykjavik` and returns the Reykjavík city row. `kempinski` returns Grand Hotel Kempinski. `tromso` returns the Tromsø city row (priority 1) rather than Clarion Hotel The Edge. `nida` returns the Nida city row with a null `page_url`. The homepage should not navigate when that value is null.
 
 ## Stay fields
 
@@ -186,6 +207,6 @@ Keep accepting them on `GET /api/search` if the route is added later, and ignore
 sqlite3 :memory: < docs/sql/hotel-search.sql
 ```
 
-The script prints three result sets: cities for `royal aarhus`, hotels for `royal aarhus`, and the homepage match for `reykjavik`.
+The script prints five result sets: cities for `royal aarhus`, hotels for `royal aarhus`, cities and hotels for `nida`, then the homepage match for `reykjavik`. The Nida rows have a null `url`.
 
 Full-text indexes such as FTS5 split on words and do not reproduce these substring matches. The catalog is small enough that `instr` over `search_text` is the query to keep.
