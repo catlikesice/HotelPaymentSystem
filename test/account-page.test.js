@@ -62,11 +62,15 @@ test('homepage login popup no longer includes a View account button', () => {
   assert.doesNotMatch(html, /login-popup__account/);
 });
 
-test('signed-in navbar account button goes to the account page', () => {
+test('signed-in navbar account dropdown toggles on the account page', () => {
   const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
   assert.match(
     source,
-    /const opener = event\.target\.closest\('\[data-login-open\], \.nav-account-btn'\);[\s\S]*?if \(user && user\.email\) \{[\s\S]*?goToAccountPage\(\);/
+    /if \(user && user\.email && opener\.closest\('\.nav-dropdown-account'\)\) \{\s*return;\s*\}/
+  );
+  assert.match(
+    source,
+    /if \(user && user\.email\) \{[\s\S]*?goToAccountPage\(\);/
   );
   assert.doesNotMatch(source, /data-login-account/);
   assert.doesNotMatch(source, /login-popup__account/);

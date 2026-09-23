@@ -386,8 +386,14 @@
     document.addEventListener('click', function(event) {
       const opener = event.target.closest('[data-login-open], .nav-account-btn');
       if (opener) {
-        event.preventDefault();
         const user = getStoredUser();
+        // The navbar account control is a <summary>. A signed-in click must
+        // toggle that menu. preventDefault would cancel the toggle, which
+        // leaves the menu stuck closed on the account page.
+        if (user && user.email && opener.closest('.nav-dropdown-account')) {
+          return;
+        }
+        event.preventDefault();
         if (user && user.email) {
           closeLoginPopup();
           goToAccountPage();
