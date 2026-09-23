@@ -4,6 +4,7 @@
  * Today: filters window.SEARCH_CATALOG in the browser.
  * Later (SQL): set USE_SQL_API = true and implement GET /api/search?q=...
  * returning { cities: [...], hotels: [...] } with the same shape as SEARCH_CATALOG.
+ * Schema and queries: docs/sql/hotel-search.md.
  */
 (function () {
   'use strict';
