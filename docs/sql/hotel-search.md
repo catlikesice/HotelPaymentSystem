@@ -4,7 +4,7 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. Fold accents in application code before the query. SQLite has no `unaccent`.
 
-The static catalog is 55 cities and 146 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, and Abisko. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
+The static catalog is 55 cities and 146 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, and Finland. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
 
 ## What a search is
 
@@ -166,9 +166,18 @@ Hotels that only appear on a city page are the other case. They have a `page_url
 | Place | Country | Hotel |
 | --- | --- | --- |
 | Nida | Lithuania | Hotel Nida Marina |
+| Palanga | Lithuania | Palanga Dune Hotel |
+| Druskininkai | Lithuania | Druskininkai Spa House |
+| Trakai | Lithuania | Trakai Lake House |
 | Barentsburg | Svalbard | Barentsburg Guesthouse |
 | Pyramiden | Svalbard | Pyramiden Harbour House |
 | Abisko | Sweden | Abisko Mountain Lodge |
+| St Andrews | Scotland | St Andrews Harbour Hotel |
+| Fort William | Scotland | Ben Nevis Lodge |
+| Oban | Scotland | Oban Bay Hotel |
+| Porvoo | Finland | Porvoo Old Town Hotel |
+| Kuopio | Finland | Kuopio Lakefront Hotel |
+| Savonlinna | Finland | Savonlinna Castle Hotel |
 
 The results card still renders. When `url` is null and the hotel's `cityUrl` is also null, the card says the place has no separate page. When the hotel has no page but the city does, the card links to `cityUrl`.
 

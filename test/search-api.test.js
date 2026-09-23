@@ -97,12 +97,44 @@ test('accent-folded city names still match', async () => {
   assert.ok(body.cities.some((city) => city.name === 'Reykjavík' && city.url === 'reykjavík.html'));
 });
 
+test('scotland, lithuania, and finland towns without pages are searchable', async () => {
+  const places = [
+    { q: 'St Andrews', city: 'St Andrews', country: 'Scotland', hotel: 'St Andrews Harbour Hotel', file: 'st-andrews.html' },
+    { q: 'Fort William', city: 'Fort William', country: 'Scotland', hotel: 'Ben Nevis Lodge', file: 'fort-william.html' },
+    { q: 'Oban', city: 'Oban', country: 'Scotland', hotel: 'Oban Bay Hotel', file: 'oban.html' },
+    { q: 'Palanga', city: 'Palanga', country: 'Lithuania', hotel: 'Palanga Dune Hotel', file: 'palanga.html' },
+    { q: 'Druskininkai', city: 'Druskininkai', country: 'Lithuania', hotel: 'Druskininkai Spa House', file: 'druskininkai.html' },
+    { q: 'Trakai', city: 'Trakai', country: 'Lithuania', hotel: 'Trakai Lake House', file: 'trakai.html' },
+    { q: 'Porvoo', city: 'Porvoo', country: 'Finland', hotel: 'Porvoo Old Town Hotel', file: 'porvoo.html' },
+    { q: 'Kuopio', city: 'Kuopio', country: 'Finland', hotel: 'Kuopio Lakefront Hotel', file: 'kuopio.html' },
+    { q: 'Savonlinna', city: 'Savonlinna', country: 'Finland', hotel: 'Savonlinna Castle Hotel', file: 'savonlinna.html' }
+  ];
+
+  for (const place of places) {
+    assert.equal(fs.existsSync(path.join(root, place.file)), false, place.file + ' should not exist');
+    const body = await searchFor(place.q);
+    const city = body.cities.find((item) => item.name === place.city);
+    assert.ok(city, place.city + ' should be returned');
+    assert.equal(city.country, place.country);
+    assert.equal(city.url, null);
+    const hotel = body.hotels.find((item) => item.name === place.hotel);
+    assert.ok(hotel, place.hotel + ' should be returned');
+    assert.equal(hotel.city, place.city);
+    assert.equal(hotel.country, place.country);
+    assert.equal(hotel.url, null);
+  }
+});
+
 test('destination labels include places that have no page', async () => {
   const response = await fetch(base + '/api/search/destinations');
   assert.equal(response.status, 200);
   const body = await response.json();
   assert.ok(body.labels.includes('Nida'));
   assert.ok(body.labels.includes('Hotel Nida Marina — Nida'));
+  assert.ok(body.labels.includes('St Andrews'));
+  assert.ok(body.labels.includes('Palanga'));
+  assert.ok(body.labels.includes('Porvoo'));
+  assert.ok(body.labels.includes('Savonlinna Castle Hotel — Savonlinna'));
   assert.ok(body.labels.includes('Aarhus'));
   assert.ok(body.labels.includes('Grand Hotel Kempinski — Riga'));
 });
