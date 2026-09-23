@@ -79,6 +79,20 @@ test('nav translations still include View account for the account dropdown', () 
   assert.doesNotMatch(source, /data-login-account/);
 });
 
+test('account portal dropdown opens underneath the account control on hover', () => {
+  const source = fs.readFileSync(path.join(root, 'assets/account-portal.js'), 'utf8');
+  assert.match(source, /portal-account-menu/);
+  assert.match(source, /mouseenter/);
+  assert.match(source, /mouseleave/);
+  assert.match(source, /setOpen\(true\)/);
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  const accountRule = css.match(/\.portal-account\s*\{[^}]+\}/);
+  assert.ok(accountRule, 'expected a .portal-account rule');
+  assert.match(accountRule[0], /z-index:\s*30/);
+  assert.match(css, /\.portal-account:hover\s*>\s*\.portal-account__menu/);
+  assert.match(css, /\.portal-account__menu::before/);
+});
+
 test('account portal has an account dropdown with details and logout links', () => {
   const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
   assert.match(html, /class="portal-account"/);
