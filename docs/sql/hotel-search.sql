@@ -8,8 +8,10 @@
 -- price-tier filters.
 --
 -- The INSERT rows are a worked example (Aarhus, Reykjavík, Riga, Tórshavn,
--- Tromsø). The live list is assets/search-catalog.js (55 cities, 146 hotels).
--- Load that catalog with the same columns and the same search_text rules.
+-- Tromsø, plus Nida, which has no HTML page). The live list is
+-- assets/search-catalog.js (55 cities, 146 hotels) plus
+-- lib/places-without-pages.js. Load both with the same columns and the
+-- same search_text rules. page_url may be NULL.
 
 PRAGMA foreign_keys = ON;
 
@@ -17,13 +19,14 @@ PRAGMA foreign_keys = ON;
 -- Tables
 -- ---------------------------------------------------------------------------
 
--- One row per destination page (aarhus.html, reykjavík.html, ...).
+-- One row per destination. page_url is NULL when the place has no HTML page.
 CREATE TABLE cities (
   id            INTEGER PRIMARY KEY,
   name          TEXT    NOT NULL,
   country       TEXT    NOT NULL,
   -- Public page, including the .html suffix, as SEARCH_CATALOG cities[].url.
-  page_url      TEXT    NOT NULL UNIQUE,
+  -- NULL when the place is searchable but has no HTML file of its own.
+  page_url      TEXT    UNIQUE,
   description   TEXT    NOT NULL,
   -- Catalog order. Results keep this order, same as Array.filter on the catalog.
   sort_order    INTEGER NOT NULL UNIQUE,
@@ -35,13 +38,14 @@ CREATE TABLE cities (
   search_text   TEXT    NOT NULL
 );
 
--- One row per hotel card. page_url is the city page for most hotels, and a
--- dedicated page for a few (for example grand-hotel-kempinski-riga.html).
+-- One row per hotel card. page_url is the city page for most hotels, a
+-- dedicated page for a few (for example grand-hotel-kempinski-riga.html),
+-- or NULL when the hotel has no HTML page.
 CREATE TABLE hotels (
   id            INTEGER PRIMARY KEY,
   city_id       INTEGER NOT NULL REFERENCES cities(id),
   name          TEXT    NOT NULL,
-  page_url      TEXT    NOT NULL,
+  page_url      TEXT,
   image_url     TEXT,
   -- Display string from the catalog, e.g. "0.08 ETH / night".
   -- Search matches this text, not a reformatted number.
@@ -82,7 +86,10 @@ INSERT INTO cities (id, name, country, page_url, description, sort_order, name_k
    'torshavn torshavn faroe islands browse hotels in torshavn, faroe islands.  city'),
   (5, 'Tromsø', 'Norway', 'tromso.html',
    'Browse hotels in Tromsø, Norway.', 5, 'tromso',
-   'tromso tromso norway browse hotels in tromso, norway.  city');
+   'tromso tromso norway browse hotels in tromso, norway.  city'),
+  (6, 'Nida', 'Lithuania', NULL,
+   'Browse hotels in Nida, Lithuania.', 6, 'nida',
+   'nida nida lithuania browse hotels in nida, lithuania.  city');
 
 INSERT INTO hotels (
   id, city_id, name, page_url, image_url, price_label, price_eth, description,
@@ -111,7 +118,13 @@ INSERT INTO hotels (
    '0.10 ETH / night', 0.10,
    'Waterfront hotel on the Tromsø Sound with harbour views and a short hop to the Arctic Cathedral.',
    4, 'clarion hotel the edge', 'clarion hotel the edge — tromso',
-   'clarion hotel the edge tromso norway waterfront hotel on the tromso sound with harbour views and a short hop to the arctic cathedral. 0.10 eth / night hotel');
+   'clarion hotel the edge tromso norway waterfront hotel on the tromso sound with harbour views and a short hop to the arctic cathedral. 0.10 eth / night hotel'),
+  (5, 6, 'Hotel Nida Marina', NULL,
+   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80',
+   '0.07 ETH / night', 0.07,
+   'Lagoon-side hotel in Nida with dune views and a short walk to the fishing harbour.',
+   5, 'hotel nida marina', 'hotel nida marina — nida',
+   'hotel nida marina nida lithuania lagoon-side hotel in nida with dune views and a short walk to the fishing harbour. 0.07 eth / night hotel');
 
 -- ---------------------------------------------------------------------------
 -- Results page: GET /api/search?q=...
@@ -157,6 +170,49 @@ SELECT
   c.name         AS city,
   c.country      AS country,
   h.page_url     AS url,
+  c.page_url     AS cityUrl,
+  h.image_url    AS image,
+  h.price_label  AS price,
+  h.price_eth    AS priceEth,
+  h.description  AS description
+FROM hotels AS h
+JOIN cities AS c ON c.id = h.city_id
+WHERE (
+  SELECT COUNT(*)
+  FROM query_tokens AS t
+  WHERE instr(h.search_text, t.token) > 0
+) = (SELECT COUNT(*) FROM query_tokens)
+ORDER BY h.sort_order;
+
+-- Worked example: q = "nida". The city and hotel have no HTML page, so url
+-- and cityUrl are NULL. Application code treats an em dash in the typed
+-- label ("Hotel Nida Marina — Nida") as whitespace before inserting tokens.
+DELETE FROM query_tokens;
+INSERT INTO query_tokens (position, token) VALUES
+  (1, 'nida');
+
+SELECT
+  'city'       AS type,
+  c.name       AS name,
+  c.name       AS city,
+  c.country    AS country,
+  c.page_url   AS url,
+  c.description AS description
+FROM cities AS c
+WHERE (
+  SELECT COUNT(*)
+  FROM query_tokens AS t
+  WHERE instr(c.search_text, t.token) > 0
+) = (SELECT COUNT(*) FROM query_tokens)
+ORDER BY c.sort_order;
+
+SELECT
+  'hotel'        AS type,
+  h.name         AS name,
+  c.name         AS city,
+  c.country      AS country,
+  h.page_url     AS url,
+  c.page_url     AS cityUrl,
   h.image_url    AS image,
   h.price_label  AS price,
   h.price_eth    AS priceEth,

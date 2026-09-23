@@ -1,16 +1,13 @@
 /**
  * Search results page logic.
  *
- * Today: filters window.SEARCH_CATALOG in the browser.
- * Later (SQL): set USE_SQL_API = true and implement GET /api/search?q=...
- * returning { cities: [...], hotels: [...] } with the same shape as SEARCH_CATALOG.
- * Schema and queries: docs/sql/hotel-search.md.
+ * Prefer GET /api/search, which reads the SQL catalog and also returns places
+ * that have no HTML page (url is null). If the API cannot be reached, fall
+ * back to window.SEARCH_CATALOG. Schema: docs/sql/hotel-search.md.
  */
 (function () {
   'use strict';
 
-  // Flip this when the Express + SQL search endpoint is ready.
-  var USE_SQL_API = false;
   var SQL_SEARCH_ENDPOINT = '/api/search';
   var BOOKING_STORAGE_KEY = 'balticComfortBooking';
 
@@ -155,6 +152,10 @@
     }
   }
 
+  function queryTokens(query) {
+    return normalize(query).replace(/[—–]/g, ' ').split(/\s+/).filter(Boolean);
+  }
+
   function matchesQuery(item, query) {
     if (!query) return false;
     var haystack = normalize([
@@ -165,7 +166,8 @@
       item.price,
       item.type
     ].join(' '));
-    var tokens = normalize(query).split(/\s+/).filter(Boolean);
+    var tokens = queryTokens(query);
+    if (!tokens.length) return false;
     return tokens.every(function (token) {
       return haystack.indexOf(token) !== -1;
     });
@@ -183,24 +185,35 @@
     };
   }
 
-  /**
-   * Single entry point for results. Swap the body to call SQL later:
-   *   return fetch(SQL_SEARCH_ENDPOINT + '?q=' + encodeURIComponent(query))
-   *     .then(function (res) { if (!res.ok) throw new Error('Search failed'); return res.json(); });
-   */
   function fetchSearchResults(query) {
-    if (USE_SQL_API) {
-      return fetch(SQL_SEARCH_ENDPOINT + '?q=' + encodeURIComponent(query), {
-        headers: { Accept: 'application/json' }
-      }).then(function (res) {
-        if (!res.ok) {
-          throw new Error('Search request failed (' + res.status + ')');
-        }
-        return res.json();
-      });
-    }
+    var params = new URLSearchParams(window.location.search);
+    params.set('q', query);
+    return fetch(SQL_SEARCH_ENDPOINT + '?' + params.toString(), {
+      headers: { Accept: 'application/json' }
+    }).then(function (res) {
+      if (!res.ok) {
+        throw new Error('Search request failed (' + res.status + ')');
+      }
+      return res.json();
+    }).catch(function (err) {
+      // The static catalog has no SQL-only places. Use it only when the API
+      // cannot be reached (for example, opening the file directly).
+      if (err && err.name === 'TypeError' && window.SEARCH_CATALOG) {
+        return filterCatalog(query);
+      }
+      throw err;
+    });
+  }
 
-    return Promise.resolve(filterCatalog(query));
+  function pageNote() {
+    return '<p class="search-card__note">No separate page. This place is included in search.</p>';
+  }
+
+  function pageLink(url, label) {
+    if (!url) {
+      return pageNote();
+    }
+    return '<a class="search-card__link" href="' + escapeHtml(url) + '">' + label + '</a>';
   }
 
   function escapeHtml(value) {
@@ -221,7 +234,7 @@
           '<h3 class="search-card__title">' + escapeHtml(city.name) + '</h3>' +
           (location ? '<p class="search-card__meta">' + escapeHtml(location) + '</p>' : '') +
           (city.description ? '<p class="search-card__desc">' + escapeHtml(city.description) + '</p>' : '') +
-          '<a class="search-card__link" href="' + escapeHtml(city.url) + '">View hotels</a>' +
+          pageLink(city.url, 'View hotels') +
         '</div>' +
       '</article>'
     );
@@ -242,7 +255,9 @@
           (location ? '<p class="search-card__meta">' + escapeHtml(location) + '</p>' : '') +
           (hotel.price ? '<p class="search-card__price">' + escapeHtml(hotel.price) + '</p>' : '') +
           (hotel.description ? '<p class="search-card__desc">' + escapeHtml(hotel.description) + '</p>' : '') +
-          '<a class="search-card__link" href="' + escapeHtml(hotel.url) + '">View &amp; Book</a>' +
+          (hotel.url
+            ? pageLink(hotel.url, 'View &amp; Book')
+            : pageLink(hotel.cityUrl, hotel.cityUrl ? 'View hotels' : '')) +
         '</div>' +
       '</article>'
     );

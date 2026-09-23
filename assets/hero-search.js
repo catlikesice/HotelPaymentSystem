@@ -1,9 +1,10 @@
 /**
  * Homepage booking search bar: destination + stay dates + guests.
  * Persists booking dates and guests from the homepage search so hotel pages
- * can price the stay. When SQL search is ready, city matching can move
- * to GET /api/search while this form still posts q, checkIn, checkOut,
- * adults, and children.
+ * can price the stay. Destination suggestions come from GET /api/search/destinations
+ * when the API is available, including places that have no HTML page.
+ * A match with a page opens that page. A place with no page continues to
+ * search.html. The form still posts q, checkIn, checkOut, adults, and children.
  */
 (function () {
   'use strict';
@@ -171,6 +172,26 @@
     datalist.innerHTML = options.map(function (label) {
       return '<option value="' + String(label).replace(/"/g, '&quot;') + '"></option>';
     }).join('');
+
+    fetch('/api/search/destinations', { headers: { Accept: 'application/json' } })
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error('Destination list failed');
+        }
+        return res.json();
+      })
+      .then(function (payload) {
+        var labels = payload && payload.labels;
+        if (!Array.isArray(labels) || !labels.length) {
+          return;
+        }
+        datalist.innerHTML = labels.map(function (label) {
+          return '<option value="' + String(label).replace(/"/g, '&quot;') + '"></option>';
+        }).join('');
+      })
+      .catch(function () {
+        // Keep the static catalog list when SQL search is unavailable.
+      });
   }
 
   function findDestination(query) {
