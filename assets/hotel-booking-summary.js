@@ -2,12 +2,6 @@
   const STORAGE_KEY = 'balticComfortBooking';
   const PENDING_CHECKOUT_KEY = 'bh_pending_checkout';
   const MS_PER_DAY = 24 * 60 * 60 * 1000;
-  const LOCALE_FALLBACK = {
-    en: 'en-GB',
-    ru: 'ru-RU',
-    sv: 'sv-SE',
-    de: 'de-DE'
-  };
   const optionsConfigCache = new WeakMap();
 
   function safeGetSessionStorage() {
@@ -108,27 +102,12 @@
     return parts.join(', ');
   }
 
-  function getDocumentLocale() {
-    const lang = (document.documentElement.getAttribute('lang') || 'en').toLowerCase();
-    return LOCALE_FALLBACK[lang] || 'en-GB';
-  }
-
   function formatDate(value) {
-    const date = parseISODate(value);
-    if (!date) {
-      return null;
+    if (window.BookingDates && typeof window.BookingDates.toEuropean === 'function') {
+      return window.BookingDates.toEuropean(value) || null;
     }
-
-    try {
-      return new Intl.DateTimeFormat(getDocumentLocale(), {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      }).format(date);
-    } catch (error) {
-      console.warn('Unable to format date', value, error);
-      return null;
-    }
+    const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return match ? match[3] + '/' + match[2] + '/' + match[1] : null;
   }
 
   function getNightlyRate(priceEl) {

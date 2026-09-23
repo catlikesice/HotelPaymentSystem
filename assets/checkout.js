@@ -19,24 +19,11 @@
   }
 
   function formatDate(value) {
-    if (!value) {
-      return '';
+    if (window.BookingDates && typeof window.BookingDates.toEuropean === 'function') {
+      return window.BookingDates.toEuropean(value) || value || '';
     }
-    const parts = String(value).split('-').map(Number);
-    if (parts.length !== 3 || parts.some(Number.isNaN)) {
-      return value;
-    }
-    const date = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
-    try {
-      return new Intl.DateTimeFormat(undefined, {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        timeZone: 'UTC'
-      }).format(date);
-    } catch (error) {
-      return value;
-    }
+    const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return match ? match[3] + '/' + match[2] + '/' + match[1] : (value || '');
   }
 
   function formatAmount(amount, currency, decimals) {
