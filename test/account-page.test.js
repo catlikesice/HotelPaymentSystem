@@ -79,23 +79,21 @@ test('signed-in navbar account dropdown toggles on the account page', () => {
 test('nav translations still include View account for the account dropdown', () => {
   const source = fs.readFileSync(path.join(root, 'assets/nav-translations.js'), 'utf8');
   assert.match(source, /viewAccount: 'View account'/);
-  assert.match(source, /viewDetails: 'View details'/);
+  assert.doesNotMatch(source, /viewDetails/);
   assert.doesNotMatch(source, /data-login-account/);
 });
 
-test('account portal dropdown opens underneath the account control on hover', () => {
+test('account portal does not show a name dropdown above the dashboard', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
   const source = fs.readFileSync(path.join(root, 'assets/account-portal.js'), 'utf8');
-  assert.match(source, /portal-account-menu/);
-  assert.match(source, /mouseenter/);
-  assert.match(source, /mouseleave/);
-  assert.match(source, /setOpen\(true\)/);
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
-  const accountRule = css.match(/\.portal-account\s*\{[^}]+\}/);
-  assert.ok(accountRule, 'expected a .portal-account rule');
-  assert.match(accountRule[0], /z-index:\s*30/);
-  assert.match(css, /\.portal-account:hover\s*>\s*\.portal-account__menu/);
-  assert.doesNotMatch(css, /@media \(hover: hover\) and \(pointer: fine\) \{\s*\.portal-account:hover/s);
-  assert.match(css, /\.portal-account__menu::before/);
+  assert.doesNotMatch(html, /class="portal-account"/);
+  assert.doesNotMatch(html, /id="portal-account-menu"/);
+  assert.doesNotMatch(html, /data-portal-account-label/);
+  assert.doesNotMatch(source, /portal-account-menu/);
+  assert.doesNotMatch(css, /\.portal-account/);
+  assert.match(html, /data-portal-section="profile"/);
+  assert.match(html, /id="account-logout"/);
 });
 
 test('account portal does not include a search bar', () => {
@@ -105,15 +103,14 @@ test('account portal does not include a search bar', () => {
   assert.doesNotMatch(html, /Search stays, cities or events/);
 });
 
-test('account portal has an account dropdown with details and logout links', () => {
+test('account portal keeps profile and logout without a name menu', () => {
   const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
-  assert.match(html, /class="portal-account"/);
-  assert.match(html, /id="portal-account-menu"/);
-  assert.match(html, /data-portal-account="details"/);
+  assert.doesNotMatch(html, /class="portal-account"/);
+  assert.doesNotMatch(html, /View details/);
+  assert.match(html, /data-portal-section="profile"/);
   assert.match(html, /href="#profile"/);
-  assert.match(html, /View details/);
-  assert.match(html, /data-portal-account="logout"/);
-  assert.match(html, /href="logout\.html"/);
+  assert.match(html, /id="account-logout"/);
+  assert.match(html, /Log out/);
 });
 
 test('logout page signs the visitor out and returns them to login', () => {
@@ -132,8 +129,7 @@ test('account styles hide empty profile rows', () => {
   assert.match(css, /account-dl > div\[hidden\]/);
   assert.match(css, /\.portal-nav/);
   assert.match(css, /\.portal-stats/);
-  assert.match(css, /\.portal-account/);
-  assert.match(css, /\.portal-account__menu/);
+  assert.doesNotMatch(css, /\.portal-account/);
 });
 
 test('account portal keeps the sidebar on screen while the main column scrolls', () => {
