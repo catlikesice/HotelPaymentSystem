@@ -40,6 +40,23 @@ test('site HTML documents declare a mobile viewport', () => {
   });
 });
 
+test('culture blog copy stays inside the centered column', () => {
+  const html = fs.readFileSync(path.join(root, 'culture-blog.html'), 'utf8');
+  const mainStart = html.indexOf('<main class="content culture-blog"');
+  const mainEnd = html.indexOf('</main>');
+  assert.ok(mainStart !== -1 && mainEnd > mainStart, 'blog page should wrap copy in the centered main column');
+  const main = html.slice(mainStart, mainEnd);
+  assert.match(main, /class="blog-intro"/);
+  assert.match(main, /class="blog-posts"/);
+  assert.match(main, /class="blog-post"/);
+  assert.match(main, /id="contact" class="blog-contact"/);
+  assert.equal(main.includes('<footer'), false, 'footer stays outside the article column');
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /\.culture-blog\s*\{[^}]*text-align:\s*center/s);
+  assert.match(css, /\.culture-blog \.blog-post\s*\{[^}]*text-align:\s*center/s);
+  assert.match(css, /\.culture-blog \.blog-posts\s*\{[^}]*max-width:\s*min\(860px,\s*100%\)/s);
+});
+
 test('shared stylesheet contains overflow containment for cards, images, and URLs', () => {
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
   assert.match(css, /overflow-x:\s*clip/);

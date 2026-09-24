@@ -680,12 +680,16 @@ header a { position: static !important; left: auto !important; right: auto !impo
   margin: 0 auto;
   padding: 2rem var(--gutter) 3rem;
   color: var(--color-text);
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 .culture-blog .blog-intro {
-  max-width: 760px;
+  max-width: min(760px, 100%);
   margin: 0 auto 2rem;
   text-align: center;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .culture-blog .blog-intro h2 {
@@ -703,7 +707,8 @@ header a { position: static !important; left: auto !important; right: auto !impo
   display: grid;
   gap: 1.25rem;
   margin: 0 auto 2.5rem;
-  max-width: 860px;
+  max-width: min(860px, 100%);
+  min-width: 0;
 }
 
 .culture-blog .blog-post {
@@ -711,6 +716,9 @@ header a { position: static !important; left: auto !important; right: auto !impo
   border: 1px solid rgba(35, 68, 26, 0.16);
   border-radius: 12px;
   padding: 1.4rem 1.35rem;
+  min-width: 0;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
 .culture-blog .blog-post h3 {
@@ -726,10 +734,12 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 
 .culture-blog .blog-contact {
-  max-width: 760px;
+  max-width: min(760px, 100%);
   margin: 0 auto;
   text-align: center;
   padding: 1.5rem 0 0.5rem;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .culture-blog .blog-contact h2 {
