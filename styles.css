@@ -3484,6 +3484,31 @@ main a {
   word-break: break-word;
 }
 
+/* The green footer band reaches both edges of the page. Reference copy
+   stays in the same column as the article above it. */
+footer {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+footer .tagline,
+footer .references,
+footer .wiki-tag,
+.site-footer .footer-inner {
+  max-width: min(var(--max-width), 56rem);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.5rem, 8vw, 4.5rem);
+  padding-right: clamp(1.5rem, 8vw, 4.5rem);
+  box-sizing: border-box;
+}
+
+footer .references {
+  display: block;
+}
+
 .booking-container,
 .booking-layout,
 .booking-content,
