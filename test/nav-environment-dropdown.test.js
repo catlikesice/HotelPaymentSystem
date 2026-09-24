@@ -54,6 +54,20 @@ test('navbar account control has a dropdown under the accounts portal', () => {
   assert.doesNotMatch(rail, /hover: hover/);
 });
 
+test('reference footers sit outside the centered article column', () => {
+  ['crypto-environment.html', 'hotel-chains.html'].forEach((fileName) => {
+    const html = fs.readFileSync(path.join(root, fileName), 'utf8');
+    const mainStart = html.indexOf('<main');
+    const mainEnd = html.indexOf('</main>');
+    assert.ok(mainStart !== -1 && mainEnd > mainStart, `${fileName} should have a main element`);
+    const main = html.slice(mainStart, mainEnd);
+    assert.equal(main.includes('<footer'), false, `${fileName} should keep the green footer outside the article column`);
+    assert.match(html.slice(mainEnd), /<footer>/, `${fileName} should still render a footer`);
+  });
+  const contact = fs.readFileSync(path.join(root, 'contact us business client.html'), 'utf8');
+  assert.doesNotMatch(contact, /<footer[^>]*\bcontainer\b/);
+});
+
 test('nav translations include Environmental Mission and About EcoTourism', () => {
   const source = fs.readFileSync(path.join(root, 'assets/nav-translations.js'), 'utf8');
   assert.match(source, /environmentMission: 'Environmental Mission'/);
