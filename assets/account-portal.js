@@ -360,75 +360,8 @@
     });
   }
 
-  function bindAccountMenu() {
-    const menu = document.getElementById('portal-account-menu');
-    if (!menu || menu.getAttribute('data-bound')) {
-      return;
-    }
-    menu.setAttribute('data-bound', 'true');
-    const summary = menu.querySelector('summary');
-
-    function syncExpanded() {
-      if (summary) {
-        summary.setAttribute('aria-expanded', menu.hasAttribute('open') ? 'true' : 'false');
-      }
-    }
-
-    function setOpen(isOpen) {
-      if (isOpen) {
-        menu.setAttribute('open', '');
-      } else {
-        menu.removeAttribute('open');
-      }
-      syncExpanded();
-    }
-
-    menu.addEventListener('toggle', function () {
-      if (!menu.hasAttribute('open') && menu.matches(':hover')) {
-        setOpen(true);
-        return;
-      }
-      syncExpanded();
-    });
-    syncExpanded();
-
-    menu.addEventListener('mouseenter', function () {
-      setOpen(true);
-    });
-
-    menu.addEventListener('mouseleave', function () {
-      setOpen(false);
-    });
-
-    menu.addEventListener('click', function (event) {
-      if (event.target.closest('a')) {
-        menu.removeAttribute('open');
-        syncExpanded();
-      }
-    });
-
-    document.addEventListener('click', function (event) {
-      if (!menu.hasAttribute('open') || menu.contains(event.target)) {
-        return;
-      }
-      menu.removeAttribute('open');
-      syncExpanded();
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key !== 'Escape' || !menu.hasAttribute('open')) {
-        return;
-      }
-      menu.removeAttribute('open');
-      syncExpanded();
-      if (summary) {
-        summary.focus();
-      }
-    });
-  }
-
   function bindNav() {
-    const roots = document.querySelectorAll('.portal-nav, .portal-account');
+    const roots = document.querySelectorAll('.portal-nav');
     roots.forEach(function (root) {
       if (!root || root.getAttribute('data-section-bound')) {
         return;
@@ -457,7 +390,6 @@
         showSection(currentSection());
       });
     }
-    bindAccountMenu();
   }
 
   function renderLists(bookings) {

@@ -708,11 +708,6 @@
     const firstName = String(user.name || '').trim().split(/\s+/)[0] || 'there';
     const isBusiness = user.accountType === 'business';
     setAccountText('[data-account-greeting]', 'Welcome, ' + firstName);
-    const accountToggle = document.querySelector('[data-portal-account-label]');
-    if (accountToggle) {
-      accountToggle.textContent = firstName || 'Account';
-      accountToggle.setAttribute('aria-label', 'Account menu for ' + (user.name || firstName));
-    }
     setAccountText('[data-account-type-badge]', isBusiness ? 'Business account' : 'Guest account');
     setAccountText(
       '[data-account-lead]',
