@@ -76,6 +76,16 @@ test('signed-in navbar account dropdown toggles on the account page', () => {
   assert.doesNotMatch(source, /login-popup__account/);
 });
 
+test('account dropdown shows the signed-in full name instead of the email', () => {
+  const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  assert.match(source, /data-signed-in-name/);
+  assert.match(source, /escapeHtml\(user\.name\)/);
+  assert.doesNotMatch(
+    source,
+    /nav-account-status[\s\S]{0,180}escapeHtml\(user\.email\)/
+  );
+});
+
 test('nav translations still include View account for the account dropdown', () => {
   const source = fs.readFileSync(path.join(root, 'assets/nav-translations.js'), 'utf8');
   assert.match(source, /viewAccount: 'View account'/);
