@@ -3508,6 +3508,29 @@ main.content + footer {
   margin-top: 2.5rem;
 }
 
+/* Short pages (register, login, and other auth screens) were ending the
+   green footer before the viewport, so the yellow body background showed
+   underneath it. Stretch those pages and let the block above the footer
+   absorb the leftover space, which keeps the footer's own top margin.
+   The signed-in portal already fills the viewport. */
+body:not(.portal-open) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body:not(.portal-open) > header,
+body:not(.portal-open) > main,
+body:not(.portal-open) > section,
+body:not(.portal-open) > footer {
+  min-width: 0;
+}
+
+body:not(.portal-open) > :not(footer):has(+ footer) {
+  flex: 1 0 auto;
+}
+
 footer .tagline,
 footer .references,
 footer .wiki-tag,

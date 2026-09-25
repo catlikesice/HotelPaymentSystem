@@ -57,6 +57,19 @@ test('culture blog copy stays inside the centered column', () => {
   assert.match(css, /\.culture-blog \.blog-posts\s*\{[^}]*max-width:\s*min\(860px,\s*100%\)/s);
 });
 
+test('short pages pin the footer to the bottom of the viewport', () => {
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /body:not\(\.portal-open\)\s*\{[^}]*display:\s*flex/s);
+  assert.match(css, /body:not\(\.portal-open\)\s*\{[^}]*min-height:\s*100dvh/s);
+  assert.match(
+    css,
+    /body:not\(\.portal-open\)\s*>\s*:not\(footer\):has\(\+ footer\)\s*\{[^}]*flex:\s*1 0 auto/s
+  );
+  const register = fs.readFileSync(path.join(root, 'register.html'), 'utf8');
+  assert.match(register, /<footer>/);
+  assert.equal(register.includes('class="portal-open"'), false);
+});
+
 test('shared stylesheet contains overflow containment for cards, images, and URLs', () => {
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
   assert.match(css, /overflow-x:\s*clip/);
