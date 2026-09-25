@@ -3495,12 +3495,17 @@ main a {
 }
 
 /* The green footer band reaches both edges of the page. Reference copy
-   stays in the same column as the article above it. */
+   stays in the same column as the article above it.
+   Space above the band so a closing button does not sit flush against it. */
 footer {
   width: 100%;
   max-width: none;
   margin-left: 0;
   margin-right: 0;
+}
+
+main.content + footer {
+  margin-top: 2.5rem;
 }
 
 footer .tagline,
