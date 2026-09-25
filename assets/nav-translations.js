@@ -305,6 +305,11 @@
         if (logoutBtn && mapping.logOut) {
           logoutBtn.textContent = mapping.logOut;
         }
+
+        const signedInPrefix = accountMenu.querySelector('[data-signed-in-prefix]');
+        if (signedInPrefix && mapping.signedInAs) {
+          signedInPrefix.textContent = mapping.signedInAs;
+        }
       }
     }
 

@@ -535,11 +535,13 @@
       }
 
       if (user && user.name) {
+        const signedInPrefix = (mapping && mapping.signedInAs) || 'Signed in as';
         summary.textContent = user.name.split(' ')[0];
         summary.setAttribute('aria-label', 'Account menu for ' + user.name);
         menu.innerHTML =
           '<a href="account.html" role="menuitem" class="nav-account-page">View account</a>' +
-          '<span class="nav-account-status">Signed in as ' + escapeHtml(user.email) + '</span>' +
+          '<span class="nav-account-status"><span data-signed-in-prefix>' + escapeHtml(signedInPrefix) + '</span> ' +
+          '<span data-signed-in-name>' + escapeHtml(user.name) + '</span></span>' +
           '<button type="button" role="menuitem" class="nav-account-logout">Log out</button>';
         const logoutBtn = menu.querySelector('.nav-account-logout');
         if (logoutBtn) {
