@@ -88,6 +88,21 @@
         </div>
 
         <div class="form-group">
+          <label for="birthDate">Date of birth <span class="required" aria-hidden="true">*</span></label>
+          <div class="date-field" data-birth-calendar>
+            <input id="birthDate" name="birthDate" class="date-field__text" type="text" required inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="bday" maxlength="10" spellcheck="false" aria-describedby="birthDate-hint" />
+            <button type="button" class="date-field__button" id="birthDate-calendar" data-birth-calendar-open aria-label="Open birth date calendar" aria-haspopup="dialog" aria-expanded="false" aria-controls="birthDate-dialog">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                <rect x="3.5" y="5" width="17" height="15.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+                <path d="M3.5 10h17M8 3.5v4M16 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </button>
+            <div id="birthDate-dialog" class="birth-calendar" data-birth-calendar-dialog role="dialog" aria-label="Choose birth date" hidden></div>
+          </div>
+          <span id="birthDate-hint" class="field-hint">Open the calendar or type the date as day/month/year.</span>
+        </div>
+
+        <div class="form-group">
           <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
           <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
         </div>
@@ -118,6 +133,8 @@
   <script src="site-preferences.js"></script>
   <script src="assets/nav-translations.js"></script>
   <script src="assets/nav-rail.js"></script>
+  <script src="assets/booking-dates.js"></script>
+  <script src="assets/birth-date-calendar.js"></script>
   <script src="assets/local-auth.js"></script>
   <script src="assets/auth-client.js"></script>
   <script>

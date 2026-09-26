@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
 const CountryAddress = require('../assets/country-address');
+const BookingDates = require('../assets/booking-dates');
 
 const router = express.Router();
 
@@ -89,6 +90,7 @@ function publicUser(user) {
     city: user.city || '',
     address: user.address || null,
     addressFormatted: user.addressFormatted || '',
+    birthDate: user.birthDate || '',
     createdAt: user.createdAt
   };
 }
@@ -153,6 +155,7 @@ router.post('/register', authLimiter, (req, res) => {
   let city = String(body.city || '').trim();
   let address = body.address && typeof body.address === 'object' ? body.address : null;
   let addressFormatted = String(body.addressFormatted || '').trim();
+  let birthDate = '';
 
   if (!name || name.length < 2) {
     return res.status(400).json({ error: 'Please enter your full name (at least 2 characters).' });
@@ -180,6 +183,12 @@ router.post('/register', authLimiter, (req, res) => {
     city = addressResult.values.city || city;
     address = addressResult.values;
     addressFormatted = addressResult.formatted;
+  } else if (String(body.birthDate || '').trim()) {
+    const birthResult = BookingDates.validateBirthDate(body.birthDate);
+    if (!birthResult.ok) {
+      return res.status(400).json({ error: birthResult.message });
+    }
+    birthDate = birthResult.iso;
   }
 
   const users = readJson(USERS_FILE, []);
@@ -202,6 +211,7 @@ router.post('/register', authLimiter, (req, res) => {
     city,
     address,
     addressFormatted,
+    birthDate,
     passwordSalt: salt,
     passwordHash: hash,
     createdAt: new Date().toISOString()
