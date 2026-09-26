@@ -43,6 +43,29 @@ test('creates a guest account locally and logs back in', () => {
   assert.equal(login.user.name, 'Oliver Mark Killington');
 });
 
+test('stores a personal birth date and rejects a future one', () => {
+  const auth = LocalAuth.create({ storage: memoryStorage() });
+  const created = auth.register({
+    name: 'Ada Guest',
+    email: 'ada-birth@example.com',
+    password: 'password123',
+    birthDate: '15/03/1990'
+  });
+
+  assert.equal(created.user.birthDate, '1990-03-15');
+  assert.equal(auth.me(created.token).user.birthDate, '1990-03-15');
+
+  assert.throws(
+    () => auth.register({
+      name: 'Future Guest',
+      email: 'future@example.com',
+      password: 'password123',
+      birthDate: '01/01/2999'
+    }),
+    (error) => error.status === 400 && /future/i.test(error.message)
+  );
+});
+
 test('rejects duplicate local emails and wrong passwords', () => {
   const auth = LocalAuth.create({ storage: memoryStorage() });
   auth.register({

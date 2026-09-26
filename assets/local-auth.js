@@ -83,8 +83,36 @@
       city: user.city || '',
       address: user.address || null,
       addressFormatted: user.addressFormatted || '',
+      birthDate: user.birthDate || '',
       createdAt: user.createdAt
     };
+  }
+
+  function bookingDatesApi() {
+    if (typeof globalThis !== 'undefined' && globalThis.BookingDates &&
+        typeof globalThis.BookingDates.validateBirthDate === 'function') {
+      return globalThis.BookingDates;
+    }
+    if (typeof require === 'function') {
+      return require('./booking-dates');
+    }
+    return null;
+  }
+
+  function normalizeBirthDate(value) {
+    var text = String(value || '').trim();
+    if (!text) {
+      return '';
+    }
+    var dates = bookingDatesApi();
+    if (!dates) {
+      fail(400, 'Please enter a valid birth date (dd/mm/yyyy).');
+    }
+    var result = dates.validateBirthDate(text);
+    if (!result.ok) {
+      fail(400, result.message);
+    }
+    return result.iso;
   }
 
   function readJson(storage, key, fallback) {
@@ -129,6 +157,8 @@
         fail(400, 'Please select a business type.');
       }
 
+      var birthDate = accountType === 'business' ? '' : normalizeBirthDate(body.birthDate);
+
       var users = readJson(storage, USERS_KEY, []);
       if (users.some(function (user) { return user.email === email; })) {
         fail(409, 'An account with this email already exists.');
@@ -149,6 +179,7 @@
         city: String(body.city || '').trim(),
         address: body.address && typeof body.address === 'object' ? body.address : null,
         addressFormatted: String(body.addressFormatted || '').trim(),
+        birthDate: birthDate,
         passwordSalt: hashed.salt,
         passwordHash: hashed.hash,
         createdAt: new Date().toISOString()

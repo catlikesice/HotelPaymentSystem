@@ -16,6 +16,22 @@ test('rejects month-first dates that are not valid European dates', () => {
   assert.equal(BookingDates.toISO('29/02/2024'), '2024-02-29');
 });
 
+test('accepts a past birth date and rejects future or impossible days', () => {
+  assert.deepEqual(BookingDates.validateBirthDate('15/03/1990'), {
+    ok: true,
+    empty: false,
+    iso: '1990-03-15',
+    message: ''
+  });
+  assert.equal(BookingDates.validateBirthDate('1990-03-15').ok, true);
+  assert.equal(BookingDates.validateBirthDate('').empty, true);
+  assert.equal(BookingDates.validateBirthDate('31/02/1990').ok, false);
+  assert.equal(BookingDates.validateBirthDate('01/01/1899').ok, false);
+  assert.match(BookingDates.validateBirthDate('01/01/1899').message, /1900/);
+  assert.equal(BookingDates.validateBirthDate('01/01/2999').ok, false);
+  assert.match(BookingDates.validateBirthDate('01/01/2999').message, /future/);
+});
+
 test('masks typed digits into dd/mm/yyyy and keeps explicit slashes', () => {
   assert.equal(BookingDates.maskInput('10052026'), '10/05/2026');
   assert.equal(BookingDates.maskInput('105'), '10/5');

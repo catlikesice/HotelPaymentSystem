@@ -14,6 +14,8 @@ test('account page shows a guest prompt and a signed-in dashboard', () => {
   assert.match(html, /href="login\.html"/);
   assert.match(html, /data-account-name/);
   assert.match(html, /data-account-email/);
+  assert.match(html, /data-account-row="birthDate"/);
+  assert.match(html, /data-account-birth-date/);
   assert.match(html, /id="account-bookings-title"/);
   assert.match(html, /id="account-logout"/);
   assert.match(html, /aria-current="page"/);
@@ -53,6 +55,7 @@ test('login and register send people to the account page after success', () => {
   assert.match(source, /function bindAccountPage/);
   assert.match(source, /function listBookings/);
   assert.match(source, /function createBooking/);
+  assert.match(source, /setAccountRow\('birthDate'/);
 });
 
 test('homepage login popup no longer includes a View account button', () => {

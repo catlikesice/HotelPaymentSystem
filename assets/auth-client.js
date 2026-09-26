@@ -691,6 +691,22 @@
     return labels[value] || value || '';
   }
 
+  function formatCalendarDate(iso) {
+    const match = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) {
+      return '';
+    }
+    const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+    if (Number.isNaN(date.getTime())) {
+      return '';
+    }
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
   function formatJoinedDate(iso) {
     if (!iso) {
       return 'Just now';
@@ -720,6 +736,7 @@
     setAccountText('[data-account-name]', user.name || '');
     setAccountText('[data-account-email]', user.email || '');
     setAccountText('[data-account-created]', formatJoinedDate(user.createdAt));
+    setAccountRow('birthDate', formatCalendarDate(user.birthDate));
     setAccountRow('phone', user.phone);
 
     const businessCard = document.querySelector('[data-account-business]');
@@ -865,6 +882,32 @@
             extra[fieldName] = String(field.value).trim();
           }
         });
+
+        const birthDateInput = registerForm.elements.birthDate;
+        if (birthDateInput) {
+          const dates = window.BookingDates;
+          const birthResult = dates && typeof dates.validateBirthDate === 'function'
+            ? dates.validateBirthDate(birthDateInput.value)
+            : null;
+          if (!birthResult) {
+            if (status) {
+              status.textContent = 'Birth date calendar failed to load. Please refresh the page.';
+              status.className = 'auth-status auth-status--error';
+            }
+            return;
+          }
+          if (!birthResult.ok) {
+            birthDateInput.setCustomValidity(birthResult.message);
+            if (status) {
+              status.textContent = birthResult.message;
+              status.className = 'auth-status auth-status--error';
+            }
+            birthDateInput.reportValidity();
+            return;
+          }
+          birthDateInput.setCustomValidity('');
+          extra.birthDate = birthResult.iso;
+        }
 
         if (!registerForm.checkValidity()) {
           registerForm.reportValidity();

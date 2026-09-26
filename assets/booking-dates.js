@@ -54,6 +54,50 @@
     return parts[2] + '/' + parts[1] + '/' + parts[0];
   }
 
+  function localTodayISO() {
+    var now = new Date();
+    return buildISO(now.getFullYear(), now.getMonth() + 1, now.getDate());
+  }
+
+  function validateBirthDate(value) {
+    var text = String(value || '').trim();
+    if (!text) {
+      return {
+        ok: false,
+        empty: true,
+        iso: '',
+        message: 'Please choose your birth date.'
+      };
+    }
+    var iso = toISO(text);
+    if (!iso) {
+      return {
+        ok: false,
+        empty: false,
+        iso: '',
+        message: 'Please enter a valid birth date (dd/mm/yyyy).'
+      };
+    }
+    var year = Number(iso.slice(0, 4));
+    if (year < 1900) {
+      return {
+        ok: false,
+        empty: false,
+        iso: '',
+        message: 'Please enter a birth year from 1900 onward.'
+      };
+    }
+    if (iso > localTodayISO()) {
+      return {
+        ok: false,
+        empty: false,
+        iso: '',
+        message: 'Birth date cannot be in the future.'
+      };
+    }
+    return { ok: true, empty: false, iso: iso, message: '' };
+  }
+
   function maskInput(raw) {
     var text = String(raw || '');
     var trimmed = text.trim();
@@ -89,6 +133,8 @@
     toISO: toISO,
     toEuropean: toEuropean,
     maskInput: maskInput,
-    isRealDate: isRealDate
+    isRealDate: isRealDate,
+    localTodayISO: localTodayISO,
+    validateBirthDate: validateBirthDate
   };
 });

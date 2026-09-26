@@ -86,6 +86,35 @@ test('registers a guest account, logs in, and returns the public profile', async
   assert.equal(login.data.user.name, 'Ada Guest');
 });
 
+test('registers a guest birth date and rejects a future date', async () => {
+  const created = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'Ada Guest',
+      email: 'birth-' + Date.now() + '@example.com',
+      password: 'password123',
+      birthDate: '15/03/1990'
+    })
+  });
+
+  assert.equal(created.status, 201, created.data && created.data.error);
+  assert.equal(created.data.user.birthDate, '1990-03-15');
+
+  const future = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'Future Guest',
+      email: 'future-' + Date.now() + '@example.com',
+      password: 'password123',
+      birthDate: '01/01/2999'
+    })
+  });
+  assert.equal(future.status, 400);
+  assert.match(future.data.error, /future/i);
+});
+
 test('registers a business account with a local postal address', async () => {
   const created = await jsonRequest('/api/auth/register', {
     method: 'POST',
