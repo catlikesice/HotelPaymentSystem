@@ -282,9 +282,7 @@
         stayMount.appendChild(bookingCard(stay));
       } else {
         stayMount.appendChild(emptyMessage(
-          'You have not booked a stay yet. Search Northern Europe and complete checkout to see it here.',
-          'search.html',
-          'Find a stay'
+          'You have not booked a stay yet. Search Northern Europe and complete checkout to see it here.'
         ));
       }
     }
@@ -297,9 +295,7 @@
         eventsMount.appendChild(emptyMessage('Book a stay first, then add event tickets for those dates.'));
       } else if (!linkedEvents.length) {
         eventsMount.appendChild(emptyMessage(
-          'No event tickets are booked for this stay.',
-          'search.html',
-          'Explore events'
+          'No event tickets are booked for this stay.'
         ));
       } else {
         linkedEvents.forEach(function (booking) {
@@ -398,23 +394,17 @@
     fillList(
       document.querySelector('[data-trip-list]'),
       bookings.filter(isUpcoming),
-      'You have no upcoming trips. Book a stay and it will appear here after checkout.',
-      'search.html',
-      'Find a stay'
+      'You have no upcoming trips. Book a stay and it will appear here after checkout.'
     );
     fillList(
       document.querySelector('[data-stay-list]'),
       stays,
-      'No accommodation bookings yet.',
-      'search.html',
-      'Find a stay'
+      'No accommodation bookings yet.'
     );
     fillList(
       document.querySelector('[data-event-list]'),
       events,
-      'No event tickets have been booked on this account.',
-      'search.html',
-      'Explore events'
+      'No event tickets have been booked on this account.'
     );
     renderPayments(bookings);
   }
