@@ -259,6 +259,199 @@
         </div>
       </div>
     </section>
+
+    <section id="business-dashboard" class="portal" hidden aria-labelledby="business-dashboard-title">
+      <div class="portal-top">
+        <a class="portal-brand" href="index.html">Boreal Horizons</a>
+      </div>
+
+      <div class="portal-shell">
+        <nav class="portal-nav" aria-label="Business account">
+          <a href="#overview" data-portal-section="overview">Overview</a>
+          <a href="#accommodation" data-portal-section="accommodation" class="is-active" aria-current="page">Accommodation</a>
+          <a href="#profile" data-portal-section="profile">Profile &amp; settings</a>
+        </nav>
+
+        <div class="portal-main">
+          <section data-portal-panel="overview" hidden aria-labelledby="business-dashboard-title">
+            <div class="portal-hero">
+              <div>
+                <p class="account-eyebrow" data-business-greeting>Signed in</p>
+                <h1 id="business-dashboard-title" data-business-company>Your properties</h1>
+                <p class="portal-hero__lead">Upload where each accommodation is so guests can find it.</p>
+              </div>
+              <button type="button" class="btn" id="business-add-location">Add a location</button>
+            </div>
+
+            <div class="portal-stats">
+              <article class="portal-stat">
+                <p class="portal-stat__label">Locations</p>
+                <p class="portal-stat__value" data-property-count>0</p>
+                <p class="portal-stat__meta">Saved on this account</p>
+              </article>
+              <article class="portal-stat">
+                <p class="portal-stat__label">Places</p>
+                <p class="portal-stat__value portal-stat__value--text" data-property-places>No locations yet</p>
+              </article>
+              <article class="portal-stat">
+                <p class="portal-stat__label">Latest</p>
+                <p class="portal-stat__value portal-stat__value--text" data-property-latest>—</p>
+                <p class="portal-stat__meta" data-property-latest-meta>Save a location to see it here</p>
+              </article>
+            </div>
+          </section>
+
+          <section data-portal-panel="accommodation" aria-labelledby="business-stays-title">
+            <h1 id="business-stays-title">Accommodation</h1>
+            <p class="portal-hero__lead">Add the local address and a short note that tells guests where the property is.</p>
+            <div data-property-list></div>
+
+            <form id="property-form" class="auth-form portal-form" novalidate>
+              <h2 id="property-form-title">Add accommodation location</h2>
+              <p class="auth-status" id="property-form-status" role="status" aria-live="polite"></p>
+
+              <fieldset>
+                <legend>Property</legend>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="companyName">Accommodation name <span class="required" aria-hidden="true">*</span></label>
+                    <input id="companyName" name="companyName" type="text" required minlength="2" maxlength="160" autocomplete="organization" placeholder="Property name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="propertyType">Accommodation type <span class="required" aria-hidden="true">*</span></label>
+                    <select id="propertyType" name="propertyType" required>
+                      <option value="" selected disabled>Select one</option>
+                      <option value="hotel">Hotel</option>
+                      <option value="hostel">Hostel</option>
+                      <option value="guesthouse">Guesthouse</option>
+                      <option value="apartment">Apartment</option>
+                      <option value="cabin">Cabin</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea id="description" name="description" rows="3" maxlength="600" placeholder="A short description of the stay"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="+371 20000000" />
+                  </div>
+                  <div class="form-group">
+                    <label for="website">Website</label>
+                    <input id="website" name="website" type="url" autocomplete="url" maxlength="180" placeholder="https://example.com" />
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Where it is</legend>
+                <div class="form-group">
+                  <label for="country">Country / region <span class="required" aria-hidden="true">*</span></label>
+                  <select id="country" name="country" required autocomplete="country-name">
+                    <option value="">Select country or region</option>
+                  </select>
+                </div>
+                <div id="address-fields" class="address-fields"></div>
+                <div id="address-preview" class="address-preview" hidden>
+                  <p class="address-preview__label">Postal address</p>
+                  <pre id="address-preview-text" class="address-preview__text"></pre>
+                </div>
+                <div class="form-group">
+                  <label for="directions">Location details <span class="required" aria-hidden="true">*</span></label>
+                  <textarea id="directions" name="directions" rows="4" required minlength="8" maxlength="800" placeholder="Entrance, landmarks, and how guests reach the property."></textarea>
+                  <small class="field-hint">Tell guests where the accommodation is: the entrance, a landmark, or the walk from the station.</small>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Map pin</legend>
+                <p class="address-hint">Optional. Decimal degrees, for example 56.9496 and 24.1052.</p>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input id="latitude" name="latitude" type="text" inputmode="decimal" placeholder="56.9496" />
+                  </div>
+                  <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input id="longitude" name="longitude" type="text" inputmode="decimal" placeholder="24.1052" />
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="portal-form__actions">
+                <button class="btn" type="submit" id="property-submit">Save location</button>
+                <button class="btn btn--secondary" type="button" id="property-cancel" hidden>Cancel</button>
+              </div>
+            </form>
+          </section>
+
+          <section data-portal-panel="profile" hidden aria-labelledby="business-profile-heading">
+            <div class="account-heading">
+              <h1 id="business-profile-heading">Profile &amp; settings</h1>
+              <p class="account-badge">Business account</p>
+            </div>
+            <p class="auth-lead">Company details from registration. Accommodation locations are managed under Accommodation.</p>
+
+            <div class="account-grid">
+              <article class="account-card" aria-labelledby="business-contact-title">
+                <h2 id="business-contact-title">Primary contact</h2>
+                <dl class="account-dl">
+                  <div>
+                    <dt>Name</dt>
+                    <dd data-business-name></dd>
+                  </div>
+                  <div>
+                    <dt>Email</dt>
+                    <dd data-business-email></dd>
+                  </div>
+                  <div data-business-row="phone" hidden>
+                    <dt>Phone</dt>
+                    <dd></dd>
+                  </div>
+                  <div>
+                    <dt>Member since</dt>
+                    <dd data-business-created></dd>
+                  </div>
+                </dl>
+              </article>
+
+              <article class="account-card" aria-labelledby="business-company-title">
+                <h2 id="business-company-title">Company</h2>
+                <dl class="account-dl">
+                  <div>
+                    <dt>Company name</dt>
+                    <dd data-business-company-name></dd>
+                  </div>
+                  <div data-business-row="businessType" hidden>
+                    <dt>Business type</dt>
+                    <dd></dd>
+                  </div>
+                  <div data-business-row="vatId" hidden>
+                    <dt>VAT / business ID</dt>
+                    <dd></dd>
+                  </div>
+                  <div data-business-row="website" hidden>
+                    <dt>Website</dt>
+                    <dd></dd>
+                  </div>
+                  <div data-business-row="address" hidden>
+                    <dt>Postal address</dt>
+                    <dd class="account-address"></dd>
+                  </div>
+                </dl>
+              </article>
+            </div>
+
+            <div class="account-actions">
+              <button type="button" class="btn btn--secondary" id="business-logout">Log out</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -271,8 +464,12 @@
   <script src="assets/local-auth.js"></script>
   <script src="assets/booking-records.js"></script>
   <script src="assets/local-bookings.js"></script>
+  <script src="assets/country-address.js"></script>
+  <script src="assets/property-records.js"></script>
+  <script src="assets/local-properties.js"></script>
   <script src="assets/auth-client.js"></script>
   <script src="assets/booking-dates.js"></script>
+  <script src="assets/business-portal.js"></script>
   <script src="assets/account-portal.js"></script>
   <script>
     (function() {
