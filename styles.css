@@ -3408,6 +3408,10 @@ body.portal-open #account-page {
   flex-direction: column;
 }
 
+.portal[hidden] {
+  display: none;
+}
+
 body.portal-open .portal {
   margin-bottom: 0;
   padding-bottom: 1rem;

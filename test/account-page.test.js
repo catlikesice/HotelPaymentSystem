@@ -175,4 +175,5 @@ test('account portal keeps the sidebar on screen while the main column scrolls',
   assert.match(navBlock[0], /max-height:\s*100%/);
   assert.match(navBlock[0], /overflow-y:\s*auto/);
   assert.match(css, /\.portal-main\s*\{[^}]*overflow-y:\s*auto/s);
+  assert.match(css, /\.portal\[hidden\]\s*\{[^}]*display:\s*none/s);
 });
