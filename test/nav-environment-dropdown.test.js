@@ -11,6 +11,7 @@ const navPages = [
   'about-us-and-partners.html',
   'account.html',
   'business-register.html',
+  'contact.html',
   'crypto-environment.html',
   'crypto-reliability.html',
   'culture-blog.html',

@@ -7,6 +7,7 @@ const authRouter = require('./routes/auth');
 const bookingsRouter = require('./routes/bookings');
 const propertiesRouter = require('./routes/properties');
 const searchRouter = require('./routes/search');
+const contactRouter = require('./routes/contact');
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/properties', propertiesRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/contact', contactRouter);
 
 // Serve the static multi-page site alongside the API.
 app.use(express.static(path.join(__dirname)));
