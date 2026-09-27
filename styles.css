@@ -3413,6 +3413,12 @@ body.portal-open #account-page {
   flex-direction: column;
 }
 
+/* display:flex above beats the hidden attribute, which was stacking the
+   guest trip portal on top of the business account. */
+.portal[hidden] {
+  display: none !important;
+}
+
 body.portal-open .portal {
   margin-bottom: 0;
   padding-bottom: 1rem;

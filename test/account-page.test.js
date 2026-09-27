@@ -156,6 +156,20 @@ test('account styles hide empty profile rows', () => {
   assert.doesNotMatch(css, /\.portal-account/);
 });
 
+test('business accounts do not show the guest trip portal', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
+  const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  const businessNav = html.slice(
+    html.indexOf('id="business-dashboard"'),
+    html.indexOf('id="property-form"')
+  );
+  assert.match(source, /dashboard\.hidden = !signedIn \|\| Boolean\(isBusiness\)/);
+  assert.doesNotMatch(businessNav, /data-portal-section="trips"/);
+  assert.doesNotMatch(businessNav, /My trips/);
+  assert.match(css, /\.portal\[hidden\]\s*\{[^}]*display:\s*none\s*!important/s);
+});
+
 test('business accounts get a portal for uploading accommodation locations', () => {
   const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
   const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
