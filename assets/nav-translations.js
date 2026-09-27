@@ -401,7 +401,7 @@
           updateLinkContent(anchor, mapping.aboutEcoTourism, mapping.aboutEcoTourismAria);
         } else if (href === 'crypto-reliability.html') {
           updateLinkContent(anchor, mapping.reliableBlockchain, mapping.reliableBlockchainAria);
-        } else if (href === '#contact' || href === 'index.html#contact') {
+        } else if (href === '#contact' || href === 'index.html#contact' || href === 'contact.html') {
           updateLinkContent(anchor, mapping.contact, mapping.contactAria);
         } else if (href === 'login.html') {
           updateLinkContent(anchor, mapping.login, mapping.loginAria);

@@ -2048,6 +2048,11 @@ body > header.header-bar {
   cursor: pointer;
 }
 
+.contact-question-form textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
 .auth-form input:focus,
 .auth-form select:focus,
 .auth-form textarea:focus {
