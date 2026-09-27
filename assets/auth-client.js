@@ -11,6 +11,9 @@
   const localBookings = (typeof window !== 'undefined' && window.LocalBookings)
     ? window.LocalBookings.create({ storage: window.localStorage })
     : null;
+  const localProperties = (typeof window !== 'undefined' && window.LocalProperties)
+    ? window.LocalProperties.create({ storage: window.localStorage })
+    : null;
 
   function apiBase() {
     if (typeof window === 'undefined') {
@@ -644,6 +647,73 @@
     }
   }
 
+  function requireBusinessUser() {
+    const user = getStoredUser();
+    if (!user || user.accountType !== 'business' || !user.id) {
+      const err = new Error('Business accounts can upload accommodation locations.');
+      err.status = 403;
+      throw err;
+    }
+    return user;
+  }
+
+  function useLocalProperties(error) {
+    return Boolean(localProperties && (shouldUseLocalFallback(error) || isLocalToken(getToken())));
+  }
+
+  async function listProperties() {
+    const user = requireBusinessUser();
+    try {
+      return await request('/api/properties');
+    } catch (error) {
+      if (useLocalProperties(error)) {
+        return { properties: localProperties.list(user.id) };
+      }
+      throw error;
+    }
+  }
+
+  async function saveProperty(payload) {
+    const user = requireBusinessUser();
+    const body = payload || {};
+    const propertyId = String(body.id || '').trim();
+    try {
+      if (propertyId) {
+        return await request('/api/properties/' + encodeURIComponent(propertyId), {
+          method: 'PUT',
+          body: JSON.stringify(body)
+        });
+      }
+      return await request('/api/properties', {
+        method: 'POST',
+        body: JSON.stringify(body)
+      });
+    } catch (error) {
+      if (useLocalProperties(error)) {
+        if (propertyId) {
+          return { property: localProperties.update(user.id, propertyId, body) };
+        }
+        return { property: localProperties.create(user.id, body) };
+      }
+      throw error;
+    }
+  }
+
+  async function deleteProperty(propertyId) {
+    const user = requireBusinessUser();
+    const id = String(propertyId || '').trim();
+    try {
+      return await request('/api/properties/' + encodeURIComponent(id), {
+        method: 'DELETE'
+      });
+    } catch (error) {
+      if (useLocalProperties(error)) {
+        return localProperties.remove(user.id, id);
+      }
+      throw error;
+    }
+  }
+
   function goToAccountPage() {
     if (document.getElementById('checkout-page')) {
       closeLoginPopup();
@@ -755,21 +825,31 @@
   function renderAccountPage(user) {
     const guest = document.getElementById('account-guest');
     const dashboard = document.getElementById('account-dashboard');
+    const business = document.getElementById('business-dashboard');
     if (!guest || !dashboard) {
       return;
     }
-    if (user && user.email) {
-      guest.hidden = true;
-      dashboard.hidden = false;
-      document.body.classList.add('portal-open');
-      fillAccountDashboard(user);
-      if (window.AccountPortal && typeof window.AccountPortal.render === 'function') {
-        window.AccountPortal.render(user);
-      }
-    } else {
-      guest.hidden = false;
-      dashboard.hidden = true;
+    const signedIn = Boolean(user && user.email);
+    const isBusiness = signedIn && user.accountType === 'business' && business;
+    guest.hidden = signedIn;
+    dashboard.hidden = !signedIn || Boolean(isBusiness);
+    if (business) {
+      business.hidden = !isBusiness;
+    }
+    if (!signedIn) {
       document.body.classList.remove('portal-open');
+      return;
+    }
+    document.body.classList.add('portal-open');
+    if (isBusiness) {
+      if (window.BusinessPortal && typeof window.BusinessPortal.render === 'function') {
+        window.BusinessPortal.render(user);
+      }
+      return;
+    }
+    fillAccountDashboard(user);
+    if (window.AccountPortal && typeof window.AccountPortal.render === 'function') {
+      window.AccountPortal.render(user);
     }
   }
 
@@ -803,15 +883,17 @@
       return;
     }
 
-    const logoutBtn = document.getElementById('account-logout');
-    if (logoutBtn && !logoutBtn.getAttribute('data-bound')) {
-      logoutBtn.setAttribute('data-bound', 'true');
-      logoutBtn.addEventListener('click', function() {
-        logout().then(function() {
-          renderAccountPage(null);
+    ['account-logout', 'business-logout'].forEach(function(buttonId) {
+      const logoutBtn = document.getElementById(buttonId);
+      if (logoutBtn && !logoutBtn.getAttribute('data-bound')) {
+        logoutBtn.setAttribute('data-bound', 'true');
+        logoutBtn.addEventListener('click', function() {
+          logout().then(function() {
+            renderAccountPage(null);
+          });
         });
-      });
-    }
+      }
+    });
 
     renderAccountPage(getStoredUser());
     me().then(function(user) {
@@ -1033,6 +1115,9 @@
     getUser: getStoredUser,
     listBookings: listBookings,
     createBooking: createBooking,
+    listProperties: listProperties,
+    saveProperty: saveProperty,
+    deleteProperty: deleteProperty,
     updateAccountNav: updateAccountNav,
     openLoginPopup: openLoginPopup,
     closeLoginPopup: closeLoginPopup,

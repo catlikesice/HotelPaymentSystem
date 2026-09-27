@@ -145,6 +145,27 @@ test('account styles hide empty profile rows', () => {
   assert.doesNotMatch(css, /\.portal-account/);
 });
 
+test('business accounts get a portal for uploading accommodation locations', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
+  const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  const portal = fs.readFileSync(path.join(root, 'assets/business-portal.js'), 'utf8');
+  assert.match(html, /id="business-dashboard"/);
+  assert.match(html, /id="property-form"/);
+  assert.match(html, /id="directions"/);
+  assert.match(html, /Location details/);
+  assert.match(html, /data-property-list/);
+  assert.match(html, /assets\/business-portal\.js/);
+  assert.match(html, /assets\/property-records\.js/);
+  assert.match(html, /assets\/country-address\.js/);
+  assert.match(source, /getElementById\('business-dashboard'\)/);
+  assert.match(source, /function listProperties/);
+  assert.match(source, /function saveProperty/);
+  assert.match(source, /accountType === 'business'/);
+  assert.match(portal, /Save location/);
+  assert.match(portal, /data-property-list/);
+  assert.doesNotMatch(html, /Old Town Riverside Hostel/);
+});
+
 test('account portal keeps the sidebar on screen while the main column scrolls', () => {
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
   assert.match(css, /body\.portal-open\s*\{[^}]*overflow:\s*hidden/s);
