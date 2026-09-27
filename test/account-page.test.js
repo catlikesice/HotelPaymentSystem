@@ -126,6 +126,17 @@ test('account portal keeps profile and logout without a name menu', () => {
   assert.match(html, /Log out/);
 });
 
+test('navbar account logout stays on the current page', () => {
+  const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  const handler = source.match(
+    /class="nav-account-logout"[\s\S]*?addEventListener\('click', function\(\) \{[\s\S]*?\}\);/
+  );
+  assert.ok(handler, 'navbar logout handler should exist');
+  assert.doesNotMatch(handler[0], /index\.html/);
+  assert.doesNotMatch(handler[0], /location\.href/);
+  assert.match(handler[0], /renderAccountPage\(null\)/);
+});
+
 test('logout page signs the visitor out and returns them to login', () => {
   const html = fs.readFileSync(path.join(root, 'logout.html'), 'utf8');
   assert.match(html, /id="logout-page"/);
