@@ -552,8 +552,12 @@
             logoutBtn.textContent = mapping.logOut;
           }
           logoutBtn.addEventListener('click', function() {
+            const dropdown = logoutBtn.closest('.nav-dropdown-account');
+            if (dropdown) {
+              dropdown.removeAttribute('open');
+            }
             logout().then(function() {
-              window.location.href = 'index.html';
+              renderAccountPage(null);
             });
           });
         }
