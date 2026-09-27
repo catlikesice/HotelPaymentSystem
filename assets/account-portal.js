@@ -340,12 +340,20 @@
     return SECTIONS.indexOf(hash) === -1 ? 'overview' : hash;
   }
 
+  function guestDashboard() {
+    return document.getElementById('account-dashboard');
+  }
+
   function showSection(name) {
+    const root = guestDashboard();
+    if (!root) {
+      return;
+    }
     const section = SECTIONS.indexOf(name) === -1 ? 'overview' : name;
-    document.querySelectorAll('[data-portal-panel]').forEach(function (panel) {
+    root.querySelectorAll('[data-portal-panel]').forEach(function (panel) {
       panel.hidden = panel.getAttribute('data-portal-panel') !== section;
     });
-    document.querySelectorAll('[data-portal-section]').forEach(function (link) {
+    root.querySelectorAll('[data-portal-section]').forEach(function (link) {
       const active = link.getAttribute('data-portal-section') === section;
       link.classList.toggle('is-active', active);
       if (active) {
@@ -357,15 +365,13 @@
   }
 
   function bindNav() {
-    const roots = document.querySelectorAll('.portal-nav');
-    roots.forEach(function (root) {
-      if (!root || root.getAttribute('data-section-bound')) {
-        return;
-      }
+    const dashboard = guestDashboard();
+    const root = dashboard ? dashboard.querySelector('.portal-nav') : null;
+    if (root && !root.getAttribute('data-section-bound')) {
       root.setAttribute('data-section-bound', 'true');
       root.addEventListener('click', function (event) {
         const link = event.target.closest('[data-portal-section]');
-        if (!link) {
+        if (!link || !root.contains(link)) {
           return;
         }
         const section = link.getAttribute('data-portal-section');
@@ -379,7 +385,7 @@
           showSection(section);
         }
       });
-    });
+    }
     if (!hashBound) {
       hashBound = true;
       window.addEventListener('hashchange', function () {
