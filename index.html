@@ -5,8 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boreal Horizons – Blockchain Payments for Hospitality</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+      /* Home page only. Shared nav rail is 56px and solid green; double it and use the Abisko aurora. */
+      body.home-page {
+        --nav-rail-height: 112px;
+        --nav-height: 112px;
+        --nav-band-height: 112px;
+      }
+
+      html:has(body.home-page > header > .site-nav .nav-inner) {
+        scroll-padding-top: 8.5rem;
+      }
+
+      body.home-page > header:has(> .site-nav .nav-inner) {
+        background-color: #07140f !important;
+        background-image: url("Aurora_Abisko_hero_1920x548.jpg") !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        background-size: cover !important;
+      }
+
+      body.home-page > header:has(> .site-nav .nav-inner) > .site-nav,
+      body.home-page > header:has(> .site-nav .nav-inner) .site-nav {
+        background: transparent !important;
+        background-image: none !important;
+      }
+    </style>
 </head>
-<body>
+<body class="home-page">
     <header>
         <!-- Navigation bar at top -->
         <nav class="site-nav" aria-label="Primary navigation">
