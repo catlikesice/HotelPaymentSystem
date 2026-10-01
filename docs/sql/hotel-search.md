@@ -4,7 +4,9 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. Fold accents in application code before the query. SQLite has no `unaccent`.
 
-The static catalog is 55 cities and 146 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, and Finland. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
+The static catalog is 56 cities and 152 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
+
+Šiauliai, the Odense hotels, and Hotel d’Angleterre already have pages, so they live in the static catalog rather than the pageless list. Šiauliai is `šiauliai.htm`. The Odense hotels use `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`.
 
 ## What a search is
 
@@ -178,6 +180,18 @@ Hotels that only appear on a city page are the other case. They have a `page_url
 | Porvoo | Finland | Porvoo Old Town Hotel |
 | Kuopio | Finland | Kuopio Lakefront Hotel |
 | Savonlinna | Finland | Savonlinna Castle Hotel |
+| Jukkasjärvi | Sweden | Icehotel Jukkasjärvi |
+| Gjógv | Faroe Islands | Gjógv Guesthouse |
+| Saksun | Faroe Islands | Saksun Turf House |
+| Mykines | Faroe Islands | Mykines Puffin Lodge |
+| Nólsoy | Faroe Islands | Nólsoy Harbour House |
+| Vágar | Faroe Islands | Vágar Cliff Hotel |
+| Streymoy | Faroe Islands | Streymoy Valley Inn |
+| Eysturoy | Faroe Islands | Eysturoy Sound Hotel |
+| Ny-Ålesund | Svalbard | Ny-Ålesund Polar Lodge |
+| Kastelholm | Åland Islands | Kastelholm Castle Inn |
+| Bomarsund | Åland Islands | Bomarsund Fortress House |
+| Isle of Skye | Scotland | Skye Cuillin Hotel |
 
 The results card still renders. When `url` is null and the hotel's `cityUrl` is also null, the card says the place has no separate page. When the hotel has no page but the city does, the card links to `cityUrl`.
 

@@ -342,6 +342,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Šiauliai",
+      "city": "Šiauliai",
+      "country": "Lithuania",
+      "url": "šiauliai.htm",
+      "description": "Browse hotels in Šiauliai, Lithuania."
+    },
+    {
+      "type": "city",
       "name": "Stavanger",
       "city": "Stavanger",
       "country": "Norway",
@@ -676,6 +684,17 @@ window.SEARCH_CATALOG = {
       "price": "0.027 ETH / night",
       "priceEth": 0.027,
       "description": ""
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel d’Angleterre",
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "url": "hotel-dangleterre-copenhagen.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=600&q=80",
+      "price": "0.12 ETH / night",
+      "priceEth": 0.12,
+      "description": "Historic five-star hotel on Kongens Nytorv, with luxury amenities and fine dining."
     },
     {
       "type": "hotel",
@@ -1482,6 +1501,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Hotel Odeon",
+      "city": "Odense",
+      "country": "Denmark",
+      "url": "odense.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Modern hotel close to Odense railway station."
+    },
+    {
+      "type": "hotel",
+      "name": "First Hotel Grand",
+      "city": "Odense",
+      "country": "Denmark",
+      "url": "odense.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Historical charm in central Odense."
+    },
+    {
+      "type": "hotel",
+      "name": "Comwell H.C. Andersen Odense",
+      "city": "Odense",
+      "country": "Denmark",
+      "url": "odense.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Comfort and convenience for leisure or business."
+    },
+    {
+      "type": "hotel",
       "name": "Grand Hotel Oslo",
       "city": "Oslo",
       "country": "Norway",
@@ -1688,6 +1740,28 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront."
+    },
+    {
+      "type": "hotel",
+      "name": "Park Inn Šiauliai",
+      "city": "Šiauliai",
+      "country": "Lithuania",
+      "url": "šiauliai.htm",
+      "image": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop&crop=entropy",
+      "price": "0.045 ETH / night",
+      "priceEth": 0.045,
+      "description": "Reliable mid-range hotel with clean, comfortable rooms, conference facilities and convenient transport links."
+    },
+    {
+      "type": "hotel",
+      "name": "Old Town Boutique",
+      "city": "Šiauliai",
+      "country": "Lithuania",
+      "url": "šiauliai.htm",
+      "image": "https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy",
+      "price": "0.04 ETH / night",
+      "priceEth": 0.04,
+      "description": "Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast."
     },
     {
       "type": "hotel",
