@@ -6,48 +6,24 @@
     <title>Boreal Horizons – Blockchain Payments for Hospitality</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-      /* Homepage only. The aurora is the header background.
-         Nav text sits on the photo; the green rail is not used here. */
-      body.home-page > header.home-header {
-        position: relative !important;
-        top: auto !important;
-        z-index: 20 !important;
-        background: transparent !important;
-        background-image: none !important;
-        box-shadow: none !important;
+      /* Homepage only. The shared navbar stays the 56px green rail.
+         The Abisko aurora sits in the header band directly under it. */
+      .home-header-banner {
+        margin: 0;
+        line-height: 0;
+        background: #07140f;
       }
 
-      body.home-page > header.home-header > .home-header-banner {
+      .home-header-banner img {
         display: block;
         width: 100%;
         height: auto;
-        margin: 0;
-      }
-
-      body.home-page > header.home-header > .site-nav,
-      body.home-page > header.home-header .site-nav {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        z-index: 2 !important;
-        background: transparent !important;
-        background-color: transparent !important;
-        background-image: none !important;
-        box-shadow: none !important;
-      }
-
-      @media (max-width: 1200px) {
-        body.home-page > header.home-header .site-nav.is-open .nav-containers {
-          background: rgba(7, 20, 15, 0.94) !important;
-        }
       }
     </style>
 </head>
-<body class="home-page">
-    <header class="home-header">
-        <img class="home-header-banner" src="Aurora_Abisko_hero_1920x548.jpg" alt="" width="1920" height="548">
-        <!-- Navigation sits on the aurora. Other pages keep the green rail. -->
+<body>
+    <header>
+        <!-- Navigation bar at top -->
         <nav class="site-nav" aria-label="Primary navigation">
             <div class="nav-inner">
                 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav-links">
@@ -114,6 +90,10 @@
             </div>
         </nav>
     </header>
+
+    <div class="home-header-banner">
+        <img src="Aurora_Abisko_hero_1920x548.jpg" alt="Aurora over Abisko" width="1920" height="548">
+    </div>
 
     <div id="login-popup" class="login-popup" hidden>
         <div class="login-popup__backdrop" data-login-close></div>
