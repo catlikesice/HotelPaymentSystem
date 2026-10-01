@@ -125,6 +125,70 @@ test('scotland, lithuania, and finland towns without pages are searchable', asyn
   }
 });
 
+test('other named places without pages are searchable', async () => {
+  const places = [
+    { q: 'Jukkasjärvi', city: 'Jukkasjärvi', country: 'Sweden', hotel: 'Icehotel Jukkasjärvi', file: 'jukkasjarvi.html' },
+    { q: 'Gjogv', city: 'Gjógv', country: 'Faroe Islands', hotel: 'Gjógv Guesthouse', file: 'gjogv.html' },
+    { q: 'Saksun', city: 'Saksun', country: 'Faroe Islands', hotel: 'Saksun Turf House', file: 'saksun.html' },
+    { q: 'Mykines', city: 'Mykines', country: 'Faroe Islands', hotel: 'Mykines Puffin Lodge', file: 'mykines.html' },
+    { q: 'Nolsoy', city: 'Nólsoy', country: 'Faroe Islands', hotel: 'Nólsoy Harbour House', file: 'nolsoy.html' },
+    { q: 'Vagar', city: 'Vágar', country: 'Faroe Islands', hotel: 'Vágar Cliff Hotel', file: 'vagar.html' },
+    { q: 'Streymoy', city: 'Streymoy', country: 'Faroe Islands', hotel: 'Streymoy Valley Inn', file: 'streymoy.html' },
+    { q: 'Eysturoy', city: 'Eysturoy', country: 'Faroe Islands', hotel: 'Eysturoy Sound Hotel', file: 'eysturoy.html' },
+    { q: 'Ny-Alesund', city: 'Ny-Ålesund', country: 'Svalbard', hotel: 'Ny-Ålesund Polar Lodge', file: 'ny-alesund.html' },
+    { q: 'Kastelholm', city: 'Kastelholm', country: 'Åland Islands', hotel: 'Kastelholm Castle Inn', file: 'kastelholm.html' },
+    { q: 'Bomarsund', city: 'Bomarsund', country: 'Åland Islands', hotel: 'Bomarsund Fortress House', file: 'bomarsund.html' },
+    { q: 'Isle of Skye', city: 'Isle of Skye', country: 'Scotland', hotel: 'Skye Cuillin Hotel', file: 'isle-of-skye.html' }
+  ];
+
+  for (const place of places) {
+    assert.equal(fs.existsSync(path.join(root, place.file)), false, place.file + ' should not exist');
+    const body = await searchFor(place.q);
+    const city = body.cities.find((item) => item.name === place.city);
+    assert.ok(city, place.city + ' should be returned');
+    assert.equal(city.country, place.country);
+    assert.equal(city.url, null);
+    const hotel = body.hotels.find((item) => item.name === place.hotel);
+    assert.ok(hotel, place.hotel + ' should be returned');
+    assert.equal(hotel.city, place.city);
+    assert.equal(hotel.country, place.country);
+    assert.equal(hotel.url, null);
+    assert.equal(hotel.cityUrl, null);
+  }
+});
+
+test('pages missing from the catalog are returned from SQL', async () => {
+  assert.equal(fs.existsSync(path.join(root, 'šiauliai.htm')), true);
+  const siauliai = await searchFor('Siauliai');
+  assert.deepEqual(siauliai.cities.map((city) => city.name), ['Šiauliai']);
+  assert.equal(siauliai.cities[0].url, 'šiauliai.htm');
+  assert.equal(siauliai.cities[0].country, 'Lithuania');
+  assert.deepEqual(siauliai.hotels.map((hotel) => hotel.name), ['Park Inn Šiauliai', 'Old Town Boutique']);
+  siauliai.hotels.forEach((hotel) => {
+    assert.equal(hotel.url, 'šiauliai.htm');
+    assert.equal(hotel.cityUrl, 'šiauliai.htm');
+  });
+
+  const odense = await searchFor('Odense');
+  assert.ok(odense.cities.some((city) => city.name === 'Odense' && city.url === 'odense.html'));
+  assert.deepEqual(
+    odense.hotels.map((hotel) => hotel.name),
+    ['Hotel Odeon', 'First Hotel Grand', 'Comwell H.C. Andersen Odense']
+  );
+  odense.hotels.forEach((hotel) => {
+    assert.equal(hotel.url, 'odense.html');
+    assert.equal(hotel.city, 'Odense');
+  });
+
+  assert.equal(fs.existsSync(path.join(root, 'hotel-dangleterre-copenhagen.html')), true);
+  const angleterre = await searchFor('Angleterre');
+  assert.equal(angleterre.hotels.length, 1);
+  assert.equal(angleterre.hotels[0].name, 'Hotel d’Angleterre');
+  assert.equal(angleterre.hotels[0].city, 'Copenhagen');
+  assert.equal(angleterre.hotels[0].url, 'hotel-dangleterre-copenhagen.html');
+  assert.equal(angleterre.hotels[0].price, '0.12 ETH / night');
+});
+
 test('destination labels include places that have no page', async () => {
   const response = await fetch(base + '/api/search/destinations');
   assert.equal(response.status, 200);
@@ -135,6 +199,12 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Palanga'));
   assert.ok(body.labels.includes('Porvoo'));
   assert.ok(body.labels.includes('Savonlinna Castle Hotel — Savonlinna'));
+  assert.ok(body.labels.includes('Gjógv'));
+  assert.ok(body.labels.includes('Ny-Ålesund'));
+  assert.ok(body.labels.includes('Isle of Skye'));
+  assert.ok(body.labels.includes('Skye Cuillin Hotel — Isle of Skye'));
+  assert.ok(body.labels.includes('Šiauliai'));
+  assert.ok(body.labels.includes('Hotel d’Angleterre — Copenhagen'));
   assert.ok(body.labels.includes('Aarhus'));
   assert.ok(body.labels.includes('Grand Hotel Kempinski — Riga'));
 });
