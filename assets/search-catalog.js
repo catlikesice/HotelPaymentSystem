@@ -38,6 +38,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Bauska",
+      "city": "Bauska",
+      "country": "Latvia",
+      "url": "bauska.html",
+      "description": "Browse hotels in Bauska, Latvia."
+    },
+    {
+      "type": "city",
       "name": "Bergen",
       "city": "Bergen",
       "country": "Norway",
@@ -541,6 +549,28 @@ window.SEARCH_CATALOG = {
       "price": "0.05 ETH / night",
       "priceEth": 0.05,
       "description": "Compact central hotel on Hafnarstræti, a practical base for north-Iceland day trips."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Bauska",
+      "city": "Bauska",
+      "country": "Latvia",
+      "url": "hotel-bauska.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade."
+    },
+    {
+      "type": "hotel",
+      "name": "Bauska Castle Hotel",
+      "city": "Bauska",
+      "country": "Latvia",
+      "url": "bauska-castle-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence."
     },
     {
       "type": "hotel",

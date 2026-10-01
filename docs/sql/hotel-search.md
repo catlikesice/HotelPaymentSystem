@@ -4,9 +4,9 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. Fold accents in application code before the query. SQLite has no `unaccent`.
 
-The static catalog is 56 cities and 152 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
+The static catalog is 57 cities and 154 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
 
-Šiauliai, the Odense hotels, and Hotel d’Angleterre already have pages, so they live in the static catalog rather than the pageless list. Šiauliai is `šiauliai.htm`. The Odense hotels use `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`.
+Šiauliai, the Odense hotels, and Hotel d’Angleterre already have pages, so they live in the static catalog rather than the pageless list. Šiauliai is `šiauliai.htm`. The Odense hotels use `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`. Bauska, Latvia is bookable from `bauska.html`. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) continue to checkout.
 
 ## What a search is
 
