@@ -38,6 +38,27 @@
     }) + ' ' + (currency || 'ETH');
   }
 
+  function isFiatPayment(pending) {
+    if (!pending) {
+      return false;
+    }
+    if (pending.paymentMethod === 'fiat') {
+      return true;
+    }
+    return window.PaymentCurrencies ? window.PaymentCurrencies.isFiat(pending.currency) : false;
+  }
+
+  function paymentMethodLabel(pending) {
+    const currency = pending && pending.currency ? pending.currency : 'ETH';
+    const entry = window.PaymentCurrencies && window.PaymentCurrencies.find(currency);
+    const name = entry ? entry.label : currency;
+    return (isFiatPayment(pending) ? 'Fiat' : 'Crypto') + ' · ' + name;
+  }
+
+  function confirmLabel(pending) {
+    return isFiatPayment(pending) ? 'Confirm fiat payment' : 'Confirm crypto payment';
+  }
+
   function guestLabel(guests) {
     const adults = guests && Number(guests.adults);
     const children = guests && Number(guests.children);
@@ -107,6 +128,11 @@
     );
     setText('[data-checkout-guests]', guestLabel(pending.guests));
     setText('[data-checkout-total]', formatAmount(pending.amount, pending.currency, pending.decimals));
+    setText('[data-checkout-method]', paymentMethodLabel(pending));
+    const confirmButton = document.getElementById('checkout-confirm');
+    if (confirmButton && !confirmButton.disabled) {
+      confirmButton.textContent = confirmLabel(pending);
+    }
 
     const roomRow = document.querySelector('[data-checkout-row="room"]');
     if (roomRow) {
@@ -156,7 +182,8 @@
         roomLabel: pending.roomLabel,
         addOns: pending.addOns,
         amount: pending.amount,
-        currency: pending.currency
+        currency: pending.currency,
+        paymentMethod: isFiatPayment(pending) ? 'fiat' : 'crypto'
       }).then(function (data) {
         const booking = data && data.booking;
         clearPending();
@@ -170,7 +197,7 @@
       }).catch(function (error) {
         setStatus(error.message || 'Unable to complete booking.', 'error');
         button.disabled = false;
-        button.textContent = 'Confirm crypto payment';
+        button.textContent = confirmLabel(pending);
       });
     });
   }

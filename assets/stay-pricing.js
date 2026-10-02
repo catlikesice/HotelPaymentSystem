@@ -2,7 +2,7 @@
   const STORAGE_KEY = 'balticComfortBooking';
   const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
-  const conversionRates = {
+  const fallbackRates = {
     ETH: 0.00035,
     BTC: 0.0000058,
     USDT: 1,
@@ -17,8 +17,30 @@
     UNI: 0.14,
     SOL: 0.0065,
     ADA: 1.3,
-    TRN: 5.5
+    TRN: 5.5,
+    EUR: 0.92,
+    USD: 1,
+    GBP: 0.76,
+    SEK: 10.5,
+    NOK: 10.7,
+    DKK: 6.86,
+    ISK: 137
   };
+
+  function activeRates() {
+    if (window.PaymentCurrencies && window.PaymentCurrencies.rates) {
+      return window.PaymentCurrencies.rates;
+    }
+    return fallbackRates;
+  }
+
+  function isFiatCurrency(currency) {
+    if (window.PaymentCurrencies && typeof window.PaymentCurrencies.isFiat === 'function') {
+      return window.PaymentCurrencies.isFiat(currency);
+    }
+    return currency === 'EUR' || currency === 'USD' || currency === 'GBP' ||
+      currency === 'SEK' || currency === 'NOK' || currency === 'DKK' || currency === 'ISK';
+  }
 
   function safeGetSessionStorage() {
     try {
@@ -143,16 +165,45 @@
     }
 
     const usdtValue = dataset.usdt ? parseFloat(dataset.usdt) : NaN;
-    const rate = conversionRates[currency];
+    const rate = activeRates()[currency];
 
     if (!Number.isFinite(usdtValue) || !Number.isFinite(rate)) {
       return null;
     }
 
     const perNight = usdtValue * rate;
-    const decimals = rate < 0.001 ? 6 : rate < 0.1 ? 4 : 2;
+    const decimals = isFiatCurrency(currency)
+      ? (window.PaymentCurrencies && typeof window.PaymentCurrencies.decimalsFor === 'function'
+        ? window.PaymentCurrencies.decimalsFor(currency)
+        : (rate >= 50 ? 0 : 2))
+      : (rate < 0.001 ? 6 : rate < 0.1 ? 4 : 2);
+    const factor = Math.pow(10, decimals);
+    const rounded = isFiatCurrency(currency)
+      ? Math.round((perNight + Number.EPSILON) * factor) / factor
+      : perNight;
 
-    return { value: perNight, decimals };
+    return { value: rounded, decimals };
+  }
+
+  function ensureFiatCurrencyOptions() {
+    const currencySelect = document.getElementById('currency');
+    if (!currencySelect || !window.PaymentCurrencies) {
+      return;
+    }
+
+    window.PaymentCurrencies.appendFiatOptions(currencySelect);
+
+    const saved = window.PaymentCurrencies.readPreference();
+    if (saved && currencySelect.querySelector('option[value="' + saved + '"]')) {
+      currencySelect.value = saved;
+    }
+
+    if (!currencySelect.dataset.fiatBound) {
+      currencySelect.dataset.fiatBound = 'true';
+      currencySelect.addEventListener('change', function () {
+        window.PaymentCurrencies.writePreference(currencySelect.value);
+      });
+    }
   }
 
   function ensureStaySummary(nights) {
@@ -206,6 +257,7 @@
   }
 
   function initStayPricing() {
+    ensureFiatCurrencyOptions();
     updatePricesInternal();
   }
 
