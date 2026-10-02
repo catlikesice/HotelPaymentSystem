@@ -265,21 +265,17 @@
       const baseCurrency = input.dataset.baseCurrency || input.dataset.currency || 'ETH';
       const baseDecimals = toSafeDecimals(input.dataset.baseDecimals || input.dataset.decimals, 2);
       const fiat = moneyFromBase(base, baseCurrency, baseDecimals, fiatCode);
-      const details = input.parentElement;
-      const rateDiv = details && details.querySelector('.room-option__rate');
+      const rateDiv = input.parentElement && input.parentElement.querySelector('.room-option__rate');
+      const rateParent = rateDiv && rateDiv.parentElement;
       if (rateDiv) {
         rateDiv.textContent = formatAmount(base, baseDecimals) + ' ' + baseCurrency + ' / night';
       }
-      if (details) {
-        let fiatDiv = details.querySelector('.room-option__fiat');
+      if (rateParent) {
+        let fiatDiv = rateParent.querySelector('.room-option__fiat');
         if (!fiatDiv) {
           fiatDiv = document.createElement('div');
           fiatDiv.className = 'room-option__fiat';
-          if (rateDiv && rateDiv.nextSibling) {
-            details.insertBefore(fiatDiv, rateDiv.nextSibling);
-          } else {
-            details.appendChild(fiatDiv);
-          }
+          rateParent.insertBefore(fiatDiv, rateDiv.nextSibling);
         }
         fiatDiv.textContent = 'or ' + formatAmount(fiat.value, fiat.decimals) + ' ' + fiat.currency + ' / night';
       }
@@ -294,21 +290,17 @@
       const baseDecimals = toSafeDecimals(input.dataset.baseDecimals || input.dataset.decimals, 2);
       const fiat = moneyFromBase(base, baseCurrency, baseDecimals, fiatCode);
       const billing = (input.dataset.billing || '').toLowerCase() === 'per-night' ? ' / night' : ' per stay';
-      const details = input.parentElement;
-      const rateDiv = details && details.querySelector('.addon-option__rate');
+      const rateDiv = input.parentElement && input.parentElement.querySelector('.addon-option__rate');
+      const rateParent = rateDiv && rateDiv.parentElement;
       if (rateDiv) {
         rateDiv.textContent = '+' + formatAmount(base, baseDecimals) + ' ' + baseCurrency + billing;
       }
-      if (details) {
-        let fiatDiv = details.querySelector('.addon-option__fiat');
+      if (rateParent) {
+        let fiatDiv = rateParent.querySelector('.addon-option__fiat');
         if (!fiatDiv) {
           fiatDiv = document.createElement('div');
           fiatDiv.className = 'addon-option__fiat';
-          if (rateDiv && rateDiv.nextSibling) {
-            details.insertBefore(fiatDiv, rateDiv.nextSibling);
-          } else {
-            details.appendChild(fiatDiv);
-          }
+          rateParent.insertBefore(fiatDiv, rateDiv.nextSibling);
         }
         fiatDiv.textContent = 'or +' + formatAmount(fiat.value, fiat.decimals) + ' ' + fiat.currency + billing;
       }
