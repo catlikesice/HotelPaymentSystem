@@ -3199,6 +3199,15 @@ header:has(.nav-inner) .nav-tools .nav-dropdown.nav-dropdown-account {
 
 header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn {
   list-style: none;
+  position: relative;
+  display: inline-block;
+  max-width: min(16rem, 42vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 34px;
+  padding-right: 1.35rem;
+  vertical-align: middle;
 }
 
 header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn::-webkit-details-marker,
@@ -3208,9 +3217,13 @@ header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn::marker {
 
 header:has(.nav-inner) .nav-dropdown-account > summary.nav-account-btn::after {
   content: "";
+  position: absolute;
+  right: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0;
   height: 0;
-  margin-left: 0.4rem;
+  margin-left: 0;
   border-left: 3.5px solid transparent;
   border-right: 3.5px solid transparent;
   border-top: 4px solid currentColor;
