@@ -189,6 +189,33 @@ test('pages missing from the catalog are returned from SQL', async () => {
   assert.equal(angleterre.hotels[0].price, '0.12 ETH / night');
 });
 
+test('Bauska, Latvia can be booked from search', async () => {
+  assert.equal(fs.existsSync(path.join(root, 'bauska.html')), true);
+  const cityHtml = fs.readFileSync(path.join(root, 'bauska.html'), 'utf8');
+  assert.match(cityHtml, /data-city="Bauska"/);
+  assert.match(cityHtml, /href="hotel-bauska\.html"/);
+  assert.match(cityHtml, /href="bauska-castle-hotel\.html"/);
+
+  const body = await searchFor('Bauska');
+  assert.deepEqual(body.cities.map((city) => city.name), ['Bauska']);
+  assert.equal(body.cities[0].country, 'Latvia');
+  assert.equal(body.cities[0].url, 'bauska.html');
+  assert.deepEqual(body.hotels.map((hotel) => hotel.name), ['Hotel Bauska', 'Bauska Castle Hotel']);
+
+  for (const hotel of body.hotels) {
+    assert.equal(hotel.city, 'Bauska');
+    assert.equal(hotel.country, 'Latvia');
+    assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+    const html = fs.readFileSync(path.join(root, hotel.url), 'utf8');
+    assert.match(html, /data-city="Bauska"/);
+    assert.match(html, /data-country="Latvia"/);
+    assert.match(html, /checkout\.html/);
+    assert.match(html, /assets\/hotel-booking-summary\.js/);
+    assert.match(html, /assets\/booking-dates\.js/);
+    assert.match(html, new RegExp(hotel.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+});
+
 test('destination labels include places that have no page', async () => {
   const response = await fetch(base + '/api/search/destinations');
   assert.equal(response.status, 200);
@@ -205,6 +232,8 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Skye Cuillin Hotel — Isle of Skye'));
   assert.ok(body.labels.includes('Šiauliai'));
   assert.ok(body.labels.includes('Hotel d’Angleterre — Copenhagen'));
+  assert.ok(body.labels.includes('Bauska'));
+  assert.ok(body.labels.includes('Hotel Bauska — Bauska'));
   assert.ok(body.labels.includes('Aarhus'));
   assert.ok(body.labels.includes('Grand Hotel Kempinski — Riga'));
 });

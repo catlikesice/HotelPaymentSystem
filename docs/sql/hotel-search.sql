@@ -9,7 +9,7 @@
 --
 -- The INSERT rows are a worked example (Aarhus, Reykjavík, Riga, Tórshavn,
 -- Tromsø, plus Nida, which has no HTML page). The live list is
--- assets/search-catalog.js (56 cities, 152 hotels) plus
+-- assets/search-catalog.js (57 cities, 154 hotels) plus
 -- lib/places-without-pages.js. Load both with the same columns and the
 -- same search_text rules. page_url may be NULL.
 
