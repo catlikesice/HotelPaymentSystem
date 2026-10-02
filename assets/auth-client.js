@@ -505,6 +505,27 @@
     }
   }
 
+  function accountDisplayName(user) {
+    if (!user) {
+      return '';
+    }
+    if (user.accountType === 'business') {
+      const company = String(user.companyName || '').trim();
+      if (company) {
+        return company;
+      }
+    }
+    return String(user.name || '').trim();
+  }
+
+  function accountButtonLabel(user) {
+    const displayName = accountDisplayName(user);
+    if (user && user.accountType === 'business') {
+      return displayName;
+    }
+    return displayName.split(' ')[0];
+  }
+
   function updateAccountNav() {
     const user = getStoredUser();
     const accountButtons = document.querySelectorAll('.nav-account-btn');
@@ -515,8 +536,14 @@
 
     accountButtons.forEach(function(button) {
       if (user && user.name) {
-        button.textContent = user.name.split(' ')[0];
-        button.setAttribute('aria-label', (mapping && mapping.accountAria) || ('Account for ' + user.name));
+        const displayName = accountDisplayName(user);
+        button.textContent = accountButtonLabel(user);
+        button.setAttribute('aria-label', (mapping && mapping.accountAria) || ('Account for ' + displayName));
+        if (user.accountType === 'business') {
+          button.setAttribute('title', displayName);
+        } else {
+          button.removeAttribute('title');
+        }
         button.removeAttribute('aria-haspopup');
         button.removeAttribute('aria-controls');
         button.removeAttribute('aria-expanded');
@@ -538,13 +565,19 @@
       }
 
       if (user && user.name) {
+        const displayName = accountDisplayName(user);
         const signedInPrefix = (mapping && mapping.signedInAs) || 'Signed in as';
-        summary.textContent = user.name.split(' ')[0];
-        summary.setAttribute('aria-label', 'Account menu for ' + user.name);
+        summary.textContent = accountButtonLabel(user);
+        summary.setAttribute('aria-label', 'Account menu for ' + displayName);
+        if (user.accountType === 'business') {
+          summary.setAttribute('title', displayName);
+        } else {
+          summary.removeAttribute('title');
+        }
         menu.innerHTML =
           '<a href="account.html" role="menuitem" class="nav-account-page">View account</a>' +
           '<span class="nav-account-status"><span data-signed-in-prefix>' + escapeHtml(signedInPrefix) + '</span> ' +
-          '<span data-signed-in-name>' + escapeHtml(user.name) + '</span></span>' +
+          '<span data-signed-in-name>' + escapeHtml(displayName) + '</span></span>' +
           '<button type="button" role="menuitem" class="nav-account-logout">Log out</button>';
         const logoutBtn = menu.querySelector('.nav-account-logout');
         if (logoutBtn) {
