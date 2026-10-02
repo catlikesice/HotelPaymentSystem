@@ -284,7 +284,7 @@
     const accountDropdown = navRoot.querySelector('.nav-dropdown-account');
     if (accountDropdown) {
       const accountSummary = accountDropdown.querySelector('summary.nav-box-account');
-      // Avoid overwriting the signed-in first-name label managed by AuthClient.
+      // Avoid overwriting the signed-in account label managed by AuthClient.
       // The navbar account pill keeps the Login label until someone signs in.
       if (!signedIn && accountSummary && !accountSummary.classList.contains('nav-account-btn')) {
         updateSummaryContent(accountSummary, mapping.account, mapping.accountAria);

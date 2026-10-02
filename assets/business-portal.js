@@ -487,13 +487,15 @@
   }
 
   function fillProfile(user) {
-    const firstName = String(user.name || '').trim().split(/\s+/)[0] || 'there';
-    setText('[data-business-greeting]', 'Welcome, ' + firstName);
-    setText('[data-business-company]', user.companyName || 'Your properties');
-    setText('[data-business-name]', user.name || '');
+    const company = String(user.companyName || '').trim();
+    const representative = String(user.name || '').trim();
+    const greetingName = company || representative.split(/\s+/)[0] || 'there';
+    setText('[data-business-greeting]', 'Welcome, ' + greetingName);
+    setText('[data-business-company]', company || 'Your properties');
+    setText('[data-business-name]', representative);
     setText('[data-business-email]', user.email || '');
     setText('[data-business-created]', formatJoinedDate(user.createdAt));
-    setText('[data-business-company-name]', user.companyName || '');
+    setText('[data-business-company-name]', company);
     setRow('businessType', businessTypeLabel(user.businessType));
     setRow('phone', user.phone);
     setRow('vatId', user.vatId);

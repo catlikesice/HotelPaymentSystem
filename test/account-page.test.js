@@ -82,11 +82,35 @@ test('signed-in navbar account dropdown toggles on the account page', () => {
 test('account dropdown shows the signed-in full name instead of the email', () => {
   const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
   assert.match(source, /data-signed-in-name/);
-  assert.match(source, /escapeHtml\(user\.name\)/);
+  assert.match(source, /escapeHtml\(displayName\)/);
+  assert.match(source, /return String\(user\.name \|\| ''\)\.trim\(\)/);
   assert.doesNotMatch(
     source,
-    /nav-account-status[\s\S]{0,180}escapeHtml\(user\.email\)/
+    /nav-account-status[\s\S]{0,220}escapeHtml\(user\.email\)/
   );
+});
+
+test('business account portal shows the company name instead of the representative', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
+  const portal = fs.readFileSync(path.join(root, 'assets/business-portal.js'), 'utf8');
+  const auth = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  const businessProfile = html.slice(
+    html.indexOf('id="business-profile-heading"'),
+    html.indexOf('id="business-logout"')
+  );
+  const companyAt = businessProfile.indexOf('data-business-company-name');
+  const representativeAt = businessProfile.indexOf('>Representative<');
+  assert.ok(companyAt !== -1, 'company name should be on the business profile');
+  assert.ok(representativeAt !== -1, 'representative should stay labeled as the contact');
+  assert.ok(companyAt < representativeAt, 'company name should appear before the representative');
+  assert.match(portal, /const greetingName = company \|\| representative\.split/);
+  assert.match(portal, /Welcome, ' \+ greetingName/);
+  assert.match(portal, /setText\('\[data-business-company\]', company \|\| 'Your properties'\)/);
+  assert.doesNotMatch(portal, /Welcome, ' \+ firstName/);
+  assert.match(auth, /function accountDisplayName/);
+  assert.match(auth, /user\.accountType === 'business'/);
+  assert.match(auth, /user\.companyName/);
+  assert.match(auth, /function accountButtonLabel/);
 });
 
 test('nav translations still include View account for the account dropdown', () => {
