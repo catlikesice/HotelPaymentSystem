@@ -142,6 +142,43 @@ header, header.site-header, .site-header {
   }
 }
 
+/* City booking pages put this control in a column flex body, which stretches
+   it into a full-width bar. Keep it compact until the shared navbar script
+   moves it into the header rail. */
+body:has(.booking-container) > .language-switcher,
+body:has(.booking-header) > .language-switcher {
+  align-self: flex-end;
+  width: auto;
+  min-width: 8.25rem;
+  max-width: 11rem;
+  margin: 0.55rem 1rem 0 auto;
+  padding: 0.15rem 0.4rem;
+  gap: 0;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+body:has(.booking-container) > .language-switcher label,
+body:has(.booking-header) > .language-switcher label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body:has(.booking-container) > .language-switcher select,
+body:has(.booking-header) > .language-switcher select {
+  min-width: 0;
+  padding: 0.15rem 1.45rem 0.15rem 0.65rem;
+  font-size: 0.78rem;
+  border-radius: 999px;
+}
+
 /* Logo inside navbar (left) */
 .logo-header {
   max-width: none;
