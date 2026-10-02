@@ -1466,8 +1466,10 @@ header .nav-containers > * {
   margin-bottom: 0.55rem;
 }
 
-.hotel-detail .payment-currency select {
+.hotel-detail .payment-currency select,
+.fiat-currency-field select {
   width: 100%;
+  max-width: 24rem;
   padding: 0.75rem 0.9rem;
   border-radius: 0.6rem;
   border: 1px solid rgba(46, 125, 50, 0.35);
@@ -1475,6 +1477,44 @@ header .nav-containers > * {
   color: #1f4b23;
   font-size: 1rem;
   font-weight: 600;
+}
+
+.fiat-currency-field {
+  margin-top: 0.85rem;
+  text-align: center;
+}
+
+.fiat-currency-field label {
+  display: inline-block;
+  margin: 0 0.55rem 0.35rem 0;
+  font-weight: 600;
+  color: #2e4d25;
+}
+
+.price-fiat,
+.hotel-detail .room-option__fiat,
+.hotel-detail .addon-option__fiat,
+.hotel-detail .booking-summary__fiat-total {
+  font-weight: 600;
+  color: #1f4b23;
+  margin-top: 0.2rem;
+}
+
+.hotel-detail .pay-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.hotel-detail .pay-actions .confirm-button {
+  width: auto;
+  flex: 1 1 14rem;
+  margin-top: 0;
+}
+
+.hotel-detail .confirm-button--fiat {
+  background: #1b4332;
 }
 
 .hotel-detail .room-options legend,
