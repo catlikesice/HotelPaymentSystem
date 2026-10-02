@@ -1451,10 +1451,30 @@ header .nav-containers > * {
    Hotel room & add-on selectors
    ------------------------- */
 .hotel-detail .room-options,
-.hotel-detail .addon-options {
+.hotel-detail .addon-options,
+.hotel-detail .payment-currency {
   margin-top: 1.75rem;
   padding: 0;
   border: none;
+}
+
+.hotel-detail .payment-currency label {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2e4d25;
+  margin-bottom: 0.55rem;
+}
+
+.hotel-detail .payment-currency select {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(46, 125, 50, 0.35);
+  background: #f9fdf9;
+  color: #1f4b23;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .hotel-detail .room-options legend,

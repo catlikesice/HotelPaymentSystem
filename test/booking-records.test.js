@@ -39,6 +39,26 @@ test('creates a stay record with a generated confirmation code', () => {
   assert.match(record.confirmationCode, /^BH-[A-Z0-9]{6}$/);
   assert.notEqual(record.confirmationCode, 'BH-4821');
   assert.equal(BookingRecords.publicBooking(record).userId, undefined);
+  assert.equal(record.paymentMethod, 'crypto');
+});
+
+test('records a fiat payment when the guest pays in a government currency', () => {
+  const record = BookingRecords.createRecord('user-1', {
+    kind: 'stay',
+    propertyName: 'Scandic Copenhagen',
+    city: 'Copenhagen',
+    country: 'Denmark',
+    checkInDate: '2099-08-01',
+    checkOutDate: '2099-08-03',
+    amount: 368,
+    currency: 'eur',
+    paymentMethod: 'fiat'
+  });
+
+  assert.equal(record.currency, 'EUR');
+  assert.equal(record.paymentMethod, 'fiat');
+  assert.equal(record.nights, 2);
+  assert.equal(BookingRecords.publicBooking(record).paymentMethod, 'fiat');
 });
 
 test('rejects incomplete stays and accepts booked event tickets', () => {

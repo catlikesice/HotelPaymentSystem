@@ -8,6 +8,22 @@
   'use strict';
 
   var CONFIRMATION_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var FIAT_CURRENCIES = {
+    EUR: true,
+    USD: true,
+    GBP: true,
+    SEK: true,
+    NOK: true,
+    DKK: true,
+    ISK: true
+  };
+
+  function paymentMethodFor(currency, requested) {
+    if (FIAT_CURRENCIES[currency]) {
+      return 'fiat';
+    }
+    return requested === 'fiat' ? 'fiat' : 'crypto';
+  }
 
   function fail(status, message) {
     var err = new Error(message);
@@ -155,6 +171,7 @@
     var city = cleanText(body.city, 80);
     var country = cleanText(body.country, 80);
     var currency = cleanText(body.currency, 8).toUpperCase() || 'ETH';
+    var paymentMethod = paymentMethodFor(currency, body.paymentMethod);
     var amount = typeof body.amount === 'number' ? body.amount : parseFloat(body.amount);
     var now = opts.now instanceof Date ? opts.now : new Date();
 
@@ -176,6 +193,7 @@
       country: country,
       amount: amount,
       currency: currency,
+      paymentMethod: paymentMethod,
       createdAt: now.toISOString()
     };
 
@@ -229,6 +247,7 @@
       country: record.country || '',
       amount: record.amount,
       currency: record.currency,
+      paymentMethod: record.paymentMethod || (FIAT_CURRENCIES[record.currency] ? 'fiat' : 'crypto'),
       createdAt: record.createdAt
     };
     if (record.kind === 'stay') {

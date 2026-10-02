@@ -312,7 +312,7 @@
     }
     clearNode(mount);
     if (!bookings.length) {
-      mount.appendChild(emptyMessage('No payments yet. Confirmed bookings will list their crypto payments here.'));
+      mount.appendChild(emptyMessage('No payments yet. Confirmed bookings will list their crypto or fiat payments here.'));
       return;
     }
     bookings.slice().reverse().forEach(function (booking) {
@@ -326,7 +326,8 @@
         'p',
         'portal-booking__meta',
         (booking.paymentStatus === 'paid' ? 'Paid' : booking.paymentStatus) +
-          ' · ' + formatAmount(booking.amount, booking.currency)
+          ' · ' + formatAmount(booking.amount, booking.currency) +
+          ' · ' + (booking.paymentMethod === 'fiat' || (window.PaymentCurrencies && window.PaymentCurrencies.isFiat(booking.currency)) ? 'Fiat' : 'Crypto')
       ));
       if (booking.confirmationCode) {
         row.appendChild(createEl('p', 'portal-booking__confirm', 'Confirmation ' + booking.confirmationCode));
