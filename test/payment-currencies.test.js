@@ -26,7 +26,17 @@ test('fiat currencies convert from the USDT peg without changing crypto rates', 
 
 function loadStayPricing() {
   const prices = [
-    { dataset: { eth: '0.07', btc: '0.0012', usdt: '200' }, textContent: '0.07 ETH / night', className: 'price' }
+    {
+      dataset: { eth: '0.07', btc: '0.0012', usdt: '200' },
+      textContent: '0.07 ETH / night',
+      className: 'price',
+      nextElementSibling: null,
+      insertAdjacentElement(position, el) {
+        if (position === 'afterend') {
+          this.nextElementSibling = el;
+        }
+      }
+    }
   ];
   const options = [
     { value: 'ETH', textContent: 'ETH (Ethereum)' },
@@ -53,10 +63,51 @@ function loadStayPricing() {
     appendChild(child) { this.children.push(child); },
     querySelector() { return null; }
   };
+  const byId = { currency: select };
+  function createdElement(tag) {
+    const el = {
+      tag,
+      label: '',
+      value: '',
+      textContent: '',
+      className: '',
+      style: {},
+      children: [],
+      setAttribute(name, value) {
+        if (name === 'data-stay-duration') this.stay = value;
+        if (name === 'aria-label') this.ariaLabel = value;
+      },
+      appendChild(child) {
+        this.children.push(child);
+      },
+      addEventListener() {},
+      querySelector(selector) {
+        const match = /option\[value="([A-Z]+)"\]/.exec(selector || '');
+        if (!match) return null;
+        const stack = (this.children || []).slice();
+        while (stack.length) {
+          const node = stack.shift();
+          if (node.value === match[1]) return node;
+          if (node.children) stack.push.apply(stack, node.children);
+        }
+        return null;
+      }
+    };
+    let currentId = '';
+    Object.defineProperty(el, 'id', {
+      configurable: true,
+      get() { return currentId; },
+      set(value) {
+        currentId = value;
+        byId[value] = el;
+      }
+    });
+    return el;
+  }
   const document = {
     readyState: 'complete',
     getElementById(id) {
-      return id === 'currency' ? select : null;
+      return byId[id] || null;
     },
     querySelector(selector) {
       return selector === '.currency-selector' ? summary : null;
@@ -64,22 +115,7 @@ function loadStayPricing() {
     querySelectorAll(selector) {
       return selector === '.price' ? prices : [];
     },
-    createElement(tag) {
-      return {
-        tag,
-        label: '',
-        value: '',
-        textContent: '',
-        style: {},
-        children: [],
-        setAttribute(name, value) {
-          if (name === 'data-stay-duration') this.stay = value;
-        },
-        appendChild(child) {
-          this.children.push(child);
-        }
-      };
-    },
+    createElement: createdElement,
     addEventListener() {}
   };
   const context = {
@@ -97,18 +133,26 @@ function loadStayPricing() {
   return { context, select, options, prices };
 }
 
-test('city booking currency list can price a stay in fiat', () => {
+test('fiat prices sit alongside the crypto price', () => {
   const { context, select, options, prices } = loadStayPricing();
-  assert.ok(options.some((option) => option.value === 'EUR'));
-  assert.ok(options.some((option) => option.value === 'SEK'));
+  assert.equal(options.some((option) => option.value === 'EUR'), false);
+  assert.ok(options.some((option) => option.value === 'ETH'));
 
-  select.value = 'EUR';
-  context.window.updatePrices();
-  assert.equal(prices[0].textContent, '184.00 EUR / night');
-
-  select.value = 'ETH';
-  context.window.updatePrices();
+  const fiatSelect = context.document.getElementById('fiat-currency');
+  assert.ok(fiatSelect);
+  assert.equal(fiatSelect.value, 'EUR');
   assert.equal(prices[0].textContent, '0.07 ETH / night');
+  assert.equal(prices[0].nextElementSibling.textContent, 'or 184.00 EUR');
+
+  select.value = 'BTC';
+  context.window.updatePrices();
+  assert.equal(prices[0].textContent, '0.0012 BTC / night');
+  assert.equal(prices[0].nextElementSibling.textContent, 'or 184.00 EUR');
+
+  fiatSelect.value = 'USD';
+  context.window.updatePrices();
+  assert.equal(prices[0].textContent, '0.0012 BTC / night');
+  assert.equal(prices[0].nextElementSibling.textContent, 'or 200.00 USD');
 });
 
 test('hotel and checkout pages load shared fiat payment currencies', () => {
@@ -122,6 +166,9 @@ test('hotel and checkout pages load shared fiat payment currencies', () => {
   assert.match(copenhagen, /assets\/payment-currencies\.js"><\/script>\s*<script src="assets\/stay-pricing\.js"/);
   assert.match(checkout, /data-checkout-method/);
   assert.match(checkout, /assets\/payment-currencies\.js/);
-  assert.match(fs.readFileSync(path.join(root, 'assets/hotel-booking-summary.js'), 'utf8'), /Pay with/);
+  const summary = fs.readFileSync(path.join(root, 'assets/hotel-booking-summary.js'), 'utf8');
+  assert.match(summary, /Pay with crypto/);
+  assert.match(summary, /Pay with fiat/);
+  assert.match(summary, /data-pay-kind', 'fiat'/);
   assert.match(fs.readFileSync(path.join(root, 'assets/checkout.js'), 'utf8'), /Confirm fiat payment/);
 });
