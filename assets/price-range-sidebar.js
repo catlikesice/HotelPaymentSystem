@@ -34,6 +34,17 @@
         luxury: "Above {amount} {unit}",
         uniform: "{amount} {unit}",
       },
+      orderDescription:
+        "Order stays from much to little, or from little to much.",
+      orderAriaLabel: "Order hotels by nightly rate",
+      orderOptions: {
+        much: "Much",
+        little: "Little",
+      },
+      orderHints: {
+        much: "Highest price first",
+        little: "Lowest price first",
+      },
       combinationSeparator: " • ",
     },
     ru: {
@@ -57,6 +68,17 @@
         luxury: "Выше {amount} {unit}",
         uniform: "{amount} {unit}",
       },
+      orderDescription:
+        "Отсортируйте варианты от большего к меньшему или от меньшего к большему.",
+      orderAriaLabel: "Упорядочить отели по ночной цене",
+      orderOptions: {
+        much: "Больше",
+        little: "Меньше",
+      },
+      orderHints: {
+        much: "Сначала дороже",
+        little: "Сначала дешевле",
+      },
     },
     sv: {
       badge: "Prisguide",
@@ -78,6 +100,17 @@
         midrange: "{min} - {max} {unit}",
         luxury: "Över {amount} {unit}",
         uniform: "{amount} {unit}",
+      },
+      orderDescription:
+        "Sortera boenden från mycket till lite, eller från lite till mycket.",
+      orderAriaLabel: "Sortera hotell efter nattpris",
+      orderOptions: {
+        much: "Mycket",
+        little: "Lite",
+      },
+      orderHints: {
+        much: "Högsta pris först",
+        little: "Lägsta pris först",
       },
       combinationSeparator: " • ",
     },
@@ -102,6 +135,17 @@
         midrange: "{min}–{max} {unit}",
         luxury: "Über {amount} {unit}",
         uniform: "{amount} {unit}",
+      },
+      orderDescription:
+        "Sortieren Sie die Aufenthalte von viel nach wenig oder von wenig nach viel.",
+      orderAriaLabel: "Hotels nach Übernachtungspreis sortieren",
+      orderOptions: {
+        much: "Viel",
+        little: "Wenig",
+      },
+      orderHints: {
+        much: "Höchster Preis zuerst",
+        little: "Niedrigster Preis zuerst",
       },
     },
   };
@@ -337,6 +381,33 @@
       }
     });
 
+    const orderDesc = sidebar.querySelector("[data-order-desc]");
+    if (orderDesc && strings.orderDescription) {
+      orderDesc.textContent = strings.orderDescription;
+    }
+
+    const orderGroup = sidebar.querySelector("[data-price-order]");
+    if (orderGroup && strings.orderAriaLabel) {
+      orderGroup.setAttribute("aria-label", strings.orderAriaLabel);
+    }
+
+    ["much", "little"].forEach(function (key) {
+      const button = sidebar.querySelector(
+        '.price-range-option[data-order="' + key + '"]'
+      );
+      if (!button) {
+        return;
+      }
+      const label = button.querySelector(".range-label");
+      if (label && strings.orderOptions && strings.orderOptions[key]) {
+        label.textContent = strings.orderOptions[key];
+      }
+      const hint = button.querySelector("[data-order-hint]");
+      if (hint && strings.orderHints && strings.orderHints[key]) {
+        hint.textContent = strings.orderHints[key];
+      }
+    });
+
     const note = sidebar.querySelector("[data-range-note]");
     if (note && strings.noteDefault) {
       note.textContent = strings.noteDefault;
@@ -500,6 +571,135 @@
     }
   }
 
+  function nightlyAmount(card, currency) {
+    if (!card || typeof card.querySelector !== "function") {
+      return null;
+    }
+    const priceEl = card.querySelector(".price");
+    if (!priceEl) {
+      return null;
+    }
+    const dataset = priceEl.dataset || {};
+    const key = String(currency || "ETH").toLowerCase();
+    const raw = dataset[key];
+    if (raw !== undefined && raw !== null && raw !== "") {
+      const direct = parseFloat(raw);
+      if (Number.isFinite(direct)) {
+        return direct;
+      }
+    }
+    const text = String(priceEl.textContent || "").replace(/,/g, "");
+    const match = text.match(/-?\d+(?:\.\d+)?/);
+    if (!match) {
+      return null;
+    }
+    const parsed = parseFloat(match[0]);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+
+  function orderStayCards(cards, direction, currency) {
+    const list = Array.prototype.slice.call(cards || []);
+    const decorated = list.map(function (card, index) {
+      return {
+        card: card,
+        index: index,
+        amount: nightlyAmount(card, currency),
+      };
+    });
+    const normalized =
+      direction === "little" || direction === "much" ? direction : null;
+    decorated.sort(function (a, b) {
+      if (!normalized) {
+        return a.index - b.index;
+      }
+      const aMissing = !Number.isFinite(a.amount);
+      const bMissing = !Number.isFinite(b.amount);
+      if (aMissing || bMissing) {
+        if (aMissing && bMissing) {
+          return a.index - b.index;
+        }
+        return aMissing ? 1 : -1;
+      }
+      if (a.amount === b.amount) {
+        return a.index - b.index;
+      }
+      return normalized === "little" ? a.amount - b.amount : b.amount - a.amount;
+    });
+    return decorated.map(function (item) {
+      return item.card;
+    });
+  }
+
+  function activeCurrency() {
+    const currencySelect = document.getElementById("currency");
+    if (currencySelect && currencySelect.value) {
+      return currencySelect.value;
+    }
+    return "ETH";
+  }
+
+  function wirePriceOrder(context, sidebar, hotelCards) {
+    const buttons = Array.prototype.slice.call(
+      sidebar.querySelectorAll('.price-range-option[data-order]')
+    );
+    if (!buttons.length || !hotelCards.length) {
+      return;
+    }
+
+    const hotelList = hotelCards[0].parentNode;
+    let activeOrder = null;
+
+    function updateOrderButtons() {
+      buttons.forEach(function (btn) {
+        const isActive = btn.dataset.order === activeOrder;
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+    }
+
+    function applyOrder() {
+      if (!hotelList) {
+        return;
+      }
+      const ordered = orderStayCards(hotelCards, activeOrder, activeCurrency());
+      ordered.forEach(function (card) {
+        hotelList.appendChild(card);
+      });
+    }
+
+    context.applyOrder = applyOrder;
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const order = button.dataset.order;
+        activeOrder = activeOrder === order ? null : order;
+        updateOrderButtons();
+        applyOrder();
+      });
+    });
+
+    updateOrderButtons();
+  }
+
+  let currencyHookBound = false;
+
+  function bindCurrencyHook() {
+    if (currencyHookBound) {
+      return;
+    }
+    currencyHookBound = true;
+    document.addEventListener("change", function (event) {
+      const target = event.target;
+      if (!target || target.id !== "currency") {
+        return;
+      }
+      contexts.forEach(function (context) {
+        if (typeof context.applyOrder === "function") {
+          context.applyOrder();
+        }
+      });
+    });
+  }
+
   function createSidebar(index) {
     const strings = DEFAULT_TRANSLATIONS.en;
     const aside = document.createElement("aside");
@@ -553,6 +753,46 @@
 
     aside.appendChild(options);
 
+    const orderDesc = document.createElement("p");
+    orderDesc.className = "price-range-desc";
+    orderDesc.setAttribute("data-order-desc", "");
+    orderDesc.textContent = strings.orderDescription || "";
+    aside.appendChild(orderDesc);
+
+    const orderOptions = document.createElement("div");
+    orderOptions.className = "price-range-options price-range-options--order";
+    orderOptions.setAttribute("data-price-order", "");
+    orderOptions.setAttribute("role", "group");
+    orderOptions.setAttribute(
+      "aria-label",
+      strings.orderAriaLabel || "Order hotels by nightly rate"
+    );
+
+    ["much", "little"].forEach(function (key) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "price-range-option";
+      button.dataset.order = key;
+      button.setAttribute("aria-pressed", "false");
+
+      const label = document.createElement("span");
+      label.className = "range-label";
+      label.textContent =
+        (strings.orderOptions && strings.orderOptions[key]) || key;
+
+      const value = document.createElement("span");
+      value.className = "range-value";
+      value.setAttribute("data-order-hint", key);
+      value.textContent =
+        (strings.orderHints && strings.orderHints[key]) || "";
+
+      button.appendChild(label);
+      button.appendChild(value);
+      orderOptions.appendChild(button);
+    });
+
+    aside.appendChild(orderOptions);
+
     const note = document.createElement("p");
     note.className = "price-range-footnote";
     note.setAttribute("data-range-note", "");
@@ -600,6 +840,7 @@
     const hotelCards = Array.prototype.slice.call(
       container.querySelectorAll(".hotel-list .hotel-card")
     );
+    wirePriceOrder(context, sidebar, hotelCards);
     if (!hotelCards.length) {
       context.metrics = null;
       renderSidebar(context, composeTranslation(currentLanguage));
@@ -719,7 +960,7 @@
     renderSidebar(context, composeTranslation(currentLanguage));
 
     const buttons = Array.prototype.slice.call(
-      sidebar.querySelectorAll(".price-range-option")
+      sidebar.querySelectorAll('.price-range-option[data-filter]')
     );
     if (!buttons.length) {
       return;
@@ -771,6 +1012,7 @@
     });
 
     bindLanguageHooks();
+    bindCurrencyHook();
     setLanguage(detectLanguage());
   }
 
@@ -783,5 +1025,7 @@
   var api = window.PriceRangeSidebar || {};
   api.setLanguage = setLanguage;
   api.registerTranslations = registerTranslations;
+  api.orderStayCards = orderStayCards;
+  api.nightlyAmount = nightlyAmount;
   window.PriceRangeSidebar = api;
 })();
