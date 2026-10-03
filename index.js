@@ -8,6 +8,7 @@ const bookingsRouter = require('./routes/bookings');
 const propertiesRouter = require('./routes/properties');
 const searchRouter = require('./routes/search');
 const contactRouter = require('./routes/contact');
+const { serveCityPage } = require('./lib/city-pages');
 
 const app = express();
 app.use(express.json());
@@ -26,6 +27,10 @@ app.use('/api/bookings', bookingsRouter);
 app.use('/api/properties', propertiesRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/contact', contactRouter);
+
+// City listing documents live in docs/sql/city-pages.sql. Serve them at the
+// same addresses the old HTML files used, before the static file handler.
+app.use(serveCityPage);
 
 // Serve the static multi-page site alongside the API.
 app.use(express.static(path.join(__dirname)));

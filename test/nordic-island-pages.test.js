@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
+const { getCityPage, hotelsFor } = require('../lib/city-pages');
+
 const root = path.join(__dirname, '..');
 
 function loadCatalog() {
@@ -47,13 +49,15 @@ test('search catalog includes Åland, Greenland, Faroe Island, and Svalbard citi
 
 test('Åland, Greenland, Faroe Island, and Svalbard city pages list local hotels', () => {
   DESTINATIONS.forEach((destination) => {
-    const filePath = path.join(root, destination.url);
-    assert.ok(fs.existsSync(filePath), destination.url + ' should exist');
-    const html = fs.readFileSync(filePath, 'utf8');
-    assert.match(html, /name=["']viewport["']/);
-    assert.match(html, new RegExp('data-city="' + destination.city + '"'));
+    assert.equal(fs.existsSync(path.join(root, destination.url)), false, destination.url + ' should live in SQL');
+    const page = getCityPage(destination.url);
+    assert.ok(page, destination.url + ' should be stored in SQL');
+    assert.match(page.html, /name=["']viewport["']/);
+    assert.match(page.html, new RegExp('data-city="' + destination.city + '"'));
+    const hotels = hotelsFor(destination.url);
     destination.hotels.forEach((name) => {
-      assert.match(html, new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+      assert.ok(hotels.some((hotel) => hotel.name === name), name + ' should be a SQL hotel row');
+      assert.match(page.html, new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
     });
   });
 });

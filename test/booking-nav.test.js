@@ -3,26 +3,30 @@ const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
 
+const { listCityPages, getCityPage } = require('../lib/city-pages');
+
 const root = path.join(__dirname, '..');
 
 function htmlFiles() {
   return fs.readdirSync(root).filter((name) => name.endsWith('.html'));
 }
 
-test('booking listings that show a language bar load the shared preferences script', () => {
-  const listings = htmlFiles().filter((fileName) => {
-    const html = fs.readFileSync(path.join(root, fileName), 'utf8');
+test('city pages in SQL that show a language bar load the shared preferences script', () => {
+  const pages = listCityPages();
+  const listings = pages.filter((page) => {
+    const html = getCityPage(page.page_url).html;
     const hasBooking = html.includes('booking-container') || html.includes('booking-header');
     const hasLooseLanguage = html.includes('class="language-switcher"') && !html.includes('nav-inner');
     return hasBooking && hasLooseLanguage;
   });
 
   assert.ok(listings.length > 0, 'expected city booking pages with a standalone language bar');
-  assert.ok(listings.includes('tallinn.html'));
+  assert.ok(listings.some((page) => page.page_url === 'tallinn.html'));
 
-  listings.forEach((fileName) => {
-    const html = fs.readFileSync(path.join(root, fileName), 'utf8');
-    assert.match(html, /site-preferences\.js/, `${fileName} should load the shared preferences script`);
+  listings.forEach((page) => {
+    const html = getCityPage(page.page_url).html;
+    assert.equal(fs.existsSync(path.join(root, page.page_url)), false, page.page_url + ' should not remain as a file');
+    assert.match(html, /site-preferences\.js/, `${page.page_url} should load the shared preferences script`);
   });
 });
 

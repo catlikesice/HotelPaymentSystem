@@ -1,0 +1,17650 @@
+-- City listing pages for Boreal Horizons.
+--
+-- Dialect: SQLite 3.
+-- The HTML files that used to live at these page_url paths are stored here.
+-- html is the full document. The other columns are the city and hotel facts from that document.
+-- lib/city-pages.js loads this file and the server serves page_url from it.
+
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE city_pages (
+  page_url            TEXT PRIMARY KEY,
+  title               TEXT NOT NULL,
+  city_name           TEXT NOT NULL,
+  country             TEXT NOT NULL,
+  heading             TEXT,
+  header_title        TEXT,
+  header_description  TEXT,
+  back_href           TEXT,
+  placeholder_text    TEXT,
+  expected_path       TEXT,
+  currencies          TEXT,
+  html                TEXT NOT NULL
+);
+
+CREATE TABLE city_page_hotels (
+  page_url      TEXT    NOT NULL REFERENCES city_pages(page_url),
+  position      INTEGER NOT NULL,
+  name          TEXT    NOT NULL,
+  image_url     TEXT,
+  image_alt     TEXT,
+  chain_name    TEXT,
+  price_label   TEXT,
+  price_eth     REAL,
+  price_btc     REAL,
+  price_usdt    REAL,
+  description   TEXT,
+  book_url      TEXT,
+  book_label    TEXT,
+  PRIMARY KEY (page_url, position)
+);
+
+CREATE TABLE city_page_strings (
+  page_url    TEXT NOT NULL REFERENCES city_pages(page_url),
+  lang        TEXT NOT NULL,
+  string_key  TEXT NOT NULL,
+  value       TEXT NOT NULL,
+  PRIMARY KEY (page_url, lang, string_key)
+);
+
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('aalborg.html', 'Aalborg — Denmark (Placeholder)', 'Aalborg', 'Denmark', 'Aalborg — Denmark', NULL, NULL, NULL, 'This is a placeholder page for Aalborg in Denmark. The hotel listing for this city will be added here soon.', 'html/cities/denmark/aalborg.html', NULL, '<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Aalborg — Denmark (Placeholder)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="language-switcher" aria-label="Language selector">
+      <label for="lang-select">Language</label>
+      <div class="language-switcher__select">
+          <select id="lang-select" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+              <option value="sv">Svenska</option>
+              <option value="de">Deutsch</option>
+          </select>
+      </div>
+  </div>
+
+  <div class="container">
+    <h1 id="page-title">Aalborg — Denmark</h1>
+    <p id="placeholder-text">This is a placeholder page for Aalborg in Denmark. The hotel listing for this city will be added here soon.</p>
+    <p>Expected path: html/cities/denmark/aalborg.html</p>
+    <p><a href="index.html"><span id="back-link-text">Back to Select Location</span></a></p>
+  </div>
+
+    <script src="site-preferences.js"></script>
+    <script>
+    const translations = {
+    en: {
+      "page-title": "Aalborg — Denmark",
+      "placeholder-text": "This is a placeholder page for Aalborg in Denmark. The hotel listing for this city will be added here soon.",
+      "back-link-text": "Back to Select Location"
+    },
+    ru: {
+      "page-title": "Ольборг — Дания",
+      "placeholder-text": "Это страница-заполнитель для Ольборга в Дании. Список отелей для этого города скоро будет добавлен.",
+      "back-link-text": "Назад к выбору местоположения"
+    },
+    sv: {
+      "page-title": "Aalborg — Danmark",
+      "placeholder-text": "Det här är en platshållarsida för Aalborg i Danmark. Hotellistan för den här staden läggs till här inom kort.",
+      "back-link-text": "Tillbaka till platsvalet"
+    },
+    de: {
+      "page-title": "Aalborg — Dänemark",
+      "placeholder-text": "Dies ist eine Platzhalterseite für Aalborg in Dänemark. Die Hotelliste für diese Stadt wird in Kürze hinzugefügt.",
+      "back-link-text": "Zurück zur Standortauswahl"
+    },
+  };
+
+    function applyTranslations(lang) {
+      const mapping = translations[lang] || translations[''en''];
+      Object.keys(mapping).forEach(function(key) {
+        const el = document.getElementById(key);
+        if (el) {
+          el.textContent = mapping[key];
+        }
+      });
+    }
+
+    const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+    document.addEventListener(languageEventName, function(event) {
+      applyTranslations((event.detail && event.detail.lang) || ''en'');
+    });
+
+    if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+      LanguagePreferences.init(document.getElementById(''lang-select''));
+    } else {
+      const fallbackSelect = document.getElementById(''lang-select'');
+      if (fallbackSelect) {
+        const initialLanguage = fallbackSelect.value || ''en'';
+        document.documentElement.setAttribute(''lang'', initialLanguage);
+        applyTranslations(initialLanguage);
+        fallbackSelect.addEventListener(''change'', function() {
+          const lang = this.value;
+          document.documentElement.setAttribute(''lang'', lang);
+          applyTranslations(lang);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('aarhus.html', 'Hotels in Aarhus', 'Aarhus', 'Denmark', 'Available Hotels in Aarhus', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Aarhus</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Aarhus">Available Hotels in Aarhus</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Royal Aarhus">
+                <h3>Hotel Royal Aarhus</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Luxury hotel in the heart of Aarhus, featuring elegant rooms, gourmet restaurant, and spa services.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Scandic Aarhus City">
+                <h3>Scandic Aarhus City</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Modern amenities and eco-friendly design, located in the vibrant city center with easy access to attractions.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Comwell Aarhus">
+                <h3>Comwell Aarhus</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Contemporary comfort with panoramic city views, perfect for business or leisure travelers.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('aberdeen.html', 'Hotels in Aberdeen', 'Aberdeen', 'Scotland', 'Available Hotels in Aberdeen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Aberdeen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Aberdeen">Available Hotels in Aberdeen</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="The Marcliffe Hotel and Spa">
+                <h3>The Marcliffe Hotel and Spa</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Country-house luxury on the edge of Aberdeen with gardens and spa.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Mercure Aberdeen Caledonian">
+                <h3>Mercure Aberdeen Caledonian</h3>
+                <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="142">0.05 ETH / night</div>
+                <p>Classic city-centre hotel close to Union Street and the harbour.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Sandman Signature Aberdeen">
+                <h3>Sandman Signature Aberdeen</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Modern hotel near the beach and Aberdeen’s exhibition centre.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('akureyri.html', 'Hotels in Akureyri', 'Akureyri', 'Iceland', 'Available Hotels in Akureyri', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Akureyri</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Akureyri">Available Hotels in Akureyri</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Kea">
+                <h3>Hotel Kea</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Long-standing harbour hotel facing the fjord, steps from the church and downtown cafés.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Icelandair Hotel Akureyri">
+                <h3>Icelandair Hotel Akureyri</h3>
+                <div class="price" data-eth="0.075" data-btc="0.0012" data-usdt="214">0.075 ETH / night</div>
+                <p>Contemporary hotel near the botanical garden, with views toward the ski slopes.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Nordurland">
+                <h3>Hotel Nordurland</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Compact central hotel on Hafnarstræti, a practical base for north-Iceland day trips.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('bauska.html', 'Hotels in Bauska', 'Bauska', 'Latvia', 'Available Hotels in Bauska', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Bauska</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Bauska">Available Hotels in Bauska</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Bauska">
+                <h3>Hotel Bauska</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0009" data-usdt="142">0.05 ETH / night</div>
+                <p>Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade.</p>
+                <a href="hotel-bauska.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Bauska Castle Hotel">
+                <h3>Bauska Castle Hotel</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
+                <p>Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence.</p>
+                <a href="bauska-castle-hotel.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('bergen.html', 'Hotels in Bergen', 'Bergen', 'Norway', 'Available Hotels in Bergen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Bergen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Bergen">Available Hotels in Bergen</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Norge by Scandic">
+                <h3>Hotel Norge by Scandic</h3>
+                <div class="price" data-eth="0.1" data-btc="0.0017" data-usdt="285">0.1 ETH / night</div>
+                <p>Rebuilt city-centre icon on Ole Bulls plass, a short walk from the fish market.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Clarion Hotel Admiral">
+                <h3>Clarion Hotel Admiral</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Waterfront hotel facing Bryggen, with harbour-view rooms and a rooftop restaurant.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Steens Hotel">
+                <h3>Steens Hotel</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Intimate Swiss-chalet style guesthouse near Nygårdsparken, handy for the funicular.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('berwick-upon-tweed.html', 'Hotels in Berwick-upon-Tweed', 'Berwick-upon-Tweed', 'Northeast England', 'Available Hotels in Berwick-upon-Tweed', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Berwick-upon-Tweed</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Berwick-upon-Tweed">Available Hotels in Berwick-upon-Tweed</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Marshall Meadows Country House">
+                <h3>Marshall Meadows Country House</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Georgian country house on the coast just north of town, with sea views and period rooms.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="The King’s Arms Hotel">
+                <h3>The King’s Arms Hotel</h3>
+                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
+                <p>Historic coaching inn in the town centre, a short walk from the Elizabethan walls.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="The Walls Guest House">
+                <h3>The Walls Guest House</h3>
+                <div class="price" data-eth="0.03" data-btc="0.0005" data-usdt="86">0.03 ETH / night</div>
+                <p>Friendly townhouse stay beside Berwick’s ramparts, close to the Tweed estuary.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('copenhagen.html', 'Hotels in Copenhagen', 'Copenhagen', 'Denmark', 'Available Hotels in Copenhagen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Copenhagen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Copenhagen">Available Hotels in Copenhagen</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+            <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Scandic Palace Hotel">
+                <h3>Scandic Palace Hotel</h3>
+                <div class="hotel-chain">Scandic Hotels</div>
+                <div class="price" data-eth="0.042" data-btc="0.0007" data-usdt="120">0.042 ETH / night</div>
+                <a href="scandic-copenhagen.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Comwell Copenhagen Portside">
+                <h3>Comwell Copenhagen Portside</h3>
+                <div class="hotel-chain">Comwell Hotels</div>
+                <div class="price" data-eth="0.038" data-btc="0.00063" data-usdt="110">0.038 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Imperial Hotel">
+                <h3>Imperial Hotel</h3>
+                <div class="hotel-chain">Arp-Hansen Hotel Group</div>
+                <div class="price" data-eth="0.045" data-btc="0.00075" data-usdt="130">0.045 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="CABINN City">
+                <h3>CABINN City</h3>
+                <div class="hotel-chain">Cabinn Hotels</div>
+                <div class="price" data-eth="0.021" data-btc="0.00035" data-usdt="60">0.021 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80" alt="Zleep Hotel Copenhagen City">
+                <h3>Zleep Hotel Copenhagen City</h3>
+                <div class="hotel-chain">Zleep Hotels</div>
+                <div class="price" data-eth="0.027" data-btc="0.00045" data-usdt="77">0.027 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80" alt="First Hotel Kong Frederik">
+                <h3>First Hotel Kong Frederik</h3>
+                <div class="hotel-chain">First Hotels</div>
+                <div class="price" data-eth="0.033" data-btc="0.00055" data-usdt="95">0.033 ETH / night</div>
+                <a href="#" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('daugavpils.html', 'Hotels in Daugavpils', 'Daugavpils', 'Latvia', 'Available Hotels in Daugavpils', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Daugavpils</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Daugavpils">Available Hotels in Daugavpils</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Park Hotel Latgola">
+                <h3>Park Hotel Latgola</h3>
+                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
+                <p>Modern hotel in the city center with panoramic views and conference facilities.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Dinaburg">
+                <h3>Hotel Dinaburg</h3>
+                <div class="price" data-eth="0.03" data-btc="0.0005" data-usdt="86">0.03 ETH / night</div>
+                <p>Comfortable rooms, restaurant, and wellness area close to Daugavpils fortress.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Biplan Hotel">
+                <h3>Biplan Hotel</h3>
+                <div class="price" data-eth="0.025" data-btc="0.0004" data-usdt="71">0.025 ETH / night</div>
+                <p>Budget-friendly hotel with cozy rooms and a convenient location.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('dundee.html', 'Hotels in Dundee', 'Dundee', 'Scotland', 'Available Hotels in Dundee', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Dundee</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Dundee">Available Hotels in Dundee</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Apex City Quay Hotel & Spa">
+                <h3>Apex City Quay Hotel & Spa</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Waterfront hotel on Dundee’s City Quay with spa and easy access to the V&A.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Malmaison Dundee">
+                <h3>Malmaison Dundee</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Characterful hotel in a converted church, walking distance from the waterfront.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Indigo Dundee">
+                <h3>Hotel Indigo Dundee</h3>
+                <div class="price" data-eth="0.055" data-btc="0.00092" data-usdt="157">0.055 ETH / night</div>
+                <p>Design hotel in a historic jute mill near Dundee city centre.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('edinburgh.html', 'Hotels in Edinburgh', 'Edinburgh', 'Scotland', 'Available Hotels in Edinburgh', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Edinburgh</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Edinburgh">Available Hotels in Edinburgh</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="The Balmoral">
+                <h3>The Balmoral</h3>
+                <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="400">0.14 ETH / night</div>
+                <p>Historic luxury hotel on Princes Street, steps from Waverley Station and Edinburgh Castle.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Waldorf Astoria Edinburgh">
+                <h3>Waldorf Astoria Edinburgh</h3>
+                <div class="price" data-eth="0.12" data-btc="0.002" data-usdt="340">0.12 ETH / night</div>
+                <p>Grand landmark hotel at the west end of Princes Street with spa and castle views.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel du Vin Edinburgh">
+                <h3>Hotel du Vin Edinburgh</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Boutique townhouse hotel in the Old Town, close to the Royal Mile.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('esbjerg.html', 'Hotel Booking - Esbjerg', 'Esbjerg', 'Denmark', 'Available Hotels in Esbjerg', 'HotelPaymentSystem', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, NULL, '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking - Esbjerg</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #e6f5ea;
+            min-height: 100vh;
+            margin: 0;
+            font-family: ''Segoe UI'', Arial, sans-serif;
+        }
+        .booking-header {
+            background: #487344;
+            color: #fff;
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+        }
+        .booking-header h1 {
+            margin: 0 0 0.5rem 0;
+        }
+        .booking-header p {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .booking-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .hotel-card {
+            background: #d6f2da;
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(72,115,68,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            transition: box-shadow .2s;
+        }
+        .hotel-card:hover {
+            box-shadow: 0 8px 24px rgba(72,115,68,0.13);
+        }
+        .hotel-card img {
+            width: 240px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+        }
+        .hotel-card h3 {
+            margin: 0 0 0.3rem 0;
+            color: #305b31;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+        .hotel-card .hotel-group {
+            color: #3b5039;
+            font-size: 1.03rem;
+            margin-bottom: 0.7rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #23451d;
+            font-size: 1.1rem;
+            margin-bottom: 1.1rem;
+        }
+        .hotel-card button {
+            background: #305b31;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 0.7rem 2.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .hotel-card button:hover {
+            background: #1e3d1d;
+        }
+        @media (max-width: 600px) {
+            .hotel-card img {
+                width: 100%;
+                height: 110px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-header">
+        <h1 id="booking-header-title">HotelPaymentSystem</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" style="text-align:center; color:#305b31;" data-city="Esbjerg">Available Hotels in Esbjerg</h2>
+        <div class="hotel-grid">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Hotel Britannia">
+                <h3>Hotel Britannia</h3>
+                <div class="hotel-group">Britannia Hotels</div>
+                <div class="price">0.035 ETH / night</div>
+                <button>Book Now</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Scandic Olympic">
+                <h3>Scandic Olympic</h3>
+                <div class="hotel-group">Scandic Hotels</div>
+                <div class="price">0.029 ETH / night</div>
+                <button>Book Now</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Hotel Ansgar">
+                <h3>Hotel Ansgar</h3>
+                <div class="hotel-group">Ansgar Group</div>
+                <div class="price">0.025 ETH / night</div>
+                <button>Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-link" style="text-align: center; margin: 2rem 0;">
+        <p><a href="index.html" style="color: #305b31; text-decoration: none; font-weight: bold;"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+    <footer style="text-align: center; padding: 1rem 2rem; font-size: 0.9rem; background: #b2e3b2; color: #2e4d25; border-top: 1px solid #2e4d25; margin-top: 3rem;">
+        <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+    </footer>
+
+    <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in Esbjerg",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в Esbjerg",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i Esbjerg",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('espoo.html', 'Hotels in Espoo', 'Espoo', 'Finland', 'Available Hotels in Espoo', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Espoo</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Espoo">Available Hotels in Espoo</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Matts">
+                <h3>Hotel Matts</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Modern hotel in Espoo offering stylish rooms and apartments.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Glo Hotel Sello">
+                <h3>Glo Hotel Sello</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Contemporary hotel next to Sello shopping center, great for families and business.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Radisson Blu Hotel Espoo">
+                <h3>Radisson Blu Hotel Espoo</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Waterfront hotel with excellent meeting facilities and nature access.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('glasgow.html', 'Hotels in Glasgow', 'Glasgow', 'Scotland', 'Available Hotels in Glasgow', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Glasgow</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Glasgow">Available Hotels in Glasgow</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Kimpton Blythswood Square">
+                <h3>Kimpton Blythswood Square</h3>
+                <div class="price" data-eth="0.10" data-btc="0.0017" data-usdt="285">0.10 ETH / night</div>
+                <p>Elegant Georgian square hotel with spa in the heart of Glasgow.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Radisson Blu Hotel, Glasgow">
+                <h3>Radisson Blu Hotel, Glasgow</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Contemporary hotel beside Glasgow Central Station, ideal for exploring the city.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Motel One Glasgow">
+                <h3>Motel One Glasgow</h3>
+                <div class="price" data-eth="0.04" data-btc="0.00067" data-usdt="114">0.04 ETH / night</div>
+                <p>Stylish budget-friendly stay on Argyle Street near the River Clyde.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('gothenburg.html', 'Hotels in Gothenburg', 'Gothenburg', 'Sweden', 'Available Hotels in Gothenburg', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Gothenburg</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Gothenburg">Available Hotels in Gothenburg</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Upper House">
+                <h3>Upper House</h3>
+                <div class="price" data-eth="0.12" data-btc="0.002" data-usdt="342">0.12 ETH / night</div>
+                <p>Design hotel high above Liseberg with a spa, skyline views, and Nordic cuisine.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Clarion Hotel Post">
+                <h3>Clarion Hotel Post</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Converted central post office with a rooftop pool, next to Drottningtorget and the station.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Eggers">
+                <h3>Hotel Eggers</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Classic 19th-century hotel by the railway station, close to Avenyn and the opera.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('hafnarfjörður.html', 'Hotels in Hafnarfjörður', 'Hafnarfjörður', 'Iceland', 'Available Hotels in Hafnarfjörður', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Hafnarfjörður</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Hafnarfjörður">Available Hotels in Hafnarfjörður</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Viking">
+                <h3>Hotel Viking</h3>
+                <div class="price" data-eth="0.065" data-btc="0.0011" data-usdt="185">0.065 ETH / night</div>
+                <p>Characterful harbour hotel with Norse-inspired interiors and a popular restaurant.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hótel Hafnarfjörður">
+                <h3>Hótel Hafnarfjörður</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Straightforward town hotel close to the lava fields, harbour, and Reykjavík bus routes.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Helguhús Guesthouse">
+                <h3>Helguhús Guesthouse</h3>
+                <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
+                <p>Homely guesthouse in a quiet neighbourhood, a short drive from the capital.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('helsinki.html', 'Hotels in Helsinki', 'Helsinki', 'Finland', 'Available Hotels in Helsinki', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Helsinki</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Helsinki">Available Hotels in Helsinki</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Kämp">
+                <h3>Hotel Kämp</h3>
+                <div class="price" data-eth="0.13" data-btc="0.0022" data-usdt="370">0.13 ETH / night</div>
+                <p>Historic luxury hotel in the heart of Helsinki with elegant rooms and spa.</p>
+                <a href="hotel-kamp-helsinki.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Scandic Grand Central">
+                <h3>Scandic Grand Central</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="220">0.08 ETH / night</div>
+                <p>Contemporary hotel next to Helsinki Central Station, great for exploring the city.</p>
+                <a href="scandic-grand-central-helsinki.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Helka">
+                <h3>Hotel Helka</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
+                <p>Stylish boutique hotel with Finnish design and cozy atmosphere.</p>
+                <a href="hotel-helka-helsinki.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('ilulissat.html', 'Hotels in Ilulissat', 'Ilulissat', 'Greenland', 'Available Hotels in Ilulissat', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Ilulissat</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Ilulissat">Available Hotels in Ilulissat</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Arctic">
+                <h3>Hotel Arctic</h3>
+                <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="400">0.14 ETH / night</div>
+                <p>Clifftop hotel above the UNESCO icefjord, with midnight-sun terraces and views of drifting icebergs.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Icefiord">
+                <h3>Hotel Icefiord</h3>
+                <div class="price" data-eth="0.12" data-btc="0.002" data-usdt="340">0.12 ETH / night</div>
+                <p>Harbour hotel facing Disko Bay, steps from boat departures into the icefjord.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Hvide Falk">
+                <h3>Hotel Hvide Falk</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="260">0.09 ETH / night</div>
+                <p>Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('inverness.html', 'Hotels in Inverness', 'Inverness', 'Scotland', 'Available Hotels in Inverness', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Inverness</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Inverness">Available Hotels in Inverness</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Kingsmills Hotel">
+                <h3>Kingsmills Hotel</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Highland hotel with gardens and golf, a short walk from Inverness city centre.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Rocpool Reserve Hotel">
+                <h3>Rocpool Reserve Hotel</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Boutique luxury stay overlooking the River Ness.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Glen Mhor Hotel">
+                <h3>Glen Mhor Hotel</h3>
+                <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="142">0.05 ETH / night</div>
+                <p>Riverside hotel with restaurant, close to Inverness Castle.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('jelgava.html', 'Hotels in Jelgava', 'Jelgava', 'Latvia', 'Available Hotels in Jelgava', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Jelgava</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Jelgava">Available Hotels in Jelgava</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Jelgava Hotel">
+                <h3>Jelgava Hotel</h3>
+                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
+                <p>Modern hotel in the city center with comfortable rooms and restaurant.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('jurmala.html', 'Hotels in Jurmala', 'Jūrmala', 'Latvia', 'Available Hotels in Jurmala', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Jurmala</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Jurmala">Available Hotels in Jurmala</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Baltic Beach Hotel">
+                <h3>Baltic Beach Hotel</h3>
+                <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
+                <p>Luxury spa hotel on the beach with beautiful sea views and upscale amenities.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Jurmala Spa">
+                <h3>Hotel Jurmala Spa</h3>
+                <div class="price" data-eth="0.045" data-btc="0.0008" data-usdt="128">0.045 ETH / night</div>
+                <p>Modern spa hotel with pools, saunas, and wellness treatments in Jurmala center.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Villa Joma">
+                <h3>Villa Joma</h3>
+                <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
+                <p>Charming boutique hotel near the sea, ideal for a relaxing getaway.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('kaunas.html', 'Hotels in Kaunas', 'Kaunas', 'Lithuania', 'Available Hotels in Kaunas', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Kaunas</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Kaunas">Available Hotels in Kaunas</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Hotel Kaunas City">
+                <h3>Hotel Kaunas City</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
+                <p>Comfortable city-centre hotel with modern rooms and easy access to Kaunas Old Town and cultural sights.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1501118572072-7c5d7d3d47e6?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Magnolia Boutique">
+                <h3>Magnolia Boutique</h3>
+                <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="140">0.05 ETH / night</div>
+                <p>Cozy boutique hotel offering an intimate atmosphere, complimentary breakfast and friendly service close to the river.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('kiruna.html', 'Hotels in Kiruna', 'Kiruna', 'Sweden', 'Available Hotels in Kiruna', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Kiruna</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Kiruna">Available Hotels in Kiruna</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Camp Ripan">
+                <h3>Camp Ripan</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Arctic spa hotel on the edge of Kiruna, with northern lights views and a base for Kebnekaise trails.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Arctic Eden">
+                <h3>Hotel Arctic Eden</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Lapland-inspired rooms in the town centre, close to Kiruna’s relocated church and new city district.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Scandic Kiruna">
+                <h3>Scandic Kiruna</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Modern hotel near the town centre, handy for aurora trips, Abisko, and the Icehotel in Jukkasjärvi.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('klaipeda.html', 'Hotels in Klaipėda', 'Klaipėda', 'Lithuania', 'Available Hotels in Klaipėda', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Klaipėda</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Klaipėda">Available Hotels in Klaipėda</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Seaside Harbour Hotel">
+                <h3>Seaside Harbour Hotel</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Seafront hotel with beautiful views of the Baltic Sea, fresh seafood nearby and easy access to the ferry terminal.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Portside Boutique">
+                <h3>Portside Boutique</h3>
+                <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="140">0.05 ETH / night</div>
+                <p>Charming boutique hotel in the city centre, close to restaurants, theatres and the Old Town promenade.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('kópavogur.html', 'Hotels in Kópavogur', 'Kópavogur', 'Iceland', 'Available Hotels in Kópavogur', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Kópavogur</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Kópavogur">Available Hotels in Kópavogur</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Vellir">
+                <h3>Hotel Vellir</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Contemporary hotel in Kópavogur with spacious rooms and quick links into Reykjavík.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hótel Smárinn">
+                <h3>Hótel Smárinn</h3>
+                <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
+                <p>Practical stay near Smáralind shopping centre, useful for families and longer visits.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Kórinn Guesthouse">
+                <h3>Kórinn Guesthouse</h3>
+                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
+                <p>Quiet guesthouse-style rooms with easy access to local pools and coastal paths.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('kristiansand.html', 'Hotels in Kristiansand', 'Kristiansand', 'Norway', 'Available Hotels in Kristiansand', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Kristiansand</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Kristiansand">Available Hotels in Kristiansand</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Clarion Hotel Ernst">
+                <h3>Clarion Hotel Ernst</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Landmark hotel on the main square, a short stroll from the cathedral and fish market.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Scandic Kristiansand Bystranda">
+                <h3>Scandic Kristiansand Bystranda</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Beachfront hotel on Bystranda with a pool, close to the boardwalk and Kilden.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Thon Hotel Wergeland">
+                <h3>Thon Hotel Wergeland</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Compact city hotel beside Wergeland’s park, handy for the Posebyen old town.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('liepaja.html', 'Hotels in Liepaja', 'Liepāja', 'Latvia', 'Available Hotels in Liepaja', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Liepaja</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Liepaja">Available Hotels in Liepaja</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Kolumbs">
+                <h3>Hotel Kolumbs</h3>
+                <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
+                <p>Elegant hotel with spa facilities near the sea and city center.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Promenade Hotel">
+                <h3>Promenade Hotel</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Luxury hotel set in a historic warehouse with art gallery and gourmet restaurant.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Liva Hotel">
+                <h3>Liva Hotel</h3>
+                <div class="price" data-eth="0.025" data-btc="0.0004" data-usdt="71">0.025 ETH / night</div>
+                <p>Central, affordable hotel ideal for business or leisure travelers.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('linköping.html', 'Hotels in Linköping', 'Linköping', 'Sweden', 'Available Hotels in Linköping', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Linköping</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Linköping">Available Hotels in Linköping</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Quality Hotel Ekoxen">
+                <h3>Quality Hotel Ekoxen</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Well-equipped city hotel with a pool and spa, close to Linköping’s main square.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Scandic Frimurarehotellet">
+                <h3>Scandic Frimurarehotellet</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Landmark hotel in the city centre with easy access to the cathedral and old town.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Stora Hotellet Linköping">
+                <h3>Stora Hotellet Linköping</h3>
+                <div class="price" data-eth="0.045" data-btc="0.0007" data-usdt="128">0.045 ETH / night</div>
+                <p>Classic independent hotel with a restaurant, a short walk from the railway station.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('longyearbyen.html', 'Hotels in Longyearbyen', 'Longyearbyen', 'Svalbard', 'Available Hotels in Longyearbyen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Longyearbyen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Longyearbyen">Available Hotels in Longyearbyen</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Radisson Blu Polar Hotel Spitsbergen">
+                <h3>Radisson Blu Polar Hotel Spitsbergen</h3>
+                <div class="price" data-eth="0.13" data-btc="0.0021" data-usdt="370">0.13 ETH / night</div>
+                <p>Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.</p>
+                <a href="radisson-blu-polar-spitsbergen.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Funken Lodge">
+                <h3>Funken Lodge</h3>
+                <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="315">0.11 ETH / night</div>
+                <p>Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.</p>
+                <a href="funken-lodge.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Basecamp Hotel">
+                <h3>Basecamp Hotel</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="255">0.09 ETH / night</div>
+                <p>Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.</p>
+                <a href="basecamp-hotel-svalbard.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('malmö.html', 'Hotels in Malmö', 'Malmö', 'Sweden', 'Available Hotels in Malmö', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Malmö</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Malmö">Available Hotels in Malmö</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Clarion Hotel Malmö Live">
+                <h3>Clarion Hotel Malmö Live</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>High-rise waterfront hotel with a sky bar and concert hall next door.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Savoy Malmö">
+                <h3>Hotel Savoy Malmö</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Historic city hotel opposite the central station, a short hop from the Turning Torso.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Scandic Triangeln">
+                <h3>Scandic Triangeln</h3>
+                <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
+                <p>Modern tower hotel above Triangeln station, handy for Möllevången and shopping.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('mariehamn.html', 'Hotels in Mariehamn', 'Mariehamn', 'Åland Islands', 'Available Hotels in Mariehamn', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Mariehamn</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Mariehamn">Available Hotels in Mariehamn</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Arkipelag">
+                <h3>Hotel Arkipelag</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Waterfront hotel by Mariehamn’s western harbour, a short walk from shops, ferries, and the maritime quarter.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Park Alandia Hotel">
+                <h3>Park Alandia Hotel</h3>
+                <div class="price" data-eth="0.05" data-btc="0.00085" data-usdt="145">0.05 ETH / night</div>
+                <p>Central Åland stay beside the town park, handy for the sailing harbour and the road to Kastelholm.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Pommern">
+                <h3>Hotel Pommern</h3>
+                <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="160">0.055 ETH / night</div>
+                <p>Relaxed hotel near the Åland Maritime Museum and the historic four-masted barque Pommern.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('narva.html', 'Hotels in Narva', 'Narva', 'Estonia', 'Available Hotels in Narva', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Narva</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Narva">Available Hotels in Narva</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1505691723518-36a1ddb1b3b6?fit=crop&w=400&q=80" alt="Narva-Jõesuu Hotel">
+                <h3>Narva-Jõesuu Seaside Hotel</h3>
+                <div class="price" data-eth="0.03" data-btc="0.0005" data-usdt="86">0.03 ETH / night</div>
+                <p>Seaside hotel near Narva with easy access to sandy beaches and coastal walks.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc3?fit=crop&w=400&q=80" alt="Narva City Hotel">
+                <h3>Narva City Hotel</h3>
+                <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
+                <p>Conveniently located in Narva city center, close to the river and historical sites.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('newcastle.html', 'Hotels in Newcastle', 'Newcastle', 'Northeast England', 'Available Hotels in Newcastle', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Newcastle</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Newcastle">Available Hotels in Newcastle</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel du Vin Newcastle">
+                <h3>Hotel du Vin Newcastle</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Boutique hotel in a converted warehouse beside the Quayside, with a bistro and wine cellar.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Malmaison Newcastle">
+                <h3>Malmaison Newcastle</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Crowne Plaza Newcastle">
+                <h3>Crowne Plaza Newcastle</h3>
+                <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
+                <p>Modern city hotel near St James’ Park, well placed for business and match-day stays.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('nuuk.html', 'Hotels in Nuuk', 'Nuuk', 'Greenland', 'Available Hotels in Nuuk', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Nuuk</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Nuuk">Available Hotels in Nuuk</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Hans Egede">
+                <h3>Hotel Hans Egede</h3>
+                <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="310">0.11 ETH / night</div>
+                <p>Landmark hotel on Aqqusinersuaq, with fjord views and a base for exploring Greenland’s capital.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Inuit Hotel">
+                <h3>Inuit Hotel</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="230">0.08 ETH / night</div>
+                <p>Contemporary rooms near the colonial harbour, close to Katuaq and the waterfront boardwalk.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Nuuk">
+                <h3>Hotel Nuuk</h3>
+                <div class="price" data-eth="0.075" data-btc="0.00125" data-usdt="215">0.075 ETH / night</div>
+                <p>Hillside stay overlooking Nuuk Fjord, a quiet launch point for boat trips and city walks.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('odense.html', 'Hotel Booking - Odense', 'Odense', 'Denmark', 'Available Hotels in Odense', 'HotelPaymentSystem', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, NULL, '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking - Odense</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">HotelPaymentSystem</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Odense">Available Hotels in Odense</h2>
+        <ul class="hotel-list">
+            <li>
+                <h3>Hotel Odeon</h3>
+                <p>Modern hotel close to Odense railway station.</p>
+            </li>
+            <li>
+                <h3>First Hotel Grand</h3>
+                <p>Historical charm in central Odense.</p>
+            </li>
+            <li>
+                <h3>Comwell H.C. Andersen Odense</h3>
+                <p>Comfort and convenience for leisure or business.</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+    <footer>
+        <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+    </footer>
+
+    <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in Odense",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в Odense",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i Odense",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "HotelPaymentSystem",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('oslo.html', 'Hotels in Oslo', 'Oslo', 'Norway', 'Available Hotels in Oslo', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Oslo</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Oslo">Available Hotels in Oslo</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Grand Hotel Oslo">
+                <h3>Grand Hotel Oslo</h3>
+                <div class="price" data-eth="0.15" data-btc="0.0025" data-usdt="428">0.15 ETH / night</div>
+                <p>Historic hotel on Karl Johans gate, facing the Storting and a stroll from the palace.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="The Thief">
+                <h3>The Thief</h3>
+                <div class="price" data-eth="0.13" data-btc="0.0021" data-usdt="370">0.13 ETH / night</div>
+                <p>Design hotel on Tjuvholmen with contemporary art, harbour views, and a spa.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Continental">
+                <h3>Hotel Continental</h3>
+                <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="314">0.11 ETH / night</div>
+                <p>Family-run landmark beside Nationaltheatret, known for Theatercaféen and city views.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('oulu.html', 'Hotels in Oulu', 'Oulu', 'Finland', 'Available Hotels in Oulu', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Oulu</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Oulu">Available Hotels in Oulu</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Lapland Hotels Oulu">
+                <h3>Lapland Hotels Oulu</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Lapland-inspired hotel near Oulu Cathedral, cozy and unique.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Radisson Blu Hotel Oulu">
+                <h3>Radisson Blu Hotel Oulu</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Riverside hotel with beautiful views and modern amenities.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Scandic Oulu Station">
+                <h3>Scandic Oulu Station</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Comfortable rooms close to Oulu railway station and city center.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('panevėžys.html', 'Hotels in Panevėžys', 'Panevėžys', 'Lithuania', 'Available Hotels in Panevėžys', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Panevėžys</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Panevėžys">Available Hotels in Panevėžys</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Panevezys Hotel">
+                <h3>Central Park Hotel</h3>
+                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
+                <p>Modern hotel near the city park offering comfortable rooms and easy access to local attractions and concert venues.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Boutique Panevezys">
+                <h3>Boutique Riverside</h3>
+                <div class="price" data-eth="0.045" data-btc="0.0008" data-usdt="128">0.045 ETH / night</div>
+                <p>Small riverside hotel offering peaceful rooms and personalized service — a great base for exploring the region.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('pärnu.html', 'Pärnu — Estonia (Placeholder)', 'Pärnu', 'Estonia', 'Pärnu — Estonia', NULL, NULL, NULL, 'This is a placeholder page for Pärnu in Estonia. The hotel listing for this city will be added here soon.', 'html/cities/estonia/pärnu.html', NULL, '<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pärnu — Estonia (Placeholder)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="language-switcher" aria-label="Language selector">
+      <label for="lang-select">Language</label>
+      <div class="language-switcher__select">
+          <select id="lang-select" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+              <option value="sv">Svenska</option>
+              <option value="de">Deutsch</option>
+          </select>
+      </div>
+  </div>
+
+  <div class="container">
+    <h1 id="page-title">Pärnu — Estonia</h1>
+    <p id="placeholder-text">This is a placeholder page for Pärnu in Estonia. The hotel listing for this city will be added here soon.</p>
+    <p>Expected path: html/cities/estonia/pärnu.html</p>
+    <p><a href="index.html"><span id="back-link-text">Back to Select Location</span></a></p>
+  </div>
+
+  <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+    en: {
+      "page-title": "Pärnu — Estonia",
+      "placeholder-text": "This is a placeholder page for Pärnu in Estonia. The hotel listing for this city will be added here soon.",
+      "back-link-text": "Back to Select Location"
+    },
+    ru: {
+      "page-title": "Пярну — Эстония",
+      "placeholder-text": "Это страница-заполнитель для Пярну в Эстонии. Список отелей для этого города скоро будет добавлен.",
+      "back-link-text": "Назад к выбору местоположения"
+    },
+    sv: {
+      "page-title": "Pärnu — Estland",
+      "placeholder-text": "Det här är en platshållarsida för Pärnu i Estland. Hotellistan för den här staden läggs till här inom kort.",
+      "back-link-text": "Tillbaka till platsvalet"
+    },
+    de: {
+      "page-title": "Pärnu — Estland",
+      "placeholder-text": "Dies ist eine Platzhalterseite für Pärnu in Estland. Die Hotelliste für diese Stadt wird in Kürze hinzugefügt.",
+      "back-link-text": "Zurück zur Standortauswahl"
+    },
+  };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('reykjanesbær.html', 'Hotels in Reykjanesbær', 'Reykjanesbær', 'Iceland', 'Available Hotels in Reykjanesbær', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Reykjanesbær</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Reykjanesbær">Available Hotels in Reykjanesbær</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Keflavik">
+                <h3>Hotel Keflavik</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Well-known airport-town hotel with a restaurant, handy for early flights and the lagoon.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Keilir">
+                <h3>Hotel Keilir</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Modern stay in central Keflavík, close to the waterfront and the Viking World museum.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Airport Hotel Aurora Star">
+                <h3>Airport Hotel Aurora Star</h3>
+                <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
+                <p>Convenient overnight beside Keflavík International Airport with a 24-hour desk.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('reykjavík.html', 'Hotels in Reykjavík', 'Reykjavík', 'Iceland', 'Available Hotels in Reykjavík', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Reykjavík</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Reykjavík">Available Hotels in Reykjavík</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Borg">
+                <h3>Hotel Borg</h3>
+                <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="399">0.14 ETH / night</div>
+                <p>Art Deco landmark on Austurvöllur square, steps from the parliament and harbour.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Canopy by Hilton Reykjavik City Centre">
+                <h3>Canopy by Hilton Reykjavik City Centre</h3>
+                <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="314">0.11 ETH / night</div>
+                <p>Design-led hotel on Laugavegur with local art, a café, and easy access to nightlife.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Center Hotels Plaza">
+                <h3>Center Hotels Plaza</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Practical city-centre stay on Ingólfstorg, close to shops, bars, and the Old Harbour.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('riga.html', 'Hotels in Riga', 'Riga', 'Latvia', 'Available Hotels in Riga', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Riga</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Riga">Available Hotels in Riga</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Grand Hotel Kempinski">
+                <h3>Grand Hotel Kempinski</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="250">0.09 ETH / night</div>
+                <p>Luxury stay in the heart of Riga with elegant rooms and spa facilities.</p>
+                <a href="grand-hotel-kempinski-riga.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Wellton Riverside">
+                <h3>Wellton Riverside</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
+                <p>Modern hotel with river views, wellness area and rooftop terrace.</p>
+                <a href="wellton-riverside-riga.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('rovaniemi.html', 'Hotels in Rovaniemi', 'Rovaniemi', 'Finland', 'Available Hotels in Rovaniemi', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Rovaniemi</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Rovaniemi">Available Hotels in Rovaniemi</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Arctic Light Hotel">
+                <h3>Arctic Light Hotel</h3>
+                <div class="price" data-eth="0.10" data-btc="0.0016" data-usdt="285">0.10 ETH / night</div>
+                <p>Boutique hotel in a converted city hall, steps from Rovaniemi’s centre and Santa Claus Village day trips.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Lapland Hotels Sky Ounasvaara">
+                <h3>Lapland Hotels Sky Ounasvaara</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Hilltop hotel above the Kemijoki, with northern lights views and forest trails just outside town.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Santa''s Hotel Santa Claus">
+                <h3>Santa''s Hotel Santa Claus</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('šiauliai.htm', 'Hotels in Šiauliai.Htm', 'Šiauliai', 'Lithuania', 'Available Hotels in Šiauliai.Htm', 'Boreal Horizons', 'Book your stay with secure crypto payments', 'selectlocation.html', NULL, NULL, 'ETH,BTC,USDT', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotels in Šiauliai.Htm</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>Boreal Horizons</h1>
+        <p>Book your stay with secure crypto payments</p>
+    </div>
+    <div class="booking-container">
+        <h2>Available Hotels in Šiauliai.Htm</h2>
+        <div class="currency-selector">
+            <label for="currency">Select Currency:</label>
+            <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Park Inn Siauliai">
+                <h3>Park Inn Šiauliai</h3>
+                <div class="price" data-eth="0.045" data-btc="0.0008" data-usdt="128">0.045 ETH / night</div>
+                <p>Reliable mid-range hotel with clean, comfortable rooms, conference facilities and convenient transport links.</p>
+                <a href="selectlocation.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Šiauliai Boutique">
+                <h3>Old Town Boutique</h3>
+                <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
+                <p>Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast.</p>
+                <a href="selectlocation.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="selectlocation.html">Back to Booking</a></p>
+    </div>
+    <footer>
+        <p>&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+    </footer>
+    <script>
+        function updatePrices() {{
+            const currency = document.getElementById(''currency'').value;
+            const priceElements = document.querySelectorAll(''.price'');
+            
+            priceElements.forEach(priceEl => {{
+                const ethPrice = priceEl.getAttribute(''data-eth'');
+                const btcPrice = priceEl.getAttribute(''data-btc'');
+                const usdtPrice = priceEl.getAttribute(''data-usdt'');
+                
+                let newPrice;
+                if (currency === ''ETH'') {{
+                    newPrice = `${{ethPrice}} ETH / night`;
+                }} else if (currency === ''BTC'') {{
+                    newPrice = `${{btcPrice}} BTC / night`;
+                }} else if (currency === ''USDT'') {{
+                    newPrice = `${{usdtPrice}} USDT / night`;
+                }}
+                
+                priceEl.textContent = newPrice;
+            }});
+        }}
+    </script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('stavanger.html', 'Hotels in Stavanger', 'Stavanger', 'Norway', 'Available Hotels in Stavanger', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Stavanger</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Stavanger">Available Hotels in Stavanger</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Clarion Hotel Stavanger">
+                <h3>Clarion Hotel Stavanger</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Central high-rise with a rooftop restaurant and views over the harbour and old town.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Radisson Blu Atlantic">
+                <h3>Radisson Blu Atlantic</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Waterfront hotel on the lake, walking distance to the petroleum museum and colour houses.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Victoria Stavanger">
+                <h3>Hotel Victoria Stavanger</h3>
+                <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
+                <p>Historic hotel on Skansegt, close to the cathedral and the ferry to Tau.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('stirling.html', 'Hotels in Stirling', 'Stirling', 'Scotland', 'Available Hotels in Stirling', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Stirling</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Stirling">Available Hotels in Stirling</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Stirling Highland Hotel">
+                <h3>Stirling Highland Hotel</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Historic hotel beside Stirling Castle, in a former high school building.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Colessio">
+                <h3>Hotel Colessio</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Stylish boutique hotel on the edge of Stirling’s old town.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Golden Lion Hotel">
+                <h3>Golden Lion Hotel</h3>
+                <div class="price" data-eth="0.045" data-btc="0.00075" data-usdt="128">0.045 ETH / night</div>
+                <p>Traditional city-centre inn, a convenient base for exploring Stirling.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('stockholm.html', 'Hotels in Stockholm', 'Stockholm', 'Sweden', 'Available Hotels in Stockholm', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Stockholm</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Stockholm">Available Hotels in Stockholm</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Grand Hôtel Stockholm">
+                <h3>Grand Hôtel Stockholm</h3>
+                <div class="price" data-eth="0.16" data-btc="0.0026" data-usdt="456">0.16 ETH / night</div>
+                <p>Landmark waterfront palace facing the Royal Palace, with a Nordic spa and fine dining.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Diplomat">
+                <h3>Hotel Diplomat</h3>
+                <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="314">0.11 ETH / night</div>
+                <p>Elegant Art Nouveau hotel on Strandvägen, steps from Östermalm boutiques and Djurgården.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Scandic Continental">
+                <h3>Scandic Continental</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Central eco-minded hotel beside Stockholm Central Station, ideal for exploring the islands.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('tallinn.html', 'Hotels in Tallinn', 'Tallinn', 'Estonia', 'Available Hotels in Tallinn', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Tallinn</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Tallinn">Available Hotels in Tallinn</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80" alt="Hotel Telegraaf">
+                <h3>Hotel Telegraaf</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="220">0.08 ETH / night</div>
+                <p>Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.</p>
+                <a href="hotel-telegraaf-tallinn.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80" alt="Swissôtel Tallinn">
+                <h3>Swissôtel Tallinn</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Modern high-rise hotel offering panoramic city views, pool and business facilities.</p>
+                <a href="swissotel-tallinn.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('tampere.html', 'Hotels in Tampere', 'Tampere', 'Finland', 'Available Hotels in Tampere', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Tampere</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Tampere">Available Hotels in Tampere</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Lapland Hotels Tampere">
+                <h3>Lapland Hotels Tampere</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Modern comfort with Lapland-inspired decor in central Tampere.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Scandic Tampere Station">
+                <h3>Scandic Tampere Station</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Convenient hotel next to the train station, perfect for business and leisure.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Original Sokos Hotel Ilves">
+                <h3>Original Sokos Hotel Ilves</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Iconic riverside hotel offering panoramic city views and dining.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('tartu.html', 'Hotels in Tartu', 'Tartu', 'Estonia', 'Available Hotels in Tartu', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Tartu</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Tartu">Available Hotels in Tartu</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80" alt="Hotel Telegraaf">
+                <h3>Hotel Telegraaf</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80" alt="Swissôtel Tallinn">
+                <h3>Swissôtel Tallinn</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Modern high-rise hotel offering panoramic city views, pool and business facilities.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('tórshavn.html', 'Hotels in Tórshavn', 'Tórshavn', 'Faroe Islands', 'Available Hotels in Tórshavn', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Tórshavn</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Tórshavn">Available Hotels in Tórshavn</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Hotel Føroyar">
+                <h3>Hotel Føroyar</h3>
+                <div class="price" data-eth="0.10" data-btc="0.0017" data-usdt="285">0.10 ETH / night</div>
+                <p>Hillside hotel above the capital, with grass-roof rooms and wide views over Tórshavn and Nólsoy.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Hotel Hafnia">
+                <h3>Hotel Hafnia</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="230">0.08 ETH / night</div>
+                <p>Classic downtown hotel on Áarvegur, walking distance to Tinganes and the harbour.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Streym">
+                <h3>Hotel Streym</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Harbour-side stay near the ferry terminal, a practical base for island-hopping around the Faroes.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('tromso.html', 'Hotels in Tromsø', 'Tromsø', 'Norway', 'Available Hotels in Tromsø', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Tromsø</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Tromsø">Available Hotels in Tromsø</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Clarion Hotel The Edge">
+                <h3>Clarion Hotel The Edge</h3>
+                <div class="price" data-eth="0.10" data-btc="0.0016" data-usdt="285">0.10 ETH / night</div>
+                <p>Waterfront hotel on the Tromsø Sound with harbour views and a short hop to the Arctic Cathedral.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Radisson Blu Hotel Tromsø">
+                <h3>Radisson Blu Hotel Tromsø</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
+                <p>Central Arctic-city hotel with a rooftop bar looking over the island and surrounding peaks.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Scandic Ishavshotel">
+                <h3>Scandic Ishavshotel</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Harbourfront stay on the quay, a short walk from Tromsø city centre and the polar museum.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('trondheim.html', 'Hotels in Trondheim', 'Trondheim', 'Norway', 'Available Hotels in Trondheim', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Trondheim</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Trondheim">Available Hotels in Trondheim</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Britannia Hotel">
+                <h3>Britannia Hotel</h3>
+                <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="399">0.14 ETH / night</div>
+                <p>Restored palatial hotel with a palm court, spa, and several celebrated restaurants.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Clarion Hotel Trondheim">
+                <h3>Clarion Hotel Trondheim</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Harbourfront hotel on Brattøra, a short walk from the aquarium and city centre.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Scandic Nidelven">
+                <h3>Scandic Nidelven</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Riverside hotel famous for its breakfast, next to the Solsiden quarter.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('turku.html', 'Hotels in Turku', 'Turku', 'Finland', 'Available Hotels in Turku', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Turku</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Turku">Available Hotels in Turku</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Radisson Blu Marina Palace">
+                <h3>Radisson Blu Marina Palace</h3>
+                <div class="price" data-eth="0.10" data-btc="0.0017" data-usdt="285">0.10 ETH / night</div>
+                <p>Riverside hotel with modern rooms and excellent amenities.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Scandic Julia">
+                <h3>Scandic Julia</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Modern comfort in the center of Turku, close to shopping and attractions.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Original Sokos Hotel Wiklund">
+                <h3>Original Sokos Hotel Wiklund</h3>
+                <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
+                <p>Central hotel with rooftop bar and easy access to Turku’s sights.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('uppsala.html', 'Hotels in Uppsala', 'Uppsala', 'Sweden', 'Available Hotels in Uppsala', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Uppsala</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header {
+            background: #ffeec0;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .booking-header h1 {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+        .booking-header p {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .booking-container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .booking-container h2 {
+            text-align: center;
+            color: #2e4d25;
+            margin-bottom: 1rem;
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .hotel-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .hotel-chain {
+            font-size: 0.9em;
+            color: #2e4d25;
+            margin-bottom: 0.3rem;
+        }
+        .hotel-card .price {
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link {
+            display: block;
+            margin: 1rem auto 0 auto;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover {
+            background: #156d17;
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Uppsala">Available Hotels in Uppsala</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+                        <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" alt="Clarion Hotel Gillet">
+                <h3>Clarion Hotel Gillet</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Central hotel by the river Fyris, walking distance to the cathedral and university.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Elite Hotel Academia">
+                <h3>Elite Hotel Academia</h3>
+                <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
+                <p>Contemporary stay beside Uppsala Central Station with a restaurant and gym.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Grand Hotel Hörnan">
+                <h3>Grand Hotel Hörnan</h3>
+                <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
+                <p>Boutique hotel in a historic corner building overlooking the river and old town.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('viljandi.html', 'Viljandi — Estonia (Placeholder)', 'Viljandi', 'Estonia', 'Viljandi — Estonia', NULL, NULL, NULL, 'This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.', 'html/cities/estonia/viljandi.html', NULL, '<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Viljandi — Estonia (Placeholder)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="language-switcher" aria-label="Language selector">
+      <label for="lang-select">Language</label>
+      <div class="language-switcher__select">
+          <select id="lang-select" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+              <option value="sv">Svenska</option>
+              <option value="de">Deutsch</option>
+          </select>
+      </div>
+  </div>
+
+  <div class="container">
+    <h1 id="page-title">Viljandi — Estonia</h1>
+    <p id="placeholder-text">This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.</p>
+    <p>Expected path: html/cities/estonia/viljandi.html</p>
+    <p><a href="index.html"><span id="back-link-text">Back to Select Location</span></a></p>
+  </div>
+
+  <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+    en: {
+      "page-title": "Viljandi — Estonia",
+      "placeholder-text": "This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.",
+      "back-link-text": "Back to Select Location"
+    },
+    ru: {
+      "page-title": "Вильянди — Эстония",
+      "placeholder-text": "Это страница-заполнитель для Вильянди в Эстонии. Список отелей для этого города скоро будет добавлен.",
+      "back-link-text": "Назад к выбору местоположения"
+    },
+    sv: {
+      "page-title": "Viljandi — Estland",
+      "placeholder-text": "Det här är en platshållarsida för Viljandi i Estland. Hotellistan för den här staden läggs till här inom kort.",
+      "back-link-text": "Tillbaka till platsvalet"
+    },
+    de: {
+      "page-title": "Viljandi — Estland",
+      "placeholder-text": "Dies ist eine Platzhalterseite für Viljandi in Estland. Die Hotelliste für diese Stadt wird in Kürze hinzugefügt.",
+      "back-link-text": "Zurück zur Standortauswahl"
+    },
+  };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('vilnius.html', 'Hotels in Vilnius', 'Vilnius', 'Lithuania', 'Available Hotels in Vilnius', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels in Vilnius</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-header { 
+            background: #ffeec0; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .booking-header h1 { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2.2rem; 
+        }
+        .booking-header p { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0; 
+            font-size: 1.1rem; 
+        }
+        .booking-container { 
+            margin: 2rem auto; 
+            max-width: 1200px; 
+            padding: 0 1rem; 
+        }
+        .booking-container h2 { 
+            text-align: center; 
+            color: #2e4d25; 
+            margin-bottom: 1rem; 
+        }
+        .currency-selector {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .currency-selector label {
+            font-weight: bold;
+            color: #2e4d25;
+            margin-right: 0.5rem;
+        }
+        .currency-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e7d32;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #2e4d25;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hotel-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        .hotel-card { 
+            background: #fff; 
+            border-radius: 1rem; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); 
+            width: 300px; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .hotel-card img { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 0.7rem; 
+        }
+        .hotel-card h3 {
+            color: #2e4d25;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .price { 
+            font-weight: bold; 
+            color: #2e7d32; 
+            margin: 0.5rem 0; 
+            font-size: 1.1rem;
+        }
+        .hotel-card p {
+            color: #2e4d25;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+        .hotel-card .book-link { 
+            display: block; 
+            margin: 1rem auto 0 auto; 
+            background: #2e7d32; 
+            color: #fff; 
+            border: none; 
+            border-radius: 0.5rem; 
+            padding: 0.7rem 1.2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: background 0.2s;
+        }
+        .hotel-card .book-link:hover { 
+            background: #156d17; 
+        }
+        .back-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .back-link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            background: #b2e3b2;
+            color: #2e4d25;
+            border-top: 1px solid #2e4d25;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1 id="booking-header-title">Boreal Horizons</h1>
+        <p id="booking-header-desc">Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h2 id="available-hotels" data-city="Vilnius">Available Hotels in Vilnius</h2>
+        <div class="currency-selector">
+            <label for="currency" id="currency-label">Select Currency:</label>
+            <select id="currency" onchange="updatePrices()">
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="LTC">LTC (Litecoin)</option>
+                <option value="BCH">BCH (Bitcoin Cash)</option>
+                <option value="DOGE">DOGE (Dogecoin)</option>
+                <option value="XRP">XRP</option>
+                <option value="XMR">XMR (Monero)</option>
+                <option value="XNO">XNO (Nano)</option>
+                <option value="DASH">DASH</option>
+                <option value="VET">VET (Vechain)</option>
+                <option value="UNI">UNI (Uniswap)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="ADA">ADA (Cardano)</option>
+                <option value="TRN">TRN (Tron)</option>
+            </select>
+        </div>
+        <div class="hotel-list">
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1501117716987-c8e6b8a6b2d2?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="PACAI Hotel">
+                <h3>PACAI Hotel</h3>
+                <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="250">0.09 ETH / night</div>
+                <p>Luxury boutique hotel in Vilnius Old Town with elegant rooms and a quiet courtyard — perfect for exploring the historic centre.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1472552949507-78c2d0f1311d?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Radisson Blu Lietuva">
+                <h3>Radisson Blu Lietuva</h3>
+                <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
+                <p>Modern riverside hotel offering panoramic city views, an indoor pool and business facilities for business and leisure travellers.</p>
+                <a href="index.html" class="book-link">View & Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="back-link">
+        <p><a href="index.html"><span id="back-link-text">Back to Booking</span></a></p>
+    </div>
+      <footer>
+          <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
+      </footer>
+      <script src="assets/payment-currencies.js"></script>
+      <script src="assets/stay-pricing.js"></script>
+      <script src="assets/price-range-sidebar.js"></script>
+      <script src="site-preferences.js"></script>
+<script>
+// Translation data for supported languages
+const translations = {
+      en: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Book your stay with secure crypto payments, and pay in fiat too.",
+        "available-hotels": "Available Hotels in {city}",
+        "currency-label": "Select Currency:",
+        "back-link-text": "Back to Booking",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+      },
+      ru: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате",
+        "available-hotels": "Доступные отели в {city}",
+        "currency-label": "Выберите валюту:",
+        "back-link-text": "Назад к бронированию",
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+      },
+      sv: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Boka din vistelse med säkra kryptobetalningar, och betala i fiat också",
+        "available-hotels": "Tillgängliga hotell i {city}",
+        "currency-label": "Välj valuta:",
+        "back-link-text": "Tillbaka till bokningen",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+      },
+      de: {
+        "booking-header-title": "Boreal Horizons",
+        "booking-header-desc": "Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat",
+        "available-hotels": "Verfügbare Hotels in {city}",
+        "currency-label": "Währung auswählen:",
+        "back-link-text": "Zurück zur Buchung",
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+      },
+    };
+
+function applyTranslations(lang) {
+  const mapping = translations[lang] || translations[''en''];
+  Object.keys(mapping).forEach(function(key) {
+    const el = document.getElementById(key);
+    if (!el) {
+      return;
+    }
+    if (key === ''footer-text'') {
+      el.innerHTML = mapping[key];
+    } else if (key === ''available-hotels'' && el.hasAttribute(''data-city'')) {
+      const cityName = el.getAttribute(''data-city'') || '''';
+      el.textContent = mapping[key].replace(''{city}'', cityName);
+    } else {
+      el.textContent = mapping[key];
+    }
+  });
+}
+
+const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || ''preferredLanguageChange'';
+document.addEventListener(languageEventName, function(event) {
+  applyTranslations((event.detail && event.detail.lang) || ''en'');
+});
+
+const langSelect = document.getElementById(''lang-select'');
+const availableLanguages = langSelect ? Array.prototype.map.call(langSelect.options, function(option) { return option.value; }) : [];
+const preferredLanguage = (window.LanguagePreferences && typeof window.LanguagePreferences.getPreferredLanguage === ''function'')
+  ? window.LanguagePreferences.getPreferredLanguage()
+  : null;
+const initialLang = (preferredLanguage && availableLanguages.indexOf(preferredLanguage) !== -1)
+  ? preferredLanguage
+  : (langSelect ? (langSelect.value || availableLanguages[0] || ''en'') : ''en'');
+
+if (langSelect && initialLang && langSelect.value !== initialLang) {
+  langSelect.value = initialLang;
+}
+
+applyTranslations(initialLang);
+
+if (langSelect) {
+  if (window.LanguagePreferences && typeof window.LanguagePreferences.init === ''function'') {
+    window.LanguagePreferences.init(langSelect);
+  } else {
+    document.documentElement.setAttribute(''lang'', initialLang);
+    langSelect.addEventListener(''change'', function() {
+      const lang = this.value;
+      applyTranslations(lang);
+      document.documentElement.setAttribute(''lang'', lang);
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = ''preferredLanguage='' + encodeURIComponent(lang) + '';expires='' + expires.toUTCString() + '';path=/;SameSite=Lax'';
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+');
+
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('aarhus.html', 1, 'Hotel Royal Aarhus', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Royal Aarhus', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Luxury hotel in the heart of Aarhus, featuring elegant rooms, gourmet restaurant, and spa services.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('aarhus.html', 2, 'Scandic Aarhus City', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Aarhus City', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Modern amenities and eco-friendly design, located in the vibrant city center with easy access to attractions.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('aarhus.html', 3, 'Comwell Aarhus', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Comwell Aarhus', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Contemporary comfort with panoramic city views, perfect for business or leisure travelers.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('aberdeen.html', 1, 'The Marcliffe Hotel and Spa', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Marcliffe Hotel and Spa', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Country-house luxury on the edge of Aberdeen with gardens and spa.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('aberdeen.html', 2, 'Mercure Aberdeen Caledonian', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Mercure Aberdeen Caledonian', NULL, '0.05 ETH / night', 0.05, 0.00083, 142, 'Classic city-centre hotel close to Union Street and the harbour.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('aberdeen.html', 3, 'Sandman Signature Aberdeen', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Sandman Signature Aberdeen', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Modern hotel near the beach and Aberdeen’s exhibition centre.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('akureyri.html', 1, 'Hotel Kea', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Kea', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Long-standing harbour hotel facing the fjord, steps from the church and downtown cafés.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('akureyri.html', 2, 'Icelandair Hotel Akureyri', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Icelandair Hotel Akureyri', NULL, '0.075 ETH / night', 0.075, 0.0012, 214, 'Contemporary hotel near the botanical garden, with views toward the ski slopes.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('akureyri.html', 3, 'Hotel Nordurland', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Nordurland', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Compact central hotel on Hafnarstræti, a practical base for north-Iceland day trips.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('bauska.html', 1, 'Hotel Bauska', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Bauska', NULL, '0.05 ETH / night', 0.05, 0.0009, 142, 'Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade.', 'hotel-bauska.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('bauska.html', 2, 'Bauska Castle Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Bauska Castle Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence.', 'bauska-castle-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('bergen.html', 1, 'Hotel Norge by Scandic', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Norge by Scandic', NULL, '0.1 ETH / night', 0.1, 0.0017, 285, 'Rebuilt city-centre icon on Ole Bulls plass, a short walk from the fish market.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('bergen.html', 2, 'Clarion Hotel Admiral', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Admiral', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel facing Bryggen, with harbour-view rooms and a rooftop restaurant.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('bergen.html', 3, 'Steens Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Steens Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Intimate Swiss-chalet style guesthouse near Nygårdsparken, handy for the funicular.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('berwick-upon-tweed.html', 1, 'Marshall Meadows Country House', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Marshall Meadows Country House', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Georgian country house on the coast just north of town, with sea views and period rooms.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('berwick-upon-tweed.html', 2, 'The King’s Arms Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The King’s Arms Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Historic coaching inn in the town centre, a short walk from the Elizabethan walls.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('berwick-upon-tweed.html', 3, 'The Walls Guest House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'The Walls Guest House', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Friendly townhouse stay beside Berwick’s ramparts, close to the Tweed estuary.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('copenhagen.html', 1, 'Scandic Palace Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', 'Scandic Palace Hotel', 'Scandic Hotels', '0.042 ETH / night', 0.042, 0.0007, 120, NULL, 'scandic-copenhagen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('copenhagen.html', 2, 'Comwell Copenhagen Portside', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80', 'Comwell Copenhagen Portside', 'Comwell Hotels', '0.038 ETH / night', 0.038, 0.00063, 110, NULL, '#', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('copenhagen.html', 3, 'Imperial Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80', 'Imperial Hotel', 'Arp-Hansen Hotel Group', '0.045 ETH / night', 0.045, 0.00075, 130, NULL, '#', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('copenhagen.html', 4, 'CABINN City', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80', 'CABINN City', 'Cabinn Hotels', '0.021 ETH / night', 0.021, 0.00035, 60, NULL, '#', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('copenhagen.html', 5, 'Zleep Hotel Copenhagen City', 'https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80', 'Zleep Hotel Copenhagen City', 'Zleep Hotels', '0.027 ETH / night', 0.027, 0.00045, 77, NULL, '#', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('copenhagen.html', 6, 'First Hotel Kong Frederik', 'https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80', 'First Hotel Kong Frederik', 'First Hotels', '0.033 ETH / night', 0.033, 0.00055, 95, NULL, '#', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('daugavpils.html', 1, 'Park Hotel Latgola', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Hotel Latgola', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel in the city center with panoramic views and conference facilities.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('daugavpils.html', 2, 'Hotel Dinaburg', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Dinaburg', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Comfortable rooms, restaurant, and wellness area close to Daugavpils fortress.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('daugavpils.html', 3, 'Biplan Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Biplan Hotel', NULL, '0.025 ETH / night', 0.025, 0.0004, 71, 'Budget-friendly hotel with cozy rooms and a convenient location.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('dundee.html', 1, 'Apex City Quay Hotel & Spa', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Apex City Quay Hotel & Spa', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Waterfront hotel on Dundee’s City Quay with spa and easy access to the V&A.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('dundee.html', 2, 'Malmaison Dundee', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Malmaison Dundee', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Characterful hotel in a converted church, walking distance from the waterfront.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('dundee.html', 3, 'Hotel Indigo Dundee', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Indigo Dundee', NULL, '0.055 ETH / night', 0.055, 0.00092, 157, 'Design hotel in a historic jute mill near Dundee city centre.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('edinburgh.html', 1, 'The Balmoral', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Balmoral', NULL, '0.14 ETH / night', 0.14, 0.0023, 400, 'Historic luxury hotel on Princes Street, steps from Waverley Station and Edinburgh Castle.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('edinburgh.html', 2, 'Waldorf Astoria Edinburgh', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Waldorf Astoria Edinburgh', NULL, '0.12 ETH / night', 0.12, 0.002, 340, 'Grand landmark hotel at the west end of Princes Street with spa and castle views.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('edinburgh.html', 3, 'Hotel du Vin Edinburgh', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel du Vin Edinburgh', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Boutique townhouse hotel in the Old Town, close to the Royal Mile.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('esbjerg.html', 1, 'Hotel Britannia', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', 'Hotel Britannia', 'Britannia Hotels', '0.035 ETH / night', 0.035, NULL, NULL, NULL, NULL, 'Book Now');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('esbjerg.html', 2, 'Scandic Olympic', 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80', 'Scandic Olympic', 'Scandic Hotels', '0.029 ETH / night', 0.029, NULL, NULL, NULL, NULL, 'Book Now');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('esbjerg.html', 3, 'Hotel Ansgar', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80', 'Hotel Ansgar', 'Ansgar Group', '0.025 ETH / night', 0.025, NULL, NULL, NULL, NULL, 'Book Now');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('espoo.html', 1, 'Hotel Matts', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Matts', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern hotel in Espoo offering stylish rooms and apartments.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('espoo.html', 2, 'Glo Hotel Sello', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Glo Hotel Sello', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Contemporary hotel next to Sello shopping center, great for families and business.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('espoo.html', 3, 'Radisson Blu Hotel Espoo', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Radisson Blu Hotel Espoo', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel with excellent meeting facilities and nature access.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('glasgow.html', 1, 'Kimpton Blythswood Square', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Kimpton Blythswood Square', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Elegant Georgian square hotel with spa in the heart of Glasgow.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('glasgow.html', 2, 'Radisson Blu Hotel, Glasgow', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel, Glasgow', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Contemporary hotel beside Glasgow Central Station, ideal for exploring the city.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('glasgow.html', 3, 'Motel One Glasgow', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Motel One Glasgow', NULL, '0.04 ETH / night', 0.04, 0.00067, 114, 'Stylish budget-friendly stay on Argyle Street near the River Clyde.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('gothenburg.html', 1, 'Upper House', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Upper House', NULL, '0.12 ETH / night', 0.12, 0.002, 342, 'Design hotel high above Liseberg with a spa, skyline views, and Nordic cuisine.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('gothenburg.html', 2, 'Clarion Hotel Post', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Post', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Converted central post office with a rooftop pool, next to Drottningtorget and the station.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('gothenburg.html', 3, 'Hotel Eggers', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Eggers', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Classic 19th-century hotel by the railway station, close to Avenyn and the opera.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('hafnarfjörður.html', 1, 'Hotel Viking', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Viking', NULL, '0.065 ETH / night', 0.065, 0.0011, 185, 'Characterful harbour hotel with Norse-inspired interiors and a popular restaurant.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('hafnarfjörður.html', 2, 'Hótel Hafnarfjörður', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Hafnarfjörður', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Straightforward town hotel close to the lava fields, harbour, and Reykjavík bus routes.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('hafnarfjörður.html', 3, 'Helguhús Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Helguhús Guesthouse', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Homely guesthouse in a quiet neighbourhood, a short drive from the capital.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('helsinki.html', 1, 'Hotel Kämp', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Kämp', NULL, '0.13 ETH / night', 0.13, 0.0022, 370, 'Historic luxury hotel in the heart of Helsinki with elegant rooms and spa.', 'hotel-kamp-helsinki.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('helsinki.html', 2, 'Scandic Grand Central', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Grand Central', NULL, '0.08 ETH / night', 0.08, 0.0013, 220, 'Contemporary hotel next to Helsinki Central Station, great for exploring the city.', 'scandic-grand-central-helsinki.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('helsinki.html', 3, 'Hotel Helka', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Helka', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Stylish boutique hotel with Finnish design and cozy atmosphere.', 'hotel-helka-helsinki.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('ilulissat.html', 1, 'Hotel Arctic', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Arctic', NULL, '0.14 ETH / night', 0.14, 0.0023, 400, 'Clifftop hotel above the UNESCO icefjord, with midnight-sun terraces and views of drifting icebergs.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('ilulissat.html', 2, 'Hotel Icefiord', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Icefiord', NULL, '0.12 ETH / night', 0.12, 0.002, 340, 'Harbour hotel facing Disko Bay, steps from boat departures into the icefjord.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('ilulissat.html', 3, 'Hotel Hvide Falk', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Hvide Falk', NULL, '0.09 ETH / night', 0.09, 0.0015, 260, 'Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('inverness.html', 1, 'Kingsmills Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Kingsmills Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Highland hotel with gardens and golf, a short walk from Inverness city centre.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('inverness.html', 2, 'Rocpool Reserve Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Rocpool Reserve Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Boutique luxury stay overlooking the River Ness.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('inverness.html', 3, 'Glen Mhor Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Glen Mhor Hotel', NULL, '0.05 ETH / night', 0.05, 0.00083, 142, 'Riverside hotel with restaurant, close to Inverness Castle.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('jelgava.html', 1, 'Jelgava Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Jelgava Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel in the city center with comfortable rooms and restaurant.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('jurmala.html', 1, 'Baltic Beach Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Baltic Beach Hotel', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Luxury spa hotel on the beach with beautiful sea views and upscale amenities.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('jurmala.html', 2, 'Hotel Jurmala Spa', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Jurmala Spa', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Modern spa hotel with pools, saunas, and wellness treatments in Jurmala center.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('jurmala.html', 3, 'Villa Joma', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Villa Joma', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Charming boutique hotel near the sea, ideal for a relaxing getaway.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kaunas.html', 1, 'Hotel Kaunas City', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Hotel Kaunas City', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Comfortable city-centre hotel with modern rooms and easy access to Kaunas Old Town and cultural sights.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kaunas.html', 2, 'Magnolia Boutique', 'https://images.unsplash.com/photo-1501118572072-7c5d7d3d47e6?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Magnolia Boutique', NULL, '0.05 ETH / night', 0.05, 0.00083, 140, 'Cozy boutique hotel offering an intimate atmosphere, complimentary breakfast and friendly service close to the river.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kiruna.html', 1, 'Camp Ripan', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Camp Ripan', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Arctic spa hotel on the edge of Kiruna, with northern lights views and a base for Kebnekaise trails.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kiruna.html', 2, 'Hotel Arctic Eden', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Arctic Eden', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Lapland-inspired rooms in the town centre, close to Kiruna’s relocated church and new city district.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kiruna.html', 3, 'Scandic Kiruna', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Kiruna', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Modern hotel near the town centre, handy for aurora trips, Abisko, and the Icehotel in Jukkasjärvi.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('klaipeda.html', 1, 'Seaside Harbour Hotel', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Seaside Harbour Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Seafront hotel with beautiful views of the Baltic Sea, fresh seafood nearby and easy access to the ferry terminal.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('klaipeda.html', 2, 'Portside Boutique', 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Portside Boutique', NULL, '0.05 ETH / night', 0.05, 0.00083, 140, 'Charming boutique hotel in the city centre, close to restaurants, theatres and the Old Town promenade.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kópavogur.html', 1, 'Hotel Vellir', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Vellir', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Contemporary hotel in Kópavogur with spacious rooms and quick links into Reykjavík.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kópavogur.html', 2, 'Hótel Smárinn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Smárinn', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Practical stay near Smáralind shopping centre, useful for families and longer visits.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kópavogur.html', 3, 'Kórinn Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Kórinn Guesthouse', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Quiet guesthouse-style rooms with easy access to local pools and coastal paths.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kristiansand.html', 1, 'Clarion Hotel Ernst', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Ernst', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Landmark hotel on the main square, a short stroll from the cathedral and fish market.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kristiansand.html', 2, 'Scandic Kristiansand Bystranda', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Kristiansand Bystranda', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Beachfront hotel on Bystranda with a pool, close to the boardwalk and Kilden.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('kristiansand.html', 3, 'Thon Hotel Wergeland', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Thon Hotel Wergeland', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Compact city hotel beside Wergeland’s park, handy for the Posebyen old town.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('liepaja.html', 1, 'Hotel Kolumbs', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Kolumbs', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Elegant hotel with spa facilities near the sea and city center.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('liepaja.html', 2, 'Promenade Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Promenade Hotel', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Luxury hotel set in a historic warehouse with art gallery and gourmet restaurant.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('liepaja.html', 3, 'Liva Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Liva Hotel', NULL, '0.025 ETH / night', 0.025, 0.0004, 71, 'Central, affordable hotel ideal for business or leisure travelers.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('linköping.html', 1, 'Quality Hotel Ekoxen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Quality Hotel Ekoxen', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Well-equipped city hotel with a pool and spa, close to Linköping’s main square.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('linköping.html', 2, 'Scandic Frimurarehotellet', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Frimurarehotellet', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Landmark hotel in the city centre with easy access to the cathedral and old town.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('linköping.html', 3, 'Stora Hotellet Linköping', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Stora Hotellet Linköping', NULL, '0.045 ETH / night', 0.045, 0.0007, 128, 'Classic independent hotel with a restaurant, a short walk from the railway station.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('longyearbyen.html', 1, 'Radisson Blu Polar Hotel Spitsbergen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Polar Hotel Spitsbergen', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.', 'radisson-blu-polar-spitsbergen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('longyearbyen.html', 2, 'Funken Lodge', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Funken Lodge', NULL, '0.11 ETH / night', 0.11, 0.0018, 315, 'Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.', 'funken-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('longyearbyen.html', 3, 'Basecamp Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Basecamp Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 255, 'Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.', 'basecamp-hotel-svalbard.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('malmö.html', 1, 'Clarion Hotel Malmö Live', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Malmö Live', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'High-rise waterfront hotel with a sky bar and concert hall next door.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('malmö.html', 2, 'Hotel Savoy Malmö', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Savoy Malmö', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic city hotel opposite the central station, a short hop from the Turning Torso.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('malmö.html', 3, 'Scandic Triangeln', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Triangeln', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Modern tower hotel above Triangeln station, handy for Möllevången and shopping.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('mariehamn.html', 1, 'Hotel Arkipelag', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Arkipelag', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Waterfront hotel by Mariehamn’s western harbour, a short walk from shops, ferries, and the maritime quarter.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('mariehamn.html', 2, 'Park Alandia Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Alandia Hotel', NULL, '0.05 ETH / night', 0.05, 0.00085, 145, 'Central Åland stay beside the town park, handy for the sailing harbour and the road to Kastelholm.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('mariehamn.html', 3, 'Hotel Pommern', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Pommern', NULL, '0.055 ETH / night', 0.055, 0.0009, 160, 'Relaxed hotel near the Åland Maritime Museum and the historic four-masted barque Pommern.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('narva.html', 1, 'Narva-Jõesuu Seaside Hotel', 'https://images.unsplash.com/photo-1505691723518-36a1ddb1b3b6?fit=crop&w=400&q=80', 'Narva-Jõesuu Hotel', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Seaside hotel near Narva with easy access to sandy beaches and coastal walks.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('narva.html', 2, 'Narva City Hotel', 'https://images.unsplash.com/photo-1493244040629-496f6d136cc3?fit=crop&w=400&q=80', 'Narva City Hotel', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Conveniently located in Narva city center, close to the river and historical sites.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('newcastle.html', 1, 'Hotel du Vin Newcastle', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel du Vin Newcastle', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Boutique hotel in a converted warehouse beside the Quayside, with a bistro and wine cellar.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('newcastle.html', 2, 'Malmaison Newcastle', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Malmaison Newcastle', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('newcastle.html', 3, 'Crowne Plaza Newcastle', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Crowne Plaza Newcastle', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Modern city hotel near St James’ Park, well placed for business and match-day stays.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('nuuk.html', 1, 'Hotel Hans Egede', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Hans Egede', NULL, '0.11 ETH / night', 0.11, 0.0018, 310, 'Landmark hotel on Aqqusinersuaq, with fjord views and a base for exploring Greenland’s capital.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('nuuk.html', 2, 'Inuit Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Inuit Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 230, 'Contemporary rooms near the colonial harbour, close to Katuaq and the waterfront boardwalk.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('nuuk.html', 3, 'Hotel Nuuk', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Nuuk', NULL, '0.075 ETH / night', 0.075, 0.00125, 215, 'Hillside stay overlooking Nuuk Fjord, a quiet launch point for boat trips and city walks.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('oslo.html', 1, 'Grand Hotel Oslo', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel Oslo', NULL, '0.15 ETH / night', 0.15, 0.0025, 428, 'Historic hotel on Karl Johans gate, facing the Storting and a stroll from the palace.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('oslo.html', 2, 'The Thief', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Thief', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Design hotel on Tjuvholmen with contemporary art, harbour views, and a spa.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('oslo.html', 3, 'Hotel Continental', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Continental', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Family-run landmark beside Nationaltheatret, known for Theatercaféen and city views.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('oulu.html', 1, 'Lapland Hotels Oulu', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Lapland Hotels Oulu', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Lapland-inspired hotel near Oulu Cathedral, cozy and unique.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('oulu.html', 2, 'Radisson Blu Hotel Oulu', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel Oulu', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Riverside hotel with beautiful views and modern amenities.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('oulu.html', 3, 'Scandic Oulu Station', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Oulu Station', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Comfortable rooms close to Oulu railway station and city center.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('panevėžys.html', 1, 'Central Park Hotel', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Panevezys Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel near the city park offering comfortable rooms and easy access to local attractions and concert venues.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('panevėžys.html', 2, 'Boutique Riverside', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Boutique Panevezys', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Small riverside hotel offering peaceful rooms and personalized service — a great base for exploring the region.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('reykjanesbær.html', 1, 'Hotel Keflavik', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Keflavik', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Well-known airport-town hotel with a restaurant, handy for early flights and the lagoon.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('reykjanesbær.html', 2, 'Hotel Keilir', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Keilir', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Modern stay in central Keflavík, close to the waterfront and the Viking World museum.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('reykjanesbær.html', 3, 'Airport Hotel Aurora Star', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Airport Hotel Aurora Star', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Convenient overnight beside Keflavík International Airport with a 24-hour desk.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('reykjavík.html', 1, 'Hotel Borg', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Borg', NULL, '0.14 ETH / night', 0.14, 0.0023, 399, 'Art Deco landmark on Austurvöllur square, steps from the parliament and harbour.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('reykjavík.html', 2, 'Canopy by Hilton Reykjavik City Centre', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Canopy by Hilton Reykjavik City Centre', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Design-led hotel on Laugavegur with local art, a café, and easy access to nightlife.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('reykjavík.html', 3, 'Center Hotels Plaza', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Center Hotels Plaza', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Practical city-centre stay on Ingólfstorg, close to shops, bars, and the Old Harbour.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('riga.html', 1, 'Grand Hotel Kempinski', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel Kempinski', NULL, '0.09 ETH / night', 0.09, 0.0015, 250, 'Luxury stay in the heart of Riga with elegant rooms and spa facilities.', 'grand-hotel-kempinski-riga.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('riga.html', 2, 'Wellton Riverside', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Wellton Riverside', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Modern hotel with river views, wellness area and rooftop terrace.', 'wellton-riverside-riga.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('rovaniemi.html', 1, 'Arctic Light Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Arctic Light Hotel', NULL, '0.10 ETH / night', 0.1, 0.0016, 285, 'Boutique hotel in a converted city hall, steps from Rovaniemi’s centre and Santa Claus Village day trips.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('rovaniemi.html', 2, 'Lapland Hotels Sky Ounasvaara', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Sky Ounasvaara', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Hilltop hotel above the Kemijoki, with northern lights views and forest trails just outside town.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('rovaniemi.html', 3, 'Santa''s Hotel Santa Claus', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Santa''s Hotel Santa Claus', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('šiauliai.htm', 1, 'Park Inn Šiauliai', 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Park Inn Siauliai', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Reliable mid-range hotel with clean, comfortable rooms, conference facilities and convenient transport links.', 'selectlocation.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('šiauliai.htm', 2, 'Old Town Boutique', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Šiauliai Boutique', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast.', 'selectlocation.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stavanger.html', 1, 'Clarion Hotel Stavanger', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Stavanger', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Central high-rise with a rooftop restaurant and views over the harbour and old town.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stavanger.html', 2, 'Radisson Blu Atlantic', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Atlantic', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Waterfront hotel on the lake, walking distance to the petroleum museum and colour houses.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stavanger.html', 3, 'Hotel Victoria Stavanger', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Victoria Stavanger', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Historic hotel on Skansegt, close to the cathedral and the ferry to Tau.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stirling.html', 1, 'Stirling Highland Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Stirling Highland Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic hotel beside Stirling Castle, in a former high school building.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stirling.html', 2, 'Hotel Colessio', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Colessio', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Stylish boutique hotel on the edge of Stirling’s old town.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stirling.html', 3, 'Golden Lion Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Golden Lion Hotel', NULL, '0.045 ETH / night', 0.045, 0.00075, 128, 'Traditional city-centre inn, a convenient base for exploring Stirling.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stockholm.html', 1, 'Grand Hôtel Stockholm', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hôtel Stockholm', NULL, '0.16 ETH / night', 0.16, 0.0026, 456, 'Landmark waterfront palace facing the Royal Palace, with a Nordic spa and fine dining.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stockholm.html', 2, 'Hotel Diplomat', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Diplomat', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Elegant Art Nouveau hotel on Strandvägen, steps from Östermalm boutiques and Djurgården.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('stockholm.html', 3, 'Scandic Continental', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Continental', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Central eco-minded hotel beside Stockholm Central Station, ideal for exploring the islands.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tallinn.html', 1, 'Hotel Telegraaf', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80', 'Hotel Telegraaf', NULL, '0.08 ETH / night', 0.08, 0.0013, 220, 'Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.', 'hotel-telegraaf-tallinn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tallinn.html', 2, 'Swissôtel Tallinn', 'https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80', 'Swissôtel Tallinn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern high-rise hotel offering panoramic city views, pool and business facilities.', 'swissotel-tallinn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tampere.html', 1, 'Lapland Hotels Tampere', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Tampere', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Modern comfort with Lapland-inspired decor in central Tampere.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tampere.html', 2, 'Scandic Tampere Station', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Tampere Station', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Convenient hotel next to the train station, perfect for business and leisure.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tampere.html', 3, 'Original Sokos Hotel Ilves', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Original Sokos Hotel Ilves', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Iconic riverside hotel offering panoramic city views and dining.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tartu.html', 1, 'Hotel Telegraaf', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80', 'Hotel Telegraaf', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tartu.html', 2, 'Swissôtel Tallinn', 'https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80', 'Swissôtel Tallinn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern high-rise hotel offering panoramic city views, pool and business facilities.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tórshavn.html', 1, 'Hotel Føroyar', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Føroyar', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Hillside hotel above the capital, with grass-roof rooms and wide views over Tórshavn and Nólsoy.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tórshavn.html', 2, 'Hotel Hafnia', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Hafnia', NULL, '0.08 ETH / night', 0.08, 0.0013, 230, 'Classic downtown hotel on Áarvegur, walking distance to Tinganes and the harbour.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tórshavn.html', 3, 'Hotel Streym', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Streym', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour-side stay near the ferry terminal, a practical base for island-hopping around the Faroes.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tromso.html', 1, 'Clarion Hotel The Edge', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel The Edge', NULL, '0.10 ETH / night', 0.1, 0.0016, 285, 'Waterfront hotel on the Tromsø Sound with harbour views and a short hop to the Arctic Cathedral.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tromso.html', 2, 'Radisson Blu Hotel Tromsø', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel Tromsø', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Central Arctic-city hotel with a rooftop bar looking over the island and surrounding peaks.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('tromso.html', 3, 'Scandic Ishavshotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Ishavshotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbourfront stay on the quay, a short walk from Tromsø city centre and the polar museum.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('trondheim.html', 1, 'Britannia Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Britannia Hotel', NULL, '0.14 ETH / night', 0.14, 0.0023, 399, 'Restored palatial hotel with a palm court, spa, and several celebrated restaurants.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('trondheim.html', 2, 'Clarion Hotel Trondheim', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Trondheim', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbourfront hotel on Brattøra, a short walk from the aquarium and city centre.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('trondheim.html', 3, 'Scandic Nidelven', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Nidelven', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Riverside hotel famous for its breakfast, next to the Solsiden quarter.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('turku.html', 1, 'Radisson Blu Marina Palace', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Radisson Blu Marina Palace', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Riverside hotel with modern rooms and excellent amenities.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('turku.html', 2, 'Scandic Julia', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Scandic Julia', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern comfort in the center of Turku, close to shopping and attractions.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('turku.html', 3, 'Original Sokos Hotel Wiklund', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Original Sokos Hotel Wiklund', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Central hotel with rooftop bar and easy access to Turku’s sights.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('uppsala.html', 1, 'Clarion Hotel Gillet', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Gillet', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Central hotel by the river Fyris, walking distance to the cathedral and university.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('uppsala.html', 2, 'Elite Hotel Academia', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Elite Hotel Academia', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Contemporary stay beside Uppsala Central Station with a restaurant and gym.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('uppsala.html', 3, 'Grand Hotel Hörnan', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Grand Hotel Hörnan', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Boutique hotel in a historic corner building overlooking the river and old town.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('vilnius.html', 1, 'PACAI Hotel', 'https://images.unsplash.com/photo-1501117716987-c8e6b8a6b2d2?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'PACAI Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 250, 'Luxury boutique hotel in Vilnius Old Town with elegant rooms and a quiet courtyard — perfect for exploring the historic centre.', 'index.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('vilnius.html', 2, 'Radisson Blu Lietuva', 'https://images.unsplash.com/photo-1472552949507-78c2d0f1311d?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Radisson Blu Lietuva', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern riverside hotel offering panoramic city views, an indoor pool and business facilities for business and leisure travellers.', 'index.html', 'View & Book');
+
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'en', 'page-title', 'Aalborg — Denmark');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'en', 'placeholder-text', 'This is a placeholder page for Aalborg in Denmark. The hotel listing for this city will be added here soon.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'en', 'back-link-text', 'Back to Select Location');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'ru', 'page-title', 'Ольборг — Дания');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'ru', 'placeholder-text', 'Это страница-заполнитель для Ольборга в Дании. Список отелей для этого города скоро будет добавлен.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'ru', 'back-link-text', 'Назад к выбору местоположения');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'sv', 'page-title', 'Aalborg — Danmark');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'sv', 'placeholder-text', 'Det här är en platshållarsida för Aalborg i Danmark. Hotellistan för den här staden läggs till här inom kort.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'sv', 'back-link-text', 'Tillbaka till platsvalet');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'de', 'page-title', 'Aalborg — Dänemark');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'de', 'placeholder-text', 'Dies ist eine Platzhalterseite für Aalborg in Dänemark. Die Hotelliste für diese Stadt wird in Kürze hinzugefügt.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aalborg.html', 'de', 'back-link-text', 'Zurück zur Standortauswahl');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aarhus.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('aberdeen.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('akureyri.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bauska.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('bergen.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('berwick-upon-tweed.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('copenhagen.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('daugavpils.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('dundee.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('edinburgh.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'en', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'en', 'available-hotels', 'Available Hotels in Esbjerg');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'ru', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'ru', 'available-hotels', 'Доступные отели в Esbjerg');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'sv', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'sv', 'available-hotels', 'Tillgängliga hotell i Esbjerg');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'de', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('esbjerg.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('espoo.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('glasgow.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('gothenburg.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('hafnarfjörður.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('helsinki.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('ilulissat.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('inverness.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jelgava.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('jurmala.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kaunas.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kiruna.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('klaipeda.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kópavogur.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('kristiansand.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('liepaja.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('linköping.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('longyearbyen.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('malmö.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('mariehamn.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('narva.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('newcastle.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('nuuk.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'en', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'en', 'available-hotels', 'Available Hotels in Odense');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'ru', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'ru', 'available-hotels', 'Доступные отели в Odense');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'sv', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'sv', 'available-hotels', 'Tillgängliga hotell i Odense');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'de', 'booking-header-title', 'HotelPaymentSystem');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('odense.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oslo.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('oulu.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('panevėžys.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'en', 'page-title', 'Pärnu — Estonia');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'en', 'placeholder-text', 'This is a placeholder page for Pärnu in Estonia. The hotel listing for this city will be added here soon.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'en', 'back-link-text', 'Back to Select Location');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'ru', 'page-title', 'Пярну — Эстония');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'ru', 'placeholder-text', 'Это страница-заполнитель для Пярну в Эстонии. Список отелей для этого города скоро будет добавлен.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'ru', 'back-link-text', 'Назад к выбору местоположения');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'sv', 'page-title', 'Pärnu — Estland');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'sv', 'placeholder-text', 'Det här är en platshållarsida för Pärnu i Estland. Hotellistan för den här staden läggs till här inom kort.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'sv', 'back-link-text', 'Tillbaka till platsvalet');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'de', 'page-title', 'Pärnu — Estland');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'de', 'placeholder-text', 'Dies ist eine Platzhalterseite für Pärnu in Estland. Die Hotelliste für diese Stadt wird in Kürze hinzugefügt.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('pärnu.html', 'de', 'back-link-text', 'Zurück zur Standortauswahl');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjanesbær.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('reykjavík.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('riga.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('rovaniemi.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stavanger.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stirling.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('stockholm.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tallinn.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tampere.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tartu.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tórshavn.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('tromso.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('trondheim.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('turku.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('uppsala.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'en', 'page-title', 'Viljandi — Estonia');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'en', 'placeholder-text', 'This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'en', 'back-link-text', 'Back to Select Location');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'ru', 'page-title', 'Вильянди — Эстония');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'ru', 'placeholder-text', 'Это страница-заполнитель для Вильянди в Эстонии. Список отелей для этого города скоро будет добавлен.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'ru', 'back-link-text', 'Назад к выбору местоположения');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'sv', 'page-title', 'Viljandi — Estland');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'sv', 'placeholder-text', 'Det här är en platshållarsida för Viljandi i Estland. Hotellistan för den här staden läggs till här inom kort.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'sv', 'back-link-text', 'Tillbaka till platsvalet');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'de', 'page-title', 'Viljandi — Estland');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'de', 'placeholder-text', 'Dies ist eine Platzhalterseite für Viljandi in Estland. Die Hotelliste für diese Stadt wird in Kürze hinzugefügt.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('viljandi.html', 'de', 'back-link-text', 'Zurück zur Standortauswahl');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('vilnius.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
