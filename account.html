@@ -101,6 +101,7 @@
           <a href="#messages" data-portal-section="messages">Messages</a>
           <a href="#saved" data-portal-section="saved">Saved</a>
           <a href="#payments" data-portal-section="payments">Payments &amp; refunds</a>
+          <a href="#documents" data-portal-section="documents">Documents</a>
           <a href="#profile" data-portal-section="profile">Profile &amp; settings</a>
         </nav>
 
@@ -191,6 +192,49 @@
             <div data-payment-list></div>
           </section>
 
+          <section data-portal-panel="documents" hidden aria-labelledby="account-documents-title">
+            <h1 id="account-documents-title">Documents</h1>
+            <p class="portal-hero__lead">Confirmations, invoices, and other papers saved on this account. Removing one hides it until you bring it back.</p>
+            <div data-document-root>
+              <h2>Saved</h2>
+              <div data-document-list></div>
+              <h2>Removed</h2>
+              <p class="portal-hero__lead">These stay on your account. Bring one back when you need it again.</p>
+              <div data-document-deleted></div>
+              <form class="auth-form portal-form" data-document-form novalidate>
+                <h2>Add a document</h2>
+                <p class="auth-status" data-document-status role="status" aria-live="polite"></p>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="guest-document-title">Title <span class="required" aria-hidden="true">*</span></label>
+                    <input id="guest-document-title" name="title" type="text" required minlength="2" maxlength="160" placeholder="Stay confirmation" />
+                  </div>
+                  <div class="form-group">
+                    <label for="guest-document-kind">Type <span class="required" aria-hidden="true">*</span></label>
+                    <select id="guest-document-kind" name="kind" required>
+                      <option value="confirmation">Confirmation</option>
+                      <option value="invoice">Invoice</option>
+                      <option value="receipt">Receipt</option>
+                      <option value="itinerary">Itinerary</option>
+                      <option value="other" selected>Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="guest-document-reference">Reference</label>
+                  <input id="guest-document-reference" name="reference" type="text" maxlength="80" placeholder="Booking reference" />
+                </div>
+                <div class="form-group">
+                  <label for="guest-document-note">Note</label>
+                  <textarea id="guest-document-note" name="note" rows="3" maxlength="800" placeholder="What this document is for"></textarea>
+                </div>
+                <div class="portal-form__actions">
+                  <button class="btn" type="submit">Save document</button>
+                </div>
+              </form>
+            </div>
+          </section>
+
           <section data-portal-panel="profile" hidden aria-labelledby="account-profile-title">
             <div class="account-heading">
               <h1 id="account-profile-heading">Profile &amp; settings</h1>
@@ -269,6 +313,7 @@
         <nav class="portal-nav" aria-label="Business account">
           <a href="#overview" data-portal-section="overview">Overview</a>
           <a href="#accommodation" data-portal-section="accommodation" class="is-active" aria-current="page">Accommodation</a>
+          <a href="#documents" data-portal-section="documents">Documents</a>
           <a href="#profile" data-portal-section="profile">Profile &amp; settings</a>
         </nav>
 
@@ -388,6 +433,49 @@
             </form>
           </section>
 
+          <section data-portal-panel="documents" hidden aria-labelledby="business-documents-title">
+            <h1 id="business-documents-title">Documents</h1>
+            <p class="portal-hero__lead">Invoices, contracts, and other papers for this company. Removing one hides it until you bring it back.</p>
+            <div data-document-root>
+              <h2>Saved</h2>
+              <div data-document-list></div>
+              <h2>Removed</h2>
+              <p class="portal-hero__lead">These stay on your account. Bring one back when you need it again.</p>
+              <div data-document-deleted></div>
+              <form class="auth-form portal-form" data-document-form novalidate>
+                <h2>Add a document</h2>
+                <p class="auth-status" data-document-status role="status" aria-live="polite"></p>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="business-document-title">Title <span class="required" aria-hidden="true">*</span></label>
+                    <input id="business-document-title" name="title" type="text" required minlength="2" maxlength="160" placeholder="Property invoice" />
+                  </div>
+                  <div class="form-group">
+                    <label for="business-document-kind">Type <span class="required" aria-hidden="true">*</span></label>
+                    <select id="business-document-kind" name="kind" required>
+                      <option value="confirmation">Confirmation</option>
+                      <option value="invoice">Invoice</option>
+                      <option value="receipt">Receipt</option>
+                      <option value="itinerary">Itinerary</option>
+                      <option value="other" selected>Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="business-document-reference">Reference</label>
+                  <input id="business-document-reference" name="reference" type="text" maxlength="80" placeholder="Invoice number" />
+                </div>
+                <div class="form-group">
+                  <label for="business-document-note">Note</label>
+                  <textarea id="business-document-note" name="note" rows="3" maxlength="800" placeholder="What this document is for"></textarea>
+                </div>
+                <div class="portal-form__actions">
+                  <button class="btn" type="submit">Save document</button>
+                </div>
+              </form>
+            </div>
+          </section>
+
           <section data-portal-panel="profile" hidden aria-labelledby="business-profile-heading">
             <div class="account-heading">
               <h1 id="business-profile-heading">Profile &amp; settings</h1>
@@ -467,9 +555,12 @@
   <script src="assets/country-address.js"></script>
   <script src="assets/property-records.js"></script>
   <script src="assets/local-properties.js"></script>
+  <script src="assets/document-records.js"></script>
+  <script src="assets/local-documents.js"></script>
   <script src="assets/auth-client.js"></script>
   <script src="assets/booking-dates.js"></script>
   <script src="assets/payment-currencies.js"></script>
+  <script src="assets/documents-portal.js"></script>
   <script src="assets/business-portal.js"></script>
   <script src="assets/account-portal.js"></script>
   <script>

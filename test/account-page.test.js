@@ -48,6 +48,24 @@ test('account portal scripts load booking helpers', () => {
   assert.match(html, /assets\/local-bookings\.js/);
 });
 
+test('account portals can remove a document and bring it back', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
+  const guest = fs.readFileSync(path.join(root, 'assets/account-portal.js'), 'utf8');
+  const business = fs.readFileSync(path.join(root, 'assets/business-portal.js'), 'utf8');
+  const auth = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  assert.match(html, /data-portal-section="documents"/);
+  assert.match(html, /id="account-documents-title"/);
+  assert.match(html, /id="business-documents-title"/);
+  assert.match(html, /data-document-deleted/);
+  assert.match(html, /assets\/document-records\.js/);
+  assert.match(html, /assets\/documents-portal\.js/);
+  assert.match(guest, /'documents'/);
+  assert.match(business, /'documents'/);
+  assert.match(auth, /function deleteDocument/);
+  assert.match(auth, /function restoreDocument/);
+  assert.match(auth, /\/restore/);
+});
+
 test('login and register send people to the account page after success', () => {
   const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
   assert.match(source, /window\.location\.href = 'account\.html'/);

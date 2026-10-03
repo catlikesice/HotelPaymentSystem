@@ -8,6 +8,7 @@
     'messages',
     'saved',
     'payments',
+    'documents',
     'profile'
   ];
 
@@ -423,6 +424,9 @@
     }
     bindNav();
     showSection(currentSection());
+    if (window.DocumentsPortal && typeof window.DocumentsPortal.refresh === 'function') {
+      window.DocumentsPortal.refresh();
+    }
 
     const auth = window.AuthClient;
     if (!auth || typeof auth.listBookings !== 'function') {

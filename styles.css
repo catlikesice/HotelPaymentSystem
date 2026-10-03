@@ -3637,7 +3637,8 @@ body.portal-open .portal {
 .portal-panel,
 .portal-booking,
 .portal-payment,
-.portal-property {
+.portal-property,
+.portal-document {
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid rgba(35, 68, 26, 0.14);
   border-radius: 14px;
@@ -3691,7 +3692,8 @@ body.portal-open .portal {
 
 .portal-booking,
 .portal-payment,
-.portal-property {
+.portal-property,
+.portal-document {
   margin-top: 0.75rem;
 }
 
