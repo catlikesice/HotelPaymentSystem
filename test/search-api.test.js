@@ -101,6 +101,30 @@ test('accent-folded city names still match', async () => {
   assert.ok(body.cities.some((city) => city.name === 'Reykjavík' && city.url === 'reykjavík.html'));
 });
 
+test('plain ASCII queries match letters SQL cannot unaccent on its own', async () => {
+  const hafnarfjordur = await searchFor('hafnarfjordur');
+  assert.deepEqual(hafnarfjordur.cities.map((city) => city.name), ['Hafnarfjörður']);
+  assert.deepEqual(hafnarfjordur.hotels.map((hotel) => hotel.name), [
+    'Helguhús Guesthouse',
+    'Hótel Hafnarfjörður',
+    'Hotel Viking'
+  ]);
+
+  const reykjanes = await searchFor('reykjanesbaer');
+  assert.deepEqual(reykjanes.cities.map((city) => city.name), ['Reykjanesbær']);
+  assert.equal(reykjanes.hotels.length, 3);
+
+  const straight = await searchFor("d'Angleterre");
+  const curly = await searchFor('d’Angleterre');
+  const stripped = await searchFor('dangleterre');
+  for (const body of [straight, curly, stripped]) {
+    assert.deepEqual(body.hotels.map((hotel) => hotel.name), ['Hotel d’Angleterre']);
+  }
+
+  const kings = await searchFor('The Kings Arms');
+  assert.deepEqual(kings.hotels.map((hotel) => hotel.name), ['The King’s Arms Hotel']);
+});
+
 test('scotland, lithuania, and finland towns without pages are searchable', async () => {
   const places = [
     { q: 'St Andrews', city: 'St Andrews', country: 'Scotland', hotel: 'St Andrews Harbour Hotel', file: 'st-andrews.html' },

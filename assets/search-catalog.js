@@ -1,6 +1,6 @@
-/* Static catalog of places that have an HTML page.
- * GET /api/search loads this list and also places with no page of their own
- * (lib/places-without-pages.js). Schema: docs/sql/hotel-search.md.
+/* Offline fallback catalog. GET /api/search reads docs/sql/hotel-search.sql,
+ * which is this list plus places with no page (lib/places-without-pages.js).
+ * Schema: docs/sql/hotel-search.md.
  */
 window.SEARCH_CATALOG = {
   "cities": [
