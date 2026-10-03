@@ -14,9 +14,6 @@
   const localProperties = (typeof window !== 'undefined' && window.LocalProperties)
     ? window.LocalProperties.create({ storage: window.localStorage })
     : null;
-  const localDocuments = (typeof window !== 'undefined' && window.LocalDocuments)
-    ? window.LocalDocuments.create({ storage: window.localStorage })
-    : null;
 
   function apiBase() {
     if (typeof window === 'undefined') {
@@ -739,79 +736,6 @@
     }
   }
 
-  function requireSignedInUser() {
-    const user = getStoredUser();
-    if (!user || !user.id) {
-      const err = new Error('Not authenticated.');
-      err.status = 401;
-      throw err;
-    }
-    return user;
-  }
-
-  function useLocalDocuments(error) {
-    return Boolean(localDocuments && (shouldUseLocalFallback(error) || isLocalToken(getToken())));
-  }
-
-  async function listDocuments(options) {
-    const user = requireSignedInUser();
-    const deleted = Boolean(options && options.deleted);
-    const query = deleted ? '?status=deleted' : '';
-    try {
-      return await request('/api/documents' + query);
-    } catch (error) {
-      if (useLocalDocuments(error)) {
-        return { documents: localDocuments.list(user.id, { deleted: deleted }) };
-      }
-      throw error;
-    }
-  }
-
-  async function createDocument(payload) {
-    const user = requireSignedInUser();
-    try {
-      return await request('/api/documents', {
-        method: 'POST',
-        body: JSON.stringify(payload || {})
-      });
-    } catch (error) {
-      if (useLocalDocuments(error)) {
-        return { document: localDocuments.create(user.id, payload || {}) };
-      }
-      throw error;
-    }
-  }
-
-  async function deleteDocument(documentId) {
-    const user = requireSignedInUser();
-    const id = String(documentId || '').trim();
-    try {
-      return await request('/api/documents/' + encodeURIComponent(id), {
-        method: 'DELETE'
-      });
-    } catch (error) {
-      if (useLocalDocuments(error)) {
-        return { document: localDocuments.remove(user.id, id) };
-      }
-      throw error;
-    }
-  }
-
-  async function restoreDocument(documentId) {
-    const user = requireSignedInUser();
-    const id = String(documentId || '').trim();
-    try {
-      return await request('/api/documents/' + encodeURIComponent(id) + '/restore', {
-        method: 'POST'
-      });
-    } catch (error) {
-      if (useLocalDocuments(error)) {
-        return { document: localDocuments.restore(user.id, id) };
-      }
-      throw error;
-    }
-  }
-
   async function deleteProperty(propertyId) {
     const user = requireBusinessUser();
     const id = String(propertyId || '').trim();
@@ -1231,10 +1155,6 @@
     listProperties: listProperties,
     saveProperty: saveProperty,
     deleteProperty: deleteProperty,
-    listDocuments: listDocuments,
-    createDocument: createDocument,
-    deleteDocument: deleteDocument,
-    restoreDocument: restoreDocument,
     updateAccountNav: updateAccountNav,
     openLoginPopup: openLoginPopup,
     closeLoginPopup: closeLoginPopup,

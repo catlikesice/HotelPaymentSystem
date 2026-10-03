@@ -1,6 +1,6 @@
 (function () {
   let hashBound = false;
-  const SECTIONS = ['overview', 'accommodation', 'documents', 'profile'];
+  const SECTIONS = ['overview', 'accommodation', 'profile'];
 
   function rootEl() {
     return document.getElementById('business-dashboard');
@@ -513,9 +513,6 @@
     fillProfile(user);
     bindForm();
     loadProperties();
-    if (window.DocumentsPortal && typeof window.DocumentsPortal.refresh === 'function') {
-      window.DocumentsPortal.refresh();
-    }
   }
 
   window.BusinessPortal = {

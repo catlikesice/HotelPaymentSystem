@@ -6,7 +6,6 @@ const rateLimiter = require('./middleware/rateLimitMiddleware');
 const authRouter = require('./routes/auth');
 const bookingsRouter = require('./routes/bookings');
 const propertiesRouter = require('./routes/properties');
-const documentsRouter = require('./routes/documents');
 const searchRouter = require('./routes/search');
 const contactRouter = require('./routes/contact');
 
@@ -25,7 +24,6 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRouter);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/properties', propertiesRouter);
-app.use('/api/documents', documentsRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/contact', contactRouter);
 
