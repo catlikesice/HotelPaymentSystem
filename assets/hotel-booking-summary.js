@@ -171,20 +171,20 @@
     return toSafeDecimals(priceEl.dataset.rateDecimals || priceEl.dataset.decimals, 2);
   }
 
-  function selectedFiatCurrency(detailContainer) {
-    const select = (detailContainer && detailContainer.querySelector('#fiat-currency')) || document.getElementById('fiat-currency');
+  function selectedPaymentCurrency(detailContainer) {
+    const select = detailContainer && detailContainer.querySelector('#payment-currency');
     const catalog = window.PaymentCurrencies;
     const fromSelect = select && select.value;
-    if (fromSelect && catalog && catalog.isFiat(fromSelect)) {
+    if (fromSelect && catalog && catalog.find(fromSelect)) {
       return catalog.find(fromSelect).code;
     }
-    if (catalog && typeof catalog.readFiatPreference === 'function') {
-      const saved = catalog.readFiatPreference();
+    if (catalog && typeof catalog.readPreference === 'function') {
+      const saved = catalog.readPreference();
       if (saved) {
         return saved;
       }
     }
-    return 'EUR';
+    return 'ETH';
   }
 
   function moneyFromBase(amount, baseCurrency, baseDecimals, targetCurrency) {
@@ -210,7 +210,7 @@
   }
 
   function ensurePaymentSelector(detailContainer) {
-    if (!detailContainer || detailContainer.querySelector('#fiat-currency') || !window.PaymentCurrencies) {
+    if (!detailContainer || detailContainer.querySelector('#payment-currency') || !window.PaymentCurrencies) {
       return;
     }
 
@@ -221,22 +221,23 @@
     wrapper.className = 'payment-currency';
 
     const label = document.createElement('label');
-    label.htmlFor = 'fiat-currency';
-    label.id = 'fiat-currency-label';
-    label.textContent = 'Also pay in';
+    label.htmlFor = 'payment-currency';
+    label.id = 'payment-currency-label';
+    label.textContent = 'Pay with';
 
     const select = document.createElement('select');
-    select.id = 'fiat-currency';
-    select.setAttribute('aria-label', 'Fiat currency');
+    select.id = 'payment-currency';
+    select.setAttribute('aria-label', 'Payment currency');
+    select.appendChild(catalog.optionGroup('Cryptocurrency', catalog.crypto));
     select.appendChild(catalog.optionGroup('Fiat', catalog.fiat));
 
-    const preferred = catalog.readFiatPreference();
+    const preferred = catalog.readPreference();
     if (preferred) {
       select.value = preferred;
     }
 
     select.addEventListener('change', function () {
-      catalog.writeFiatPreference(select.value);
+      catalog.writePreference(select.value);
       renderSummary(detailContainer);
     });
 
@@ -255,29 +256,22 @@
       return;
     }
 
-    const fiatCode = selectedFiatCurrency(detailContainer);
+    const target = selectedPaymentCurrency(detailContainer);
 
     detailContainer.querySelectorAll('input[name="roomOption"]').forEach(function (input) {
       const base = parseFloat(input.dataset.baseAmount || input.dataset.nightlyRate);
       if (!Number.isFinite(base)) {
         return;
       }
-      const baseCurrency = input.dataset.baseCurrency || input.dataset.currency || 'ETH';
-      const baseDecimals = toSafeDecimals(input.dataset.baseDecimals || input.dataset.decimals, 2);
-      const fiat = moneyFromBase(base, baseCurrency, baseDecimals, fiatCode);
+      const money = moneyFromBase(
+        base,
+        input.dataset.baseCurrency || input.dataset.currency || 'ETH',
+        toSafeDecimals(input.dataset.baseDecimals || input.dataset.decimals, 2),
+        target
+      );
       const rateDiv = input.parentElement && input.parentElement.querySelector('.room-option__rate');
-      const rateParent = rateDiv && rateDiv.parentElement;
       if (rateDiv) {
-        rateDiv.textContent = formatAmount(base, baseDecimals) + ' ' + baseCurrency + ' / night';
-      }
-      if (rateParent) {
-        let fiatDiv = rateParent.querySelector('.room-option__fiat');
-        if (!fiatDiv) {
-          fiatDiv = document.createElement('div');
-          fiatDiv.className = 'room-option__fiat';
-          rateParent.insertBefore(fiatDiv, rateDiv.nextSibling);
-        }
-        fiatDiv.textContent = 'or ' + formatAmount(fiat.value, fiat.decimals) + ' ' + fiat.currency + ' / night';
+        rateDiv.textContent = formatAmount(money.value, money.decimals) + ' ' + money.currency + ' / night';
       }
     });
 
@@ -286,25 +280,23 @@
       if (!Number.isFinite(base)) {
         return;
       }
-      const baseCurrency = input.dataset.baseCurrency || input.dataset.currency || 'ETH';
-      const baseDecimals = toSafeDecimals(input.dataset.baseDecimals || input.dataset.decimals, 2);
-      const fiat = moneyFromBase(base, baseCurrency, baseDecimals, fiatCode);
+      const money = moneyFromBase(
+        base,
+        input.dataset.baseCurrency || input.dataset.currency || 'ETH',
+        toSafeDecimals(input.dataset.baseDecimals || input.dataset.decimals, 2),
+        target
+      );
       const billing = (input.dataset.billing || '').toLowerCase() === 'per-night' ? ' / night' : ' per stay';
       const rateDiv = input.parentElement && input.parentElement.querySelector('.addon-option__rate');
-      const rateParent = rateDiv && rateDiv.parentElement;
       if (rateDiv) {
-        rateDiv.textContent = '+' + formatAmount(base, baseDecimals) + ' ' + baseCurrency + billing;
-      }
-      if (rateParent) {
-        let fiatDiv = rateParent.querySelector('.addon-option__fiat');
-        if (!fiatDiv) {
-          fiatDiv = document.createElement('div');
-          fiatDiv.className = 'addon-option__fiat';
-          rateParent.insertBefore(fiatDiv, rateDiv.nextSibling);
-        }
-        fiatDiv.textContent = 'or +' + formatAmount(fiat.value, fiat.decimals) + ' ' + fiat.currency + billing;
+        rateDiv.textContent = '+' + formatAmount(money.value, money.decimals) + ' ' + money.currency + billing;
       }
     });
+
+    const payNow = detailContainer.querySelector('.confirm-button');
+    if (payNow) {
+      payNow.textContent = 'Pay with ' + target;
+    }
   }
 
   function readOptionsConfig(detailContainer) {
@@ -568,27 +560,12 @@
   }
 
   function showConvertedPrice(priceEl, baseAmount, baseCurrency, baseDecimals, detailContainer) {
-    priceEl.dataset.rateValue = String(baseAmount);
-    priceEl.dataset.rateCurrency = baseCurrency;
-    priceEl.dataset.rateDecimals = String(baseDecimals);
-    priceEl.textContent = formatAmount(baseAmount, baseDecimals) + ' ' + baseCurrency + ' / night';
-
-    const fiat = moneyFromBase(baseAmount, baseCurrency, baseDecimals, selectedFiatCurrency(detailContainer));
-    let fiatEl = priceEl.nextElementSibling;
-    if (!fiatEl || !fiatEl.className || String(fiatEl.className).indexOf('price-fiat') === -1) {
-      fiatEl = document.createElement('div');
-      fiatEl.className = 'price-fiat';
-      if (typeof priceEl.insertAdjacentElement === 'function') {
-        priceEl.insertAdjacentElement('afterend', fiatEl);
-      }
-    }
-    fiatEl.textContent = 'or ' + formatAmount(fiat.value, fiat.decimals) + ' ' + fiat.currency + ' / night';
-    return {
-      value: baseAmount,
-      currency: baseCurrency,
-      decimals: baseDecimals,
-      kind: 'crypto'
-    };
+    const money = moneyFromBase(baseAmount, baseCurrency, baseDecimals, selectedPaymentCurrency(detailContainer));
+    priceEl.dataset.rateValue = String(money.value);
+    priceEl.dataset.rateCurrency = money.currency;
+    priceEl.dataset.rateDecimals = String(money.decimals);
+    priceEl.textContent = formatAmount(money.value, money.decimals) + ' ' + money.currency + ' / night';
+    return money;
   }
 
   function getSelectedRoom(detailContainer, priceEl) {
@@ -613,7 +590,7 @@
       selectedInput.dataset.baseDecimals || selectedInput.dataset.decimals,
       toSafeDecimals(fallbackDecimals, 2)
     );
-    const money = moneyFromBase(baseRate, baseCurrency, baseDecimals, baseCurrency);
+    const money = moneyFromBase(baseRate, baseCurrency, baseDecimals, selectedPaymentCurrency(detailContainer));
     const label = selectedInput.dataset.label || selectedInput.getAttribute('aria-label') || selectedInput.value || 'Selected room';
 
     return {
@@ -645,7 +622,7 @@
         const billing = billingRaw === 'per-night' ? 'per-night' : 'per-stay';
         const baseCurrency = input.dataset.baseCurrency || input.dataset.currency || expectedCurrency || 'ETH';
         const baseDecimals = toSafeDecimals(input.dataset.baseDecimals || input.dataset.decimals, toSafeDecimals(expectedDecimals, 2));
-        const money = moneyFromBase(basePrice, baseCurrency, baseDecimals, baseCurrency);
+        const money = moneyFromBase(basePrice, baseCurrency, baseDecimals, selectedPaymentCurrency(detailContainer));
         const label = input.dataset.label || input.getAttribute('aria-label') || input.value || 'Add-on';
 
         return {
@@ -720,17 +697,6 @@
       message.className = 'booking-summary__notice';
       message.textContent = 'We could not find your booking details. Please return to the booking page to choose your dates.';
       summaryEl.appendChild(message);
-      if (rate) {
-        updatePayButtons(
-          detailContainer,
-          rate.value,
-          rate.currency,
-          rate.decimals,
-          moneyFromBase(rate.value, rate.currency, rate.decimals, selectedFiatCurrency(detailContainer))
-        );
-      } else {
-        updatePayButtons(detailContainer);
-      }
       return;
     }
 
@@ -739,7 +705,6 @@
       message.className = 'booking-summary__notice';
       message.textContent = 'Booking dates saved. Nightly pricing information is unavailable for this property.';
       summaryEl.appendChild(message);
-      updatePayButtons(detailContainer);
       const guestLabelWithoutRate = formatGuestSummary(bookingDetails);
       if (guestLabelWithoutRate) {
         const guestsEl = document.createElement('p');
@@ -842,15 +807,8 @@
     const totalAmount = nightlyTotal * nights + perStayAddOnTotal;
     const totalEl = document.createElement('p');
     totalEl.className = 'booking-summary__total';
-    totalEl.textContent = 'Total in crypto: ' + formatAmount(totalAmount, rate.decimals) + ' ' + rate.currency;
+    totalEl.textContent = 'Total cost: ' + formatAmount(totalAmount, rate.decimals) + ' ' + rate.currency;
     summaryEl.appendChild(totalEl);
-
-    const fiatTotal = moneyFromBase(totalAmount, rate.currency, rate.decimals, selectedFiatCurrency(detailContainer));
-    const fiatTotalEl = document.createElement('p');
-    fiatTotalEl.className = 'booking-summary__fiat-total';
-    fiatTotalEl.textContent = 'Or pay ' + formatAmount(fiatTotal.value, fiatTotal.decimals) + ' ' + fiatTotal.currency + ' in fiat';
-    summaryEl.appendChild(fiatTotalEl);
-    updatePayButtons(detailContainer, totalAmount, rate.currency, rate.decimals, fiatTotal);
 
     const reminderEl = document.createElement('p');
     reminderEl.className = 'booking-summary__reminder';
@@ -1008,112 +966,23 @@
     return 'checkout.html';
   }
 
-  function ensurePayButtons(detailContainer) {
-    const cryptoBtn = detailContainer.querySelector('.confirm-button');
-    if (!cryptoBtn) {
-      return;
-    }
-
-    let wrap = detailContainer.querySelector('.pay-actions');
-    if (!wrap) {
-      wrap = document.createElement('div');
-      wrap.className = 'pay-actions';
-      cryptoBtn.parentNode.insertBefore(wrap, cryptoBtn);
-      wrap.appendChild(cryptoBtn);
-    }
-
-    cryptoBtn.setAttribute('data-pay-kind', 'crypto');
-    cryptoBtn.setAttribute('href', checkoutHref());
-
-    let fiatBtn = wrap.querySelector('[data-pay-kind="fiat"]');
-    if (!fiatBtn) {
-      fiatBtn = document.createElement('a');
-      fiatBtn.className = 'confirm-button confirm-button--fiat';
-      fiatBtn.setAttribute('data-pay-kind', 'fiat');
-      fiatBtn.href = checkoutHref();
-      fiatBtn.textContent = 'Pay with fiat';
-      wrap.appendChild(fiatBtn);
-    }
-  }
-
-  function updatePayButtons(detailContainer, cryptoAmount, cryptoCurrency, cryptoDecimals, fiatMoney) {
-    if (!detailContainer) {
-      return;
-    }
-    ensurePayButtons(detailContainer);
-    const cryptoBtn = detailContainer.querySelector('[data-pay-kind="crypto"]');
-    const fiatBtn = detailContainer.querySelector('[data-pay-kind="fiat"]');
-    if (cryptoBtn) {
-      cryptoBtn.textContent = Number.isFinite(cryptoAmount)
-        ? 'Pay ' + formatAmount(cryptoAmount, cryptoDecimals) + ' ' + cryptoCurrency + ' with crypto'
-        : 'Pay with crypto';
-    }
-    if (fiatBtn) {
-      fiatBtn.textContent = fiatMoney && Number.isFinite(fiatMoney.value)
-        ? 'Pay ' + formatAmount(fiatMoney.value, fiatMoney.decimals) + ' ' + fiatMoney.currency + ' with fiat'
-        : 'Pay with fiat';
-    }
-  }
-
-  function quoteForPayment(quote, payKind) {
-    if (!quote || payKind !== 'fiat' || !window.PaymentCurrencies) {
-      if (quote) {
-        quote.paymentMethod = 'crypto';
-      }
-      return quote;
-    }
-
-    const fiatCode = selectedFiatCurrency(document.querySelector('.hotel-detail'));
-    const converted = moneyFromBase(quote.amount, quote.currency, quote.decimals, fiatCode);
-    return {
-      kind: quote.kind,
-      propertyName: quote.propertyName,
-      city: quote.city,
-      country: quote.country,
-      propertyUrl: quote.propertyUrl,
-      checkInDate: quote.checkInDate,
-      checkOutDate: quote.checkOutDate,
-      nights: quote.nights,
-      guests: quote.guests,
-      roomLabel: quote.roomLabel,
-      addOns: (quote.addOns || []).map(function (addOn) {
-        const money = moneyFromBase(addOn.price, quote.currency, quote.decimals, fiatCode);
-        return {
-          id: addOn.id,
-          label: addOn.label,
-          price: money.value,
-          billing: addOn.billing
-        };
-      }),
-      amount: converted.value,
-      currency: converted.currency,
-      decimals: converted.decimals,
-      paymentMethod: 'fiat',
-      hasDates: quote.hasDates,
-      hasRate: quote.hasRate
-    };
-  }
-
   function bindPayNow(detailContainer) {
     if (!detailContainer) {
       return;
     }
-    ensurePayButtons(detailContainer);
-    detailContainer.querySelectorAll('[data-pay-kind]').forEach(function (button) {
-      if (button.getAttribute('data-bound')) {
+    const payNow = detailContainer.querySelector('.confirm-button');
+    if (!payNow) {
+      return;
+    }
+    payNow.setAttribute('href', checkoutHref());
+    payNow.addEventListener('click', function (event) {
+      const quote = computeStayQuote(detailContainer);
+      if (!quote || !quote.propertyName) {
         return;
       }
-      button.setAttribute('data-bound', 'true');
-      button.setAttribute('href', checkoutHref());
-      button.addEventListener('click', function (event) {
-        const quote = quoteForPayment(computeStayQuote(detailContainer), button.getAttribute('data-pay-kind'));
-        if (!quote || !quote.propertyName) {
-          return;
-        }
-        persistPendingCheckout(quote);
-        event.preventDefault();
-        window.location.href = checkoutHref();
-      });
+      persistPendingCheckout(quote);
+      event.preventDefault();
+      window.location.href = checkoutHref();
     });
   }
 

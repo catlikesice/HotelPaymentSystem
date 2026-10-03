@@ -185,88 +185,25 @@
     return { value: rounded, decimals };
   }
 
-  function selectedCryptoCurrency() {
-    const currencySelect = document.getElementById('currency');
-    const currency = currencySelect ? currencySelect.value : 'ETH';
-    if (!currency || isFiatCurrency(currency)) {
-      return 'ETH';
-    }
-    return currency;
-  }
-
-  function selectedFiatCurrency() {
-    const fiatSelect = document.getElementById('fiat-currency');
-    if (fiatSelect && isFiatCurrency(fiatSelect.value)) {
-      return fiatSelect.value;
-    }
-    if (window.PaymentCurrencies && typeof window.PaymentCurrencies.readFiatPreference === 'function') {
-      const saved = window.PaymentCurrencies.readFiatPreference();
-      if (saved) {
-        return saved;
-      }
-    }
-    return 'EUR';
-  }
-
   function ensureFiatCurrencyOptions() {
-    const container = document.querySelector('.currency-selector');
     const currencySelect = document.getElementById('currency');
-    if (!container || !currencySelect || !window.PaymentCurrencies || document.getElementById('fiat-currency')) {
+    if (!currencySelect || !window.PaymentCurrencies) {
       return;
     }
 
-    const catalog = window.PaymentCurrencies;
-    const savedCrypto = catalog.readPreference();
-    if (savedCrypto && currencySelect.querySelector('option[value="' + savedCrypto + '"]')) {
-      currencySelect.value = savedCrypto;
+    window.PaymentCurrencies.appendFiatOptions(currencySelect);
+
+    const saved = window.PaymentCurrencies.readPreference();
+    if (saved && currencySelect.querySelector('option[value="' + saved + '"]')) {
+      currencySelect.value = saved;
     }
-    if (!currencySelect.dataset.cryptoBound) {
-      currencySelect.dataset.cryptoBound = 'true';
+
+    if (!currencySelect.dataset.fiatBound) {
+      currencySelect.dataset.fiatBound = 'true';
       currencySelect.addEventListener('change', function () {
-        if (!isFiatCurrency(currencySelect.value)) {
-          catalog.writePreference(currencySelect.value);
-        }
-        updatePricesInternal();
+        window.PaymentCurrencies.writePreference(currencySelect.value);
       });
     }
-
-    const field = document.createElement('div');
-    field.className = 'fiat-currency-field';
-
-    const label = document.createElement('label');
-    label.htmlFor = 'fiat-currency';
-    label.id = 'fiat-currency-label';
-    label.textContent = 'Also pay in:';
-
-    const fiatSelect = document.createElement('select');
-    fiatSelect.id = 'fiat-currency';
-    fiatSelect.setAttribute('aria-label', 'Fiat currency');
-    catalog.appendFiatOptions(fiatSelect);
-    fiatSelect.value = catalog.readFiatPreference() || 'EUR';
-    fiatSelect.addEventListener('change', function () {
-      catalog.writeFiatPreference(fiatSelect.value);
-      updatePricesInternal();
-    });
-
-    field.appendChild(label);
-    field.appendChild(fiatSelect);
-    container.appendChild(field);
-  }
-
-  function fiatLineFor(priceEl) {
-    const next = priceEl.nextElementSibling;
-    if (next && next.className && String(next.className).indexOf('price-fiat') !== -1) {
-      return next;
-    }
-
-    const line = document.createElement('div');
-    line.className = 'price-fiat';
-    if (typeof priceEl.insertAdjacentElement === 'function') {
-      priceEl.insertAdjacentElement('afterend', line);
-    } else if (priceEl.parentNode) {
-      priceEl.parentNode.appendChild(line);
-    }
-    return line;
   }
 
   function ensureStaySummary(nights) {
@@ -293,8 +230,8 @@
   }
 
   function updatePricesInternal() {
-    const currency = selectedCryptoCurrency();
-    const fiatCurrency = selectedFiatCurrency();
+    const currencySelect = document.getElementById('currency');
+    const currency = currencySelect ? currencySelect.value : 'ETH';
     const nights = getStayNights();
 
     ensureStaySummary(nights);
@@ -316,20 +253,6 @@
       } else {
         priceEl.textContent = `${totalFormatted} ${currency} total for ${nightsLabel} (${perNightFormatted} ${currency}/night)`;
       }
-
-      const fiatPricing = getPerNightPricing(priceEl, fiatCurrency);
-      if (!fiatPricing) {
-        return;
-      }
-      const fiatPerNight = formatValue(fiatPricing.value, fiatPricing.decimals);
-      const fiatTotal = formatValue(fiatPricing.value * nights, fiatPricing.decimals);
-      const fiatLine = fiatLineFor(priceEl);
-      if (!fiatLine) {
-        return;
-      }
-      fiatLine.textContent = nights === 1
-        ? `or ${fiatPerNight} ${fiatCurrency}`
-        : `or ${fiatTotal} ${fiatCurrency} total (${fiatPerNight} ${fiatCurrency}/night)`;
     });
   }
 
