@@ -133,26 +133,21 @@ function loadStayPricing() {
   return { context, select, options, prices };
 }
 
-test('fiat prices sit alongside the crypto price', () => {
+test('city booking currency list prices a stay in crypto or fiat', () => {
   const { context, select, options, prices } = loadStayPricing();
-  assert.equal(options.some((option) => option.value === 'EUR'), false);
+  assert.equal(context.document.getElementById('fiat-currency'), null);
   assert.ok(options.some((option) => option.value === 'ETH'));
+  assert.ok(options.some((option) => option.value === 'EUR'));
+  assert.ok(options.some((option) => option.value === 'SEK'));
 
-  const fiatSelect = context.document.getElementById('fiat-currency');
-  assert.ok(fiatSelect);
-  assert.equal(fiatSelect.value, 'EUR');
+  select.value = 'EUR';
+  context.window.updatePrices();
+  assert.equal(prices[0].textContent, '184.00 EUR / night');
+  assert.equal(prices[0].nextElementSibling, null);
+
+  select.value = 'ETH';
+  context.window.updatePrices();
   assert.equal(prices[0].textContent, '0.07 ETH / night');
-  assert.equal(prices[0].nextElementSibling.textContent, 'or 184.00 EUR');
-
-  select.value = 'BTC';
-  context.window.updatePrices();
-  assert.equal(prices[0].textContent, '0.0012 BTC / night');
-  assert.equal(prices[0].nextElementSibling.textContent, 'or 184.00 EUR');
-
-  fiatSelect.value = 'USD';
-  context.window.updatePrices();
-  assert.equal(prices[0].textContent, '0.0012 BTC / night');
-  assert.equal(prices[0].nextElementSibling.textContent, 'or 200.00 USD');
 });
 
 test('hotel and checkout pages load shared fiat payment currencies', () => {
@@ -169,8 +164,8 @@ test('hotel and checkout pages load shared fiat payment currencies', () => {
   assert.match(checkout, /data-checkout-method/);
   assert.match(checkout, /assets\/payment-currencies\.js/);
   const summary = fs.readFileSync(path.join(root, 'assets/hotel-booking-summary.js'), 'utf8');
-  assert.match(summary, /Pay with crypto/);
-  assert.match(summary, /Pay with fiat/);
-  assert.match(summary, /data-pay-kind', 'fiat'/);
+  assert.match(summary, /optionGroup\('Cryptocurrency'/);
+  assert.match(summary, /optionGroup\('Fiat'/);
+  assert.doesNotMatch(summary, /fiat-currency/);
   assert.match(fs.readFileSync(path.join(root, 'assets/checkout.js'), 'utf8'), /Confirm fiat payment/);
 });

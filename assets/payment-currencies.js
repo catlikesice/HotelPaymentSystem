@@ -12,7 +12,6 @@
   'use strict';
 
   var PREFERENCE_KEY = 'bh_payment_currency';
-  var FIAT_PREFERENCE_KEY = 'bh_fiat_currency';
 
   // perUsdt is how many units of this currency equal 1 USDT.
   // USDT prices on the site are treated as US dollars.
@@ -166,35 +165,15 @@
 
   function readPreference() {
     var entry = find(storageGet(PREFERENCE_KEY));
-    if (!entry || entry.kind === 'fiat') {
-      return '';
-    }
-    return entry.code;
+    return entry ? entry.code : '';
   }
 
   function writePreference(code) {
     var entry = find(code);
-    if (!entry || entry.kind === 'fiat') {
+    if (!entry) {
       return;
     }
     storageSet(PREFERENCE_KEY, entry.code);
-  }
-
-  function readFiatPreference() {
-    var entry = find(storageGet(FIAT_PREFERENCE_KEY));
-    if (entry && entry.kind === 'fiat') {
-      return entry.code;
-    }
-    var legacy = find(storageGet(PREFERENCE_KEY));
-    return legacy && legacy.kind === 'fiat' ? legacy.code : '';
-  }
-
-  function writeFiatPreference(code) {
-    var entry = find(code);
-    if (!entry || entry.kind !== 'fiat') {
-      return;
-    }
-    storageSet(FIAT_PREFERENCE_KEY, entry.code);
   }
 
   function paymentMethodFor(code) {
@@ -203,7 +182,6 @@
 
   return {
     PREFERENCE_KEY: PREFERENCE_KEY,
-    FIAT_PREFERENCE_KEY: FIAT_PREFERENCE_KEY,
     crypto: CRYPTO.map(function (entry) { return byCode[entry.code]; }),
     fiat: FIAT.map(function (entry) { return byCode[entry.code]; }),
     rates: rates,
@@ -218,8 +196,6 @@
     appendFiatOptions: appendFiatOptions,
     readPreference: readPreference,
     writePreference: writePreference,
-    readFiatPreference: readFiatPreference,
-    writeFiatPreference: writeFiatPreference,
     paymentMethodFor: paymentMethodFor
   };
 });

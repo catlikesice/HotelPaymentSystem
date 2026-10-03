@@ -83,7 +83,11 @@ function createDocument(root) {
       getAttribute(name) {
         return this.attributes[name];
       },
-      addEventListener() {},
+      listeners: {},
+      addEventListener(type, handler) {
+        this.listeners[type] = this.listeners[type] || [];
+        this.listeners[type].push(handler);
+      },
       querySelector(selector) {
         return this.querySelectorAll(selector)[0] || null;
       },
@@ -155,7 +159,7 @@ function createDocument(root) {
   };
 }
 
-test('hotel page keeps a crypto pay button and adds fiat beside it', () => {
+test('hotel page lists crypto and fiat in one pay-with menu', () => {
   const root = {
     children: [],
     appendChild(child) { this.children.push(child); child.parentElement = this; },
@@ -187,20 +191,25 @@ test('hotel page keeps a crypto pay button and adds fiat beside it', () => {
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../assets/hotel-booking-summary.js'), 'utf8'), context);
 
   const detail = document.querySelector('.hotel-detail');
+  const menu = detail.querySelector('#payment-currency');
+  assert.ok(menu);
+  assert.equal(detail.querySelector('#fiat-currency'), null);
+  assert.equal(detail.querySelectorAll('.confirm-button').length, 1);
+  assert.equal(detail.querySelector('.price-fiat'), null);
+  assert.match(menu.querySelector('[value="ETH"]').textContent, /ETH/);
+  assert.match(menu.querySelector('[value="EUR"]').textContent, /EUR/);
   assert.equal(detail.querySelector('.price').textContent, '0.11 ETH / night');
-  assert.match(detail.querySelector('.price-fiat').textContent, /or 289\.14 EUR/);
-  const cryptoBtn = detail.querySelector('[data-pay-kind="crypto"]');
-  const fiatBtn = detail.querySelector('[data-pay-kind="fiat"]');
-  assert.ok(cryptoBtn);
-  assert.ok(fiatBtn);
-  assert.match(cryptoBtn.textContent, /ETH with crypto/);
-  assert.match(fiatBtn.textContent, /EUR with fiat/);
-  assert.notEqual(cryptoBtn, fiatBtn);
-  const roomFiat = detail.querySelector('.room-option__fiat');
-  const addonFiat = detail.querySelector('.addon-option__fiat');
-  assert.ok(roomFiat);
-  assert.match(roomFiat.textContent, /EUR/);
-  assert.ok(addonFiat);
-  assert.match(addonFiat.textContent, /EUR/);
+  assert.match(detail.querySelector('.confirm-button').textContent, /Pay with ETH/);
   assert.match(detail.querySelector('.room-option__rate').textContent, /ETH/);
+  assert.match(detail.querySelector('.addon-option__rate').textContent, /ETH/);
+
+  menu.value = 'EUR';
+  const change = menu.listeners && menu.listeners.change && menu.listeners.change[0];
+  assert.equal(typeof change, 'function');
+  change();
+  assert.match(detail.querySelector('.price').textContent, /289\.14 EUR/);
+  assert.match(detail.querySelector('.confirm-button').textContent, /Pay with EUR/);
+  assert.match(detail.querySelector('.room-option__rate').textContent, /EUR/);
+  assert.match(detail.querySelector('.addon-option__rate').textContent, /EUR/);
+  assert.equal(detail.querySelectorAll('.confirm-button').length, 1);
 });
