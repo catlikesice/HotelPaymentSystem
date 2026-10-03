@@ -7,6 +7,7 @@ const http = require('http');
 
 const searchRouter = require('../routes/search');
 const { loadStaticCatalog } = require('../lib/search-db');
+const { getCityPage, hotelsFor } = require('../lib/city-pages');
 
 const root = path.join(__dirname, '..');
 let server;
@@ -45,7 +46,10 @@ test('catalog hotels without their own page are still searchable', async () => {
   assert.equal(body.hotels[0].city, 'Copenhagen');
   assert.equal(body.hotels[0].url, 'copenhagen.html');
   assert.equal(fs.existsSync(path.join(root, 'cabinn-city.html')), false);
-  assert.equal(fs.existsSync(path.join(root, 'copenhagen.html')), true);
+  assert.equal(fs.existsSync(path.join(root, 'copenhagen.html')), false);
+  const copenhagen = getCityPage('copenhagen.html');
+  assert.ok(copenhagen);
+  assert.ok(hotelsFor('copenhagen.html').some((hotel) => hotel.name === 'CABINN City'));
 });
 
 test('hotels with a dedicated page keep that page', async () => {
@@ -158,7 +162,8 @@ test('other named places without pages are searchable', async () => {
 });
 
 test('pages missing from the catalog are returned from SQL', async () => {
-  assert.equal(fs.existsSync(path.join(root, 'šiauliai.htm')), true);
+  assert.equal(fs.existsSync(path.join(root, 'šiauliai.htm')), false);
+  assert.equal(getCityPage('šiauliai.htm').city_name, 'Šiauliai');
   const siauliai = await searchFor('Siauliai');
   assert.deepEqual(siauliai.cities.map((city) => city.name), ['Šiauliai']);
   assert.equal(siauliai.cities[0].url, 'šiauliai.htm');
@@ -190,11 +195,15 @@ test('pages missing from the catalog are returned from SQL', async () => {
 });
 
 test('Bauska, Latvia can be booked from search', async () => {
-  assert.equal(fs.existsSync(path.join(root, 'bauska.html')), true);
-  const cityHtml = fs.readFileSync(path.join(root, 'bauska.html'), 'utf8');
+  assert.equal(fs.existsSync(path.join(root, 'bauska.html')), false);
+  const cityHtml = getCityPage('bauska.html').html;
   assert.match(cityHtml, /data-city="Bauska"/);
   assert.match(cityHtml, /href="hotel-bauska\.html"/);
   assert.match(cityHtml, /href="bauska-castle-hotel\.html"/);
+  assert.deepEqual(
+    hotelsFor('bauska.html').map((hotel) => hotel.book_url),
+    ['hotel-bauska.html', 'bauska-castle-hotel.html']
+  );
 
   const body = await searchFor('Bauska');
   assert.deepEqual(body.cities.map((city) => city.name), ['Bauska']);
