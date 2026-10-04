@@ -46,6 +46,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Aviemore",
+      "city": "Aviemore",
+      "country": "Scotland",
+      "url": "aviemore.html",
+      "description": "Browse hotels in Aviemore, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Bauska",
       "city": "Bauska",
       "country": "Latvia",
@@ -374,6 +382,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Pitlochry",
+      "city": "Pitlochry",
+      "country": "Scotland",
+      "url": "pitlochry.html",
+      "description": "Browse hotels in Pitlochry, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Portree",
       "city": "Portree",
       "country": "Scotland",
@@ -427,6 +443,14 @@ window.SEARCH_CATALOG = {
       "country": "Lithuania",
       "url": "šiauliai.htm",
       "description": "Browse hotels in Šiauliai, Lithuania."
+    },
+    {
+      "type": "city",
+      "name": "St Andrews",
+      "city": "St Andrews",
+      "country": "Scotland",
+      "url": "st-andrews.html",
+      "description": "Browse hotels in St Andrews, Scotland."
     },
     {
       "type": "city",
@@ -515,6 +539,14 @@ window.SEARCH_CATALOG = {
       "country": "Finland",
       "url": "turku.html",
       "description": "Browse hotels in Turku, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Ullapool",
+      "city": "Ullapool",
+      "country": "Scotland",
+      "url": "ullapool.html",
+      "description": "Browse hotels in Ullapool, Scotland."
     },
     {
       "type": "city",
@@ -703,6 +735,39 @@ window.SEARCH_CATALOG = {
       "price": "0.075 ETH / night",
       "priceEth": 0.075,
       "description": "Contemporary hotel near the botanical garden, with views toward the ski slopes."
+    },
+    {
+      "type": "hotel",
+      "name": "Cairngorm Hotel",
+      "city": "Aviemore",
+      "country": "Scotland",
+      "url": "aviemore.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "High Street hotel in Aviemore, a base for the Cairngorm plateau."
+    },
+    {
+      "type": "hotel",
+      "name": "Rothiemurchus Lodge",
+      "city": "Aviemore",
+      "country": "Scotland",
+      "url": "aviemore.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Forest lodge on the edge of Aviemore, beside the Rothiemurchus pines."
+    },
+    {
+      "type": "hotel",
+      "name": "Spey Valley Hotel",
+      "city": "Aviemore",
+      "country": "Scotland",
+      "url": "aviemore.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Riverside hotel in Aviemore, looking toward the Spey and the mountain railway."
     },
     {
       "type": "hotel",
@@ -1971,6 +2036,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Atholl Palace Hotel",
+      "city": "Pitlochry",
+      "country": "Scotland",
+      "url": "pitlochry.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Victorian hotel above Pitlochry, with gardens looking toward Ben Vrackie."
+    },
+    {
+      "type": "hotel",
+      "name": "Fishers Hotel",
+      "city": "Pitlochry",
+      "country": "Scotland",
+      "url": "pitlochry.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel on Atholl Road in Pitlochry, a short walk from the theatre and the river."
+    },
+    {
+      "type": "hotel",
+      "name": "Loch Faskally House",
+      "city": "Pitlochry",
+      "country": "Scotland",
+      "url": "pitlochry.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Shore house on Loch Faskally, beside the dam and the salmon ladder."
+    },
+    {
+      "type": "hotel",
       "name": "Bosville Hotel",
       "city": "Portree",
       "country": "Scotland",
@@ -2177,6 +2275,39 @@ window.SEARCH_CATALOG = {
       "price": "0.04 ETH / night",
       "priceEth": 0.04,
       "description": "Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast."
+    },
+    {
+      "type": "hotel",
+      "name": "Scores Hotel",
+      "city": "St Andrews",
+      "country": "Scotland",
+      "url": "st-andrews.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Hotel on The Scores in St Andrews, looking over the bay and the West Sands."
+    },
+    {
+      "type": "hotel",
+      "name": "St Andrews Harbour Hotel",
+      "city": "St Andrews",
+      "country": "Scotland",
+      "url": "st-andrews.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Harbour hotel in St Andrews, a short walk from the cathedral ruins and the West Sands."
+    },
+    {
+      "type": "hotel",
+      "name": "Cathedral Gate House",
+      "city": "St Andrews",
+      "country": "Scotland",
+      "url": "st-andrews.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town house in St Andrews, beside the cathedral ruins and the harbour wall."
     },
     {
       "type": "hotel",
@@ -2518,6 +2649,39 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Modern comfort in the center of Turku, close to shopping and attractions."
+    },
+    {
+      "type": "hotel",
+      "name": "The Ceilidh Place",
+      "city": "Ullapool",
+      "country": "Scotland",
+      "url": "ullapool.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Bookshop hotel on the west shore of Ullapool, above Loch Broom."
+    },
+    {
+      "type": "hotel",
+      "name": "Broomfield House",
+      "city": "Ullapool",
+      "country": "Scotland",
+      "url": "ullapool.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Hillside house above the harbour in Ullapool, looking across Loch Broom."
+    },
+    {
+      "type": "hotel",
+      "name": "Ullapool Ferry Hotel",
+      "city": "Ullapool",
+      "country": "Scotland",
+      "url": "ullapool.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Harbour hotel in Ullapool, on Loch Broom beside the ferry to Lewis."
     },
     {
       "type": "hotel",

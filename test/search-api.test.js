@@ -121,12 +121,10 @@ test('plain ASCII queries match letters SQL cannot unaccent on its own', async (
 
 test('scotland, lithuania, and finland towns without pages are searchable', async () => {
   const places = [
-    { q: 'St Andrews', city: 'St Andrews', country: 'Scotland', hotel: 'St Andrews Harbour Hotel', file: 'st-andrews.html' },
     { q: 'Kirkwall', city: 'Kirkwall', country: 'Scotland', hotel: 'Kirkwall Harbour Hotel', file: 'kirkwall.html' },
     { q: 'Tobermory', city: 'Tobermory', country: 'Scotland', hotel: 'Tobermory Waterfront Hotel', file: 'tobermory.html' },
     { q: 'Uist', city: 'Uist', country: 'Scotland', hotel: 'Uist Machair House', file: 'uist.html' },
     { q: 'Tarbert (Harris)', city: 'Tarbert (Harris)', country: 'Scotland', hotel: 'Tarbert Harris Hotel', file: 'tarbert-harris.html' },
-    { q: 'Ullapool', city: 'Ullapool', country: 'Scotland', hotel: 'Ullapool Ferry Hotel', file: 'ullapool.html' },
     { q: 'Uig', city: 'Uig', country: 'Scotland', hotel: 'Uig Bay Hotel', file: 'uig.html' },
     { q: 'Dunvegan', city: 'Dunvegan', country: 'Scotland', hotel: 'Dunvegan Castle Hotel', file: 'dunvegan.html' },
     { q: 'Broadford', city: 'Broadford', country: 'Scotland', hotel: 'Broadford Bay Hotel', file: 'broadford.html' },
@@ -258,6 +256,9 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Nida'));
   assert.ok(body.labels.includes('Hotel Nida Marina — Nida'));
   assert.ok(body.labels.includes('St Andrews'));
+  assert.ok(body.labels.includes('Aviemore'));
+  assert.ok(body.labels.includes('Pitlochry'));
+  assert.ok(body.labels.includes('Ullapool'));
   assert.ok(body.labels.includes('Palanga'));
   assert.ok(body.labels.includes('Porvoo'));
   assert.ok(body.labels.includes('Savonlinna Castle Hotel — Savonlinna'));
