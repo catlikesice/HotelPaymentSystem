@@ -198,6 +198,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Keflavík",
+      "city": "Keflavík",
+      "country": "Iceland",
+      "url": "keflavík.html",
+      "description": "Browse hotels in Keflavík, Iceland."
+    },
+    {
+      "type": "city",
       "name": "Kiruna",
       "city": "Kiruna",
       "country": "Sweden",
@@ -1276,6 +1284,39 @@ window.SEARCH_CATALOG = {
       "price": "0.05 ETH / night",
       "priceEth": 0.05,
       "description": "Cozy boutique hotel offering an intimate atmosphere, complimentary breakfast and friendly service close to the river."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Berg",
+      "city": "Keflavík",
+      "country": "Iceland",
+      "url": "keflavík.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Harbour hotel in Keflavík, a short walk from the waterfront and the Viking World museum."
+    },
+    {
+      "type": "hotel",
+      "name": "Guesthouse 1x6",
+      "city": "Keflavík",
+      "country": "Iceland",
+      "url": "keflavík.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Small guesthouse in Keflavík, close to the harbour and the road out to the airport."
+    },
+    {
+      "type": "hotel",
+      "name": "Courtyard by Marriott Reykjavik Keflavik Airport",
+      "city": "Keflavík",
+      "country": "Iceland",
+      "url": "keflavík.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Airport hotel beside Keflavík International Airport, convenient for early flights and the Reykjanes coast."
     },
     {
       "type": "hotel",
