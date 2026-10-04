@@ -28,8 +28,8 @@ app.use('/api/properties', propertiesRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/contact', contactRouter);
 
-// City listing documents live in docs/sql/city-pages.sql. Serve them at the
-// same addresses the old HTML files used, before the static file handler.
+// Restored city listing pages are files in the site root. If one is missing,
+// serve the copy stored in docs/sql/city-pages.sql before the static handler.
 app.use(serveCityPage);
 
 // Serve the static multi-page site alongside the API.

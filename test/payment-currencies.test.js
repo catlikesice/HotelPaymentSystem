@@ -151,11 +151,9 @@ test('city booking currency list prices a stay in crypto or fiat', () => {
 });
 
 test('hotel and checkout pages load shared fiat payment currencies', () => {
-  const { getCityPage } = require('../lib/city-pages');
   const funken = fs.readFileSync(path.join(root, 'funken-lodge.html'), 'utf8');
   const scandic = fs.readFileSync(path.join(root, 'scandic-copenhagen.html'), 'utf8');
-  const copenhagen = getCityPage('copenhagen.html').html;
-  assert.equal(fs.existsSync(path.join(root, 'copenhagen.html')), false);
+  const copenhagen = fs.readFileSync(path.join(root, 'copenhagen.html'), 'utf8');
   const checkout = fs.readFileSync(path.join(root, 'checkout.html'), 'utf8');
 
   assert.match(funken, /assets\/payment-currencies\.js"><\/script>\s*<script src="assets\/hotel-booking-summary\.js"/);

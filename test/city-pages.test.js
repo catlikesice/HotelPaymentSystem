@@ -16,14 +16,16 @@ function loadCatalog() {
   return context.window.SEARCH_CATALOG;
 }
 
-test('every catalog city page is stored in SQL and removed as a file', () => {
+test('every catalog city page is stored in SQL and restored as a file', () => {
   const catalog = loadCatalog();
   const stored = new Set(listCityPages().map((page) => page.page_url));
   assert.equal(stored.size, catalog.cities.length);
   catalog.cities.forEach((city) => {
     assert.equal(stored.has(city.url), true, city.url);
-    assert.equal(fs.existsSync(path.join(root, city.url)), false, city.url);
+    const filePath = path.join(root, city.url);
+    assert.equal(fs.existsSync(filePath), true, city.url);
     const page = getCityPage(city.url);
+    assert.equal(fs.readFileSync(filePath, 'utf8'), page.html, city.url);
     assert.equal(page.city_name, city.city);
     assert.equal(page.country, city.country);
     assert.match(page.html, /<html/i);
@@ -66,9 +68,10 @@ test('Esbjerg keeps the hotel group and the visible ETH price', () => {
   assert.equal(britannia.book_url, null);
 });
 
-test('the server answers a city address from SQL', async () => {
+test('the server answers a city address from its HTML file', async () => {
   const app = express();
   app.use(serveCityPage);
+  app.use(express.static(root));
   app.use((req, res) => {
     res.status(404).type('text').send('missing');
   });
@@ -84,15 +87,18 @@ test('the server answers a city address from SQL', async () => {
   const encoded = await fetch(base + '/' + encodeURIComponent('šiauliai.htm'));
   assert.equal(encoded.status, 200);
   const html = await encoded.text();
+  assert.equal(html, fs.readFileSync(path.join(root, 'šiauliai.htm'), 'utf8'));
   assert.match(html, /Park Inn Šiauliai/);
   assert.match(html, /Old Town Boutique/);
   const page = getCityPage('šiauliai.htm');
+  assert.equal(html, page.html);
   assert.equal(page.heading, 'Available Hotels in Šiauliai.Htm');
   assert.equal(page.currencies, 'ETH,BTC,USDT');
   assert.equal(page.back_href, 'selectlocation.html');
 
-  const missing = await fetch(base + '/funken-lodge.html');
+  const missing = await fetch(base + '/not-a-city.html');
   assert.equal(missing.status, 404);
+  assert.equal(getCityPage('funken-lodge.html'), null);
   } finally {
     await new Promise((resolve, reject) => {
       server.close((error) => (error ? reject(error) : resolve()));

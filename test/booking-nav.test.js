@@ -24,8 +24,10 @@ test('city pages in SQL that show a language bar load the shared preferences scr
   assert.ok(listings.some((page) => page.page_url === 'tallinn.html'));
 
   listings.forEach((page) => {
-    const html = getCityPage(page.page_url).html;
-    assert.equal(fs.existsSync(path.join(root, page.page_url)), false, page.page_url + ' should not remain as a file');
+    const filePath = path.join(root, page.page_url);
+    assert.equal(fs.existsSync(filePath), true, page.page_url + ' should be restored');
+    const html = fs.readFileSync(filePath, 'utf8');
+    assert.equal(html, getCityPage(page.page_url).html);
     assert.match(html, /site-preferences\.js/, `${page.page_url} should load the shared preferences script`);
   });
 });
