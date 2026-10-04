@@ -11,6 +11,9 @@
 --
 -- lib/hotel-addons.js loads this file. The trip page reads it through
 -- GET /api/hotel-addons/trip. A property page reads GET /api/hotel-addons.
+-- A listed hotel with no stay row here receives breakfast and late checkout.
+-- A city with no experience or transport row receives a walking tour and a
+-- station transfer. Those defaults are added when the catalog loads.
 
 PRAGMA foreign_keys = ON;
 

@@ -221,7 +221,10 @@
   }
 
   function hotelHasOwnPage(hotel) {
-    return Boolean(hotel && hotel.url && hotel.cityUrl && hotel.url !== hotel.cityUrl);
+    if (!hotel || !hotel.url || !hotel.cityUrl || hotel.url === hotel.cityUrl) {
+      return false;
+    }
+    return Boolean(window.BorealPropertyPages && window.BorealPropertyPages.isPropertyPage(hotel.url));
   }
 
   function hotelSelectHref(hotel) {
