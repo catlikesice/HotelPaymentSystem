@@ -46,7 +46,7 @@ test('catalog hotels without their own page are still searchable', async () => {
   assert.equal(body.hotels[0].city, 'Copenhagen');
   assert.equal(body.hotels[0].url, 'copenhagen.html');
   assert.equal(fs.existsSync(path.join(root, 'cabinn-city.html')), false);
-  assert.equal(fs.existsSync(path.join(root, 'copenhagen.html')), false);
+  assert.equal(fs.existsSync(path.join(root, 'copenhagen.html')), true);
   const copenhagen = getCityPage('copenhagen.html');
   assert.ok(copenhagen);
   assert.ok(hotelsFor('copenhagen.html').some((hotel) => hotel.name === 'CABINN City'));
@@ -186,7 +186,7 @@ test('other named places without pages are searchable', async () => {
 });
 
 test('pages missing from the catalog are returned from SQL', async () => {
-  assert.equal(fs.existsSync(path.join(root, 'šiauliai.htm')), false);
+  assert.equal(fs.existsSync(path.join(root, 'šiauliai.htm')), true);
   assert.equal(getCityPage('šiauliai.htm').city_name, 'Šiauliai');
   const siauliai = await searchFor('Siauliai');
   assert.deepEqual(siauliai.cities.map((city) => city.name), ['Šiauliai']);
@@ -219,8 +219,9 @@ test('pages missing from the catalog are returned from SQL', async () => {
 });
 
 test('Bauska, Latvia can be booked from search', async () => {
-  assert.equal(fs.existsSync(path.join(root, 'bauska.html')), false);
-  const cityHtml = getCityPage('bauska.html').html;
+  assert.equal(fs.existsSync(path.join(root, 'bauska.html')), true);
+  const cityHtml = fs.readFileSync(path.join(root, 'bauska.html'), 'utf8');
+  assert.equal(cityHtml, getCityPage('bauska.html').html);
   assert.match(cityHtml, /data-city="Bauska"/);
   assert.match(cityHtml, /href="hotel-bauska\.html"/);
   assert.match(cityHtml, /href="bauska-castle-hotel\.html"/);

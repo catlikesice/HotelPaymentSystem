@@ -1,9 +1,9 @@
 -- City listing pages for Boreal Horizons.
 --
 -- Dialect: SQLite 3.
--- The HTML files that used to live at these page_url paths are stored here.
--- html is the full document. The other columns are the city and hotel facts from that document.
--- lib/city-pages.js loads this file and the server serves page_url from it.
+-- Each page_url is also an HTML file in the repository root.
+-- html is that full document. The other columns are the city and hotel facts from that document.
+-- lib/city-pages.js loads this file. The server serves the HTML file, and this copy when the file is missing.
 
 PRAGMA foreign_keys = ON;
 

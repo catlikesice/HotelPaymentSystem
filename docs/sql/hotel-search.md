@@ -6,7 +6,7 @@ The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite
 
 The static catalog is 57 cities and 154 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no HTML file. The SQL file contains every catalog row and then those pageless places (82 cities, 179 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
-Šiauliai, the Odense hotels, and Hotel d’Angleterre are in the static catalog rather than the pageless list. The Šiauliai and Odense listing documents are `šiauliai.htm` and `odense.html` inside `city-pages.sql`. Hotel d’Angleterre keeps its own file, `hotel-dangleterre-copenhagen.html`. Bauska’s listing is `bauska.html` in that same SQL file. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) stay as hotel pages and continue to checkout.
+Šiauliai, the Odense hotels, and Hotel d’Angleterre are in the static catalog rather than the pageless list. Šiauliai is `šiauliai.htm`. The Odense hotels use `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`. Bauska, Latvia is bookable from `bauska.html`. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) continue to checkout. The same listing documents are stored in `city-pages.sql`.
 
 ## What a search is
 
@@ -29,7 +29,7 @@ A blank `q` returns no rows. `search.js` treats an empty query as `{ "cities": [
 | --- | --- | --- |
 | `name` | `name` and `city` | Same string on a city row |
 | `country` | `country` | Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Åland Islands, Greenland, Faroe Islands, Svalbard |
-| `page_url` | `url` | Includes `.html`, for example `aarhus.html`. That document is stored in `city-pages.sql`, not as a file in the repository. NULL when the place has no city page |
+| `page_url` | `url` | Includes `.html`, for example `aarhus.html`. That document is a file in the repository root, and the same document is stored in `city-pages.sql`. NULL when the place has no city page |
 | `description` | `description` | |
 | `sort_order` | array order | `Array.filter` keeps catalog order; `ORDER BY sort_order` does the same |
 | `name_key` | | Homepage compare key. See normalization |
@@ -49,7 +49,7 @@ A blank `q` returns no rows. `search.js` treats an empty query as `{ "cities": [
 | `label_key` | | Normalized `name + " — " + city` (em dash, U+2014) |
 | `search_text` | | Results haystack |
 
-City listing pages also show BTC and USDT amounts, hotel chains, booking links, and translated placeholder copy. Those facts are columns in [`city-pages.sql`](city-pages.sql) (`city_page_hotels`, `city_page_strings`). They are not columns in this search schema. The old city HTML files are not in the repository. `lib/city-pages.js` loads `city-pages.sql`, and the server answers `page_url` from the stored document.
+City listing pages also show BTC and USDT amounts, hotel chains, booking links, and translated placeholder copy. Those facts are columns in [`city-pages.sql`](city-pages.sql) (`city_page_hotels`, `city_page_strings`). They are not columns in this search schema. The city HTML files are in the repository at `page_url`. `lib/city-pages.js` loads `city-pages.sql`, and the server answers `page_url` from the HTML file.
 
 ## Normalization
 
