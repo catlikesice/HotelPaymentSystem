@@ -30,10 +30,17 @@ const DESTINATIONS = [
     url: 'vestmannaeyjar.html',
     section: 'boreal-vestmannaeyjar-title',
     hotels: ['Hotel Vestmannaeyjar', 'Hótel Eyjar', 'Guesthouse Hamar']
+  },
+  {
+    city: 'Sauðárkrókur',
+    query: 'saudarkrokur',
+    url: 'sauðárkrókur.html',
+    section: 'boreal-saudarkrokur-title',
+    hotels: ['Hótel Tindastóll', 'Hótel Mikligarður', 'Skagafjörður Guesthouse']
   }
 ];
 
-test('Ísafjörður and Vestmannaeyjar are on the HTML city list and in search', () => {
+test('Ísafjörður, Vestmannaeyjar, and Sauðárkrókur are on the HTML city list and in search', () => {
   const catalog = loadCatalog();
   const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const db = openSearchDatabase();

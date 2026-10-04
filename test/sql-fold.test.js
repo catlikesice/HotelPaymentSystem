@@ -64,7 +64,7 @@ test('fold_map matches the JavaScript normalizer', () => {
   }
 
   const cities = db.prepare('SELECT name, country, description, search_text, name_key FROM cities').all();
-  assert.equal(cities.length, 98);
+  assert.equal(cities.length, 99);
   for (const city of cities) {
     const joined = [city.name, city.name, city.country, city.description, '', 'city'].join(' ');
     assert.equal(foldText(db, joined), city.search_text, city.name);
@@ -77,7 +77,7 @@ test('fold_map matches the JavaScript normalizer', () => {
     FROM hotels AS h
     JOIN cities AS c ON c.id = h.city_id
   `).all();
-  assert.equal(hotels.length, 215);
+  assert.equal(hotels.length, 218);
   for (const hotel of hotels) {
     const joined = [hotel.name, hotel.city, hotel.country, hotel.description, hotel.price, 'hotel'].join(' ');
     assert.equal(foldText(db, joined), hotel.search_text, hotel.name);

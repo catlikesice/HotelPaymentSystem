@@ -414,6 +414,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Sauðárkrókur",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "description": "Browse hotels in Sauðárkrókur, Iceland."
+    },
+    {
+      "type": "city",
       "name": "Šiauliai",
       "city": "Šiauliai",
       "country": "Lithuania",
@@ -2114,6 +2122,39 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Tindastóll",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Historic harbour hotel in Sauðárkrókur, on the Skagafjörður waterfront."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Mikligarður",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel in Sauðárkrókur, a base for the Skagafjörður valley and the north coast."
+    },
+    {
+      "type": "hotel",
+      "name": "Skagafjörður Guesthouse",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Small guesthouse in Sauðárkrókur, a short walk from the harbour and the church."
     },
     {
       "type": "hotel",
