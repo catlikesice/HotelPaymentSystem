@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build your trip – Boreal Horizons</title>
+  <meta name="description" content="Choose a stay, then add experiences and transport to one booking.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="language-switcher" aria-label="Language selector">
+    <label for="lang-select">Language</label>
+    <div class="language-switcher__select">
+      <select id="lang-select" aria-label="Select language">
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+        <option value="sv">Svenska</option>
+        <option value="de">Deutsch</option>
+      </select>
+    </div>
+  </div>
+
+  <main class="booking-container trip-builder" id="trip-builder">
+    <p class="trip-status" id="trip-status" role="status">Loading add-ons for this stay…</p>
+    <div id="trip-app" hidden></div>
+  </main>
+
+  <footer>
+    <small>&copy; Boreal Horizons</small>
+  </footer>
+
+  <script src="site-preferences.js"></script>
+  <script src="assets/booking-dates.js"></script>
+  <script src="assets/payment-currencies.js"></script>
+  <script src="assets/trip-builder.js"></script>
+</body>
+</html>

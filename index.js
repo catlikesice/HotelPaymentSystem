@@ -7,6 +7,7 @@ const authRouter = require('./routes/auth');
 const bookingsRouter = require('./routes/bookings');
 const propertiesRouter = require('./routes/properties');
 const searchRouter = require('./routes/search');
+const hotelAddonsRouter = require('./routes/hotel-addons');
 const contactRouter = require('./routes/contact');
 const { serveCityPage } = require('./lib/city-pages');
 
@@ -26,6 +27,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/properties', propertiesRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/hotel-addons', hotelAddonsRouter);
 app.use('/api/contact', contactRouter);
 
 // Restored city listing pages are files in the site root. If one is missing,
