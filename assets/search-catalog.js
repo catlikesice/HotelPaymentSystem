@@ -62,6 +62,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Benbecula",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "benbecula.html",
+      "description": "Browse hotels in Benbecula, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Bergen",
       "city": "Bergen",
       "country": "Norway",
@@ -724,6 +732,39 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence."
+    },
+    {
+      "type": "hotel",
+      "name": "Dark Island Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "benbecula.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Roadside hotel in Liniclate on Benbecula, between the machair and the road south."
+    },
+    {
+      "type": "hotel",
+      "name": "Balivanich Airport House",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "benbecula.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore."
+    },
+    {
+      "type": "hotel",
+      "name": "Culla Bay Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "benbecula.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Shore hotel on Benbecula, facing the white sand of Culla Bay."
     },
     {
       "type": "hotel",

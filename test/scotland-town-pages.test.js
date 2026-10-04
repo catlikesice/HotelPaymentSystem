@@ -44,10 +44,17 @@ const DESTINATIONS = [
     url: 'pitlochry.html',
     section: 'boreal-pitlochry-title',
     hotels: ['Atholl Palace Hotel', 'Fishers Hotel', 'Loch Faskally House']
+  },
+  {
+    city: 'Benbecula',
+    query: 'benbecula',
+    url: 'benbecula.html',
+    section: 'boreal-benbecula-title',
+    hotels: ['Dark Island Hotel', 'Balivanich Airport House', 'Culla Bay Hotel']
   }
 ];
 
-test('Ullapool, St Andrews, Aviemore, and Pitlochry are on the HTML city list and in search', () => {
+test('Ullapool, St Andrews, Aviemore, Pitlochry, and Benbecula are on the HTML city list and in search', () => {
   const catalog = loadCatalog();
   const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const db = openSearchDatabase();
