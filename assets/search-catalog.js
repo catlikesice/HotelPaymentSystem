@@ -174,6 +174,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Ísafjörður",
+      "city": "Ísafjörður",
+      "country": "Iceland",
+      "url": "ísafjörður.html",
+      "description": "Browse hotels in Ísafjörður, Iceland."
+    },
+    {
+      "type": "city",
       "name": "Jelgava",
       "city": "Jelgava",
       "country": "Latvia",
@@ -406,6 +414,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Sauðárkrókur",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "description": "Browse hotels in Sauðárkrókur, Iceland."
+    },
+    {
+      "type": "city",
       "name": "Šiauliai",
       "city": "Šiauliai",
       "country": "Lithuania",
@@ -507,6 +523,14 @@ window.SEARCH_CATALOG = {
       "country": "Sweden",
       "url": "uppsala.html",
       "description": "Browse hotels in Uppsala, Sweden."
+    },
+    {
+      "type": "city",
+      "name": "Vestmannaeyjar",
+      "city": "Vestmannaeyjar",
+      "country": "Iceland",
+      "url": "vestmannaeyjar.html",
+      "description": "Browse hotels in Vestmannaeyjar, Iceland."
     },
     {
       "type": "city",
@@ -1218,6 +1242,39 @@ window.SEARCH_CATALOG = {
       "price": "0.09 ETH / night",
       "priceEth": 0.09,
       "description": "Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Ísafjörður",
+      "city": "Ísafjörður",
+      "country": "Iceland",
+      "url": "ísafjörður.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Harbour hotel in Ísafjörður, on the Skutulsfjörður waterfront."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Horn",
+      "city": "Ísafjörður",
+      "country": "Iceland",
+      "url": "ísafjörður.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel in Ísafjörður, a practical base for the Westfjords."
+    },
+    {
+      "type": "hotel",
+      "name": "Gamla Guesthouse",
+      "city": "Ísafjörður",
+      "country": "Iceland",
+      "url": "ísafjörður.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Timber guesthouse in the old town of Ísafjörður, a short walk from the harbour."
     },
     {
       "type": "hotel",
@@ -2068,6 +2125,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Hótel Tindastóll",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Historic harbour hotel in Sauðárkrókur, on the Skagafjörður waterfront."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Mikligarður",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel in Sauðárkrókur, a base for the Skagafjörður valley and the north coast."
+    },
+    {
+      "type": "hotel",
+      "name": "Skagafjörður Guesthouse",
+      "city": "Sauðárkrókur",
+      "country": "Iceland",
+      "url": "sauðárkrókur.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Small guesthouse in Sauðárkrókur, a short walk from the harbour and the church."
+    },
+    {
+      "type": "hotel",
       "name": "Park Inn Šiauliai",
       "city": "Šiauliai",
       "country": "Lithuania",
@@ -2461,6 +2551,39 @@ window.SEARCH_CATALOG = {
       "price": "0.05 ETH / night",
       "priceEth": 0.05,
       "description": "Boutique hotel in a historic corner building overlooking the river and old town."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Vestmannaeyjar",
+      "city": "Vestmannaeyjar",
+      "country": "Iceland",
+      "url": "vestmannaeyjar.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Harbour hotel on Heimaey, close to the ferry and the town centre."
+    },
+    {
+      "type": "hotel",
+      "name": "Hótel Eyjar",
+      "city": "Vestmannaeyjar",
+      "country": "Iceland",
+      "url": "vestmannaeyjar.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Island hotel in Vestmannaeyjar, with views toward the cliffs and the harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "Guesthouse Hamar",
+      "city": "Vestmannaeyjar",
+      "country": "Iceland",
+      "url": "vestmannaeyjar.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.055 ETH / night",
+      "priceEth": 0.055,
+      "description": "Small guesthouse on Heimaey, a short walk from the puffin cliffs and Eldfell."
     },
     {
       "type": "hotel",
