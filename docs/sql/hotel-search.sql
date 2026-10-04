@@ -515,7 +515,8 @@ INSERT INTO cities (id, name, country, page_url, description, sort_order, name_k
   (98, 'Uig', 'Scotland', NULL, 'Browse hotels in Uig, Scotland.', 98, 'uig', 'uig uig scotland browse hotels in uig, scotland.  city'),
   (99, 'Dunvegan', 'Scotland', NULL, 'Browse hotels in Dunvegan, Scotland.', 99, 'dunvegan', 'dunvegan dunvegan scotland browse hotels in dunvegan, scotland.  city'),
   (100, 'Broadford', 'Scotland', NULL, 'Browse hotels in Broadford, Scotland.', 100, 'broadford', 'broadford broadford scotland browse hotels in broadford, scotland.  city'),
-  (101, 'Armadale', 'Scotland', NULL, 'Browse hotels in Armadale, Scotland.', 101, 'armadale', 'armadale armadale scotland browse hotels in armadale, scotland.  city');
+  (101, 'Armadale', 'Scotland', NULL, 'Browse hotels in Armadale, Scotland.', 101, 'armadale', 'armadale armadale scotland browse hotels in armadale, scotland.  city'),
+  (102, 'Lochmaddy', 'Scotland', NULL, 'Browse hotels in Lochmaddy, Scotland.', 102, 'lochmaddy', 'lochmaddy lochmaddy scotland browse hotels in lochmaddy, scotland.  city');
 
 INSERT INTO hotels (
   id, city_id, name, page_url, image_url, price_label, price_eth, description,
@@ -748,7 +749,8 @@ INSERT INTO hotels (
   (225, 98, 'Uig Bay Hotel', NULL, 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', '0.06 ETH / night', 0.06, 'Bay hotel in Uig, at the Skye ferry pier for the Outer Hebrides.', 225, 'uig bay hotel', 'uig bay hotel — uig', 'uig bay hotel uig scotland bay hotel in uig, at the skye ferry pier for the outer hebrides. 0.06 eth / night hotel'),
   (226, 99, 'Dunvegan Castle Hotel', NULL, 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', '0.09 ETH / night', 0.09, 'Lochside hotel in Dunvegan, a short walk from Dunvegan Castle on the Isle of Skye.', 226, 'dunvegan castle hotel', 'dunvegan castle hotel — dunvegan', 'dunvegan castle hotel dunvegan scotland lochside hotel in dunvegan, a short walk from dunvegan castle on the isle of skye. 0.09 eth / night hotel'),
   (227, 100, 'Broadford Bay Hotel', NULL, 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', '0.07 ETH / night', 0.07, 'Bay hotel in Broadford, on the south-east shore of the Isle of Skye.', 227, 'broadford bay hotel', 'broadford bay hotel — broadford', 'broadford bay hotel broadford scotland bay hotel in broadford, on the south-east shore of the isle of skye. 0.07 eth / night hotel'),
-  (228, 101, 'Armadale Pier Hotel', NULL, 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', '0.06 ETH / night', 0.06, 'Pier hotel in Armadale, where the Mallaig ferry meets the Sleat peninsula.', 228, 'armadale pier hotel', 'armadale pier hotel — armadale', 'armadale pier hotel armadale scotland pier hotel in armadale, where the mallaig ferry meets the sleat peninsula. 0.06 eth / night hotel');
+  (228, 101, 'Armadale Pier Hotel', NULL, 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', '0.06 ETH / night', 0.06, 'Pier hotel in Armadale, where the Mallaig ferry meets the Sleat peninsula.', 228, 'armadale pier hotel', 'armadale pier hotel — armadale', 'armadale pier hotel armadale scotland pier hotel in armadale, where the mallaig ferry meets the sleat peninsula. 0.06 eth / night hotel'),
+  (229, 102, 'Lochmaddy Harbour Hotel', NULL, 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', '0.07 ETH / night', 0.07, 'Harbour hotel in Lochmaddy, the ferry port on North Uist.', 229, 'lochmaddy harbour hotel', 'lochmaddy harbour hotel — lochmaddy', 'lochmaddy harbour hotel lochmaddy scotland harbour hotel in lochmaddy, the ferry port on north uist. 0.07 eth / night hotel');
 COMMIT;
 
 -- ---------------------------------------------------------------------------
