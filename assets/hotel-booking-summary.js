@@ -444,16 +444,26 @@
         ? config.addOns
         : [];
 
-    if (!addOns.length || detailContainer.querySelector('.addon-options')) {
+    if (!addOns.length) {
       return;
     }
 
-    const fieldset = document.createElement('fieldset');
-    fieldset.className = 'addon-options';
+    let fieldset = detailContainer.querySelector('.addon-options');
+    const createdFieldset = !fieldset;
+    if (!fieldset) {
+      fieldset = document.createElement('fieldset');
+      fieldset.className = 'addon-options';
+      const legend = document.createElement('legend');
+      legend.textContent = config.addonLegend || config.addOnsLegend || 'Enhance your stay';
+      fieldset.appendChild(legend);
+    }
 
-    const legend = document.createElement('legend');
-    legend.textContent = config.addonLegend || config.addOnsLegend || 'Enhance your stay';
-    fieldset.appendChild(legend);
+    const existingIds = {};
+    detailContainer.querySelectorAll('input[name="addonOption"]').forEach(function (input) {
+      if (input.value) {
+        existingIds[input.value] = true;
+      }
+    });
 
     const baseCurrency = getBaseCurrency(priceEl);
     const baseDecimals = getBaseDecimals(priceEl);
@@ -473,6 +483,11 @@
       const currency = addOn.currency || baseCurrency;
       const decimals = toSafeDecimals(addOn.decimals, baseDecimals);
       const labelText = addOn.label || 'Add-on';
+      const addonId = addOn.id || 'addon-' + index;
+      if (existingIds[addonId]) {
+        return;
+      }
+      existingIds[addonId] = true;
 
       const labelEl = document.createElement('label');
       labelEl.className = 'addon-option';
@@ -480,7 +495,7 @@
       const input = document.createElement('input');
       input.type = 'checkbox';
       input.name = 'addonOption';
-      input.value = addOn.id || 'addon-' + index;
+      input.value = addonId;
       input.dataset.label = labelText;
       input.dataset.price = String(price);
       input.dataset.billing = billing;
@@ -521,9 +536,74 @@
       hasValidAddOn = true;
     });
 
-    if (hasValidAddOn) {
-      detailContainer.insertBefore(fieldset, insertionPoint);
+    if (!hasValidAddOn || !createdFieldset) {
+      return;
     }
+    if (insertionPoint) {
+      detailContainer.insertBefore(fieldset, insertionPoint);
+    } else {
+      detailContainer.appendChild(fieldset);
+    }
+  }
+
+  function bindAddonInput(detailContainer, input) {
+    if (!input || input.dataset.addonBound === 'true') {
+      return;
+    }
+    input.dataset.addonBound = 'true';
+    input.addEventListener('change', function () {
+      renderSummary(detailContainer);
+    });
+  }
+
+  function loadCatalogAddons(detailContainer) {
+    if (!detailContainer || typeof fetch !== 'function') {
+      return;
+    }
+    const location = inferLocation(detailContainer);
+    if (!location.propertyName && !location.city) {
+      return;
+    }
+    const params = new URLSearchParams();
+    if (location.propertyName) params.set('hotel', location.propertyName);
+    if (location.city) params.set('city', location.city);
+    const path = (window.location && window.location.pathname) || '';
+    const prefix = path.indexOf('/assets/') !== -1 ? '..' : '';
+    fetch(prefix + '/api/hotel-addons?' + params.toString(), { headers: { accept: 'application/json' } })
+      .then(function (response) {
+        if (!response || !response.ok) {
+          return null;
+        }
+        return response.json();
+      })
+      .then(function (payload) {
+        const addons = payload && payload.addons;
+        if (!Array.isArray(addons) || !addons.length) {
+          return;
+        }
+        const priceEl = detailContainer.querySelector('.price');
+        const summaryEl = detailContainer.querySelector('.booking-summary');
+        const insertionPoint = summaryEl || detailContainer.querySelector('.confirm-button') || null;
+        createAddOnOptions(detailContainer, {
+          addonLegend: 'Add to your trip',
+          addons: addons.map(function (addon) {
+            return {
+              id: addon.id,
+              label: addon.label,
+              price: addon.priceEth,
+              billing: addon.billing,
+              description: addon.description
+            };
+          })
+        }, priceEl, insertionPoint);
+        detailContainer.querySelectorAll('input[name="addonOption"]').forEach(function (input) {
+          bindAddonInput(detailContainer, input);
+        });
+        renderSummary(detailContainer);
+      })
+      .catch(function () {
+        // The inline extras on the page still stand if the catalog cannot be reached.
+      });
   }
 
   function ensureOptionControls(detailContainer) {
@@ -841,11 +921,8 @@
       });
     });
 
-    const addonInputs = detailContainer.querySelectorAll('input[name="addonOption"]');
-    addonInputs.forEach(function(input) {
-      input.addEventListener('change', function() {
-        renderSummary(detailContainer);
-      });
+    detailContainer.querySelectorAll('input[name="addonOption"]').forEach(function (input) {
+      bindAddonInput(detailContainer, input);
     });
   }
 
@@ -990,6 +1067,7 @@
     initializeOptionControls();
     renderSummary();
     bindPayNow(document.querySelector('.hotel-detail'));
+    loadCatalogAddons(document.querySelector('.hotel-detail'));
   }
 
   if (document.readyState === 'loading') {

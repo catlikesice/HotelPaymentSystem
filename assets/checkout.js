@@ -139,6 +139,14 @@
       roomRow.hidden = !pending.roomLabel;
       setText('[data-checkout-room]', pending.roomLabel);
     }
+    const addonRow = document.querySelector('[data-checkout-row="addons"]');
+    if (addonRow) {
+      const labels = Array.isArray(pending.addOns)
+        ? pending.addOns.map(function (addon) { return addon && addon.label; }).filter(Boolean)
+        : [];
+      addonRow.hidden = labels.length === 0;
+      setText('[data-checkout-addons]', labels.join(', '));
+    }
 
     if (!user || !user.id) {
       showPanel('checkout-auth');

@@ -220,6 +220,25 @@
     return '<a class="search-card__link" href="' + escapeHtml(url) + '">' + label + '</a>';
   }
 
+  function hotelHasOwnPage(hotel) {
+    return Boolean(hotel && hotel.url && hotel.cityUrl && hotel.url !== hotel.cityUrl);
+  }
+
+  function hotelSelectHref(hotel) {
+    var params = new URLSearchParams();
+    params.set('hotel', hotel.name || '');
+    if (hotel.city) params.set('city', hotel.city);
+    if (hotel.country) params.set('country', hotel.country);
+    var page = hotel.cityUrl || hotel.url || '';
+    if (page) params.set('page', page);
+    var stay = getStayFromUrl();
+    if (stay.checkIn) params.set('checkIn', stay.checkIn);
+    if (stay.checkOut) params.set('checkOut', stay.checkOut);
+    if (Number.isFinite(stay.adults)) params.set('adults', String(stay.adults));
+    if (Number.isFinite(stay.children)) params.set('children', String(stay.children));
+    return 'trip.html?' + params.toString();
+  }
+
   function escapeHtml(value) {
     return String(value == null ? '' : value)
       .replace(/&/g, '&amp;')
@@ -259,9 +278,9 @@
           (location ? '<p class="search-card__meta">' + escapeHtml(location) + '</p>' : '') +
           (hotel.price ? '<p class="search-card__price">' + escapeHtml(hotel.price) + '</p>' : '') +
           (hotel.description ? '<p class="search-card__desc">' + escapeHtml(hotel.description) + '</p>' : '') +
-          (hotel.url
+          (hotelHasOwnPage(hotel)
             ? pageLink(hotel.url, 'View &amp; Book')
-            : pageLink(hotel.cityUrl, hotel.cityUrl ? 'View hotels' : '')) +
+            : pageLink(hotelSelectHref(hotel), 'Select stay')) +
         '</div>' +
       '</article>'
     );

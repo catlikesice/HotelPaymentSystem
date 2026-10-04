@@ -147,6 +147,14 @@
     if (booking.roomLabel && !(options && options.compact)) {
       card.appendChild(createEl('p', 'portal-booking__detail', booking.roomLabel));
     }
+    if (!(options && options.compact) && Array.isArray(booking.addOns) && booking.addOns.length) {
+      var addonLabels = booking.addOns.map(function (addon) {
+        return addon && addon.label;
+      }).filter(Boolean);
+      if (addonLabels.length) {
+        card.appendChild(createEl('p', 'portal-booking__detail', 'Add-ons: ' + addonLabels.join(', ')));
+      }
+    }
     const guests = guestLabel(booking.guests);
     if (guests) {
       card.appendChild(createEl('p', 'portal-booking__detail', guests));
