@@ -122,6 +122,15 @@ test('plain ASCII queries match letters SQL cannot unaccent on its own', async (
 test('scotland, lithuania, and finland towns without pages are searchable', async () => {
   const places = [
     { q: 'St Andrews', city: 'St Andrews', country: 'Scotland', hotel: 'St Andrews Harbour Hotel', file: 'st-andrews.html' },
+    { q: 'Kirkwall', city: 'Kirkwall', country: 'Scotland', hotel: 'Kirkwall Harbour Hotel', file: 'kirkwall.html' },
+    { q: 'Tobermory', city: 'Tobermory', country: 'Scotland', hotel: 'Tobermory Waterfront Hotel', file: 'tobermory.html' },
+    { q: 'Uist', city: 'Uist', country: 'Scotland', hotel: 'Uist Machair House', file: 'uist.html' },
+    { q: 'Tarbert (Harris)', city: 'Tarbert (Harris)', country: 'Scotland', hotel: 'Tarbert Harris Hotel', file: 'tarbert-harris.html' },
+    { q: 'Ullapool', city: 'Ullapool', country: 'Scotland', hotel: 'Ullapool Ferry Hotel', file: 'ullapool.html' },
+    { q: 'Uig', city: 'Uig', country: 'Scotland', hotel: 'Uig Bay Hotel', file: 'uig.html' },
+    { q: 'Dunvegan', city: 'Dunvegan', country: 'Scotland', hotel: 'Dunvegan Castle Hotel', file: 'dunvegan.html' },
+    { q: 'Broadford', city: 'Broadford', country: 'Scotland', hotel: 'Broadford Bay Hotel', file: 'broadford.html' },
+    { q: 'Armadale', city: 'Armadale', country: 'Scotland', hotel: 'Armadale Pier Hotel', file: 'armadale.html' },
     { q: 'Palanga', city: 'Palanga', country: 'Lithuania', hotel: 'Palanga Dune Hotel', file: 'palanga.html' },
     { q: 'Druskininkai', city: 'Druskininkai', country: 'Lithuania', hotel: 'Druskininkai Spa House', file: 'druskininkai.html' },
     { q: 'Trakai', city: 'Trakai', country: 'Lithuania', hotel: 'Trakai Lake House', file: 'trakai.html' },
@@ -256,6 +265,10 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Ny-Ålesund'));
   assert.ok(body.labels.includes('Isle of Skye'));
   assert.ok(body.labels.includes('Skye Cuillin Hotel — Isle of Skye'));
+  assert.ok(body.labels.includes('Kirkwall'));
+  assert.ok(body.labels.includes('Tarbert (Harris)'));
+  assert.ok(body.labels.includes('Ullapool Ferry Hotel — Ullapool'));
+  assert.ok(body.labels.includes('Armadale Pier Hotel — Armadale'));
   assert.ok(body.labels.includes('Šiauliai'));
   assert.ok(body.labels.includes('Hotel d’Angleterre — Copenhagen'));
   assert.ok(body.labels.includes('Bauska'));
