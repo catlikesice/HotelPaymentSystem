@@ -30,6 +30,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Abisko",
+      "city": "Abisko",
+      "country": "Sweden",
+      "url": "abisko.html",
+      "description": "Browse hotels in Abisko, Sweden."
+    },
+    {
+      "type": "city",
       "name": "Akureyri",
       "city": "Akureyri",
       "country": "Iceland",
@@ -107,6 +115,14 @@ window.SEARCH_CATALOG = {
       "country": "Finland",
       "url": "espoo.html",
       "description": "Browse hotels in Espoo, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Fort William",
+      "city": "Fort William",
+      "country": "Scotland",
+      "url": "fort-william.html",
+      "description": "Browse hotels in Fort William, Scotland."
     },
     {
       "type": "city",
@@ -214,11 +230,27 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Lerwick",
+      "city": "Lerwick",
+      "country": "Scotland",
+      "url": "lerwick.html",
+      "description": "Browse hotels in Lerwick, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Liepāja",
       "city": "Liepāja",
       "country": "Latvia",
       "url": "liepaja.html",
       "description": "Browse hotels in Liepāja, Latvia."
+    },
+    {
+      "type": "city",
+      "name": "Lillehammer",
+      "city": "Lillehammer",
+      "country": "Norway",
+      "url": "lillehammer.html",
+      "description": "Browse hotels in Lillehammer, Norway."
     },
     {
       "type": "city",
@@ -278,6 +310,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Oban",
+      "city": "Oban",
+      "country": "Scotland",
+      "url": "oban.html",
+      "description": "Browse hotels in Oban, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Odense",
       "city": "Odense",
       "country": "Denmark",
@@ -315,6 +355,14 @@ window.SEARCH_CATALOG = {
       "country": "Estonia",
       "url": "pärnu.html",
       "description": "Browse hotels in Pärnu, Estonia."
+    },
+    {
+      "type": "city",
+      "name": "Portree",
+      "city": "Portree",
+      "country": "Scotland",
+      "url": "portree.html",
+      "description": "Browse hotels in Portree, Scotland."
     },
     {
       "type": "city",
@@ -379,6 +427,14 @@ window.SEARCH_CATALOG = {
       "country": "Sweden",
       "url": "stockholm.html",
       "description": "Browse hotels in Stockholm, Sweden."
+    },
+    {
+      "type": "city",
+      "name": "Stornoway",
+      "city": "Stornoway",
+      "country": "Scotland",
+      "url": "stornoway.html",
+      "description": "Browse hotels in Stornoway, Scotland."
     },
     {
       "type": "city",
@@ -527,6 +583,39 @@ window.SEARCH_CATALOG = {
       "price": "0.09 ETH / night",
       "priceEth": 0.09,
       "description": "Country-house luxury on the edge of Aberdeen with gardens and spa."
+    },
+    {
+      "type": "hotel",
+      "name": "Abisko Mountain Lodge",
+      "city": "Abisko",
+      "country": "Sweden",
+      "url": "abisko.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Trailside lodge in Abisko, a base for the Kungsleden and clear winter nights."
+    },
+    {
+      "type": "hotel",
+      "name": "Björkliden Mountain Lodge",
+      "city": "Abisko",
+      "country": "Sweden",
+      "url": "abisko.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Ski lodge at Björkliden, on the railway between Abisko and the Norwegian border."
+    },
+    {
+      "type": "hotel",
+      "name": "STF Abisko Turiststation",
+      "city": "Abisko",
+      "country": "Sweden",
+      "url": "abisko.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Mountain station where the Kungsleden begins, above the Abisko river and the lake."
     },
     {
       "type": "hotel",
@@ -890,6 +979,39 @@ window.SEARCH_CATALOG = {
       "price": "0.09 ETH / night",
       "priceEth": 0.09,
       "description": "Waterfront hotel with excellent meeting facilities and nature access."
+    },
+    {
+      "type": "hotel",
+      "name": "Alexandra Hotel",
+      "city": "Fort William",
+      "country": "Scotland",
+      "url": "fort-william.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "High Street hotel in Fort William, facing the parade toward Loch Linnhe."
+    },
+    {
+      "type": "hotel",
+      "name": "Ben Nevis Lodge",
+      "city": "Fort William",
+      "country": "Scotland",
+      "url": "fort-william.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Highland lodge in Fort William, with glen views and a path toward Ben Nevis."
+    },
+    {
+      "type": "hotel",
+      "name": "The Lime Tree Hotel",
+      "city": "Fort William",
+      "country": "Scotland",
+      "url": "fort-william.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Town-centre hotel in Fort William, a short walk from the High Street and the loch."
     },
     {
       "type": "hotel",
@@ -1278,6 +1400,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Grand Hotel Lerwick",
+      "city": "Lerwick",
+      "country": "Scotland",
+      "url": "lerwick.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel beside the harbour, a short walk from Commercial Street."
+    },
+    {
+      "type": "hotel",
+      "name": "Lerwick Harbour House",
+      "city": "Lerwick",
+      "country": "Scotland",
+      "url": "lerwick.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Waterfront house in Lerwick, close to the lanes and the lodberries."
+    },
+    {
+      "type": "hotel",
+      "name": "Shetland Hotel",
+      "city": "Lerwick",
+      "country": "Scotland",
+      "url": "lerwick.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Harbour hotel in Lerwick, overlooking the sound and the ferry to Bressay."
+    },
+    {
+      "type": "hotel",
       "name": "Hotel Kolumbs",
       "city": "Liepāja",
       "country": "Latvia",
@@ -1308,6 +1463,39 @@ window.SEARCH_CATALOG = {
       "price": "0.05 ETH / night",
       "priceEth": 0.05,
       "description": "Luxury hotel set in a historic warehouse with art gallery and gourmet restaurant."
+    },
+    {
+      "type": "hotel",
+      "name": "Mølla Hotell",
+      "city": "Lillehammer",
+      "country": "Norway",
+      "url": "lillehammer.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Riverside hotel in a former mill on the Mesna, in the centre of Lillehammer."
+    },
+    {
+      "type": "hotel",
+      "name": "Radisson Blu Lillehammer Hotel",
+      "city": "Lillehammer",
+      "country": "Norway",
+      "url": "lillehammer.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Lakeside hotel in Lillehammer, below the ski jump and the Olympic park."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Lillehammer",
+      "city": "Lillehammer",
+      "country": "Norway",
+      "url": "lillehammer.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel in Lillehammer, a short walk from the pedestrian street and the station."
     },
     {
       "type": "hotel",
@@ -1531,6 +1719,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Manor House Hotel",
+      "city": "Oban",
+      "country": "Scotland",
+      "url": "oban.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Harbour house on the south shore of Oban, a short walk from the railway pier."
+    },
+    {
+      "type": "hotel",
+      "name": "Oban Bay Hotel",
+      "city": "Oban",
+      "country": "Scotland",
+      "url": "oban.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Bayfront hotel in Oban, beside the ferry pier for the Hebridean islands."
+    },
+    {
+      "type": "hotel",
+      "name": "Perle Oban Hotel",
+      "city": "Oban",
+      "country": "Scotland",
+      "url": "oban.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Seafront hotel on Oban Bay, looking across the water to Kerrera."
+    },
+    {
+      "type": "hotel",
       "name": "Hotel Odeon",
       "city": "Odense",
       "country": "Denmark",
@@ -1649,6 +1870,39 @@ window.SEARCH_CATALOG = {
       "price": "0.04 ETH / night",
       "priceEth": 0.04,
       "description": "Modern hotel near the city park offering comfortable rooms and easy access to local attractions and concert venues."
+    },
+    {
+      "type": "hotel",
+      "name": "Bosville Hotel",
+      "city": "Portree",
+      "country": "Scotland",
+      "url": "portree.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Town hotel above Portree harbour, a short walk from Somerled Square."
+    },
+    {
+      "type": "hotel",
+      "name": "Cuillin Hills Hotel",
+      "city": "Portree",
+      "country": "Scotland",
+      "url": "portree.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Harbour hotel in Portree, with views across the bay toward the Cuillin on the Isle of Skye."
+    },
+    {
+      "type": "hotel",
+      "name": "The Royal Hotel",
+      "city": "Portree",
+      "country": "Scotland",
+      "url": "portree.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Harbour hotel in Portree, beside the coloured houses and the fishing pier."
     },
     {
       "type": "hotel",
@@ -1891,6 +2145,39 @@ window.SEARCH_CATALOG = {
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
       "description": "Central eco-minded hotel beside Stockholm Central Station, ideal for exploring the islands."
+    },
+    {
+      "type": "hotel",
+      "name": "Cabarfeidh Hotel",
+      "city": "Stornoway",
+      "country": "Scotland",
+      "url": "stornoway.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Town hotel in Stornoway, a short walk from the harbour and Lews Castle."
+    },
+    {
+      "type": "hotel",
+      "name": "Caladh Inn",
+      "city": "Stornoway",
+      "country": "Scotland",
+      "url": "stornoway.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Harbour inn in Stornoway, beside the ferry terminal for the mainland."
+    },
+    {
+      "type": "hotel",
+      "name": "Lews Castle Lodge",
+      "city": "Stornoway",
+      "country": "Scotland",
+      "url": "stornoway.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Woodland lodge across the harbour from Stornoway, on the grounds of Lews Castle."
     },
     {
       "type": "hotel",

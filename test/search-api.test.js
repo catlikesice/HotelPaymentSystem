@@ -66,7 +66,6 @@ test('places with no HTML page are returned from SQL', async () => {
   assert.equal(fs.existsSync(path.join(root, 'nida.html')), false);
   assert.equal(fs.existsSync(path.join(root, 'barentsburg.html')), false);
   assert.equal(fs.existsSync(path.join(root, 'pyramiden.html')), false);
-  assert.equal(fs.existsSync(path.join(root, 'abisko.html')), false);
 
   const nida = await searchFor('nida');
   assert.deepEqual(nida.cities.map((city) => city.name), ['Nida']);
@@ -89,11 +88,6 @@ test('places with no HTML page are returned from SQL', async () => {
   assert.equal(pyramiden.cities[0].name, 'Pyramiden');
   assert.equal(pyramiden.cities[0].url, null);
 
-  const abisko = await searchFor('Abisko');
-  const abiskoCity = abisko.cities.find((city) => city.name === 'Abisko');
-  assert.ok(abiskoCity);
-  assert.equal(abiskoCity.url, null);
-  assert.ok(abisko.hotels.some((hotel) => hotel.name === 'Abisko Mountain Lodge' && hotel.url === null));
 });
 
 test('accent-folded city names still match', async () => {
@@ -128,8 +122,6 @@ test('plain ASCII queries match letters SQL cannot unaccent on its own', async (
 test('scotland, lithuania, and finland towns without pages are searchable', async () => {
   const places = [
     { q: 'St Andrews', city: 'St Andrews', country: 'Scotland', hotel: 'St Andrews Harbour Hotel', file: 'st-andrews.html' },
-    { q: 'Fort William', city: 'Fort William', country: 'Scotland', hotel: 'Ben Nevis Lodge', file: 'fort-william.html' },
-    { q: 'Oban', city: 'Oban', country: 'Scotland', hotel: 'Oban Bay Hotel', file: 'oban.html' },
     { q: 'Palanga', city: 'Palanga', country: 'Lithuania', hotel: 'Palanga Dune Hotel', file: 'palanga.html' },
     { q: 'Druskininkai', city: 'Druskininkai', country: 'Lithuania', hotel: 'Druskininkai Spa House', file: 'druskininkai.html' },
     { q: 'Trakai', city: 'Trakai', country: 'Lithuania', hotel: 'Trakai Lake House', file: 'trakai.html' },
