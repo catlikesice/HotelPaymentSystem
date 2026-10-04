@@ -459,6 +459,14 @@ window.SEARCH_CATALOG = {
       "country": "Lithuania",
       "url": "vilnius.html",
       "description": "Browse hotels in Vilnius, Lithuania."
+    },
+    {
+      "type": "city",
+      "name": "Visby",
+      "city": "Visby",
+      "country": "Sweden",
+      "url": "visby.html",
+      "description": "Browse hotels in Visby, the walled town on Visby Island (Gotland), Sweden."
     }
   ],
   "hotels": [
@@ -2155,6 +2163,39 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Modern riverside hotel offering panoramic city views, an indoor pool and business facilities for business and leisure travellers."
+    },
+    {
+      "type": "hotel",
+      "name": "Clarion Hotel Wisby",
+      "city": "Visby",
+      "country": "Sweden",
+      "url": "clarion-hotel-wisby.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Hanseatic landmark inside the medieval walls of Visby, a short walk from the cathedral, the ringmur, and the harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel St Clemens",
+      "city": "Visby",
+      "country": "Sweden",
+      "url": "hotel-st-clemens.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Garden hotel among the ruins of St Clemens church, inside the old town and close to the main square."
+    },
+    {
+      "type": "hotel",
+      "name": "Strand Hotel Visby",
+      "city": "Visby",
+      "country": "Sweden",
+      "url": "strand-hotel-visby.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Harbour hotel on the waterfront, with sea views toward the ferry and the limestone coast of Visby Island."
     }
   ]
 };

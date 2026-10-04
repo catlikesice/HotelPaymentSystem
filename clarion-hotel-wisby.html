@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarion Hotel Wisby</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-detail {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+            padding: 2rem;
+        }
+        .hotel-detail img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+            margin-bottom: 1rem;
+        }
+        .hotel-detail .price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .booking-summary {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f1f7f1;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(46, 125, 50, 0.2);
+            color: #2e4d25;
+            line-height: 1.6;
+        }
+        .booking-summary p {
+            margin: 0.35rem 0;
+        }
+        .booking-summary__total {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.05rem;
+        }
+        .booking-summary__notice {
+            font-weight: 600;
+        }
+        .booking-summary__reminder a {
+            color: #2e7d32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .booking-summary__reminder a:hover {
+            text-decoration: underline;
+        }
+        .confirm-button {
+            display: inline-block;
+            width: 100%;
+            margin-top: 1.75rem;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1.4rem;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+        .confirm-button:hover,
+        .confirm-button:focus {
+            background: #156d17;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>Boreal Horizons</h1>
+        <p>Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="hotel-detail" data-property-name="Clarion Hotel Wisby" data-city="Visby" data-country="Sweden">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=600&q=80" alt="Clarion Hotel Wisby">
+        <h2>Clarion Hotel Wisby</h2>
+        <div class="price" data-rate-value="0.09" data-rate-currency="ETH" data-rate-decimals="2">0.09 ETH / night</div>
+        <p>
+            A Hanseatic landmark inside the medieval walls of Visby, a short walk from the cathedral, the ringmur, and the harbour on Visby Island.
+        </p>
+          <script type="application/json" data-hotel-config>
+          {
+            "roomLegend": "Choose your preferred room type",
+            "rooms": [
+              {
+                "id": "wisby-room",
+                "label": "Wisby Room",
+                "nightlyRate": 0.09,
+                "description": "Quiet room in the old merchant house, with limestone walls and breakfast inside the ring wall.",
+                "default": true
+              },
+              {
+                "id": "cathedral-room",
+                "label": "Cathedral Room",
+                "nightlyRate": 0.12,
+                "description": "Larger room a few steps from Visby Cathedral, with a sitting area and a view toward the lanes."
+              },
+              {
+                "id": "ringmur-suite",
+                "label": "Ringmur Suite",
+                "nightlyRate": 0.16,
+                "description": "Top-floor suite with a separate sitting room and a window toward the city wall and harbour."
+              }
+            ],
+            "addonLegend": "Enhance your stay",
+            "addons": [
+              {
+                "id": "bike-day",
+                "label": "Island bicycle day",
+                "price": 0.01,
+                "billing": "per-stay",
+                "description": "A bicycle for the limestone lanes and the coast road north of the walled town."
+              },
+              {
+                "id": "medieval-dinner",
+                "label": "Hanseatic set dinner",
+                "price": 0.03,
+                "billing": "per-night",
+                "description": "Three-course dinner with Baltic fish and island lamb in the hotel restaurant."
+              },
+              {
+                "id": "old-town-walk",
+                "label": "Guided ring wall walk",
+                "price": 0.02,
+                "billing": "per-stay",
+                "description": "A local guide along the ringmur, the cathedral, and the rose-covered church ruins."
+              }
+            ]
+          }
+          </script>
+        <div class="booking-summary" aria-live="polite">
+            <p class="booking-summary__notice">Loading your booking summary…</p>
+        </div>
+        <a href="checkout.html" class="confirm-button">Pay Now</a>
+    </div>
+    <script src="assets/booking-dates.js"></script>
+    <script src="assets/payment-currencies.js"></script>
+    <script src="assets/hotel-booking-summary.js"></script>
+</body>
+</html>
