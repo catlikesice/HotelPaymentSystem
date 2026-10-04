@@ -39,17 +39,22 @@ test('a blank query returns no rows', async () => {
   assert.deepEqual(body, { cities: [], hotels: [] });
 });
 
-test('catalog hotels without their own page are still searchable', async () => {
+test('every catalog hotel opens its own page', async () => {
   const body = await searchFor('CABINN City');
   assert.equal(body.hotels.length, 1);
   assert.equal(body.hotels[0].name, 'CABINN City');
   assert.equal(body.hotels[0].city, 'Copenhagen');
-  assert.equal(body.hotels[0].url, 'copenhagen.html');
-  assert.equal(fs.existsSync(path.join(root, 'cabinn-city.html')), false);
+  assert.equal(body.hotels[0].cityUrl, 'copenhagen.html');
+  assert.notEqual(body.hotels[0].url, 'copenhagen.html');
+  assert.equal(fs.existsSync(path.join(root, body.hotels[0].url)), true);
   assert.equal(fs.existsSync(path.join(root, 'copenhagen.html')), true);
+  const page = fs.readFileSync(path.join(root, body.hotels[0].url), 'utf8');
+  assert.match(page, /class="hotel-detail"/);
+  assert.match(page, /site-preferences\.js/);
+  assert.match(page, /language-switcher|class="site-nav"/);
   const copenhagen = getCityPage('copenhagen.html');
   assert.ok(copenhagen);
-  assert.ok(hotelsFor('copenhagen.html').some((hotel) => hotel.name === 'CABINN City'));
+  assert.ok(hotelsFor('copenhagen.html').some((hotel) => hotel.name === 'CABINN City' && hotel.book_url === body.hotels[0].url));
 });
 
 test('hotels with a dedicated page keep that page', async () => {
@@ -73,7 +78,9 @@ test('places with no HTML page are returned from SQL', async () => {
   assert.equal(nida.cities[0].country, 'Lithuania');
   assert.equal(nida.hotels.length, 1);
   assert.equal(nida.hotels[0].name, 'Hotel Nida Marina');
-  assert.equal(nida.hotels[0].url, null);
+  assert.ok(nida.hotels[0].url);
+  assert.notEqual(nida.hotels[0].url, 'nida.html');
+  assert.equal(fs.existsSync(path.join(root, nida.hotels[0].url)), true);
   assert.equal(nida.hotels[0].cityUrl, null);
   assert.equal(nida.hotels[0].price, '0.07 ETH / night');
 
@@ -148,7 +155,9 @@ test('scotland, lithuania, and finland towns without pages are searchable', asyn
     assert.ok(hotel, place.hotel + ' should be returned');
     assert.equal(hotel.city, place.city);
     assert.equal(hotel.country, place.country);
-    assert.equal(hotel.url, null);
+    assert.ok(hotel.url);
+    assert.notEqual(hotel.url, place.file);
+    assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
   }
 });
 
@@ -179,7 +188,9 @@ test('other named places without pages are searchable', async () => {
     assert.ok(hotel, place.hotel + ' should be returned');
     assert.equal(hotel.city, place.city);
     assert.equal(hotel.country, place.country);
-    assert.equal(hotel.url, null);
+    assert.ok(hotel.url);
+    assert.notEqual(hotel.url, place.file);
+    assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
     assert.equal(hotel.cityUrl, null);
   }
 });
@@ -193,7 +204,8 @@ test('pages missing from the catalog are returned from SQL', async () => {
   assert.equal(siauliai.cities[0].country, 'Lithuania');
   assert.deepEqual(siauliai.hotels.map((hotel) => hotel.name), ['Park Inn Šiauliai', 'Old Town Boutique']);
   siauliai.hotels.forEach((hotel) => {
-    assert.equal(hotel.url, 'šiauliai.htm');
+    assert.notEqual(hotel.url, 'šiauliai.htm');
+    assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
     assert.equal(hotel.cityUrl, 'šiauliai.htm');
   });
 
@@ -204,7 +216,8 @@ test('pages missing from the catalog are returned from SQL', async () => {
     ['Hotel Odeon', 'First Hotel Grand', 'Comwell H.C. Andersen Odense']
   );
   odense.hotels.forEach((hotel) => {
-    assert.equal(hotel.url, 'odense.html');
+    assert.notEqual(hotel.url, 'odense.html');
+    assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
     assert.equal(hotel.city, 'Odense');
   });
 

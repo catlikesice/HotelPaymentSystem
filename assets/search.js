@@ -221,7 +221,7 @@
   }
 
   function hotelHasOwnPage(hotel) {
-    return Boolean(hotel && hotel.url && hotel.cityUrl && hotel.url !== hotel.cityUrl);
+    return Boolean(hotel && hotel.url && hotel.url !== hotel.cityUrl);
   }
 
   function hotelSelectHref(hotel) {

@@ -61,7 +61,12 @@ test('Ullapool, St Andrews, Aviemore, and Pitlochry are on the HTML city list an
     const hotels = catalog.hotels.filter((item) => item.city === destination.city);
     assert.deepEqual(Array.from(hotels, (hotel) => hotel.name), destination.hotels);
     hotels.forEach((hotel) => {
-      assert.equal(hotel.url, destination.url);
+      assert.notEqual(hotel.url, destination.url);
+      assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+      const hotelHtml = fs.readFileSync(path.join(root, hotel.url), 'utf8');
+      assert.match(hotelHtml, /class="hotel-detail"/);
+      assert.match(hotelHtml, /site-preferences\.js/);
+      assert.match(hotelHtml, /language-switcher|class="site-nav"/);
       assert.equal(hotel.country, 'Scotland');
     });
 

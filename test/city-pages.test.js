@@ -65,7 +65,9 @@ test('Esbjerg keeps the hotel group and the visible ETH price', () => {
   assert.equal(britannia.price_eth, 0.035);
   assert.equal(britannia.price_label, '0.035 ETH / night');
   assert.equal(britannia.book_label, 'Book Now');
-  assert.equal(britannia.book_url, null);
+  assert.ok(britannia.book_url);
+  assert.equal(fs.existsSync(path.join(root, britannia.book_url)), true);
+  assert.match(getCityPage('esbjerg.html').html, new RegExp('href="' + britannia.book_url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '"'));
 });
 
 test('the server answers a city address from its HTML file', async () => {

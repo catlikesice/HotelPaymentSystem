@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Keflavik</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hotel-detail {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+            padding: 2rem;
+        }
+        .hotel-detail img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.7rem;
+            margin-bottom: 1rem;
+        }
+        .hotel-detail .price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .booking-summary {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f1f7f1;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(46, 125, 50, 0.2);
+            color: #2e4d25;
+            line-height: 1.6;
+        }
+        .booking-summary p {
+            margin: 0.35rem 0;
+        }
+        .booking-summary__total {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.05rem;
+        }
+        .booking-summary__notice {
+            font-weight: 600;
+        }
+        .booking-summary__reminder a {
+            color: #2e7d32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .booking-summary__reminder a:hover {
+            text-decoration: underline;
+        }
+        .confirm-button {
+            display: inline-block;
+            width: 100%;
+            margin-top: 1.75rem;
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1.4rem;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .confirm-button:hover,
+        .confirm-button:focus {
+            background: #156d17;
+        }
+        .hotel-back {
+            margin: 1.25rem 0 0;
+            text-align: center;
+        }
+        .hotel-back a {
+            color: #2e7d32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .hotel-back a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body style="background:#e6f0e6;min-height:100vh;">
+    <div class="booking-header">
+        <h1>Boreal Horizons</h1>
+        <p>Book your stay with secure crypto payments, and pay in fiat too.</p>
+    </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+    <div class="hotel-detail" data-property-name="Hotel Keflavik" data-city="Reykjanesbær" data-country="Iceland">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&amp;w=400&amp;q=80" alt="Hotel Keflavik">
+        <h2>Hotel Keflavik</h2>
+        <div class="price" data-rate-value="0.08" data-rate-currency="ETH" data-rate-decimals="2">0.08 ETH / night</div>
+        <p>
+            Well-known airport-town hotel with a restaurant, handy for early flights and the lagoon.
+        </p>
+        <div class="booking-summary" aria-live="polite">
+            <p class="booking-summary__notice">Loading your booking summary…</p>
+        </div>
+        <a href="checkout.html" class="confirm-button">Pay Now</a>
+        <p class="hotel-back"><a href="reykjanesbær.html">Back to Reykjanesbær</a></p>
+    </div>
+    <script src="assets/booking-dates.js"></script>
+    <script src="assets/payment-currencies.js"></script>
+    <script src="assets/hotel-booking-summary.js"></script>
+    <script src="site-preferences.js"></script>
+</body>
+</html>
