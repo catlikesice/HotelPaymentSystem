@@ -15,6 +15,10 @@
     return String(text || '')
       .toLowerCase()
       .replace(/ø/g, 'o')
+      .replace(/æ/g, 'ae')
+      .replace(/ð/g, 'd')
+      .replace(/þ/g, 'th')
+      .replace(/['’ʼ]/g, '')
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
   }

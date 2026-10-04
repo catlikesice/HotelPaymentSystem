@@ -2,9 +2,9 @@
 
 `GET /api/search` reads this schema (`routes/search.js`, `lib/search-db.js`). The results page uses that response. If the API cannot be reached, `assets/search.js` falls back to `window.SEARCH_CATALOG`. The homepage datalist uses `GET /api/search/destinations` the same way.
 
-The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. Fold accents in application code before the query. SQLite has no `unaccent`.
+The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. `lib/search-db.js` loads that file, the same way `lib/city-pages.js` loads `city-pages.sql`.
 
-The static catalog is 57 cities and 154 hotels. The server also loads `lib/places-without-pages.js`: Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no HTML file. The SQL file loads a six-place example, including Nida, so the queries can be run as written. A loader should copy every catalog row, then the pageless places, into the same columns.
+The static catalog is 57 cities and 154 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, Abisko, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no HTML file. The SQL file contains every catalog row and then those pageless places (82 cities, 179 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
 Šiauliai, the Odense hotels, and Hotel d’Angleterre are in the static catalog rather than the pageless list. The Šiauliai and Odense listing documents are `šiauliai.htm` and `odense.html` inside `city-pages.sql`. Hotel d’Angleterre keeps its own file, `hotel-dangleterre-copenhagen.html`. Bauska’s listing is `bauska.html` in that same SQL file. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) stay as hotel pages and continue to checkout.
 
@@ -53,15 +53,21 @@ City listing pages also show BTC and USDT amounts, hotel chains, booking links, 
 
 ## Normalization
 
-Build keys in JavaScript and store them. Do not re-fold text in SQL.
+SQLite has no `unaccent`, and `lower()` only folds `A`–`Z`. `fold_map` is one row per character that folding changes. A query walks that table with `replace()`, so a raw string can be searched without a JavaScript normalizer. The stored `search_text`, `name_key`, and `label_key` columns are the same fold, kept so each search does not walk the map once per row.
 
-Results haystack (`assets/search.js`):
+Letters Unicode does not decompose are mapped on purpose: `ø`→`o`, `æ`→`ae`, `ð`→`d`, `þ`→`th`. Apostrophes (`'`, `’`, `ʼ`) are removed. `hafnarfjordur` matches Hafnarfjörður, `reykjanesbaer` matches Reykjanesbær, and `d'Angleterre` matches Hotel d’Angleterre.
+
+The browser fallback (`assets/search.js`) uses the same character rules:
 
 ```js
 function normalizeResults(text) {
   return String(text || '')
     .toLowerCase()
     .replace(/ø/g, 'o')
+    .replace(/æ/g, 'ae')
+    .replace(/ð/g, 'd')
+    .replace(/þ/g, 'th')
+    .replace(/['’ʼ]/g, '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
 }
@@ -94,7 +100,10 @@ Examples:
 | --- | --- |
 | `Reykjavík` | `reykjavik` |
 | `Tromsø` | `tromso` |
+| `Hafnarfjörður` | `hafnarfjordur` |
+| `Reykjanesbær` | `reykjanesbaer` |
 | `Hotel Føroyar` | `hotel foroyar` |
+| `Hotel d’Angleterre` | `hotel dangleterre` |
 | `Grand Hotel Kempinski — Riga` | `grand hotel kempinski — riga` |
 
 ## Results query
@@ -102,10 +111,9 @@ Examples:
 `GET /api/search?q=royal%20aarhus`
 
 1. Trim `q`. If it is empty, respond `{ "cities": [], "hotels": [] }` and stop.
-2. Run `normalizeResults` on `q`, treat `—` and `–` as spaces, and split on whitespace. Drop empty tokens. The em dash is the separator in a homepage label such as `Hotel Nida Marina — Nida`.
-3. Insert each token into `query_tokens` (see the SQL file). Bind the token values. Do not paste the typed text into the statement.
-4. Run the city `SELECT` and the hotel `SELECT`. A row matches when every token is found with `instr(search_text, token) > 0`.
-5. Return both lists in `sort_order`.
+2. Fold `q` with `fold_map`, treat `—` and `–` as spaces, and split on whitespace. Drop empty tokens. The em dash is the separator in a homepage label such as `Hotel Nida Marina — Nida`. The SQL file does this in `raw_query_tokens`. The route uses the same map through `foldText` and binds the tokens. Do not paste the typed text into the statement.
+3. Run the city `SELECT` and the hotel `SELECT`. A row matches when every token is found with `instr(search_text, token) > 0`.
+4. Return both lists in `sort_order`.
 
 `instr` treats `%` and `_` as ordinary characters. `LIKE` would not.
 
@@ -144,18 +152,23 @@ Response shape, one object per row, same keys the cards already read:
 
 `search.html` reads `name`, `city`, `country`, `description`, `url`, and for hotels also `image`, `price`, and `cityUrl`. A null `url` still renders the card.
 
-The worked example in `hotel-search.sql` is loaded with tokens `royal` and `aarhus`. Both tokens have to match, so the city query returns nothing and the hotel query returns Hotel Royal Aarhus. A single token `aarhus` returns the Aarhus city row and that hotel.
+The worked example folds the typed text `Royal Aarhus`. Both tokens have to match, so the city query returns nothing and the hotel query returns Hotel Royal Aarhus. A single token `aarhus` returns the Aarhus city row plus Comwell Aarhus, Hotel Royal Aarhus, and Scandic Aarhus City.
 
-Other checks against that sample:
+Other checks against the full catalog:
 
 | `q` | Cities | Hotels |
 | --- | --- | --- |
-| `reykjavik` | Reykjavík | none |
+| `reykjavik` | Reykjavík | Hótel Hafnarfjörður, Hotel Vellir, Canopy by Hilton Reykjavik City Centre, Center Hotels Plaza, Hotel Borg |
+| `hafnarfjordur` | Hafnarfjörður | Helguhús Guesthouse, Hótel Hafnarfjörður, Hotel Viking |
+| `reykjanesbaer` | Reykjanesbær | Airport Hotel Aurora Star, Hotel Keflavik, Hotel Keilir |
+| `d'Angleterre` | none | Hotel d’Angleterre |
 | `kempinski` | none | Grand Hotel Kempinski |
-| `torshavn` | Tórshavn | Hotel Føroyar |
-| `0.10` | none | Hotel Føroyar, Clarion Hotel The Edge |
+| `torshavn` | Tórshavn | Hotel Føroyar, Hotel Hafnia, Hotel Streym, Nólsoy Harbour House, Streymoy Valley Inn |
+| `0.10` | none | Kimpton Blythswood Square, Arctic Light Hotel, Hotel Føroyar, Clarion Hotel The Edge, Radisson Blu Marina Palace |
 | `nida` | Nida (`url` null) | Hotel Nida Marina (`url` and `cityUrl` null) |
 | *(empty)* | none | none |
+
+Hótel Hafnarfjörður is in the `reykjavik` hotel list because its description mentions the Reykjavík bus routes. Nólsoy Harbour House and Streymoy Valley Inn match `torshavn` the same way. The script itself prints the `Royal Aarhus`, `Nida`, and `Reykjavík` examples, not every row in this table.
 
 ## Places without an HTML page
 
@@ -201,7 +214,7 @@ The homepage opens a page only when the matched catalog row has a `url`. A place
 
 The homepage does not list every match. It picks one destination and opens that page.
 
-Normalize the typed destination with `normalizeHero`. If the result is empty, do not query.
+Fold the typed destination with `fold_map`, then collapse whitespace and trim (`folded_key` in the SQL file, `normalizeHero` in the browser). If the result is empty, do not query.
 
 Then take the first row of the union in `hotel-search.sql`, ordered by priority and `sort_order`:
 
@@ -210,7 +223,7 @@ Then take the first row of the union in `hotel-search.sql`, ordered by priority 
 3. The city key starts with the needle, or the needle starts with the city key.
 4. The hotel key contains the needle.
 
-The sample statement uses the literal needle `reykjavik` and returns the Reykjavík city row. `kempinski` returns Grand Hotel Kempinski. `tromso` returns the Tromsø city row (priority 1) rather than Clarion Hotel The Edge. `nida` returns the Nida city row with a null `page_url`. The homepage should not navigate when that value is null.
+The statement at the bottom of `hotel-search.sql` folds the typed needle `Reykjavík` and returns the Reykjavík city row. `kempinski` returns Grand Hotel Kempinski. `tromso` returns the Tromsø city row (priority 1) rather than Clarion Hotel The Edge. `nida` returns the Nida city row with a null `page_url`. The homepage should not navigate when that value is null.
 
 ## Stay fields
 
@@ -230,6 +243,6 @@ Keep accepting them on `GET /api/search` if the route is added later, and ignore
 sqlite3 :memory: < docs/sql/hotel-search.sql
 ```
 
-The script prints five result sets: cities for `royal aarhus`, hotels for `royal aarhus`, cities and hotels for `nida`, then the homepage match for `reykjavik`. The Nida rows have a null `url`.
+The script prints five result sets: cities for `Royal Aarhus` (none), hotels for `Royal Aarhus` (Hotel Royal Aarhus), cities and hotels for `Nida` (null `url`), then the homepage match for `Reykjavík`. To try another raw string, change the `fold_input` value and refill `query_tokens` from `raw_query_tokens`.
 
-Full-text indexes such as FTS5 split on words and do not reproduce these substring matches. The catalog is small enough that `instr` over `search_text` is the query to keep.
+Full-text indexes such as FTS5 split on words and do not reproduce these substring matches. `instr` over the folded `search_text` is the query to keep.
