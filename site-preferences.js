@@ -294,6 +294,7 @@
       'assets/nav-rail.js',
       'assets/local-auth.js',
       'assets/auth-client.js',
+      'assets/property-pages.js',
       'assets/hotel-select.js'
     ];
 

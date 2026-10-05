@@ -1,7 +1,9 @@
 /**
  * City listing pages keep their hotel cards. Book Now and View & Book open the
  * trip page, where that hotel can be selected and catalog add-ons upsold.
- * A link that already opens a property page (Kempinski, Funken Lodge, …) stays.
+ * A link stays put only when it opens a hotel HTML file that has its own
+ * booking screen. Missing files such as hotel-telegraaf-tallinn.html open
+ * the trip page instead.
  */
 (function () {
   var STORAGE_KEY = 'balticComfortBooking';
@@ -12,24 +14,8 @@
     return parts[parts.length - 1] || '';
   }
 
-  function fileName(href) {
-    var path = String(href || '').split('#')[0].split('?')[0];
-    var parts = path.split('/');
-    return parts[parts.length - 1] || '';
-  }
-
   function isOwnPropertyPage(href) {
-    var file = fileName(href);
-    if (!file || !/\.html?$/i.test(file)) {
-      return false;
-    }
-    if (file === 'index.html' || file === 'search.html' || file === 'trip.html' || file === 'checkout.html') {
-      return false;
-    }
-    if (file === currentPage()) {
-      return false;
-    }
-    return true;
+    return Boolean(window.BorealPropertyPages && window.BorealPropertyPages.isPropertyPage(href));
   }
 
   function cityName() {
