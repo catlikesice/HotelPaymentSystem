@@ -569,6 +569,8 @@
     if (location.city) params.set('city', location.city);
     const path = (window.location && window.location.pathname) || '';
     const prefix = path.indexOf('/assets/') !== -1 ? '..' : '';
+    const file = path.split('/').pop() || '';
+    if (file.indexOf('.') !== -1) params.set('page', file);
     fetch(prefix + '/api/hotel-addons?' + params.toString(), { headers: { accept: 'application/json' } })
       .then(function (response) {
         if (!response || !response.ok) {
