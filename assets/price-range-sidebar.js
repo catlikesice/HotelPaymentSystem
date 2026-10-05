@@ -2,8 +2,8 @@
  * price-range-sidebar.js
  *
  * Builds and enhances a price range sidebar on city hotel listing pages.
- * It automatically categorises hotels into cheap, midrange, and luxury tiers
- * based on the nightly prices embedded in the markup.
+ * It categorises hotels into cheap, midrange, and luxury tiers and shows those
+ * ranges in the currency the customer selected.
  */
 (function () {
   const RANGE_KEYS = ["cheap", "midrange", "luxury"];
@@ -216,6 +216,262 @@
       return formatUsdt;
     }
     return null;
+  }
+
+  const FALLBACK_RATES = {
+    ETH: 0.00035,
+    BTC: 0.0000058,
+    USDT: 1,
+    LTC: 0.0105,
+    BCH: 0.00235,
+    DOGE: 9.5,
+    XRP: 1.9,
+    XMR: 0.006,
+    XNO: 0.95,
+    DASH: 0.0335,
+    VET: 28,
+    UNI: 0.14,
+    SOL: 0.0065,
+    ADA: 1.3,
+    TRN: 5.5,
+    EUR: 0.92,
+    USD: 1,
+    GBP: 0.76,
+    SEK: 10.5,
+    NOK: 10.7,
+    DKK: 6.86,
+    ISK: 137,
+  };
+
+  function activeRates() {
+    if (window.PaymentCurrencies && window.PaymentCurrencies.rates) {
+      return window.PaymentCurrencies.rates;
+    }
+    return FALLBACK_RATES;
+  }
+
+  function isFiatCurrency(currency) {
+    if (
+      window.PaymentCurrencies &&
+      typeof window.PaymentCurrencies.isFiat === "function"
+    ) {
+      return window.PaymentCurrencies.isFiat(currency);
+    }
+    return (
+      currency === "EUR" ||
+      currency === "USD" ||
+      currency === "GBP" ||
+      currency === "SEK" ||
+      currency === "NOK" ||
+      currency === "DKK" ||
+      currency === "ISK"
+    );
+  }
+
+  function decimalPlacesFromValue(value) {
+    if (value === undefined || value === null) {
+      return 2;
+    }
+    const stringValue = String(value);
+    const dotIndex = stringValue.indexOf(".");
+    if (dotIndex === -1) {
+      return 0;
+    }
+    return stringValue.length - dotIndex - 1;
+  }
+
+  function clampDecimals(decimals) {
+    if (!Number.isFinite(decimals)) {
+      return 2;
+    }
+    return Math.max(0, Math.min(6, Math.round(decimals)));
+  }
+
+  function decimalsForCurrency(currency, rate) {
+    if (
+      window.PaymentCurrencies &&
+      typeof window.PaymentCurrencies.decimalsFor === "function" &&
+      window.PaymentCurrencies.find &&
+      window.PaymentCurrencies.find(currency)
+    ) {
+      return window.PaymentCurrencies.decimalsFor(currency);
+    }
+    if (!Number.isFinite(rate)) {
+      return 2;
+    }
+    if (isFiatCurrency(currency)) {
+      return rate >= 50 ? 0 : 2;
+    }
+    if (rate < 0.001) {
+      return 6;
+    }
+    if (rate < 0.1) {
+      return 4;
+    }
+    return 2;
+  }
+
+  function quoteFromText(priceEl, currency) {
+    const text = String((priceEl && priceEl.textContent) || "");
+    if (!text) {
+      return null;
+    }
+    if (currency && text.toUpperCase().indexOf(currency) === -1) {
+      return null;
+    }
+    const nightly = text.match(
+      /\(([-+]?\d[\d,]*(?:\.\d+)?)\s+[A-Za-z]{2,5}\s*\/\s*night\)/
+    );
+    const source = nightly ? nightly[1] : text;
+    const match = String(source)
+      .replace(/,/g, "")
+      .match(/-?\d+(?:\.\d+)?/);
+    if (!match) {
+      return null;
+    }
+    const parsed = parseFloat(match[0]);
+    if (!Number.isFinite(parsed)) {
+      return null;
+    }
+    return { value: parsed, decimals: decimalPlacesFromValue(match[0]) };
+  }
+
+  function directQuote(dataset, key) {
+    if (!dataset || dataset[key] === undefined || dataset[key] === "") {
+      return null;
+    }
+    const value = parseFloat(dataset[key]);
+    if (!Number.isFinite(value)) {
+      return null;
+    }
+    return { value: value, decimals: decimalPlacesFromValue(dataset[key]) };
+  }
+
+  function quoteNightly(priceEl, currency) {
+    if (!priceEl) {
+      return null;
+    }
+    const code = String(currency || "ETH")
+      .trim()
+      .toUpperCase();
+    const dataset = priceEl.dataset || {};
+    const direct =
+      code === "ETH"
+        ? directQuote(dataset, "eth")
+        : code === "BTC"
+        ? directQuote(dataset, "btc")
+        : code === "USDT"
+        ? directQuote(dataset, "usdt")
+        : null;
+    if (direct) {
+      return direct;
+    }
+
+    const usdtQuote = directQuote(dataset, "usdt");
+    const rate = activeRates()[code];
+    if (usdtQuote && Number.isFinite(rate)) {
+      const decimals = decimalsForCurrency(code, rate);
+      let perNight = usdtQuote.value * rate;
+      if (isFiatCurrency(code)) {
+        const factor = Math.pow(10, decimals);
+        perNight = Math.round((perNight + Number.EPSILON) * factor) / factor;
+      }
+      return { value: perNight, decimals: decimals };
+    }
+
+    return quoteFromText(priceEl, code);
+  }
+
+  function formatterFor(currency, decimals) {
+    const code = String(currency || "ETH")
+      .trim()
+      .toUpperCase();
+    const places = clampDecimals(decimals);
+    return function (value) {
+      if (!Number.isFinite(value)) {
+        return null;
+      }
+      if (code === "ETH") {
+        return formatEth(value);
+      }
+      if (code === "USDT") {
+        return formatUsdt(value);
+      }
+      return value.toFixed(places);
+    };
+  }
+
+  function categoryFor(amount, thresholds) {
+    if (!thresholds || !Number.isFinite(amount) || thresholds.spread < EPSILON) {
+      return "midrange";
+    }
+    if (amount <= thresholds.cheap + EPSILON) {
+      return "cheap";
+    }
+    if (amount > thresholds.luxury + EPSILON) {
+      return "luxury";
+    }
+    return "midrange";
+  }
+
+  function measureContext(context) {
+    if (!context || !context.sidebar) {
+      return;
+    }
+    const hotelCards = context.hotelCards || [];
+    const currency = activeCurrency();
+    const quotes = [];
+
+    hotelCards.forEach(function (card) {
+      if (card.classList) {
+        card.classList.remove("is-highlighted", "is-dimmed");
+      }
+      if (typeof card.removeAttribute === "function") {
+        card.removeAttribute("data-price-range");
+      }
+      const priceEl = card.querySelector ? card.querySelector(".price") : null;
+      const quote = quoteNightly(priceEl, currency);
+      if (quote) {
+        quotes.push({ card: card, quote: quote });
+      }
+    });
+
+    const thresholds = computeThresholds(
+      quotes.map(function (entry) {
+        return entry.quote.value;
+      })
+    );
+
+    quotes.forEach(function (entry) {
+      entry.card.setAttribute(
+        "data-price-range",
+        categoryFor(entry.quote.value, thresholds)
+      );
+    });
+
+    if (!thresholds) {
+      context.metrics = null;
+    } else {
+      let decimals = quotes.length ? quotes[0].quote.decimals : 2;
+      quotes.forEach(function (entry) {
+        if (Number.isFinite(entry.quote.decimals)) {
+          decimals = Math.max(decimals, entry.quote.decimals);
+        }
+      });
+      context.metrics = {
+        primary: {
+          unit: currency,
+          thresholds: thresholds,
+          formatter: formatterFor(currency, decimals),
+        },
+        secondary: null,
+      };
+    }
+
+    renderSidebar(context, composeTranslation(currentLanguage));
+    if (typeof context.applyFilter === "function") {
+      context.applyFilter();
+    }
   }
 
   function computeThresholds(values) {
@@ -633,7 +889,16 @@
   function activeCurrency() {
     const currencySelect = document.getElementById("currency");
     if (currencySelect && currencySelect.value) {
-      return currencySelect.value;
+      return String(currencySelect.value).trim().toUpperCase();
+    }
+    if (
+      window.PaymentCurrencies &&
+      typeof window.PaymentCurrencies.readPreference === "function"
+    ) {
+      const saved = window.PaymentCurrencies.readPreference();
+      if (saved) {
+        return saved;
+      }
     }
     return "ETH";
   }
@@ -682,6 +947,15 @@
 
   let currencyHookBound = false;
 
+  function refreshCurrencyRanges() {
+    contexts.forEach(function (context) {
+      measureContext(context);
+      if (typeof context.applyOrder === "function") {
+        context.applyOrder();
+      }
+    });
+  }
+
   function bindCurrencyHook() {
     if (currencyHookBound) {
       return;
@@ -692,12 +966,22 @@
       if (!target || target.id !== "currency") {
         return;
       }
-      contexts.forEach(function (context) {
-        if (typeof context.applyOrder === "function") {
-          context.applyOrder();
-        }
-      });
+      refreshCurrencyRanges();
     });
+
+    if (
+      typeof window.updatePrices === "function" &&
+      !window.updatePrices.__priceRangeWrapped
+    ) {
+      const original = window.updatePrices;
+      const wrapped = function () {
+        const result = original.apply(this, arguments);
+        refreshCurrencyRanges();
+        return result;
+      };
+      wrapped.__priceRangeWrapped = true;
+      window.updatePrices = wrapped;
+    }
   }
 
   function createSidebar(index) {
@@ -840,124 +1124,9 @@
     const hotelCards = Array.prototype.slice.call(
       container.querySelectorAll(".hotel-list .hotel-card")
     );
+    context.hotelCards = hotelCards;
     wirePriceOrder(context, sidebar, hotelCards);
-    if (!hotelCards.length) {
-      context.metrics = null;
-      renderSidebar(context, composeTranslation(currentLanguage));
-      return;
-    }
-
-    const priceEntries = hotelCards
-      .map(function (card) {
-        const priceEl = card.querySelector(".price");
-        if (!priceEl) {
-          return null;
-        }
-        const eth = parseFloat(priceEl.dataset.eth);
-        const usdt = parseFloat(priceEl.dataset.usdt);
-        return {
-          card,
-          eth: Number.isFinite(eth) ? eth : null,
-          usdt: Number.isFinite(usdt) ? usdt : null,
-        };
-      })
-      .filter(Boolean);
-
-    if (!priceEntries.length) {
-      context.metrics = null;
-      renderSidebar(context, composeTranslation(currentLanguage));
-      return;
-    }
-
-    const ethValues = priceEntries
-      .map(function (entry) {
-        return entry.eth;
-      })
-      .filter(function (value) {
-        return Number.isFinite(value);
-      });
-
-    const usdtValues = priceEntries
-      .map(function (entry) {
-        return entry.usdt;
-      })
-      .filter(function (value) {
-        return Number.isFinite(value);
-      });
-
-    const ethThresholds = computeThresholds(ethValues);
-    const usdtThresholds = computeThresholds(usdtValues);
-
-    hotelCards.forEach(function (card) {
-      card.classList.remove("is-highlighted", "is-dimmed");
-      card.removeAttribute("data-price-range");
-    });
-
-    priceEntries.forEach(function (entry) {
-      var category = "midrange";
-      var reference = null;
-      var thresholds = null;
-
-      if (Number.isFinite(entry.eth) && ethThresholds) {
-        reference = entry.eth;
-        thresholds = ethThresholds;
-      } else if (Number.isFinite(entry.usdt) && usdtThresholds) {
-        reference = entry.usdt;
-        thresholds = usdtThresholds;
-      }
-
-      if (
-        thresholds &&
-        Number.isFinite(reference) &&
-        thresholds.spread >= EPSILON
-      ) {
-        if (reference <= thresholds.cheap + EPSILON) {
-          category = "cheap";
-        } else if (reference > thresholds.luxury + EPSILON) {
-          category = "luxury";
-        }
-      } else if (thresholds && Number.isFinite(reference)) {
-        category = "midrange";
-      }
-
-      entry.card.setAttribute("data-price-range", category);
-    });
-
-    const primary =
-      ethThresholds && ethValues.length
-        ? {
-            unit: "ETH",
-            thresholds: ethThresholds,
-            formatter: formatEth,
-          }
-        : usdtThresholds && usdtValues.length
-        ? {
-            unit: "USDT",
-            thresholds: usdtThresholds,
-            formatter: formatUsdt,
-          }
-        : null;
-
-    let secondary = null;
-    if (primary && primary.unit === "ETH" && usdtThresholds) {
-      secondary = {
-        unit: "USDT",
-        thresholds: usdtThresholds,
-        formatter: formatUsdt,
-      };
-    } else if (primary && primary.unit === "USDT" && ethThresholds) {
-      secondary = {
-        unit: "ETH",
-        thresholds: ethThresholds,
-        formatter: formatEth,
-      };
-    }
-
-    context.metrics = primary
-      ? { primary: primary, secondary: secondary }
-      : null;
-
-    renderSidebar(context, composeTranslation(currentLanguage));
+    measureContext(context);
 
     const buttons = Array.prototype.slice.call(
       sidebar.querySelectorAll('.price-range-option[data-filter]')
@@ -985,6 +1154,8 @@
         card.classList.toggle("is-dimmed", !!dim);
       });
     }
+
+    context.applyFilter = applyFilter;
 
     buttons.forEach(function (button) {
       button.addEventListener("click", function () {
