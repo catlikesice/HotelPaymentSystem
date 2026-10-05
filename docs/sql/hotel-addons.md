@@ -30,6 +30,12 @@ Choosing a hotel on a city page, or **Select stay** on a search result that has 
 
 A property page such as `funken-lodge.html` keeps the extras written in the page and appends catalog rows whose `addon_id` is not already there. Funken Lodge therefore still shows the lodge spa, and also the Longyearbyen dog-sled outing.
 
+Every hotel listed on a city page or in the search catalog receives add-ons. Where this file has no stay row for that hotel, the loader adds breakfast for two (£18 per night) and late checkout (£16). Where a city has no experience, it adds a walking tour (£28). Where a city has no transport, it adds a station transfer (£22). Curated rows stay as written, so Esbjerg still shows the maritime museum and Britannia breakfast, and those defaults are not added again.
+
+A property-page name still matches the catalog hotel when one name contains the other, so `Hotel d’Angleterre, Copenhagen` uses the `Hotel d’Angleterre` rows. `scandic-copenhagen.html` is the page for Scandic Palace Hotel, and that page asks for add-ons with its own filename so the two names share one set of extras.
+
+City-card links open `trip.html` except when the link target is a hotel HTML file that has its own booking screen. Links to files that are not on disk, such as `hotel-telegraaf-tallinn.html`, open the trip page for that hotel.
+
 ## Queries
 
 Extras for Hotel Britannia, including Esbjerg experiences and the station transfer:
