@@ -4,7 +4,7 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. `lib/search-db.js` loads that file, the same way `lib/city-pages.js` loads `city-pages.sql`.
 
-The static catalog is 74 cities and 205 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (104 cities, 235 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
+The static catalog is 76 cities and 211 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (106 cities, 241 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
 Šiauliai, the Odense hotels, and Hotel d’Angleterre are in the static catalog rather than the pageless list. The Šiauliai city listing is `šiauliai.htm`. The Odense city listing is `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`. Bauska, Latvia is bookable from `bauska.html`. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) continue to checkout. The same listing documents are stored in `city-pages.sql`.
 
@@ -12,9 +12,11 @@ Abisko, Lillehammer, Portree, Oban, Fort William, Stornoway, and Lerwick are cat
 
 Keflavík, Ísafjörður, Vestmannaeyjar, and Sauðárkrókur are catalog cities. Their listing files are `keflavík.html`, `ísafjörður.html`, `vestmannaeyjar.html`, and `sauðárkrókur.html`, and the same documents are stored in `city-pages.sql`.
 
-Ullapool, St Andrews, Aviemore, and Pitlochry are catalog cities. Their listing files are `ullapool.html`, `st-andrews.html`, `aviemore.html`, and `pitlochry.html`, and the same documents are stored in `city-pages.sql`.
+Ullapool, St Andrews, Aviemore, Pitlochry, and Benbecula are catalog cities. Their listing files are `ullapool.html`, `st-andrews.html`, `aviemore.html`, `pitlochry.html`, and `benbecula.html`, and the same documents are stored in `city-pages.sql`.
 
 Alnwick and Northumberland National Park are catalog places in Northeast England. Their listing files are `alnwick.html` and `northumberland-national-park.html`, and the same documents are stored in `city-pages.sql`.
+
+Loch Lomond National Park is a catalog destination. Its listing file is `loch-lomond.html`, and the same document is stored in `city-pages.sql`.
 
 ## What a search is
 

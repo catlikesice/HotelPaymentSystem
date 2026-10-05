@@ -284,6 +284,10 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Aviemore'));
   assert.ok(body.labels.includes('Pitlochry'));
   assert.ok(body.labels.includes('Ullapool'));
+  assert.ok(body.labels.includes('Loch Lomond National Park'));
+  assert.ok(body.labels.includes('The Lodge on Loch Lomond — Loch Lomond National Park'));
+  assert.ok(body.labels.includes('Benbecula'));
+  assert.ok(body.labels.includes('Dark Island Hotel — Benbecula'));
   assert.ok(body.labels.includes('Palanga'));
   assert.ok(body.labels.includes('Porvoo'));
   assert.ok(body.labels.includes('Savonlinna Castle Hotel — Savonlinna'));

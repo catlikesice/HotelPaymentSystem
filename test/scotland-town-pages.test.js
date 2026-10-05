@@ -44,10 +44,24 @@ const DESTINATIONS = [
     url: 'pitlochry.html',
     section: 'boreal-pitlochry-title',
     hotels: ['Atholl Palace Hotel', 'Fishers Hotel', 'Loch Faskally House']
+  },
+  {
+    city: 'Loch Lomond National Park',
+    query: 'loch lomond',
+    url: 'loch-lomond.html',
+    section: 'boreal-loch-lomond-title',
+    hotels: ['The Lodge on Loch Lomond', 'Cameron House', 'Oak Tree Inn']
+  },
+  {
+    city: 'Benbecula',
+    query: 'benbecula',
+    url: 'benbecula.html',
+    section: 'boreal-benbecula-title',
+    hotels: ['Dark Island Hotel', 'Balivanich Airport House', 'Culla Bay Hotel']
   }
 ];
 
-test('Ullapool, St Andrews, Aviemore, and Pitlochry are on the HTML city list and in search', () => {
+test('Ullapool, St Andrews, Aviemore, Pitlochry, Loch Lomond National Park, and Benbecula are on the HTML city list and in search', () => {
   const catalog = loadCatalog();
   const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const db = openSearchDatabase();

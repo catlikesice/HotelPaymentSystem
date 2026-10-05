@@ -70,6 +70,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Benbecula",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "benbecula.html",
+      "description": "Browse hotels in Benbecula, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Bergen",
       "city": "Bergen",
       "country": "Norway",
@@ -291,6 +299,14 @@ window.SEARCH_CATALOG = {
       "country": "Sweden",
       "url": "linköping.html",
       "description": "Browse hotels in Linköping, Sweden."
+    },
+    {
+      "type": "city",
+      "name": "Loch Lomond National Park",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "loch-lomond.html",
+      "description": "Browse hotels in Loch Lomond National Park, Scotland."
     },
     {
       "type": "city",
@@ -740,6 +756,39 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence."
+    },
+    {
+      "type": "hotel",
+      "name": "Dark Island Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "dark-island-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Roadside hotel in Liniclate on Benbecula, between the machair and the road south."
+    },
+    {
+      "type": "hotel",
+      "name": "Balivanich Airport House",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "balivanich-airport-house.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore."
+    },
+    {
+      "type": "hotel",
+      "name": "Culla Bay Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "culla-bay-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Shore hotel on Benbecula, facing the white sand of Culla Bay."
     },
     {
       "type": "hotel",
@@ -1741,6 +1790,39 @@ window.SEARCH_CATALOG = {
       "price": "0.045 ETH / night",
       "priceEth": 0.045,
       "description": "Classic independent hotel with a restaurant, a short walk from the railway station."
+    },
+    {
+      "type": "hotel",
+      "name": "The Lodge on Loch Lomond",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "the-lodge-on-loch-lomond.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Waterfront hotel in Luss, looking across the loch toward the national park hills."
+    },
+    {
+      "type": "hotel",
+      "name": "Cameron House",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "cameron-house.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.12 ETH / night",
+      "priceEth": 0.12,
+      "description": "Lochside resort near Balloch, at the southern gate of Loch Lomond National Park."
+    },
+    {
+      "type": "hotel",
+      "name": "Oak Tree Inn",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "oak-tree-inn.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Village inn in Balmaha, where the West Highland Way meets the east shore of the loch."
     },
     {
       "type": "hotel",
