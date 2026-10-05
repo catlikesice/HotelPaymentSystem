@@ -286,6 +286,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Loch Lomond National Park",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "loch-lomond.html",
+      "description": "Browse hotels in Loch Lomond National Park, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Longyearbyen",
       "city": "Longyearbyen",
       "country": "Svalbard",
@@ -1692,6 +1700,39 @@ window.SEARCH_CATALOG = {
       "price": "0.045 ETH / night",
       "priceEth": 0.045,
       "description": "Classic independent hotel with a restaurant, a short walk from the railway station."
+    },
+    {
+      "type": "hotel",
+      "name": "The Lodge on Loch Lomond",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "the-lodge-on-loch-lomond.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Waterfront hotel in Luss, looking across the loch toward the national park hills."
+    },
+    {
+      "type": "hotel",
+      "name": "Cameron House",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "cameron-house.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.12 ETH / night",
+      "priceEth": 0.12,
+      "description": "Lochside resort near Balloch, at the southern gate of Loch Lomond National Park."
+    },
+    {
+      "type": "hotel",
+      "name": "Oak Tree Inn",
+      "city": "Loch Lomond National Park",
+      "country": "Scotland",
+      "url": "oak-tree-inn.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Village inn in Balmaha, where the West Highland Way meets the east shore of the loch."
     },
     {
       "type": "hotel",
