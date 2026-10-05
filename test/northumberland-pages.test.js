@@ -18,70 +18,39 @@ function loadCatalog() {
 
 const DESTINATIONS = [
   {
-    city: 'Ullapool',
-    query: 'ullapool',
-    url: 'ullapool.html',
-    section: 'boreal-ullapool-title',
-    hotels: ['The Ceilidh Place', 'Broomfield House', 'Ullapool Ferry Hotel']
+    city: 'Alnwick',
+    query: 'alnwick',
+    url: 'alnwick.html',
+    hotels: ['The Cookie Jar', 'The Oaks Hotel', 'White Swan Hotel']
   },
   {
-    city: 'St Andrews',
-    query: 'st andrews',
-    url: 'st-andrews.html',
-    section: 'boreal-st-andrews-title',
-    hotels: ['Scores Hotel', 'St Andrews Harbour Hotel', 'Cathedral Gate House']
-  },
-  {
-    city: 'Aviemore',
-    query: 'aviemore',
-    url: 'aviemore.html',
-    section: 'boreal-aviemore-title',
-    hotels: ['Cairngorm Hotel', 'Rothiemurchus Lodge', 'Spey Valley Hotel']
-  },
-  {
-    city: 'Pitlochry',
-    query: 'pitlochry',
-    url: 'pitlochry.html',
-    section: 'boreal-pitlochry-title',
-    hotels: ['Atholl Palace Hotel', 'Fishers Hotel', 'Loch Faskally House']
-  },
-  {
-    city: 'Loch Lomond National Park',
-    query: 'loch lomond',
-    url: 'loch-lomond.html',
-    section: 'boreal-loch-lomond-title',
-    hotels: ['The Lodge on Loch Lomond', 'Cameron House', 'Oak Tree Inn']
-  },
-  {
-    city: 'Benbecula',
-    query: 'benbecula',
-    url: 'benbecula.html',
-    section: 'boreal-benbecula-title',
-    hotels: ['Dark Island Hotel', 'Balivanich Airport House', 'Culla Bay Hotel']
+    city: 'Northumberland National Park',
+    query: 'northumberland national park',
+    url: 'northumberland-national-park.html',
+    hotels: ['Otterburn Castle', 'The Tankerville Arms', 'Twice Brewed Inn']
   }
 ];
 
-test('Ullapool, St Andrews, Aviemore, Pitlochry, Loch Lomond National Park, and Benbecula are on the HTML city list and in search', () => {
+test('Alnwick and Northumberland National Park are listing pages and searchable', () => {
   const catalog = loadCatalog();
-  const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const db = openSearchDatabase();
 
   DESTINATIONS.forEach((destination) => {
     const city = catalog.cities.find((item) => item.city === destination.city);
     assert.ok(city, destination.city);
-    assert.equal(city.country, 'Scotland');
+    assert.equal(city.country, 'Northeast England');
     assert.equal(city.url, destination.url);
 
     const hotels = catalog.hotels.filter((item) => item.city === destination.city);
     assert.deepEqual(Array.from(hotels, (hotel) => hotel.name), destination.hotels);
     hotels.forEach((hotel) => {
       assert.notEqual(hotel.url, destination.url);
-      assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+      assert.equal(fs.existsSync(path.join(root, hotel.url)), true, hotel.url);
       const hotelHtml = fs.readFileSync(path.join(root, hotel.url), 'utf8');
       assert.match(hotelHtml, /class="hotel-detail"/);
       assert.match(hotelHtml, /site-preferences\.js/);
       assert.match(hotelHtml, /language-switcher|class="site-nav"/);
-      assert.equal(hotel.country, 'Scotland');
+      assert.equal(hotel.country, 'Northeast England');
     });
 
     const html = fs.readFileSync(path.join(root, destination.url), 'utf8');
@@ -89,9 +58,10 @@ test('Ullapool, St Andrews, Aviemore, Pitlochry, Loch Lomond National Park, and 
     assert.ok(page, destination.url);
     assert.equal(html, page.html);
     assert.equal(page.city_name, destination.city);
-    assert.equal(page.country, 'Scotland');
+    assert.equal(page.country, 'Northeast England');
     assert.match(html, /name=["']viewport["']/);
     assert.match(html, new RegExp('data-city="' + destination.city + '"'));
+    assert.match(html, /site-preferences\.js/);
 
     const stored = hotelsFor(destination.url);
     assert.equal(stored.length, destination.hotels.length);
@@ -105,7 +75,5 @@ test('Ullapool, St Andrews, Aviemore, Pitlochry, Loch Lomond National Park, and 
     destination.hotels.forEach((name) => {
       assert.ok(found.hotels.some((hotel) => hotel.name === name), name);
     });
-
-    assert.match(indexHtml, new RegExp('id="' + destination.section + '"'));
   });
 });

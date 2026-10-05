@@ -46,6 +46,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Alnwick",
+      "city": "Alnwick",
+      "country": "Northeast England",
+      "url": "alnwick.html",
+      "description": "Browse hotels in Alnwick, Northeast England."
+    },
+    {
+      "type": "city",
       "name": "Aviemore",
       "city": "Aviemore",
       "country": "Scotland",
@@ -59,6 +67,14 @@ window.SEARCH_CATALOG = {
       "country": "Latvia",
       "url": "bauska.html",
       "description": "Browse hotels in Bauska, Latvia."
+    },
+    {
+      "type": "city",
+      "name": "Benbecula",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "benbecula.html",
+      "description": "Browse hotels in Benbecula, Scotland."
     },
     {
       "type": "city",
@@ -331,6 +347,14 @@ window.SEARCH_CATALOG = {
       "country": "Northeast England",
       "url": "newcastle.html",
       "description": "Browse hotels in Newcastle upon Tyne, Northeast England."
+    },
+    {
+      "type": "city",
+      "name": "Northumberland National Park",
+      "city": "Northumberland National Park",
+      "country": "Northeast England",
+      "url": "northumberland-national-park.html",
+      "description": "Browse hotels in Northumberland National Park, Northeast England."
     },
     {
       "type": "city",
@@ -735,6 +759,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Dark Island Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "dark-island-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Roadside hotel in Liniclate on Benbecula, between the machair and the road south."
+    },
+    {
+      "type": "hotel",
+      "name": "Balivanich Airport House",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "balivanich-airport-house.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore."
+    },
+    {
+      "type": "hotel",
+      "name": "Culla Bay Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "culla-bay-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Shore hotel on Benbecula, facing the white sand of Culla Bay."
+    },
+    {
+      "type": "hotel",
       "name": "Icelandair Hotel Akureyri",
       "city": "Akureyri",
       "country": "Iceland",
@@ -743,6 +800,39 @@ window.SEARCH_CATALOG = {
       "price": "0.075 ETH / night",
       "priceEth": 0.075,
       "description": "Contemporary hotel near the botanical garden, with views toward the ski slopes."
+    },
+    {
+      "type": "hotel",
+      "name": "The Cookie Jar",
+      "city": "Alnwick",
+      "country": "Northeast England",
+      "url": "the-cookie-jar.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Boutique rooms in a former convent on Bailiffgate, a short walk from Alnwick Castle."
+    },
+    {
+      "type": "hotel",
+      "name": "The Oaks Hotel",
+      "city": "Alnwick",
+      "country": "Northeast England",
+      "url": "the-oaks-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Country hotel on the edge of Alnwick, handy for the castle gardens and the coast."
+    },
+    {
+      "type": "hotel",
+      "name": "White Swan Hotel",
+      "city": "Alnwick",
+      "country": "Northeast England",
+      "url": "white-swan-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Coaching inn on Bondgate in the market-town centre, close to the castle gate."
     },
     {
       "type": "hotel",
@@ -1887,6 +1977,39 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges."
+    },
+    {
+      "type": "hotel",
+      "name": "Otterburn Castle",
+      "city": "Northumberland National Park",
+      "country": "Northeast England",
+      "url": "otterburn-castle.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Stone castle hotel in Redesdale, a base for the park moors and Kielder."
+    },
+    {
+      "type": "hotel",
+      "name": "The Tankerville Arms",
+      "city": "Northumberland National Park",
+      "country": "Northeast England",
+      "url": "the-tankerville-arms.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Market-town inn in Wooler, at the foot of the Cheviot Hills."
+    },
+    {
+      "type": "hotel",
+      "name": "Twice Brewed Inn",
+      "city": "Northumberland National Park",
+      "country": "Northeast England",
+      "url": "twice-brewed-inn.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Inn beside Hadrian’s Wall at Once Brewed, with walks along the crags."
     },
     {
       "type": "hotel",
