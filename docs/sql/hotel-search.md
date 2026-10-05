@@ -4,9 +4,9 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. `lib/search-db.js` loads that file, the same way `lib/city-pages.js` loads `city-pages.sql`.
 
-The static catalog is 72 cities and 199 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no HTML file. The SQL file contains every catalog row and then those pageless places (102 cities, 229 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
+The static catalog is 72 cities and 199 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (102 cities, 229 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
-Šiauliai, the Odense hotels, and Hotel d’Angleterre are in the static catalog rather than the pageless list. Šiauliai is `šiauliai.htm`. The Odense hotels use `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`. Bauska, Latvia is bookable from `bauska.html`. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) continue to checkout. The same listing documents are stored in `city-pages.sql`.
+Šiauliai, the Odense hotels, and Hotel d’Angleterre are in the static catalog rather than the pageless list. The Šiauliai city listing is `šiauliai.htm`. The Odense city listing is `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`. Bauska, Latvia is bookable from `bauska.html`. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) continue to checkout. The same listing documents are stored in `city-pages.sql`.
 
 Abisko, Lillehammer, Portree, Oban, Fort William, Stornoway, and Lerwick are catalog cities. Their listing files are `abisko.html`, `lillehammer.html`, `portree.html`, `oban.html`, `fort-william.html`, `stornoway.html`, and `lerwick.html`, and the same documents are stored in `city-pages.sql`.
 
@@ -41,12 +41,12 @@ A blank `q` returns no rows. `search.js` treats an empty query as `{ "cities": [
 | `name_key` | | Homepage compare key. See normalization |
 | `search_text` | | Results haystack |
 
-`hotels` is one row per hotel card. `city_id` references `cities`. `page_url` is usually the city page. A few hotels have their own page (`grand-hotel-kempinski-riga.html`, `wellton-riverside-riga.html`). `page_url` is NULL when the hotel has no HTML page. `(city_id, name)` is unique. `page_url` is not unique, because several hotels share a city page, and more than one row may be NULL.
+`hotels` is one row per hotel card. `city_id` references `cities`. `page_url` is that hotel's HTML page, for example `grand-hotel-kempinski-riga.html` or `cabinn-city.html`. It is separate from the city's `page_url`. `(city_id, name)` is unique.
 
 | Column | Catalog field | Notes |
 | --- | --- | --- |
 | `name` | `name` | |
-| `page_url` | `url` | NULL when the hotel has no HTML page. The JSON also includes `cityUrl`, the city's `page_url`, so a hotel without its own page can still link to the city page |
+| `page_url` | `url` | The hotel's HTML page. The JSON also includes `cityUrl`, the city's `page_url`, which is NULL when that place has no city page |
 | `image_url` | `image` | Null when the card has no photo |
 | `price_label` | `price` | Exact display string, such as `0.08 ETH / night` or `0.10 ETH / night` |
 | `price_eth` | `priceEth` | Nightly ETH number. Stored for the JSON field. Search does not filter on it |

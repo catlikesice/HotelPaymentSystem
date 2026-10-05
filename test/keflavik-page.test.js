@@ -32,7 +32,12 @@ test('Keflavík is on the HTML city list and in search', () => {
   const hotels = catalog.hotels.filter((item) => item.city === 'Keflavík');
   assert.deepEqual(Array.from(hotels, (hotel) => hotel.name), HOTELS);
   hotels.forEach((hotel) => {
-    assert.equal(hotel.url, 'keflavík.html');
+    assert.notEqual(hotel.url, 'keflavík.html');
+    assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+    const hotelHtml = fs.readFileSync(path.join(root, hotel.url), 'utf8');
+    assert.match(hotelHtml, /class="hotel-detail"/);
+    assert.match(hotelHtml, /site-preferences\.js/);
+    assert.match(hotelHtml, /language-switcher|class="site-nav"/);
     assert.equal(hotel.country, 'Iceland');
   });
 
