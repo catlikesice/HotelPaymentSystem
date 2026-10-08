@@ -56,7 +56,27 @@ function normalizeEmail(email) {
 }
 
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 160;
+}
+
+const PROFILE_PHOTO_MAX = 110000;
+
+function normalizePhoto(value) {
+  if (typeof value !== 'string') {
+    return { error: 'Please upload a JPEG, PNG, WebP, or GIF photo.' };
+  }
+  const photo = value.trim();
+  if (!photo) {
+    return { photo: '' };
+  }
+  if (photo.length > PROFILE_PHOTO_MAX) {
+    return { error: 'That photo is too large. Please choose a smaller image.' };
+  }
+  const match = /^data:image\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/.exec(photo);
+  if (!match || match[2].length % 4 !== 0) {
+    return { error: 'Please upload a JPEG, PNG, WebP, or GIF photo.' };
+  }
+  return { photo };
 }
 
 function hashPassword(password, salt) {
@@ -91,6 +111,7 @@ function publicUser(user) {
     address: user.address || null,
     addressFormatted: user.addressFormatted || '',
     birthDate: user.birthDate || '',
+    photo: user.photo || '',
     createdAt: user.createdAt
   };
 }
@@ -212,6 +233,7 @@ router.post('/register', authLimiter, (req, res) => {
     address,
     addressFormatted,
     birthDate,
+    photo: '',
     passwordSalt: salt,
     passwordHash: hash,
     createdAt: new Date().toISOString()
@@ -247,6 +269,67 @@ router.post('/login', authLimiter, (req, res) => {
     message: 'Logged in successfully.',
     token,
     user: publicUser(user)
+  });
+});
+
+router.post('/profile', authLimiter, (req, res) => {
+  const current = findUserByToken(getTokenFromRequest(req));
+  if (!current) {
+    return res.status(401).json({ error: 'Not authenticated.' });
+  }
+
+  const body = req.body || {};
+  const hasEmail = Object.prototype.hasOwnProperty.call(body, 'email');
+  const hasPhoto = Object.prototype.hasOwnProperty.call(body, 'photo');
+  if (!hasEmail && !hasPhoto) {
+    return res.status(400).json({ error: 'Choose a photo or a new email address.' });
+  }
+
+  const users = readJson(USERS_FILE, []);
+  const index = users.findIndex((user) => user.id === current.id);
+  if (index === -1) {
+    return res.status(401).json({ error: 'Not authenticated.' });
+  }
+
+  let photoMessage = '';
+  let emailMessage = '';
+
+  if (hasPhoto) {
+    const photoResult = normalizePhoto(body.photo);
+    if (photoResult.error) {
+      return res.status(400).json({ error: photoResult.error });
+    }
+    users[index].photo = photoResult.photo;
+    photoMessage = photoResult.photo ? 'Profile photo saved.' : 'Profile photo removed.';
+  }
+
+  if (hasEmail) {
+    const email = normalizeEmail(body.email);
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Please enter a valid email address.' });
+    }
+    if (email !== users[index].email) {
+      const password = String(body.password || '');
+      if (!password) {
+        return res.status(400).json({ error: 'Enter your current password to change your email address.' });
+      }
+      if (!verifyPassword(password, users[index].passwordSalt, users[index].passwordHash)) {
+        return res.status(401).json({ error: 'Current password is incorrect.' });
+      }
+      if (users.some((user) => user.email === email && user.id !== users[index].id)) {
+        return res.status(409).json({ error: 'An account with this email already exists.' });
+      }
+      users[index].email = email;
+      emailMessage = 'Email address updated.';
+    } else {
+      emailMessage = 'Email address is already up to date.';
+    }
+  }
+
+  writeJson(USERS_FILE, users);
+  return res.json({
+    message: [photoMessage, emailMessage].filter(Boolean).join(' ') || 'Profile updated.',
+    user: publicUser(users[index])
   });
 });
 

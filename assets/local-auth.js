@@ -21,7 +21,27 @@
   }
 
   function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 160;
+  }
+
+  var PROFILE_PHOTO_MAX = 110000;
+
+  function normalizePhoto(value) {
+    if (typeof value !== 'string') {
+      fail(400, 'Please upload a JPEG, PNG, WebP, or GIF photo.');
+    }
+    var photo = value.trim();
+    if (!photo) {
+      return '';
+    }
+    if (photo.length > PROFILE_PHOTO_MAX) {
+      fail(400, 'That photo is too large. Please choose a smaller image.');
+    }
+    var match = /^data:image\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/.exec(photo);
+    if (!match || match[2].length % 4 !== 0) {
+      fail(400, 'Please upload a JPEG, PNG, WebP, or GIF photo.');
+    }
+    return photo;
   }
 
   function randomHex(bytes) {
@@ -84,6 +104,7 @@
       address: user.address || null,
       addressFormatted: user.addressFormatted || '',
       birthDate: user.birthDate || '',
+      photo: user.photo || '',
       createdAt: user.createdAt
     };
   }
@@ -180,6 +201,7 @@
         address: body.address && typeof body.address === 'object' ? body.address : null,
         addressFormatted: String(body.addressFormatted || '').trim(),
         birthDate: birthDate,
+        photo: '',
         passwordSalt: hashed.salt,
         passwordHash: hashed.hash,
         createdAt: new Date().toISOString()
@@ -225,6 +247,78 @@
       };
     }
 
+    function updateProfile(token, payload) {
+      var body = payload || {};
+      var hasEmail = Object.prototype.hasOwnProperty.call(body, 'email');
+      var hasPhoto = Object.prototype.hasOwnProperty.call(body, 'photo');
+      if (!hasEmail && !hasPhoto) {
+        fail(400, 'Choose a photo or a new email address.');
+      }
+
+      var sessions = readJson(storage, SESSIONS_KEY, {});
+      var session = token ? sessions[token] : null;
+      if (!session) {
+        fail(401, 'Not authenticated.');
+      }
+
+      var users = readJson(storage, USERS_KEY, []);
+      var index = -1;
+      var i;
+      for (i = 0; i < users.length; i += 1) {
+        if (users[i].id === session.userId) {
+          index = i;
+          break;
+        }
+      }
+      if (index === -1) {
+        fail(401, 'Not authenticated.');
+      }
+
+      var photoMessage = '';
+      var emailMessage = '';
+
+      if (hasPhoto) {
+        var photo = normalizePhoto(body.photo);
+        users[index].photo = photo;
+        photoMessage = photo ? 'Profile photo saved.' : 'Profile photo removed.';
+      }
+
+      if (hasEmail) {
+        var email = normalizeEmail(body.email);
+        if (!isValidEmail(email)) {
+          fail(400, 'Please enter a valid email address.');
+        }
+        if (email !== users[index].email) {
+          var password = String(body.password || '');
+          if (!password) {
+            fail(400, 'Enter your current password to change your email address.');
+          }
+          var hashed = hashPassword(password, users[index].passwordSalt);
+          if (hashed.hash !== users[index].passwordHash) {
+            fail(401, 'Current password is incorrect.');
+          }
+          if (users.some(function (user) { return user.email === email && user.id !== users[index].id; })) {
+            fail(409, 'An account with this email already exists.');
+          }
+          users[index].email = email;
+          emailMessage = 'Email address updated.';
+        } else {
+          emailMessage = 'Email address is already up to date.';
+        }
+      }
+
+      try {
+        writeJson(storage, USERS_KEY, users);
+      } catch (error) {
+        fail(400, 'That photo is too large to save on this device. Please choose a smaller image.');
+      }
+
+      return {
+        message: [photoMessage, emailMessage].filter(Boolean).join(' ') || 'Profile updated.',
+        user: publicUser(users[index])
+      };
+    }
+
     function logout(token) {
       if (!token) {
         return { message: 'Logged out successfully.' };
@@ -255,7 +349,8 @@
       register: register,
       login: login,
       logout: logout,
-      me: me
+      me: me,
+      updateProfile: updateProfile
     };
   }
 

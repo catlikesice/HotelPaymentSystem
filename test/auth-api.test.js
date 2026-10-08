@@ -192,3 +192,117 @@ test('rejects duplicate emails, bad passwords, and missing sessions', async () =
   });
   assert.equal(afterLogout.status, 401);
 });
+
+test('personal profile can save a photo and change the email address', async () => {
+  const stamp = Date.now() + '-' + Math.random().toString(16).slice(2);
+  const email = 'profile-' + stamp + '@example.com';
+  const otherEmail = 'other-' + stamp + '@example.com';
+  const password = 'password123';
+  const photo = 'data:image/png;base64,' + Buffer.from('photo').toString('base64');
+
+  const created = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'Ada Guest', email, password })
+  });
+  assert.equal(created.status, 201, created.data && created.data.error);
+  assert.equal(created.data.user.photo, '');
+
+  await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'Other Guest', email: otherEmail, password })
+  });
+
+  const authHeaders = {
+    Authorization: 'Bearer ' + created.data.token,
+    'Content-Type': 'application/json'
+  };
+
+  const anonymous = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ photo })
+  });
+  assert.equal(anonymous.status, 401);
+
+  const withPhoto = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: authHeaders,
+    body: JSON.stringify({ photo })
+  });
+  assert.equal(withPhoto.status, 200, withPhoto.data && withPhoto.data.error);
+  assert.equal(withPhoto.data.user.photo, photo);
+  assert.equal(withPhoto.data.user.passwordHash, undefined);
+  assert.match(withPhoto.data.message, /Profile photo saved/);
+
+  const svg = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: authHeaders,
+    body: JSON.stringify({ photo: 'data:image/svg+xml;base64,PHN2Zz4=' })
+  });
+  assert.equal(svg.status, 400);
+
+  const nextEmail = 'ada-' + stamp + '@example.com';
+  const missingPassword = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: authHeaders,
+    body: JSON.stringify({ email: nextEmail })
+  });
+  assert.equal(missingPassword.status, 400);
+  assert.match(missingPassword.data.error, /password/i);
+
+  const wrongPassword = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: authHeaders,
+    body: JSON.stringify({ email: nextEmail, password: 'wrong-password' })
+  });
+  assert.equal(wrongPassword.status, 401);
+
+  const duplicate = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: authHeaders,
+    body: JSON.stringify({ email: otherEmail, password })
+  });
+  assert.equal(duplicate.status, 409);
+
+  const renamed = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: authHeaders,
+    body: JSON.stringify({ email: 'Ada-' + stamp + '@Example.com', password })
+  });
+  assert.equal(renamed.status, 200, renamed.data && renamed.data.error);
+  assert.equal(renamed.data.user.email, nextEmail);
+  assert.equal(renamed.data.user.photo, photo);
+
+  const me = await jsonRequest('/api/auth/me', {
+    headers: { Authorization: 'Bearer ' + created.data.token }
+  });
+  assert.equal(me.status, 200);
+  assert.equal(me.data.user.email, nextEmail);
+  assert.equal(me.data.user.photo, photo);
+
+  const oldLogin = await jsonRequest('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+  assert.equal(oldLogin.status, 401);
+
+  const newLogin = await jsonRequest('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: nextEmail, password })
+  });
+  assert.equal(newLogin.status, 200);
+  assert.equal(newLogin.data.user.email, nextEmail);
+
+  const cleared = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: authHeaders,
+    body: JSON.stringify({ photo: '' })
+  });
+  assert.equal(cleared.status, 200, cleared.data && cleared.data.error);
+  assert.equal(cleared.data.user.photo, '');
+  assert.match(cleared.data.message, /removed/i);
+});

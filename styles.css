@@ -2436,6 +2436,72 @@ body > header.header-bar {
   cursor: pointer;
 }
 
+.account-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.95rem;
+  margin-top: 0.95rem;
+}
+
+.account-settings-form {
+  margin: 0;
+}
+
+.account-settings-lead {
+  margin-bottom: 0.85rem;
+  font-size: 0.95rem;
+}
+
+.account-photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6.5rem;
+  height: 6.5rem;
+  margin: 0 0 0.9rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(46, 125, 50, 0.12);
+  border: 1px solid rgba(35, 68, 26, 0.16);
+}
+
+.account-photo__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.account-photo__image[hidden],
+.account-photo__fallback[hidden] {
+  display: none;
+}
+
+.account-photo__fallback {
+  font-size: 1.8rem;
+  font-weight: 750;
+  color: #1f5b28;
+}
+
+.account-actions--compact {
+  margin-top: 0.2rem;
+}
+
+#account-photo-remove[hidden] {
+  display: none !important;
+}
+
+.account-actions--compact .btn {
+  min-width: 0;
+}
+
+.auth-form input[type="file"] {
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+}
+
 .btn--secondary {
   background: #fffdf2;
   color: var(--accent);
@@ -2443,7 +2509,8 @@ body > header.header-bar {
 }
 
 @media (max-width: 720px) {
-  .account-grid {
+  .account-grid,
+  .account-settings {
     grid-template-columns: 1fr;
   }
 

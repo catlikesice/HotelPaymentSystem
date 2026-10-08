@@ -252,6 +252,47 @@
               </article>
             </div>
 
+            <div class="account-settings">
+              <article class="account-card" aria-labelledby="account-photo-title">
+                <h2 id="account-photo-title">Profile photo</h2>
+                <div class="account-photo">
+                  <img class="account-photo__image" data-account-photo alt="" hidden>
+                  <span class="account-photo__fallback" data-account-photo-fallback aria-hidden="true"></span>
+                </div>
+                <form id="account-photo-form" class="auth-form account-settings-form" novalidate>
+                  <p class="auth-status" id="account-photo-status" role="status" aria-live="polite"></p>
+                  <div class="form-group">
+                    <label for="account-photo-input">Upload a photo</label>
+                    <input id="account-photo-input" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+                    <p class="field-hint">JPEG, PNG, WebP, or GIF. A smaller copy is saved on your account.</p>
+                  </div>
+                  <div class="account-actions account-actions--compact">
+                    <button class="btn" type="submit" id="account-photo-save">Save photo</button>
+                    <button class="btn btn--secondary" type="button" id="account-photo-remove" hidden>Remove photo</button>
+                  </div>
+                </form>
+              </article>
+
+              <article class="account-card" aria-labelledby="account-email-title">
+                <h2 id="account-email-title">Email address</h2>
+                <p class="auth-lead account-settings-lead">Change the email you use to sign in. Your current password confirms the change.</p>
+                <form id="account-email-form" class="auth-form account-settings-form" novalidate>
+                  <p class="auth-status" id="account-email-status" role="status" aria-live="polite"></p>
+                  <div class="form-group">
+                    <label for="account-email-input">Email address</label>
+                    <input id="account-email-input" name="email" type="email" autocomplete="email" required maxlength="160" spellcheck="false" placeholder="you@example.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="account-email-password">Current password</label>
+                    <input id="account-email-password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="Current password">
+                  </div>
+                  <div class="account-actions account-actions--compact">
+                    <button class="btn" type="submit" id="account-email-save">Change email</button>
+                  </div>
+                </form>
+              </article>
+            </div>
+
             <div class="account-actions">
               <button type="button" class="btn btn--secondary" id="account-logout">Log out</button>
             </div>
