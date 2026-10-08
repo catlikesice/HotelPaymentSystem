@@ -165,6 +165,53 @@ test('auth-client falls back to local accounts when the API is missing', () => {
   assert.match(source, /localBookings/);
 });
 
+test('replaces a forgotten password and signs out old sessions', () => {
+  const auth = LocalAuth.create({ storage: memoryStorage() });
+  const created = auth.register({
+    name: 'Ada Guest',
+    email: 'Ada@Example.com',
+    password: 'password123'
+  });
+
+  const missing = auth.resetPassword({
+    email: 'missing@example.com',
+    password: 'newpassword1'
+  });
+  assert.equal(missing.updated, false);
+  assert.match(missing.message, /if an account exists/i);
+
+  const reset = auth.resetPassword({
+    email: 'ada@example.com',
+    password: 'newpassword1'
+  });
+  assert.equal(reset.updated, true);
+  assert.equal(auth.me(created.token), null);
+
+  assert.throws(
+    () => auth.login({ email: 'ada@example.com', password: 'password123' }),
+    { status: 401 }
+  );
+  const login = auth.login({ email: 'ada@example.com', password: 'newpassword1' });
+  assert.equal(login.user.name, 'Ada Guest');
+
+  assert.throws(
+    () => auth.resetPassword({ email: 'ada@example.com', password: 'short' }),
+    (error) => error.status === 400 && /8 characters/i.test(error.message)
+  );
+});
+
+test('login page links to forgot password', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'login.html'), 'utf8');
+  assert.match(html, /href="forgot-password\.html"/);
+  assert.match(html, /data-login-forgot/);
+  const forgot = fs.readFileSync(path.join(__dirname, '..', 'forgot-password.html'), 'utf8');
+  assert.match(forgot, /id="forgotPasswordForm"/);
+  assert.match(forgot, /name="confirmPassword"/);
+  const source = fs.readFileSync(path.join(__dirname, '..', 'assets/auth-client.js'), 'utf8');
+  assert.match(source, /\/api\/auth\/reset-password/);
+  assert.match(source, /localAccounts\.resetPassword/);
+});
+
 test('register pages load the local account helper', () => {
   ['personal-register.html', 'login.html', 'logout.html', 'account.html', 'index.html'].forEach((fileName) => {
     const html = fs.readFileSync(path.join(__dirname, '..', fileName), 'utf8');
