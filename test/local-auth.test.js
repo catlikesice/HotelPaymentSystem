@@ -210,7 +210,8 @@ test('replaces a forgotten password and signs out old sessions', () => {
   const created = auth.register({
     name: 'Ada Guest',
     email: 'Ada@Example.com',
-    password: 'password123'
+    password: 'password123',
+    birthDate: '15/03/1990'
   });
 
   const missing = auth.resetPassword({

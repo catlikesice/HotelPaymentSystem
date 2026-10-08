@@ -373,7 +373,7 @@ test('resets a forgotten password without revealing whether the email exists', a
   const created = await jsonRequest('/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'Reset Guest', email, password })
+    body: JSON.stringify({ name: 'Reset Guest', email, password, birthDate: '15/03/1990' })
   });
   assert.equal(created.status, 201, created.data && created.data.error);
 
