@@ -32,6 +32,27 @@
     };
   }
 
+  function adultCutoff(now) {
+    var api = datesApi();
+    if (api && typeof api.latestAdultISO === 'function') {
+      var iso = api.latestAdultISO(now);
+      return {
+        year: Number(iso.slice(0, 4)),
+        month: Number(iso.slice(5, 7)),
+        day: Number(iso.slice(8, 10))
+      };
+    }
+    var actual = todayParts(now);
+    var year = actual.year - 18;
+    var month = actual.month;
+    var day = actual.day;
+    var count = daysInMonth(year, month);
+    if (day > count) {
+      day = count;
+    }
+    return { year: year, month: month, day: day };
+  }
+
   function isAfter(year, month, day, today) {
     if (year !== today.year) {
       return year > today.year;
@@ -138,7 +159,7 @@
       return null;
     }
 
-    var today = todayParts();
+    var today = adultCutoff();
     var view = defaultView(today);
     var selectedISO = '';
     var open = false;
@@ -232,7 +253,7 @@
     }
 
     function openCalendar() {
-      today = todayParts();
+      today = adultCutoff();
       readSelection();
       if (!selectedISO) {
         view = defaultView(today);
@@ -387,6 +408,7 @@
     MONTHS: MONTHS,
     WEEKDAYS: WEEKDAYS,
     todayParts: todayParts,
+    adultCutoff: adultCutoff,
     buildMonth: buildMonth,
     shiftMonth: shiftMonth,
     clampView: clampView,

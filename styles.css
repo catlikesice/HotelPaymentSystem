@@ -2126,6 +2126,12 @@ body > header.header-bar {
   border-color: var(--accent);
 }
 
+.auth-form input.is-invalid,
+.auth-form input.is-invalid:focus {
+  border-color: #8b1e1e;
+  outline: 2px solid rgba(139, 30, 30, 0.28);
+}
+
 .auth-form .date-field {
   position: relative;
 }

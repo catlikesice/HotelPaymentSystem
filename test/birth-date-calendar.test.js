@@ -39,6 +39,19 @@ test('keeps birth-date navigation inside 1900 through the current month', () => 
     { year: 1997, month: 1 }
   );
   assert.deepEqual(BirthDateCalendar.defaultView(today), { year: 1996, month: 9 });
+  assert.deepEqual(
+    BirthDateCalendar.adultCutoff(new Date(2026, 9, 8)),
+    { year: 2008, month: 10, day: 8 }
+  );
+  assert.deepEqual(
+    BirthDateCalendar.adultCutoff(new Date(2024, 1, 29)),
+    { year: 2006, month: 2, day: 28 }
+  );
+  const cutoff = BirthDateCalendar.adultCutoff(new Date(2026, 9, 8));
+  const october = BirthDateCalendar.buildMonth(2008, 10, cutoff, '');
+  const octoberDays = october.cells.filter((cell) => cell.type === 'day');
+  assert.equal(octoberDays[7].disabled, false);
+  assert.equal(octoberDays[8].disabled, true);
   assert.deepEqual(BirthDateCalendar.WEEKDAYS, ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
 });
 
@@ -54,6 +67,7 @@ test('personal registration includes a birth date calendar', () => {
   assert.match(personal, /data-birth-calendar-dialog/);
   assert.match(personal, /autocomplete="bday"/);
   assert.match(personal, /assets\/birth-date-calendar\.js/);
+  assert.match(personal, /at least 18/);
   assert.match(personal, /assets\/booking-dates\.js/);
   assert.match(client, /validateBirthDate/);
   assert.match(client, /extra\.birthDate/);

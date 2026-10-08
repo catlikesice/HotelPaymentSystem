@@ -32,8 +32,29 @@ test('accepts a past birth date and rejects future or impossible days', () => {
   assert.match(BookingDates.validateBirthDate('01/01/2999').message, /future/);
 });
 
+test('requires a birth date that makes the person at least 18', () => {
+  const now = new Date(2026, 9, 8);
+  assert.equal(BookingDates.latestAdultISO(now), '2008-10-08');
+  assert.equal(BookingDates.latestAdultISO(new Date(2024, 1, 29)), '2006-02-28');
+
+  const today = new Date();
+  const adultIso = BookingDates.latestAdultISO(today);
+  const adultEuropean = adultIso.slice(8, 10) + '/' + adultIso.slice(5, 7) + '/' + adultIso.slice(0, 4);
+  assert.equal(BookingDates.validateBirthDate(adultEuropean).ok, true);
+
+  const parts = adultIso.split('-').map(Number);
+  const younger = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + 1));
+  const youngerIso = younger.toISOString().slice(0, 10);
+  const youngerEuropean = youngerIso.slice(8, 10) + '/' + youngerIso.slice(5, 7) + '/' + youngerIso.slice(0, 4);
+  const tooYoung = BookingDates.validateBirthDate(youngerEuropean);
+  assert.equal(tooYoung.ok, false);
+  assert.match(tooYoung.message, /at least 18/);
+});
+
 test('masks typed digits into dd/mm/yyyy and keeps explicit slashes', () => {
   assert.equal(BookingDates.maskInput('10052026'), '10/05/2026');
+  assert.equal(BookingDates.maskInput('01/012'), '01/01/2');
+  assert.equal(BookingDates.maskInput('01/012010'), '01/01/2010');
   assert.equal(BookingDates.maskInput('105'), '10/5');
   assert.equal(BookingDates.maskInput('1/5/2026'), '1/5/2026');
   assert.equal(BookingDates.maskInput('2026-05-10'), '10/05/2026');

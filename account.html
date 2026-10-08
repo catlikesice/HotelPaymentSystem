@@ -253,6 +253,37 @@
             </div>
 
             <div class="account-settings">
+              <article class="account-card account-card--wide" aria-labelledby="account-details-title">
+                <h2 id="account-details-title">Your details</h2>
+                <p class="auth-lead account-settings-lead">Update the name on your profile. You must be at least 18.</p>
+                <form id="account-details-form" class="auth-form account-settings-form" novalidate>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="account-name-input">Full name</label>
+                      <input id="account-name-input" name="name" type="text" required minlength="2" maxlength="160" autocomplete="name" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                      <label for="birthDate">Date of birth</label>
+                      <div class="date-field" data-birth-calendar>
+                        <input id="birthDate" name="birthDate" class="date-field__text" type="text" required inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="bday" maxlength="10" spellcheck="false" aria-describedby="account-birth-hint">
+                        <button type="button" class="date-field__button" id="birthDate-calendar" data-birth-calendar-open aria-label="Open birth date calendar" aria-haspopup="dialog" aria-expanded="false" aria-controls="birthDate-dialog">
+                          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                            <rect x="3.5" y="5" width="17" height="15.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+                            <path d="M3.5 10h17M8 3.5v4M16 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                          </svg>
+                        </button>
+                        <div id="birthDate-dialog" class="birth-calendar" data-birth-calendar-dialog role="dialog" aria-label="Choose birth date" hidden></div>
+                      </div>
+                      <p id="account-birth-hint" class="field-hint">You must be at least 18 years old.</p>
+                      <p class="auth-status" id="account-details-status" role="status" aria-live="polite"></p>
+                    </div>
+                  </div>
+                  <div class="account-actions account-actions--compact">
+                    <button class="btn" type="submit" id="account-details-save">Save details</button>
+                  </div>
+                </form>
+              </article>
+
               <article class="account-card" aria-labelledby="account-photo-title">
                 <h2 id="account-photo-title">Profile photo</h2>
                 <div class="account-photo">
@@ -510,6 +541,7 @@
   <script src="assets/local-properties.js"></script>
   <script src="assets/auth-client.js"></script>
   <script src="assets/booking-dates.js"></script>
+  <script src="assets/birth-date-calendar.js"></script>
   <script src="assets/payment-currencies.js"></script>
   <script src="assets/business-portal.js"></script>
   <script src="assets/account-portal.js"></script>

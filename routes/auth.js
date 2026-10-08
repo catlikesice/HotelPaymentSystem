@@ -204,7 +204,7 @@ router.post('/register', authLimiter, (req, res) => {
     city = addressResult.values.city || city;
     address = addressResult.values;
     addressFormatted = addressResult.formatted;
-  } else if (String(body.birthDate || '').trim()) {
+  } else {
     const birthResult = BookingDates.validateBirthDate(body.birthDate);
     if (!birthResult.ok) {
       return res.status(400).json({ error: birthResult.message });
@@ -281,8 +281,10 @@ router.post('/profile', authLimiter, (req, res) => {
   const body = req.body || {};
   const hasEmail = Object.prototype.hasOwnProperty.call(body, 'email');
   const hasPhoto = Object.prototype.hasOwnProperty.call(body, 'photo');
-  if (!hasEmail && !hasPhoto) {
-    return res.status(400).json({ error: 'Choose a photo or a new email address.' });
+  const hasName = Object.prototype.hasOwnProperty.call(body, 'name');
+  const hasBirthDate = Object.prototype.hasOwnProperty.call(body, 'birthDate');
+  if (!hasEmail && !hasPhoto && !hasName && !hasBirthDate) {
+    return res.status(400).json({ error: 'Choose a photo, a name, or a new email address.' });
   }
 
   const users = readJson(USERS_FILE, []);
@@ -293,6 +295,30 @@ router.post('/profile', authLimiter, (req, res) => {
 
   let photoMessage = '';
   let emailMessage = '';
+  let detailsMessage = '';
+  let nextName = users[index].name;
+  let nextBirthDate = users[index].birthDate || '';
+
+  if (hasName) {
+    nextName = String(body.name || '').trim();
+    if (!nextName || nextName.length < 2) {
+      return res.status(400).json({ error: 'Please enter your full name (at least 2 characters).' });
+    }
+    if (nextName.length > 160) {
+      return res.status(400).json({ error: 'Please enter a shorter name (160 characters or fewer).' });
+    }
+  }
+
+  if (hasBirthDate) {
+    if ((users[index].accountType || 'customer') === 'business') {
+      return res.status(400).json({ error: 'Date of birth is saved on guest accounts.' });
+    }
+    const birthResult = BookingDates.validateBirthDate(body.birthDate);
+    if (!birthResult.ok) {
+      return res.status(400).json({ error: birthResult.message });
+    }
+    nextBirthDate = birthResult.iso;
+  }
 
   if (hasPhoto) {
     const photoResult = normalizePhoto(body.photo);
@@ -326,9 +352,27 @@ router.post('/profile', authLimiter, (req, res) => {
     }
   }
 
+  const nameChanged = hasName && nextName !== users[index].name;
+  const birthChanged = hasBirthDate && nextBirthDate !== (users[index].birthDate || '');
+  if (nameChanged) {
+    users[index].name = nextName;
+  }
+  if (birthChanged) {
+    users[index].birthDate = nextBirthDate;
+  }
+  if (nameChanged && birthChanged) {
+    detailsMessage = 'Name and date of birth updated.';
+  } else if (nameChanged) {
+    detailsMessage = 'Name updated.';
+  } else if (birthChanged) {
+    detailsMessage = 'Date of birth updated.';
+  } else if (hasName || hasBirthDate) {
+    detailsMessage = 'Your details are already up to date.';
+  }
+
   writeJson(USERS_FILE, users);
   return res.json({
-    message: [photoMessage, emailMessage].filter(Boolean).join(' ') || 'Profile updated.',
+    message: [detailsMessage, photoMessage, emailMessage].filter(Boolean).join(' ') || 'Profile updated.',
     user: publicUser(users[index])
   });
 });

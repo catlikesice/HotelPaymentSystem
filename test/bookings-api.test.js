@@ -81,7 +81,8 @@ test('saves a confirmed stay and lists it for that account only', async () => {
     body: JSON.stringify({
       name: 'Ada Booker',
       email,
-      password: 'password123'
+      password: 'password123',
+      birthDate: '15/03/1990'
     })
   });
   assert.equal(createdUser.status, 201);

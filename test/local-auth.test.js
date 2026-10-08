@@ -24,7 +24,8 @@ test('creates a guest account locally and logs back in', () => {
   const created = auth.register({
     name: 'Oliver Mark Killington',
     email: 'catlikesice.8h88m@passmail.net',
-    password: 'password12345'
+    password: 'password12345',
+    birthDate: '15/03/1990'
   });
 
   assert.equal(created.user.name, 'Oliver Mark Killington');
@@ -64,6 +65,23 @@ test('stores a personal birth date and rejects a future one', () => {
     }),
     (error) => error.status === 400 && /future/i.test(error.message)
   );
+  assert.throws(
+    () => auth.register({
+      name: 'Young Guest',
+      email: 'young@example.com',
+      password: 'password123',
+      birthDate: '01/01/2020'
+    }),
+    (error) => error.status === 400 && /at least 18/.test(error.message)
+  );
+  assert.throws(
+    () => auth.register({
+      name: 'No Date',
+      email: 'nodate@example.com',
+      password: 'password123'
+    }),
+    (error) => error.status === 400 && /birth date/i.test(error.message)
+  );
 });
 
 test('rejects duplicate local emails and wrong passwords', () => {
@@ -71,11 +89,17 @@ test('rejects duplicate local emails and wrong passwords', () => {
   auth.register({
     name: 'Ada Guest',
     email: 'ada@example.com',
-    password: 'password123'
+    password: 'password123',
+    birthDate: '15/03/1990'
   });
 
   assert.throws(
-    () => auth.register({ name: 'Other', email: 'ada@example.com', password: 'password123' }),
+    () => auth.register({
+      name: 'Other',
+      email: 'ada@example.com',
+      password: 'password123',
+      birthDate: '15/03/1990'
+    }),
     { status: 409 }
   );
   assert.throws(
@@ -89,14 +113,30 @@ test('updates a personal photo and email address', () => {
   const created = auth.register({
     name: 'Ada Guest',
     email: 'ada@example.com',
-    password: 'password123'
+    password: 'password123',
+    birthDate: '15/03/1990'
   });
   auth.register({
     name: 'Other Guest',
     email: 'other@example.com',
-    password: 'password123'
+    password: 'password123',
+    birthDate: '15/03/1990'
   });
   assert.equal(created.user.photo, '');
+
+  const named = auth.updateProfile(created.token, { name: 'Ada Traveler' });
+  assert.equal(named.user.name, 'Ada Traveler');
+  assert.equal(named.user.birthDate, '1990-03-15');
+  assert.match(named.message, /Name updated/);
+  assert.throws(
+    () => auth.updateProfile(created.token, { name: 'A' }),
+    (error) => error.status === 400 && /full name/i.test(error.message)
+  );
+  assert.throws(
+    () => auth.updateProfile(created.token, { birthDate: '01/01/2020' }),
+    (error) => error.status === 400 && /at least 18/.test(error.message)
+  );
+  assert.equal(auth.me(created.token).user.name, 'Ada Traveler');
 
   const photo = 'data:image/png;base64,' + Buffer.from('photo').toString('base64');
   const withPhoto = auth.updateProfile(created.token, { photo });
@@ -113,7 +153,7 @@ test('updates a personal photo and email address', () => {
   assert.match(renamed.message, /Email address updated/);
 
   const login = auth.login({ email: 'ada.new@example.com', password: 'password123' });
-  assert.equal(login.user.name, 'Ada Guest');
+  assert.equal(login.user.name, 'Ada Traveler');
   assert.throws(
     () => auth.login({ email: 'ada@example.com', password: 'password123' }),
     (error) => error.status === 401
