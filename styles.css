@@ -2005,6 +2005,30 @@ body > header.header-bar {
   margin-bottom: 0.35rem;
 }
 
+.auth-field-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.auth-field-head label {
+  margin-bottom: 0.35rem;
+}
+
+.auth-forgot {
+  margin: 0 0 0.35rem;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.auth-forgot:hover,
+.auth-forgot:focus-visible {
+  text-decoration: underline;
+}
+
 .auth-page--wide {
   max-width: 760px;
 }

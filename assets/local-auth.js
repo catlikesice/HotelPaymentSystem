@@ -368,6 +368,54 @@
       };
     }
 
+    function clearSessionsForUser(userId) {
+      var sessions = readJson(storage, SESSIONS_KEY, {});
+      var changed = false;
+      Object.keys(sessions).forEach(function (token) {
+        if (sessions[token] && sessions[token].userId === userId) {
+          delete sessions[token];
+          changed = true;
+        }
+      });
+      if (changed) {
+        writeJson(storage, SESSIONS_KEY, sessions);
+      }
+    }
+
+    function resetPassword(payload) {
+      var email = normalizeEmail(payload && payload.email);
+      var password = String((payload && payload.password) || '');
+      if (!isValidEmail(email)) {
+        fail(400, 'Please enter a valid email address.');
+      }
+      if (password.length < 8) {
+        fail(400, 'Password must be at least 8 characters.');
+      }
+
+      var users = readJson(storage, USERS_KEY, []);
+      var index = -1;
+      var i;
+      for (i = 0; i < users.length; i += 1) {
+        if (users[i].email === email) {
+          index = i;
+          break;
+        }
+      }
+
+      var message = 'If an account exists for this email, the password has been updated.';
+      if (index === -1) {
+        hashPassword(password);
+        return { message: message, updated: false };
+      }
+
+      var hashed = hashPassword(password);
+      users[index].passwordSalt = hashed.salt;
+      users[index].passwordHash = hashed.hash;
+      writeJson(storage, USERS_KEY, users);
+      clearSessionsForUser(users[index].id);
+      return { message: message, updated: true };
+    }
+
     function logout(token) {
       if (!token) {
         return { message: 'Logged out successfully.' };
@@ -399,7 +447,8 @@
       login: login,
       logout: logout,
       me: me,
-      updateProfile: updateProfile
+      updateProfile: updateProfile,
+      resetPassword: resetPassword
     };
   }
 

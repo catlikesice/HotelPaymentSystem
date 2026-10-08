@@ -366,3 +366,58 @@ test('personal profile can save a photo and change the email address', async () 
   assert.equal(cleared.data.user.photo, '');
   assert.match(cleared.data.message, /removed/i);
 });
+
+test('resets a forgotten password without revealing whether the email exists', async () => {
+  const email = 'reset-' + Date.now() + '@example.com';
+  const password = 'password123';
+  const created = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'Reset Guest', email, password })
+  });
+  assert.equal(created.status, 201, created.data && created.data.error);
+
+  const unknown = await jsonRequest('/api/auth/reset-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: 'nobody-' + Date.now() + '@example.com', password: 'newpassword1' })
+  });
+  assert.equal(unknown.status, 200);
+  assert.equal(unknown.data.updated, undefined);
+  assert.match(unknown.data.message, /if an account exists/i);
+
+  const tooShort = await jsonRequest('/api/auth/reset-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: 'short' })
+  });
+  assert.equal(tooShort.status, 400);
+
+  const reset = await jsonRequest('/api/auth/reset-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email.toUpperCase(), password: 'newpassword1' })
+  });
+  assert.equal(reset.status, 200, reset.data && reset.data.error);
+  assert.match(reset.data.message, /password has been updated/i);
+
+  const oldSession = await jsonRequest('/api/auth/me', {
+    headers: { Authorization: 'Bearer ' + created.data.token }
+  });
+  assert.equal(oldSession.status, 401);
+
+  const oldLogin = await jsonRequest('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+  assert.equal(oldLogin.status, 401);
+
+  const newLogin = await jsonRequest('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: 'newpassword1' })
+  });
+  assert.equal(newLogin.status, 200);
+  assert.equal(newLogin.data.user.email, email);
+});

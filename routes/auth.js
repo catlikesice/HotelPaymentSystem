@@ -129,6 +129,20 @@ function isValidWebsite(value) {
   }
 }
 
+function clearSessionsForUser(userId) {
+  const sessions = readJson(SESSIONS_FILE, {});
+  let changed = false;
+  Object.keys(sessions).forEach((token) => {
+    if (sessions[token] && sessions[token].userId === userId) {
+      delete sessions[token];
+      changed = true;
+    }
+  });
+  if (changed) {
+    writeJson(SESSIONS_FILE, sessions);
+  }
+}
+
 function createSession(userId) {
   const sessions = readJson(SESSIONS_FILE, {});
   const token = crypto.randomBytes(32).toString('hex');
@@ -374,6 +388,34 @@ router.post('/profile', authLimiter, (req, res) => {
   return res.json({
     message: [detailsMessage, photoMessage, emailMessage].filter(Boolean).join(' ') || 'Profile updated.',
     user: publicUser(users[index])
+  });
+});
+
+router.post('/reset-password', authLimiter, (req, res) => {
+  const email = normalizeEmail(req.body && req.body.email);
+  const password = String((req.body && req.body.password) || '');
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ error: 'Please enter a valid email address.' });
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ error: 'Password must be at least 8 characters.' });
+  }
+
+  const users = readJson(USERS_FILE, []);
+  const index = users.findIndex((entry) => entry.email === email);
+  if (index === -1) {
+    hashPassword(password);
+  } else {
+    const { salt, hash } = hashPassword(password);
+    users[index].passwordSalt = salt;
+    users[index].passwordHash = hash;
+    writeJson(USERS_FILE, users);
+    clearSessionsForUser(users[index].id);
+  }
+
+  return res.json({
+    message: 'If an account exists for this email, the password has been updated.'
   });
 });
 

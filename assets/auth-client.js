@@ -191,6 +191,28 @@
     }
   }
 
+  async function resetPassword(payload) {
+    try {
+      const data = await request('/api/auth/reset-password', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+      if (localAccounts) {
+        try {
+          localAccounts.resetPassword(payload);
+        } catch (error) {
+          // The server already accepted the reset. A local copy is optional.
+        }
+      }
+      return data;
+    } catch (error) {
+      if (!shouldUseLocalFallback(error) || !localAccounts) {
+        throw error;
+      }
+      return localAccounts.resetPassword(payload);
+    }
+  }
+
   async function logout() {
     const token = getToken();
     try {
@@ -1467,19 +1489,58 @@
         const status = document.getElementById('auth-form-status');
         const submitBtn = forgotForm.querySelector('button[type="submit"]');
         const email = forgotForm.email.value.trim();
+        const password = forgotForm.password ? forgotForm.password.value : '';
+        const confirm = forgotForm.confirmPassword ? forgotForm.confirmPassword.value : '';
 
         if (!forgotForm.checkValidity()) {
           forgotForm.reportValidity();
           return;
         }
+        if (password !== confirm) {
+          if (status) {
+            status.textContent = 'Passwords do not match.';
+            status.className = 'auth-status auth-status--error';
+          }
+          return;
+        }
 
+        const submitLabel = submitBtn ? submitBtn.textContent : 'Reset password';
         if (submitBtn) {
           submitBtn.disabled = true;
+          submitBtn.textContent = 'Updating password...';
         }
         if (status) {
-          status.textContent = 'If an account exists for ' + email + ', reset instructions will be sent.';
-          status.className = 'auth-status auth-status--success';
+          status.textContent = '';
+          status.className = 'auth-status';
         }
+
+        resetPassword({ email: email, password: password })
+          .then(function(data) {
+            const stored = getStoredUser();
+            if (stored && stored.email && stored.email.toLowerCase() === email.toLowerCase()) {
+              clearSession();
+            }
+            if (status) {
+              status.textContent = (data && data.message)
+                || 'If an account exists for this email, the password has been updated.';
+              status.className = 'auth-status auth-status--success';
+            }
+            forgotForm.reset();
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = submitLabel;
+            }
+          })
+          .catch(function(error) {
+            if (status) {
+              status.textContent = error.message;
+              status.className = 'auth-status auth-status--error';
+            }
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = submitLabel;
+            }
+          });
       });
     }
   }
@@ -1505,6 +1566,7 @@
   window.AuthClient = {
     login: login,
     register: register,
+    resetPassword: resetPassword,
     logout: logout,
     me: me,
     updateProfile: updateProfile,

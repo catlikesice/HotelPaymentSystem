@@ -353,14 +353,15 @@
       const registerLink = loginPopup.querySelector('[data-login-register]');
       updateLinkContent(registerLink, mapping.register, mapping.registerAria);
 
-      const forgotLink = loginPopup.querySelector('[data-login-forgot]');
-      updateLinkContent(forgotLink, mapping.forgotPassword, mapping.forgotPassword);
-
       const logoutBtn = loginPopup.querySelector('.login-popup__logout');
       if (logoutBtn && mapping.logOut) {
         logoutBtn.textContent = mapping.logOut;
       }
     }
+
+    document.querySelectorAll('a[data-login-forgot]').forEach(function(forgotLink) {
+      updateLinkContent(forgotLink, mapping.forgotPassword, mapping.forgotPassword);
+    });
 
     const searchInput = navRoot.querySelector('.nav-search__input, .nav-search input[type="search"]');
     if (searchInput) {
