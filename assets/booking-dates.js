@@ -54,9 +54,21 @@
     return parts[2] + '/' + parts[1] + '/' + parts[0];
   }
 
-  function localTodayISO() {
-    var now = new Date();
-    return buildISO(now.getFullYear(), now.getMonth() + 1, now.getDate());
+  function localTodayISO(now) {
+    var date = now || new Date();
+    return buildISO(date.getFullYear(), date.getMonth() + 1, date.getDate());
+  }
+
+  function latestAdultISO(now) {
+    var date = now || new Date();
+    var year = date.getFullYear() - 18;
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var dim = new Date(Date.UTC(year, month, 0)).getUTCDate();
+    if (day > dim) {
+      day = dim;
+    }
+    return buildISO(year, month, day);
   }
 
   function validateBirthDate(value) {
@@ -95,6 +107,14 @@
         message: 'Birth date cannot be in the future.'
       };
     }
+    if (iso > latestAdultISO()) {
+      return {
+        ok: false,
+        empty: false,
+        iso: '',
+        message: 'You must be at least 18 years old. Choose an earlier date.'
+      };
+    }
     return { ok: true, empty: false, iso: iso, message: '' };
   }
 
@@ -106,14 +126,23 @@
     }
     if (text.indexOf('/') !== -1) {
       var parts = text.split('/');
-      var day = (parts[0] || '').replace(/\D/g, '').slice(0, 2);
-      var month = (parts[1] || '').replace(/\D/g, '').slice(0, 2);
-      var year = (parts[2] || '').replace(/\D/g, '').slice(0, 4);
+      var day = (parts[0] || '').replace(/\D/g, '');
+      var month = (parts[1] || '').replace(/\D/g, '');
+      var year = (parts.slice(2).join('')).replace(/\D/g, '');
+      if (day.length > 2) {
+        month = day.slice(2) + month;
+        day = day.slice(0, 2);
+      }
+      if (month.length > 2) {
+        year = month.slice(2) + year;
+        month = month.slice(0, 2);
+      }
+      year = year.slice(0, 4);
       var masked = day;
-      if (parts.length > 1) {
+      if (parts.length > 1 || month || year) {
         masked += '/' + month;
       }
-      if (parts.length > 2) {
+      if (parts.length > 2 || year) {
         masked += '/' + year;
       }
       return masked;
@@ -135,6 +164,7 @@
     maskInput: maskInput,
     isRealDate: isRealDate,
     localTodayISO: localTodayISO,
+    latestAdultISO: latestAdultISO,
     validateBirthDate: validateBirthDate
   };
 });

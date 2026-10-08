@@ -178,7 +178,13 @@
         fail(400, 'Please select a business type.');
       }
 
-      var birthDate = accountType === 'business' ? '' : normalizeBirthDate(body.birthDate);
+      var birthDate = '';
+      if (accountType !== 'business') {
+        if (!String(body.birthDate || '').trim()) {
+          fail(400, 'Please choose your birth date.');
+        }
+        birthDate = normalizeBirthDate(body.birthDate);
+      }
 
       var users = readJson(storage, USERS_KEY, []);
       if (users.some(function (user) { return user.email === email; })) {
@@ -251,8 +257,10 @@
       var body = payload || {};
       var hasEmail = Object.prototype.hasOwnProperty.call(body, 'email');
       var hasPhoto = Object.prototype.hasOwnProperty.call(body, 'photo');
-      if (!hasEmail && !hasPhoto) {
-        fail(400, 'Choose a photo or a new email address.');
+      var hasName = Object.prototype.hasOwnProperty.call(body, 'name');
+      var hasBirthDate = Object.prototype.hasOwnProperty.call(body, 'birthDate');
+      if (!hasEmail && !hasPhoto && !hasName && !hasBirthDate) {
+        fail(400, 'Choose a photo, a name, or a new email address.');
       }
 
       var sessions = readJson(storage, SESSIONS_KEY, {});
@@ -276,6 +284,29 @@
 
       var photoMessage = '';
       var emailMessage = '';
+      var detailsMessage = '';
+      var nextName = users[index].name;
+      var nextBirthDate = users[index].birthDate || '';
+
+      if (hasName) {
+        nextName = String(body.name || '').trim();
+        if (!nextName || nextName.length < 2) {
+          fail(400, 'Please enter your full name (at least 2 characters).');
+        }
+        if (nextName.length > 160) {
+          fail(400, 'Please enter a shorter name (160 characters or fewer).');
+        }
+      }
+
+      if (hasBirthDate) {
+        if ((users[index].accountType || 'customer') === 'business') {
+          fail(400, 'Date of birth is saved on guest accounts.');
+        }
+        if (!String(body.birthDate || '').trim()) {
+          fail(400, 'Please choose your birth date.');
+        }
+        nextBirthDate = normalizeBirthDate(body.birthDate);
+      }
 
       if (hasPhoto) {
         var photo = normalizePhoto(body.photo);
@@ -307,6 +338,24 @@
         }
       }
 
+      var nameChanged = hasName && nextName !== users[index].name;
+      var birthChanged = hasBirthDate && nextBirthDate !== (users[index].birthDate || '');
+      if (nameChanged) {
+        users[index].name = nextName;
+      }
+      if (birthChanged) {
+        users[index].birthDate = nextBirthDate;
+      }
+      if (nameChanged && birthChanged) {
+        detailsMessage = 'Name and date of birth updated.';
+      } else if (nameChanged) {
+        detailsMessage = 'Name updated.';
+      } else if (birthChanged) {
+        detailsMessage = 'Date of birth updated.';
+      } else if (hasName || hasBirthDate) {
+        detailsMessage = 'Your details are already up to date.';
+      }
+
       try {
         writeJson(storage, USERS_KEY, users);
       } catch (error) {
@@ -314,7 +363,7 @@
       }
 
       return {
-        message: [photoMessage, emailMessage].filter(Boolean).join(' ') || 'Profile updated.',
+        message: [detailsMessage, photoMessage, emailMessage].filter(Boolean).join(' ') || 'Profile updated.',
         user: publicUser(users[index])
       };
     }

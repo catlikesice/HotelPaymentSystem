@@ -228,10 +228,16 @@ test('personal account settings can upload a photo and change the email address'
   assert.match(personal, /Upload a photo/);
   assert.match(personal, /id="account-photo-save"/);
   assert.match(personal, /id="account-photo-remove"/);
+  assert.match(personal, /id="account-details-form"/);
+  assert.match(personal, /id="account-name-input"/);
+  assert.match(personal, /id="birthDate"/);
+  assert.match(personal, /at least 18/);
+  assert.match(personal, /Save details/);
   assert.match(personal, /id="account-email-form"/);
   assert.match(personal, /id="account-email-input"/);
   assert.match(personal, /id="account-email-password"/);
   assert.match(personal, /Change email/);
+  assert.doesNotMatch(business, /id="account-details-form"/);
   assert.doesNotMatch(business, /id="account-photo-form"/);
   assert.doesNotMatch(business, /id="account-email-form"/);
 
@@ -240,6 +246,9 @@ test('personal account settings can upload a photo and change the email address'
   assert.match(source, /\/api\/auth\/profile/);
   assert.match(source, /function prepareProfilePhoto/);
   assert.match(source, /account-photo-form/);
+  assert.match(source, /account-details-form/);
+  assert.match(source, /account-name-input/);
+  assert.match(source, /You must be at least 18 years old/);
   assert.match(source, /account-email-form/);
   assert.match(source, /Enter your current password to change your email address/);
 

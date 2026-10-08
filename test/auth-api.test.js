@@ -60,7 +60,8 @@ test('registers a guest account, logs in, and returns the public profile', async
     body: JSON.stringify({
       name: 'Ada Guest',
       email,
-      password
+      password,
+      birthDate: '15/03/1990'
     })
   });
 
@@ -113,6 +114,31 @@ test('registers a guest birth date and rejects a future date', async () => {
   });
   assert.equal(future.status, 400);
   assert.match(future.data.error, /future/i);
+
+  const young = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'Young Guest',
+      email: 'young-' + Date.now() + '@example.com',
+      password: 'password123',
+      birthDate: '01/01/2020'
+    })
+  });
+  assert.equal(young.status, 400);
+  assert.match(young.data.error, /at least 18/);
+
+  const missingBirthDate = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'No Date',
+      email: 'nodate-' + Date.now() + '@example.com',
+      password: 'password123'
+    })
+  });
+  assert.equal(missingBirthDate.status, 400);
+  assert.match(missingBirthDate.data.error, /birth date/i);
 });
 
 test('registers a business account with a local postal address', async () => {
@@ -149,14 +175,14 @@ test('rejects duplicate emails, bad passwords, and missing sessions', async () =
   const first = await jsonRequest('/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'First User', email, password: 'password123' })
+    body: JSON.stringify({ name: 'First User', email, password: 'password123', birthDate: '15/03/1990' })
   });
   assert.equal(first.status, 201);
 
   const duplicate = await jsonRequest('/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'Second User', email, password: 'password123' })
+    body: JSON.stringify({ name: 'Second User', email, password: 'password123', birthDate: '15/03/1990' })
   });
   assert.equal(duplicate.status, 409);
 
@@ -203,15 +229,49 @@ test('personal profile can save a photo and change the email address', async () 
   const created = await jsonRequest('/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'Ada Guest', email, password })
+    body: JSON.stringify({ name: 'Ada Guest', email, password, birthDate: '15/03/1990' })
   });
   assert.equal(created.status, 201, created.data && created.data.error);
   assert.equal(created.data.user.photo, '');
 
+  const named = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + created.data.token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: 'Ada Traveler' })
+  });
+  assert.equal(named.status, 200, named.data && named.data.error);
+  assert.equal(named.data.user.name, 'Ada Traveler');
+  assert.equal(named.data.user.birthDate, '1990-03-15');
+  assert.match(named.data.message, /Name updated/);
+
+  const youngProfile = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + created.data.token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ birthDate: '01/01/2020' })
+  });
+  assert.equal(youngProfile.status, 400);
+  assert.match(youngProfile.data.error, /at least 18/);
+
+  const shortName = await jsonRequest('/api/auth/profile', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + created.data.token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: 'A' })
+  });
+  assert.equal(shortName.status, 400);
+
   await jsonRequest('/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'Other Guest', email: otherEmail, password })
+    body: JSON.stringify({ name: 'Other Guest', email: otherEmail, password, birthDate: '15/03/1990' })
   });
 
   const authHeaders = {
@@ -313,7 +373,7 @@ test('resets a forgotten password without revealing whether the email exists', a
   const created = await jsonRequest('/api/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'Reset Guest', email, password })
+    body: JSON.stringify({ name: 'Reset Guest', email, password, birthDate: '15/03/1990' })
   });
   assert.equal(created.status, 201, created.data && created.data.error);
 

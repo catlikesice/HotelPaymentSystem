@@ -889,6 +889,7 @@
     setAccountText('[data-account-created]', formatJoinedDate(user.createdAt));
     showAccountPhoto(user.photo || '', user);
     fillAccountEmailField(user);
+    fillAccountDetails(user);
     setAccountRow('birthDate', formatCalendarDate(user.birthDate));
     setAccountRow('phone', user.phone);
 
@@ -935,6 +936,24 @@
       const saved = isProfilePhoto(user && user.photo);
       removeBtn.hidden = !saved;
     }
+  }
+
+  function fillAccountDetails(user) {
+    const nameInput = document.getElementById('account-name-input');
+    if (nameInput && document.activeElement !== nameInput) {
+      nameInput.value = (user && user.name) || '';
+    }
+    const birthInput = document.getElementById('birthDate');
+    const dialog = document.getElementById('birthDate-dialog');
+    const calendarOpen = dialog && !dialog.hidden;
+    if (!birthInput || document.activeElement === birthInput || calendarOpen) {
+      return;
+    }
+    const dates = window.BookingDates;
+    const european = dates && typeof dates.toEuropean === 'function'
+      ? dates.toEuropean(user && user.birthDate)
+      : '';
+    birthInput.value = european || '';
   }
 
   function fillAccountEmailField(user) {
@@ -1014,8 +1033,79 @@
   }
 
   function bindAccountSettings() {
+    const detailsForm = document.getElementById('account-details-form');
     const photoForm = document.getElementById('account-photo-form');
     const emailForm = document.getElementById('account-email-form');
+    if (detailsForm && !detailsForm.getAttribute('data-bound')) {
+      detailsForm.setAttribute('data-bound', 'true');
+      const nameInput = document.getElementById('account-name-input');
+      const birthInput = document.getElementById('birthDate');
+      const saveBtn = document.getElementById('account-details-save');
+      if (birthInput) {
+        birthInput.addEventListener('input', function() {
+          birthInput.classList.remove('is-invalid');
+          birthInput.removeAttribute('aria-invalid');
+        });
+      }
+      detailsForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const name = nameInput ? nameInput.value.trim() : '';
+        if (name.length < 2 || name.length > 160) {
+          setSettingsStatus(
+            'account-details-status',
+            name.length > 160
+              ? 'Please enter a shorter name (160 characters or fewer).'
+              : 'Please enter your full name (at least 2 characters).',
+            'error'
+          );
+          if (nameInput) {
+            nameInput.focus();
+          }
+          return;
+        }
+        const dates = window.BookingDates;
+        const birthResult = dates && typeof dates.validateBirthDate === 'function'
+          ? dates.validateBirthDate(birthInput ? birthInput.value : '')
+          : null;
+        if (!birthResult || !birthResult.ok) {
+          if (birthInput) {
+            birthInput.classList.add('is-invalid');
+            birthInput.setAttribute('aria-invalid', 'true');
+            birthInput.focus();
+          }
+          setSettingsStatus(
+            'account-details-status',
+            (birthResult && birthResult.message) || 'You must be at least 18 years old. Choose an earlier date.',
+            'error'
+          );
+          return;
+        }
+        if (birthInput) {
+          birthInput.classList.remove('is-invalid');
+          birthInput.removeAttribute('aria-invalid');
+        }
+        const saveLabel = saveBtn ? saveBtn.textContent : 'Save details';
+        if (saveBtn) {
+          saveBtn.disabled = true;
+          saveBtn.textContent = 'Saving...';
+        }
+        updateProfile({ name: name, birthDate: birthResult.iso })
+          .then(function(data) {
+            setSettingsStatus('account-details-status', (data && data.message) || 'Name updated.', 'success');
+            renderAccountPage((data && data.user) || getStoredUser());
+          })
+          .catch(function(error) {
+            setSettingsStatus('account-details-status', error.message || 'Could not save those details.', 'error');
+          })
+          .finally(function() {
+            if (saveBtn) {
+              saveBtn.disabled = false;
+              saveBtn.textContent = saveLabel;
+            }
+          });
+      });
+    }
+
     if (photoForm && !photoForm.getAttribute('data-bound')) {
       photoForm.setAttribute('data-bound', 'true');
       const input = document.getElementById('account-photo-input');
