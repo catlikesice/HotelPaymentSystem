@@ -94,6 +94,19 @@ CREATE TABLE accounts (
                       ),
   -- Postal block from CountryAddress.formatAddress, including the company name.
   address_formatted   TEXT NOT NULL DEFAULT '' CHECK (address_formatted = trim(address_formatted)),
+  -- Profile photo from POST /api/auth/profile. Empty until the person uploads one.
+  photo               TEXT NOT NULL DEFAULT '' CHECK (
+                        photo = ''
+                        OR (
+                          length(photo) BETWEEN 26 AND 110000
+                          AND (
+                            photo GLOB 'data:image/jpeg;base64,*'
+                            OR photo GLOB 'data:image/png;base64,*'
+                            OR photo GLOB 'data:image/webp;base64,*'
+                            OR photo GLOB 'data:image/gif;base64,*'
+                          )
+                        )
+                      ),
   -- hex(scrypt salt), 16 bytes.
   password_salt       TEXT NOT NULL CHECK (
                         length(password_salt) = 32
@@ -195,6 +208,7 @@ SELECT
   country,
   city,
   address_formatted  AS addressFormatted,
+  photo,
   created_at         AS createdAt
 FROM accounts
 ORDER BY created_at, email;

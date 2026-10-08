@@ -12,7 +12,7 @@ const contactRouter = require('./routes/contact');
 const { serveCityPage } = require('./lib/city-pages');
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '200kb' }));
 
 // Keep auth/user storage and server internals off the public static surface.
 app.use((req, res, next) => {

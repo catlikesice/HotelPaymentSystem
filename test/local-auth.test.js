@@ -84,6 +84,79 @@ test('rejects duplicate local emails and wrong passwords', () => {
   );
 });
 
+test('updates a personal photo and email address', () => {
+  const auth = LocalAuth.create({ storage: memoryStorage() });
+  const created = auth.register({
+    name: 'Ada Guest',
+    email: 'ada@example.com',
+    password: 'password123'
+  });
+  auth.register({
+    name: 'Other Guest',
+    email: 'other@example.com',
+    password: 'password123'
+  });
+  assert.equal(created.user.photo, '');
+
+  const photo = 'data:image/png;base64,' + Buffer.from('photo').toString('base64');
+  const withPhoto = auth.updateProfile(created.token, { photo });
+  assert.equal(withPhoto.user.photo, photo);
+  assert.equal(withPhoto.user.passwordHash, undefined);
+  assert.equal(auth.me(created.token).user.photo, photo);
+
+  const renamed = auth.updateProfile(created.token, {
+    email: 'Ada.New@example.com',
+    password: 'password123'
+  });
+  assert.equal(renamed.user.email, 'ada.new@example.com');
+  assert.equal(renamed.user.photo, photo);
+  assert.match(renamed.message, /Email address updated/);
+
+  const login = auth.login({ email: 'ada.new@example.com', password: 'password123' });
+  assert.equal(login.user.name, 'Ada Guest');
+  assert.throws(
+    () => auth.login({ email: 'ada@example.com', password: 'password123' }),
+    (error) => error.status === 401
+  );
+
+  const same = auth.updateProfile(created.token, { email: 'ada.new@example.com' });
+  assert.match(same.message, /already up to date/i);
+
+  assert.throws(
+    () => auth.updateProfile(created.token, { email: 'other@example.com', password: 'password123' }),
+    (error) => error.status === 409
+  );
+  assert.throws(
+    () => auth.updateProfile(created.token, {
+      email: 'ada.other@example.com',
+      password: 'wrong-password'
+    }),
+    (error) => error.status === 401
+  );
+  assert.equal(auth.me(created.token).user.email, 'ada.new@example.com');
+  assert.throws(
+    () => auth.updateProfile(created.token, { email: 'ada.other@example.com' }),
+    (error) => error.status === 400 && /password/i.test(error.message)
+  );
+
+  const cleared = auth.updateProfile(created.token, { photo: '' });
+  assert.equal(cleared.user.photo, '');
+  assert.match(cleared.message, /removed/i);
+
+  assert.throws(
+    () => auth.updateProfile(created.token, { photo: 'data:image/svg+xml;base64,PHN2Zz4=' }),
+    (error) => error.status === 400
+  );
+  assert.throws(
+    () => auth.updateProfile('', { email: 'fresh@example.com', password: 'password123' }),
+    (error) => error.status === 401
+  );
+  assert.throws(
+    () => auth.updateProfile(created.token, {}),
+    (error) => error.status === 400
+  );
+});
+
 test('auth-client falls back to local accounts when the API is missing', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'assets/auth-client.js'), 'utf8');
   assert.match(source, /shouldUseLocalFallback/);

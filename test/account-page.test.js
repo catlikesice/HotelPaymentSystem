@@ -215,6 +215,40 @@ test('business accounts get a portal for uploading accommodation locations', () 
   assert.doesNotMatch(html, /Old Town Riverside Hostel/);
 });
 
+test('personal account settings can upload a photo and change the email address', () => {
+  const html = fs.readFileSync(path.join(root, 'account.html'), 'utf8');
+  const personal = html.slice(
+    html.indexOf('id="account-dashboard"'),
+    html.indexOf('id="business-dashboard"')
+  );
+  const business = html.slice(html.indexOf('id="business-dashboard"'));
+  assert.match(personal, /id="account-photo-form"/);
+  assert.match(personal, /id="account-photo-input"/);
+  assert.match(personal, /accept="image\/jpeg,image\/png,image\/webp,image\/gif"/);
+  assert.match(personal, /Upload a photo/);
+  assert.match(personal, /id="account-photo-save"/);
+  assert.match(personal, /id="account-photo-remove"/);
+  assert.match(personal, /id="account-email-form"/);
+  assert.match(personal, /id="account-email-input"/);
+  assert.match(personal, /id="account-email-password"/);
+  assert.match(personal, /Change email/);
+  assert.doesNotMatch(business, /id="account-photo-form"/);
+  assert.doesNotMatch(business, /id="account-email-form"/);
+
+  const source = fs.readFileSync(path.join(root, 'assets/auth-client.js'), 'utf8');
+  assert.match(source, /function updateProfile/);
+  assert.match(source, /\/api\/auth\/profile/);
+  assert.match(source, /function prepareProfilePhoto/);
+  assert.match(source, /account-photo-form/);
+  assert.match(source, /account-email-form/);
+  assert.match(source, /Enter your current password to change your email address/);
+
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /\.account-settings\s*\{[^}]*grid-template-columns:\s*1fr 1fr/s);
+  assert.match(css, /\.account-photo__image\s*\{[^}]*object-fit:\s*cover/s);
+  assert.match(css, /\.account-grid,\s*\.account-settings\s*\{[^}]*grid-template-columns:\s*1fr;/s);
+});
+
 test('account portal keeps the sidebar on screen while the main column scrolls', () => {
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
   assert.match(css, /body\.portal-open\s*\{[^}]*overflow:\s*hidden/s);

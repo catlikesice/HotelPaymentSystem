@@ -229,6 +229,28 @@
     }
   }
 
+  async function updateProfile(payload) {
+    try {
+      const data = await request('/api/auth/profile', {
+        method: 'POST',
+        body: JSON.stringify(payload || {})
+      });
+      if (data && data.user) {
+        setSession(getToken(), data.user);
+      }
+      return data;
+    } catch (error) {
+      if (!shouldUseLocalFallback(error) || !localAccounts) {
+        throw error;
+      }
+      const data = localAccounts.updateProfile(getToken(), payload || {});
+      if (data && data.user) {
+        setSession(getToken(), data.user);
+      }
+      return data;
+    }
+  }
+
   function loginPopupMarkup() {
     return (
       '<div class="login-popup__backdrop" data-login-close></div>' +
@@ -843,6 +865,8 @@
     setAccountText('[data-account-name]', user.name || '');
     setAccountText('[data-account-email]', user.email || '');
     setAccountText('[data-account-created]', formatJoinedDate(user.createdAt));
+    showAccountPhoto(user.photo || '', user);
+    fillAccountEmailField(user);
     setAccountRow('birthDate', formatCalendarDate(user.birthDate));
     setAccountRow('phone', user.phone);
 
@@ -856,6 +880,250 @@
       setAccountRow('vatId', user.vatId);
       setAccountRow('website', user.website);
       setAccountRow('address', user.addressFormatted);
+    }
+  }
+
+  function isProfilePhoto(value) {
+    return /^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+/]+={0,2}$/.test(String(value || ''));
+  }
+
+  function showAccountPhoto(photo, user) {
+    const image = document.querySelector('[data-account-photo]');
+    const fallback = document.querySelector('[data-account-photo-fallback]');
+    const removeBtn = document.getElementById('account-photo-remove');
+    const name = String((user && user.name) || '').trim();
+    const initial = name ? name.charAt(0).toUpperCase() : '';
+    const visiblePhoto = isProfilePhoto(photo) ? photo : '';
+    if (fallback) {
+      fallback.textContent = initial;
+      fallback.hidden = Boolean(visiblePhoto);
+    }
+    if (image) {
+      if (visiblePhoto) {
+        image.src = visiblePhoto;
+        image.alt = name ? (name + ' profile photo') : 'Profile photo';
+        image.hidden = false;
+      } else {
+        image.removeAttribute('src');
+        image.alt = '';
+        image.hidden = true;
+      }
+    }
+    if (removeBtn) {
+      const saved = isProfilePhoto(user && user.photo);
+      removeBtn.hidden = !saved;
+    }
+  }
+
+  function fillAccountEmailField(user) {
+    const input = document.getElementById('account-email-input');
+    if (!input || document.activeElement === input) {
+      return;
+    }
+    input.value = (user && user.email) || '';
+  }
+
+  function setSettingsStatus(id, message, kind) {
+    const status = document.getElementById(id);
+    if (!status) {
+      return;
+    }
+    status.textContent = message || '';
+    status.className = 'auth-status' + (kind ? ' auth-status--' + kind : '');
+  }
+
+  function prepareProfilePhoto(file) {
+    return new Promise(function(resolve, reject) {
+      const allowed = {
+        'image/jpeg': true,
+        'image/png': true,
+        'image/webp': true,
+        'image/gif': true
+      };
+      if (!file || !allowed[file.type]) {
+        reject(new Error('Please upload a JPEG, PNG, WebP, or GIF photo.'));
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        reject(new Error('That photo is too large. Please choose an image under 8 MB.'));
+        return;
+      }
+      const reader = new FileReader();
+      reader.onerror = function() {
+        reject(new Error('Could not read that photo. Please try another image.'));
+      };
+      reader.onload = function() {
+        const image = new Image();
+        image.onerror = function() {
+          reject(new Error('Could not read that photo. Please try another image.'));
+        };
+        image.onload = function() {
+          const maxEdge = 320;
+          const scale = Math.min(1, maxEdge / Math.max(image.width || 1, image.height || 1));
+          const width = Math.max(1, Math.round(image.width * scale));
+          const height = Math.max(1, Math.round(image.height * scale));
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const context = canvas.getContext('2d');
+          if (!context) {
+            reject(new Error('Could not read that photo. Please try another image.'));
+            return;
+          }
+          context.fillStyle = '#fffdf2';
+          context.fillRect(0, 0, width, height);
+          context.drawImage(image, 0, 0, width, height);
+          let quality = 0.82;
+          let dataUrl = canvas.toDataURL('image/jpeg', quality);
+          while (dataUrl.length > 90000 && quality > 0.45) {
+            quality = Math.round((quality - 0.08) * 100) / 100;
+            dataUrl = canvas.toDataURL('image/jpeg', quality);
+          }
+          if (!isProfilePhoto(dataUrl) || dataUrl.length > 110000) {
+            reject(new Error('That photo is too large. Please choose a smaller image.'));
+            return;
+          }
+          resolve(dataUrl);
+        };
+        image.src = String(reader.result || '');
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function bindAccountSettings() {
+    const photoForm = document.getElementById('account-photo-form');
+    const emailForm = document.getElementById('account-email-form');
+    if (photoForm && !photoForm.getAttribute('data-bound')) {
+      photoForm.setAttribute('data-bound', 'true');
+      const input = document.getElementById('account-photo-input');
+      const saveBtn = document.getElementById('account-photo-save');
+      const removeBtn = document.getElementById('account-photo-remove');
+
+      if (input) {
+        input.addEventListener('change', function() {
+          const file = input.files && input.files[0];
+          if (!file) {
+            return;
+          }
+          prepareProfilePhoto(file).then(function(photo) {
+            showAccountPhoto(photo, getStoredUser());
+            setSettingsStatus('account-photo-status', '', '');
+          }).catch(function(error) {
+            input.value = '';
+            showAccountPhoto((getStoredUser() && getStoredUser().photo) || '', getStoredUser());
+            setSettingsStatus('account-photo-status', error.message, 'error');
+          });
+        });
+      }
+
+      photoForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const file = input && input.files && input.files[0];
+        if (!file) {
+          setSettingsStatus('account-photo-status', 'Choose a photo to upload.', 'error');
+          if (input) {
+            input.focus();
+          }
+          return;
+        }
+        const saveLabel = saveBtn ? saveBtn.textContent : 'Save photo';
+        if (saveBtn) {
+          saveBtn.disabled = true;
+          saveBtn.textContent = 'Saving...';
+        }
+        prepareProfilePhoto(file)
+          .then(function(photo) {
+            return updateProfile({ photo: photo });
+          })
+          .then(function(data) {
+            if (input) {
+              input.value = '';
+            }
+            setSettingsStatus('account-photo-status', (data && data.message) || 'Profile photo saved.', 'success');
+            renderAccountPage((data && data.user) || getStoredUser());
+          })
+          .catch(function(error) {
+            setSettingsStatus('account-photo-status', error.message || 'Could not save that photo.', 'error');
+            showAccountPhoto((getStoredUser() && getStoredUser().photo) || '', getStoredUser());
+          })
+          .finally(function() {
+            if (saveBtn) {
+              saveBtn.disabled = false;
+              saveBtn.textContent = saveLabel;
+            }
+          });
+      });
+
+      if (removeBtn) {
+        removeBtn.addEventListener('click', function() {
+          removeBtn.disabled = true;
+          updateProfile({ photo: '' })
+            .then(function(data) {
+              if (input) {
+                input.value = '';
+              }
+              setSettingsStatus('account-photo-status', (data && data.message) || 'Profile photo removed.', 'success');
+              renderAccountPage((data && data.user) || getStoredUser());
+            })
+            .catch(function(error) {
+              setSettingsStatus('account-photo-status', error.message || 'Could not remove that photo.', 'error');
+            })
+            .finally(function() {
+              removeBtn.disabled = false;
+            });
+        });
+      }
+    }
+
+    if (emailForm && !emailForm.getAttribute('data-bound')) {
+      emailForm.setAttribute('data-bound', 'true');
+      const emailInput = document.getElementById('account-email-input');
+      const passwordInput = document.getElementById('account-email-password');
+      const saveBtn = document.getElementById('account-email-save');
+      emailForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = emailInput ? emailInput.value.trim() : '';
+        const password = passwordInput ? passwordInput.value : '';
+        const current = String((getStoredUser() && getStoredUser().email) || '');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 160) {
+          setSettingsStatus('account-email-status', 'Please enter a valid email address.', 'error');
+          if (emailInput) {
+            emailInput.focus();
+          }
+          return;
+        }
+        const changed = email.toLowerCase() !== current.toLowerCase();
+        if (changed && !password) {
+          setSettingsStatus('account-email-status', 'Enter your current password to change your email address.', 'error');
+          if (passwordInput) {
+            passwordInput.focus();
+          }
+          return;
+        }
+        const saveLabel = saveBtn ? saveBtn.textContent : 'Change email';
+        if (saveBtn) {
+          saveBtn.disabled = true;
+          saveBtn.textContent = 'Saving...';
+        }
+        updateProfile({ email: email, password: password })
+          .then(function(data) {
+            if (passwordInput) {
+              passwordInput.value = '';
+            }
+            setSettingsStatus('account-email-status', (data && data.message) || 'Email address updated.', 'success');
+            renderAccountPage((data && data.user) || getStoredUser());
+          })
+          .catch(function(error) {
+            setSettingsStatus('account-email-status', error.message || 'Could not change that email address.', 'error');
+          })
+          .finally(function() {
+            if (saveBtn) {
+              saveBtn.disabled = false;
+              saveBtn.textContent = saveLabel;
+            }
+          });
+      });
     }
   }
 
@@ -932,6 +1200,7 @@
       }
     });
 
+    bindAccountSettings();
     renderAccountPage(getStoredUser());
     me().then(function(user) {
       renderAccountPage(user);
@@ -1148,6 +1417,7 @@
     register: register,
     logout: logout,
     me: me,
+    updateProfile: updateProfile,
     getToken: getToken,
     getUser: getStoredUser,
     listBookings: listBookings,

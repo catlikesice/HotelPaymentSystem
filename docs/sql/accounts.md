@@ -25,11 +25,14 @@ The statements live in [`accounts.sql`](accounts.sql). Dialect is SQLite 3.
 | `city` | `city` | City taken from the validated address |
 | `address_json` | `address` | Object of local address fields. NULL when there is no address |
 | `address_formatted` | `addressFormatted` | Postal block, company name on the first line for a business |
+| `photo` | `photo` | Profile image as a `data:image/jpeg`, `png`, `webp`, or `gif` base64 URL, at most 110,000 characters. Empty until the person uploads one |
 | `password_salt` | `passwordSalt` | Not part of `publicUser()` |
 | `password_hash` | `passwordHash` | Not part of `publicUser()` |
 | `created_at` | `createdAt` | ISO-8601 UTC, for example `2026-05-10T09:15:00.000Z` |
 
 A business row must have a company name, a business type, a country, `address_json`, and `address_formatted`. A guest row may leave the company and address columns empty. `email` is unique, which is the same rule as the 409 response "An account with this email already exists."
+
+A signed-in person can change that email and photo with `POST /api/auth/profile`. The personal account page sends the same fields from Profile & settings. A new email has to be valid, unique, and confirmed with the current password. `photo` is the data URL above, or an empty string to remove it. The password hash never changes on that route, and the session stays on the same account id.
 
 `address_json` uses the keys produced by `CountryAddress.validateAddress` for that country (`streetName`, `houseNumber`, `postalCode`, and the optional local fields such as `apartment` or `floor`). Store the normalized postal code, for example `LV-1011`, not the digits the person typed.
 
