@@ -57,10 +57,16 @@ const DESTINATIONS = [
     country: 'Denmark',
     url: 'skagen.html',
     hotels: ['Brøndums Hotel', 'Color Hotel Skagen', 'Ruths Hotel']
+  },
+  {
+    city: 'Ruka-Kuusamo',
+    country: 'Finland',
+    url: 'ruka-kuusamo.html',
+    hotels: ['Hotel Rukatonttu', 'Ruka Peak', 'Scandic Rukahovi']
   }
 ];
 
-test('Levi, Voss, Geilo, Sälen, Ylläs, Hemsedal, and Skagen are in the catalog', () => {
+test('Levi, Voss, Geilo, Sälen, Ylläs, Hemsedal, Skagen, and Ruka-Kuusamo are in the catalog', () => {
   const catalog = loadCatalog();
   DESTINATIONS.forEach((destination) => {
     const city = catalog.cities.find((item) => item.city === destination.city);
@@ -81,7 +87,7 @@ test('Levi, Voss, Geilo, Sälen, Ylläs, Hemsedal, and Skagen are in the catalog
   });
 });
 
-test('Levi, Voss, Geilo, Sälen, Ylläs, Hemsedal, and Skagen have listing pages', () => {
+test('Levi, Voss, Geilo, Sälen, Ylläs, Hemsedal, Skagen, and Ruka-Kuusamo have listing pages', () => {
   DESTINATIONS.forEach((destination) => {
     const filePath = path.join(root, destination.url);
     assert.equal(fs.existsSync(filePath), true, destination.url + ' should exist');
