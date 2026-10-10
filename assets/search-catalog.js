@@ -150,6 +150,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Geilo",
+      "city": "Geilo",
+      "country": "Norway",
+      "url": "geilo.html",
+      "description": "Browse hotels in Geilo, Norway."
+    },
+    {
+      "type": "city",
       "name": "Glasgow",
       "city": "Glasgow",
       "country": "Scotland",
@@ -179,6 +187,14 @@ window.SEARCH_CATALOG = {
       "country": "Finland",
       "url": "helsinki.html",
       "description": "Browse hotels in Helsinki, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Hemsedal",
+      "city": "Hemsedal",
+      "country": "Norway",
+      "url": "hemsedal.html",
+      "description": "Browse hotels in Hemsedal, Norway."
     },
     {
       "type": "city",
@@ -275,6 +291,14 @@ window.SEARCH_CATALOG = {
       "country": "Scotland",
       "url": "lerwick.html",
       "description": "Browse hotels in Lerwick, Scotland."
+    },
+    {
+      "type": "city",
+      "name": "Levi",
+      "city": "Levi",
+      "country": "Finland",
+      "url": "levi.html",
+      "description": "Browse hotels in Levi, Finland."
     },
     {
       "type": "city",
@@ -462,6 +486,22 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Ruka-Kuusamo",
+      "city": "Ruka-Kuusamo",
+      "country": "Finland",
+      "url": "ruka-kuusamo.html",
+      "description": "Browse hotels in Ruka-Kuusamo, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Sälen",
+      "city": "Sälen",
+      "country": "Sweden",
+      "url": "salen.html",
+      "description": "Browse hotels in Sälen, Sweden."
+    },
+    {
+      "type": "city",
       "name": "Sauðárkrókur",
       "city": "Sauðárkrókur",
       "country": "Iceland",
@@ -475,6 +515,14 @@ window.SEARCH_CATALOG = {
       "country": "Lithuania",
       "url": "šiauliai.htm",
       "description": "Browse hotels in Šiauliai, Lithuania."
+    },
+    {
+      "type": "city",
+      "name": "Skagen",
+      "city": "Skagen",
+      "country": "Denmark",
+      "url": "skagen.html",
+      "description": "Browse hotels in Skagen, Denmark."
     },
     {
       "type": "city",
@@ -611,6 +659,22 @@ window.SEARCH_CATALOG = {
       "country": "Lithuania",
       "url": "vilnius.html",
       "description": "Browse hotels in Vilnius, Lithuania."
+    },
+    {
+      "type": "city",
+      "name": "Voss",
+      "city": "Voss",
+      "country": "Norway",
+      "url": "voss.html",
+      "description": "Browse hotels in Voss, Norway."
+    },
+    {
+      "type": "city",
+      "name": "Ylläs",
+      "city": "Ylläs",
+      "country": "Finland",
+      "url": "yllas.html",
+      "description": "Browse hotels in Ylläs, Finland."
     }
   ],
   "hotels": [
@@ -1210,6 +1274,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Bardøla Høyfjellshotell",
+      "city": "Geilo",
+      "country": "Norway",
+      "url": "bardola-hoyfjellshotell.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Mountain hotel above Geilo, with ski slopes and a path onto the Hardangervidda."
+    },
+    {
+      "type": "hotel",
+      "name": "Dr. Holms Hotel",
+      "city": "Geilo",
+      "country": "Norway",
+      "url": "dr-holms-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Historic timber hotel in Geilo, beside the railway and the village centre."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Vestlia",
+      "city": "Geilo",
+      "country": "Norway",
+      "url": "hotel-vestlia.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Family hotel on the west side of Geilo, close to the cross-country trails."
+    },
+    {
+      "type": "hotel",
       "name": "Kimpton Blythswood Square",
       "city": "Glasgow",
       "country": "Scotland",
@@ -1339,6 +1436,39 @@ window.SEARCH_CATALOG = {
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
       "description": "Contemporary hotel next to Helsinki Central Station, great for exploring the city."
+    },
+    {
+      "type": "hotel",
+      "name": "Harahorn",
+      "city": "Hemsedal",
+      "country": "Norway",
+      "url": "harahorn.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Timber hotel in Hemsedal, set among the valley farms below the alpine slopes."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Skogstad",
+      "city": "Hemsedal",
+      "country": "Norway",
+      "url": "hotel-skogstad.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Village hotel in Hemsedal, at the foot of the ski area and the river."
+    },
+    {
+      "type": "hotel",
+      "name": "Skarsnuten Hotel",
+      "city": "Hemsedal",
+      "country": "Norway",
+      "url": "skarsnuten-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Mountaintop hotel above Hemsedal, with wide views over the valley."
     },
     {
       "type": "hotel",
@@ -1691,6 +1821,39 @@ window.SEARCH_CATALOG = {
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
       "description": "Harbour hotel in Lerwick, overlooking the sound and the ferry to Bressay."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel K5 Levi",
+      "city": "Levi",
+      "country": "Finland",
+      "url": "hotel-k5-levi.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Slope-side hotel in Levi, beside the gondola and the village centre."
+    },
+    {
+      "type": "hotel",
+      "name": "Hullu Poro",
+      "city": "Levi",
+      "country": "Finland",
+      "url": "hullu-poro.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Lively hotel in Levi, with saunas along the main pedestrian street."
+    },
+    {
+      "type": "hotel",
+      "name": "Levi Hotel Spa",
+      "city": "Levi",
+      "country": "Finland",
+      "url": "levi-hotel-spa.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Spa hotel in Levi, with pools looking toward the fell."
     },
     {
       "type": "hotel",
@@ -2387,6 +2550,72 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Hotel Rukatonttu",
+      "city": "Ruka-Kuusamo",
+      "country": "Finland",
+      "url": "hotel-rukatonttu.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Village hotel in Ruka, a short walk from the slopes in Kuusamo."
+    },
+    {
+      "type": "hotel",
+      "name": "Ruka Peak",
+      "city": "Ruka-Kuusamo",
+      "country": "Finland",
+      "url": "ruka-peak.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Hilltop hotel at Ruka, above the village and the Kuusamo fells."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Rukahovi",
+      "city": "Ruka-Kuusamo",
+      "country": "Finland",
+      "url": "scandic-rukahovi.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Slope-side hotel in the centre of the Ruka-Kuusamo ski village."
+    },
+    {
+      "type": "hotel",
+      "name": "Högfjällshotellet",
+      "city": "Sälen",
+      "country": "Sweden",
+      "url": "hogfjallshotellet.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Ski hotel at Högfjället in Sälen, above the valley and the trail network."
+    },
+    {
+      "type": "hotel",
+      "name": "Hundfjällshotellet",
+      "city": "Sälen",
+      "country": "Sweden",
+      "url": "hundfjallshotellet.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Mountain hotel at Hundfjället in Sälen, close to the lifts and the forest trails."
+    },
+    {
+      "type": "hotel",
+      "name": "Tandådalens Fjällhotell",
+      "city": "Sälen",
+      "country": "Sweden",
+      "url": "tandadalens-fjallhotell.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Fell hotel in Tandådalen, in the Sälen ski area."
+    },
+    {
+      "type": "hotel",
       "name": "Hótel Tindastóll",
       "city": "Sauðárkrókur",
       "country": "Iceland",
@@ -2439,6 +2668,39 @@ window.SEARCH_CATALOG = {
       "price": "0.04 ETH / night",
       "priceEth": 0.04,
       "description": "Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast."
+    },
+    {
+      "type": "hotel",
+      "name": "Brøndums Hotel",
+      "city": "Skagen",
+      "country": "Denmark",
+      "url": "brondums-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Historic hotel in Skagen, beside the art museum and the old town lanes."
+    },
+    {
+      "type": "hotel",
+      "name": "Color Hotel Skagen",
+      "city": "Skagen",
+      "country": "Denmark",
+      "url": "color-hotel-skagen.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Harbour hotel in Skagen, a short walk from the fishing port and the yellow houses."
+    },
+    {
+      "type": "hotel",
+      "name": "Ruths Hotel",
+      "city": "Skagen",
+      "country": "Denmark",
+      "url": "ruths-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Seaside hotel in Old Skagen, between the dunes and the beach."
     },
     {
       "type": "hotel",
@@ -2934,6 +3196,72 @@ window.SEARCH_CATALOG = {
       "price": "0.07 ETH / night",
       "priceEth": 0.07,
       "description": "Modern riverside hotel offering panoramic city views, an indoor pool and business facilities for business and leisure travellers."
+    },
+    {
+      "type": "hotel",
+      "name": "Fleischer’s Hotel",
+      "city": "Voss",
+      "country": "Norway",
+      "url": "fleischers-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Historic hotel by Voss station, where the Bergen railway meets the lake."
+    },
+    {
+      "type": "hotel",
+      "name": "Park Hotel Vossevangen",
+      "city": "Voss",
+      "country": "Norway",
+      "url": "park-hotel-vossevangen.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Lakeside hotel in Voss, beside the station and the town park."
+    },
+    {
+      "type": "hotel",
+      "name": "Scandic Voss",
+      "city": "Voss",
+      "country": "Norway",
+      "url": "scandic-voss.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Modern hotel in Voss, a short walk from the lake and the gondola."
+    },
+    {
+      "type": "hotel",
+      "name": "Äkäshotelli",
+      "city": "Ylläs",
+      "country": "Finland",
+      "url": "akashotelli.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Hotel in Äkäslompolo, at the foot of Ylläs fell and the ski trails."
+    },
+    {
+      "type": "hotel",
+      "name": "Lapland Hotels Ylläs",
+      "city": "Ylläs",
+      "country": "Finland",
+      "url": "lapland-hotels-yllas.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Fell hotel in Ylläsjärvi, close to the gondola and the village."
+    },
+    {
+      "type": "hotel",
+      "name": "Ylläs Saaga",
+      "city": "Ylläs",
+      "country": "Finland",
+      "url": "yllas-saaga.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Spa hotel in Äkäslompolo, with pools and views toward Ylläs."
     }
   ]
 };
