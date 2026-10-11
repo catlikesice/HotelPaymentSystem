@@ -137,6 +137,7 @@ test('scotland, lithuania, and finland towns without pages are searchable', asyn
     { q: 'Broadford', city: 'Broadford', country: 'Scotland', hotel: 'Broadford Bay Hotel', file: 'broadford.html' },
     { q: 'Armadale', city: 'Armadale', country: 'Scotland', hotel: 'Armadale Pier Hotel', file: 'armadale.html' },
     { q: 'Lochmaddy', city: 'Lochmaddy', country: 'Scotland', hotel: 'Lochmaddy Harbour Hotel', file: 'lochmaddy.html' },
+    { q: 'Brodick', city: 'Brodick', country: 'Scotland', hotel: 'Brodick Ferry Hotel', file: 'brodick.html' },
     { q: 'Palanga', city: 'Palanga', country: 'Lithuania', hotel: 'Palanga Dune Hotel', file: 'palanga.html' },
     { q: 'Druskininkai', city: 'Druskininkai', country: 'Lithuania', hotel: 'Druskininkai Spa House', file: 'druskininkai.html' },
     { q: 'Trakai', city: 'Trakai', country: 'Lithuania', hotel: 'Trakai Lake House', file: 'trakai.html' },
@@ -171,6 +172,19 @@ test('Lochmaddy is returned with a Uist search', async () => {
   assert.equal(hotel.country, 'Scotland');
   assert.equal(hotel.url, 'lochmaddy-harbour-hotel.html');
   assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+});
+
+test('Brodick is returned with an Isle of Arran search', async () => {
+  const body = await searchFor('Isle of Arran');
+  const hotel = body.hotels.find((item) => item.name === 'Brodick Ferry Hotel');
+  assert.ok(hotel, 'Brodick Ferry Hotel should match Isle of Arran');
+  assert.equal(hotel.city, 'Brodick');
+  assert.equal(hotel.country, 'Scotland');
+  assert.equal(hotel.url, 'brodick-ferry-hotel.html');
+  assert.equal(hotel.cityUrl, null);
+  assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+  assert.equal(fs.existsSync(path.join(root, 'brodick.html')), false);
+  assert.equal(fs.existsSync(path.join(root, 'isle-of-arran.html')), false);
 });
 
 test('other named places without pages are searchable', async () => {
@@ -301,6 +315,8 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Armadale Pier Hotel — Armadale'));
   assert.ok(body.labels.includes('Lochmaddy'));
   assert.ok(body.labels.includes('Lochmaddy Harbour Hotel — Lochmaddy'));
+  assert.ok(body.labels.includes('Brodick'));
+  assert.ok(body.labels.includes('Brodick Ferry Hotel — Brodick'));
   assert.ok(body.labels.includes('Šiauliai'));
   assert.ok(body.labels.includes('Hotel d’Angleterre — Copenhagen'));
   assert.ok(body.labels.includes('Bauska'));
