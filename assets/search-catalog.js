@@ -9,7 +9,7 @@ window.SEARCH_CATALOG = {
       "name": "Aalborg",
       "city": "Aalborg",
       "country": "Denmark",
-      "url": "aalborg.html",
+      "url": "html/cities/denmark/aalborg.html",
       "description": "Browse hotels in Aalborg, Denmark."
     },
     {
@@ -17,7 +17,7 @@ window.SEARCH_CATALOG = {
       "name": "Aarhus",
       "city": "Aarhus",
       "country": "Denmark",
-      "url": "aarhus.html",
+      "url": "html/cities/denmark/aarhus.html",
       "description": "Browse hotels in Aarhus, Denmark."
     },
     {
@@ -25,7 +25,7 @@ window.SEARCH_CATALOG = {
       "name": "Aberdeen",
       "city": "Aberdeen",
       "country": "Scotland",
-      "url": "aberdeen.html",
+      "url": "html/cities/scotland/aberdeen.html",
       "description": "Browse hotels in Aberdeen, Scotland."
     },
     {
@@ -33,7 +33,7 @@ window.SEARCH_CATALOG = {
       "name": "Abisko",
       "city": "Abisko",
       "country": "Sweden",
-      "url": "abisko.html",
+      "url": "html/cities/sweden/abisko.html",
       "description": "Browse hotels in Abisko, Sweden."
     },
     {
@@ -41,7 +41,7 @@ window.SEARCH_CATALOG = {
       "name": "Akureyri",
       "city": "Akureyri",
       "country": "Iceland",
-      "url": "akureyri.html",
+      "url": "html/cities/iceland/akureyri.html",
       "description": "Browse hotels in Akureyri, Iceland."
     },
     {
@@ -49,7 +49,7 @@ window.SEARCH_CATALOG = {
       "name": "Alnwick",
       "city": "Alnwick",
       "country": "Northeast England",
-      "url": "alnwick.html",
+      "url": "html/cities/northeast-england/alnwick.html",
       "description": "Browse hotels in Alnwick, Northeast England."
     },
     {
@@ -57,7 +57,7 @@ window.SEARCH_CATALOG = {
       "name": "Aviemore",
       "city": "Aviemore",
       "country": "Scotland",
-      "url": "aviemore.html",
+      "url": "html/cities/scotland/aviemore.html",
       "description": "Browse hotels in Aviemore, Scotland."
     },
     {
@@ -65,7 +65,7 @@ window.SEARCH_CATALOG = {
       "name": "Bauska",
       "city": "Bauska",
       "country": "Latvia",
-      "url": "bauska.html",
+      "url": "html/cities/latvia/bauska.html",
       "description": "Browse hotels in Bauska, Latvia."
     },
     {
@@ -73,7 +73,7 @@ window.SEARCH_CATALOG = {
       "name": "Benbecula",
       "city": "Benbecula",
       "country": "Scotland",
-      "url": "benbecula.html",
+      "url": "html/cities/scotland/benbecula.html",
       "description": "Browse hotels in Benbecula, Scotland."
     },
     {
@@ -81,7 +81,7 @@ window.SEARCH_CATALOG = {
       "name": "Bergen",
       "city": "Bergen",
       "country": "Norway",
-      "url": "bergen.html",
+      "url": "html/cities/norway/bergen.html",
       "description": "Browse hotels in Bergen, Norway."
     },
     {
@@ -89,7 +89,7 @@ window.SEARCH_CATALOG = {
       "name": "Berwick-upon-Tweed",
       "city": "Berwick-upon-Tweed",
       "country": "Northeast England",
-      "url": "berwick-upon-tweed.html",
+      "url": "html/cities/northeast-england/berwick-upon-tweed.html",
       "description": "Browse hotels in Berwick-upon-Tweed, Northeast England."
     },
     {
@@ -97,7 +97,7 @@ window.SEARCH_CATALOG = {
       "name": "Copenhagen",
       "city": "Copenhagen",
       "country": "Denmark",
-      "url": "copenhagen.html",
+      "url": "html/cities/denmark/copenhagen.html",
       "description": "Browse hotels in Copenhagen, Denmark."
     },
     {
@@ -105,7 +105,7 @@ window.SEARCH_CATALOG = {
       "name": "Daugavpils",
       "city": "Daugavpils",
       "country": "Latvia",
-      "url": "daugavpils.html",
+      "url": "html/cities/latvia/daugavpils.html",
       "description": "Browse hotels in Daugavpils, Latvia."
     },
     {
@@ -113,7 +113,7 @@ window.SEARCH_CATALOG = {
       "name": "Dundee",
       "city": "Dundee",
       "country": "Scotland",
-      "url": "dundee.html",
+      "url": "html/cities/scotland/dundee.html",
       "description": "Browse hotels in Dundee, Scotland."
     },
     {
@@ -121,7 +121,7 @@ window.SEARCH_CATALOG = {
       "name": "Durham",
       "city": "Durham",
       "country": "Northeast England",
-      "url": "durham.html",
+      "url": "html/cities/northeast-england/durham.html",
       "description": "Browse hotels in Durham, Northeast England."
     },
     {
@@ -129,7 +129,7 @@ window.SEARCH_CATALOG = {
       "name": "Edinburgh",
       "city": "Edinburgh",
       "country": "Scotland",
-      "url": "edinburgh.html",
+      "url": "html/cities/scotland/edinburgh.html",
       "description": "Browse hotels in Edinburgh, Scotland."
     },
     {
@@ -137,7 +137,7 @@ window.SEARCH_CATALOG = {
       "name": "Esbjerg",
       "city": "Esbjerg",
       "country": "Denmark",
-      "url": "esbjerg.html",
+      "url": "html/cities/denmark/esbjerg.html",
       "description": "Browse hotels in Esbjerg, Denmark."
     },
     {
@@ -145,7 +145,7 @@ window.SEARCH_CATALOG = {
       "name": "Espoo",
       "city": "Espoo",
       "country": "Finland",
-      "url": "espoo.html",
+      "url": "html/cities/finland/espoo.html",
       "description": "Browse hotels in Espoo, Finland."
     },
     {
@@ -153,7 +153,7 @@ window.SEARCH_CATALOG = {
       "name": "Fort William",
       "city": "Fort William",
       "country": "Scotland",
-      "url": "fort-william.html",
+      "url": "html/cities/scotland/fort-william.html",
       "description": "Browse hotels in Fort William, Scotland."
     },
     {
@@ -161,7 +161,7 @@ window.SEARCH_CATALOG = {
       "name": "Geilo",
       "city": "Geilo",
       "country": "Norway",
-      "url": "geilo.html",
+      "url": "html/cities/norway/geilo.html",
       "description": "Browse hotels in Geilo, Norway."
     },
     {
@@ -169,7 +169,7 @@ window.SEARCH_CATALOG = {
       "name": "Glasgow",
       "city": "Glasgow",
       "country": "Scotland",
-      "url": "glasgow.html",
+      "url": "html/cities/scotland/glasgow.html",
       "description": "Browse hotels in Glasgow, Scotland."
     },
     {
@@ -177,7 +177,7 @@ window.SEARCH_CATALOG = {
       "name": "Gothenburg",
       "city": "Gothenburg",
       "country": "Sweden",
-      "url": "gothenburg.html",
+      "url": "html/cities/sweden/gothenburg.html",
       "description": "Browse hotels in Gothenburg, Sweden."
     },
     {
@@ -185,7 +185,7 @@ window.SEARCH_CATALOG = {
       "name": "Hafnarfjörður",
       "city": "Hafnarfjörður",
       "country": "Iceland",
-      "url": "hafnarfjörður.html",
+      "url": "html/cities/iceland/hafnarfjörður.html",
       "description": "Browse hotels in Hafnarfjörður, Iceland."
     },
     {
@@ -193,7 +193,7 @@ window.SEARCH_CATALOG = {
       "name": "Hartlepool",
       "city": "Hartlepool",
       "country": "Northeast England",
-      "url": "hartlepool.html",
+      "url": "html/cities/northeast-england/hartlepool.html",
       "description": "Browse hotels in Hartlepool, Northeast England."
     },
     {
@@ -201,7 +201,7 @@ window.SEARCH_CATALOG = {
       "name": "Helsinki",
       "city": "Helsinki",
       "country": "Finland",
-      "url": "helsinki.html",
+      "url": "html/cities/finland/helsinki.html",
       "description": "Browse hotels in Helsinki, Finland."
     },
     {
@@ -209,7 +209,7 @@ window.SEARCH_CATALOG = {
       "name": "Hemsedal",
       "city": "Hemsedal",
       "country": "Norway",
-      "url": "hemsedal.html",
+      "url": "html/cities/norway/hemsedal.html",
       "description": "Browse hotels in Hemsedal, Norway."
     },
     {
@@ -217,7 +217,7 @@ window.SEARCH_CATALOG = {
       "name": "Ilulissat",
       "city": "Ilulissat",
       "country": "Greenland",
-      "url": "ilulissat.html",
+      "url": "html/cities/greenland/ilulissat.html",
       "description": "Browse hotels in Ilulissat, Greenland."
     },
     {
@@ -225,7 +225,7 @@ window.SEARCH_CATALOG = {
       "name": "Inverness",
       "city": "Inverness",
       "country": "Scotland",
-      "url": "inverness.html",
+      "url": "html/cities/scotland/inverness.html",
       "description": "Browse hotels in Inverness, Scotland."
     },
     {
@@ -233,7 +233,7 @@ window.SEARCH_CATALOG = {
       "name": "Ísafjörður",
       "city": "Ísafjörður",
       "country": "Iceland",
-      "url": "ísafjörður.html",
+      "url": "html/cities/iceland/ísafjörður.html",
       "description": "Browse hotels in Ísafjörður, Iceland."
     },
     {
@@ -241,7 +241,7 @@ window.SEARCH_CATALOG = {
       "name": "Jelgava",
       "city": "Jelgava",
       "country": "Latvia",
-      "url": "jelgava.html",
+      "url": "html/cities/latvia/jelgava.html",
       "description": "Browse hotels in Jelgava, Latvia."
     },
     {
@@ -249,7 +249,7 @@ window.SEARCH_CATALOG = {
       "name": "Jūrmala",
       "city": "Jūrmala",
       "country": "Latvia",
-      "url": "jurmala.html",
+      "url": "html/cities/latvia/jurmala.html",
       "description": "Browse hotels in Jūrmala, Latvia."
     },
     {
@@ -257,7 +257,7 @@ window.SEARCH_CATALOG = {
       "name": "Kaunas",
       "city": "Kaunas",
       "country": "Lithuania",
-      "url": "kaunas.html",
+      "url": "html/cities/lithuania/kaunas.html",
       "description": "Browse hotels in Kaunas, Lithuania."
     },
     {
@@ -265,7 +265,7 @@ window.SEARCH_CATALOG = {
       "name": "Keflavík",
       "city": "Keflavík",
       "country": "Iceland",
-      "url": "keflavík.html",
+      "url": "html/cities/iceland/keflavík.html",
       "description": "Browse hotels in Keflavík, Iceland."
     },
     {
@@ -273,7 +273,7 @@ window.SEARCH_CATALOG = {
       "name": "Kielder Forest",
       "city": "Kielder Forest",
       "country": "Northeast England",
-      "url": "kielder-forest.html",
+      "url": "html/cities/northeast-england/kielder-forest.html",
       "description": "Browse hotels in Kielder Forest, Northeast England."
     },
     {
@@ -281,7 +281,7 @@ window.SEARCH_CATALOG = {
       "name": "Kiruna",
       "city": "Kiruna",
       "country": "Sweden",
-      "url": "kiruna.html",
+      "url": "html/cities/sweden/kiruna.html",
       "description": "Browse hotels in Kiruna, Sweden."
     },
     {
@@ -289,7 +289,7 @@ window.SEARCH_CATALOG = {
       "name": "Klaipėda",
       "city": "Klaipėda",
       "country": "Lithuania",
-      "url": "klaipeda.html",
+      "url": "html/cities/lithuania/klaipeda.html",
       "description": "Browse hotels in Klaipėda, Lithuania."
     },
     {
@@ -297,7 +297,7 @@ window.SEARCH_CATALOG = {
       "name": "Kópavogur",
       "city": "Kópavogur",
       "country": "Iceland",
-      "url": "kópavogur.html",
+      "url": "html/cities/iceland/kópavogur.html",
       "description": "Browse hotels in Kópavogur, Iceland."
     },
     {
@@ -305,7 +305,7 @@ window.SEARCH_CATALOG = {
       "name": "Kristiansand",
       "city": "Kristiansand",
       "country": "Norway",
-      "url": "kristiansand.html",
+      "url": "html/cities/norway/kristiansand.html",
       "description": "Browse hotels in Kristiansand, Norway."
     },
     {
@@ -313,7 +313,7 @@ window.SEARCH_CATALOG = {
       "name": "Lerwick",
       "city": "Lerwick",
       "country": "Scotland",
-      "url": "lerwick.html",
+      "url": "html/cities/scotland/lerwick.html",
       "description": "Browse hotels in Lerwick, Scotland."
     },
     {
@@ -321,7 +321,7 @@ window.SEARCH_CATALOG = {
       "name": "Levi",
       "city": "Levi",
       "country": "Finland",
-      "url": "levi.html",
+      "url": "html/cities/finland/levi.html",
       "description": "Browse hotels in Levi, Finland."
     },
     {
@@ -329,7 +329,7 @@ window.SEARCH_CATALOG = {
       "name": "Liepāja",
       "city": "Liepāja",
       "country": "Latvia",
-      "url": "liepaja.html",
+      "url": "html/cities/latvia/liepaja.html",
       "description": "Browse hotels in Liepāja, Latvia."
     },
     {
@@ -337,7 +337,7 @@ window.SEARCH_CATALOG = {
       "name": "Lillehammer",
       "city": "Lillehammer",
       "country": "Norway",
-      "url": "lillehammer.html",
+      "url": "html/cities/norway/lillehammer.html",
       "description": "Browse hotels in Lillehammer, Norway."
     },
     {
@@ -345,7 +345,7 @@ window.SEARCH_CATALOG = {
       "name": "Linköping",
       "city": "Linköping",
       "country": "Sweden",
-      "url": "linköping.html",
+      "url": "html/cities/sweden/linköping.html",
       "description": "Browse hotels in Linköping, Sweden."
     },
     {
@@ -353,7 +353,7 @@ window.SEARCH_CATALOG = {
       "name": "Loch Lomond National Park",
       "city": "Loch Lomond National Park",
       "country": "Scotland",
-      "url": "loch-lomond.html",
+      "url": "html/cities/scotland/loch-lomond.html",
       "description": "Browse hotels in Loch Lomond National Park, Scotland."
     },
     {
@@ -361,7 +361,7 @@ window.SEARCH_CATALOG = {
       "name": "Longyearbyen",
       "city": "Longyearbyen",
       "country": "Svalbard",
-      "url": "longyearbyen.html",
+      "url": "html/cities/svalbard/longyearbyen.html",
       "description": "Browse hotels in Longyearbyen, Svalbard."
     },
     {
@@ -369,7 +369,7 @@ window.SEARCH_CATALOG = {
       "name": "Malmö",
       "city": "Malmö",
       "country": "Sweden",
-      "url": "malmö.html",
+      "url": "html/cities/sweden/malmö.html",
       "description": "Browse hotels in Malmö, Sweden."
     },
     {
@@ -377,7 +377,7 @@ window.SEARCH_CATALOG = {
       "name": "Mariehamn",
       "city": "Mariehamn",
       "country": "Åland Islands",
-      "url": "mariehamn.html",
+      "url": "html/cities/aland-islands/mariehamn.html",
       "description": "Browse hotels in Mariehamn, Åland Islands."
     },
     {
@@ -385,7 +385,7 @@ window.SEARCH_CATALOG = {
       "name": "Narva",
       "city": "Narva",
       "country": "Estonia",
-      "url": "narva.html",
+      "url": "html/cities/estonia/narva.html",
       "description": "Browse hotels in Narva, Estonia."
     },
     {
@@ -393,7 +393,7 @@ window.SEARCH_CATALOG = {
       "name": "Newcastle",
       "city": "Newcastle",
       "country": "Northeast England",
-      "url": "newcastle.html",
+      "url": "html/cities/northeast-england/newcastle.html",
       "description": "Browse hotels in Newcastle upon Tyne, Northeast England."
     },
     {
@@ -401,7 +401,7 @@ window.SEARCH_CATALOG = {
       "name": "Northumberland National Park",
       "city": "Northumberland National Park",
       "country": "Northeast England",
-      "url": "northumberland-national-park.html",
+      "url": "html/cities/northeast-england/northumberland-national-park.html",
       "description": "Browse hotels in Northumberland National Park, Northeast England."
     },
     {
@@ -409,7 +409,7 @@ window.SEARCH_CATALOG = {
       "name": "Nuuk",
       "city": "Nuuk",
       "country": "Greenland",
-      "url": "nuuk.html",
+      "url": "html/cities/greenland/nuuk.html",
       "description": "Browse hotels in Nuuk, Greenland."
     },
     {
@@ -417,7 +417,7 @@ window.SEARCH_CATALOG = {
       "name": "Oban",
       "city": "Oban",
       "country": "Scotland",
-      "url": "oban.html",
+      "url": "html/cities/scotland/oban.html",
       "description": "Browse hotels in Oban, Scotland."
     },
     {
@@ -425,7 +425,7 @@ window.SEARCH_CATALOG = {
       "name": "Odense",
       "city": "Odense",
       "country": "Denmark",
-      "url": "odense.html",
+      "url": "html/cities/denmark/odense.html",
       "description": "Browse hotels in Odense, Denmark."
     },
     {
@@ -433,7 +433,7 @@ window.SEARCH_CATALOG = {
       "name": "Oslo",
       "city": "Oslo",
       "country": "Norway",
-      "url": "oslo.html",
+      "url": "html/cities/norway/oslo.html",
       "description": "Browse hotels in Oslo, Norway."
     },
     {
@@ -441,7 +441,7 @@ window.SEARCH_CATALOG = {
       "name": "Oulu",
       "city": "Oulu",
       "country": "Finland",
-      "url": "oulu.html",
+      "url": "html/cities/finland/oulu.html",
       "description": "Browse hotels in Oulu, Finland."
     },
     {
@@ -449,7 +449,7 @@ window.SEARCH_CATALOG = {
       "name": "Panevėžys",
       "city": "Panevėžys",
       "country": "Lithuania",
-      "url": "panevėžys.html",
+      "url": "html/cities/lithuania/panevėžys.html",
       "description": "Browse hotels in Panevėžys, Lithuania."
     },
     {
@@ -457,7 +457,7 @@ window.SEARCH_CATALOG = {
       "name": "Pärnu",
       "city": "Pärnu",
       "country": "Estonia",
-      "url": "pärnu.html",
+      "url": "html/cities/estonia/pärnu.html",
       "description": "Browse hotels in Pärnu, Estonia."
     },
     {
@@ -465,7 +465,7 @@ window.SEARCH_CATALOG = {
       "name": "Pitlochry",
       "city": "Pitlochry",
       "country": "Scotland",
-      "url": "pitlochry.html",
+      "url": "html/cities/scotland/pitlochry.html",
       "description": "Browse hotels in Pitlochry, Scotland."
     },
     {
@@ -473,7 +473,7 @@ window.SEARCH_CATALOG = {
       "name": "Portree",
       "city": "Portree",
       "country": "Scotland",
-      "url": "portree.html",
+      "url": "html/cities/scotland/portree.html",
       "description": "Browse hotels in Portree, Scotland."
     },
     {
@@ -481,7 +481,7 @@ window.SEARCH_CATALOG = {
       "name": "Reykjanesbær",
       "city": "Reykjanesbær",
       "country": "Iceland",
-      "url": "reykjanesbær.html",
+      "url": "html/cities/iceland/reykjanesbær.html",
       "description": "Browse hotels in Reykjanesbær, Iceland."
     },
     {
@@ -489,7 +489,7 @@ window.SEARCH_CATALOG = {
       "name": "Reykjavík",
       "city": "Reykjavík",
       "country": "Iceland",
-      "url": "reykjavík.html",
+      "url": "html/cities/iceland/reykjavík.html",
       "description": "Browse hotels in Reykjavík, Iceland."
     },
     {
@@ -497,7 +497,7 @@ window.SEARCH_CATALOG = {
       "name": "Riga",
       "city": "Riga",
       "country": "Latvia",
-      "url": "riga.html",
+      "url": "html/cities/latvia/riga.html",
       "description": "Browse hotels in Riga, Latvia."
     },
     {
@@ -505,7 +505,7 @@ window.SEARCH_CATALOG = {
       "name": "Rovaniemi",
       "city": "Rovaniemi",
       "country": "Finland",
-      "url": "rovaniemi.html",
+      "url": "html/cities/finland/rovaniemi.html",
       "description": "Browse hotels in Rovaniemi, Finland."
     },
     {
@@ -513,7 +513,7 @@ window.SEARCH_CATALOG = {
       "name": "Ruka-Kuusamo",
       "city": "Ruka-Kuusamo",
       "country": "Finland",
-      "url": "ruka-kuusamo.html",
+      "url": "html/cities/finland/ruka-kuusamo.html",
       "description": "Browse hotels in Ruka-Kuusamo, Finland."
     },
     {
@@ -521,7 +521,7 @@ window.SEARCH_CATALOG = {
       "name": "Sälen",
       "city": "Sälen",
       "country": "Sweden",
-      "url": "salen.html",
+      "url": "html/cities/sweden/salen.html",
       "description": "Browse hotels in Sälen, Sweden."
     },
     {
@@ -529,7 +529,7 @@ window.SEARCH_CATALOG = {
       "name": "Sauðárkrókur",
       "city": "Sauðárkrókur",
       "country": "Iceland",
-      "url": "sauðárkrókur.html",
+      "url": "html/cities/iceland/sauðárkrókur.html",
       "description": "Browse hotels in Sauðárkrókur, Iceland."
     },
     {
@@ -537,7 +537,7 @@ window.SEARCH_CATALOG = {
       "name": "Šiauliai",
       "city": "Šiauliai",
       "country": "Lithuania",
-      "url": "šiauliai.htm",
+      "url": "html/cities/lithuania/šiauliai.htm",
       "description": "Browse hotels in Šiauliai, Lithuania."
     },
     {
@@ -545,7 +545,7 @@ window.SEARCH_CATALOG = {
       "name": "Skagen",
       "city": "Skagen",
       "country": "Denmark",
-      "url": "skagen.html",
+      "url": "html/cities/denmark/skagen.html",
       "description": "Browse hotels in Skagen, Denmark."
     },
     {
@@ -553,7 +553,7 @@ window.SEARCH_CATALOG = {
       "name": "St Andrews",
       "city": "St Andrews",
       "country": "Scotland",
-      "url": "st-andrews.html",
+      "url": "html/cities/scotland/st-andrews.html",
       "description": "Browse hotels in St Andrews, Scotland."
     },
     {
@@ -561,7 +561,7 @@ window.SEARCH_CATALOG = {
       "name": "Stavanger",
       "city": "Stavanger",
       "country": "Norway",
-      "url": "stavanger.html",
+      "url": "html/cities/norway/stavanger.html",
       "description": "Browse hotels in Stavanger, Norway."
     },
     {
@@ -569,7 +569,7 @@ window.SEARCH_CATALOG = {
       "name": "Stirling",
       "city": "Stirling",
       "country": "Scotland",
-      "url": "stirling.html",
+      "url": "html/cities/scotland/stirling.html",
       "description": "Browse hotels in Stirling, Scotland."
     },
     {
@@ -577,7 +577,7 @@ window.SEARCH_CATALOG = {
       "name": "Stockholm",
       "city": "Stockholm",
       "country": "Sweden",
-      "url": "stockholm.html",
+      "url": "html/cities/sweden/stockholm.html",
       "description": "Browse hotels in Stockholm, Sweden."
     },
     {
@@ -585,7 +585,7 @@ window.SEARCH_CATALOG = {
       "name": "Stornoway",
       "city": "Stornoway",
       "country": "Scotland",
-      "url": "stornoway.html",
+      "url": "html/cities/scotland/stornoway.html",
       "description": "Browse hotels in Stornoway, Scotland."
     },
     {
@@ -593,7 +593,7 @@ window.SEARCH_CATALOG = {
       "name": "Tallinn",
       "city": "Tallinn",
       "country": "Estonia",
-      "url": "tallinn.html",
+      "url": "html/cities/estonia/tallinn.html",
       "description": "Browse hotels in Tallinn, Estonia."
     },
     {
@@ -601,7 +601,7 @@ window.SEARCH_CATALOG = {
       "name": "Tampere",
       "city": "Tampere",
       "country": "Finland",
-      "url": "tampere.html",
+      "url": "html/cities/finland/tampere.html",
       "description": "Browse hotels in Tampere, Finland."
     },
     {
@@ -609,7 +609,7 @@ window.SEARCH_CATALOG = {
       "name": "Tartu",
       "city": "Tartu",
       "country": "Estonia",
-      "url": "tartu.html",
+      "url": "html/cities/estonia/tartu.html",
       "description": "Browse hotels in Tartu, Estonia."
     },
     {
@@ -617,7 +617,7 @@ window.SEARCH_CATALOG = {
       "name": "Tórshavn",
       "city": "Tórshavn",
       "country": "Faroe Islands",
-      "url": "tórshavn.html",
+      "url": "html/cities/faroe-islands/tórshavn.html",
       "description": "Browse hotels in Tórshavn, Faroe Islands."
     },
     {
@@ -625,7 +625,7 @@ window.SEARCH_CATALOG = {
       "name": "Tromsø",
       "city": "Tromsø",
       "country": "Norway",
-      "url": "tromso.html",
+      "url": "html/cities/norway/tromso.html",
       "description": "Browse hotels in Tromsø, Norway."
     },
     {
@@ -633,7 +633,7 @@ window.SEARCH_CATALOG = {
       "name": "Trondheim",
       "city": "Trondheim",
       "country": "Norway",
-      "url": "trondheim.html",
+      "url": "html/cities/norway/trondheim.html",
       "description": "Browse hotels in Trondheim, Norway."
     },
     {
@@ -641,7 +641,7 @@ window.SEARCH_CATALOG = {
       "name": "Turku",
       "city": "Turku",
       "country": "Finland",
-      "url": "turku.html",
+      "url": "html/cities/finland/turku.html",
       "description": "Browse hotels in Turku, Finland."
     },
     {
@@ -649,7 +649,7 @@ window.SEARCH_CATALOG = {
       "name": "Ullapool",
       "city": "Ullapool",
       "country": "Scotland",
-      "url": "ullapool.html",
+      "url": "html/cities/scotland/ullapool.html",
       "description": "Browse hotels in Ullapool, Scotland."
     },
     {
@@ -657,7 +657,7 @@ window.SEARCH_CATALOG = {
       "name": "Uppsala",
       "city": "Uppsala",
       "country": "Sweden",
-      "url": "uppsala.html",
+      "url": "html/cities/sweden/uppsala.html",
       "description": "Browse hotels in Uppsala, Sweden."
     },
     {
@@ -665,7 +665,7 @@ window.SEARCH_CATALOG = {
       "name": "Vestmannaeyjar",
       "city": "Vestmannaeyjar",
       "country": "Iceland",
-      "url": "vestmannaeyjar.html",
+      "url": "html/cities/iceland/vestmannaeyjar.html",
       "description": "Browse hotels in Vestmannaeyjar, Iceland."
     },
     {
@@ -673,7 +673,7 @@ window.SEARCH_CATALOG = {
       "name": "Viljandi",
       "city": "Viljandi",
       "country": "Estonia",
-      "url": "viljandi.html",
+      "url": "html/cities/estonia/viljandi.html",
       "description": "Browse hotels in Viljandi, Estonia."
     },
     {
@@ -681,7 +681,7 @@ window.SEARCH_CATALOG = {
       "name": "Vilnius",
       "city": "Vilnius",
       "country": "Lithuania",
-      "url": "vilnius.html",
+      "url": "html/cities/lithuania/vilnius.html",
       "description": "Browse hotels in Vilnius, Lithuania."
     },
     {
@@ -689,7 +689,7 @@ window.SEARCH_CATALOG = {
       "name": "Voss",
       "city": "Voss",
       "country": "Norway",
-      "url": "voss.html",
+      "url": "html/cities/norway/voss.html",
       "description": "Browse hotels in Voss, Norway."
     },
     {
@@ -697,7 +697,7 @@ window.SEARCH_CATALOG = {
       "name": "Ylläs",
       "city": "Ylläs",
       "country": "Finland",
-      "url": "yllas.html",
+      "url": "html/cities/finland/yllas.html",
       "description": "Browse hotels in Ylläs, Finland."
     }
   ],

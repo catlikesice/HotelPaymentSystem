@@ -20,21 +20,21 @@ const DESTINATIONS = [
   {
     city: 'Ísafjörður',
     query: 'isafjordur',
-    url: 'ísafjörður.html',
+    url: 'html/cities/iceland/ísafjörður.html',
     section: 'boreal-isafjordur-title',
     hotels: ['Hótel Ísafjörður', 'Hótel Horn', 'Gamla Guesthouse']
   },
   {
     city: 'Vestmannaeyjar',
     query: 'vestmannaeyjar',
-    url: 'vestmannaeyjar.html',
+    url: 'html/cities/iceland/vestmannaeyjar.html',
     section: 'boreal-vestmannaeyjar-title',
     hotels: ['Hotel Vestmannaeyjar', 'Hótel Eyjar', 'Guesthouse Hamar']
   },
   {
     city: 'Sauðárkrókur',
     query: 'saudarkrokur',
-    url: 'sauðárkrókur.html',
+    url: 'html/cities/iceland/sauðárkrókur.html',
     section: 'boreal-saudarkrokur-title',
     hotels: ['Hótel Tindastóll', 'Hótel Mikligarður', 'Skagafjörður Guesthouse']
   }

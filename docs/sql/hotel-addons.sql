@@ -62,49 +62,49 @@ INSERT INTO hotel_addons (
   category, label, description, detail_line, price_eth, billing, icon, sort_order
 ) VALUES
   (
-    'esbjerg:hotel-britannia:breakfast', 'breakfast', 'hotel', 'Hotel Britannia', 'Esbjerg', 'Denmark', 'esbjerg.html',
+    'esbjerg:hotel-britannia:breakfast', 'breakfast', 'hotel', 'Hotel Britannia', 'Esbjerg', 'Denmark', 'html/cities/denmark/esbjerg.html',
     'stay', 'Breakfast for two',
     'Hot breakfast for two in the hotel restaurant each morning of the stay.',
     'Served each morning',
     0.008289473684210525, 'per-night', 'utensils', 10
   ),
   (
-    'esbjerg:hotel-britannia:late-checkout', 'late-checkout', 'hotel', 'Hotel Britannia', 'Esbjerg', 'Denmark', 'esbjerg.html',
+    'esbjerg:hotel-britannia:late-checkout', 'late-checkout', 'hotel', 'Hotel Britannia', 'Esbjerg', 'Denmark', 'html/cities/denmark/esbjerg.html',
     'stay', 'Late checkout',
     'Keep the room until 15:00 on departure day.',
     'Until 15:00',
     0.00736842105263158, 'per-stay', 'hotel', 20
   ),
   (
-    'esbjerg:scandic-olympic:breakfast', 'breakfast', 'hotel', 'Scandic Olympic', 'Esbjerg', 'Denmark', 'esbjerg.html',
+    'esbjerg:scandic-olympic:breakfast', 'breakfast', 'hotel', 'Scandic Olympic', 'Esbjerg', 'Denmark', 'html/cities/denmark/esbjerg.html',
     'stay', 'Breakfast buffet',
     'Breakfast buffet each morning of the stay.',
     'Served each morning',
     0.008289473684210525, 'per-night', 'utensils', 10
   ),
   (
-    'esbjerg:hotel-ansgar:breakfast', 'breakfast', 'hotel', 'Hotel Ansgar', 'Esbjerg', 'Denmark', 'esbjerg.html',
+    'esbjerg:hotel-ansgar:breakfast', 'breakfast', 'hotel', 'Hotel Ansgar', 'Esbjerg', 'Denmark', 'html/cities/denmark/esbjerg.html',
     'stay', 'Harbour breakfast',
     'Breakfast with a harbour view each morning of the stay.',
     'Served each morning',
     0.00736842105263158, 'per-night', 'utensils', 10
   ),
   (
-    'esbjerg:city:maritime-museum', 'maritime-museum', 'city', '', 'Esbjerg', 'Denmark', 'esbjerg.html',
+    'esbjerg:city:maritime-museum', 'maritime-museum', 'city', '', 'Esbjerg', 'Denmark', 'html/cities/denmark/esbjerg.html',
     'experience', 'Maritime Museum admission',
     'Admission to the Fisheries and Maritime Museum beside the Esbjerg harbour, with ships and North Sea galleries.',
     'Flexible entry · adult tickets',
     0.015657894736842103, 'per-stay', 'museum', 100
   ),
   (
-    'esbjerg:city:wadden-walk', 'wadden-walk', 'city', '', 'Esbjerg', 'Denmark', 'esbjerg.html',
+    'esbjerg:city:wadden-walk', 'wadden-walk', 'city', '', 'Esbjerg', 'Denmark', 'html/cities/denmark/esbjerg.html',
     'experience', 'Wadden Sea guided walk',
     'Guided walk on the UNESCO Wadden Sea mudflats with a local nature guide.',
     '3 hours · English-language guide',
     0.022105263157894735, 'per-stay', 'waves', 110
   ),
   (
-    'esbjerg:city:station-transfer', 'station-transfer', 'city', '', 'Esbjerg', 'Denmark', 'esbjerg.html',
+    'esbjerg:city:station-transfer', 'station-transfer', 'city', '', 'Esbjerg', 'Denmark', 'html/cities/denmark/esbjerg.html',
     'transport', 'Esbjerg station transfer',
     'Private car between Esbjerg station and the hotel, timed to the train.',
     'One way · private car',
@@ -184,7 +184,7 @@ INSERT INTO hotel_addons (
     0.03, 'per-stay', 'bus', 200
   ),
   (
-    'longyearbyen:city:dogsled', 'dogsled', 'city', '', 'Longyearbyen', 'Svalbard', 'longyearbyen.html',
+    'longyearbyen:city:dogsled', 'dogsled', 'city', '', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/longyearbyen.html',
     'experience', 'Dog-sled outing',
     'Short dog-sled run on the edge of town with a musher and a thermal suit.',
     '2 hours · thermal suit included',
@@ -233,7 +233,7 @@ INSERT INTO hotel_addons (
     0.05, 'per-stay', 'bus', 200
   ),
   (
-    'riga:city:art-nouveau', 'art-nouveau', 'city', '', 'Riga', 'Latvia', 'riga.html',
+    'riga:city:art-nouveau', 'art-nouveau', 'city', '', 'Riga', 'Latvia', 'html/cities/latvia/riga.html',
     'experience', 'Art Nouveau walking tour',
     'Guided walk through the Alberta iela district and the Art Nouveau museum quarter.',
     '2 hours · English-language guide',
@@ -277,84 +277,84 @@ INSERT INTO hotel_addons (
   category, label, description, detail_line, price_eth, billing, icon, sort_order
 ) VALUES
   (
-    'copenhagen:city:canal-tour', 'canal-tour', 'city', '', 'Copenhagen', 'Denmark', 'copenhagen.html',
+    'copenhagen:city:canal-tour', 'canal-tour', 'city', '', 'Copenhagen', 'Denmark', 'html/cities/denmark/copenhagen.html',
     'experience', 'Harbour canal tour',
     'Boat tour through the inner harbour and Christianshavn canals.',
     '1 hour · live commentary',
     0.01657894736842105, 'per-stay', 'waves', 100
   ),
   (
-    'copenhagen:city:airport-transfer', 'airport-transfer', 'city', '', 'Copenhagen', 'Denmark', 'copenhagen.html',
+    'copenhagen:city:airport-transfer', 'airport-transfer', 'city', '', 'Copenhagen', 'Denmark', 'html/cities/denmark/copenhagen.html',
     'transport', 'Copenhagen airport transfer',
     'Private car from CPH to the hotel.',
     'One way · private car',
     0.019342105263157893, 'per-stay', 'bus', 200
   ),
   (
-    'reykjavik:city:whale-watching', 'whale-watching', 'city', '', 'Reykjavík', 'Iceland', 'reykjavík.html',
+    'reykjavik:city:whale-watching', 'whale-watching', 'city', '', 'Reykjavík', 'Iceland', 'html/cities/iceland/reykjavík.html',
     'experience', 'Faxaflói whale watching',
     'Boat trip from the old harbour for whales and seabirds.',
     '3 hours · departs from the old harbour',
     0.02532894736842105, 'per-stay', 'waves', 100
   ),
   (
-    'stockholm:city:vasa', 'vasa', 'city', '', 'Stockholm', 'Sweden', 'stockholm.html',
+    'stockholm:city:vasa', 'vasa', 'city', '', 'Stockholm', 'Sweden', 'html/cities/sweden/stockholm.html',
     'experience', 'Vasa Museum admission',
     'Entry to the Vasa warship on Djurgården.',
     'Flexible entry · adult tickets',
     0.008749999999999999, 'per-stay', 'museum', 100
   ),
   (
-    'edinburgh:city:castle', 'castle', 'city', '', 'Edinburgh', 'Scotland', 'edinburgh.html',
+    'edinburgh:city:castle', 'castle', 'city', '', 'Edinburgh', 'Scotland', 'html/cities/scotland/edinburgh.html',
     'experience', 'Edinburgh Castle entry',
     'Timed entry to Edinburgh Castle, above the Royal Mile.',
     'Timed entry · adult tickets',
     0.011052631578947368, 'per-stay', 'museum', 100
   ),
   (
-    'bergen:city:floibanen', 'floibanen', 'city', '', 'Bergen', 'Norway', 'bergen.html',
+    'bergen:city:floibanen', 'floibanen', 'city', '', 'Bergen', 'Norway', 'html/cities/norway/bergen.html',
     'experience', 'Fløibanen funicular',
     'Return ride from the city centre to Mount Fløyen.',
     'Return ticket',
     0.00736842105263158, 'per-stay', 'ticket', 100
   ),
   (
-    'bergen:city:fjord', 'fjord', 'city', '', 'Bergen', 'Norway', 'bergen.html',
+    'bergen:city:fjord', 'fjord', 'city', '', 'Bergen', 'Norway', 'html/cities/norway/bergen.html',
     'experience', 'Bergen fjord cruise',
     'Cruise from the Bryggen quay into the outer fjord.',
     '3 hours · outer fjord',
     0.020723684210526314, 'per-stay', 'waves', 110
   ),
   (
-    'helsinki:city:suomenlinna', 'suomenlinna', 'city', '', 'Helsinki', 'Finland', 'helsinki.html',
+    'helsinki:city:suomenlinna', 'suomenlinna', 'city', '', 'Helsinki', 'Finland', 'html/cities/finland/helsinki.html',
     'experience', 'Suomenlinna ferry and fortress',
     'Return ferry to the sea fortress and time on the ramparts.',
     'Return ferry · fortress grounds',
     0.008289473684210525, 'per-stay', 'waves', 100
   ),
   (
-    'tallinn:city:old-town', 'old-town', 'city', '', 'Tallinn', 'Estonia', 'tallinn.html',
+    'tallinn:city:old-town', 'old-town', 'city', '', 'Tallinn', 'Estonia', 'html/cities/estonia/tallinn.html',
     'experience', 'Old Town walking tour',
     'Guided walk on Toompea and through the lower old town.',
     '2 hours · English-language guide',
     0.012434210526315789, 'per-stay', 'walk', 100
   ),
   (
-    'oslo:city:fjord', 'fjord', 'city', '', 'Oslo', 'Norway', 'oslo.html',
+    'oslo:city:fjord', 'fjord', 'city', '', 'Oslo', 'Norway', 'html/cities/norway/oslo.html',
     'experience', 'Oslo fjord sightseeing',
     'Boat trip along the islands, departing from Aker Brygge.',
     '2 hours · departs from Aker Brygge',
     0.018421052631578946, 'per-stay', 'waves', 100
   ),
   (
-    'tromso:city:fjord', 'fjord', 'city', '', 'Tromsø', 'Norway', 'tromso.html',
+    'tromso:city:fjord', 'fjord', 'city', '', 'Tromsø', 'Norway', 'html/cities/norway/tromso.html',
     'experience', 'Tromsø fjord cruise',
     'Cruise from the harbour with an Arctic wildlife route.',
     '3 hours · Arctic wildlife route',
     0.022105263157894735, 'per-stay', 'waves', 100
   ),
   (
-    'aarhus:city:aros', 'aros', 'city', '', 'Aarhus', 'Denmark', 'aarhus.html',
+    'aarhus:city:aros', 'aros', 'city', '', 'Aarhus', 'Denmark', 'html/cities/denmark/aarhus.html',
     'experience', 'ARoS art museum admission',
     'Entry to ARoS, including the rooftop walk.',
     'Flexible entry · adult tickets',

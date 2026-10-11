@@ -27,12 +27,12 @@ test('Keflavík is on the HTML city list and in search', () => {
   const city = catalog.cities.find((item) => item.city === 'Keflavík');
   assert.ok(city);
   assert.equal(city.country, 'Iceland');
-  assert.equal(city.url, 'keflavík.html');
+  assert.equal(city.url, 'html/cities/iceland/keflavík.html');
 
   const hotels = catalog.hotels.filter((item) => item.city === 'Keflavík');
   assert.deepEqual(Array.from(hotels, (hotel) => hotel.name), HOTELS);
   hotels.forEach((hotel) => {
-    assert.notEqual(hotel.url, 'keflavík.html');
+    assert.notEqual(hotel.url, 'html/cities/iceland/keflavík.html');
     assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
     const hotelHtml = fs.readFileSync(path.join(root, hotel.url), 'utf8');
     assert.match(hotelHtml, /class="hotel-detail"/);
@@ -41,9 +41,9 @@ test('Keflavík is on the HTML city list and in search', () => {
     assert.equal(hotel.country, 'Iceland');
   });
 
-  const filePath = path.join(root, 'keflavík.html');
+  const filePath = path.join(root, 'html/cities/iceland/keflavík.html');
   const html = fs.readFileSync(filePath, 'utf8');
-  const page = getCityPage('keflavík.html');
+  const page = getCityPage('html/cities/iceland/keflavík.html');
   assert.ok(page);
   assert.equal(html, page.html);
   assert.equal(page.city_name, 'Keflavík');
@@ -51,7 +51,7 @@ test('Keflavík is on the HTML city list and in search', () => {
   assert.match(html, /name=["']viewport["']/);
   assert.match(html, /data-city="Keflavík"/);
 
-  const stored = hotelsFor('keflavík.html');
+  const stored = hotelsFor('html/cities/iceland/keflavík.html');
   assert.equal(stored.length, HOTELS.length);
   HOTELS.forEach((name) => {
     assert.ok(stored.some((hotel) => hotel.name === name), name);

@@ -37,7 +37,7 @@ test('every catalog city page is stored in SQL and restored as a file', () => {
 });
 
 test('Aarhus keeps nightly ETH, BTC, and USDT from the old listing', () => {
-  const hotels = hotelsFor('aarhus.html');
+  const hotels = hotelsFor('html/cities/denmark/aarhus.html');
   const royal = hotels.find((hotel) => hotel.name === 'Hotel Royal Aarhus');
   assert.ok(royal);
   assert.equal(royal.price_eth, 0.08);
@@ -45,29 +45,29 @@ test('Aarhus keeps nightly ETH, BTC, and USDT from the old listing', () => {
   assert.equal(royal.price_usdt, 228);
   assert.match(royal.description, /spa services/);
   assert.equal(royal.image_alt, 'Hotel Royal Aarhus');
-  assert.match(getCityPage('aarhus.html').html, /data-btc="0.0013"/);
+  assert.match(getCityPage('html/cities/denmark/aarhus.html').html, /data-btc="0.0013"/);
 });
 
 test('placeholder cities keep their translated copy', () => {
-  const page = getCityPage('aalborg.html');
+  const page = getCityPage('html/cities/denmark/aalborg.html');
   assert.match(page.placeholder_text, /placeholder page for Aalborg/);
   assert.equal(page.expected_path, 'html/cities/denmark/aalborg.html');
-  const english = stringsFor('aalborg.html', 'en').find((row) => row.string_key === 'page-title');
-  const russian = stringsFor('aalborg.html', 'ru').find((row) => row.string_key === 'placeholder-text');
+  const english = stringsFor('html/cities/denmark/aalborg.html', 'en').find((row) => row.string_key === 'page-title');
+  const russian = stringsFor('html/cities/denmark/aalborg.html', 'ru').find((row) => row.string_key === 'placeholder-text');
   assert.equal(english.value, 'Aalborg — Denmark');
   assert.match(russian.value, /Ольборга/);
-  assert.equal(hotelsFor('aalborg.html').length, 0);
+  assert.equal(hotelsFor('html/cities/denmark/aalborg.html').length, 0);
 });
 
 test('Esbjerg keeps the hotel group and the visible ETH price', () => {
-  const britannia = hotelsFor('esbjerg.html').find((hotel) => hotel.name === 'Hotel Britannia');
+  const britannia = hotelsFor('html/cities/denmark/esbjerg.html').find((hotel) => hotel.name === 'Hotel Britannia');
   assert.equal(britannia.chain_name, 'Britannia Hotels');
   assert.equal(britannia.price_eth, 0.035);
   assert.equal(britannia.price_label, '0.035 ETH / night');
   assert.equal(britannia.book_label, 'Book Now');
   assert.ok(britannia.book_url);
   assert.equal(fs.existsSync(path.join(root, britannia.book_url)), true);
-  assert.match(getCityPage('esbjerg.html').html, new RegExp('href="' + britannia.book_url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '"'));
+  assert.match(getCityPage('html/cities/denmark/esbjerg.html').html, new RegExp('href="' + britannia.book_url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '"'));
 });
 
 test('the server answers a city address from its HTML file', async () => {
@@ -86,17 +86,23 @@ test('the server answers a city address from its HTML file', async () => {
   });
 
   try {
-  const encoded = await fetch(base + '/' + encodeURIComponent('šiauliai.htm'));
+  const pageUrl = 'html/cities/lithuania/šiauliai.htm';
+  const encodedPath = pageUrl.split('/').map((part) => encodeURIComponent(part)).join('/');
+  const encoded = await fetch(base + '/' + encodedPath);
   assert.equal(encoded.status, 200);
   const html = await encoded.text();
-  assert.equal(html, fs.readFileSync(path.join(root, 'šiauliai.htm'), 'utf8'));
+  assert.equal(html, fs.readFileSync(path.join(root, pageUrl), 'utf8'));
   assert.match(html, /Park Inn Šiauliai/);
   assert.match(html, /Old Town Boutique/);
-  const page = getCityPage('šiauliai.htm');
+  const page = getCityPage(pageUrl);
   assert.equal(html, page.html);
   assert.equal(page.heading, 'Available Hotels in Šiauliai.Htm');
   assert.equal(page.currencies, 'ETH,BTC,USDT');
   assert.equal(page.back_href, 'selectlocation.html');
+
+  const legacy = await fetch(base + '/' + encodeURIComponent('šiauliai.htm'), { redirect: 'manual' });
+  assert.equal(legacy.status, 302);
+  assert.equal(legacy.headers.get('location'), '/' + encodedPath);
 
   const missing = await fetch(base + '/not-a-city.html');
   assert.equal(missing.status, 404);

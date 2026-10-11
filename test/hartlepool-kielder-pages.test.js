@@ -20,13 +20,13 @@ const DESTINATIONS = [
   {
     city: 'Hartlepool',
     query: 'hartlepool',
-    url: 'hartlepool.html',
+    url: 'html/cities/northeast-england/hartlepool.html',
     hotels: ['Grand Hotel', 'Marine Hotel', 'Premier Inn Hartlepool Marina']
   },
   {
     city: 'Kielder Forest',
     query: 'kielder forest',
-    url: 'kielder-forest.html',
+    url: 'html/cities/northeast-england/kielder-forest.html',
     hotels: ['Leaplish Waterside', 'The Pheasant Inn', 'Kielder Lodges']
   }
 ];

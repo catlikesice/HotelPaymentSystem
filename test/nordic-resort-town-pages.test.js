@@ -19,49 +19,49 @@ const DESTINATIONS = [
   {
     city: 'Levi',
     country: 'Finland',
-    url: 'levi.html',
+    url: 'html/cities/finland/levi.html',
     hotels: ['Hotel K5 Levi', 'Hullu Poro', 'Levi Hotel Spa']
   },
   {
     city: 'Voss',
     country: 'Norway',
-    url: 'voss.html',
+    url: 'html/cities/norway/voss.html',
     hotels: ['Fleischer’s Hotel', 'Park Hotel Vossevangen', 'Scandic Voss']
   },
   {
     city: 'Geilo',
     country: 'Norway',
-    url: 'geilo.html',
+    url: 'html/cities/norway/geilo.html',
     hotels: ['Bardøla Høyfjellshotell', 'Dr. Holms Hotel', 'Hotel Vestlia']
   },
   {
     city: 'Sälen',
     country: 'Sweden',
-    url: 'salen.html',
+    url: 'html/cities/sweden/salen.html',
     hotels: ['Högfjällshotellet', 'Hundfjällshotellet', 'Tandådalens Fjällhotell']
   },
   {
     city: 'Ylläs',
     country: 'Finland',
-    url: 'yllas.html',
+    url: 'html/cities/finland/yllas.html',
     hotels: ['Äkäshotelli', 'Lapland Hotels Ylläs', 'Ylläs Saaga']
   },
   {
     city: 'Hemsedal',
     country: 'Norway',
-    url: 'hemsedal.html',
+    url: 'html/cities/norway/hemsedal.html',
     hotels: ['Harahorn', 'Hotel Skogstad', 'Skarsnuten Hotel']
   },
   {
     city: 'Skagen',
     country: 'Denmark',
-    url: 'skagen.html',
+    url: 'html/cities/denmark/skagen.html',
     hotels: ['Brøndums Hotel', 'Color Hotel Skagen', 'Ruths Hotel']
   },
   {
     city: 'Ruka-Kuusamo',
     country: 'Finland',
-    url: 'ruka-kuusamo.html',
+    url: 'html/cities/finland/ruka-kuusamo.html',
     hotels: ['Hotel Rukatonttu', 'Ruka Peak', 'Scandic Rukahovi']
   }
 ];

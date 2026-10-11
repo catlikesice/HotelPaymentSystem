@@ -20,42 +20,42 @@ const DESTINATIONS = [
   {
     city: 'Ullapool',
     query: 'ullapool',
-    url: 'ullapool.html',
+    url: 'html/cities/scotland/ullapool.html',
     section: 'boreal-ullapool-title',
     hotels: ['The Ceilidh Place', 'Broomfield House', 'Ullapool Ferry Hotel']
   },
   {
     city: 'St Andrews',
     query: 'st andrews',
-    url: 'st-andrews.html',
+    url: 'html/cities/scotland/st-andrews.html',
     section: 'boreal-st-andrews-title',
     hotels: ['Scores Hotel', 'St Andrews Harbour Hotel', 'Cathedral Gate House']
   },
   {
     city: 'Aviemore',
     query: 'aviemore',
-    url: 'aviemore.html',
+    url: 'html/cities/scotland/aviemore.html',
     section: 'boreal-aviemore-title',
     hotels: ['Cairngorm Hotel', 'Rothiemurchus Lodge', 'Spey Valley Hotel']
   },
   {
     city: 'Pitlochry',
     query: 'pitlochry',
-    url: 'pitlochry.html',
+    url: 'html/cities/scotland/pitlochry.html',
     section: 'boreal-pitlochry-title',
     hotels: ['Atholl Palace Hotel', 'Fishers Hotel', 'Loch Faskally House']
   },
   {
     city: 'Loch Lomond National Park',
     query: 'loch lomond',
-    url: 'loch-lomond.html',
+    url: 'html/cities/scotland/loch-lomond.html',
     section: 'boreal-loch-lomond-title',
     hotels: ['The Lodge on Loch Lomond', 'Cameron House', 'Oak Tree Inn']
   },
   {
     city: 'Benbecula',
     query: 'benbecula',
-    url: 'benbecula.html',
+    url: 'html/cities/scotland/benbecula.html',
     section: 'boreal-benbecula-title',
     hotels: ['Dark Island Hotel', 'Balivanich Airport House', 'Culla Bay Hotel']
   }
