@@ -71,6 +71,67 @@
     </nav>
   </header>
 
+  <nav class="blog-topics" aria-label="Blog topics">
+    <ul class="blog-topics__list">
+      <li class="blog-topic">
+        <button type="button" class="blog-topic__label" id="topic-places" data-topic="places" aria-expanded="false" aria-controls="blog-menu-places">Places</button>
+        <div class="blog-topic__menu" id="blog-menu-places" role="menu" hidden>
+          <button type="button" role="menuitem" id="topic-nordic-cities" data-topic="nordic-cities">Nordic Cities</button>
+          <button type="button" role="menuitem" id="topic-baltic-coast" data-topic="baltic-coast">Baltic Coast</button>
+          <button type="button" role="menuitem" id="topic-highland-routes" data-topic="highland-routes">Highland Routes</button>
+          <button type="button" role="menuitem" id="topic-island-hops" data-topic="island-hops">Island Hops</button>
+        </div>
+      </li>
+      <li class="blog-topic">
+        <button type="button" class="blog-topic__label" id="topic-stay-picks" data-topic="stay-picks" aria-expanded="false" aria-controls="blog-menu-stay-picks">Stay Picks</button>
+        <div class="blog-topic__menu" id="blog-menu-stay-picks" role="menu" hidden>
+          <button type="button" role="menuitem" id="topic-choosing-a-room" data-topic="choosing-a-room">Choosing a Room</button>
+          <button type="button" role="menuitem" id="topic-offbeat-lodgings" data-topic="offbeat-lodgings">Offbeat Lodgings</button>
+          <button type="button" role="menuitem" id="topic-traveling-with-children" data-topic="traveling-with-children">Traveling with Children</button>
+          <button type="button" role="menuitem" id="topic-high-end-hideaways" data-topic="high-end-hideaways">High-End Hideaways</button>
+        </div>
+      </li>
+      <li class="blog-topic">
+        <button type="button" class="blog-topic__label" id="topic-journey-currents" data-topic="journey-currents" aria-expanded="false" aria-controls="blog-menu-journey-currents">Journey Currents</button>
+        <div class="blog-topic__menu" id="blog-menu-journey-currents" role="menu" hidden>
+          <button type="button" role="menuitem" id="topic-greener-getaways" data-topic="greener-getaways">Greener Getaways</button>
+          <button type="button" role="menuitem" id="topic-travel-and-technology" data-topic="travel-and-technology">Travel and Technology</button>
+          <button type="button" role="menuitem" id="topic-trend-digests" data-topic="trend-digests">Trend Digests</button>
+          <button type="button" role="menuitem" id="topic-trips-that-work" data-topic="trips-that-work">Trips that Work</button>
+          <button type="button" role="menuitem" id="topic-next-wave-travel" data-topic="next-wave-travel">Next Wave Travel</button>
+          <button type="button" role="menuitem" id="topic-your-kind-of-trip" data-topic="your-kind-of-trip">Your Kind of Trip</button>
+        </div>
+      </li>
+      <li class="blog-topic">
+        <button type="button" class="blog-topic__label" id="topic-bulletin" data-topic="bulletin" aria-expanded="false" aria-controls="blog-menu-bulletin">Bulletin</button>
+        <div class="blog-topic__menu" id="blog-menu-bulletin" role="menu" hidden>
+          <button type="button" role="menuitem" id="topic-from-the-desk" data-topic="from-the-desk">From the Desk</button>
+          <button type="button" role="menuitem" id="topic-hospitality-wire" data-topic="hospitality-wire">Hospitality Wire</button>
+          <button type="button" role="menuitem" id="topic-northern-notes" data-topic="northern-notes">Northern Notes</button>
+        </div>
+      </li>
+      <li class="blog-topic">
+        <button type="button" class="blog-topic__label" id="topic-getting-ready" data-topic="getting-ready" aria-expanded="false" aria-controls="blog-menu-getting-ready">Getting Ready</button>
+        <div class="blog-topic__menu" id="blog-menu-getting-ready" role="menu" hidden>
+          <button type="button" role="menuitem" id="topic-air-ticket-know-how" data-topic="air-ticket-know-how">Air Ticket Know-How</button>
+          <button type="button" role="menuitem" id="topic-itinerary-kits" data-topic="itinerary-kits">Itinerary Kits</button>
+          <button type="button" role="menuitem" id="topic-wallet-wise-trips" data-topic="wallet-wise-trips">Wallet-Wise Trips</button>
+          <button type="button" role="menuitem" id="topic-field-shortcuts" data-topic="field-shortcuts">Field Shortcuts</button>
+          <button type="button" role="menuitem" id="topic-first-journey" data-topic="first-journey">First Journey</button>
+          <button type="button" role="menuitem" id="topic-on-the-ground-advice" data-topic="on-the-ground-advice">On-the-Ground Advice</button>
+        </div>
+      </li>
+      <li class="blog-topic">
+        <button type="button" class="blog-topic__label" id="topic-token-payments" data-topic="token-payments" aria-expanded="false" aria-controls="blog-menu-token-payments">Token Payments</button>
+        <div class="blog-topic__menu" id="blog-menu-token-payments" role="menu" hidden>
+          <button type="button" role="menuitem" id="topic-checkout-with-crypto" data-topic="checkout-with-crypto">Checkout with Crypto</button>
+          <button type="button" role="menuitem" id="topic-wallets-for-travelers" data-topic="wallets-for-travelers">Wallets for Travelers</button>
+          <button type="button" role="menuitem" id="topic-coins-we-accept" data-topic="coins-we-accept">Coins We Accept</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
   <main class="content culture-blog" id="page">
     <section class="blog-intro">
       <h2 id="blog-intro-title">Welcome to the Blog</h2>
@@ -78,8 +139,15 @@
         New stories will appear here as we grow this collection—start with the features below.</p>
     </section>
 
+    <span id="blog-filter-template" hidden>Showing: {label}</span>
+    <p class="blog-filter-status" id="blog-filter-status" hidden>
+      <span id="blog-filter-showing"></span>
+      <button type="button" class="blog-filter-clear" id="blog-filter-clear">Show all stories</button>
+    </p>
+    <p class="blog-empty" id="blog-empty" hidden>Stories in this collection are on the way.</p>
+
     <section class="blog-posts" aria-label="Blog posts">
-      <article class="blog-post">
+      <article class="blog-post" data-topics="places baltic-coast">
         <h3 id="post1-title">Midsummer Along the Baltic Coast</h3>
         <p id="post1-desc">
           From flower crowns to bonfires by the sea, Midsummer is one of the region’s most beloved celebrations.
@@ -87,7 +155,7 @@
         </p>
       </article>
 
-      <article class="blog-post">
+      <article class="blog-post" data-topics="places baltic-coast">
         <h3 id="post2-title">Art Nouveau Walks in Riga</h3>
         <p id="post2-desc">
           Alberta iela and the surrounding streets hold some of Europe’s finest Art Nouveau façades.
@@ -95,11 +163,43 @@
         </p>
       </article>
 
-      <article class="blog-post">
+      <article class="blog-post" data-topics="stay-picks offbeat-lodgings">
         <h3 id="post3-title">Sauna Culture from Finland to Estonia</h3>
         <p id="post3-desc">
           Heat, steam, and a plunge into cool water are more than a pastime—they are a shared Northern ritual.
           Learn why the sauna remains central to hospitality and everyday life across the region.
+        </p>
+      </article>
+
+      <article class="blog-post" data-topics="journey-currents greener-getaways">
+        <h3 id="post4-title">Quiet Routes through the North</h3>
+        <p id="post4-desc">
+          Trains along the coast, inns that keep the lights low, and trips built around fewer flights.
+          A briefing on gentler travel through Northern Europe.
+        </p>
+      </article>
+
+      <article class="blog-post" data-topics="bulletin hospitality-wire">
+        <h3 id="post5-title">What Partner Inns Are Changing</h3>
+        <p id="post5-desc">
+          Check-in hours, seasonal staffing, and rooms settled without a card network.
+          A short note on what northern hotels are adjusting before the next travel season.
+        </p>
+      </article>
+
+      <article class="blog-post" data-topics="getting-ready first-journey">
+        <h3 id="post6-title">A First Winter Along the Baltic</h3>
+        <p id="post6-desc">
+          Earlier sunsets, ferries that leave on time, and layers that actually work.
+          A starter briefing for anyone booking a first cold-season trip in the region.
+        </p>
+      </article>
+
+      <article class="blog-post" data-topics="token-payments checkout-with-crypto">
+        <h3 id="post7-title">Settling the Room with Tokens</h3>
+        <p id="post7-desc">
+          From the confirmation screen to the front desk, a stay can be paid in digital coins.
+          A plain look at how on-chain checkout works for a northern inn.
         </p>
       </article>
     </section>
@@ -141,7 +241,51 @@
         "contact-title": "Get in Touch",
         "contact-desc": "Have a culture story to share, or questions about traveling in Northern Europe? Reach our team and we will be glad to help.",
         "contact-btn": "Contact Us",
-        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry."
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.",
+        "blog-topics-label": "Blog topics",
+        "blog-filter-template": "Showing: {label}",
+        "blog-filter-clear": "Show all stories",
+        "blog-empty": "Stories in this collection are on the way.",
+        "topic-places": "Places",
+        "topic-nordic-cities": "Nordic Cities",
+        "topic-baltic-coast": "Baltic Coast",
+        "topic-highland-routes": "Highland Routes",
+        "topic-island-hops": "Island Hops",
+        "topic-stay-picks": "Stay Picks",
+        "topic-choosing-a-room": "Choosing a Room",
+        "topic-offbeat-lodgings": "Offbeat Lodgings",
+        "topic-traveling-with-children": "Traveling with Children",
+        "topic-high-end-hideaways": "High-End Hideaways",
+        "topic-journey-currents": "Journey Currents",
+        "topic-greener-getaways": "Greener Getaways",
+        "topic-travel-and-technology": "Travel and Technology",
+        "topic-trend-digests": "Trend Digests",
+        "topic-trips-that-work": "Trips that Work",
+        "topic-next-wave-travel": "Next Wave Travel",
+        "topic-your-kind-of-trip": "Your Kind of Trip",
+        "topic-bulletin": "Bulletin",
+        "topic-from-the-desk": "From the Desk",
+        "topic-hospitality-wire": "Hospitality Wire",
+        "topic-northern-notes": "Northern Notes",
+        "topic-getting-ready": "Getting Ready",
+        "topic-air-ticket-know-how": "Air Ticket Know-How",
+        "topic-itinerary-kits": "Itinerary Kits",
+        "topic-wallet-wise-trips": "Wallet-Wise Trips",
+        "topic-field-shortcuts": "Field Shortcuts",
+        "topic-first-journey": "First Journey",
+        "topic-on-the-ground-advice": "On-the-Ground Advice",
+        "topic-token-payments": "Token Payments",
+        "topic-checkout-with-crypto": "Checkout with Crypto",
+        "topic-wallets-for-travelers": "Wallets for Travelers",
+        "topic-coins-we-accept": "Coins We Accept",
+        "post4-title": "Quiet Routes through the North",
+        "post4-desc": "Trains along the coast, inns that keep the lights low, and trips built around fewer flights. A briefing on gentler travel through Northern Europe.",
+        "post5-title": "What Partner Inns Are Changing",
+        "post5-desc": "Check-in hours, seasonal staffing, and rooms settled without a card network. A short note on what northern hotels are adjusting before the next travel season.",
+        "post6-title": "A First Winter Along the Baltic",
+        "post6-desc": "Earlier sunsets, ferries that leave on time, and layers that actually work. A starter briefing for anyone booking a first cold-season trip in the region.",
+        "post7-title": "Settling the Room with Tokens",
+        "post7-desc": "From the confirmation screen to the front desk, a stay can be paid in digital coins. A plain look at how on-chain checkout works for a northern inn."
       },
       ru: {
         "blog-hero-title": "Блог",
@@ -157,7 +301,51 @@
         "contact-title": "Свяжитесь с нами",
         "contact-desc": "Есть история о культуре или вопросы о путешествиях по Северной Европе? Напишите нашей команде — мы будем рады помочь.",
         "contact-btn": "Связаться с нами",
-        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии."
+        "footer-text": "&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.",
+        "blog-topics-label": "Темы блога",
+        "blog-filter-template": "Показано: {label}",
+        "blog-filter-clear": "Все истории",
+        "blog-empty": "Истории в этой подборке скоро появятся.",
+        "topic-places": "Места",
+        "topic-nordic-cities": "Города Севера",
+        "topic-baltic-coast": "Балтийское побережье",
+        "topic-highland-routes": "Горные маршруты",
+        "topic-island-hops": "Островные переезды",
+        "topic-stay-picks": "Выбор жилья",
+        "topic-choosing-a-room": "Как выбрать номер",
+        "topic-offbeat-lodgings": "Необычное жильё",
+        "topic-traveling-with-children": "Путешествие с детьми",
+        "topic-high-end-hideaways": "Дорогие уединения",
+        "topic-journey-currents": "Веяния в пути",
+        "topic-greener-getaways": "Более спокойные поездки",
+        "topic-travel-and-technology": "Путешествия и технологии",
+        "topic-trend-digests": "Обзоры тенденций",
+        "topic-trips-that-work": "Поездки для работы",
+        "topic-next-wave-travel": "Следующая волна",
+        "topic-your-kind-of-trip": "Ваш стиль поездки",
+        "topic-bulletin": "Сводка",
+        "topic-from-the-desk": "От редакции",
+        "topic-hospitality-wire": "Новости гостеприимства",
+        "topic-northern-notes": "Северные заметки",
+        "topic-getting-ready": "Сборы в дорогу",
+        "topic-air-ticket-know-how": "Как брать авиабилеты",
+        "topic-itinerary-kits": "Наборы для маршрута",
+        "topic-wallet-wise-trips": "Поездки по средствам",
+        "topic-field-shortcuts": "Полевые приёмы",
+        "topic-first-journey": "Первая поездка",
+        "topic-on-the-ground-advice": "Советы на месте",
+        "topic-token-payments": "Оплата токенами",
+        "topic-checkout-with-crypto": "Оплата криптовалютой",
+        "topic-wallets-for-travelers": "Кошельки для путешественников",
+        "topic-coins-we-accept": "Какие монеты принимаем",
+        "post4-title": "Тихие маршруты на север",
+        "post4-desc": "Поезда вдоль побережья, гостиницы с приглушённым светом и поездки с меньшим числом перелётов. Кратко о более спокойных путешествиях по Северной Европе.",
+        "post5-title": "Что меняют гостиницы-партнёры",
+        "post5-desc": "Часы заезда, сезонный персонал и номера, которые можно оплатить без карточной сети. Короткая заметка о том, что северные отели меняют к следующему сезону.",
+        "post6-title": "Первая зима на Балтике",
+        "post6-desc": "Ранние закаты, паромы, которые отходят вовремя, и слои одежды, которые действительно работают. Памятка для тех, кто впервые бронирует поездку в холодный сезон.",
+        "post7-title": "Оплата номера токенами",
+        "post7-desc": "От экрана подтверждения до стойки регистрации номер можно оплатить цифровыми монетами. Просто о том, как устроен ончейн-расчёт в северной гостинице."
       },
       sv: {
         "blog-hero-title": "Blogg",
@@ -173,7 +361,51 @@
         "contact-title": "Hör av dig",
         "contact-desc": "Har du en kulturberättelse att dela, eller frågor om att resa i Nordeuropa? Hör av dig till vårt team så hjälper vi gärna till.",
         "contact-btn": "Kontakta oss",
-        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen."
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.",
+        "blog-topics-label": "Bloggämnen",
+        "blog-filter-template": "Visar: {label}",
+        "blog-filter-clear": "Visa alla berättelser",
+        "blog-empty": "Berättelser i den här samlingen är på väg.",
+        "topic-places": "Platser",
+        "topic-nordic-cities": "Nordiska städer",
+        "topic-baltic-coast": "Östersjökusten",
+        "topic-highland-routes": "Höglandsleder",
+        "topic-island-hops": "Öhopp",
+        "topic-stay-picks": "Boendeval",
+        "topic-choosing-a-room": "Välja rum",
+        "topic-offbeat-lodgings": "Ovanliga boenden",
+        "topic-traveling-with-children": "Resa med barn",
+        "topic-high-end-hideaways": "Exklusiva tillhåll",
+        "topic-journey-currents": "Reseströmmar",
+        "topic-greener-getaways": "Grönare resor",
+        "topic-travel-and-technology": "Resor och teknik",
+        "topic-trend-digests": "Trendöversikter",
+        "topic-trips-that-work": "Resor att jobba på",
+        "topic-next-wave-travel": "Nästa våg av resor",
+        "topic-your-kind-of-trip": "Din sorts resa",
+        "topic-bulletin": "Bulletin",
+        "topic-from-the-desk": "Från redaktionen",
+        "topic-hospitality-wire": "Besöksnäringsnytt",
+        "topic-northern-notes": "Nordiska notiser",
+        "topic-getting-ready": "Inför resan",
+        "topic-air-ticket-know-how": "Flygbiljettskoll",
+        "topic-itinerary-kits": "Ruttpaket",
+        "topic-wallet-wise-trips": "Resor på budget",
+        "topic-field-shortcuts": "Knep på plats",
+        "topic-first-journey": "Första resan",
+        "topic-on-the-ground-advice": "Råd på marken",
+        "topic-token-payments": "Tokenbetalningar",
+        "topic-checkout-with-crypto": "Betala med krypto",
+        "topic-wallets-for-travelers": "Plånböcker för resenärer",
+        "topic-coins-we-accept": "Mynt vi tar emot",
+        "post4-title": "Lugna vägar norrut",
+        "post4-desc": "Tåg längs kusten, värdshus med dämpad belysning och resor med färre flyg. En briefing om ett lugnare sätt att resa i Nordeuropa.",
+        "post5-title": "Vad partnerhotellen ändrar",
+        "post5-desc": "Incheckningstider, säsongspersonal och rum som betalas utan kortnät. En kort notis om vad nordliga hotell justerar inför nästa resesäsong.",
+        "post6-title": "En första vinter vid Östersjön",
+        "post6-desc": "Tidigare solnedgångar, färjor som går i tid och lager som faktiskt fungerar. En startguide för den som bokar sin första resa under den kalla säsongen.",
+        "post7-title": "Att betala rummet med token",
+        "post7-desc": "Från bekräftelseskärmen till receptionen kan en vistelse betalas med digitala mynt. En rak genomgång av hur on-chain-utcheckning fungerar på ett nordligt värdshus."
       },
       de: {
         "blog-hero-title": "Blog",
@@ -189,9 +421,86 @@
         "contact-title": "Kontakt aufnehmen",
         "contact-desc": "Haben Sie eine Kulturgeschichte zu teilen oder Fragen zum Reisen in Nordeuropa? Schreiben Sie unserem Team — wir helfen gerne.",
         "contact-btn": "Kontakt",
-        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie."
+        "footer-text": "&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.",
+        "blog-topics-label": "Blogthemen",
+        "blog-filter-template": "Angezeigt: {label}",
+        "blog-filter-clear": "Alle Beiträge zeigen",
+        "blog-empty": "Beiträge in dieser Sammlung folgen in Kürze.",
+        "topic-places": "Orte",
+        "topic-nordic-cities": "Nordische Städte",
+        "topic-baltic-coast": "Ostseeküste",
+        "topic-highland-routes": "Hochlandrouten",
+        "topic-island-hops": "Inselhopping",
+        "topic-stay-picks": "Unterkunftswahl",
+        "topic-choosing-a-room": "Zimmer wählen",
+        "topic-offbeat-lodgings": "Ungewöhnliche Unterkünfte",
+        "topic-traveling-with-children": "Reisen mit Kindern",
+        "topic-high-end-hideaways": "Gehobene Rückzugsorte",
+        "topic-journey-currents": "Reiseströmungen",
+        "topic-greener-getaways": "Grünere Auszeiten",
+        "topic-travel-and-technology": "Reisen und Technik",
+        "topic-trend-digests": "Trendüberblicke",
+        "topic-trips-that-work": "Reisen zum Arbeiten",
+        "topic-next-wave-travel": "Die nächste Reisewelle",
+        "topic-your-kind-of-trip": "Ihre Art zu reisen",
+        "topic-bulletin": "Bulletin",
+        "topic-from-the-desk": "Aus der Redaktion",
+        "topic-hospitality-wire": "Gastgewerbe aktuell",
+        "topic-northern-notes": "Nördliche Notizen",
+        "topic-getting-ready": "Vor der Abreise",
+        "topic-air-ticket-know-how": "Flugtickets verstehen",
+        "topic-itinerary-kits": "Routenhelfer",
+        "topic-wallet-wise-trips": "Reisen nach Budget",
+        "topic-field-shortcuts": "Kniffe unterwegs",
+        "topic-first-journey": "Erste Reise",
+        "topic-on-the-ground-advice": "Rat vor Ort",
+        "topic-token-payments": "Token-Zahlungen",
+        "topic-checkout-with-crypto": "Mit Krypto bezahlen",
+        "topic-wallets-for-travelers": "Wallets für Reisende",
+        "topic-coins-we-accept": "Münzen, die wir annehmen",
+        "post4-title": "Ruhige Wege nach Norden",
+        "post4-desc": "Züge entlang der Küste, Gasthäuser mit gedämpftem Licht und Reisen mit weniger Flügen. Ein Überblick über ein ruhigeres Reisen durch Nordeuropa.",
+        "post5-title": "Was Partnerhotels ändern",
+        "post5-desc": "Check-in-Zeiten, Saisonpersonal und Zimmer, die ohne Kartennetz bezahlt werden. Eine kurze Notiz dazu, was nördliche Hotels vor der nächsten Saison anpassen.",
+        "post6-title": "Ein erster Winter an der Ostsee",
+        "post6-desc": "Frühere Sonnenuntergänge, Fähren, die pünktlich ablegen, und Schichten, die wirklich tragen. Eine Einführung für alle, die ihre erste Reise in der kalten Jahreszeit buchen.",
+        "post7-title": "Das Zimmer mit Token bezahlen",
+        "post7-desc": "Vom Bestätigungsbildschirm bis zur Rezeption lässt sich ein Aufenthalt mit digitalen Münzen bezahlen. Ein klarer Blick darauf, wie der On-Chain-Checkout in einem nördlichen Gasthaus funktioniert."
       }
     };
+
+    let activeBlogTopic = '';
+
+    function blogTopicLabel(slug) {
+      const button = document.querySelector('.blog-topics [data-topic="' + slug + '"]');
+      return button ? button.textContent.trim() : slug;
+    }
+
+    function applyBlogFilter(slug) {
+      activeBlogTopic = slug || '';
+      const posts = document.querySelectorAll('.blog-post');
+      let visible = 0;
+      posts.forEach(function(post) {
+        const topics = (post.getAttribute('data-topics') || '').split(/\s+/);
+        const show = !activeBlogTopic || topics.indexOf(activeBlogTopic) !== -1;
+        post.hidden = !show;
+        if (show) visible += 1;
+      });
+      document.querySelectorAll('.blog-topics [data-topic]').forEach(function(button) {
+        const on = button.getAttribute('data-topic') === activeBlogTopic;
+        button.setAttribute('aria-pressed', on ? 'true' : 'false');
+        button.classList.toggle('is-active', on);
+      });
+      const status = document.getElementById('blog-filter-status');
+      const showing = document.getElementById('blog-filter-showing');
+      const empty = document.getElementById('blog-empty');
+      const template = document.getElementById('blog-filter-template');
+      if (status) status.hidden = !activeBlogTopic;
+      if (empty) empty.hidden = !activeBlogTopic || visible > 0;
+      if (showing && template && activeBlogTopic) {
+        showing.textContent = template.textContent.replace('{label}', blogTopicLabel(activeBlogTopic));
+      }
+    }
 
     function applyTranslations(lang) {
       const mapping = translations[lang] || translations.en;
@@ -206,7 +515,104 @@
           el.textContent = value;
         }
       });
+      const topicsNav = document.querySelector('.blog-topics');
+      if (topicsNav && mapping['blog-topics-label']) {
+        topicsNav.setAttribute('aria-label', mapping['blog-topics-label']);
+      }
       document.documentElement.setAttribute('lang', lang);
+      applyBlogFilter(activeBlogTopic);
+    }
+
+    function initBlogTopics() {
+      const nav = document.querySelector('.blog-topics');
+      if (!nav) return;
+      const topics = Array.prototype.slice.call(nav.querySelectorAll('.blog-topic'));
+
+      function hoverNav() {
+        return window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches;
+      }
+
+      function openTopic(topic) {
+        topic.classList.add('is-open');
+        const menu = topic.querySelector('.blog-topic__menu');
+        const label = topic.querySelector('.blog-topic__label');
+        if (menu) menu.hidden = false;
+        if (label) label.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeTopic(topic) {
+        topic.classList.remove('is-open');
+        const menu = topic.querySelector('.blog-topic__menu');
+        const label = topic.querySelector('.blog-topic__label');
+        if (menu) menu.hidden = true;
+        if (label) label.setAttribute('aria-expanded', 'false');
+      }
+
+      function closeAll() {
+        topics.forEach(closeTopic);
+      }
+
+      topics.forEach(function(topic) {
+        const label = topic.querySelector('.blog-topic__label');
+        const items = topic.querySelectorAll('.blog-topic__menu [data-topic]');
+        if (!label) return;
+
+        topic.addEventListener('mouseenter', function() {
+          if (!hoverNav()) return;
+          closeAll();
+          openTopic(topic);
+        });
+
+        topic.addEventListener('mouseleave', function() {
+          if (!hoverNav()) return;
+          closeTopic(topic);
+        });
+
+        label.addEventListener('click', function() {
+          if (!hoverNav() && !topic.classList.contains('is-open')) {
+            closeAll();
+            openTopic(topic);
+            return;
+          }
+          applyBlogFilter(label.getAttribute('data-topic'));
+          if (!hoverNav()) closeAll();
+        });
+
+        label.addEventListener('keydown', function(event) {
+          if (event.key !== 'ArrowDown') return;
+          event.preventDefault();
+          closeAll();
+          openTopic(topic);
+          const first = topic.querySelector('.blog-topic__menu button');
+          if (first) first.focus();
+        });
+
+        items.forEach(function(item) {
+          item.addEventListener('click', function() {
+            applyBlogFilter(item.getAttribute('data-topic'));
+            closeAll();
+          });
+        });
+      });
+
+      const clearButton = document.getElementById('blog-filter-clear');
+      if (clearButton) {
+        clearButton.addEventListener('click', function() {
+          applyBlogFilter('');
+          closeAll();
+        });
+      }
+
+      document.addEventListener('click', function(event) {
+        if (nav.contains(event.target)) return;
+        closeAll();
+      });
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') closeAll();
+      });
+
+      window.addEventListener('resize', closeAll);
     }
 
     const languageEventName = (window.LanguagePreferences && window.LanguagePreferences.CHANGE_EVENT) || 'preferredLanguageChange';
@@ -224,6 +630,7 @@
       : (langSelect ? (langSelect.value || availableLanguages[0] || 'en') : 'en');
 
     applyTranslations(initialLang);
+    initBlogTopics();
 
     if (window.NavBarTranslations && typeof window.NavBarTranslations.apply === 'function') {
       window.NavBarTranslations.apply(initialLang);

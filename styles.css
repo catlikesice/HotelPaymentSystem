@@ -790,6 +790,187 @@ header a { position: static !important; left: auto !important; right: auto !impo
   color: #214a27;
 }
 
+/* Blog topic bar: category groups for the journal, seated under the site nav. */
+.blog-topics {
+  background: #fff;
+  border-bottom: 1px solid rgba(35, 68, 26, 0.12);
+  position: relative;
+  z-index: 16;
+}
+
+.blog-topics__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.15rem 0.35rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.2rem 0.75rem;
+}
+
+.blog-topic {
+  position: relative;
+}
+
+.blog-topic__label,
+.blog-topic__menu button {
+  font: inherit;
+  cursor: pointer;
+  color: #2e4d25;
+  background: transparent;
+  border: 0;
+}
+
+.blog-topic__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.72rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.blog-topic__label::after {
+  content: "";
+  width: 0.38rem;
+  height: 0.38rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+  flex-shrink: 0;
+}
+
+.blog-topic.is-open > .blog-topic__label,
+.blog-topic__label.is-active,
+.blog-topic__menu button.is-active {
+  color: var(--accent);
+}
+
+.blog-topic__label.is-active {
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.blog-topic__menu {
+  position: absolute;
+  top: calc(100% - 0.15rem);
+  left: 0;
+  min-width: 15.5rem;
+  padding: 0.2rem 0;
+  background: #fff;
+  border: 1px solid rgba(35, 68, 26, 0.12);
+  border-radius: 2px;
+  box-shadow: 0 12px 28px rgba(35, 68, 26, 0.14);
+  z-index: 17;
+}
+
+.blog-topic:nth-last-child(-n+2) .blog-topic__menu {
+  left: auto;
+  right: 0;
+}
+
+.blog-topic__menu button {
+  display: block;
+  width: 100%;
+  padding: 0.78rem 1.05rem;
+  text-align: left;
+  font-size: 0.74rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  border-bottom: 1px solid #eef3ee;
+}
+
+.blog-topic__menu button:last-child {
+  border-bottom: 0;
+}
+
+.blog-topic__menu button:hover,
+.blog-topic__menu button:focus,
+.blog-topic__label:hover,
+.blog-topic__label:focus {
+  color: var(--accent);
+  outline: none;
+}
+
+.blog-topic__label:focus-visible,
+.blog-topic__menu button:focus-visible,
+.blog-filter-clear:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.culture-blog .blog-filter-status,
+.culture-blog .blog-empty {
+  max-width: min(760px, 100%);
+  margin: 0 auto 1.25rem;
+  text-align: center;
+  color: #214a27;
+  line-height: 1.6;
+}
+
+.culture-blog .blog-filter-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-weight: 650;
+}
+
+.culture-blog .blog-filter-status[hidden],
+.culture-blog .blog-empty[hidden] {
+  display: none;
+}
+
+.blog-filter-clear {
+  font: inherit;
+  font-weight: 700;
+  color: var(--accent);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+@media (max-width: 899px) {
+  .blog-topics__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.25rem 0.75rem 0.5rem;
+  }
+
+  .blog-topic__label {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.85rem 0.35rem;
+    border-bottom: 1px solid #eef3ee;
+  }
+
+  .blog-topic__menu,
+  .blog-topic:nth-last-child(-n+2) .blog-topic__menu {
+    position: static;
+    left: auto;
+    right: auto;
+    min-width: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #f7fbf7;
+  }
+
+  .blog-topic__menu button {
+    padding-left: 1.15rem;
+  }
+}
+
 /* =========================
    City listings: price range sidebar
    ========================= */
