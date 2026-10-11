@@ -118,6 +118,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Durham",
+      "city": "Durham",
+      "country": "Northeast England",
+      "url": "durham.html",
+      "description": "Browse hotels in Durham, Northeast England."
+    },
+    {
+      "type": "city",
       "name": "Edinburgh",
       "city": "Edinburgh",
       "country": "Scotland",
@@ -1139,6 +1147,39 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Characterful hotel in a converted church, walking distance from the waterfront."
+    },
+    {
+      "type": "hotel",
+      "name": "Radisson Blu Durham",
+      "city": "Durham",
+      "country": "Northeast England",
+      "url": "radisson-blu-durham.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Riverside hotel on the Wear, a short walk from Durham Cathedral and the market place."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Indigo Durham",
+      "city": "Durham",
+      "country": "Northeast England",
+      "url": "hotel-indigo-durham.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Boutique stay in the Milburngate quarter, looking across the river toward the castle."
+    },
+    {
+      "type": "hotel",
+      "name": "Durham Marriott Royal County",
+      "city": "Durham",
+      "country": "Northeast England",
+      "url": "durham-marriott-royal-county.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Victorian hotel on Old Elvet, across the Wear from the cathedral peninsula."
     },
     {
       "type": "hotel",
