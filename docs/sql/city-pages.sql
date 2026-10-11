@@ -314,7 +314,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Royal Aarhus</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Luxury hotel in the heart of Aarhus, featuring elegant rooms, gourmet restaurant, and spa services.</p>
-                <a href="hotel-royal-aarhus.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/hotel-royal-aarhus.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -322,7 +322,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Aarhus City</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Modern amenities and eco-friendly design, located in the vibrant city center with easy access to attractions.</p>
-                <a href="scandic-aarhus-city.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/scandic-aarhus-city.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -330,7 +330,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Comwell Aarhus</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Contemporary comfort with panoramic city views, perfect for business or leisure travelers.</p>
-                <a href="comwell-aarhus.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/comwell-aarhus.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -615,7 +615,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Marcliffe Hotel and Spa</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Country-house luxury on the edge of Aberdeen with gardens and spa.</p>
-                <a href="the-marcliffe-hotel-and-spa.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/the-marcliffe-hotel-and-spa.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -623,7 +623,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Mercure Aberdeen Caledonian</h3>
                 <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="142">0.05 ETH / night</div>
                 <p>Classic city-centre hotel close to Union Street and the harbour.</p>
-                <a href="mercure-aberdeen-caledonian.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/mercure-aberdeen-caledonian.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -631,7 +631,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Sandman Signature Aberdeen</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Modern hotel near the beach and Aberdeen’s exhibition centre.</p>
-                <a href="sandman-signature-aberdeen.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/sandman-signature-aberdeen.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -917,7 +917,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Abisko Mountain Lodge</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Trailside lodge in Abisko, a base for the Kungsleden and clear winter nights.</p>
-                <a href="abisko-mountain-lodge.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/abisko-mountain-lodge.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -925,7 +925,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>STF Abisko Turiststation</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Mountain station where the Kungsleden begins, above the Abisko river and the lake.</p>
-                <a href="stf-abisko-turiststation.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/stf-abisko-turiststation.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -933,7 +933,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Björkliden Mountain Lodge</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Ski lodge at Björkliden, on the railway between Abisko and the Norwegian border.</p>
-                <a href="bjorkliden-mountain-lodge.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/bjorkliden-mountain-lodge.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -1219,7 +1219,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Kea</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Long-standing harbour hotel facing the fjord, steps from the church and downtown cafés.</p>
-                <a href="hotel-kea.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-kea.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -1227,7 +1227,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Icelandair Hotel Akureyri</h3>
                 <div class="price" data-eth="0.075" data-btc="0.0012" data-usdt="214">0.075 ETH / night</div>
                 <p>Contemporary hotel near the botanical garden, with views toward the ski slopes.</p>
-                <a href="icelandair-hotel-akureyri.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/icelandair-hotel-akureyri.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -1235,7 +1235,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Nordurland</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Compact central hotel on Hafnarstræti, a practical base for north-Iceland day trips.</p>
-                <a href="hotel-nordurland.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-nordurland.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -1517,14 +1517,14 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Bauska</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0009" data-usdt="142">0.05 ETH / night</div>
                 <p>Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade.</p>
-                <a href="hotel-bauska.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/hotel-bauska.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Bauska Castle Hotel">
                 <h3>Bauska Castle Hotel</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
                 <p>Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence.</p>
-                <a href="bauska-castle-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/bauska-castle-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -1811,7 +1811,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Norge by Scandic</h3>
                 <div class="price" data-eth="0.1" data-btc="0.0017" data-usdt="285">0.1 ETH / night</div>
                 <p>Rebuilt city-centre icon on Ole Bulls plass, a short walk from the fish market.</p>
-                <a href="hotel-norge-by-scandic.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/hotel-norge-by-scandic.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -1819,7 +1819,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel Admiral</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Waterfront hotel facing Bryggen, with harbour-view rooms and a rooftop restaurant.</p>
-                <a href="clarion-hotel-admiral.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/clarion-hotel-admiral.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -1827,7 +1827,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Steens Hotel</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Intimate Swiss-chalet style guesthouse near Nygårdsparken, handy for the funicular.</p>
-                <a href="steens-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/steens-hotel.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -2114,7 +2114,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Marshall Meadows Country House</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Georgian country house on the coast just north of town, with sea views and period rooms.</p>
-                <a href="marshall-meadows-country-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/marshall-meadows-country-house.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -2122,7 +2122,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The King’s Arms Hotel</h3>
                 <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
                 <p>Historic coaching inn in the town centre, a short walk from the Elizabethan walls.</p>
-                <a href="the-kings-arms-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/the-kings-arms-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -2130,7 +2130,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Walls Guest House</h3>
                 <div class="price" data-eth="0.03" data-btc="0.0005" data-usdt="86">0.03 ETH / night</div>
                 <p>Friendly townhouse stay beside Berwick’s ramparts, close to the Tweed estuary.</p>
-                <a href="the-walls-guest-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/the-walls-guest-house.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -2417,42 +2417,42 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Palace Hotel</h3>
                 <div class="hotel-chain">Scandic Hotels</div>
                 <div class="price" data-eth="0.042" data-btc="0.0007" data-usdt="120">0.042 ETH / night</div>
-                <a href="scandic-copenhagen.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/scandic-copenhagen.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Comwell Copenhagen Portside">
                 <h3>Comwell Copenhagen Portside</h3>
                 <div class="hotel-chain">Comwell Hotels</div>
                 <div class="price" data-eth="0.038" data-btc="0.00063" data-usdt="110">0.038 ETH / night</div>
-                <a href="comwell-copenhagen-portside.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/comwell-copenhagen-portside.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Imperial Hotel">
                 <h3>Imperial Hotel</h3>
                 <div class="hotel-chain">Arp-Hansen Hotel Group</div>
                 <div class="price" data-eth="0.045" data-btc="0.00075" data-usdt="130">0.045 ETH / night</div>
-                <a href="imperial-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/imperial-hotel.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="CABINN City">
                 <h3>CABINN City</h3>
                 <div class="hotel-chain">Cabinn Hotels</div>
                 <div class="price" data-eth="0.021" data-btc="0.00035" data-usdt="60">0.021 ETH / night</div>
-                <a href="cabinn-city.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/cabinn-city.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80" alt="Zleep Hotel Copenhagen City">
                 <h3>Zleep Hotel Copenhagen City</h3>
                 <div class="hotel-chain">Zleep Hotels</div>
                 <div class="price" data-eth="0.027" data-btc="0.00045" data-usdt="77">0.027 ETH / night</div>
-                <a href="zleep-hotel-copenhagen-city.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/zleep-hotel-copenhagen-city.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80" alt="First Hotel Kong Frederik">
                 <h3>First Hotel Kong Frederik</h3>
                 <div class="hotel-chain">First Hotels</div>
                 <div class="price" data-eth="0.033" data-btc="0.00055" data-usdt="95">0.033 ETH / night</div>
-                <a href="first-hotel-kong-frederik.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/first-hotel-kong-frederik.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -2739,7 +2739,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Park Hotel Latgola</h3>
                 <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
                 <p>Modern hotel in the city center with panoramic views and conference facilities.</p>
-                <a href="park-hotel-latgola.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/park-hotel-latgola.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -2747,7 +2747,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Dinaburg</h3>
                 <div class="price" data-eth="0.03" data-btc="0.0005" data-usdt="86">0.03 ETH / night</div>
                 <p>Comfortable rooms, restaurant, and wellness area close to Daugavpils fortress.</p>
-                <a href="hotel-dinaburg.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/hotel-dinaburg.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -2755,7 +2755,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Biplan Hotel</h3>
                 <div class="price" data-eth="0.025" data-btc="0.0004" data-usdt="71">0.025 ETH / night</div>
                 <p>Budget-friendly hotel with cozy rooms and a convenient location.</p>
-                <a href="biplan-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/biplan-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -3040,7 +3040,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Apex City Quay Hotel & Spa</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Waterfront hotel on Dundee’s City Quay with spa and easy access to the V&A.</p>
-                <a href="apex-city-quay-hotel-and-spa.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/apex-city-quay-hotel-and-spa.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -3048,7 +3048,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Malmaison Dundee</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Characterful hotel in a converted church, walking distance from the waterfront.</p>
-                <a href="malmaison-dundee.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/malmaison-dundee.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -3056,7 +3056,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Indigo Dundee</h3>
                 <div class="price" data-eth="0.055" data-btc="0.00092" data-usdt="157">0.055 ETH / night</div>
                 <p>Design hotel in a historic jute mill near Dundee city centre.</p>
-                <a href="hotel-indigo-dundee.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/hotel-indigo-dundee.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -3342,7 +3342,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Balmoral</h3>
                 <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="400">0.14 ETH / night</div>
                 <p>Historic luxury hotel on Princes Street, steps from Waverley Station and Edinburgh Castle.</p>
-                <a href="the-balmoral.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/the-balmoral.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -3350,7 +3350,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Waldorf Astoria Edinburgh</h3>
                 <div class="price" data-eth="0.12" data-btc="0.002" data-usdt="340">0.12 ETH / night</div>
                 <p>Grand landmark hotel at the west end of Princes Street with spa and castle views.</p>
-                <a href="waldorf-astoria-edinburgh.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/waldorf-astoria-edinburgh.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -3358,7 +3358,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel du Vin Edinburgh</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Boutique townhouse hotel in the Old Town, close to the Royal Mile.</p>
-                <a href="hotel-du-vin-edinburgh.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/hotel-du-vin-edinburgh.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -3589,21 +3589,21 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Britannia</h3>
                 <div class="hotel-group">Britannia Hotels</div>
                 <div class="price">0.035 ETH / night</div>
-                <a href="hotel-britannia.html" class="book-link">Book Now</a>
+                <a href="html/cities/denmark/hotel-britannia.html" class="book-link">Book Now</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Scandic Olympic">
                 <h3>Scandic Olympic</h3>
                 <div class="hotel-group">Scandic Hotels</div>
                 <div class="price">0.029 ETH / night</div>
-                <a href="scandic-olympic.html" class="book-link">Book Now</a>
+                <a href="html/cities/denmark/scandic-olympic.html" class="book-link">Book Now</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Hotel Ansgar">
                 <h3>Hotel Ansgar</h3>
                 <div class="hotel-group">Ansgar Group</div>
                 <div class="price">0.025 ETH / night</div>
-                <a href="hotel-ansgar.html" class="book-link">Book Now</a>
+                <a href="html/cities/denmark/hotel-ansgar.html" class="book-link">Book Now</a>
             </div>
         </div>
     </div>
@@ -3885,7 +3885,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Matts</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Modern hotel in Espoo offering stylish rooms and apartments.</p>
-                <a href="hotel-matts.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/hotel-matts.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -3893,7 +3893,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Glo Hotel Sello</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Contemporary hotel next to Sello shopping center, great for families and business.</p>
-                <a href="glo-hotel-sello.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/glo-hotel-sello.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -3901,7 +3901,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Hotel Espoo</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Waterfront hotel with excellent meeting facilities and nature access.</p>
-                <a href="radisson-blu-hotel-espoo.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/radisson-blu-hotel-espoo.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -4186,7 +4186,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Ben Nevis Lodge</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Highland lodge in Fort William, with glen views and a path toward Ben Nevis.</p>
-                <a href="ben-nevis-lodge.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/ben-nevis-lodge.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -4194,7 +4194,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Alexandra Hotel</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>High Street hotel in Fort William, facing the parade toward Loch Linnhe.</p>
-                <a href="alexandra-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/alexandra-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -4202,7 +4202,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Lime Tree Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Town-centre hotel in Fort William, a short walk from the High Street and the loch.</p>
-                <a href="the-lime-tree-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/the-lime-tree-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -4488,7 +4488,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Kimpton Blythswood Square</h3>
                 <div class="price" data-eth="0.10" data-btc="0.0017" data-usdt="285">0.10 ETH / night</div>
                 <p>Elegant Georgian square hotel with spa in the heart of Glasgow.</p>
-                <a href="kimpton-blythswood-square.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/kimpton-blythswood-square.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -4496,7 +4496,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Hotel, Glasgow</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Contemporary hotel beside Glasgow Central Station, ideal for exploring the city.</p>
-                <a href="radisson-blu-hotel-glasgow.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/radisson-blu-hotel-glasgow.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -4504,7 +4504,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Motel One Glasgow</h3>
                 <div class="price" data-eth="0.04" data-btc="0.00067" data-usdt="114">0.04 ETH / night</div>
                 <p>Stylish budget-friendly stay on Argyle Street near the River Clyde.</p>
-                <a href="motel-one-glasgow.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/motel-one-glasgow.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -4790,7 +4790,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Upper House</h3>
                 <div class="price" data-eth="0.12" data-btc="0.002" data-usdt="342">0.12 ETH / night</div>
                 <p>Design hotel high above Liseberg with a spa, skyline views, and Nordic cuisine.</p>
-                <a href="upper-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/upper-house.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -4798,7 +4798,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel Post</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Converted central post office with a rooftop pool, next to Drottningtorget and the station.</p>
-                <a href="clarion-hotel-post.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/clarion-hotel-post.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -4806,7 +4806,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Eggers</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Classic 19th-century hotel by the railway station, close to Avenyn and the opera.</p>
-                <a href="hotel-eggers.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/hotel-eggers.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -5093,7 +5093,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Viking</h3>
                 <div class="price" data-eth="0.065" data-btc="0.0011" data-usdt="185">0.065 ETH / night</div>
                 <p>Characterful harbour hotel with Norse-inspired interiors and a popular restaurant.</p>
-                <a href="hotel-viking.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-viking.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -5101,7 +5101,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Hafnarfjörður</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Straightforward town hotel close to the lava fields, harbour, and Reykjavík bus routes.</p>
-                <a href="hotel-hafnarfjordur.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-hafnarfjordur.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -5109,7 +5109,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Helguhús Guesthouse</h3>
                 <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
                 <p>Homely guesthouse in a quiet neighbourhood, a short drive from the capital.</p>
-                <a href="helguhus-guesthouse.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/helguhus-guesthouse.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -5391,21 +5391,21 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Kämp</h3>
                 <div class="price" data-eth="0.13" data-btc="0.0022" data-usdt="370">0.13 ETH / night</div>
                 <p>Historic luxury hotel in the heart of Helsinki with elegant rooms and spa.</p>
-                <a href="hotel-kamp-helsinki.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/hotel-kamp-helsinki.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Scandic Grand Central">
                 <h3>Scandic Grand Central</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="220">0.08 ETH / night</div>
                 <p>Contemporary hotel next to Helsinki Central Station, great for exploring the city.</p>
-                <a href="scandic-grand-central-helsinki.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/scandic-grand-central-helsinki.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80" alt="Hotel Helka">
                 <h3>Hotel Helka</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
                 <p>Stylish boutique hotel with Finnish design and cozy atmosphere.</p>
-                <a href="hotel-helka-helsinki.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/hotel-helka-helsinki.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -5692,7 +5692,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Arctic</h3>
                 <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="400">0.14 ETH / night</div>
                 <p>Clifftop hotel above the UNESCO icefjord, with midnight-sun terraces and views of drifting icebergs.</p>
-                <a href="hotel-arctic.html" class="book-link">View & Book</a>
+                <a href="html/cities/greenland/hotel-arctic.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -5700,7 +5700,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Icefiord</h3>
                 <div class="price" data-eth="0.12" data-btc="0.002" data-usdt="340">0.12 ETH / night</div>
                 <p>Harbour hotel facing Disko Bay, steps from boat departures into the icefjord.</p>
-                <a href="hotel-icefiord.html" class="book-link">View & Book</a>
+                <a href="html/cities/greenland/hotel-icefiord.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -5708,7 +5708,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Hvide Falk</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="260">0.09 ETH / night</div>
                 <p>Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley.</p>
-                <a href="hotel-hvide-falk.html" class="book-link">View & Book</a>
+                <a href="html/cities/greenland/hotel-hvide-falk.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -5995,7 +5995,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Kingsmills Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Highland hotel with gardens and golf, a short walk from Inverness city centre.</p>
-                <a href="kingsmills-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/kingsmills-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -6003,7 +6003,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Rocpool Reserve Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Boutique luxury stay overlooking the River Ness.</p>
-                <a href="rocpool-reserve-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/rocpool-reserve-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -6011,7 +6011,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Glen Mhor Hotel</h3>
                 <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="142">0.05 ETH / night</div>
                 <p>Riverside hotel with restaurant, close to Inverness Castle.</p>
-                <a href="glen-mhor-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/glen-mhor-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -6297,7 +6297,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Jelgava Hotel</h3>
                 <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
                 <p>Modern hotel in the city center with comfortable rooms and restaurant.</p>
-                <a href="jelgava-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/jelgava-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -6582,7 +6582,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Baltic Beach Hotel</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Luxury spa hotel on the beach with beautiful sea views and upscale amenities.</p>
-                <a href="baltic-beach-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/baltic-beach-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -6590,7 +6590,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Jurmala Spa</h3>
                 <div class="price" data-eth="0.045" data-btc="0.0008" data-usdt="128">0.045 ETH / night</div>
                 <p>Modern spa hotel with pools, saunas, and wellness treatments in Jurmala center.</p>
-                <a href="hotel-jurmala-spa.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/hotel-jurmala-spa.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -6598,7 +6598,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Villa Joma</h3>
                 <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
                 <p>Charming boutique hotel near the sea, ideal for a relaxing getaway.</p>
-                <a href="villa-joma.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/villa-joma.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -6878,14 +6878,14 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Kaunas City</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
                 <p>Comfortable city-centre hotel with modern rooms and easy access to Kaunas Old Town and cultural sights.</p>
-                <a href="hotel-kaunas-city.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/hotel-kaunas-city.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1501118572072-7c5d7d3d47e6?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Magnolia Boutique">
                 <h3>Magnolia Boutique</h3>
                 <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="140">0.05 ETH / night</div>
                 <p>Cozy boutique hotel offering an intimate atmosphere, complimentary breakfast and friendly service close to the river.</p>
-                <a href="magnolia-boutique.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/magnolia-boutique.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -7172,7 +7172,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Camp Ripan</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Arctic spa hotel on the edge of Kiruna, with northern lights views and a base for Kebnekaise trails.</p>
-                <a href="camp-ripan.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/camp-ripan.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -7180,7 +7180,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Arctic Eden</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Lapland-inspired rooms in the town centre, close to Kiruna’s relocated church and new city district.</p>
-                <a href="hotel-arctic-eden.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/hotel-arctic-eden.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -7188,7 +7188,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Kiruna</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Modern hotel near the town centre, handy for aurora trips, Abisko, and the Icehotel in Jukkasjärvi.</p>
-                <a href="scandic-kiruna.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/scandic-kiruna.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -7470,14 +7470,14 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Seaside Harbour Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Seafront hotel with beautiful views of the Baltic Sea, fresh seafood nearby and easy access to the ferry terminal.</p>
-                <a href="seaside-harbour-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/seaside-harbour-hotel.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Portside Boutique">
                 <h3>Portside Boutique</h3>
                 <div class="price" data-eth="0.05" data-btc="0.00083" data-usdt="140">0.05 ETH / night</div>
                 <p>Charming boutique hotel in the city centre, close to restaurants, theatres and the Old Town promenade.</p>
-                <a href="portside-boutique.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/portside-boutique.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -7764,7 +7764,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Vellir</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Contemporary hotel in Kópavogur with spacious rooms and quick links into Reykjavík.</p>
-                <a href="hotel-vellir.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-vellir.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -7772,7 +7772,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Smárinn</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Practical stay near Smáralind shopping centre, useful for families and longer visits.</p>
-                <a href="hotel-smarinn.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-smarinn.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -7780,7 +7780,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Kórinn Guesthouse</h3>
                 <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
                 <p>Quiet guesthouse-style rooms with easy access to local pools and coastal paths.</p>
-                <a href="korinn-guesthouse.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/korinn-guesthouse.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -8067,7 +8067,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel Ernst</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Landmark hotel on the main square, a short stroll from the cathedral and fish market.</p>
-                <a href="clarion-hotel-ernst.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/clarion-hotel-ernst.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8075,7 +8075,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Kristiansand Bystranda</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Beachfront hotel on Bystranda with a pool, close to the boardwalk and Kilden.</p>
-                <a href="scandic-kristiansand-bystranda.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/scandic-kristiansand-bystranda.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8083,7 +8083,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Thon Hotel Wergeland</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Compact city hotel beside Wergeland’s park, handy for the Posebyen old town.</p>
-                <a href="thon-hotel-wergeland.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/thon-hotel-wergeland.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -8370,7 +8370,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Shetland Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Harbour hotel in Lerwick, overlooking the sound and the ferry to Bressay.</p>
-                <a href="shetland-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/shetland-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8378,7 +8378,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Grand Hotel Lerwick</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Town hotel beside the harbour, a short walk from Commercial Street.</p>
-                <a href="grand-hotel-lerwick.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/grand-hotel-lerwick.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8386,7 +8386,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Lerwick Harbour House</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Waterfront house in Lerwick, close to the lanes and the lodberries.</p>
-                <a href="lerwick-harbour-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/lerwick-harbour-house.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -8672,7 +8672,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Kolumbs</h3>
                 <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
                 <p>Elegant hotel with spa facilities near the sea and city center.</p>
-                <a href="hotel-kolumbs.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/hotel-kolumbs.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8680,7 +8680,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Promenade Hotel</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Luxury hotel set in a historic warehouse with art gallery and gourmet restaurant.</p>
-                <a href="promenade-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/promenade-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8688,7 +8688,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Liva Hotel</h3>
                 <div class="price" data-eth="0.025" data-btc="0.0004" data-usdt="71">0.025 ETH / night</div>
                 <p>Central, affordable hotel ideal for business or leisure travelers.</p>
-                <a href="liva-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/liva-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -8973,7 +8973,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Lillehammer Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Lakeside hotel in Lillehammer, below the ski jump and the Olympic park.</p>
-                <a href="radisson-blu-lillehammer-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/radisson-blu-lillehammer-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8981,7 +8981,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Lillehammer</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Town hotel in Lillehammer, a short walk from the pedestrian street and the station.</p>
-                <a href="scandic-lillehammer.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/scandic-lillehammer.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -8989,7 +8989,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Mølla Hotell</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Riverside hotel in a former mill on the Mesna, in the centre of Lillehammer.</p>
-                <a href="molla-hotell.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/molla-hotell.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -9275,7 +9275,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Quality Hotel Ekoxen</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Well-equipped city hotel with a pool and spa, close to Linköping’s main square.</p>
-                <a href="quality-hotel-ekoxen.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/quality-hotel-ekoxen.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9283,7 +9283,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Frimurarehotellet</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Landmark hotel in the city centre with easy access to the cathedral and old town.</p>
-                <a href="scandic-frimurarehotellet.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/scandic-frimurarehotellet.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9291,7 +9291,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Stora Hotellet Linköping</h3>
                 <div class="price" data-eth="0.045" data-btc="0.0007" data-usdt="128">0.045 ETH / night</div>
                 <p>Classic independent hotel with a restaurant, a short walk from the railway station.</p>
-                <a href="stora-hotellet-linkoping.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/stora-hotellet-linkoping.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -9578,7 +9578,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Polar Hotel Spitsbergen</h3>
                 <div class="price" data-eth="0.13" data-btc="0.0021" data-usdt="370">0.13 ETH / night</div>
                 <p>Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.</p>
-                <a href="radisson-blu-polar-spitsbergen.html" class="book-link">View & Book</a>
+                <a href="html/cities/svalbard/radisson-blu-polar-spitsbergen.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9586,7 +9586,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Funken Lodge</h3>
                 <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="315">0.11 ETH / night</div>
                 <p>Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.</p>
-                <a href="funken-lodge.html" class="book-link">View & Book</a>
+                <a href="html/cities/svalbard/funken-lodge.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9594,7 +9594,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Basecamp Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="255">0.09 ETH / night</div>
                 <p>Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.</p>
-                <a href="basecamp-hotel-svalbard.html" class="book-link">View & Book</a>
+                <a href="html/cities/svalbard/basecamp-hotel-svalbard.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -9881,7 +9881,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel Malmö Live</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>High-rise waterfront hotel with a sky bar and concert hall next door.</p>
-                <a href="clarion-hotel-malmo-live.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/clarion-hotel-malmo-live.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9889,7 +9889,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Savoy Malmö</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Historic city hotel opposite the central station, a short hop from the Turning Torso.</p>
-                <a href="hotel-savoy-malmo.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/hotel-savoy-malmo.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9897,7 +9897,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Triangeln</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Modern tower hotel above Triangeln station, handy for Möllevången and shopping.</p>
-                <a href="scandic-triangeln.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/scandic-triangeln.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -10184,7 +10184,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Arkipelag</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Waterfront hotel by Mariehamn’s western harbour, a short walk from shops, ferries, and the maritime quarter.</p>
-                <a href="hotel-arkipelag.html" class="book-link">View & Book</a>
+                <a href="html/cities/aland-islands/hotel-arkipelag.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -10192,7 +10192,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Park Alandia Hotel</h3>
                 <div class="price" data-eth="0.05" data-btc="0.00085" data-usdt="145">0.05 ETH / night</div>
                 <p>Central Åland stay beside the town park, handy for the sailing harbour and the road to Kastelholm.</p>
-                <a href="park-alandia-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/aland-islands/park-alandia-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -10200,7 +10200,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Pommern</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="160">0.055 ETH / night</div>
                 <p>Relaxed hotel near the Åland Maritime Museum and the historic four-masted barque Pommern.</p>
-                <a href="hotel-pommern.html" class="book-link">View & Book</a>
+                <a href="html/cities/aland-islands/hotel-pommern.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -10487,7 +10487,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Narva-Jõesuu Seaside Hotel</h3>
                 <div class="price" data-eth="0.03" data-btc="0.0005" data-usdt="86">0.03 ETH / night</div>
                 <p>Seaside hotel near Narva with easy access to sandy beaches and coastal walks.</p>
-                <a href="narva-joesuu-seaside-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/estonia/narva-joesuu-seaside-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -10495,7 +10495,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Narva City Hotel</h3>
                 <div class="price" data-eth="0.035" data-btc="0.0006" data-usdt="100">0.035 ETH / night</div>
                 <p>Conveniently located in Narva city center, close to the river and historical sites.</p>
-                <a href="narva-city-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/estonia/narva-city-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -10780,7 +10780,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel du Vin Newcastle</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Boutique hotel in a converted warehouse beside the Quayside, with a bistro and wine cellar.</p>
-                <a href="hotel-du-vin-newcastle.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/hotel-du-vin-newcastle.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -10788,7 +10788,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Malmaison Newcastle</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges.</p>
-                <a href="malmaison-newcastle.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/malmaison-newcastle.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -10796,7 +10796,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Crowne Plaza Newcastle</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Modern city hotel near St James’ Park, well placed for business and match-day stays.</p>
-                <a href="crowne-plaza-newcastle.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/crowne-plaza-newcastle.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -11083,7 +11083,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Hans Egede</h3>
                 <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="310">0.11 ETH / night</div>
                 <p>Landmark hotel on Aqqusinersuaq, with fjord views and a base for exploring Greenland’s capital.</p>
-                <a href="hotel-hans-egede.html" class="book-link">View & Book</a>
+                <a href="html/cities/greenland/hotel-hans-egede.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -11091,7 +11091,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Inuit Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="230">0.08 ETH / night</div>
                 <p>Contemporary rooms near the colonial harbour, close to Katuaq and the waterfront boardwalk.</p>
-                <a href="inuit-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/greenland/inuit-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -11099,7 +11099,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Nuuk</h3>
                 <div class="price" data-eth="0.075" data-btc="0.00125" data-usdt="215">0.075 ETH / night</div>
                 <p>Hillside stay overlooking Nuuk Fjord, a quiet launch point for boat trips and city walks.</p>
-                <a href="hotel-nuuk.html" class="book-link">View & Book</a>
+                <a href="html/cities/greenland/hotel-nuuk.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -11386,7 +11386,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Oban Bay Hotel</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Bayfront hotel in Oban, beside the ferry pier for the Hebridean islands.</p>
-                <a href="oban-bay-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/oban-bay-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -11394,7 +11394,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Perle Oban Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Seafront hotel on Oban Bay, looking across the water to Kerrera.</p>
-                <a href="perle-oban-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/perle-oban-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -11402,7 +11402,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Manor House Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Harbour house on the south shore of Oban, a short walk from the railway pier.</p>
-                <a href="manor-house-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/manor-house-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -11831,7 +11831,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Grand Hotel Oslo</h3>
                 <div class="price" data-eth="0.15" data-btc="0.0025" data-usdt="428">0.15 ETH / night</div>
                 <p>Historic hotel on Karl Johans gate, facing the Storting and a stroll from the palace.</p>
-                <a href="grand-hotel-oslo.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/grand-hotel-oslo.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -11839,7 +11839,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Thief</h3>
                 <div class="price" data-eth="0.13" data-btc="0.0021" data-usdt="370">0.13 ETH / night</div>
                 <p>Design hotel on Tjuvholmen with contemporary art, harbour views, and a spa.</p>
-                <a href="the-thief.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/the-thief.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -11847,7 +11847,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Continental</h3>
                 <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="314">0.11 ETH / night</div>
                 <p>Family-run landmark beside Nationaltheatret, known for Theatercaféen and city views.</p>
-                <a href="hotel-continental.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/hotel-continental.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -12134,7 +12134,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Lapland Hotels Oulu</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Lapland-inspired hotel near Oulu Cathedral, cozy and unique.</p>
-                <a href="lapland-hotels-oulu.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/lapland-hotels-oulu.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -12142,7 +12142,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Hotel Oulu</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Riverside hotel with beautiful views and modern amenities.</p>
-                <a href="radisson-blu-hotel-oulu.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/radisson-blu-hotel-oulu.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -12150,7 +12150,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Oulu Station</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Comfortable rooms close to Oulu railway station and city center.</p>
-                <a href="scandic-oulu-station.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/scandic-oulu-station.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -12435,7 +12435,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Central Park Hotel</h3>
                 <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
                 <p>Modern hotel near the city park offering comfortable rooms and easy access to local attractions and concert venues.</p>
-                <a href="central-park-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/central-park-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -12443,7 +12443,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Boutique Riverside</h3>
                 <div class="price" data-eth="0.045" data-btc="0.0008" data-usdt="128">0.045 ETH / night</div>
                 <p>Small riverside hotel offering peaceful rooms and personalized service — a great base for exploring the region.</p>
-                <a href="boutique-riverside.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/boutique-riverside.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -12841,7 +12841,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Cuillin Hills Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Harbour hotel in Portree, with views across the bay toward the Cuillin on the Isle of Skye.</p>
-                <a href="cuillin-hills-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/cuillin-hills-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -12849,7 +12849,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Bosville Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Town hotel above Portree harbour, a short walk from Somerled Square.</p>
-                <a href="bosville-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/bosville-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -12857,7 +12857,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Royal Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Harbour hotel in Portree, beside the coloured houses and the fishing pier.</p>
-                <a href="the-royal-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/the-royal-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -13143,7 +13143,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Keflavik</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Well-known airport-town hotel with a restaurant, handy for early flights and the lagoon.</p>
-                <a href="hotel-keflavik.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-keflavik.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -13151,7 +13151,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Keilir</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Modern stay in central Keflavík, close to the waterfront and the Viking World museum.</p>
-                <a href="hotel-keilir.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-keilir.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -13159,7 +13159,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Airport Hotel Aurora Star</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Convenient overnight beside Keflavík International Airport with a 24-hour desk.</p>
-                <a href="airport-hotel-aurora-star.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/airport-hotel-aurora-star.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -13446,7 +13446,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Borg</h3>
                 <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="399">0.14 ETH / night</div>
                 <p>Art Deco landmark on Austurvöllur square, steps from the parliament and harbour.</p>
-                <a href="hotel-borg.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-borg.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -13454,7 +13454,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Canopy by Hilton Reykjavik City Centre</h3>
                 <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="314">0.11 ETH / night</div>
                 <p>Design-led hotel on Laugavegur with local art, a café, and easy access to nightlife.</p>
-                <a href="canopy-by-hilton-reykjavik-city-centre.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/canopy-by-hilton-reykjavik-city-centre.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -13462,7 +13462,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Center Hotels Plaza</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Practical city-centre stay on Ingólfstorg, close to shops, bars, and the Old Harbour.</p>
-                <a href="center-hotels-plaza.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/center-hotels-plaza.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -13744,14 +13744,14 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Grand Hotel Kempinski</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="250">0.09 ETH / night</div>
                 <p>Luxury stay in the heart of Riga with elegant rooms and spa facilities.</p>
-                <a href="grand-hotel-kempinski-riga.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/grand-hotel-kempinski-riga.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80" alt="Wellton Riverside">
                 <h3>Wellton Riverside</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="170">0.06 ETH / night</div>
                 <p>Modern hotel with river views, wellness area and rooftop terrace.</p>
-                <a href="wellton-riverside-riga.html" class="book-link">View & Book</a>
+                <a href="html/cities/latvia/wellton-riverside-riga.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -14038,7 +14038,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Arctic Light Hotel</h3>
                 <div class="price" data-eth="0.10" data-btc="0.0016" data-usdt="285">0.10 ETH / night</div>
                 <p>Boutique hotel in a converted city hall, steps from Rovaniemi’s centre and Santa Claus Village day trips.</p>
-                <a href="arctic-light-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/arctic-light-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -14046,7 +14046,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Lapland Hotels Sky Ounasvaara</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Hilltop hotel above the Kemijoki, with northern lights views and forest trails just outside town.</p>
-                <a href="lapland-hotels-sky-ounasvaara.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/lapland-hotels-sky-ounasvaara.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -14054,7 +14054,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Santa''s Hotel Santa Claus</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront.</p>
-                <a href="santas-hotel-santa-claus.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/santas-hotel-santa-claus.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -14316,7 +14316,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Park Inn Šiauliai</h3>
                 <div class="price" data-eth="0.045" data-btc="0.0008" data-usdt="128">0.045 ETH / night</div>
                 <p>Reliable mid-range hotel with clean, comfortable rooms, conference facilities and convenient transport links.</p>
-                <a href="park-inn-siauliai.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/park-inn-siauliai.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -14324,7 +14324,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Old Town Boutique</h3>
                 <div class="price" data-eth="0.04" data-btc="0.0007" data-usdt="114">0.04 ETH / night</div>
                 <p>Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast.</p>
-                <a href="old-town-boutique.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/old-town-boutique.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -14537,7 +14537,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel Stavanger</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Central high-rise with a rooftop restaurant and views over the harbour and old town.</p>
-                <a href="clarion-hotel-stavanger.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/clarion-hotel-stavanger.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -14545,7 +14545,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Atlantic</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Waterfront hotel on the lake, walking distance to the petroleum museum and colour houses.</p>
-                <a href="radisson-blu-atlantic.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/radisson-blu-atlantic.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -14553,7 +14553,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Victoria Stavanger</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Historic hotel on Skansegt, close to the cathedral and the ferry to Tau.</p>
-                <a href="hotel-victoria-stavanger.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/hotel-victoria-stavanger.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -14840,7 +14840,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Stirling Highland Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Historic hotel beside Stirling Castle, in a former high school building.</p>
-                <a href="stirling-highland-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/stirling-highland-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -14848,7 +14848,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Colessio</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Stylish boutique hotel on the edge of Stirling’s old town.</p>
-                <a href="hotel-colessio.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/hotel-colessio.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -14856,7 +14856,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Golden Lion Hotel</h3>
                 <div class="price" data-eth="0.045" data-btc="0.00075" data-usdt="128">0.045 ETH / night</div>
                 <p>Traditional city-centre inn, a convenient base for exploring Stirling.</p>
-                <a href="golden-lion-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/golden-lion-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -15142,7 +15142,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Grand Hôtel Stockholm</h3>
                 <div class="price" data-eth="0.16" data-btc="0.0026" data-usdt="456">0.16 ETH / night</div>
                 <p>Landmark waterfront palace facing the Royal Palace, with a Nordic spa and fine dining.</p>
-                <a href="grand-hotel-stockholm.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/grand-hotel-stockholm.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -15150,7 +15150,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Diplomat</h3>
                 <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="314">0.11 ETH / night</div>
                 <p>Elegant Art Nouveau hotel on Strandvägen, steps from Östermalm boutiques and Djurgården.</p>
-                <a href="hotel-diplomat.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/hotel-diplomat.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -15158,7 +15158,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Continental</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Central eco-minded hotel beside Stockholm Central Station, ideal for exploring the islands.</p>
-                <a href="scandic-continental.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/scandic-continental.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -15445,7 +15445,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Cabarfeidh Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Town hotel in Stornoway, a short walk from the harbour and Lews Castle.</p>
-                <a href="cabarfeidh-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/cabarfeidh-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -15453,7 +15453,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Caladh Inn</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Harbour inn in Stornoway, beside the ferry terminal for the mainland.</p>
-                <a href="caladh-inn.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/caladh-inn.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -15461,7 +15461,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Lews Castle Lodge</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Woodland lodge across the harbour from Stornoway, on the grounds of Lews Castle.</p>
-                <a href="lews-castle-lodge.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/lews-castle-lodge.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -15742,14 +15742,14 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Telegraaf</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="220">0.08 ETH / night</div>
                 <p>Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.</p>
-                <a href="hotel-telegraaf-tallinn.html" class="book-link">View & Book</a>
+                <a href="html/cities/estonia/hotel-telegraaf-tallinn.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80" alt="Swissôtel Tallinn">
                 <h3>Swissôtel Tallinn</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Modern high-rise hotel offering panoramic city views, pool and business facilities.</p>
-                <a href="swissotel-tallinn.html" class="book-link">View & Book</a>
+                <a href="html/cities/estonia/swissotel-tallinn.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -16036,7 +16036,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Lapland Hotels Tampere</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Modern comfort with Lapland-inspired decor in central Tampere.</p>
-                <a href="lapland-hotels-tampere.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/lapland-hotels-tampere.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -16044,7 +16044,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Tampere Station</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Convenient hotel next to the train station, perfect for business and leisure.</p>
-                <a href="scandic-tampere-station.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/scandic-tampere-station.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -16052,7 +16052,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Original Sokos Hotel Ilves</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Iconic riverside hotel offering panoramic city views and dining.</p>
-                <a href="original-sokos-hotel-ilves.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/original-sokos-hotel-ilves.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -16337,7 +16337,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Telegraaf</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.</p>
-                <a href="hotel-telegraaf.html" class="book-link">View & Book</a>
+                <a href="html/cities/estonia/hotel-telegraaf.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -16345,7 +16345,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Swissôtel Tallinn</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Modern high-rise hotel offering panoramic city views, pool and business facilities.</p>
-                <a href="swissotel-tallinn-tartu.html" class="book-link">View & Book</a>
+                <a href="html/cities/estonia/swissotel-tallinn-tartu.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -16630,7 +16630,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Føroyar</h3>
                 <div class="price" data-eth="0.10" data-btc="0.0017" data-usdt="285">0.10 ETH / night</div>
                 <p>Hillside hotel above the capital, with grass-roof rooms and wide views over Tórshavn and Nólsoy.</p>
-                <a href="hotel-foroyar.html" class="book-link">View & Book</a>
+                <a href="html/cities/faroe-islands/hotel-foroyar.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -16638,7 +16638,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Hafnia</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="230">0.08 ETH / night</div>
                 <p>Classic downtown hotel on Áarvegur, walking distance to Tinganes and the harbour.</p>
-                <a href="hotel-hafnia.html" class="book-link">View & Book</a>
+                <a href="html/cities/faroe-islands/hotel-hafnia.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -16646,7 +16646,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Streym</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Harbour-side stay near the ferry terminal, a practical base for island-hopping around the Faroes.</p>
-                <a href="hotel-streym.html" class="book-link">View & Book</a>
+                <a href="html/cities/faroe-islands/hotel-streym.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -16933,7 +16933,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel The Edge</h3>
                 <div class="price" data-eth="0.10" data-btc="0.0016" data-usdt="285">0.10 ETH / night</div>
                 <p>Waterfront hotel on the Tromsø Sound with harbour views and a short hop to the Arctic Cathedral.</p>
-                <a href="clarion-hotel-the-edge.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/clarion-hotel-the-edge.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -16941,7 +16941,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Hotel Tromsø</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Central Arctic-city hotel with a rooftop bar looking over the island and surrounding peaks.</p>
-                <a href="radisson-blu-hotel-tromso.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/radisson-blu-hotel-tromso.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -16949,7 +16949,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Ishavshotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Harbourfront stay on the quay, a short walk from Tromsø city centre and the polar museum.</p>
-                <a href="scandic-ishavshotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/scandic-ishavshotel.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -17236,7 +17236,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Britannia Hotel</h3>
                 <div class="price" data-eth="0.14" data-btc="0.0023" data-usdt="399">0.14 ETH / night</div>
                 <p>Restored palatial hotel with a palm court, spa, and several celebrated restaurants.</p>
-                <a href="britannia-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/britannia-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -17244,7 +17244,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel Trondheim</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Harbourfront hotel on Brattøra, a short walk from the aquarium and city centre.</p>
-                <a href="clarion-hotel-trondheim.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/clarion-hotel-trondheim.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -17252,7 +17252,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Nidelven</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Riverside hotel famous for its breakfast, next to the Solsiden quarter.</p>
-                <a href="scandic-nidelven.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/scandic-nidelven.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -17539,7 +17539,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Marina Palace</h3>
                 <div class="price" data-eth="0.10" data-btc="0.0017" data-usdt="285">0.10 ETH / night</div>
                 <p>Riverside hotel with modern rooms and excellent amenities.</p>
-                <a href="radisson-blu-marina-palace.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/radisson-blu-marina-palace.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -17547,7 +17547,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Julia</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Modern comfort in the center of Turku, close to shopping and attractions.</p>
-                <a href="scandic-julia.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/scandic-julia.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -17555,7 +17555,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Original Sokos Hotel Wiklund</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Central hotel with rooftop bar and easy access to Turku’s sights.</p>
-                <a href="original-sokos-hotel-wiklund.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/original-sokos-hotel-wiklund.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -17840,7 +17840,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Clarion Hotel Gillet</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Central hotel by the river Fyris, walking distance to the cathedral and university.</p>
-                <a href="clarion-hotel-gillet.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/clarion-hotel-gillet.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -17848,7 +17848,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Elite Hotel Academia</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Contemporary stay beside Uppsala Central Station with a restaurant and gym.</p>
-                <a href="elite-hotel-academia.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/elite-hotel-academia.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -17856,7 +17856,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Grand Hotel Hörnan</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Boutique hotel in a historic corner building overlooking the river and old town.</p>
-                <a href="grand-hotel-hornan.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/grand-hotel-hornan.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -18251,14 +18251,14 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>PACAI Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="250">0.09 ETH / night</div>
                 <p>Luxury boutique hotel in Vilnius Old Town with elegant rooms and a quiet courtyard — perfect for exploring the historic centre.</p>
-                <a href="pacai-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/pacai-hotel.html" class="book-link">View & Book</a>
             </div>
             <div class="hotel-card">
                 <img src="https://images.unsplash.com/photo-1472552949507-78c2d0f1311d?q=80&w=1200&auto=format&fit=crop&crop=entropy" alt="Radisson Blu Lietuva">
                 <h3>Radisson Blu Lietuva</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Modern riverside hotel offering panoramic city views, an indoor pool and business facilities for business and leisure travellers.</p>
-                <a href="radisson-blu-lietuva.html" class="book-link">View & Book</a>
+                <a href="html/cities/lithuania/radisson-blu-lietuva.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -18368,177 +18368,177 @@ if (langSelect) {
 
 ');
 
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/aarhus.html', 1, 'Hotel Royal Aarhus', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Royal Aarhus', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Luxury hotel in the heart of Aarhus, featuring elegant rooms, gourmet restaurant, and spa services.', 'hotel-royal-aarhus.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/aarhus.html', 2, 'Scandic Aarhus City', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Aarhus City', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Modern amenities and eco-friendly design, located in the vibrant city center with easy access to attractions.', 'scandic-aarhus-city.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/aarhus.html', 3, 'Comwell Aarhus', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Comwell Aarhus', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Contemporary comfort with panoramic city views, perfect for business or leisure travelers.', 'comwell-aarhus.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aberdeen.html', 1, 'The Marcliffe Hotel and Spa', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Marcliffe Hotel and Spa', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Country-house luxury on the edge of Aberdeen with gardens and spa.', 'the-marcliffe-hotel-and-spa.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aberdeen.html', 2, 'Mercure Aberdeen Caledonian', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Mercure Aberdeen Caledonian', NULL, '0.05 ETH / night', 0.05, 0.00083, 142, 'Classic city-centre hotel close to Union Street and the harbour.', 'mercure-aberdeen-caledonian.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aberdeen.html', 3, 'Sandman Signature Aberdeen', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Sandman Signature Aberdeen', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Modern hotel near the beach and Aberdeen’s exhibition centre.', 'sandman-signature-aberdeen.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/abisko.html', 1, 'Abisko Mountain Lodge', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Abisko Mountain Lodge', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Trailside lodge in Abisko, a base for the Kungsleden and clear winter nights.', 'abisko-mountain-lodge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/abisko.html', 2, 'STF Abisko Turiststation', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'STF Abisko Turiststation', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Mountain station where the Kungsleden begins, above the Abisko river and the lake.', 'stf-abisko-turiststation.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/abisko.html', 3, 'Björkliden Mountain Lodge', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Björkliden Mountain Lodge', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Ski lodge at Björkliden, on the railway between Abisko and the Norwegian border.', 'bjorkliden-mountain-lodge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/akureyri.html', 1, 'Hotel Kea', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Kea', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Long-standing harbour hotel facing the fjord, steps from the church and downtown cafés.', 'hotel-kea.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/akureyri.html', 2, 'Icelandair Hotel Akureyri', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Icelandair Hotel Akureyri', NULL, '0.075 ETH / night', 0.075, 0.0012, 214, 'Contemporary hotel near the botanical garden, with views toward the ski slopes.', 'icelandair-hotel-akureyri.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/akureyri.html', 3, 'Hotel Nordurland', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Nordurland', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Compact central hotel on Hafnarstræti, a practical base for north-Iceland day trips.', 'hotel-nordurland.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/bauska.html', 1, 'Hotel Bauska', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Bauska', NULL, '0.05 ETH / night', 0.05, 0.0009, 142, 'Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade.', 'hotel-bauska.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/bauska.html', 2, 'Bauska Castle Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Bauska Castle Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence.', 'bauska-castle-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/bergen.html', 1, 'Hotel Norge by Scandic', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Norge by Scandic', NULL, '0.1 ETH / night', 0.1, 0.0017, 285, 'Rebuilt city-centre icon on Ole Bulls plass, a short walk from the fish market.', 'hotel-norge-by-scandic.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/bergen.html', 2, 'Clarion Hotel Admiral', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Admiral', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel facing Bryggen, with harbour-view rooms and a rooftop restaurant.', 'clarion-hotel-admiral.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/bergen.html', 3, 'Steens Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Steens Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Intimate Swiss-chalet style guesthouse near Nygårdsparken, handy for the funicular.', 'steens-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/berwick-upon-tweed.html', 1, 'Marshall Meadows Country House', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Marshall Meadows Country House', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Georgian country house on the coast just north of town, with sea views and period rooms.', 'marshall-meadows-country-house.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/berwick-upon-tweed.html', 2, 'The King’s Arms Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The King’s Arms Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Historic coaching inn in the town centre, a short walk from the Elizabethan walls.', 'the-kings-arms-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/berwick-upon-tweed.html', 3, 'The Walls Guest House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'The Walls Guest House', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Friendly townhouse stay beside Berwick’s ramparts, close to the Tweed estuary.', 'the-walls-guest-house.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 1, 'Scandic Palace Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', 'Scandic Palace Hotel', 'Scandic Hotels', '0.042 ETH / night', 0.042, 0.0007, 120, NULL, 'scandic-copenhagen.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 2, 'Comwell Copenhagen Portside', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80', 'Comwell Copenhagen Portside', 'Comwell Hotels', '0.038 ETH / night', 0.038, 0.00063, 110, NULL, 'comwell-copenhagen-portside.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 3, 'Imperial Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80', 'Imperial Hotel', 'Arp-Hansen Hotel Group', '0.045 ETH / night', 0.045, 0.00075, 130, NULL, 'imperial-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 4, 'CABINN City', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80', 'CABINN City', 'Cabinn Hotels', '0.021 ETH / night', 0.021, 0.00035, 60, NULL, 'cabinn-city.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 5, 'Zleep Hotel Copenhagen City', 'https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80', 'Zleep Hotel Copenhagen City', 'Zleep Hotels', '0.027 ETH / night', 0.027, 0.00045, 77, NULL, 'zleep-hotel-copenhagen-city.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 6, 'First Hotel Kong Frederik', 'https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80', 'First Hotel Kong Frederik', 'First Hotels', '0.033 ETH / night', 0.033, 0.00055, 95, NULL, 'first-hotel-kong-frederik.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/daugavpils.html', 1, 'Park Hotel Latgola', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Hotel Latgola', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel in the city center with panoramic views and conference facilities.', 'park-hotel-latgola.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/daugavpils.html', 2, 'Hotel Dinaburg', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Dinaburg', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Comfortable rooms, restaurant, and wellness area close to Daugavpils fortress.', 'hotel-dinaburg.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/daugavpils.html', 3, 'Biplan Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Biplan Hotel', NULL, '0.025 ETH / night', 0.025, 0.0004, 71, 'Budget-friendly hotel with cozy rooms and a convenient location.', 'biplan-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/dundee.html', 1, 'Apex City Quay Hotel & Spa', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Apex City Quay Hotel & Spa', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Waterfront hotel on Dundee’s City Quay with spa and easy access to the V&A.', 'apex-city-quay-hotel-and-spa.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/dundee.html', 2, 'Malmaison Dundee', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Malmaison Dundee', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Characterful hotel in a converted church, walking distance from the waterfront.', 'malmaison-dundee.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/dundee.html', 3, 'Hotel Indigo Dundee', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Indigo Dundee', NULL, '0.055 ETH / night', 0.055, 0.00092, 157, 'Design hotel in a historic jute mill near Dundee city centre.', 'hotel-indigo-dundee.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/edinburgh.html', 1, 'The Balmoral', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Balmoral', NULL, '0.14 ETH / night', 0.14, 0.0023, 400, 'Historic luxury hotel on Princes Street, steps from Waverley Station and Edinburgh Castle.', 'the-balmoral.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/edinburgh.html', 2, 'Waldorf Astoria Edinburgh', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Waldorf Astoria Edinburgh', NULL, '0.12 ETH / night', 0.12, 0.002, 340, 'Grand landmark hotel at the west end of Princes Street with spa and castle views.', 'waldorf-astoria-edinburgh.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/edinburgh.html', 3, 'Hotel du Vin Edinburgh', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel du Vin Edinburgh', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Boutique townhouse hotel in the Old Town, close to the Royal Mile.', 'hotel-du-vin-edinburgh.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/esbjerg.html', 1, 'Hotel Britannia', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', 'Hotel Britannia', 'Britannia Hotels', '0.035 ETH / night', 0.035, NULL, NULL, NULL, 'hotel-britannia.html', 'Book Now');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/esbjerg.html', 2, 'Scandic Olympic', 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80', 'Scandic Olympic', 'Scandic Hotels', '0.029 ETH / night', 0.029, NULL, NULL, NULL, 'scandic-olympic.html', 'Book Now');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/esbjerg.html', 3, 'Hotel Ansgar', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80', 'Hotel Ansgar', 'Ansgar Group', '0.025 ETH / night', 0.025, NULL, NULL, NULL, 'hotel-ansgar.html', 'Book Now');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/espoo.html', 1, 'Hotel Matts', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Matts', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern hotel in Espoo offering stylish rooms and apartments.', 'hotel-matts.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/espoo.html', 2, 'Glo Hotel Sello', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Glo Hotel Sello', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Contemporary hotel next to Sello shopping center, great for families and business.', 'glo-hotel-sello.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/espoo.html', 3, 'Radisson Blu Hotel Espoo', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Radisson Blu Hotel Espoo', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel with excellent meeting facilities and nature access.', 'radisson-blu-hotel-espoo.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/fort-william.html', 1, 'Ben Nevis Lodge', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ben Nevis Lodge', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Highland lodge in Fort William, with glen views and a path toward Ben Nevis.', 'ben-nevis-lodge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/fort-william.html', 2, 'Alexandra Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Alexandra Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'High Street hotel in Fort William, facing the parade toward Loch Linnhe.', 'alexandra-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/fort-william.html', 3, 'The Lime Tree Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Lime Tree Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Town-centre hotel in Fort William, a short walk from the High Street and the loch.', 'the-lime-tree-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/glasgow.html', 1, 'Kimpton Blythswood Square', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Kimpton Blythswood Square', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Elegant Georgian square hotel with spa in the heart of Glasgow.', 'kimpton-blythswood-square.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/glasgow.html', 2, 'Radisson Blu Hotel, Glasgow', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel, Glasgow', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Contemporary hotel beside Glasgow Central Station, ideal for exploring the city.', 'radisson-blu-hotel-glasgow.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/glasgow.html', 3, 'Motel One Glasgow', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Motel One Glasgow', NULL, '0.04 ETH / night', 0.04, 0.00067, 114, 'Stylish budget-friendly stay on Argyle Street near the River Clyde.', 'motel-one-glasgow.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/gothenburg.html', 1, 'Upper House', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Upper House', NULL, '0.12 ETH / night', 0.12, 0.002, 342, 'Design hotel high above Liseberg with a spa, skyline views, and Nordic cuisine.', 'upper-house.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/gothenburg.html', 2, 'Clarion Hotel Post', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Post', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Converted central post office with a rooftop pool, next to Drottningtorget and the station.', 'clarion-hotel-post.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/gothenburg.html', 3, 'Hotel Eggers', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Eggers', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Classic 19th-century hotel by the railway station, close to Avenyn and the opera.', 'hotel-eggers.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/hafnarfjörður.html', 1, 'Hotel Viking', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Viking', NULL, '0.065 ETH / night', 0.065, 0.0011, 185, 'Characterful harbour hotel with Norse-inspired interiors and a popular restaurant.', 'hotel-viking.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/hafnarfjörður.html', 2, 'Hótel Hafnarfjörður', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Hafnarfjörður', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Straightforward town hotel close to the lava fields, harbour, and Reykjavík bus routes.', 'hotel-hafnarfjordur.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/hafnarfjörður.html', 3, 'Helguhús Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Helguhús Guesthouse', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Homely guesthouse in a quiet neighbourhood, a short drive from the capital.', 'helguhus-guesthouse.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/helsinki.html', 1, 'Hotel Kämp', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Kämp', NULL, '0.13 ETH / night', 0.13, 0.0022, 370, 'Historic luxury hotel in the heart of Helsinki with elegant rooms and spa.', 'hotel-kamp-helsinki.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/helsinki.html', 2, 'Scandic Grand Central', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Grand Central', NULL, '0.08 ETH / night', 0.08, 0.0013, 220, 'Contemporary hotel next to Helsinki Central Station, great for exploring the city.', 'scandic-grand-central-helsinki.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/helsinki.html', 3, 'Hotel Helka', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Helka', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Stylish boutique hotel with Finnish design and cozy atmosphere.', 'hotel-helka-helsinki.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/ilulissat.html', 1, 'Hotel Arctic', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Arctic', NULL, '0.14 ETH / night', 0.14, 0.0023, 400, 'Clifftop hotel above the UNESCO icefjord, with midnight-sun terraces and views of drifting icebergs.', 'hotel-arctic.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/ilulissat.html', 2, 'Hotel Icefiord', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Icefiord', NULL, '0.12 ETH / night', 0.12, 0.002, 340, 'Harbour hotel facing Disko Bay, steps from boat departures into the icefjord.', 'hotel-icefiord.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/ilulissat.html', 3, 'Hotel Hvide Falk', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Hvide Falk', NULL, '0.09 ETH / night', 0.09, 0.0015, 260, 'Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley.', 'hotel-hvide-falk.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/inverness.html', 1, 'Kingsmills Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Kingsmills Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Highland hotel with gardens and golf, a short walk from Inverness city centre.', 'kingsmills-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/inverness.html', 2, 'Rocpool Reserve Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Rocpool Reserve Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Boutique luxury stay overlooking the River Ness.', 'rocpool-reserve-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/inverness.html', 3, 'Glen Mhor Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Glen Mhor Hotel', NULL, '0.05 ETH / night', 0.05, 0.00083, 142, 'Riverside hotel with restaurant, close to Inverness Castle.', 'glen-mhor-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jelgava.html', 1, 'Jelgava Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Jelgava Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel in the city center with comfortable rooms and restaurant.', 'jelgava-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jurmala.html', 1, 'Baltic Beach Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Baltic Beach Hotel', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Luxury spa hotel on the beach with beautiful sea views and upscale amenities.', 'baltic-beach-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jurmala.html', 2, 'Hotel Jurmala Spa', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Jurmala Spa', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Modern spa hotel with pools, saunas, and wellness treatments in Jurmala center.', 'hotel-jurmala-spa.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jurmala.html', 3, 'Villa Joma', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Villa Joma', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Charming boutique hotel near the sea, ideal for a relaxing getaway.', 'villa-joma.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/kaunas.html', 1, 'Hotel Kaunas City', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Hotel Kaunas City', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Comfortable city-centre hotel with modern rooms and easy access to Kaunas Old Town and cultural sights.', 'hotel-kaunas-city.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/kaunas.html', 2, 'Magnolia Boutique', 'https://images.unsplash.com/photo-1501118572072-7c5d7d3d47e6?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Magnolia Boutique', NULL, '0.05 ETH / night', 0.05, 0.00083, 140, 'Cozy boutique hotel offering an intimate atmosphere, complimentary breakfast and friendly service close to the river.', 'magnolia-boutique.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/kiruna.html', 1, 'Camp Ripan', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Camp Ripan', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Arctic spa hotel on the edge of Kiruna, with northern lights views and a base for Kebnekaise trails.', 'camp-ripan.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/kiruna.html', 2, 'Hotel Arctic Eden', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Arctic Eden', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Lapland-inspired rooms in the town centre, close to Kiruna’s relocated church and new city district.', 'hotel-arctic-eden.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/kiruna.html', 3, 'Scandic Kiruna', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Kiruna', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Modern hotel near the town centre, handy for aurora trips, Abisko, and the Icehotel in Jukkasjärvi.', 'scandic-kiruna.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/klaipeda.html', 1, 'Seaside Harbour Hotel', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Seaside Harbour Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Seafront hotel with beautiful views of the Baltic Sea, fresh seafood nearby and easy access to the ferry terminal.', 'seaside-harbour-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/klaipeda.html', 2, 'Portside Boutique', 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Portside Boutique', NULL, '0.05 ETH / night', 0.05, 0.00083, 140, 'Charming boutique hotel in the city centre, close to restaurants, theatres and the Old Town promenade.', 'portside-boutique.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/kópavogur.html', 1, 'Hotel Vellir', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Vellir', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Contemporary hotel in Kópavogur with spacious rooms and quick links into Reykjavík.', 'hotel-vellir.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/kópavogur.html', 2, 'Hótel Smárinn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Smárinn', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Practical stay near Smáralind shopping centre, useful for families and longer visits.', 'hotel-smarinn.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/kópavogur.html', 3, 'Kórinn Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Kórinn Guesthouse', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Quiet guesthouse-style rooms with easy access to local pools and coastal paths.', 'korinn-guesthouse.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/kristiansand.html', 1, 'Clarion Hotel Ernst', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Ernst', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Landmark hotel on the main square, a short stroll from the cathedral and fish market.', 'clarion-hotel-ernst.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/kristiansand.html', 2, 'Scandic Kristiansand Bystranda', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Kristiansand Bystranda', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Beachfront hotel on Bystranda with a pool, close to the boardwalk and Kilden.', 'scandic-kristiansand-bystranda.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/kristiansand.html', 3, 'Thon Hotel Wergeland', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Thon Hotel Wergeland', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Compact city hotel beside Wergeland’s park, handy for the Posebyen old town.', 'thon-hotel-wergeland.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/lerwick.html', 1, 'Shetland Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Shetland Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in Lerwick, overlooking the sound and the ferry to Bressay.', 'shetland-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/lerwick.html', 2, 'Grand Hotel Lerwick', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Grand Hotel Lerwick', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel beside the harbour, a short walk from Commercial Street.', 'grand-hotel-lerwick.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/lerwick.html', 3, 'Lerwick Harbour House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Lerwick Harbour House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Waterfront house in Lerwick, close to the lanes and the lodberries.', 'lerwick-harbour-house.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/liepaja.html', 1, 'Hotel Kolumbs', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Kolumbs', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Elegant hotel with spa facilities near the sea and city center.', 'hotel-kolumbs.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/liepaja.html', 2, 'Promenade Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Promenade Hotel', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Luxury hotel set in a historic warehouse with art gallery and gourmet restaurant.', 'promenade-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/liepaja.html', 3, 'Liva Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Liva Hotel', NULL, '0.025 ETH / night', 0.025, 0.0004, 71, 'Central, affordable hotel ideal for business or leisure travelers.', 'liva-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/lillehammer.html', 1, 'Radisson Blu Lillehammer Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Lillehammer Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Lakeside hotel in Lillehammer, below the ski jump and the Olympic park.', 'radisson-blu-lillehammer-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/lillehammer.html', 2, 'Scandic Lillehammer', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Lillehammer', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel in Lillehammer, a short walk from the pedestrian street and the station.', 'scandic-lillehammer.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/lillehammer.html', 3, 'Mølla Hotell', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Mølla Hotell', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Riverside hotel in a former mill on the Mesna, in the centre of Lillehammer.', 'molla-hotell.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 1, 'Quality Hotel Ekoxen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Quality Hotel Ekoxen', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Well-equipped city hotel with a pool and spa, close to Linköping’s main square.', 'quality-hotel-ekoxen.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 2, 'Scandic Frimurarehotellet', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Frimurarehotellet', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Landmark hotel in the city centre with easy access to the cathedral and old town.', 'scandic-frimurarehotellet.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 3, 'Stora Hotellet Linköping', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Stora Hotellet Linköping', NULL, '0.045 ETH / night', 0.045, 0.0007, 128, 'Classic independent hotel with a restaurant, a short walk from the railway station.', 'stora-hotellet-linkoping.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 1, 'Radisson Blu Polar Hotel Spitsbergen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Polar Hotel Spitsbergen', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.', 'radisson-blu-polar-spitsbergen.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 2, 'Funken Lodge', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Funken Lodge', NULL, '0.11 ETH / night', 0.11, 0.0018, 315, 'Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.', 'funken-lodge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 3, 'Basecamp Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Basecamp Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 255, 'Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.', 'basecamp-hotel-svalbard.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 1, 'Clarion Hotel Malmö Live', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Malmö Live', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'High-rise waterfront hotel with a sky bar and concert hall next door.', 'clarion-hotel-malmo-live.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 2, 'Hotel Savoy Malmö', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Savoy Malmö', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic city hotel opposite the central station, a short hop from the Turning Torso.', 'hotel-savoy-malmo.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 3, 'Scandic Triangeln', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Triangeln', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Modern tower hotel above Triangeln station, handy for Möllevången and shopping.', 'scandic-triangeln.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/aland-islands/mariehamn.html', 1, 'Hotel Arkipelag', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Arkipelag', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Waterfront hotel by Mariehamn’s western harbour, a short walk from shops, ferries, and the maritime quarter.', 'hotel-arkipelag.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/aland-islands/mariehamn.html', 2, 'Park Alandia Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Alandia Hotel', NULL, '0.05 ETH / night', 0.05, 0.00085, 145, 'Central Åland stay beside the town park, handy for the sailing harbour and the road to Kastelholm.', 'park-alandia-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/aland-islands/mariehamn.html', 3, 'Hotel Pommern', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Pommern', NULL, '0.055 ETH / night', 0.055, 0.0009, 160, 'Relaxed hotel near the Åland Maritime Museum and the historic four-masted barque Pommern.', 'hotel-pommern.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/narva.html', 1, 'Narva-Jõesuu Seaside Hotel', 'https://images.unsplash.com/photo-1505691723518-36a1ddb1b3b6?fit=crop&w=400&q=80', 'Narva-Jõesuu Hotel', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Seaside hotel near Narva with easy access to sandy beaches and coastal walks.', 'narva-joesuu-seaside-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/narva.html', 2, 'Narva City Hotel', 'https://images.unsplash.com/photo-1493244040629-496f6d136cc3?fit=crop&w=400&q=80', 'Narva City Hotel', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Conveniently located in Narva city center, close to the river and historical sites.', 'narva-city-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/newcastle.html', 1, 'Hotel du Vin Newcastle', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel du Vin Newcastle', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Boutique hotel in a converted warehouse beside the Quayside, with a bistro and wine cellar.', 'hotel-du-vin-newcastle.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/newcastle.html', 2, 'Malmaison Newcastle', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Malmaison Newcastle', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges.', 'malmaison-newcastle.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/newcastle.html', 3, 'Crowne Plaza Newcastle', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Crowne Plaza Newcastle', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Modern city hotel near St James’ Park, well placed for business and match-day stays.', 'crowne-plaza-newcastle.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/nuuk.html', 1, 'Hotel Hans Egede', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Hans Egede', NULL, '0.11 ETH / night', 0.11, 0.0018, 310, 'Landmark hotel on Aqqusinersuaq, with fjord views and a base for exploring Greenland’s capital.', 'hotel-hans-egede.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/nuuk.html', 2, 'Inuit Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Inuit Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 230, 'Contemporary rooms near the colonial harbour, close to Katuaq and the waterfront boardwalk.', 'inuit-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/nuuk.html', 3, 'Hotel Nuuk', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Nuuk', NULL, '0.075 ETH / night', 0.075, 0.00125, 215, 'Hillside stay overlooking Nuuk Fjord, a quiet launch point for boat trips and city walks.', 'hotel-nuuk.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/oban.html', 1, 'Oban Bay Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Oban Bay Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Bayfront hotel in Oban, beside the ferry pier for the Hebridean islands.', 'oban-bay-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/oban.html', 2, 'Perle Oban Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Perle Oban Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Seafront hotel on Oban Bay, looking across the water to Kerrera.', 'perle-oban-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/oban.html', 3, 'Manor House Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Manor House Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour house on the south shore of Oban, a short walk from the railway pier.', 'manor-house-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/oslo.html', 1, 'Grand Hotel Oslo', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel Oslo', NULL, '0.15 ETH / night', 0.15, 0.0025, 428, 'Historic hotel on Karl Johans gate, facing the Storting and a stroll from the palace.', 'grand-hotel-oslo.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/oslo.html', 2, 'The Thief', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Thief', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Design hotel on Tjuvholmen with contemporary art, harbour views, and a spa.', 'the-thief.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/oslo.html', 3, 'Hotel Continental', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Continental', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Family-run landmark beside Nationaltheatret, known for Theatercaféen and city views.', 'hotel-continental.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/oulu.html', 1, 'Lapland Hotels Oulu', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Lapland Hotels Oulu', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Lapland-inspired hotel near Oulu Cathedral, cozy and unique.', 'lapland-hotels-oulu.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/oulu.html', 2, 'Radisson Blu Hotel Oulu', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel Oulu', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Riverside hotel with beautiful views and modern amenities.', 'radisson-blu-hotel-oulu.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/oulu.html', 3, 'Scandic Oulu Station', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Oulu Station', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Comfortable rooms close to Oulu railway station and city center.', 'scandic-oulu-station.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/panevėžys.html', 1, 'Central Park Hotel', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Panevezys Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel near the city park offering comfortable rooms and easy access to local attractions and concert venues.', 'central-park-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/panevėžys.html', 2, 'Boutique Riverside', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Boutique Panevezys', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Small riverside hotel offering peaceful rooms and personalized service — a great base for exploring the region.', 'boutique-riverside.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/portree.html', 1, 'Cuillin Hills Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Cuillin Hills Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Harbour hotel in Portree, with views across the bay toward the Cuillin on the Isle of Skye.', 'cuillin-hills-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/portree.html', 2, 'Bosville Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Bosville Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Town hotel above Portree harbour, a short walk from Somerled Square.', 'bosville-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/portree.html', 3, 'The Royal Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'The Royal Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel in Portree, beside the coloured houses and the fishing pier.', 'the-royal-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjanesbær.html', 1, 'Hotel Keflavik', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Keflavik', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Well-known airport-town hotel with a restaurant, handy for early flights and the lagoon.', 'hotel-keflavik.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjanesbær.html', 2, 'Hotel Keilir', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Keilir', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Modern stay in central Keflavík, close to the waterfront and the Viking World museum.', 'hotel-keilir.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjanesbær.html', 3, 'Airport Hotel Aurora Star', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Airport Hotel Aurora Star', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Convenient overnight beside Keflavík International Airport with a 24-hour desk.', 'airport-hotel-aurora-star.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjavík.html', 1, 'Hotel Borg', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Borg', NULL, '0.14 ETH / night', 0.14, 0.0023, 399, 'Art Deco landmark on Austurvöllur square, steps from the parliament and harbour.', 'hotel-borg.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjavík.html', 2, 'Canopy by Hilton Reykjavik City Centre', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Canopy by Hilton Reykjavik City Centre', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Design-led hotel on Laugavegur with local art, a café, and easy access to nightlife.', 'canopy-by-hilton-reykjavik-city-centre.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjavík.html', 3, 'Center Hotels Plaza', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Center Hotels Plaza', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Practical city-centre stay on Ingólfstorg, close to shops, bars, and the Old Harbour.', 'center-hotels-plaza.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/riga.html', 1, 'Grand Hotel Kempinski', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel Kempinski', NULL, '0.09 ETH / night', 0.09, 0.0015, 250, 'Luxury stay in the heart of Riga with elegant rooms and spa facilities.', 'grand-hotel-kempinski-riga.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/riga.html', 2, 'Wellton Riverside', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Wellton Riverside', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Modern hotel with river views, wellness area and rooftop terrace.', 'wellton-riverside-riga.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/rovaniemi.html', 1, 'Arctic Light Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Arctic Light Hotel', NULL, '0.10 ETH / night', 0.1, 0.0016, 285, 'Boutique hotel in a converted city hall, steps from Rovaniemi’s centre and Santa Claus Village day trips.', 'arctic-light-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/rovaniemi.html', 2, 'Lapland Hotels Sky Ounasvaara', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Sky Ounasvaara', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Hilltop hotel above the Kemijoki, with northern lights views and forest trails just outside town.', 'lapland-hotels-sky-ounasvaara.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/rovaniemi.html', 3, 'Santa''s Hotel Santa Claus', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Santa''s Hotel Santa Claus', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront.', 'santas-hotel-santa-claus.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/šiauliai.htm', 1, 'Park Inn Šiauliai', 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Park Inn Siauliai', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Reliable mid-range hotel with clean, comfortable rooms, conference facilities and convenient transport links.', 'park-inn-siauliai.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/šiauliai.htm', 2, 'Old Town Boutique', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Šiauliai Boutique', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast.', 'old-town-boutique.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/stavanger.html', 1, 'Clarion Hotel Stavanger', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Stavanger', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Central high-rise with a rooftop restaurant and views over the harbour and old town.', 'clarion-hotel-stavanger.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/stavanger.html', 2, 'Radisson Blu Atlantic', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Atlantic', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Waterfront hotel on the lake, walking distance to the petroleum museum and colour houses.', 'radisson-blu-atlantic.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/stavanger.html', 3, 'Hotel Victoria Stavanger', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Victoria Stavanger', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Historic hotel on Skansegt, close to the cathedral and the ferry to Tau.', 'hotel-victoria-stavanger.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stirling.html', 1, 'Stirling Highland Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Stirling Highland Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic hotel beside Stirling Castle, in a former high school building.', 'stirling-highland-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stirling.html', 2, 'Hotel Colessio', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Colessio', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Stylish boutique hotel on the edge of Stirling’s old town.', 'hotel-colessio.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stirling.html', 3, 'Golden Lion Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Golden Lion Hotel', NULL, '0.045 ETH / night', 0.045, 0.00075, 128, 'Traditional city-centre inn, a convenient base for exploring Stirling.', 'golden-lion-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/stockholm.html', 1, 'Grand Hôtel Stockholm', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hôtel Stockholm', NULL, '0.16 ETH / night', 0.16, 0.0026, 456, 'Landmark waterfront palace facing the Royal Palace, with a Nordic spa and fine dining.', 'grand-hotel-stockholm.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/stockholm.html', 2, 'Hotel Diplomat', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Diplomat', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Elegant Art Nouveau hotel on Strandvägen, steps from Östermalm boutiques and Djurgården.', 'hotel-diplomat.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/stockholm.html', 3, 'Scandic Continental', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Continental', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Central eco-minded hotel beside Stockholm Central Station, ideal for exploring the islands.', 'scandic-continental.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stornoway.html', 1, 'Cabarfeidh Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Cabarfeidh Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Town hotel in Stornoway, a short walk from the harbour and Lews Castle.', 'cabarfeidh-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stornoway.html', 2, 'Caladh Inn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Caladh Inn', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Harbour inn in Stornoway, beside the ferry terminal for the mainland.', 'caladh-inn.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stornoway.html', 3, 'Lews Castle Lodge', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Lews Castle Lodge', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Woodland lodge across the harbour from Stornoway, on the grounds of Lews Castle.', 'lews-castle-lodge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tallinn.html', 1, 'Hotel Telegraaf', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80', 'Hotel Telegraaf', NULL, '0.08 ETH / night', 0.08, 0.0013, 220, 'Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.', 'hotel-telegraaf-tallinn.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tallinn.html', 2, 'Swissôtel Tallinn', 'https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80', 'Swissôtel Tallinn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern high-rise hotel offering panoramic city views, pool and business facilities.', 'swissotel-tallinn.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/tampere.html', 1, 'Lapland Hotels Tampere', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Tampere', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Modern comfort with Lapland-inspired decor in central Tampere.', 'lapland-hotels-tampere.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/tampere.html', 2, 'Scandic Tampere Station', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Tampere Station', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Convenient hotel next to the train station, perfect for business and leisure.', 'scandic-tampere-station.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/tampere.html', 3, 'Original Sokos Hotel Ilves', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Original Sokos Hotel Ilves', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Iconic riverside hotel offering panoramic city views and dining.', 'original-sokos-hotel-ilves.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tartu.html', 1, 'Hotel Telegraaf', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80', 'Hotel Telegraaf', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.', 'hotel-telegraaf.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tartu.html', 2, 'Swissôtel Tallinn', 'https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80', 'Swissôtel Tallinn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern high-rise hotel offering panoramic city views, pool and business facilities.', 'swissotel-tallinn-tartu.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/faroe-islands/tórshavn.html', 1, 'Hotel Føroyar', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Føroyar', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Hillside hotel above the capital, with grass-roof rooms and wide views over Tórshavn and Nólsoy.', 'hotel-foroyar.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/faroe-islands/tórshavn.html', 2, 'Hotel Hafnia', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Hafnia', NULL, '0.08 ETH / night', 0.08, 0.0013, 230, 'Classic downtown hotel on Áarvegur, walking distance to Tinganes and the harbour.', 'hotel-hafnia.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/faroe-islands/tórshavn.html', 3, 'Hotel Streym', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Streym', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour-side stay near the ferry terminal, a practical base for island-hopping around the Faroes.', 'hotel-streym.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/tromso.html', 1, 'Clarion Hotel The Edge', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel The Edge', NULL, '0.10 ETH / night', 0.1, 0.0016, 285, 'Waterfront hotel on the Tromsø Sound with harbour views and a short hop to the Arctic Cathedral.', 'clarion-hotel-the-edge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/tromso.html', 2, 'Radisson Blu Hotel Tromsø', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel Tromsø', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Central Arctic-city hotel with a rooftop bar looking over the island and surrounding peaks.', 'radisson-blu-hotel-tromso.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/tromso.html', 3, 'Scandic Ishavshotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Ishavshotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbourfront stay on the quay, a short walk from Tromsø city centre and the polar museum.', 'scandic-ishavshotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/trondheim.html', 1, 'Britannia Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Britannia Hotel', NULL, '0.14 ETH / night', 0.14, 0.0023, 399, 'Restored palatial hotel with a palm court, spa, and several celebrated restaurants.', 'britannia-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/trondheim.html', 2, 'Clarion Hotel Trondheim', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Trondheim', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbourfront hotel on Brattøra, a short walk from the aquarium and city centre.', 'clarion-hotel-trondheim.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/trondheim.html', 3, 'Scandic Nidelven', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Nidelven', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Riverside hotel famous for its breakfast, next to the Solsiden quarter.', 'scandic-nidelven.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/turku.html', 1, 'Radisson Blu Marina Palace', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Radisson Blu Marina Palace', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Riverside hotel with modern rooms and excellent amenities.', 'radisson-blu-marina-palace.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/turku.html', 2, 'Scandic Julia', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Scandic Julia', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern comfort in the center of Turku, close to shopping and attractions.', 'scandic-julia.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/turku.html', 3, 'Original Sokos Hotel Wiklund', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Original Sokos Hotel Wiklund', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Central hotel with rooftop bar and easy access to Turku’s sights.', 'original-sokos-hotel-wiklund.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/uppsala.html', 1, 'Clarion Hotel Gillet', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Gillet', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Central hotel by the river Fyris, walking distance to the cathedral and university.', 'clarion-hotel-gillet.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/uppsala.html', 2, 'Elite Hotel Academia', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Elite Hotel Academia', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Contemporary stay beside Uppsala Central Station with a restaurant and gym.', 'elite-hotel-academia.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/uppsala.html', 3, 'Grand Hotel Hörnan', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Grand Hotel Hörnan', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Boutique hotel in a historic corner building overlooking the river and old town.', 'grand-hotel-hornan.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/vilnius.html', 1, 'PACAI Hotel', 'https://images.unsplash.com/photo-1501117716987-c8e6b8a6b2d2?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'PACAI Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 250, 'Luxury boutique hotel in Vilnius Old Town with elegant rooms and a quiet courtyard — perfect for exploring the historic centre.', 'pacai-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/vilnius.html', 2, 'Radisson Blu Lietuva', 'https://images.unsplash.com/photo-1472552949507-78c2d0f1311d?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Radisson Blu Lietuva', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern riverside hotel offering panoramic city views, an indoor pool and business facilities for business and leisure travellers.', 'radisson-blu-lietuva.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/aarhus.html', 1, 'Hotel Royal Aarhus', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Royal Aarhus', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Luxury hotel in the heart of Aarhus, featuring elegant rooms, gourmet restaurant, and spa services.', 'html/cities/denmark/hotel-royal-aarhus.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/aarhus.html', 2, 'Scandic Aarhus City', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Aarhus City', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Modern amenities and eco-friendly design, located in the vibrant city center with easy access to attractions.', 'html/cities/denmark/scandic-aarhus-city.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/aarhus.html', 3, 'Comwell Aarhus', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Comwell Aarhus', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Contemporary comfort with panoramic city views, perfect for business or leisure travelers.', 'html/cities/denmark/comwell-aarhus.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aberdeen.html', 1, 'The Marcliffe Hotel and Spa', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Marcliffe Hotel and Spa', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Country-house luxury on the edge of Aberdeen with gardens and spa.', 'html/cities/scotland/the-marcliffe-hotel-and-spa.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aberdeen.html', 2, 'Mercure Aberdeen Caledonian', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Mercure Aberdeen Caledonian', NULL, '0.05 ETH / night', 0.05, 0.00083, 142, 'Classic city-centre hotel close to Union Street and the harbour.', 'html/cities/scotland/mercure-aberdeen-caledonian.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aberdeen.html', 3, 'Sandman Signature Aberdeen', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Sandman Signature Aberdeen', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Modern hotel near the beach and Aberdeen’s exhibition centre.', 'html/cities/scotland/sandman-signature-aberdeen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/abisko.html', 1, 'Abisko Mountain Lodge', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Abisko Mountain Lodge', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Trailside lodge in Abisko, a base for the Kungsleden and clear winter nights.', 'html/cities/sweden/abisko-mountain-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/abisko.html', 2, 'STF Abisko Turiststation', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'STF Abisko Turiststation', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Mountain station where the Kungsleden begins, above the Abisko river and the lake.', 'html/cities/sweden/stf-abisko-turiststation.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/abisko.html', 3, 'Björkliden Mountain Lodge', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Björkliden Mountain Lodge', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Ski lodge at Björkliden, on the railway between Abisko and the Norwegian border.', 'html/cities/sweden/bjorkliden-mountain-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/akureyri.html', 1, 'Hotel Kea', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Kea', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Long-standing harbour hotel facing the fjord, steps from the church and downtown cafés.', 'html/cities/iceland/hotel-kea.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/akureyri.html', 2, 'Icelandair Hotel Akureyri', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Icelandair Hotel Akureyri', NULL, '0.075 ETH / night', 0.075, 0.0012, 214, 'Contemporary hotel near the botanical garden, with views toward the ski slopes.', 'html/cities/iceland/icelandair-hotel-akureyri.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/akureyri.html', 3, 'Hotel Nordurland', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Nordurland', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Compact central hotel on Hafnarstræti, a practical base for north-Iceland day trips.', 'html/cities/iceland/hotel-nordurland.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/bauska.html', 1, 'Hotel Bauska', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Bauska', NULL, '0.05 ETH / night', 0.05, 0.0009, 142, 'Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade.', 'html/cities/latvia/hotel-bauska.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/bauska.html', 2, 'Bauska Castle Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Bauska Castle Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence.', 'html/cities/latvia/bauska-castle-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/bergen.html', 1, 'Hotel Norge by Scandic', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Norge by Scandic', NULL, '0.1 ETH / night', 0.1, 0.0017, 285, 'Rebuilt city-centre icon on Ole Bulls plass, a short walk from the fish market.', 'html/cities/norway/hotel-norge-by-scandic.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/bergen.html', 2, 'Clarion Hotel Admiral', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Admiral', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel facing Bryggen, with harbour-view rooms and a rooftop restaurant.', 'html/cities/norway/clarion-hotel-admiral.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/bergen.html', 3, 'Steens Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Steens Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Intimate Swiss-chalet style guesthouse near Nygårdsparken, handy for the funicular.', 'html/cities/norway/steens-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/berwick-upon-tweed.html', 1, 'Marshall Meadows Country House', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Marshall Meadows Country House', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Georgian country house on the coast just north of town, with sea views and period rooms.', 'html/cities/northeast-england/marshall-meadows-country-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/berwick-upon-tweed.html', 2, 'The King’s Arms Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The King’s Arms Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Historic coaching inn in the town centre, a short walk from the Elizabethan walls.', 'html/cities/northeast-england/the-kings-arms-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/berwick-upon-tweed.html', 3, 'The Walls Guest House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'The Walls Guest House', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Friendly townhouse stay beside Berwick’s ramparts, close to the Tweed estuary.', 'html/cities/northeast-england/the-walls-guest-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 1, 'Scandic Palace Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', 'Scandic Palace Hotel', 'Scandic Hotels', '0.042 ETH / night', 0.042, 0.0007, 120, NULL, 'html/cities/denmark/scandic-copenhagen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 2, 'Comwell Copenhagen Portside', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80', 'Comwell Copenhagen Portside', 'Comwell Hotels', '0.038 ETH / night', 0.038, 0.00063, 110, NULL, 'html/cities/denmark/comwell-copenhagen-portside.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 3, 'Imperial Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80', 'Imperial Hotel', 'Arp-Hansen Hotel Group', '0.045 ETH / night', 0.045, 0.00075, 130, NULL, 'html/cities/denmark/imperial-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 4, 'CABINN City', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80', 'CABINN City', 'Cabinn Hotels', '0.021 ETH / night', 0.021, 0.00035, 60, NULL, 'html/cities/denmark/cabinn-city.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 5, 'Zleep Hotel Copenhagen City', 'https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80', 'Zleep Hotel Copenhagen City', 'Zleep Hotels', '0.027 ETH / night', 0.027, 0.00045, 77, NULL, 'html/cities/denmark/zleep-hotel-copenhagen-city.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/copenhagen.html', 6, 'First Hotel Kong Frederik', 'https://images.unsplash.com/photo-1504609813445-554e64a8f005?auto=format&fit=crop&w=600&q=80', 'First Hotel Kong Frederik', 'First Hotels', '0.033 ETH / night', 0.033, 0.00055, 95, NULL, 'html/cities/denmark/first-hotel-kong-frederik.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/daugavpils.html', 1, 'Park Hotel Latgola', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Hotel Latgola', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel in the city center with panoramic views and conference facilities.', 'html/cities/latvia/park-hotel-latgola.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/daugavpils.html', 2, 'Hotel Dinaburg', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Dinaburg', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Comfortable rooms, restaurant, and wellness area close to Daugavpils fortress.', 'html/cities/latvia/hotel-dinaburg.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/daugavpils.html', 3, 'Biplan Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Biplan Hotel', NULL, '0.025 ETH / night', 0.025, 0.0004, 71, 'Budget-friendly hotel with cozy rooms and a convenient location.', 'html/cities/latvia/biplan-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/dundee.html', 1, 'Apex City Quay Hotel & Spa', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Apex City Quay Hotel & Spa', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Waterfront hotel on Dundee’s City Quay with spa and easy access to the V&A.', 'html/cities/scotland/apex-city-quay-hotel-and-spa.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/dundee.html', 2, 'Malmaison Dundee', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Malmaison Dundee', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Characterful hotel in a converted church, walking distance from the waterfront.', 'html/cities/scotland/malmaison-dundee.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/dundee.html', 3, 'Hotel Indigo Dundee', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Indigo Dundee', NULL, '0.055 ETH / night', 0.055, 0.00092, 157, 'Design hotel in a historic jute mill near Dundee city centre.', 'html/cities/scotland/hotel-indigo-dundee.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/edinburgh.html', 1, 'The Balmoral', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Balmoral', NULL, '0.14 ETH / night', 0.14, 0.0023, 400, 'Historic luxury hotel on Princes Street, steps from Waverley Station and Edinburgh Castle.', 'html/cities/scotland/the-balmoral.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/edinburgh.html', 2, 'Waldorf Astoria Edinburgh', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Waldorf Astoria Edinburgh', NULL, '0.12 ETH / night', 0.12, 0.002, 340, 'Grand landmark hotel at the west end of Princes Street with spa and castle views.', 'html/cities/scotland/waldorf-astoria-edinburgh.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/edinburgh.html', 3, 'Hotel du Vin Edinburgh', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel du Vin Edinburgh', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Boutique townhouse hotel in the Old Town, close to the Royal Mile.', 'html/cities/scotland/hotel-du-vin-edinburgh.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/esbjerg.html', 1, 'Hotel Britannia', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', 'Hotel Britannia', 'Britannia Hotels', '0.035 ETH / night', 0.035, NULL, NULL, NULL, 'html/cities/denmark/hotel-britannia.html', 'Book Now');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/esbjerg.html', 2, 'Scandic Olympic', 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80', 'Scandic Olympic', 'Scandic Hotels', '0.029 ETH / night', 0.029, NULL, NULL, NULL, 'html/cities/denmark/scandic-olympic.html', 'Book Now');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/esbjerg.html', 3, 'Hotel Ansgar', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80', 'Hotel Ansgar', 'Ansgar Group', '0.025 ETH / night', 0.025, NULL, NULL, NULL, 'html/cities/denmark/hotel-ansgar.html', 'Book Now');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/espoo.html', 1, 'Hotel Matts', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Matts', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern hotel in Espoo offering stylish rooms and apartments.', 'html/cities/finland/hotel-matts.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/espoo.html', 2, 'Glo Hotel Sello', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Glo Hotel Sello', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Contemporary hotel next to Sello shopping center, great for families and business.', 'html/cities/finland/glo-hotel-sello.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/espoo.html', 3, 'Radisson Blu Hotel Espoo', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Radisson Blu Hotel Espoo', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel with excellent meeting facilities and nature access.', 'html/cities/finland/radisson-blu-hotel-espoo.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/fort-william.html', 1, 'Ben Nevis Lodge', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ben Nevis Lodge', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Highland lodge in Fort William, with glen views and a path toward Ben Nevis.', 'html/cities/scotland/ben-nevis-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/fort-william.html', 2, 'Alexandra Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Alexandra Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'High Street hotel in Fort William, facing the parade toward Loch Linnhe.', 'html/cities/scotland/alexandra-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/fort-william.html', 3, 'The Lime Tree Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Lime Tree Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Town-centre hotel in Fort William, a short walk from the High Street and the loch.', 'html/cities/scotland/the-lime-tree-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/glasgow.html', 1, 'Kimpton Blythswood Square', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Kimpton Blythswood Square', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Elegant Georgian square hotel with spa in the heart of Glasgow.', 'html/cities/scotland/kimpton-blythswood-square.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/glasgow.html', 2, 'Radisson Blu Hotel, Glasgow', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel, Glasgow', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Contemporary hotel beside Glasgow Central Station, ideal for exploring the city.', 'html/cities/scotland/radisson-blu-hotel-glasgow.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/glasgow.html', 3, 'Motel One Glasgow', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Motel One Glasgow', NULL, '0.04 ETH / night', 0.04, 0.00067, 114, 'Stylish budget-friendly stay on Argyle Street near the River Clyde.', 'html/cities/scotland/motel-one-glasgow.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/gothenburg.html', 1, 'Upper House', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Upper House', NULL, '0.12 ETH / night', 0.12, 0.002, 342, 'Design hotel high above Liseberg with a spa, skyline views, and Nordic cuisine.', 'html/cities/sweden/upper-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/gothenburg.html', 2, 'Clarion Hotel Post', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Post', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Converted central post office with a rooftop pool, next to Drottningtorget and the station.', 'html/cities/sweden/clarion-hotel-post.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/gothenburg.html', 3, 'Hotel Eggers', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Eggers', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Classic 19th-century hotel by the railway station, close to Avenyn and the opera.', 'html/cities/sweden/hotel-eggers.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/hafnarfjörður.html', 1, 'Hotel Viking', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Viking', NULL, '0.065 ETH / night', 0.065, 0.0011, 185, 'Characterful harbour hotel with Norse-inspired interiors and a popular restaurant.', 'html/cities/iceland/hotel-viking.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/hafnarfjörður.html', 2, 'Hótel Hafnarfjörður', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Hafnarfjörður', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Straightforward town hotel close to the lava fields, harbour, and Reykjavík bus routes.', 'html/cities/iceland/hotel-hafnarfjordur.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/hafnarfjörður.html', 3, 'Helguhús Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Helguhús Guesthouse', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Homely guesthouse in a quiet neighbourhood, a short drive from the capital.', 'html/cities/iceland/helguhus-guesthouse.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/helsinki.html', 1, 'Hotel Kämp', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Kämp', NULL, '0.13 ETH / night', 0.13, 0.0022, 370, 'Historic luxury hotel in the heart of Helsinki with elegant rooms and spa.', 'html/cities/finland/hotel-kamp-helsinki.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/helsinki.html', 2, 'Scandic Grand Central', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Grand Central', NULL, '0.08 ETH / night', 0.08, 0.0013, 220, 'Contemporary hotel next to Helsinki Central Station, great for exploring the city.', 'html/cities/finland/scandic-grand-central-helsinki.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/helsinki.html', 3, 'Hotel Helka', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Helka', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Stylish boutique hotel with Finnish design and cozy atmosphere.', 'html/cities/finland/hotel-helka-helsinki.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/ilulissat.html', 1, 'Hotel Arctic', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Arctic', NULL, '0.14 ETH / night', 0.14, 0.0023, 400, 'Clifftop hotel above the UNESCO icefjord, with midnight-sun terraces and views of drifting icebergs.', 'html/cities/greenland/hotel-arctic.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/ilulissat.html', 2, 'Hotel Icefiord', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Icefiord', NULL, '0.12 ETH / night', 0.12, 0.002, 340, 'Harbour hotel facing Disko Bay, steps from boat departures into the icefjord.', 'html/cities/greenland/hotel-icefiord.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/ilulissat.html', 3, 'Hotel Hvide Falk', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Hvide Falk', NULL, '0.09 ETH / night', 0.09, 0.0015, 260, 'Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley.', 'html/cities/greenland/hotel-hvide-falk.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/inverness.html', 1, 'Kingsmills Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Kingsmills Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Highland hotel with gardens and golf, a short walk from Inverness city centre.', 'html/cities/scotland/kingsmills-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/inverness.html', 2, 'Rocpool Reserve Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Rocpool Reserve Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Boutique luxury stay overlooking the River Ness.', 'html/cities/scotland/rocpool-reserve-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/inverness.html', 3, 'Glen Mhor Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Glen Mhor Hotel', NULL, '0.05 ETH / night', 0.05, 0.00083, 142, 'Riverside hotel with restaurant, close to Inverness Castle.', 'html/cities/scotland/glen-mhor-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jelgava.html', 1, 'Jelgava Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Jelgava Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel in the city center with comfortable rooms and restaurant.', 'html/cities/latvia/jelgava-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jurmala.html', 1, 'Baltic Beach Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Baltic Beach Hotel', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Luxury spa hotel on the beach with beautiful sea views and upscale amenities.', 'html/cities/latvia/baltic-beach-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jurmala.html', 2, 'Hotel Jurmala Spa', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Jurmala Spa', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Modern spa hotel with pools, saunas, and wellness treatments in Jurmala center.', 'html/cities/latvia/hotel-jurmala-spa.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/jurmala.html', 3, 'Villa Joma', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Villa Joma', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Charming boutique hotel near the sea, ideal for a relaxing getaway.', 'html/cities/latvia/villa-joma.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/kaunas.html', 1, 'Hotel Kaunas City', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Hotel Kaunas City', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Comfortable city-centre hotel with modern rooms and easy access to Kaunas Old Town and cultural sights.', 'html/cities/lithuania/hotel-kaunas-city.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/kaunas.html', 2, 'Magnolia Boutique', 'https://images.unsplash.com/photo-1501118572072-7c5d7d3d47e6?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Magnolia Boutique', NULL, '0.05 ETH / night', 0.05, 0.00083, 140, 'Cozy boutique hotel offering an intimate atmosphere, complimentary breakfast and friendly service close to the river.', 'html/cities/lithuania/magnolia-boutique.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/kiruna.html', 1, 'Camp Ripan', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Camp Ripan', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Arctic spa hotel on the edge of Kiruna, with northern lights views and a base for Kebnekaise trails.', 'html/cities/sweden/camp-ripan.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/kiruna.html', 2, 'Hotel Arctic Eden', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Arctic Eden', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Lapland-inspired rooms in the town centre, close to Kiruna’s relocated church and new city district.', 'html/cities/sweden/hotel-arctic-eden.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/kiruna.html', 3, 'Scandic Kiruna', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Kiruna', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Modern hotel near the town centre, handy for aurora trips, Abisko, and the Icehotel in Jukkasjärvi.', 'html/cities/sweden/scandic-kiruna.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/klaipeda.html', 1, 'Seaside Harbour Hotel', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Seaside Harbour Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Seafront hotel with beautiful views of the Baltic Sea, fresh seafood nearby and easy access to the ferry terminal.', 'html/cities/lithuania/seaside-harbour-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/klaipeda.html', 2, 'Portside Boutique', 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Portside Boutique', NULL, '0.05 ETH / night', 0.05, 0.00083, 140, 'Charming boutique hotel in the city centre, close to restaurants, theatres and the Old Town promenade.', 'html/cities/lithuania/portside-boutique.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/kópavogur.html', 1, 'Hotel Vellir', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Vellir', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Contemporary hotel in Kópavogur with spacious rooms and quick links into Reykjavík.', 'html/cities/iceland/hotel-vellir.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/kópavogur.html', 2, 'Hótel Smárinn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Smárinn', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Practical stay near Smáralind shopping centre, useful for families and longer visits.', 'html/cities/iceland/hotel-smarinn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/kópavogur.html', 3, 'Kórinn Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Kórinn Guesthouse', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Quiet guesthouse-style rooms with easy access to local pools and coastal paths.', 'html/cities/iceland/korinn-guesthouse.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/kristiansand.html', 1, 'Clarion Hotel Ernst', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Ernst', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Landmark hotel on the main square, a short stroll from the cathedral and fish market.', 'html/cities/norway/clarion-hotel-ernst.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/kristiansand.html', 2, 'Scandic Kristiansand Bystranda', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Kristiansand Bystranda', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Beachfront hotel on Bystranda with a pool, close to the boardwalk and Kilden.', 'html/cities/norway/scandic-kristiansand-bystranda.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/kristiansand.html', 3, 'Thon Hotel Wergeland', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Thon Hotel Wergeland', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Compact city hotel beside Wergeland’s park, handy for the Posebyen old town.', 'html/cities/norway/thon-hotel-wergeland.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/lerwick.html', 1, 'Shetland Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Shetland Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in Lerwick, overlooking the sound and the ferry to Bressay.', 'html/cities/scotland/shetland-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/lerwick.html', 2, 'Grand Hotel Lerwick', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Grand Hotel Lerwick', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel beside the harbour, a short walk from Commercial Street.', 'html/cities/scotland/grand-hotel-lerwick.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/lerwick.html', 3, 'Lerwick Harbour House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Lerwick Harbour House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Waterfront house in Lerwick, close to the lanes and the lodberries.', 'html/cities/scotland/lerwick-harbour-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/liepaja.html', 1, 'Hotel Kolumbs', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Kolumbs', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Elegant hotel with spa facilities near the sea and city center.', 'html/cities/latvia/hotel-kolumbs.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/liepaja.html', 2, 'Promenade Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Promenade Hotel', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Luxury hotel set in a historic warehouse with art gallery and gourmet restaurant.', 'html/cities/latvia/promenade-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/liepaja.html', 3, 'Liva Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Liva Hotel', NULL, '0.025 ETH / night', 0.025, 0.0004, 71, 'Central, affordable hotel ideal for business or leisure travelers.', 'html/cities/latvia/liva-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/lillehammer.html', 1, 'Radisson Blu Lillehammer Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Lillehammer Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Lakeside hotel in Lillehammer, below the ski jump and the Olympic park.', 'html/cities/norway/radisson-blu-lillehammer-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/lillehammer.html', 2, 'Scandic Lillehammer', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Lillehammer', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel in Lillehammer, a short walk from the pedestrian street and the station.', 'html/cities/norway/scandic-lillehammer.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/lillehammer.html', 3, 'Mølla Hotell', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Mølla Hotell', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Riverside hotel in a former mill on the Mesna, in the centre of Lillehammer.', 'html/cities/norway/molla-hotell.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 1, 'Quality Hotel Ekoxen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Quality Hotel Ekoxen', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Well-equipped city hotel with a pool and spa, close to Linköping’s main square.', 'html/cities/sweden/quality-hotel-ekoxen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 2, 'Scandic Frimurarehotellet', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Frimurarehotellet', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Landmark hotel in the city centre with easy access to the cathedral and old town.', 'html/cities/sweden/scandic-frimurarehotellet.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 3, 'Stora Hotellet Linköping', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Stora Hotellet Linköping', NULL, '0.045 ETH / night', 0.045, 0.0007, 128, 'Classic independent hotel with a restaurant, a short walk from the railway station.', 'html/cities/sweden/stora-hotellet-linkoping.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 1, 'Radisson Blu Polar Hotel Spitsbergen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Polar Hotel Spitsbergen', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 2, 'Funken Lodge', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Funken Lodge', NULL, '0.11 ETH / night', 0.11, 0.0018, 315, 'Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.', 'html/cities/svalbard/funken-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 3, 'Basecamp Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Basecamp Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 255, 'Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.', 'html/cities/svalbard/basecamp-hotel-svalbard.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 1, 'Clarion Hotel Malmö Live', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Malmö Live', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'High-rise waterfront hotel with a sky bar and concert hall next door.', 'html/cities/sweden/clarion-hotel-malmo-live.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 2, 'Hotel Savoy Malmö', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Savoy Malmö', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic city hotel opposite the central station, a short hop from the Turning Torso.', 'html/cities/sweden/hotel-savoy-malmo.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 3, 'Scandic Triangeln', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Triangeln', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Modern tower hotel above Triangeln station, handy for Möllevången and shopping.', 'html/cities/sweden/scandic-triangeln.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/aland-islands/mariehamn.html', 1, 'Hotel Arkipelag', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Arkipelag', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Waterfront hotel by Mariehamn’s western harbour, a short walk from shops, ferries, and the maritime quarter.', 'html/cities/aland-islands/hotel-arkipelag.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/aland-islands/mariehamn.html', 2, 'Park Alandia Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Alandia Hotel', NULL, '0.05 ETH / night', 0.05, 0.00085, 145, 'Central Åland stay beside the town park, handy for the sailing harbour and the road to Kastelholm.', 'html/cities/aland-islands/park-alandia-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/aland-islands/mariehamn.html', 3, 'Hotel Pommern', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Pommern', NULL, '0.055 ETH / night', 0.055, 0.0009, 160, 'Relaxed hotel near the Åland Maritime Museum and the historic four-masted barque Pommern.', 'html/cities/aland-islands/hotel-pommern.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/narva.html', 1, 'Narva-Jõesuu Seaside Hotel', 'https://images.unsplash.com/photo-1505691723518-36a1ddb1b3b6?fit=crop&w=400&q=80', 'Narva-Jõesuu Hotel', NULL, '0.03 ETH / night', 0.03, 0.0005, 86, 'Seaside hotel near Narva with easy access to sandy beaches and coastal walks.', 'html/cities/estonia/narva-joesuu-seaside-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/narva.html', 2, 'Narva City Hotel', 'https://images.unsplash.com/photo-1493244040629-496f6d136cc3?fit=crop&w=400&q=80', 'Narva City Hotel', NULL, '0.035 ETH / night', 0.035, 0.0006, 100, 'Conveniently located in Narva city center, close to the river and historical sites.', 'html/cities/estonia/narva-city-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/newcastle.html', 1, 'Hotel du Vin Newcastle', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel du Vin Newcastle', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Boutique hotel in a converted warehouse beside the Quayside, with a bistro and wine cellar.', 'html/cities/northeast-england/hotel-du-vin-newcastle.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/newcastle.html', 2, 'Malmaison Newcastle', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Malmaison Newcastle', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Stylish waterfront stay on the Tyne with contemporary rooms and easy access to the bridges.', 'html/cities/northeast-england/malmaison-newcastle.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/newcastle.html', 3, 'Crowne Plaza Newcastle', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Crowne Plaza Newcastle', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Modern city hotel near St James’ Park, well placed for business and match-day stays.', 'html/cities/northeast-england/crowne-plaza-newcastle.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/nuuk.html', 1, 'Hotel Hans Egede', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Hans Egede', NULL, '0.11 ETH / night', 0.11, 0.0018, 310, 'Landmark hotel on Aqqusinersuaq, with fjord views and a base for exploring Greenland’s capital.', 'html/cities/greenland/hotel-hans-egede.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/nuuk.html', 2, 'Inuit Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Inuit Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 230, 'Contemporary rooms near the colonial harbour, close to Katuaq and the waterfront boardwalk.', 'html/cities/greenland/inuit-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/greenland/nuuk.html', 3, 'Hotel Nuuk', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Nuuk', NULL, '0.075 ETH / night', 0.075, 0.00125, 215, 'Hillside stay overlooking Nuuk Fjord, a quiet launch point for boat trips and city walks.', 'html/cities/greenland/hotel-nuuk.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/oban.html', 1, 'Oban Bay Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Oban Bay Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Bayfront hotel in Oban, beside the ferry pier for the Hebridean islands.', 'html/cities/scotland/oban-bay-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/oban.html', 2, 'Perle Oban Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Perle Oban Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Seafront hotel on Oban Bay, looking across the water to Kerrera.', 'html/cities/scotland/perle-oban-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/oban.html', 3, 'Manor House Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Manor House Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour house on the south shore of Oban, a short walk from the railway pier.', 'html/cities/scotland/manor-house-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/oslo.html', 1, 'Grand Hotel Oslo', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel Oslo', NULL, '0.15 ETH / night', 0.15, 0.0025, 428, 'Historic hotel on Karl Johans gate, facing the Storting and a stroll from the palace.', 'html/cities/norway/grand-hotel-oslo.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/oslo.html', 2, 'The Thief', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Thief', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Design hotel on Tjuvholmen with contemporary art, harbour views, and a spa.', 'html/cities/norway/the-thief.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/oslo.html', 3, 'Hotel Continental', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Continental', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Family-run landmark beside Nationaltheatret, known for Theatercaféen and city views.', 'html/cities/norway/hotel-continental.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/oulu.html', 1, 'Lapland Hotels Oulu', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Lapland Hotels Oulu', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Lapland-inspired hotel near Oulu Cathedral, cozy and unique.', 'html/cities/finland/lapland-hotels-oulu.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/oulu.html', 2, 'Radisson Blu Hotel Oulu', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel Oulu', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Riverside hotel with beautiful views and modern amenities.', 'html/cities/finland/radisson-blu-hotel-oulu.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/oulu.html', 3, 'Scandic Oulu Station', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Oulu Station', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Comfortable rooms close to Oulu railway station and city center.', 'html/cities/finland/scandic-oulu-station.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/panevėžys.html', 1, 'Central Park Hotel', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Panevezys Hotel', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Modern hotel near the city park offering comfortable rooms and easy access to local attractions and concert venues.', 'html/cities/lithuania/central-park-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/panevėžys.html', 2, 'Boutique Riverside', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Boutique Panevezys', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Small riverside hotel offering peaceful rooms and personalized service — a great base for exploring the region.', 'html/cities/lithuania/boutique-riverside.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/portree.html', 1, 'Cuillin Hills Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Cuillin Hills Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Harbour hotel in Portree, with views across the bay toward the Cuillin on the Isle of Skye.', 'html/cities/scotland/cuillin-hills-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/portree.html', 2, 'Bosville Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Bosville Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Town hotel above Portree harbour, a short walk from Somerled Square.', 'html/cities/scotland/bosville-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/portree.html', 3, 'The Royal Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'The Royal Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel in Portree, beside the coloured houses and the fishing pier.', 'html/cities/scotland/the-royal-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjanesbær.html', 1, 'Hotel Keflavik', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Keflavik', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Well-known airport-town hotel with a restaurant, handy for early flights and the lagoon.', 'html/cities/iceland/hotel-keflavik.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjanesbær.html', 2, 'Hotel Keilir', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Keilir', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Modern stay in central Keflavík, close to the waterfront and the Viking World museum.', 'html/cities/iceland/hotel-keilir.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjanesbær.html', 3, 'Airport Hotel Aurora Star', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Airport Hotel Aurora Star', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Convenient overnight beside Keflavík International Airport with a 24-hour desk.', 'html/cities/iceland/airport-hotel-aurora-star.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjavík.html', 1, 'Hotel Borg', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Borg', NULL, '0.14 ETH / night', 0.14, 0.0023, 399, 'Art Deco landmark on Austurvöllur square, steps from the parliament and harbour.', 'html/cities/iceland/hotel-borg.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjavík.html', 2, 'Canopy by Hilton Reykjavik City Centre', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Canopy by Hilton Reykjavik City Centre', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Design-led hotel on Laugavegur with local art, a café, and easy access to nightlife.', 'html/cities/iceland/canopy-by-hilton-reykjavik-city-centre.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/reykjavík.html', 3, 'Center Hotels Plaza', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Center Hotels Plaza', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Practical city-centre stay on Ingólfstorg, close to shops, bars, and the Old Harbour.', 'html/cities/iceland/center-hotels-plaza.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/riga.html', 1, 'Grand Hotel Kempinski', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel Kempinski', NULL, '0.09 ETH / night', 0.09, 0.0015, 250, 'Luxury stay in the heart of Riga with elegant rooms and spa facilities.', 'html/cities/latvia/grand-hotel-kempinski-riga.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/latvia/riga.html', 2, 'Wellton Riverside', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Wellton Riverside', NULL, '0.06 ETH / night', 0.06, 0.001, 170, 'Modern hotel with river views, wellness area and rooftop terrace.', 'html/cities/latvia/wellton-riverside-riga.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/rovaniemi.html', 1, 'Arctic Light Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Arctic Light Hotel', NULL, '0.10 ETH / night', 0.1, 0.0016, 285, 'Boutique hotel in a converted city hall, steps from Rovaniemi’s centre and Santa Claus Village day trips.', 'html/cities/finland/arctic-light-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/rovaniemi.html', 2, 'Lapland Hotels Sky Ounasvaara', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Sky Ounasvaara', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Hilltop hotel above the Kemijoki, with northern lights views and forest trails just outside town.', 'html/cities/finland/lapland-hotels-sky-ounasvaara.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/rovaniemi.html', 3, 'Santa''s Hotel Santa Claus', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Santa''s Hotel Santa Claus', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Central Rovaniemi hotel named for Lapland’s Christmas lore, close to shops, saunas, and the riverfront.', 'html/cities/finland/santas-hotel-santa-claus.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/šiauliai.htm', 1, 'Park Inn Šiauliai', 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Park Inn Siauliai', NULL, '0.045 ETH / night', 0.045, 0.0008, 128, 'Reliable mid-range hotel with clean, comfortable rooms, conference facilities and convenient transport links.', 'html/cities/lithuania/park-inn-siauliai.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/šiauliai.htm', 2, 'Old Town Boutique', 'https://images.unsplash.com/photo-1505691723518-36a5a1313f1c?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Šiauliai Boutique', NULL, '0.04 ETH / night', 0.04, 0.0007, 114, 'Small boutique hotel located a short walk from the Old Town, offering a quiet stay and homemade breakfast.', 'html/cities/lithuania/old-town-boutique.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/stavanger.html', 1, 'Clarion Hotel Stavanger', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Stavanger', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Central high-rise with a rooftop restaurant and views over the harbour and old town.', 'html/cities/norway/clarion-hotel-stavanger.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/stavanger.html', 2, 'Radisson Blu Atlantic', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Atlantic', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Waterfront hotel on the lake, walking distance to the petroleum museum and colour houses.', 'html/cities/norway/radisson-blu-atlantic.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/stavanger.html', 3, 'Hotel Victoria Stavanger', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Victoria Stavanger', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Historic hotel on Skansegt, close to the cathedral and the ferry to Tau.', 'html/cities/norway/hotel-victoria-stavanger.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stirling.html', 1, 'Stirling Highland Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Stirling Highland Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic hotel beside Stirling Castle, in a former high school building.', 'html/cities/scotland/stirling-highland-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stirling.html', 2, 'Hotel Colessio', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Colessio', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Stylish boutique hotel on the edge of Stirling’s old town.', 'html/cities/scotland/hotel-colessio.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stirling.html', 3, 'Golden Lion Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Golden Lion Hotel', NULL, '0.045 ETH / night', 0.045, 0.00075, 128, 'Traditional city-centre inn, a convenient base for exploring Stirling.', 'html/cities/scotland/golden-lion-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/stockholm.html', 1, 'Grand Hôtel Stockholm', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hôtel Stockholm', NULL, '0.16 ETH / night', 0.16, 0.0026, 456, 'Landmark waterfront palace facing the Royal Palace, with a Nordic spa and fine dining.', 'html/cities/sweden/grand-hotel-stockholm.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/stockholm.html', 2, 'Hotel Diplomat', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Diplomat', NULL, '0.11 ETH / night', 0.11, 0.0018, 314, 'Elegant Art Nouveau hotel on Strandvägen, steps from Östermalm boutiques and Djurgården.', 'html/cities/sweden/hotel-diplomat.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/stockholm.html', 3, 'Scandic Continental', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Continental', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Central eco-minded hotel beside Stockholm Central Station, ideal for exploring the islands.', 'html/cities/sweden/scandic-continental.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stornoway.html', 1, 'Cabarfeidh Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Cabarfeidh Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Town hotel in Stornoway, a short walk from the harbour and Lews Castle.', 'html/cities/scotland/cabarfeidh-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stornoway.html', 2, 'Caladh Inn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Caladh Inn', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Harbour inn in Stornoway, beside the ferry terminal for the mainland.', 'html/cities/scotland/caladh-inn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/stornoway.html', 3, 'Lews Castle Lodge', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Lews Castle Lodge', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Woodland lodge across the harbour from Stornoway, on the grounds of Lews Castle.', 'html/cities/scotland/lews-castle-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tallinn.html', 1, 'Hotel Telegraaf', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80', 'Hotel Telegraaf', NULL, '0.08 ETH / night', 0.08, 0.0013, 220, 'Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.', 'html/cities/estonia/hotel-telegraaf-tallinn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tallinn.html', 2, 'Swissôtel Tallinn', 'https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80', 'Swissôtel Tallinn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern high-rise hotel offering panoramic city views, pool and business facilities.', 'html/cities/estonia/swissotel-tallinn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/tampere.html', 1, 'Lapland Hotels Tampere', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Tampere', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Modern comfort with Lapland-inspired decor in central Tampere.', 'html/cities/finland/lapland-hotels-tampere.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/tampere.html', 2, 'Scandic Tampere Station', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Tampere Station', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Convenient hotel next to the train station, perfect for business and leisure.', 'html/cities/finland/scandic-tampere-station.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/tampere.html', 3, 'Original Sokos Hotel Ilves', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Original Sokos Hotel Ilves', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Iconic riverside hotel offering panoramic city views and dining.', 'html/cities/finland/original-sokos-hotel-ilves.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tartu.html', 1, 'Hotel Telegraaf', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?fit=crop&w=400&q=80', 'Hotel Telegraaf', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Historic 5-star hotel in Tallinn Old Town with elegant rooms and a luxury spa.', 'html/cities/estonia/hotel-telegraaf.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/estonia/tartu.html', 2, 'Swissôtel Tallinn', 'https://images.unsplash.com/photo-1501117716987-c8e6b07f9a05?fit=crop&w=400&q=80', 'Swissôtel Tallinn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern high-rise hotel offering panoramic city views, pool and business facilities.', 'html/cities/estonia/swissotel-tallinn-tartu.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/faroe-islands/tórshavn.html', 1, 'Hotel Føroyar', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Føroyar', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Hillside hotel above the capital, with grass-roof rooms and wide views over Tórshavn and Nólsoy.', 'html/cities/faroe-islands/hotel-foroyar.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/faroe-islands/tórshavn.html', 2, 'Hotel Hafnia', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Hafnia', NULL, '0.08 ETH / night', 0.08, 0.0013, 230, 'Classic downtown hotel on Áarvegur, walking distance to Tinganes and the harbour.', 'html/cities/faroe-islands/hotel-hafnia.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/faroe-islands/tórshavn.html', 3, 'Hotel Streym', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Streym', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour-side stay near the ferry terminal, a practical base for island-hopping around the Faroes.', 'html/cities/faroe-islands/hotel-streym.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/tromso.html', 1, 'Clarion Hotel The Edge', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel The Edge', NULL, '0.10 ETH / night', 0.1, 0.0016, 285, 'Waterfront hotel on the Tromsø Sound with harbour views and a short hop to the Arctic Cathedral.', 'html/cities/norway/clarion-hotel-the-edge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/tromso.html', 2, 'Radisson Blu Hotel Tromsø', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Radisson Blu Hotel Tromsø', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Central Arctic-city hotel with a rooftop bar looking over the island and surrounding peaks.', 'html/cities/norway/radisson-blu-hotel-tromso.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/tromso.html', 3, 'Scandic Ishavshotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Ishavshotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbourfront stay on the quay, a short walk from Tromsø city centre and the polar museum.', 'html/cities/norway/scandic-ishavshotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/trondheim.html', 1, 'Britannia Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Britannia Hotel', NULL, '0.14 ETH / night', 0.14, 0.0023, 399, 'Restored palatial hotel with a palm court, spa, and several celebrated restaurants.', 'html/cities/norway/britannia-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/trondheim.html', 2, 'Clarion Hotel Trondheim', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Clarion Hotel Trondheim', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbourfront hotel on Brattøra, a short walk from the aquarium and city centre.', 'html/cities/norway/clarion-hotel-trondheim.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/trondheim.html', 3, 'Scandic Nidelven', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Nidelven', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Riverside hotel famous for its breakfast, next to the Solsiden quarter.', 'html/cities/norway/scandic-nidelven.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/turku.html', 1, 'Radisson Blu Marina Palace', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Radisson Blu Marina Palace', NULL, '0.10 ETH / night', 0.1, 0.0017, 285, 'Riverside hotel with modern rooms and excellent amenities.', 'html/cities/finland/radisson-blu-marina-palace.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/turku.html', 2, 'Scandic Julia', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Scandic Julia', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern comfort in the center of Turku, close to shopping and attractions.', 'html/cities/finland/scandic-julia.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/turku.html', 3, 'Original Sokos Hotel Wiklund', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Original Sokos Hotel Wiklund', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Central hotel with rooftop bar and easy access to Turku’s sights.', 'html/cities/finland/original-sokos-hotel-wiklund.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/uppsala.html', 1, 'Clarion Hotel Gillet', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Gillet', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Central hotel by the river Fyris, walking distance to the cathedral and university.', 'html/cities/sweden/clarion-hotel-gillet.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/uppsala.html', 2, 'Elite Hotel Academia', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Elite Hotel Academia', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Contemporary stay beside Uppsala Central Station with a restaurant and gym.', 'html/cities/sweden/elite-hotel-academia.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/uppsala.html', 3, 'Grand Hotel Hörnan', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Grand Hotel Hörnan', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Boutique hotel in a historic corner building overlooking the river and old town.', 'html/cities/sweden/grand-hotel-hornan.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/vilnius.html', 1, 'PACAI Hotel', 'https://images.unsplash.com/photo-1501117716987-c8e6b8a6b2d2?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'PACAI Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 250, 'Luxury boutique hotel in Vilnius Old Town with elegant rooms and a quiet courtyard — perfect for exploring the historic centre.', 'html/cities/lithuania/pacai-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/lithuania/vilnius.html', 2, 'Radisson Blu Lietuva', 'https://images.unsplash.com/photo-1472552949507-78c2d0f1311d?q=80&w=1200&auto=format&fit=crop&crop=entropy', 'Radisson Blu Lietuva', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Modern riverside hotel offering panoramic city views, an indoor pool and business facilities for business and leisure travellers.', 'html/cities/lithuania/radisson-blu-lietuva.html', 'View & Book');
 
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/denmark/aalborg.html', 'en', 'page-title', 'Aalborg — Denmark');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/denmark/aalborg.html', 'en', 'placeholder-text', 'This is a placeholder page for Aalborg in Denmark. The hotel listing for this city will be added here soon.');
@@ -20186,7 +20186,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Berg</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Harbour hotel in Keflavík, a short walk from the waterfront and the Viking World museum.</p>
-                <a href="hotel-berg.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-berg.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -20194,7 +20194,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Guesthouse 1x6</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Small guesthouse in Keflavík, close to the harbour and the road out to the airport.</p>
-                <a href="guesthouse-1x6.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/guesthouse-1x6.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -20202,7 +20202,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Courtyard by Marriott Reykjavik Keflavik Airport</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Airport hotel beside Keflavík International Airport, convenient for early flights and the Reykjanes coast.</p>
-                <a href="courtyard-by-marriott-reykjavik-keflavik-airport.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/courtyard-by-marriott-reykjavik-keflavik-airport.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -20310,9 +20310,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/keflavík.html', 1, 'Hótel Berg', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hótel Berg', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel in Keflavík, a short walk from the waterfront and the Viking World museum.', 'hotel-berg.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/keflavík.html', 2, 'Guesthouse 1x6', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Guesthouse 1x6', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Small guesthouse in Keflavík, close to the harbour and the road out to the airport.', 'guesthouse-1x6.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/keflavík.html', 3, 'Courtyard by Marriott Reykjavik Keflavik Airport', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Courtyard by Marriott Reykjavik Keflavik Airport', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Airport hotel beside Keflavík International Airport, convenient for early flights and the Reykjanes coast.', 'courtyard-by-marriott-reykjavik-keflavik-airport.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/keflavík.html', 1, 'Hótel Berg', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hótel Berg', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel in Keflavík, a short walk from the waterfront and the Viking World museum.', 'html/cities/iceland/hotel-berg.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/keflavík.html', 2, 'Guesthouse 1x6', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Guesthouse 1x6', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Small guesthouse in Keflavík, close to the harbour and the road out to the airport.', 'html/cities/iceland/guesthouse-1x6.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/keflavík.html', 3, 'Courtyard by Marriott Reykjavik Keflavik Airport', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Courtyard by Marriott Reykjavik Keflavik Airport', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Airport hotel beside Keflavík International Airport, convenient for early flights and the Reykjanes coast.', 'html/cities/iceland/courtyard-by-marriott-reykjavik-keflavik-airport.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/keflavík.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/keflavík.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/keflavík.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -20515,7 +20515,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Ísafjörður</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Harbour hotel in Ísafjörður, on the Skutulsfjörður waterfront.</p>
-                <a href="hotel-isafjordur.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-isafjordur.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -20523,7 +20523,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Horn</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Town hotel in Ísafjörður, a practical base for the Westfjords.</p>
-                <a href="hotel-horn.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-horn.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -20531,7 +20531,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Gamla Guesthouse</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Timber guesthouse in the old town of Ísafjörður, a short walk from the harbour.</p>
-                <a href="gamla-guesthouse.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/gamla-guesthouse.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -20639,9 +20639,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/ísafjörður.html', 1, 'Hótel Ísafjörður', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hótel Ísafjörður', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in Ísafjörður, on the Skutulsfjörður waterfront.', 'hotel-isafjordur.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/ísafjörður.html', 2, 'Hótel Horn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Horn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel in Ísafjörður, a practical base for the Westfjords.', 'hotel-horn.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/ísafjörður.html', 3, 'Gamla Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Gamla Guesthouse', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Timber guesthouse in the old town of Ísafjörður, a short walk from the harbour.', 'gamla-guesthouse.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/ísafjörður.html', 1, 'Hótel Ísafjörður', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hótel Ísafjörður', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in Ísafjörður, on the Skutulsfjörður waterfront.', 'html/cities/iceland/hotel-isafjordur.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/ísafjörður.html', 2, 'Hótel Horn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Horn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel in Ísafjörður, a practical base for the Westfjords.', 'html/cities/iceland/hotel-horn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/ísafjörður.html', 3, 'Gamla Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Gamla Guesthouse', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Timber guesthouse in the old town of Ísafjörður, a short walk from the harbour.', 'html/cities/iceland/gamla-guesthouse.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/ísafjörður.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/ísafjörður.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/ísafjörður.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -20844,7 +20844,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Vestmannaeyjar</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Harbour hotel on Heimaey, close to the ferry and the town centre.</p>
-                <a href="hotel-vestmannaeyjar.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-vestmannaeyjar.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -20852,7 +20852,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Eyjar</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Island hotel in Vestmannaeyjar, with views toward the cliffs and the harbour.</p>
-                <a href="hotel-eyjar.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-eyjar.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -20860,7 +20860,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Guesthouse Hamar</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Small guesthouse on Heimaey, a short walk from the puffin cliffs and Eldfell.</p>
-                <a href="guesthouse-hamar.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/guesthouse-hamar.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -20968,9 +20968,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/vestmannaeyjar.html', 1, 'Hotel Vestmannaeyjar', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Vestmannaeyjar', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel on Heimaey, close to the ferry and the town centre.', 'hotel-vestmannaeyjar.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/vestmannaeyjar.html', 2, 'Hótel Eyjar', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Eyjar', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Island hotel in Vestmannaeyjar, with views toward the cliffs and the harbour.', 'hotel-eyjar.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/vestmannaeyjar.html', 3, 'Guesthouse Hamar', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Guesthouse Hamar', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Small guesthouse on Heimaey, a short walk from the puffin cliffs and Eldfell.', 'guesthouse-hamar.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/vestmannaeyjar.html', 1, 'Hotel Vestmannaeyjar', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Vestmannaeyjar', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel on Heimaey, close to the ferry and the town centre.', 'html/cities/iceland/hotel-vestmannaeyjar.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/vestmannaeyjar.html', 2, 'Hótel Eyjar', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Eyjar', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Island hotel in Vestmannaeyjar, with views toward the cliffs and the harbour.', 'html/cities/iceland/hotel-eyjar.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/vestmannaeyjar.html', 3, 'Guesthouse Hamar', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Guesthouse Hamar', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Small guesthouse on Heimaey, a short walk from the puffin cliffs and Eldfell.', 'html/cities/iceland/guesthouse-hamar.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/vestmannaeyjar.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/vestmannaeyjar.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/vestmannaeyjar.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -21173,7 +21173,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Tindastóll</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Historic harbour hotel in Sauðárkrókur, on the Skagafjörður waterfront.</p>
-                <a href="hotel-tindastoll.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-tindastoll.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -21181,7 +21181,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hótel Mikligarður</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Town hotel in Sauðárkrókur, a base for the Skagafjörður valley and the north coast.</p>
-                <a href="hotel-mikligardur.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/hotel-mikligardur.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -21189,7 +21189,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Skagafjörður Guesthouse</h3>
                 <div class="price" data-eth="0.055" data-btc="0.0009" data-usdt="157">0.055 ETH / night</div>
                 <p>Small guesthouse in Sauðárkrókur, a short walk from the harbour and the church.</p>
-                <a href="skagafjordur-guesthouse.html" class="book-link">View & Book</a>
+                <a href="html/cities/iceland/skagafjordur-guesthouse.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -21297,9 +21297,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/sauðárkrókur.html', 1, 'Hótel Tindastóll', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hótel Tindastóll', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Historic harbour hotel in Sauðárkrókur, on the Skagafjörður waterfront.', 'hotel-tindastoll.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/sauðárkrókur.html', 2, 'Hótel Mikligarður', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Mikligarður', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel in Sauðárkrókur, a base for the Skagafjörður valley and the north coast.', 'hotel-mikligardur.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/sauðárkrókur.html', 3, 'Skagafjörður Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Skagafjörður Guesthouse', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Small guesthouse in Sauðárkrókur, a short walk from the harbour and the church.', 'skagafjordur-guesthouse.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/sauðárkrókur.html', 1, 'Hótel Tindastóll', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hótel Tindastóll', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Historic harbour hotel in Sauðárkrókur, on the Skagafjörður waterfront.', 'html/cities/iceland/hotel-tindastoll.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/sauðárkrókur.html', 2, 'Hótel Mikligarður', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hótel Mikligarður', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel in Sauðárkrókur, a base for the Skagafjörður valley and the north coast.', 'html/cities/iceland/hotel-mikligardur.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/iceland/sauðárkrókur.html', 3, 'Skagafjörður Guesthouse', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Skagafjörður Guesthouse', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Small guesthouse in Sauðárkrókur, a short walk from the harbour and the church.', 'html/cities/iceland/skagafjordur-guesthouse.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/sauðárkrókur.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/sauðárkrókur.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/iceland/sauðárkrókur.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -21502,7 +21502,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Cairngorm Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>High Street hotel in Aviemore, a base for the Cairngorm plateau.</p>
-                <a href="cairngorm-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/cairngorm-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -21510,7 +21510,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Rothiemurchus Lodge</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Forest lodge on the edge of Aviemore, beside the Rothiemurchus pines.</p>
-                <a href="rothiemurchus-lodge.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/rothiemurchus-lodge.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -21518,7 +21518,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Spey Valley Hotel</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Riverside hotel in Aviemore, looking toward the Spey and the mountain railway.</p>
-                <a href="spey-valley-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/spey-valley-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -21626,9 +21626,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aviemore.html', 1, 'Cairngorm Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Cairngorm Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'High Street hotel in Aviemore, a base for the Cairngorm plateau.', 'cairngorm-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aviemore.html', 2, 'Rothiemurchus Lodge', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Rothiemurchus Lodge', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Forest lodge on the edge of Aviemore, beside the Rothiemurchus pines.', 'rothiemurchus-lodge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aviemore.html', 3, 'Spey Valley Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Spey Valley Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Riverside hotel in Aviemore, looking toward the Spey and the mountain railway.', 'spey-valley-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aviemore.html', 1, 'Cairngorm Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Cairngorm Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'High Street hotel in Aviemore, a base for the Cairngorm plateau.', 'html/cities/scotland/cairngorm-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aviemore.html', 2, 'Rothiemurchus Lodge', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Rothiemurchus Lodge', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Forest lodge on the edge of Aviemore, beside the Rothiemurchus pines.', 'html/cities/scotland/rothiemurchus-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/aviemore.html', 3, 'Spey Valley Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Spey Valley Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Riverside hotel in Aviemore, looking toward the Spey and the mountain railway.', 'html/cities/scotland/spey-valley-hotel.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/aviemore.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/aviemore.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/aviemore.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -21831,7 +21831,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Atholl Palace Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Victorian hotel above Pitlochry, with gardens looking toward Ben Vrackie.</p>
-                <a href="atholl-palace-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/atholl-palace-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -21839,7 +21839,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Fishers Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Town hotel on Atholl Road in Pitlochry, a short walk from the theatre and the river.</p>
-                <a href="fishers-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/fishers-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -21847,7 +21847,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Loch Faskally House</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Shore house on Loch Faskally, beside the dam and the salmon ladder.</p>
-                <a href="loch-faskally-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/loch-faskally-house.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -21955,9 +21955,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/pitlochry.html', 1, 'Atholl Palace Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Atholl Palace Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Victorian hotel above Pitlochry, with gardens looking toward Ben Vrackie.', 'atholl-palace-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/pitlochry.html', 2, 'Fishers Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Fishers Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel on Atholl Road in Pitlochry, a short walk from the theatre and the river.', 'fishers-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/pitlochry.html', 3, 'Loch Faskally House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Loch Faskally House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Shore house on Loch Faskally, beside the dam and the salmon ladder.', 'loch-faskally-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/pitlochry.html', 1, 'Atholl Palace Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Atholl Palace Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Victorian hotel above Pitlochry, with gardens looking toward Ben Vrackie.', 'html/cities/scotland/atholl-palace-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/pitlochry.html', 2, 'Fishers Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Fishers Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town hotel on Atholl Road in Pitlochry, a short walk from the theatre and the river.', 'html/cities/scotland/fishers-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/pitlochry.html', 3, 'Loch Faskally House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Loch Faskally House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Shore house on Loch Faskally, beside the dam and the salmon ladder.', 'html/cities/scotland/loch-faskally-house.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/pitlochry.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/pitlochry.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/pitlochry.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -22160,7 +22160,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scores Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Hotel on The Scores in St Andrews, looking over the bay and the West Sands.</p>
-                <a href="scores-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/scores-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -22168,7 +22168,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>St Andrews Harbour Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Harbour hotel in St Andrews, a short walk from the cathedral ruins and the West Sands.</p>
-                <a href="st-andrews-harbour-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/st-andrews-harbour-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -22176,7 +22176,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Cathedral Gate House</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Town house in St Andrews, beside the cathedral ruins and the harbour wall.</p>
-                <a href="cathedral-gate-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/cathedral-gate-house.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -22284,9 +22284,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/st-andrews.html', 1, 'Scores Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Scores Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Hotel on The Scores in St Andrews, looking over the bay and the West Sands.', 'scores-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/st-andrews.html', 2, 'St Andrews Harbour Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'St Andrews Harbour Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in St Andrews, a short walk from the cathedral ruins and the West Sands.', 'st-andrews-harbour-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/st-andrews.html', 3, 'Cathedral Gate House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Cathedral Gate House', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town house in St Andrews, beside the cathedral ruins and the harbour wall.', 'cathedral-gate-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/st-andrews.html', 1, 'Scores Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Scores Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Hotel on The Scores in St Andrews, looking over the bay and the West Sands.', 'html/cities/scotland/scores-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/st-andrews.html', 2, 'St Andrews Harbour Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'St Andrews Harbour Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in St Andrews, a short walk from the cathedral ruins and the West Sands.', 'html/cities/scotland/st-andrews-harbour-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/st-andrews.html', 3, 'Cathedral Gate House', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Cathedral Gate House', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Town house in St Andrews, beside the cathedral ruins and the harbour wall.', 'html/cities/scotland/cathedral-gate-house.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/st-andrews.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/st-andrews.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/st-andrews.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -22489,7 +22489,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Ceilidh Place</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Bookshop hotel on the west shore of Ullapool, above Loch Broom.</p>
-                <a href="the-ceilidh-place.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/the-ceilidh-place.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -22497,7 +22497,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Broomfield House</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Hillside house above the harbour in Ullapool, looking across Loch Broom.</p>
-                <a href="broomfield-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/broomfield-house.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -22505,7 +22505,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Ullapool Ferry Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Harbour hotel in Ullapool, on Loch Broom beside the ferry to Lewis.</p>
-                <a href="ullapool-ferry-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/ullapool-ferry-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -22613,9 +22613,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/ullapool.html', 1, 'The Ceilidh Place', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Ceilidh Place', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Bookshop hotel on the west shore of Ullapool, above Loch Broom.', 'the-ceilidh-place.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/ullapool.html', 2, 'Broomfield House', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Broomfield House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Hillside house above the harbour in Ullapool, looking across Loch Broom.', 'broomfield-house.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/ullapool.html', 3, 'Ullapool Ferry Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ullapool Ferry Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in Ullapool, on Loch Broom beside the ferry to Lewis.', 'ullapool-ferry-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/ullapool.html', 1, 'The Ceilidh Place', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Ceilidh Place', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Bookshop hotel on the west shore of Ullapool, above Loch Broom.', 'html/cities/scotland/the-ceilidh-place.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/ullapool.html', 2, 'Broomfield House', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Broomfield House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Hillside house above the harbour in Ullapool, looking across Loch Broom.', 'html/cities/scotland/broomfield-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/ullapool.html', 3, 'Ullapool Ferry Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ullapool Ferry Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Harbour hotel in Ullapool, on Loch Broom beside the ferry to Lewis.', 'html/cities/scotland/ullapool-ferry-hotel.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/ullapool.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/ullapool.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/ullapool.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -22818,7 +22818,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Cookie Jar</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Boutique rooms in a former convent on Bailiffgate, a short walk from Alnwick Castle.</p>
-                <a href="the-cookie-jar.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/the-cookie-jar.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -22826,7 +22826,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Oaks Hotel</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Country hotel on the edge of Alnwick, handy for the castle gardens and the coast.</p>
-                <a href="the-oaks-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/the-oaks-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -22834,7 +22834,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>White Swan Hotel</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Coaching inn on Bondgate in the market-town centre, close to the castle gate.</p>
-                <a href="white-swan-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/white-swan-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -22942,9 +22942,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/alnwick.html', 1, 'The Cookie Jar', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Cookie Jar', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Boutique rooms in a former convent on Bailiffgate, a short walk from Alnwick Castle.', 'the-cookie-jar.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/alnwick.html', 2, 'The Oaks Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Oaks Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Country hotel on the edge of Alnwick, handy for the castle gardens and the coast.', 'the-oaks-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/alnwick.html', 3, 'White Swan Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'White Swan Hotel', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Coaching inn on Bondgate in the market-town centre, close to the castle gate.', 'white-swan-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/alnwick.html', 1, 'The Cookie Jar', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Cookie Jar', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Boutique rooms in a former convent on Bailiffgate, a short walk from Alnwick Castle.', 'html/cities/northeast-england/the-cookie-jar.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/alnwick.html', 2, 'The Oaks Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Oaks Hotel', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Country hotel on the edge of Alnwick, handy for the castle gardens and the coast.', 'html/cities/northeast-england/the-oaks-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/alnwick.html', 3, 'White Swan Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'White Swan Hotel', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Coaching inn on Bondgate in the market-town centre, close to the castle gate.', 'html/cities/northeast-england/white-swan-hotel.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/alnwick.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/alnwick.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/alnwick.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -23147,7 +23147,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Otterburn Castle</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Stone castle hotel in Redesdale, a base for the park moors and Kielder.</p>
-                <a href="otterburn-castle.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/otterburn-castle.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -23155,7 +23155,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Tankerville Arms</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Market-town inn in Wooler, at the foot of the Cheviot Hills.</p>
-                <a href="the-tankerville-arms.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/the-tankerville-arms.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -23163,7 +23163,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Twice Brewed Inn</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Inn beside Hadrian’s Wall at Once Brewed, with walks along the crags.</p>
-                <a href="twice-brewed-inn.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/twice-brewed-inn.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -23271,9 +23271,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 1, 'Otterburn Castle', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Otterburn Castle', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Stone castle hotel in Redesdale, a base for the park moors and Kielder.', 'otterburn-castle.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 2, 'The Tankerville Arms', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Tankerville Arms', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Market-town inn in Wooler, at the foot of the Cheviot Hills.', 'the-tankerville-arms.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 3, 'Twice Brewed Inn', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Twice Brewed Inn', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Inn beside Hadrian’s Wall at Once Brewed, with walks along the crags.', 'twice-brewed-inn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 1, 'Otterburn Castle', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Otterburn Castle', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Stone castle hotel in Redesdale, a base for the park moors and Kielder.', 'html/cities/northeast-england/otterburn-castle.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 2, 'The Tankerville Arms', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Tankerville Arms', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Market-town inn in Wooler, at the foot of the Cheviot Hills.', 'html/cities/northeast-england/the-tankerville-arms.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 3, 'Twice Brewed Inn', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Twice Brewed Inn', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Inn beside Hadrian’s Wall at Once Brewed, with walks along the crags.', 'html/cities/northeast-england/twice-brewed-inn.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -23476,7 +23476,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Dark Island Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Roadside hotel in Liniclate on Benbecula, between the machair and the road south.</p>
-                <a href="dark-island-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/dark-island-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -23484,7 +23484,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Balivanich Airport House</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore.</p>
-                <a href="balivanich-airport-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/balivanich-airport-house.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -23492,7 +23492,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Culla Bay Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Shore hotel on Benbecula, facing the white sand of Culla Bay.</p>
-                <a href="culla-bay-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/culla-bay-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -23600,9 +23600,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/benbecula.html', 1, 'Dark Island Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Dark Island Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Roadside hotel in Liniclate on Benbecula, between the machair and the road south.', 'dark-island-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/benbecula.html', 2, 'Balivanich Airport House', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Balivanich Airport House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore.', 'balivanich-airport-house.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/benbecula.html', 3, 'Culla Bay Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Culla Bay Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Shore hotel on Benbecula, facing the white sand of Culla Bay.', 'culla-bay-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/benbecula.html', 1, 'Dark Island Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Dark Island Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Roadside hotel in Liniclate on Benbecula, between the machair and the road south.', 'html/cities/scotland/dark-island-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/benbecula.html', 2, 'Balivanich Airport House', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Balivanich Airport House', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore.', 'html/cities/scotland/balivanich-airport-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/benbecula.html', 3, 'Culla Bay Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Culla Bay Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Shore hotel on Benbecula, facing the white sand of Culla Bay.', 'html/cities/scotland/culla-bay-hotel.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/benbecula.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/benbecula.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/benbecula.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -23805,7 +23805,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Lodge on Loch Lomond</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Waterfront hotel in Luss, looking across the loch toward the national park hills.</p>
-                <a href="the-lodge-on-loch-lomond.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/the-lodge-on-loch-lomond.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -23813,7 +23813,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Cameron House</h3>
                 <div class="price" data-eth="0.12" data-btc="0.002" data-usdt="342">0.12 ETH / night</div>
                 <p>Lochside resort near Balloch, at the southern gate of Loch Lomond National Park.</p>
-                <a href="cameron-house.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/cameron-house.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -23821,7 +23821,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Oak Tree Inn</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Village inn in Balmaha, where the West Highland Way meets the east shore of the loch.</p>
-                <a href="oak-tree-inn.html" class="book-link">View & Book</a>
+                <a href="html/cities/scotland/oak-tree-inn.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -23929,9 +23929,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/loch-lomond.html', 1, 'The Lodge on Loch Lomond', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Lodge on Loch Lomond', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel in Luss, looking across the loch toward the national park hills.', 'the-lodge-on-loch-lomond.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/loch-lomond.html', 2, 'Cameron House', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Cameron House', NULL, '0.12 ETH / night', 0.12, 0.002, 342, 'Lochside resort near Balloch, at the southern gate of Loch Lomond National Park.', 'cameron-house.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/loch-lomond.html', 3, 'Oak Tree Inn', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Oak Tree Inn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Village inn in Balmaha, where the West Highland Way meets the east shore of the loch.', 'oak-tree-inn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/loch-lomond.html', 1, 'The Lodge on Loch Lomond', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'The Lodge on Loch Lomond', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Waterfront hotel in Luss, looking across the loch toward the national park hills.', 'html/cities/scotland/the-lodge-on-loch-lomond.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/loch-lomond.html', 2, 'Cameron House', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Cameron House', NULL, '0.12 ETH / night', 0.12, 0.002, 342, 'Lochside resort near Balloch, at the southern gate of Loch Lomond National Park.', 'html/cities/scotland/cameron-house.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/scotland/loch-lomond.html', 3, 'Oak Tree Inn', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Oak Tree Inn', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Village inn in Balmaha, where the West Highland Way meets the east shore of the loch.', 'html/cities/scotland/oak-tree-inn.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/loch-lomond.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/loch-lomond.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/scotland/loch-lomond.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -24134,7 +24134,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Bardøla Høyfjellshotell</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Mountain hotel above Geilo, with ski slopes and a path onto the Hardangervidda.</p>
-                <a href="bardola-hoyfjellshotell.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/bardola-hoyfjellshotell.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -24142,7 +24142,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Dr. Holms Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Historic timber hotel in Geilo, beside the railway and the village centre.</p>
-                <a href="dr-holms-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/dr-holms-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -24150,7 +24150,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Vestlia</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Family hotel on the west side of Geilo, close to the cross-country trails.</p>
-                <a href="hotel-vestlia.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/hotel-vestlia.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -24258,9 +24258,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/geilo.html', 1, 'Bardøla Høyfjellshotell', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Bardøla Høyfjellshotell', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Mountain hotel above Geilo, with ski slopes and a path onto the Hardangervidda.', 'bardola-hoyfjellshotell.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/geilo.html', 2, 'Dr. Holms Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Dr. Holms Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic timber hotel in Geilo, beside the railway and the village centre.', 'dr-holms-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/geilo.html', 3, 'Hotel Vestlia', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Vestlia', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Family hotel on the west side of Geilo, close to the cross-country trails.', 'hotel-vestlia.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/geilo.html', 1, 'Bardøla Høyfjellshotell', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Bardøla Høyfjellshotell', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Mountain hotel above Geilo, with ski slopes and a path onto the Hardangervidda.', 'html/cities/norway/bardola-hoyfjellshotell.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/geilo.html', 2, 'Dr. Holms Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Dr. Holms Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic timber hotel in Geilo, beside the railway and the village centre.', 'html/cities/norway/dr-holms-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/geilo.html', 3, 'Hotel Vestlia', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Hotel Vestlia', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Family hotel on the west side of Geilo, close to the cross-country trails.', 'html/cities/norway/hotel-vestlia.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/geilo.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/geilo.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/geilo.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -24463,7 +24463,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Harahorn</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Timber hotel in Hemsedal, set among the valley farms below the alpine slopes.</p>
-                <a href="harahorn.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/harahorn.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -24471,7 +24471,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Skogstad</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Village hotel in Hemsedal, at the foot of the ski area and the river.</p>
-                <a href="hotel-skogstad.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/hotel-skogstad.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -24479,7 +24479,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Skarsnuten Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Mountaintop hotel above Hemsedal, with wide views over the valley.</p>
-                <a href="skarsnuten-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/skarsnuten-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -24587,9 +24587,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/hemsedal.html', 1, 'Harahorn', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Harahorn', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Timber hotel in Hemsedal, set among the valley farms below the alpine slopes.', 'harahorn.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/hemsedal.html', 2, 'Hotel Skogstad', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Skogstad', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Village hotel in Hemsedal, at the foot of the ski area and the river.', 'hotel-skogstad.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/hemsedal.html', 3, 'Skarsnuten Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Skarsnuten Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Mountaintop hotel above Hemsedal, with wide views over the valley.', 'skarsnuten-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/hemsedal.html', 1, 'Harahorn', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Harahorn', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Timber hotel in Hemsedal, set among the valley farms below the alpine slopes.', 'html/cities/norway/harahorn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/hemsedal.html', 2, 'Hotel Skogstad', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Skogstad', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Village hotel in Hemsedal, at the foot of the ski area and the river.', 'html/cities/norway/hotel-skogstad.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/hemsedal.html', 3, 'Skarsnuten Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Skarsnuten Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Mountaintop hotel above Hemsedal, with wide views over the valley.', 'html/cities/norway/skarsnuten-hotel.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/hemsedal.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/hemsedal.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/hemsedal.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -24792,7 +24792,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel K5 Levi</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Slope-side hotel in Levi, beside the gondola and the village centre.</p>
-                <a href="hotel-k5-levi.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/hotel-k5-levi.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -24800,7 +24800,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hullu Poro</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Lively hotel in Levi, with saunas along the main pedestrian street.</p>
-                <a href="hullu-poro.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/hullu-poro.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -24808,7 +24808,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Levi Hotel Spa</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Spa hotel in Levi, with pools looking toward the fell.</p>
-                <a href="levi-hotel-spa.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/levi-hotel-spa.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -24916,9 +24916,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/levi.html', 1, 'Hotel K5 Levi', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel K5 Levi', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Slope-side hotel in Levi, beside the gondola and the village centre.', 'hotel-k5-levi.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/levi.html', 2, 'Hullu Poro', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hullu Poro', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Lively hotel in Levi, with saunas along the main pedestrian street.', 'hullu-poro.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/levi.html', 3, 'Levi Hotel Spa', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Levi Hotel Spa', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Spa hotel in Levi, with pools looking toward the fell.', 'levi-hotel-spa.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/levi.html', 1, 'Hotel K5 Levi', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel K5 Levi', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Slope-side hotel in Levi, beside the gondola and the village centre.', 'html/cities/finland/hotel-k5-levi.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/levi.html', 2, 'Hullu Poro', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hullu Poro', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Lively hotel in Levi, with saunas along the main pedestrian street.', 'html/cities/finland/hullu-poro.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/levi.html', 3, 'Levi Hotel Spa', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Levi Hotel Spa', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Spa hotel in Levi, with pools looking toward the fell.', 'html/cities/finland/levi-hotel-spa.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/levi.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/levi.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/levi.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -25121,7 +25121,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Högfjällshotellet</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Ski hotel at Högfjället in Sälen, above the valley and the trail network.</p>
-                <a href="hogfjallshotellet.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/hogfjallshotellet.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -25129,7 +25129,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hundfjällshotellet</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Mountain hotel at Hundfjället in Sälen, close to the lifts and the forest trails.</p>
-                <a href="hundfjallshotellet.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/hundfjallshotellet.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -25137,7 +25137,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Tandådalens Fjällhotell</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Fell hotel in Tandådalen, in the Sälen ski area.</p>
-                <a href="tandadalens-fjallhotell.html" class="book-link">View & Book</a>
+                <a href="html/cities/sweden/tandadalens-fjallhotell.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -25245,9 +25245,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/salen.html', 1, 'Högfjällshotellet', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Högfjällshotellet', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Ski hotel at Högfjället in Sälen, above the valley and the trail network.', 'hogfjallshotellet.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/salen.html', 2, 'Hundfjällshotellet', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hundfjällshotellet', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Mountain hotel at Hundfjället in Sälen, close to the lifts and the forest trails.', 'hundfjallshotellet.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/salen.html', 3, 'Tandådalens Fjällhotell', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Tandådalens Fjällhotell', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Fell hotel in Tandådalen, in the Sälen ski area.', 'tandadalens-fjallhotell.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/salen.html', 1, 'Högfjällshotellet', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Högfjällshotellet', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Ski hotel at Högfjället in Sälen, above the valley and the trail network.', 'html/cities/sweden/hogfjallshotellet.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/salen.html', 2, 'Hundfjällshotellet', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hundfjällshotellet', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Mountain hotel at Hundfjället in Sälen, close to the lifts and the forest trails.', 'html/cities/sweden/hundfjallshotellet.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/salen.html', 3, 'Tandådalens Fjällhotell', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Tandådalens Fjällhotell', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Fell hotel in Tandådalen, in the Sälen ski area.', 'html/cities/sweden/tandadalens-fjallhotell.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/salen.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/salen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/salen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -25450,7 +25450,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Brøndums Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Historic hotel in Skagen, beside the art museum and the old town lanes.</p>
-                <a href="brondums-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/brondums-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -25458,7 +25458,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Color Hotel Skagen</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Harbour hotel in Skagen, a short walk from the fishing port and the yellow houses.</p>
-                <a href="color-hotel-skagen.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/color-hotel-skagen.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -25466,7 +25466,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Ruths Hotel</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Seaside hotel in Old Skagen, between the dunes and the beach.</p>
-                <a href="ruths-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/denmark/ruths-hotel.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -25574,9 +25574,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/skagen.html', 1, 'Brøndums Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Brøndums Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Historic hotel in Skagen, beside the art museum and the old town lanes.', 'brondums-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/skagen.html', 2, 'Color Hotel Skagen', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Color Hotel Skagen', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel in Skagen, a short walk from the fishing port and the yellow houses.', 'color-hotel-skagen.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/skagen.html', 3, 'Ruths Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ruths Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Seaside hotel in Old Skagen, between the dunes and the beach.', 'ruths-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/skagen.html', 1, 'Brøndums Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Brøndums Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Historic hotel in Skagen, beside the art museum and the old town lanes.', 'html/cities/denmark/brondums-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/skagen.html', 2, 'Color Hotel Skagen', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Color Hotel Skagen', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Harbour hotel in Skagen, a short walk from the fishing port and the yellow houses.', 'html/cities/denmark/color-hotel-skagen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/denmark/skagen.html', 3, 'Ruths Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ruths Hotel', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Seaside hotel in Old Skagen, between the dunes and the beach.', 'html/cities/denmark/ruths-hotel.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/denmark/skagen.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/denmark/skagen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/denmark/skagen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -25779,7 +25779,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Fleischer’s Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Historic hotel by Voss station, where the Bergen railway meets the lake.</p>
-                <a href="fleischers-hotel.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/fleischers-hotel.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -25787,7 +25787,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Park Hotel Vossevangen</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Lakeside hotel in Voss, beside the station and the town park.</p>
-                <a href="park-hotel-vossevangen.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/park-hotel-vossevangen.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -25795,7 +25795,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Voss</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Modern hotel in Voss, a short walk from the lake and the gondola.</p>
-                <a href="scandic-voss.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/scandic-voss.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -25903,9 +25903,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/voss.html', 1, 'Fleischer’s Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Fleischer’s Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Historic hotel by Voss station, where the Bergen railway meets the lake.', 'fleischers-hotel.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/voss.html', 2, 'Park Hotel Vossevangen', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Hotel Vossevangen', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Lakeside hotel in Voss, beside the station and the town park.', 'park-hotel-vossevangen.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/voss.html', 3, 'Scandic Voss', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Voss', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Modern hotel in Voss, a short walk from the lake and the gondola.', 'scandic-voss.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/voss.html', 1, 'Fleischer’s Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Fleischer’s Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Historic hotel by Voss station, where the Bergen railway meets the lake.', 'html/cities/norway/fleischers-hotel.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/voss.html', 2, 'Park Hotel Vossevangen', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Park Hotel Vossevangen', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Lakeside hotel in Voss, beside the station and the town park.', 'html/cities/norway/park-hotel-vossevangen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/voss.html', 3, 'Scandic Voss', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Voss', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Modern hotel in Voss, a short walk from the lake and the gondola.', 'html/cities/norway/scandic-voss.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/voss.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/voss.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/voss.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -26108,7 +26108,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Äkäshotelli</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Hotel in Äkäslompolo, at the foot of Ylläs fell and the ski trails.</p>
-                <a href="akashotelli.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/akashotelli.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -26116,7 +26116,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Lapland Hotels Ylläs</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Fell hotel in Ylläsjärvi, close to the gondola and the village.</p>
-                <a href="lapland-hotels-yllas.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/lapland-hotels-yllas.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -26124,7 +26124,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Ylläs Saaga</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Spa hotel in Äkäslompolo, with pools and views toward Ylläs.</p>
-                <a href="yllas-saaga.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/yllas-saaga.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -26232,9 +26232,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/yllas.html', 1, 'Äkäshotelli', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Äkäshotelli', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Hotel in Äkäslompolo, at the foot of Ylläs fell and the ski trails.', 'akashotelli.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/yllas.html', 2, 'Lapland Hotels Ylläs', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Ylläs', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Fell hotel in Ylläsjärvi, close to the gondola and the village.', 'lapland-hotels-yllas.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/yllas.html', 3, 'Ylläs Saaga', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ylläs Saaga', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Spa hotel in Äkäslompolo, with pools and views toward Ylläs.', 'yllas-saaga.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/yllas.html', 1, 'Äkäshotelli', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Äkäshotelli', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Hotel in Äkäslompolo, at the foot of Ylläs fell and the ski trails.', 'html/cities/finland/akashotelli.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/yllas.html', 2, 'Lapland Hotels Ylläs', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Lapland Hotels Ylläs', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Fell hotel in Ylläsjärvi, close to the gondola and the village.', 'html/cities/finland/lapland-hotels-yllas.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/yllas.html', 3, 'Ylläs Saaga', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Ylläs Saaga', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Spa hotel in Äkäslompolo, with pools and views toward Ylläs.', 'html/cities/finland/yllas-saaga.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/yllas.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/yllas.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/yllas.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -26437,7 +26437,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Rukatonttu</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="256">0.09 ETH / night</div>
                 <p>Village hotel in Ruka, a short walk from the slopes in Kuusamo.</p>
-                <a href="hotel-rukatonttu.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/hotel-rukatonttu.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -26445,7 +26445,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Ruka Peak</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Hilltop hotel at Ruka, above the village and the Kuusamo fells.</p>
-                <a href="ruka-peak.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/ruka-peak.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -26453,7 +26453,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Scandic Rukahovi</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Slope-side hotel in the centre of the Ruka-Kuusamo ski village.</p>
-                <a href="scandic-rukahovi.html" class="book-link">View & Book</a>
+                <a href="html/cities/finland/scandic-rukahovi.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -26561,9 +26561,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/ruka-kuusamo.html', 1, 'Hotel Rukatonttu', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Rukatonttu', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Village hotel in Ruka, a short walk from the slopes in Kuusamo.', 'hotel-rukatonttu.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/ruka-kuusamo.html', 2, 'Ruka Peak', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Ruka Peak', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Hilltop hotel at Ruka, above the village and the Kuusamo fells.', 'ruka-peak.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/ruka-kuusamo.html', 3, 'Scandic Rukahovi', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Rukahovi', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Slope-side hotel in the centre of the Ruka-Kuusamo ski village.', 'scandic-rukahovi.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/ruka-kuusamo.html', 1, 'Hotel Rukatonttu', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Hotel Rukatonttu', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'Village hotel in Ruka, a short walk from the slopes in Kuusamo.', 'html/cities/finland/hotel-rukatonttu.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/ruka-kuusamo.html', 2, 'Ruka Peak', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Ruka Peak', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Hilltop hotel at Ruka, above the village and the Kuusamo fells.', 'html/cities/finland/ruka-peak.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/finland/ruka-kuusamo.html', 3, 'Scandic Rukahovi', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Rukahovi', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Slope-side hotel in the centre of the Ruka-Kuusamo ski village.', 'html/cities/finland/scandic-rukahovi.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/ruka-kuusamo.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/ruka-kuusamo.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/finland/ruka-kuusamo.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -26766,7 +26766,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Durham</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Riverside hotel on the Wear, a short walk from Durham Cathedral and the market place.</p>
-                <a href="radisson-blu-durham.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/radisson-blu-durham.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -26774,7 +26774,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Hotel Indigo Durham</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Boutique stay in the Milburngate quarter, looking across the river toward the castle.</p>
-                <a href="hotel-indigo-durham.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/hotel-indigo-durham.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -26782,7 +26782,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Durham Marriott Royal County</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Victorian hotel on Old Elvet, across the Wear from the cathedral peninsula.</p>
-                <a href="durham-marriott-royal-county.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/durham-marriott-royal-county.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -26890,9 +26890,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/durham.html', 1, 'Radisson Blu Durham', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Durham', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Riverside hotel on the Wear, a short walk from Durham Cathedral and the market place.', 'radisson-blu-durham.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/durham.html', 2, 'Hotel Indigo Durham', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Indigo Durham', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Boutique stay in the Milburngate quarter, looking across the river toward the castle.', 'hotel-indigo-durham.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/durham.html', 3, 'Durham Marriott Royal County', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Durham Marriott Royal County', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Victorian hotel on Old Elvet, across the Wear from the cathedral peninsula.', 'durham-marriott-royal-county.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/durham.html', 1, 'Radisson Blu Durham', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Durham', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Riverside hotel on the Wear, a short walk from Durham Cathedral and the market place.', 'html/cities/northeast-england/radisson-blu-durham.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/durham.html', 2, 'Hotel Indigo Durham', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Indigo Durham', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Boutique stay in the Milburngate quarter, looking across the river toward the castle.', 'html/cities/northeast-england/hotel-indigo-durham.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/durham.html', 3, 'Durham Marriott Royal County', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Durham Marriott Royal County', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Victorian hotel on Old Elvet, across the Wear from the cathedral peninsula.', 'html/cities/northeast-england/durham-marriott-royal-county.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/durham.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/durham.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/durham.html', 'en', 'available-hotels', 'Available Hotels in {city}');
@@ -27095,7 +27095,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Grand Hotel</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Victorian hotel on the Headland, looking over the North Sea beside the old harbour.</p>
-                <a href="grand-hotel-hartlepool.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/grand-hotel-hartlepool.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -27103,7 +27103,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Marine Hotel</h3>
                 <div class="price" data-eth="0.05" data-btc="0.0008" data-usdt="142">0.05 ETH / night</div>
                 <p>Headland inn on Northgate, a short walk from the Heugh Battery and the sea wall.</p>
-                <a href="marine-hotel-hartlepool.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/marine-hotel-hartlepool.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -27111,7 +27111,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Premier Inn Hartlepool Marina</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Marina hotel beside the historic quay, HMS Trincomalee, and the harbour.</p>
-                <a href="premier-inn-hartlepool-marina.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/premier-inn-hartlepool-marina.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -27219,9 +27219,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/hartlepool.html', 1, 'Grand Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Victorian hotel on the Headland, looking over the North Sea beside the old harbour.', 'grand-hotel-hartlepool.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/hartlepool.html', 2, 'Marine Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Marine Hotel', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Headland inn on Northgate, a short walk from the Heugh Battery and the sea wall.', 'marine-hotel-hartlepool.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/hartlepool.html', 3, 'Premier Inn Hartlepool Marina', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Premier Inn Hartlepool Marina', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Marina hotel beside the historic quay, HMS Trincomalee, and the harbour.', 'premier-inn-hartlepool-marina.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/hartlepool.html', 1, 'Grand Hotel', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Grand Hotel', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Victorian hotel on the Headland, looking over the North Sea beside the old harbour.', 'html/cities/northeast-england/grand-hotel-hartlepool.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/hartlepool.html', 2, 'Marine Hotel', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Marine Hotel', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Headland inn on Northgate, a short walk from the Heugh Battery and the sea wall.', 'html/cities/northeast-england/marine-hotel-hartlepool.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/hartlepool.html', 3, 'Premier Inn Hartlepool Marina', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Premier Inn Hartlepool Marina', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Marina hotel beside the historic quay, HMS Trincomalee, and the harbour.', 'html/cities/northeast-england/premier-inn-hartlepool-marina.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/hartlepool.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/hartlepool.html', 'de', 'back-link-text', 'Zurück zur Buchung');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/hartlepool.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
@@ -27424,7 +27424,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Leaplish Waterside</h3>
                 <div class="price" data-eth="0.08" data-btc="0.0013" data-usdt="228">0.08 ETH / night</div>
                 <p>Lakeside lodges at Leaplish, on the shore of Kielder Water.</p>
-                <a href="leaplish-waterside.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/leaplish-waterside.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -27432,7 +27432,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>The Pheasant Inn</h3>
                 <div class="price" data-eth="0.06" data-btc="0.001" data-usdt="171">0.06 ETH / night</div>
                 <p>Country inn at Stannersburn, on the road into Kielder Forest.</p>
-                <a href="the-pheasant-inn.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/the-pheasant-inn.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -27440,7 +27440,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Kielder Lodges</h3>
                 <div class="price" data-eth="0.07" data-btc="0.0012" data-usdt="200">0.07 ETH / night</div>
                 <p>Forest lodges in Kielder village, beside the reservoir and the castle trail.</p>
-                <a href="kielder-lodges.html" class="book-link">View & Book</a>
+                <a href="html/cities/northeast-england/kielder-lodges.html" class="book-link">View & Book</a>
             </div>
         </div>
     </div>
@@ -27548,9 +27548,9 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/kielder-forest.html', 1, 'Leaplish Waterside', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Leaplish Waterside', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Lakeside lodges at Leaplish, on the shore of Kielder Water.', 'leaplish-waterside.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/kielder-forest.html', 2, 'The Pheasant Inn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Pheasant Inn', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Country inn at Stannersburn, on the road into Kielder Forest.', 'the-pheasant-inn.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/kielder-forest.html', 3, 'Kielder Lodges', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Kielder Lodges', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Forest lodges in Kielder village, beside the reservoir and the castle trail.', 'kielder-lodges.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/kielder-forest.html', 1, 'Leaplish Waterside', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Leaplish Waterside', NULL, '0.08 ETH / night', 0.08, 0.0013, 228, 'Lakeside lodges at Leaplish, on the shore of Kielder Water.', 'html/cities/northeast-england/leaplish-waterside.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/kielder-forest.html', 2, 'The Pheasant Inn', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'The Pheasant Inn', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Country inn at Stannersburn, on the road into Kielder Forest.', 'html/cities/northeast-england/the-pheasant-inn.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/northeast-england/kielder-forest.html', 3, 'Kielder Lodges', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Kielder Lodges', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Forest lodges in Kielder village, beside the reservoir and the castle trail.', 'html/cities/northeast-england/kielder-lodges.html', 'View & Book');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/kielder-forest.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/kielder-forest.html', 'de', 'back-link-text', 'Zurück zur Buchung');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/northeast-england/kielder-forest.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');

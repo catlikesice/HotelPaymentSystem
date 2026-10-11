@@ -106,9 +106,9 @@ test('curated Esbjerg extras are not replaced by the default breakfast or walkin
 });
 
 test('a longer property-page name uses the catalog hotel and its curated extras', () => {
-  const html = fs.readFileSync(path.join(root, 'hotel-dangleterre-copenhagen.html'), 'utf8');
+  const html = fs.readFileSync(path.join(root, 'html/cities/denmark/hotel-dangleterre-copenhagen.html'), 'utf8');
   const name = html.match(/data-property-name="([^"]+)"/)[1];
-  const offer = listAddons({ hotel: name, city: 'Copenhagen', page: 'hotel-dangleterre-copenhagen.html' });
+  const offer = listAddons({ hotel: name, city: 'Copenhagen', page: 'html/cities/denmark/hotel-dangleterre-copenhagen.html' });
   assert.equal(offer.hotel, 'Hotel d’Angleterre');
   assert.equal(offer.addons.filter((addon) => addon.id === 'breakfast').length, 1);
   assert.equal(offer.addons.some((addon) => addon.id === 'canal-tour'), true);
@@ -117,7 +117,7 @@ test('a longer property-page name uses the catalog hotel and its curated extras'
   const kempinski = listAddons({
     hotel: 'Grand Hotel Kempinski Riga',
     city: 'Riga',
-    page: 'grand-hotel-kempinski-riga.html'
+    page: 'html/cities/latvia/grand-hotel-kempinski-riga.html'
   });
   assert.equal(kempinski.hotel, 'Grand Hotel Kempinski');
   assert.equal(kempinski.addons.filter((addon) => addon.id === 'spa-access').length, 1);
@@ -125,14 +125,20 @@ test('a longer property-page name uses the catalog hotel and its curated extras'
   assert.equal(kempinski.addons.some((addon) => addon.id === 'art-nouveau'), true);
 });
 
-test('scandic-copenhagen.html shares Scandic Palace Hotel extras', () => {
+test('html/cities/denmark/scandic-copenhagen.html shares Scandic Palace Hotel extras', () => {
   const offer = listAddons({
+    hotel: 'Scandic Copenhagen',
+    city: 'Copenhagen',
+    page: 'html/cities/denmark/scandic-copenhagen.html'
+  });
+  assert.equal(offer.hotel, 'Scandic Palace Hotel');
+  assert.equal(offer.addons.some((addon) => addon.id === 'breakfast'), true);
+  const fromRootName = listAddons({
     hotel: 'Scandic Copenhagen',
     city: 'Copenhagen',
     page: 'scandic-copenhagen.html'
   });
-  assert.equal(offer.hotel, 'Scandic Palace Hotel');
-  assert.equal(offer.addons.some((addon) => addon.id === 'breakfast'), true);
+  assert.equal(fromRootName.hotel, 'Scandic Palace Hotel');
   assert.equal(offer.addons.some((addon) => addon.id === 'canal-tour'), true);
 });
 

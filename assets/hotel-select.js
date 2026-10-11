@@ -2,7 +2,7 @@
  * City listing pages keep their hotel cards. Book Now and View & Book open the
  * trip page, where that hotel can be selected and catalog add-ons upsold.
  * A link stays put only when it opens a hotel HTML file that has its own
- * booking screen. Missing files such as hotel-telegraaf-tallinn.html open
+ * booking screen. Missing files such as html/cities/estonia/hotel-telegraaf-tallinn.html open
  * the trip page instead.
  */
 (function () {

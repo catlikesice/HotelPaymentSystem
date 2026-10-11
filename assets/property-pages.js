@@ -1,5 +1,8 @@
 /**
  * Hotel HTML files that contain their own booking screen.
+ * Keys stay the file basename. Hotel pages live under html/cities/<region>/,
+ * and fileName() compares that last segment, so either the nested path or the
+ * old root name still counts as a property page.
  * A city-card link to any other file opens the trip page, including links
  * whose target is not on disk.
  */
