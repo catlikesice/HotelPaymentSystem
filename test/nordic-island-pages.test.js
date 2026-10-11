@@ -16,11 +16,11 @@ function loadCatalog() {
 }
 
 const DESTINATIONS = [
-  { city: 'Mariehamn', country: 'Åland Islands', url: 'mariehamn.html', hotels: ['Hotel Arkipelag', 'Park Alandia Hotel', 'Hotel Pommern'] },
-  { city: 'Nuuk', country: 'Greenland', url: 'nuuk.html', hotels: ['Hotel Hans Egede', 'Inuit Hotel', 'Hotel Nuuk'] },
-  { city: 'Ilulissat', country: 'Greenland', url: 'ilulissat.html', hotels: ['Hotel Arctic', 'Hotel Icefiord', 'Hotel Hvide Falk'] },
-  { city: 'Tórshavn', country: 'Faroe Islands', url: 'tórshavn.html', hotels: ['Hotel Føroyar', 'Hotel Hafnia', 'Hotel Streym'] },
-  { city: 'Longyearbyen', country: 'Svalbard', url: 'longyearbyen.html', hotels: ['Radisson Blu Polar Hotel Spitsbergen', 'Funken Lodge', 'Basecamp Hotel'] }
+  { city: 'Mariehamn', country: 'Åland Islands', url: 'html/cities/aland-islands/mariehamn.html', hotels: ['Hotel Arkipelag', 'Park Alandia Hotel', 'Hotel Pommern'] },
+  { city: 'Nuuk', country: 'Greenland', url: 'html/cities/greenland/nuuk.html', hotels: ['Hotel Hans Egede', 'Inuit Hotel', 'Hotel Nuuk'] },
+  { city: 'Ilulissat', country: 'Greenland', url: 'html/cities/greenland/ilulissat.html', hotels: ['Hotel Arctic', 'Hotel Icefiord', 'Hotel Hvide Falk'] },
+  { city: 'Tórshavn', country: 'Faroe Islands', url: 'html/cities/faroe-islands/tórshavn.html', hotels: ['Hotel Føroyar', 'Hotel Hafnia', 'Hotel Streym'] },
+  { city: 'Longyearbyen', country: 'Svalbard', url: 'html/cities/svalbard/longyearbyen.html', hotels: ['Radisson Blu Polar Hotel Spitsbergen', 'Funken Lodge', 'Basecamp Hotel'] }
 ];
 
 test('search catalog includes Åland, Greenland, Faroe Island, and Svalbard cities', () => {
@@ -75,7 +75,7 @@ test('Svalbard hotels can be booked from Longyearbyen and search', () => {
   assert.equal(hotels.length, 3);
   hotels.forEach((hotel) => {
     assert.equal(hotel.country, 'Svalbard');
-    assert.notEqual(hotel.url, 'longyearbyen.html', hotel.name + ' should open a hotel booking page');
+    assert.notEqual(hotel.url, 'html/cities/svalbard/longyearbyen.html', hotel.name + ' should open a hotel booking page');
     const filePath = path.join(root, hotel.url);
     assert.ok(fs.existsSync(filePath), hotel.url + ' should exist');
     const html = fs.readFileSync(filePath, 'utf8');

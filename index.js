@@ -30,8 +30,9 @@ app.use('/api/search', searchRouter);
 app.use('/api/hotel-addons', hotelAddonsRouter);
 app.use('/api/contact', contactRouter);
 
-// Restored city listing pages are files in the site root. If one is missing,
-// serve the copy stored in docs/sql/city-pages.sql before the static handler.
+// City listing pages live under html/cities/<region>/. A request for the old
+// root filename redirects there. If the file is missing, serve the copy stored
+// in docs/sql/city-pages.sql before the static handler.
 app.use(serveCityPage);
 
 // Serve the static multi-page site alongside the API.

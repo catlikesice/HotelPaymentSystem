@@ -44,14 +44,14 @@ test('Esbjerg hotel selection includes that hotel’s extras and the city upsell
 });
 
 test('a different hotel in the same city gets its own stay extras', () => {
-  const scandic = listAddons({ hotel: 'Scandic Olympic', page: 'esbjerg.html' });
+  const scandic = listAddons({ hotel: 'Scandic Olympic', page: 'html/cities/denmark/esbjerg.html' });
   assert.equal(scandic.addons.some((addon) => addon.id === 'late-checkout'), false);
   assert.equal(scandic.addons.find((addon) => addon.id === 'breakfast').label, 'Breakfast buffet');
   assert.equal(scandic.addons.some((addon) => addon.id === 'maritime-museum'), true);
 });
 
 test('the trip offer lists Esbjerg hotels and keeps the Britannia nightly rate', () => {
-  const trip = tripOffer({ hotel: 'Hotel Britannia', city: 'Esbjerg', page: 'esbjerg.html' });
+  const trip = tripOffer({ hotel: 'Hotel Britannia', city: 'Esbjerg', page: 'html/cities/denmark/esbjerg.html' });
   assert.deepEqual(trip.hotels.map((hotel) => hotel.name), [
     'Hotel Britannia',
     'Scandic Olympic',
@@ -81,7 +81,7 @@ test('an unknown city does not invent a trip', () => {
 });
 
 test('a hotel with no hand-written extras still has stay, experience, and transport', () => {
-  const offer = listAddons({ hotel: 'Motel One Glasgow', city: 'Glasgow', page: 'glasgow.html' });
+  const offer = listAddons({ hotel: 'Motel One Glasgow', city: 'Glasgow', page: 'html/cities/scotland/glasgow.html' });
   assert.equal(offer.hotel, 'Motel One Glasgow');
   const categories = new Set(offer.addons.map((addon) => addon.category));
   assert.ok(categories.has('stay'));
