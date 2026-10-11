@@ -190,6 +190,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Hartlepool",
+      "city": "Hartlepool",
+      "country": "Northeast England",
+      "url": "html/cities/northeast-england/hartlepool.html",
+      "description": "Browse hotels in Hartlepool, Northeast England."
+    },
+    {
+      "type": "city",
       "name": "Helsinki",
       "city": "Helsinki",
       "country": "Finland",
@@ -259,6 +267,14 @@ window.SEARCH_CATALOG = {
       "country": "Iceland",
       "url": "html/cities/iceland/keflavík.html",
       "description": "Browse hotels in Keflavík, Iceland."
+    },
+    {
+      "type": "city",
+      "name": "Kielder Forest",
+      "city": "Kielder Forest",
+      "country": "Northeast England",
+      "url": "html/cities/northeast-england/kielder-forest.html",
+      "description": "Browse hotels in Kielder Forest, Northeast England."
     },
     {
       "type": "city",
@@ -1447,6 +1463,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Grand Hotel",
+      "city": "Hartlepool",
+      "country": "Northeast England",
+      "url": "grand-hotel-hartlepool.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Victorian hotel on the Headland, looking over the North Sea beside the old harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "Marine Hotel",
+      "city": "Hartlepool",
+      "country": "Northeast England",
+      "url": "marine-hotel-hartlepool.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Headland inn on Northgate, a short walk from the Heugh Battery and the sea wall."
+    },
+    {
+      "type": "hotel",
+      "name": "Premier Inn Hartlepool Marina",
+      "city": "Hartlepool",
+      "country": "Northeast England",
+      "url": "premier-inn-hartlepool-marina.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Marina hotel beside the historic quay, HMS Trincomalee, and the harbour."
+    },
+    {
+      "type": "hotel",
       "name": "Hotel Helka",
       "city": "Helsinki",
       "country": "Finland",
@@ -1708,6 +1757,39 @@ window.SEARCH_CATALOG = {
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
       "description": "Airport hotel beside Keflavík International Airport, convenient for early flights and the Reykjanes coast."
+    },
+    {
+      "type": "hotel",
+      "name": "Leaplish Waterside",
+      "city": "Kielder Forest",
+      "country": "Northeast England",
+      "url": "leaplish-waterside.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Lakeside lodges at Leaplish, on the shore of Kielder Water."
+    },
+    {
+      "type": "hotel",
+      "name": "The Pheasant Inn",
+      "city": "Kielder Forest",
+      "country": "Northeast England",
+      "url": "the-pheasant-inn.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Country inn at Stannersburn, on the road into Kielder Forest."
+    },
+    {
+      "type": "hotel",
+      "name": "Kielder Lodges",
+      "city": "Kielder Forest",
+      "country": "Northeast England",
+      "url": "kielder-lodges.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Forest lodges in Kielder village, beside the reservoir and the castle trail."
     },
     {
       "type": "hotel",
