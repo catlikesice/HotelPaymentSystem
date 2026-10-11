@@ -4,7 +4,7 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. `lib/search-db.js` loads that file, the same way `lib/city-pages.js` loads `city-pages.sql`.
 
-The static catalog is 87 cities and 244 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (117 cities, 274 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
+The static catalog is 87 cities and 244 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (118 cities, 275 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
 City listing files are grouped by region under `html/cities/`. Aarhus is `html/cities/denmark/aarhus.html`. The region folder is the country name in lowercase, with accents removed and spaces turned into hyphens (`northeast-england`, `aland-islands`, `faroe-islands`). Search result links use that path. A request for the old root filename, such as `/aarhus.html`, redirects to the file in its region folder.
 
@@ -228,6 +228,7 @@ Hotels that only appear on a city page are the other case. They have a `page_url
 | Broadford | Scotland | Broadford Bay Hotel |
 | Armadale | Scotland | Armadale Pier Hotel |
 | Lochmaddy | Scotland | Lochmaddy Harbour Hotel |
+| Brodick | Scotland | Brodick Ferry Hotel |
 
 The results card still renders. When `url` is null and the hotel's `cityUrl` is also null, the card says the place has no separate page. When the hotel has no page but the city does, the card links to `cityUrl`.
 
