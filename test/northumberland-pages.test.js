@@ -20,13 +20,13 @@ const DESTINATIONS = [
   {
     city: 'Alnwick',
     query: 'alnwick',
-    url: 'alnwick.html',
+    url: 'html/cities/northeast-england/alnwick.html',
     hotels: ['The Cookie Jar', 'The Oaks Hotel', 'White Swan Hotel']
   },
   {
     city: 'Northumberland National Park',
     query: 'northumberland national park',
-    url: 'northumberland-national-park.html',
+    url: 'html/cities/northeast-england/northumberland-national-park.html',
     hotels: ['Otterburn Castle', 'The Tankerville Arms', 'Twice Brewed Inn']
   }
 ];

@@ -21,7 +21,7 @@ test('city pages in SQL that show a language bar load the shared preferences scr
   });
 
   assert.ok(listings.length > 0, 'expected city booking pages with a standalone language bar');
-  assert.ok(listings.some((page) => page.page_url === 'tallinn.html'));
+  assert.ok(listings.some((page) => page.page_url === 'html/cities/estonia/tallinn.html'));
 
   listings.forEach((page) => {
     const filePath = path.join(root, page.page_url);

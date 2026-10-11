@@ -6,6 +6,8 @@ The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite
 
 The static catalog is 85 cities and 238 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (115 cities, 268 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
+City listing files are grouped by region under `html/cities/`. Aarhus is `html/cities/denmark/aarhus.html`. The region folder is the country name in lowercase, with accents removed and spaces turned into hyphens (`northeast-england`, `aland-islands`, `faroe-islands`). Search result links use that path. A request for the old root filename, such as `/aarhus.html`, redirects to the file in its region folder.
+
 Šiauliai, the Odense hotels, and Hotel d’Angleterre are in the static catalog rather than the pageless list. The Šiauliai city listing is `šiauliai.htm`. The Odense city listing is `odense.html`. Hotel d’Angleterre uses `hotel-dangleterre-copenhagen.html`. Bauska, Latvia is bookable from `bauska.html`. Hotel Bauska (`hotel-bauska.html`) and Bauska Castle Hotel (`bauska-castle-hotel.html`) continue to checkout. The same listing documents are stored in `city-pages.sql`.
 
 Abisko, Lillehammer, Portree, Oban, Fort William, Stornoway, and Lerwick are catalog cities. Their listing files are `abisko.html`, `lillehammer.html`, `portree.html`, `oban.html`, `fort-william.html`, `stornoway.html`, and `lerwick.html`, and the same documents are stored in `city-pages.sql`.
@@ -43,7 +45,7 @@ A blank `q` returns no rows. `search.js` treats an empty query as `{ "cities": [
 | --- | --- | --- |
 | `name` | `name` and `city` | Same string on a city row |
 | `country` | `country` | Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Åland Islands, Greenland, Faroe Islands, Svalbard |
-| `page_url` | `url` | Includes `.html`, for example `aarhus.html`. That document is a file in the repository root, and the same document is stored in `city-pages.sql`. NULL when the place has no city page |
+| `page_url` | `url` | Path under `html/cities/<region>/`, for example `html/cities/denmark/aarhus.html`. That document is stored in `city-pages.sql` as well. NULL when the place has no city page |
 | `description` | `description` | |
 | `sort_order` | array order | `Array.filter` keeps catalog order; `ORDER BY sort_order` does the same |
 | `name_key` | | Homepage compare key. See normalization |
@@ -63,7 +65,7 @@ A blank `q` returns no rows. `search.js` treats an empty query as `{ "cities": [
 | `label_key` | | Normalized `name + " — " + city` (em dash, U+2014) |
 | `search_text` | | Results haystack |
 
-City listing pages also show BTC and USDT amounts, hotel chains, booking links, and translated placeholder copy. Those facts are columns in [`city-pages.sql`](city-pages.sql) (`city_page_hotels`, `city_page_strings`). They are not columns in this search schema. The city HTML files are in the repository at `page_url`. `lib/city-pages.js` loads `city-pages.sql`, and the server answers `page_url` from the HTML file.
+City listing pages also show BTC and USDT amounts, hotel chains, booking links, and translated placeholder copy. Those facts are columns in [`city-pages.sql`](city-pages.sql) (`city_page_hotels`, `city_page_strings`). They are not columns in this search schema. The city HTML files are in the repository at `page_url`, under `html/cities/<region>/`. `lib/city-pages.js` loads `city-pages.sql`, and the server answers `page_url` from the HTML file. A root filename such as `aarhus.html` redirects to that path.
 
 ## Normalization
 
@@ -143,7 +145,7 @@ Response shape, one object per row, same keys the cards already read:
       "name": "Aarhus",
       "city": "Aarhus",
       "country": "Denmark",
-      "url": "aarhus.html",
+      "url": "html/cities/denmark/aarhus.html",
       "description": "Browse hotels in Aarhus, Denmark."
     }
   ],
@@ -153,8 +155,8 @@ Response shape, one object per row, same keys the cards already read:
       "name": "Hotel Royal Aarhus",
       "city": "Aarhus",
       "country": "Denmark",
-      "url": "aarhus.html",
-      "cityUrl": "aarhus.html",
+      "url": "hotel-royal-aarhus.html",
+      "cityUrl": "html/cities/denmark/aarhus.html",
       "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
       "price": "0.08 ETH / night",
       "priceEth": 0.08,

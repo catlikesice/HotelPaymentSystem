@@ -19,43 +19,43 @@ const DESTINATIONS = [
   {
     city: 'Abisko',
     country: 'Sweden',
-    url: 'abisko.html',
+    url: 'html/cities/sweden/abisko.html',
     hotels: ['Abisko Mountain Lodge', 'Björkliden Mountain Lodge', 'STF Abisko Turiststation']
   },
   {
     city: 'Lillehammer',
     country: 'Norway',
-    url: 'lillehammer.html',
+    url: 'html/cities/norway/lillehammer.html',
     hotels: ['Mølla Hotell', 'Radisson Blu Lillehammer Hotel', 'Scandic Lillehammer']
   },
   {
     city: 'Portree',
     country: 'Scotland',
-    url: 'portree.html',
+    url: 'html/cities/scotland/portree.html',
     hotels: ['Bosville Hotel', 'Cuillin Hills Hotel', 'The Royal Hotel']
   },
   {
     city: 'Oban',
     country: 'Scotland',
-    url: 'oban.html',
+    url: 'html/cities/scotland/oban.html',
     hotels: ['Manor House Hotel', 'Oban Bay Hotel', 'Perle Oban Hotel']
   },
   {
     city: 'Fort William',
     country: 'Scotland',
-    url: 'fort-william.html',
+    url: 'html/cities/scotland/fort-william.html',
     hotels: ['Alexandra Hotel', 'Ben Nevis Lodge', 'The Lime Tree Hotel']
   },
   {
     city: 'Stornoway',
     country: 'Scotland',
-    url: 'stornoway.html',
+    url: 'html/cities/scotland/stornoway.html',
     hotels: ['Cabarfeidh Hotel', 'Caladh Inn', 'Lews Castle Lodge']
   },
   {
     city: 'Lerwick',
     country: 'Scotland',
-    url: 'lerwick.html',
+    url: 'html/cities/scotland/lerwick.html',
     hotels: ['Grand Hotel Lerwick', 'Lerwick Harbour House', 'Shetland Hotel']
   }
 ];

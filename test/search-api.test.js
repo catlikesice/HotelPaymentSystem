@@ -44,17 +44,17 @@ test('every catalog hotel opens its own page', async () => {
   assert.equal(body.hotels.length, 1);
   assert.equal(body.hotels[0].name, 'CABINN City');
   assert.equal(body.hotels[0].city, 'Copenhagen');
-  assert.equal(body.hotels[0].cityUrl, 'copenhagen.html');
-  assert.notEqual(body.hotels[0].url, 'copenhagen.html');
+  assert.equal(body.hotels[0].cityUrl, 'html/cities/denmark/copenhagen.html');
+  assert.notEqual(body.hotels[0].url, 'html/cities/denmark/copenhagen.html');
   assert.equal(fs.existsSync(path.join(root, body.hotels[0].url)), true);
-  assert.equal(fs.existsSync(path.join(root, 'copenhagen.html')), true);
+  assert.equal(fs.existsSync(path.join(root, 'html/cities/denmark/copenhagen.html')), true);
   const page = fs.readFileSync(path.join(root, body.hotels[0].url), 'utf8');
   assert.match(page, /class="hotel-detail"/);
   assert.match(page, /site-preferences\.js/);
   assert.match(page, /language-switcher|class="site-nav"/);
-  const copenhagen = getCityPage('copenhagen.html');
+  const copenhagen = getCityPage('html/cities/denmark/copenhagen.html');
   assert.ok(copenhagen);
-  assert.ok(hotelsFor('copenhagen.html').some((hotel) => hotel.name === 'CABINN City' && hotel.book_url === body.hotels[0].url));
+  assert.ok(hotelsFor('html/cities/denmark/copenhagen.html').some((hotel) => hotel.name === 'CABINN City' && hotel.book_url === body.hotels[0].url));
 });
 
 test('hotels with a dedicated page keep that page', async () => {
@@ -99,7 +99,7 @@ test('places with no HTML page are returned from SQL', async () => {
 
 test('accent-folded city names still match', async () => {
   const body = await searchFor('reykjavik');
-  assert.ok(body.cities.some((city) => city.name === 'Reykjavík' && city.url === 'reykjavík.html'));
+  assert.ok(body.cities.some((city) => city.name === 'Reykjavík' && city.url === 'html/cities/iceland/reykjavík.html'));
 });
 
 test('plain ASCII queries match letters SQL cannot unaccent on its own', async () => {
@@ -208,27 +208,27 @@ test('other named places without pages are searchable', async () => {
 });
 
 test('pages missing from the catalog are returned from SQL', async () => {
-  assert.equal(fs.existsSync(path.join(root, 'šiauliai.htm')), true);
-  assert.equal(getCityPage('šiauliai.htm').city_name, 'Šiauliai');
+  assert.equal(fs.existsSync(path.join(root, 'html/cities/lithuania/šiauliai.htm')), true);
+  assert.equal(getCityPage('html/cities/lithuania/šiauliai.htm').city_name, 'Šiauliai');
   const siauliai = await searchFor('Siauliai');
   assert.deepEqual(siauliai.cities.map((city) => city.name), ['Šiauliai']);
-  assert.equal(siauliai.cities[0].url, 'šiauliai.htm');
+  assert.equal(siauliai.cities[0].url, 'html/cities/lithuania/šiauliai.htm');
   assert.equal(siauliai.cities[0].country, 'Lithuania');
   assert.deepEqual(siauliai.hotels.map((hotel) => hotel.name), ['Park Inn Šiauliai', 'Old Town Boutique']);
   siauliai.hotels.forEach((hotel) => {
-    assert.notEqual(hotel.url, 'šiauliai.htm');
+    assert.notEqual(hotel.url, 'html/cities/lithuania/šiauliai.htm');
     assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
-    assert.equal(hotel.cityUrl, 'šiauliai.htm');
+    assert.equal(hotel.cityUrl, 'html/cities/lithuania/šiauliai.htm');
   });
 
   const odense = await searchFor('Odense');
-  assert.ok(odense.cities.some((city) => city.name === 'Odense' && city.url === 'odense.html'));
+  assert.ok(odense.cities.some((city) => city.name === 'Odense' && city.url === 'html/cities/denmark/odense.html'));
   assert.deepEqual(
     odense.hotels.map((hotel) => hotel.name),
     ['Hotel Odeon', 'First Hotel Grand', 'Comwell H.C. Andersen Odense']
   );
   odense.hotels.forEach((hotel) => {
-    assert.notEqual(hotel.url, 'odense.html');
+    assert.notEqual(hotel.url, 'html/cities/denmark/odense.html');
     assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
     assert.equal(hotel.city, 'Odense');
   });
@@ -243,21 +243,21 @@ test('pages missing from the catalog are returned from SQL', async () => {
 });
 
 test('Bauska, Latvia can be booked from search', async () => {
-  assert.equal(fs.existsSync(path.join(root, 'bauska.html')), true);
-  const cityHtml = fs.readFileSync(path.join(root, 'bauska.html'), 'utf8');
-  assert.equal(cityHtml, getCityPage('bauska.html').html);
+  assert.equal(fs.existsSync(path.join(root, 'html/cities/latvia/bauska.html')), true);
+  const cityHtml = fs.readFileSync(path.join(root, 'html/cities/latvia/bauska.html'), 'utf8');
+  assert.equal(cityHtml, getCityPage('html/cities/latvia/bauska.html').html);
   assert.match(cityHtml, /data-city="Bauska"/);
   assert.match(cityHtml, /href="hotel-bauska\.html"/);
   assert.match(cityHtml, /href="bauska-castle-hotel\.html"/);
   assert.deepEqual(
-    hotelsFor('bauska.html').map((hotel) => hotel.book_url),
+    hotelsFor('html/cities/latvia/bauska.html').map((hotel) => hotel.book_url),
     ['hotel-bauska.html', 'bauska-castle-hotel.html']
   );
 
   const body = await searchFor('Bauska');
   assert.deepEqual(body.cities.map((city) => city.name), ['Bauska']);
   assert.equal(body.cities[0].country, 'Latvia');
-  assert.equal(body.cities[0].url, 'bauska.html');
+  assert.equal(body.cities[0].url, 'html/cities/latvia/bauska.html');
   assert.deepEqual(body.hotels.map((hotel) => hotel.name), ['Hotel Bauska', 'Bauska Castle Hotel']);
 
   for (const hotel of body.hotels) {

@@ -19,7 +19,7 @@ function loadCatalog() {
 const DESTINATION = {
   city: 'Durham',
   query: 'durham',
-  url: 'durham.html',
+  url: 'html/cities/northeast-england/durham.html',
   hotels: ['Radisson Blu Durham', 'Hotel Indigo Durham', 'Durham Marriott Royal County']
 };
 

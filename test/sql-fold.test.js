@@ -31,7 +31,7 @@ test('sqlite3 can search the file without a JavaScript normalizer', () => {
   assert.match(output, /Hotel Royal Aarhus/);
   assert.match(output, /city\|Nida\|Nida\|Lithuania\|/);
   assert.match(output, /Hotel Nida Marina/);
-  assert.match(output, /city\|\d+\|\|Reykjavík\|reykjavík\.html/);
+  assert.match(output, /city\|\d+\|\|Reykjavík\|html\/cities\/iceland\/reykjavík\.html/);
 });
 
 test('fold_map matches the JavaScript normalizer', () => {
