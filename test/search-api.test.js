@@ -61,7 +61,7 @@ test('hotels with a dedicated page keep that page', async () => {
   const body = await searchFor('kempinski');
   assert.equal(body.cities.length, 0);
   assert.equal(body.hotels.length, 1);
-  assert.equal(body.hotels[0].url, 'grand-hotel-kempinski-riga.html');
+  assert.equal(body.hotels[0].url, 'html/cities/latvia/grand-hotel-kempinski-riga.html');
   assert.equal(fs.existsSync(path.join(root, body.hotels[0].url)), true);
 });
 
@@ -170,7 +170,7 @@ test('Lochmaddy is returned with a Uist search', async () => {
   assert.ok(hotel, 'Lochmaddy Harbour Hotel should match Uist');
   assert.equal(hotel.city, 'Lochmaddy');
   assert.equal(hotel.country, 'Scotland');
-  assert.equal(hotel.url, 'lochmaddy-harbour-hotel.html');
+  assert.equal(hotel.url, 'html/cities/scotland/lochmaddy-harbour-hotel.html');
   assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
 });
 
@@ -180,7 +180,7 @@ test('Brodick is returned with an Isle of Arran search', async () => {
   assert.ok(hotel, 'Brodick Ferry Hotel should match Isle of Arran');
   assert.equal(hotel.city, 'Brodick');
   assert.equal(hotel.country, 'Scotland');
-  assert.equal(hotel.url, 'brodick-ferry-hotel.html');
+  assert.equal(hotel.url, 'html/cities/scotland/brodick-ferry-hotel.html');
   assert.equal(hotel.cityUrl, null);
   assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
   assert.equal(fs.existsSync(path.join(root, 'brodick.html')), false);
@@ -247,12 +247,12 @@ test('pages missing from the catalog are returned from SQL', async () => {
     assert.equal(hotel.city, 'Odense');
   });
 
-  assert.equal(fs.existsSync(path.join(root, 'hotel-dangleterre-copenhagen.html')), true);
+  assert.equal(fs.existsSync(path.join(root, 'html/cities/denmark/hotel-dangleterre-copenhagen.html')), true);
   const angleterre = await searchFor('Angleterre');
   assert.equal(angleterre.hotels.length, 1);
   assert.equal(angleterre.hotels[0].name, 'Hotel d’Angleterre');
   assert.equal(angleterre.hotels[0].city, 'Copenhagen');
-  assert.equal(angleterre.hotels[0].url, 'hotel-dangleterre-copenhagen.html');
+  assert.equal(angleterre.hotels[0].url, 'html/cities/denmark/hotel-dangleterre-copenhagen.html');
   assert.equal(angleterre.hotels[0].price, '0.12 ETH / night');
 });
 
@@ -261,11 +261,11 @@ test('Bauska, Latvia can be booked from search', async () => {
   const cityHtml = fs.readFileSync(path.join(root, 'html/cities/latvia/bauska.html'), 'utf8');
   assert.equal(cityHtml, getCityPage('html/cities/latvia/bauska.html').html);
   assert.match(cityHtml, /data-city="Bauska"/);
-  assert.match(cityHtml, /href="hotel-bauska\.html"/);
-  assert.match(cityHtml, /href="bauska-castle-hotel\.html"/);
+  assert.match(cityHtml, /href="html\/cities\/latvia\/hotel-bauska\.html"/);
+  assert.match(cityHtml, /href="html\/cities\/latvia\/bauska-castle-hotel\.html"/);
   assert.deepEqual(
     hotelsFor('html/cities/latvia/bauska.html').map((hotel) => hotel.book_url),
-    ['hotel-bauska.html', 'bauska-castle-hotel.html']
+    ['html/cities/latvia/hotel-bauska.html', 'html/cities/latvia/bauska-castle-hotel.html']
   );
 
   const body = await searchFor('Bauska');

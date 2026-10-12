@@ -121,63 +121,63 @@ INSERT INTO hotel_addons (
   category, label, description, detail_line, price_eth, billing, icon, sort_order
 ) VALUES
   (
-    'longyearbyen:funken-lodge:spa-access', 'spa-access', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'funken-lodge.html',
+    'longyearbyen:funken-lodge:spa-access', 'spa-access', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/funken-lodge.html',
     'stay', 'Lodge spa evening',
     'Sauna and relaxation room after glacier hikes or snowmobile days.',
     'Each evening of the stay',
     0.012, 'per-night', 'spa', 10
   ),
   (
-    'longyearbyen:funken-lodge:funken-dinner', 'funken-dinner', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'funken-lodge.html',
+    'longyearbyen:funken-lodge:funken-dinner', 'funken-dinner', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/funken-lodge.html',
     'stay', 'Funken set dinner',
     'Three-course polar dinner with wine pairing in the lodge restaurant.',
     'Each evening of the stay',
     0.03, 'per-night', 'utensils', 20
   ),
   (
-    'longyearbyen:funken-lodge:snowmobile', 'snowmobile', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'funken-lodge.html',
+    'longyearbyen:funken-lodge:snowmobile', 'snowmobile', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/funken-lodge.html',
     'experience', 'Guided snowmobile day trip',
     'Full-day outing across the plateau with a certified guide, thermal suit, and hot lunch in the field.',
     'Full day · guide and thermal suit',
     0.08, 'per-stay', 'ticket', 100
   ),
   (
-    'longyearbyen:basecamp-hotel:packed-lunch', 'packed-lunch', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'basecamp-hotel-svalbard.html',
+    'longyearbyen:basecamp-hotel:packed-lunch', 'packed-lunch', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/basecamp-hotel-svalbard.html',
     'stay', 'Expedition packed lunch',
     'Thermos coffee and trail lunch packed each morning for glacier walks or town rambles.',
     'Packed each morning',
     0.01, 'per-night', 'utensils', 10
   ),
   (
-    'longyearbyen:basecamp-hotel:boat-safari', 'boat-safari', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'basecamp-hotel-svalbard.html',
+    'longyearbyen:basecamp-hotel:boat-safari', 'boat-safari', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/basecamp-hotel-svalbard.html',
     'experience', 'Isfjorden boat safari',
     'Half-day cruise among glaciers and bird cliffs, with a chance to spot seals, whales, and Arctic wildlife.',
     'Half day · glacier route',
     0.055, 'per-stay', 'waves', 100
   ),
   (
-    'longyearbyen:basecamp-hotel:museum-pass', 'museum-pass', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'basecamp-hotel-svalbard.html',
+    'longyearbyen:basecamp-hotel:museum-pass', 'museum-pass', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/basecamp-hotel-svalbard.html',
     'experience', 'Svalbard Museum visit',
     'Admission to the Svalbard Museum, covering mining history, polar exploration, and High Arctic nature.',
     'Flexible entry',
     0.008, 'per-stay', 'museum', 110
   ),
   (
-    'longyearbyen:radisson-blu:arctic-tasting', 'arctic-tasting', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'radisson-blu-polar-spitsbergen.html',
+    'longyearbyen:radisson-blu:arctic-tasting', 'arctic-tasting', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html',
     'stay', 'Arctic tasting menu',
     'Seasonal Svalbard menu with locally landed fish, cloudberries, and polar-night desserts.',
     'Each evening of the stay',
     0.035, 'per-night', 'utensils', 10
   ),
   (
-    'longyearbyen:radisson-blu:aurora-tour', 'aurora-tour', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'radisson-blu-polar-spitsbergen.html',
+    'longyearbyen:radisson-blu:aurora-tour', 'aurora-tour', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html',
     'experience', 'Northern lights minibus tour',
     'Evening outing with a local guide to dark-sky valleys around Longyearbyen, with hot drinks and photo stops.',
     'Evening · guide and hot drinks',
     0.04, 'per-stay', 'ticket', 100
   ),
   (
-    'longyearbyen:radisson-blu:airport-transfer', 'airport-transfer', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'radisson-blu-polar-spitsbergen.html',
+    'longyearbyen:radisson-blu:airport-transfer', 'airport-transfer', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html',
     'transport', 'Svalbard Airport transfer',
     'Shared shuttle from LYR into Longyearbyen and back on departure day.',
     'Arrival and departure',
@@ -191,42 +191,42 @@ INSERT INTO hotel_addons (
     0.02763157894736842, 'per-stay', 'ticket', 120
   ),
   (
-    'riga:wellton:thermal-spa', 'thermal-spa', 'hotel', 'Wellton Riverside Riga', 'Riga', 'Latvia', 'wellton-riverside-riga.html',
+    'riga:wellton:thermal-spa', 'thermal-spa', 'hotel', 'Wellton Riverside Riga', 'Riga', 'Latvia', 'html/cities/latvia/wellton-riverside-riga.html',
     'stay', 'Spa & Thermal zone access',
     'Unlimited use of saunas, steam room, and hydrotherapy pool throughout the stay.',
     'Each day of the stay',
     0.008, 'per-night', 'spa', 10
   ),
   (
-    'riga:wellton:wine-tasting', 'wine-tasting', 'hotel', 'Wellton Riverside Riga', 'Riga', 'Latvia', 'wellton-riverside-riga.html',
+    'riga:wellton:wine-tasting', 'wine-tasting', 'hotel', 'Wellton Riverside Riga', 'Riga', 'Latvia', 'html/cities/latvia/wellton-riverside-riga.html',
     'stay', 'Latvian wine tasting flight',
     'Sommelier-guided tasting of boutique Latvian wines served in the Sky Bar.',
     'One sitting',
     0.02, 'per-night', 'utensils', 20
   ),
   (
-    'riga:wellton:river-cruise', 'river-cruise', 'hotel', 'Wellton Riverside Riga', 'Riga', 'Latvia', 'wellton-riverside-riga.html',
+    'riga:wellton:river-cruise', 'river-cruise', 'hotel', 'Wellton Riverside Riga', 'Riga', 'Latvia', 'html/cities/latvia/wellton-riverside-riga.html',
     'experience', 'Daugava evening river cruise',
     'Private two-hour sunset cruise with sommelier-selected wines and a local mezze platter.',
     '2 hours · evening departure',
     0.04, 'per-stay', 'waves', 100
   ),
   (
-    'riga:kempinski:spa-access', 'spa-access', 'hotel', 'Grand Hotel Kempinski Riga', 'Riga', 'Latvia', 'grand-hotel-kempinski-riga.html',
+    'riga:kempinski:spa-access', 'spa-access', 'hotel', 'Grand Hotel Kempinski Riga', 'Riga', 'Latvia', 'html/cities/latvia/grand-hotel-kempinski-riga.html',
     'stay', 'Kempinski The Spa access',
     'Unlimited daily access to thermal suites, saunas, and the relaxation pool for registered guests.',
     'Each day of the stay',
     0.01, 'per-night', 'spa', 10
   ),
   (
-    'riga:kempinski:rooftop-tasting', 'rooftop-tasting', 'hotel', 'Grand Hotel Kempinski Riga', 'Riga', 'Latvia', 'grand-hotel-kempinski-riga.html',
+    'riga:kempinski:rooftop-tasting', 'rooftop-tasting', 'hotel', 'Grand Hotel Kempinski Riga', 'Riga', 'Latvia', 'html/cities/latvia/grand-hotel-kempinski-riga.html',
     'stay', 'Rooftop tasting menu',
     'Five-course tasting menu with wine pairings on the Skyline Terrace each night of the stay.',
     'Each evening of the stay',
     0.03, 'per-night', 'utensils', 20
   ),
   (
-    'riga:kempinski:airport-transfer', 'airport-transfer', 'hotel', 'Grand Hotel Kempinski Riga', 'Riga', 'Latvia', 'grand-hotel-kempinski-riga.html',
+    'riga:kempinski:airport-transfer', 'airport-transfer', 'hotel', 'Grand Hotel Kempinski Riga', 'Riga', 'Latvia', 'html/cities/latvia/grand-hotel-kempinski-riga.html',
     'transport', 'Private airport transfer',
     'Chauffeured pick-up and drop-off with refreshments and concierge check-in.',
     'Arrival and departure',
@@ -240,28 +240,28 @@ INSERT INTO hotel_addons (
     0.012894736842105264, 'per-stay', 'walk', 100
   ),
   (
-    'bauska:hotel-bauska:breakfast', 'breakfast', 'hotel', 'Hotel Bauska', 'Bauska', 'Latvia', 'hotel-bauska.html',
+    'bauska:hotel-bauska:breakfast', 'breakfast', 'hotel', 'Hotel Bauska', 'Bauska', 'Latvia', 'html/cities/latvia/hotel-bauska.html',
     'stay', 'Breakfast for two',
     'Hot breakfast in the hotel restaurant each morning of the stay.',
     'Served each morning',
     0.008, 'per-night', 'utensils', 10
   ),
   (
-    'bauska:hotel-bauska:castle-tour', 'castle-tour', 'hotel', 'Hotel Bauska', 'Bauska', 'Latvia', 'hotel-bauska.html',
+    'bauska:hotel-bauska:castle-tour', 'castle-tour', 'hotel', 'Hotel Bauska', 'Bauska', 'Latvia', 'html/cities/latvia/hotel-bauska.html',
     'experience', 'Bauska Castle tour',
     'Guided visit to the castle museum and the tower over the Mūsa and Mēmele.',
     'Guided visit',
     0.02, 'per-stay', 'museum', 100
   ),
   (
-    'bauska:castle-hotel:breakfast', 'breakfast', 'hotel', 'Bauska Castle Hotel', 'Bauska', 'Latvia', 'bauska-castle-hotel.html',
+    'bauska:castle-hotel:breakfast', 'breakfast', 'hotel', 'Bauska Castle Hotel', 'Bauska', 'Latvia', 'html/cities/latvia/bauska-castle-hotel.html',
     'stay', 'Breakfast for two',
     'Breakfast beside the river each morning of the stay.',
     'Served each morning',
     0.008, 'per-night', 'utensils', 10
   ),
   (
-    'bauska:castle-hotel:castle-tour', 'castle-tour', 'hotel', 'Bauska Castle Hotel', 'Bauska', 'Latvia', 'bauska-castle-hotel.html',
+    'bauska:castle-hotel:castle-tour', 'castle-tour', 'hotel', 'Bauska Castle Hotel', 'Bauska', 'Latvia', 'html/cities/latvia/bauska-castle-hotel.html',
     'experience', 'Bauska Castle tour',
     'Guided visit to the Livonian castle and the later palace wing.',
     'Guided visit',

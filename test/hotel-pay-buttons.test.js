@@ -183,7 +183,7 @@ test('hotel page lists crypto and fiat in one pay-with menu', () => {
     window: {},
     document,
     console,
-    location: { pathname: '/funken-lodge.html' },
+    location: { pathname: '/html/cities/svalbard/funken-lodge.html' },
     sessionStorage: { getItem() { return null; }, setItem() {} }
   };
   context.window = context;

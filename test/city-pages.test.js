@@ -106,7 +106,7 @@ test('the server answers a city address from its HTML file', async () => {
 
   const missing = await fetch(base + '/not-a-city.html');
   assert.equal(missing.status, 404);
-  assert.equal(getCityPage('funken-lodge.html'), null);
+  assert.equal(getCityPage('html/cities/svalbard/funken-lodge.html'), null);
   } finally {
     await new Promise((resolve, reject) => {
       server.close((error) => (error ? reject(error) : resolve()));
