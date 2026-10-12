@@ -529,7 +529,7 @@
       const topics = Array.prototype.slice.call(nav.querySelectorAll('.blog-topic'));
 
       function hoverNav() {
-        return window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches;
+        return window.innerWidth > 900;
       }
 
       function openTopic(topic) {
