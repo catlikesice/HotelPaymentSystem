@@ -28,16 +28,17 @@ Loch Lomond National Park is a catalog destination. Its listing file is `loch-lo
 
 ## What a search is
 
-Two different lookups share the catalog:
+Accommodation and tours are separate lookups:
 
 | Surface | Input | Match |
 | --- | --- | --- |
 | Results page (`search.html`, `GET /api/search?q=`) | Free text | Every whitespace-separated token is a substring of the city or hotel haystack |
 | Homepage bar (`index.html`) | One destination | First city or hotel in catalog order, using the priority list below |
+| Tours (`what=tours` on either surface) | Free text | Every token is a substring of an experience haystack. Cities and hotels are not returned |
 
-`checkIn`, `checkOut`, `adults`, and `children` travel with both forms. They are stay details for pricing and booking. They do not filter these queries.
+`checkIn`, `checkOut`, `adults`, and `children` travel with both forms. They are stay details for pricing and booking. They do not filter these queries. `what` chooses the catalog: omit it, or pass `accommodation`, for cities and hotels. Pass `tours` to search experiences only.
 
-A blank `q` returns no rows. `search.js` treats an empty query as `{ "cities": [], "hotels": [] }` and does not scan the catalog.
+A blank `q` returns no rows. `search.js` treats an empty accommodation query as `{ "cities": [], "hotels": [] }` and an empty tour query as `{ "tours": [] }`. Neither scan runs.
 
 ## Tables
 
@@ -248,6 +249,25 @@ Then take the first row of the union in `hotel-search.sql`, ordered by priority 
 4. The hotel key contains the needle.
 
 The statement at the bottom of `hotel-search.sql` folds the typed needle `Reykjavík` and returns the Reykjavík city row. `kempinski` returns Grand Hotel Kempinski. `tromso` returns the Tromsø city row (priority 1) rather than Clarion Hotel The Edge. `nida` returns the Nida city row with a null `page_url`. The homepage should not navigate when that value is null.
+
+## Tours
+
+`GET /api/search?what=tours&q=whale` reads `hotel_addons` where `category` is `experience`: guided walks, boat trips, museum visits, and the walking tour added for a city that has no experience of its own. Breakfast, late checkout, and transfers stay out of this result. The response is `{ "tours": [ ... ] }` with no `cities` or `hotels` keys.
+
+Each tour:
+
+| Field | Notes |
+| --- | --- |
+| `id` | Primary key in `hotel_addons`, unique across the catalog |
+| `addonId` | Id stored on the booking. The trip page selects this extra when `addon` is present |
+| `name` | Experience label, such as `Faxaflói whale watching` |
+| `hotel` | Empty for a city tour. The property name when the tour belongs to one hotel |
+| `price` | ETH display string, `ETH / night` when billing is per night |
+| `pageUrl` | City or hotel page used to open `trip.html` |
+
+A city tour's suggestion label is `name — city`. A hotel tour's label is `name — hotel`. `GET /api/search/destinations?what=tours` returns those labels. The homepage Tours option uses that list and always opens `search.html`. Tour cards link to `trip.html` with the city, the hotel when there is one, and `addon` set to `addonId`.
+
+`q=breakfast` matches no tours. `q=kempinski` matches the hotel only while `what` is accommodation.
 
 ## Stay fields
 

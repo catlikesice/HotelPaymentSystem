@@ -131,12 +131,25 @@
   function restoreSelection(offer) {
     var saved = readSelection()[offer.city] || {};
     var selected = {};
+    var params = new URLSearchParams(window.location.search);
     (saved.addons || []).forEach(function (key) {
       selected[key] = true;
     });
+    var requestedAddon = params.get('addon');
+    var requestedHotel = params.get('hotel') || '';
+    if (requestedAddon) {
+      (offer.addons || []).forEach(function (addon) {
+        if (addon.id !== requestedAddon) {
+          return;
+        }
+        if (addon.scope === 'hotel' && requestedHotel && addon.hotelName && addon.hotelName !== requestedHotel) {
+          return;
+        }
+        selected[addonKey(addon)] = true;
+      });
+    }
     state.selected = selected;
     if (saved.hotel && offer.hotels.some(function (hotel) { return hotel.name === saved.hotel; })) {
-      var params = new URLSearchParams(window.location.search);
       if (!params.get('hotel')) {
         state.hotelName = saved.hotel;
       }

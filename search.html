@@ -40,6 +40,11 @@
       max-width: 720px;
     }
 
+    .search-form .search-kind {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+
     .search-form__field {
       flex: 1 1 16rem;
       min-width: 0;
@@ -123,6 +128,10 @@
 
     .search-card--city {
       border-top: 4px solid #2e7d32;
+    }
+
+    .search-card--tour {
+      border-top: 4px solid #1f6b4a;
     }
 
     .search-card__image {
@@ -290,11 +299,22 @@
   <main class="search-page">
     <section class="search-page__intro" aria-labelledby="search-heading">
       <h1 id="search-heading">Search hotels and cities</h1>
-      <p>Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, the Åland Islands, Greenland, the Faroe Islands, and Svalbard.</p>
+      <p id="search-intro">Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, the Åland Islands, Greenland, the Faroe Islands, and Svalbard.</p>
 
       <form id="site-search-form" class="search-form" action="search.html" method="get" role="search">
+        <fieldset class="search-kind">
+          <legend class="sr-only" id="search-kind-legend">Search for</legend>
+          <label class="search-kind__option">
+            <input type="radio" name="what" value="accommodation" checked>
+            <span id="search-kind-accommodation">Accommodation</span>
+          </label>
+          <label class="search-kind__option">
+            <input type="radio" name="what" value="tours">
+            <span id="search-kind-tours">Tours</span>
+          </label>
+        </fieldset>
         <div class="search-form__field">
-          <label class="sr-only" for="site-search-input">Search hotels and cities</label>
+          <label class="sr-only" for="site-search-input" id="site-search-label">Search hotels and cities</label>
           <input
             id="site-search-input"
             name="q"
@@ -326,11 +346,16 @@
       <div id="hotel-results" class="search-grid"></div>
     </section>
 
+    <section id="tour-results-section" class="search-section" hidden>
+      <h2>Tours</h2>
+      <div id="tour-results" class="search-grid"></div>
+    </section>
+
     <div id="search-empty" class="search-empty" hidden>
-      <p>No matches for that search. Try another city or hotel name, or <a href="index.html">start a booking</a>.</p>
+      <p id="search-empty-copy">No matches for that search. Try another city or hotel name, or <a href="index.html">start a booking</a>.</p>
     </div>
 
-    <p class="search-page__note">
+    <p class="search-page__note" id="search-catalog-note">
       Search includes places that do not have their own page. Those stays are listed here from the hotel database.
     </p>
   </main>

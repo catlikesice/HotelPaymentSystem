@@ -288,6 +288,75 @@ test('Bauska, Latvia can be booked from search', async () => {
   }
 });
 
+async function searchForTours(query) {
+  const response = await fetch(base + '/api/search?what=tours&q=' + encodeURIComponent(query));
+  assert.equal(response.status, 200);
+  return response.json();
+}
+
+test('tour search is separate from accommodation', async () => {
+  const tours = await searchForTours('whale');
+  assert.equal(tours.cities, undefined);
+  assert.equal(tours.hotels, undefined);
+  const whale = tours.tours.find((tour) => tour.name === 'Faxaflói whale watching');
+  assert.ok(whale);
+  assert.equal(whale.type, 'tour');
+  assert.equal(whale.city, 'Reykjavík');
+  assert.equal(whale.country, 'Iceland');
+  assert.equal(whale.hotel, '');
+  assert.equal(whale.scope, 'city');
+  assert.equal(whale.addonId, 'whale-watching');
+  assert.equal(whale.id, 'reykjavik:city:whale-watching');
+  assert.equal(whale.pageUrl, 'html/cities/iceland/reykjavík.html');
+  assert.match(whale.price, /ETH/);
+
+  const stays = await searchFor('whale');
+  assert.equal(stays.tours, undefined);
+  assert.ok(Array.isArray(stays.cities));
+  assert.ok(Array.isArray(stays.hotels));
+
+  const explicit = await fetch(base + '/api/search?what=accommodation&q=kempinski');
+  assert.equal(explicit.status, 200);
+  const kempinskiStay = await explicit.json();
+  assert.equal(kempinskiStay.tours, undefined);
+  assert.equal(kempinskiStay.hotels[0].name, 'Grand Hotel Kempinski');
+
+  const blank = await searchForTours('   ');
+  assert.deepEqual(blank, { tours: [] });
+
+  const kempinskiTours = await searchForTours('kempinski');
+  assert.deepEqual(kempinskiTours.tours, []);
+
+  const breakfast = await searchForTours('breakfast');
+  assert.deepEqual(breakfast.tours, []);
+
+  const bauska = await searchForTours('Bauska Castle tour');
+  assert.deepEqual(bauska.tours.map((tour) => tour.hotel).sort(), ['Bauska Castle Hotel', 'Hotel Bauska']);
+  assert.ok(bauska.tours.every((tour) => tour.addonId === 'castle-tour' && tour.city === 'Bauska'));
+
+  const kirkwall = await searchForTours('Kirkwall walking');
+  assert.equal(kirkwall.tours.length, 1);
+  assert.equal(kirkwall.tours[0].name, 'Kirkwall walking tour');
+  assert.equal(kirkwall.tours[0].city, 'Kirkwall');
+  assert.equal(kirkwall.tours[0].country, 'Scotland');
+
+  const art = await searchForTours('art nouveau');
+  assert.ok(art.tours.some((tour) => tour.addonId === 'art-nouveau' && tour.city === 'Riga' && tour.hotel === ''));
+});
+
+test('tour destination labels are experiences, not hotels', async () => {
+  const response = await fetch(base + '/api/search/destinations?what=tours');
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(body.labels.includes('Faxaflói whale watching — Reykjavík'));
+  assert.ok(body.labels.includes('Bauska Castle tour — Hotel Bauska'));
+  assert.ok(body.labels.includes('Bauska Castle tour — Bauska Castle Hotel'));
+  assert.ok(body.labels.includes('Kirkwall walking tour — Kirkwall'));
+  assert.equal(body.labels.includes('Grand Hotel Kempinski — Riga'), false);
+  assert.equal(body.labels.includes('Nida'), false);
+  assert.equal(body.labels.includes('Hotel Nida Marina — Nida'), false);
+});
+
 test('destination labels include places that have no page', async () => {
   const response = await fetch(base + '/api/search/destinations');
   assert.equal(response.status, 200);
