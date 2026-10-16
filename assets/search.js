@@ -28,6 +28,16 @@
     return (params.get('q') || '').trim();
   }
 
+  function getKindFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('what') === 'tours' ? 'tours' : 'accommodation';
+  }
+
+  function selectedKind(form) {
+    var checked = form ? form.querySelector('input[name="what"]:checked') : null;
+    return checked && checked.value === 'tours' ? 'tours' : 'accommodation';
+  }
+
   function parseGuestCount(value, min, max, fallback) {
     var parsed = parseInt(value, 10);
     if (!Number.isFinite(parsed)) {
@@ -189,9 +199,10 @@
     };
   }
 
-  function fetchSearchResults(query) {
+  function fetchSearchResults(query, kind) {
     var params = new URLSearchParams(window.location.search);
     params.set('q', query);
+    params.set('what', kind === 'tours' ? 'tours' : 'accommodation');
     return fetch(SQL_SEARCH_ENDPOINT + '?' + params.toString(), {
       headers: { Accept: 'application/json' }
     }).then(function (res) {
@@ -200,10 +211,13 @@
       }
       return res.json();
     }).catch(function (err) {
-      // The static catalog has no SQL-only places. Use it only when the API
-      // cannot be reached (for example, opening the file directly).
-      if (err && err.name === 'TypeError' && window.SEARCH_CATALOG) {
+      // The static catalog has no SQL-only places and no tours. Use it only
+      // for accommodation when the API cannot be reached.
+      if (kind !== 'tours' && err && err.name === 'TypeError' && window.SEARCH_CATALOG) {
         return filterCatalog(query);
+      }
+      if (kind === 'tours' && err && err.name === 'TypeError') {
+        throw new Error('Tour search is unavailable. Open the site from the server and try again.');
       }
       throw err;
     });
@@ -266,6 +280,39 @@
     );
   }
 
+  function tourSelectHref(tour) {
+    var params = new URLSearchParams();
+    if (tour.hotel) params.set('hotel', tour.hotel);
+    if (tour.city) params.set('city', tour.city);
+    if (tour.country) params.set('country', tour.country);
+    if (tour.pageUrl) params.set('page', tour.pageUrl);
+    if (tour.addonId) params.set('addon', tour.addonId);
+    var stay = getStayFromUrl();
+    if (stay.checkIn) params.set('checkIn', stay.checkIn);
+    if (stay.checkOut) params.set('checkOut', stay.checkOut);
+    if (Number.isFinite(stay.adults)) params.set('adults', String(stay.adults));
+    if (Number.isFinite(stay.children)) params.set('children', String(stay.children));
+    return 'trip.html?' + params.toString();
+  }
+
+  function renderTourCard(tour) {
+    var place = [tour.city, tour.country].filter(Boolean).join(', ');
+    var location = tour.hotel ? tour.hotel + (place ? ' · ' + place : '') : place;
+    return (
+      '<article class="search-card search-card--tour">' +
+        '<div class="search-card__body">' +
+          '<p class="search-card__eyebrow">Tour</p>' +
+          '<h3 class="search-card__title">' + escapeHtml(tour.name) + '</h3>' +
+          (location ? '<p class="search-card__meta">' + escapeHtml(location) + '</p>' : '') +
+          (tour.detail ? '<p class="search-card__meta">' + escapeHtml(tour.detail) + '</p>' : '') +
+          (tour.price ? '<p class="search-card__price">' + escapeHtml(tour.price) + '</p>' : '') +
+          (tour.description ? '<p class="search-card__desc">' + escapeHtml(tour.description) + '</p>' : '') +
+          pageLink(tourSelectHref(tour), 'Add to stay') +
+        '</div>' +
+      '</article>'
+    );
+  }
+
   function renderHotelCard(hotel) {
     var location = [hotel.city, hotel.country].filter(Boolean).join(', ');
     var image = hotel.image
@@ -294,30 +341,75 @@
     if (el) el.textContent = text;
   }
 
-  function renderResults(query, results) {
-    var cities = results.cities || [];
-    var hotels = results.hotels || [];
-    var total = cities.length + hotels.length;
+  function applyKindCopy(kind) {
+    var tours = kind === 'tours';
+    var input = document.getElementById('site-search-input');
+    var emptyCopy = document.getElementById('search-empty-copy');
+    var note = document.getElementById('search-catalog-note');
+    var intro = document.getElementById('search-intro');
+    setText('site-search-label', tours ? 'Search tours' : 'Search hotels and cities');
+    if (input) {
+      input.placeholder = tours
+        ? 'Try whale watching, walking tour, or Riga'
+        : 'Try Riga, Tallinn, or Kempinski';
+    }
+    if (intro) {
+      intro.textContent = tours
+        ? 'Find a guided tour, boat trip, or museum visit, then add it to a stay.'
+        : 'Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, the Åland Islands, Greenland, the Faroe Islands, and Svalbard.';
+    }
+    if (emptyCopy) {
+      emptyCopy.innerHTML = tours
+        ? 'No tours match that search. Try a city or a tour name, such as whale watching or a walking tour.'
+        : 'No matches for that search. Try another city or hotel name, or <a href="index.html">start a booking</a>.';
+    }
+    if (note) {
+      note.textContent = tours
+        ? 'Tours are experiences you add to a stay. Open a tour to choose the hotel and include it in the booking.'
+        : 'Search includes places that do not have their own page. Those stays are listed here from the hotel database.';
+    }
+  }
+
+  function renderResults(query, results, kind) {
+    var toursMode = kind === 'tours';
+    var cities = toursMode ? [] : (results.cities || []);
+    var hotels = toursMode ? [] : (results.hotels || []);
+    var tours = toursMode ? (results.tours || []) : [];
+    var total = cities.length + hotels.length + tours.length;
     var citiesEl = document.getElementById('city-results');
     var hotelsEl = document.getElementById('hotel-results');
+    var toursEl = document.getElementById('tour-results');
     var emptyEl = document.getElementById('search-empty');
     var statusEl = document.getElementById('search-status');
 
+    applyKindCopy(kind);
+
     if (!query) {
-      setText('search-heading', 'Search hotels and cities');
-      setText('search-status', 'Enter a city, country, or hotel name to see results.');
+      setText('search-heading', toursMode ? 'Search tours' : 'Search hotels and cities');
+      setText('search-status', toursMode
+        ? 'Enter a tour name or a city to see tours.'
+        : 'Enter a city, country, or hotel name to see results.');
       if (citiesEl) citiesEl.innerHTML = '';
       if (hotelsEl) hotelsEl.innerHTML = '';
+      if (toursEl) toursEl.innerHTML = '';
       if (emptyEl) emptyEl.hidden = true;
+      var citiesSectionEmpty = document.getElementById('city-results-section');
+      var hotelsSectionEmpty = document.getElementById('hotel-results-section');
+      var toursSectionEmpty = document.getElementById('tour-results-section');
+      if (citiesSectionEmpty) citiesSectionEmpty.hidden = true;
+      if (hotelsSectionEmpty) hotelsSectionEmpty.hidden = true;
+      if (toursSectionEmpty) toursSectionEmpty.hidden = true;
       return;
     }
 
     setText('search-heading', 'Results for “' + query + '”');
 
     if (statusEl) {
-      statusEl.textContent = total === 1
-        ? '1 match found.'
-        : total + ' matches found.';
+      if (toursMode) {
+        statusEl.textContent = total === 1 ? '1 tour found.' : total + ' tours found.';
+      } else {
+        statusEl.textContent = total === 1 ? '1 match found.' : total + ' matches found.';
+      }
     }
 
     if (citiesEl) {
@@ -326,11 +418,16 @@
     if (hotelsEl) {
       hotelsEl.innerHTML = hotels.map(renderHotelCard).join('');
     }
+    if (toursEl) {
+      toursEl.innerHTML = tours.map(renderTourCard).join('');
+    }
 
     var citiesSection = document.getElementById('city-results-section');
     var hotelsSection = document.getElementById('hotel-results-section');
+    var toursSection = document.getElementById('tour-results-section');
     if (citiesSection) citiesSection.hidden = cities.length === 0;
     if (hotelsSection) hotelsSection.hidden = hotels.length === 0;
+    if (toursSection) toursSection.hidden = tours.length === 0;
     if (emptyEl) emptyEl.hidden = total > 0;
   }
 
@@ -341,38 +438,62 @@
     if (emptyEl) emptyEl.hidden = true;
   }
 
+  function syncKindFields(form, kind) {
+    if (!form) {
+      return;
+    }
+    var radios = form.querySelectorAll('input[name="what"]');
+    Array.prototype.forEach.call(radios, function (radio) {
+      radio.checked = radio.value === kind;
+    });
+  }
+
   function init() {
     var form = document.getElementById('site-search-form');
     var input = document.getElementById('site-search-input');
     var query = getQueryFromUrl();
+    var kind = getKindFromUrl();
     var stay = getStayFromUrl();
 
     if (input) {
       input.value = query;
     }
 
+    syncKindFields(form, kind);
     syncStayFields(stay);
+    applyKindCopy(kind);
 
     if (form) {
       form.addEventListener('submit', function (event) {
-        // Allow normal GET navigation to search.html?q=...
+        // Allow normal GET navigation to search.html?q=...&what=...
         var value = input ? input.value.trim() : '';
         if (!value) {
           event.preventDefault();
           input && input.focus();
         }
       });
+      Array.prototype.forEach.call(form.querySelectorAll('input[name="what"]'), function (radio) {
+        radio.addEventListener('change', function () {
+          var nextKind = selectedKind(form);
+          applyKindCopy(nextKind);
+          if (query) {
+            form.submit();
+          } else {
+            renderResults('', { cities: [], hotels: [], tours: [] }, nextKind);
+          }
+        });
+      });
     }
 
     if (!query) {
-      renderResults('', { cities: [], hotels: [] });
+      renderResults('', { cities: [], hotels: [], tours: [] }, kind);
       return;
     }
 
     setText('search-status', 'Searching…');
-    fetchSearchResults(query)
+    fetchSearchResults(query, kind)
       .then(function (results) {
-        renderResults(query, results || { cities: [], hotels: [] });
+        renderResults(query, results || { cities: [], hotels: [], tours: [] }, kind);
       })
       .catch(function (err) {
         showError(err && err.message ? err.message : 'Unable to load search results.');

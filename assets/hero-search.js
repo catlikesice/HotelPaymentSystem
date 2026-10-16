@@ -3,6 +3,8 @@
  * Persists booking dates and guests from the homepage search so hotel pages
  * can price the stay. Destination suggestions come from GET /api/search/destinations
  * when the API is available, including places that have no HTML page.
+ * Accommodation is the default. Choosing Tours asks for tour names instead
+ * and always continues to search.html?what=tours.
  * A match with a page opens that page. A place with no page continues to
  * search.html. The form still posts q, checkIn, checkOut, adults, and children.
  */
@@ -17,6 +19,13 @@
   var MAX_CHILDREN = 10;
   var DEFAULT_ADULTS = 2;
   var DEFAULT_CHILDREN = 0;
+  var ACCOMMODATION_PLACEHOLDER = 'City or hotel, e.g. Riga';
+  var TOUR_PLACEHOLDER = 'Tour or city, e.g. whale watching';
+
+  function currentKind() {
+    var checked = document.querySelector('#hero-search-form input[name="what"]:checked');
+    return checked && checked.value === 'tours' ? 'tours' : 'accommodation';
+  }
 
   function normalize(text) {
     return String(text || '')
@@ -147,8 +156,38 @@
     return window.SEARCH_CATALOG || { cities: [], hotels: [] };
   }
 
-  function fillDestinationList(datalist) {
+  function optionHtml(label) {
+    return '<option value="' + String(label).replace(/"/g, '&quot;') + '"></option>';
+  }
+
+  function writeDestinationLabels(datalist, labels, kind) {
+    if (!datalist || currentKind() !== kind || !Array.isArray(labels) || !labels.length) {
+      return;
+    }
+    datalist.innerHTML = labels.map(optionHtml).join('');
+  }
+
+  function fillDestinationList(datalist, kind) {
     if (!datalist) {
+      return;
+    }
+
+    var mode = kind === 'tours' ? 'tours' : 'accommodation';
+    if (mode === 'tours') {
+      datalist.innerHTML = '';
+      fetch('/api/search/destinations?what=tours', { headers: { Accept: 'application/json' } })
+        .then(function (res) {
+          if (!res.ok) {
+            throw new Error('Tour list failed');
+          }
+          return res.json();
+        })
+        .then(function (payload) {
+          writeDestinationLabels(datalist, payload && payload.labels, 'tours');
+        })
+        .catch(function () {
+          // Leave the list empty when tour search is unavailable.
+        });
       return;
     }
 
@@ -173,9 +212,7 @@
       return a.localeCompare(b);
     });
 
-    datalist.innerHTML = options.map(function (label) {
-      return '<option value="' + String(label).replace(/"/g, '&quot;') + '"></option>';
-    }).join('');
+    writeDestinationLabels(datalist, options, 'accommodation');
 
     fetch('/api/search/destinations', { headers: { Accept: 'application/json' } })
       .then(function (res) {
@@ -185,13 +222,7 @@
         return res.json();
       })
       .then(function (payload) {
-        var labels = payload && payload.labels;
-        if (!Array.isArray(labels) || !labels.length) {
-          return;
-        }
-        datalist.innerHTML = labels.map(function (label) {
-          return '<option value="' + String(label).replace(/"/g, '&quot;') + '"></option>';
-        }).join('');
+        writeDestinationLabels(datalist, payload && payload.labels, 'accommodation');
       })
       .catch(function () {
         // Keep the static catalog list when SQL search is unavailable.
@@ -351,8 +382,20 @@
       return;
     }
 
-    fillDestinationList(datalist);
+    function applySearchKind(kind) {
+      destination.placeholder = kind === 'tours' ? TOUR_PLACEHOLDER : ACCOMMODATION_PLACEHOLDER;
+      fillDestinationList(datalist, kind);
+      setStatus('');
+    }
+
+    applySearchKind(currentKind());
     restoreGuestFields(adultsInput, childrenInput);
+
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="what"]'), function (radio) {
+      radio.addEventListener('change', function () {
+        applySearchKind(currentKind());
+      });
+    });
 
     var minDate = todayISO();
     if (checkInPicker) {
@@ -405,9 +448,11 @@
       var children = parseGuestCount(childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
       var nights;
 
+      var kind = currentKind();
+
       if (!query) {
         event.preventDefault();
-        setStatus('Please enter a city or hotel.');
+        setStatus(kind === 'tours' ? 'Please enter a tour or a city.' : 'Please enter a city or hotel.');
         destination.focus();
         return;
       }
@@ -468,6 +513,16 @@
       }
       if (checkOutValue) {
         checkOutValue.value = checkOutDate;
+      }
+
+      if (kind === 'tours') {
+        persistBookingSelection(Object.assign({
+          cityName: query,
+          checkInDate: checkInDate,
+          checkOutDate: checkOutDate,
+          nights: nights
+        }, guestPayload(adults, children)));
+        return;
       }
 
       var match = findDestination(query);

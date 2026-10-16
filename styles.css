@@ -390,6 +390,61 @@ header a { position: static !important; left: auto !important; right: auto !impo
   display: inline-block;
 }
 
+/* Accommodation / Tours choice shared by the homepage bar and search page */
+.search-kind {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+  min-inline-size: 0;
+}
+
+.search-kind__option {
+  position: relative;
+}
+
+.search-kind__option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.search-kind__option span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  border: 1px solid #c9e5c5;
+  background: #f8fff8;
+  color: #2e4d25;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.search-kind__option input:checked + span {
+  background: #2e7d32;
+  border-color: #2e7d32;
+  color: #fff;
+}
+
+.search-kind__option input:focus-visible + span {
+  outline: 3px solid rgba(46, 125, 50, 0.35);
+  outline-offset: 2px;
+}
+
+.search-kind__option:hover span {
+  border-color: #2e7d32;
+}
+
 /* Booking-style destination + dates + guests bar under the homepage hero */
 .hero-search {
   display: grid;
@@ -408,6 +463,10 @@ header a { position: static !important; left: auto !important; right: auto !impo
   box-sizing: border-box;
   text-align: left;
   overflow: visible;
+}
+
+.hero-search .search-kind {
+  grid-column: 1 / -1;
 }
 
 .hero-search__field {
